@@ -1,0 +1,4 @@
+# TerminusDB snapshot bundles are compiled binary packs, not text — force `binary`
+# (-text -diff -merge) so git never applies line-ending normalization, text diffing,
+# or a text merge to them, regardless of core.autocrlf or any future git config.
+/db/snapshots/* binary

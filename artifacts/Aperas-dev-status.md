@@ -1,11 +1,13 @@
 - ## Aperas Development Status
 	- Phase 0: Substrate and Core Skills — In Progress
+		- `AperasKG` is its own git repo (symlinked into `Aperas/`).
 		- Schema initialization
 			- `DocumentNode`, `BlockNode`, `SpanNode`, `TripleAssertion`, `ArtifactNode` JSON-LD schema objects (TypeScript interfaces, not classes) defined in `web/src/lib/schema.ts`.
 			- Applied via `full_replace` for idempotent re-initialization; requires an explicit `@context` document in the schema set.
 		- Document CRUD
 			- `web/src/lib/crud.ts` — insert/delete for documents, blocks, spans, and triple assertions against the real `terminusdb` npm client (`addDocument`/`updateDocument`/`deleteDocument`).
-			- Idempotent reset helpers (`deleteDocumentIfExists`, `deleteTripleAssertionsInvolvingNode`) so seed/demo/ingestion runs are re-runnable.
+			- Idempotent reset helpers (`deleteDocumentIfExists`, `deleteDocumentsIfExist`, `deleteTripleAssertionsInvolvingNode`) so seed/demo/ingestion runs are re-runnable.
+			- `deleteDocumentsIfExist` batches many ids into a single `deleteDocument` call/commit — added after a cleanup loop over per-id deletes produced 530 separate "Reset demo state" commits; the ingestion re-run path below now uses it to clear a doc + all its stale blocks in one commit.
 		- WOQL query execution
 			- `web/src/lib/woql.ts` — real WOQL queries via `client.query(...)`, including impact-propagation traversal along the `impacts` predicate.
 			- Literal comparisons require explicit `WOQL.string(...)` wrapping — bare strings are treated as node references, not literals.
@@ -18,9 +20,11 @@
 		- Artifact tracking & on-demand ingestion
 			- `web/src/lib/artifacts.ts` + `web/src/lib/kgCli.ts` (`npm run kg:track`, `npm run kg:ingest`).
 			- Artifacts under `AperasKG/artifacts/` are registered as lightweight `ArtifactNode`s (path + content hash) on `track`; full AST-parse-and-commit into `DocumentNode`/`BlockNode`s only happens on `ingest`, and only for artifacts whose content hash has changed since last ingestion.
-			- Verified against the live substrate: tracked and ingested both `Aperas-design.md` (529 blocks) and `Aperas-dev-status.md` (60 blocks), confirmed no-op behavior when unchanged, via `client.updateDocument(..., create: true)` upserts on the `ArtifactNode` tracking record.
+			- Verified against the live substrate: tracked and ingested `Aperas-design.md`, `Aperas-dev-status.md`, and `tdb-cli-status-walkthrough.md`, confirmed no-op behavior when unchanged, via `client.updateDocument(..., create: true)` upserts on the `ArtifactNode` tracking record.
+			- Re-ingestion (content changed since last ingest) confirmed to correctly replace the prior `DocumentNode` + all its `BlockNode`s in a single commit via `deleteDocumentsIfExist`, rather than leaving orphaned blocks from a shrunk/changed block tree.
 		- KG backup/restore
-			- `AperasKG/db/restore.sh` (`backup` / `restore <bundle-file>`) wraps the TerminusDB `bundle`/`unbundle` CLI commands.
+			- `AperasKG/db/restore.sh` (`backup` / `restore <bundle-file>` / `verify <bundle-file>`) wraps the TerminusDB `bundle`/`unbundle` CLI commands.
+			- `backup` now self-verifies every snapshot by unbundling it into a disposable throwaway database (deleted immediately after) before reporting success — added after an office-made snapshot (`aperas_apeiron_20260825_184754.bundle`) turned out to be silently corrupted (deterministic `unknown_layer_reference` on restore) and went undetected from the moment it was written until we happened to try restoring it. See the appendix below for the full corruption investigation; the file has been kept for forensics rather than deleted.
 			- Snapshots land in `AperasKG/db/snapshots/`, git-tracked as coarse checkpoints — separate from TerminusDB's own fine-grained internal commit history, which stays in the Docker-volume-backed store (`terminusdb_storage`).
 		- Reference tooling
 			- `skills/terminusdb/references/cli.md` audited end-to-end against a live server and the official CLI docs; corrected several inaccurate flag/usage examples (query syntax, reset, push/pull, diff, role create, bundle/unbundle).
@@ -28,3 +32,14 @@
 		- Phase 1: SolidJS read-projection wiring to real TerminusDB AST nodes. (`web/` scaffolding — SolidJS/Vite + dependencies — was added as a placeholder for the overall project structure; no Phase 1 work itself has begun.)
 		- Automated tracking trigger (e.g. a git hook in `AperasKG` running `kg:track` on commit) — currently `kg:track`/`kg:ingest` are manual commands only.
 		- Phase 2+ skills: ingestion-from-arbitrary-sources, graph search skill, refactoring/lazy-atomization skill.
+	- ## Appendix: `aperas_apeiron_20260825_184754.bundle` corruption investigation
+		- Symptom: every unbundle attempt fails identically with `error(unknown_layer_reference("0938bcd3ce56850a24b4cb1f9cf29a53d5b48612"))` — 100% deterministic across repeated tries, which rules out a timing/race explanation up front.
+		- Ruled out TerminusDB's `auto-optimize` community plugin (`/plugins/auto-optimize.pl`) as the cause. Its "GC" is just SWI-Prolog in-memory `garbage_collect`/`trim_stacks` (VM heap hygiene, unrelated to on-disk layers); its "optimization" is a probabilistic layer squash. Stress-tested directly against a throwaway database: 60 rapid commits, 15 back-to-back commit→bundle→restore cycles, and an explicit forced `optimize` (squash) immediately before a restore — zero failures in every case. Bundles are self-contained and survive squash/GC.
+		- Ruled out git as the transport/corruption vector. `AperasKG` is its own git repo (symlinked into `Aperas/`); `git cat-file -p 5d1edf1:db/snapshots/aperas_apeiron_20260825_184754.bundle` produces a blob with md5 `9326f8249a3d70ee64b07dd50b8c9c5f`, byte-identical to the working-tree file. Git recorded it as a binary diff (`Bin 0 -> 166415 bytes`) in the same commit that added `restore.sh` itself — so the corruption predates that commit entirely; git only ever transported bytes that were already bad.
+		- Ruled out git's EOL/`autocrlf` handling specifically. `core.autocrlf`/`core.eol` are both unset (no conversion) on this machine, and regardless of setting, EOL conversion can only insert/strip a `\r` next to each `\n` — a change bounded by the file's LF count (346 in this file, i.e. ±346 bytes max). The actual corruption requires a 60,512-byte discrepancy to resolve (166,415 → 105,903 bytes), over 170× larger than EOL conversion could produce. Added `AperasKG/.gitattributes` (`/db/snapshots/* binary`) regardless, as defense-in-depth against any future git config doing this on a different machine.
+		- Byte-level evidence points to a Latin-1 → UTF-8 mojibake transcoding somewhere before that commit:
+			- A hex dump of the file start shows a plausible 40-char ASCII hex header (`23e4e61447b0ce621f0aaf11a15b78580fc27fc4` — likely a SHA-1 layer id) immediately followed by `1f c2 8b 08 00...` where a clean gzip stream should begin with `1f 8b 08`. The stray `c2` is the textbook signature of a raw byte ≥ 0x80 (here, `0x8b`) having been re-encoded as a 2-byte UTF-8 sequence.
+			- Reversing that transform on the whole file (`data.decode('utf-8').encode('latin-1')`) shrank it from 166,415 → 105,903 bytes and produced a byte-perfect gzip header (`1f 8b 08 00 00 00 00 00 00 ff`) at exactly the offset (40) where the ASCII hash header ends — strong confirmation every high byte in the file had been doubled this way.
+			- Full reversal still didn't yield a restorable bundle — unbundling the "fixed" file failed differently, with `Illegal UTF-8 start`, meaning the format has more internal structure than one flat Latin-1/UTF-8 swap can undo. The file was not fully recoverable by this method.
+		- Open question: exactly which step on the originating (office) machine turned raw bytes into mojibake before `git add` is unconfirmed. `restore.sh`'s own `backup` steps (`docker exec ... bundle`, `docker cp`) are binary-safe and don't explain it; whatever did this happened outside the script, or is a bug we didn't manage to reproduce. Not pursued further, since `restore.sh verify` (above) catches this class of problem regardless of root cause.
+
