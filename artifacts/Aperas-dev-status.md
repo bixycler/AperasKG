@@ -1,0 +1,30 @@
+- ## Aperas Development Status
+	- Phase 0: Substrate and Core Skills — In Progress
+		- Schema initialization
+			- `DocumentNode`, `BlockNode`, `SpanNode`, `TripleAssertion`, `ArtifactNode` classes defined in `web/src/lib/schema.ts`.
+			- Applied via `full_replace` for idempotent re-initialization; requires an explicit `@context` document in the schema set.
+		- Document CRUD
+			- `web/src/lib/crud.ts` — insert/delete for documents, blocks, spans, and triple assertions against the real `terminusdb` npm client (`addDocument`/`updateDocument`/`deleteDocument`).
+			- Idempotent reset helpers (`deleteDocumentIfExists`, `deleteTripleAssertionsInvolvingNode`) so seed/demo/ingestion runs are re-runnable.
+		- WOQL query execution
+			- `web/src/lib/woql.ts` — real WOQL queries via `client.query(...)`, including impact-propagation traversal along the `impacts` predicate.
+			- Literal comparisons require explicit `WOQL.string(...)` wrapping — bare strings are treated as node references, not literals.
+		- GraphQL query execution
+			- `web/src/lib/graphql.ts` — queries the auto-generated GraphQL endpoint (`api/graphql/<org>/<db>`) via `client.sendCustomRequest`.
+		- Temporal commit management
+			- `web/src/lib/versionControl.ts` — branch create/checkout/delete, commit history, document history, JSON/version diffing, merge (via `apply`), reset.
+		- Verification harness
+			- `web/src/lib/verifyPhase0.ts` (`npm run verify:phase0 -- --db`) — end-to-end pass across AST parsing, span reification, document/block commit, triple assertion + WOQL traversal, GraphQL query, and branch/commit-log checks. Passes cleanly and idempotently on repeated runs.
+		- Artifact tracking & on-demand ingestion
+			- `web/src/lib/artifacts.ts` + `web/src/lib/kgCli.ts` (`npm run kg:track`, `npm run kg:ingest`).
+			- Artifacts under `AperasKG/artifacts/` are registered as lightweight `ArtifactNode`s (path + content hash) on `track`; full AST-parse-and-commit into `DocumentNode`/`BlockNode`s only happens on `ingest`, and only for artifacts whose content hash has changed since last ingestion.
+			- Verified against the live substrate: tracked and ingested `Aperas-design.md` (529 blocks), confirmed no-op behavior when unchanged, and confirmed re-ingestion when the file is edited.
+		- KG backup/restore
+			- `AperasKG/db/restore.sh` (`backup` / `restore <bundle-file>`) wraps the TerminusDB `bundle`/`unbundle` CLI commands.
+			- Snapshots land in `AperasKG/db/snapshots/`, git-tracked as coarse checkpoints — separate from TerminusDB's own fine-grained internal commit history, which stays in the Docker-volume-backed store (`terminusdb_storage`).
+		- Reference tooling
+			- `skills/terminusdb/references/cli.md` audited end-to-end against a live server and the official CLI docs; corrected several inaccurate flag/usage examples (query syntax, reset, push/pull, diff, role create, bundle/unbundle).
+	- Not yet started
+		- Phase 1: SolidJS read-projection wiring to real TerminusDB AST nodes (current UI is scaffolding only, per explicit decision to keep it as a placeholder during Phase 0).
+		- Automated tracking trigger (e.g. a git hook in `AperasKG` running `kg:track` on commit) — currently `kg:track`/`kg:ingest` are manual commands only.
+		- Phase 2+ skills: ingestion-from-arbitrary-sources, graph search skill, refactoring/lazy-atomization skill.
