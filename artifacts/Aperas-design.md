@@ -1,0 +1,296 @@
+- ## Aperas
+	- Aperas Master Architectural Index
+		- Overview
+			- Aperas is an architecture for agentic knowledge systems operating over a fluid, unconditioned semantic core and crystallizing typed boundaries on demand.
+			- To maintain modularity and deep clarity, the specification is decomposed into three focused documents.
+		- Core Architecture Suite
+			- Philosophy and Ontology of Aperas
+				- Metaphysical foundation: Apeiron (macrocosm), Aperas (microcosm), and Peras (interface).
+				- Conceptual triad: Unbounded – Unbound – Bound.
+				- Flatbread metaphor and linguistic emergence.
+				- Multi-faceted node epistemology: Wikipedia reference model (Article, Source, Talk, History).
+			- System Architecture and Mechanics of Aperas
+				- Architectural philosophy: Fluid core vs. crystallized interfaces.
+				- Multi-Agent Projection Pattern and dynamic read–write transducers.
+				- System taxonomy and component boundaries.
+				- Async execution model, command dispatch, and self-healing boundary validation.
+			- Node, AST, and Storage Design in Aperas
+				- On-demand reification and lazy atomization mechanics.
+				- Three parallel planes: Rendered plane, Stored plane, and Graph plane.
+				- Universal inline boundary: `<span>` tag addressability and offset tracking.
+				- Unified.js AST mapping to TerminusDB storage substrate.
+	- Philosophy and Ontology of Aperas
+		- Metaphysics of Form and Freedom (Unbounded – Unbound – Bound)
+			- Apeiron – Unbounded (Macrocosm – Objective Infinite)
+				- The outer universe existing in a state of infinite, unmanifested potential.
+				- Represents the unconditioned, boundless origin – an inexhaustible, schema-free field holding all possibilities without being trapped by any single form.
+			- Aperas – Unbound (Microcosm – Subjective Liberation)
+				- The inner human spirit achieving freedom through the liberation of the soul.
+				- Etymologically layered:
+					- *A-* (without) + *Peras* (limit) = **Unbound**: Not merely “unlimited” in size, but intrinsically free from rigid constraints.
+					- *Aperas* in Esperanto = “Appears / Emerges”: The active manifestation where structured forms materialize out of the fluid core on demand.
+					- Appam / Flatbread: The warm, versatile, round flatbread – simple, wholesome, and adaptable to any filling or shape.
+				- While daily interaction imposes limits and fixed roles, the liberated soul breaks through the illusion of rigid division, realizing its inner ground is identical in essence to the boundless Apeiron.
+			- Peras – Bound (The Interface – Transient Boundary)
+				- The limit, boundary, or transient interface where interaction occurs.
+				- Form is not a rigid cage, but a temporary, playful instrument. Content remains formless (Apeiron), while the interface solidifies temporarily into defined structures (Peras) to accelerate interaction, then dissolves effortlessly back into the origin.
+		- Multi-Faceted Node Epistemology (The Wikipedia Reference Model)
+			- Historical precedent in collaborative knowledge work
+				- Systems like Wikipedia demonstrate that knowledge nodes are multi-perspective entities rather than flat text blobs.
+				- Aperas adopts this multi-tab structure as an illustrative reference model for node projections.
+			- Projection faces of a node
+				- Surface view (Article – Peras projection): Markdown and HTML outliner blocks rendered for human reading and fast LLM context window ingestion.
+				- Graph view (Source – Canonical triples): Semantic graph triples, explicit parent-child hierarchies, typed predicates (`impacts`, `verifies`, `derived_from`), and IRI references.
+				- Discourse view (Talk – Agent trails): Agent trails, deliberations, conflicting perspectives, and reasoning traces behind decision states.
+				- Provenance view (History – Audit deltas): Immutable commit logs, author signatures (human or agent ID), and atomic revision deltas.
+		- Meta-Aperas / Self-Aperas (Recursive Methodology)
+			- System evolution as ontological practice
+				- The engineering roadmap of Aperas is itself a self-instantiation of its underlying philosophy.
+				- Phase 0 begins in the uncarved, schema-free substrate (Apeiron), avoiding premature interfaces or heavy abstractions.
+				- Projections, skills, and tools (Perata) crystallize organically on demand only as concrete human–agent coordination points emerge.
+				- The platform builds itself using the exact principles it uses to manage knowledge: fluid at rest, bound and structured when touched.
+	- System Architecture and Mechanics of Aperas
+		- Architectural Philosophy: Fluid Core vs. Crystallized Interfaces
+			- Fluid core substrate (Apeiron – formless content)
+				- The canonical state substrate remains a continuous, unconditioned semantic field – a rich graph of associations, atomic assertions, decisions, and raw evidence without rigid schema impedance.
+				- Avoids premature schema-on-write constraints that destroy nuance or cause friction during exploratory thought and multi-agent reasoning.
+			- Schema-as-projection (Peras – crystallized interfaces)
+				- Schemas, types, enums, and unique identifiers are not intrinsic properties of the data substrate; they are temporary, disposable crystallizations generated on demand.
+				- Interfaces represent agreed-upon, lossy compressions between two parties (agents, APIs, UI engines) designed to minimize interaction friction and maximize transaction speed.
+			- Perimeter boundary transducers
+				- Type systems (e.g., Pydantic in Python, Zod/TypeBox in TypeScript) live strictly at the system perimeter (boundary transducers) rather than polluting the core graph engine.
+				- Boundary agents sample the fluid core (Apeiron) and project it into rigid, type-safe structures (Peras) strictly when interacting with deterministic runtimes (databases, AST compilers, UI outliners, or structured LLM tool endpoints).
+		- Multi-Agent Projection Pattern
+			- Pattern definition
+				- An architectural paradigm where a high-dimensional, fluid state graph (Apeiron) acts as the single source of truth, while specialized agents act as bidirectional transducers (lenses) mediating human and machine interactions.
+			- Read-side projection lenses (deep read)
+				- Specialized projection agents extract subgraphs and crystallize them into low-dimensional, context-specific interfaces (Peras) like Markdown outliners, source code ASTs, or sequence diagrams.
+				- Enables deep read capabilities where every rendered element retains provenance anchors and backlinks, allowing readers to drill down into the supporting evidence subgraph.
+			- Write-side control and delta ingestion (deep write)
+				- Intake and impact agents parse view-level edits, calculate semantic diffs, and commit reified assertion nodes or validity updates back to the substrate.
+				- Enables deep write capabilities where edits trigger impact traversals along `affects` or `constrains` edges, calculating downstream ripple effects and queuing advisory invalidations.
+		- System Taxonomy and Vocabulary
+			- System / Platform: **Aperas** – The unbound environment where structure emerges (“appears”).
+			- Fluid Core Substrate: **Apeiron** (`aperas-apeiron` / `core`) – The unconditioned, schema-free continuum where thoughts and semantic links flow without artificial boundaries.
+			- Boundary Projections / Interfaces: **Peras** (`aperas-peras` / `projections`) – The transient, typed structures (JSON Schema, Zod/Pydantic models, AST trees, DB mutations).
+			- Transduction Process: **Aperas** (*to appear / materialize*) – The active emergence of structured Peras out of the unconditioned Apeiron.
+		- Coding Agent Interface Continuum
+			- Manual skill mode (procedural recipes)
+				- Direct execution of `SKILL.md` procedures and local scripts without external service layers or extra API token costs.
+			- Active tool mode (on-demand query)
+				- Explicit tool calling (via service APIs) where the coding agent queries or mutates perata through high-level skills at an abstract level.
+			- Automatic hook mode (context engineering)
+				- Event-driven injection where relevant perata projections are automatically synthesized and placed directly into the coding agent's prompt/context window.
+		- Async Execution and Command Dispatch Mechanics
+			- Unconstrained reasoning to batch command emission
+				- Reasoner agents operate with free-flow, unconstrained thinking to analyze context and draft mutations without suffering from structured output reasoning constraints.
+				- At turn termination, the agent emits a single batch tool call or tagged payload containing array-based command intents (e.g., `list[CommandIntent]`).
+			- Event-driven async fan-out
+				- Emitted command batches are pushed to an event-driven dispatcher and executed concurrently across worker coroutines and service endpoints.
+				- Agents remain non-blocking and decoupled from slow, synchronous tool-calling loops.
+			- Self-healing boundary validation
+				- If a command payload violates boundary schema rules (Peras), type validation tracebacks are fed back to the boundary agent for immediate, localized repair without polluting the fluid core (Apeiron).
+	- Node, AST, and Storage Design in Aperas
+		- On-demand reification (lazy atomization)
+			- Coarse by default, fine when touched
+				- Content is preserved at coarse granularity (full paragraph, list item, or document block) without forcing upfront micro-fragmentation into tokens or words.
+				- The moment a sub-clause, phrase, word, or punctuation mark is addressed, linked, commented on in the Talk view, or bound to a predicate, that specific slice crystallizes into an addressed node with its own identity (URI or UUID).
+				- Untouched surrounding text remains unfragmented text chunks.
+		- Three parallel planes of architecture
+			- Rendered plane (Artifact / Surface Peras)
+				- The continuous, readable Markdown or HTML text flow where prose reads naturally without visual disruption.
+			- Stored plane (Substrate Apeiron)
+				- The backing store in TerminusDB preserving content as coarse or fine AST nodes and character offset ranges.
+			- Graph plane (Relational Peras)
+				- The explicit network of nodes and edges connecting addressed entities (documents, blocks, clauses, words, punctuation) to the rest of the knowledge graph.
+		- Universal inline addressability (`<span>` tag pattern)
+			- Zero layout interference
+				- Unlike `<div>` or `<p>`, `<span>` elements introduce no visual breaks or line collapses in the rendered plane.
+			- Attribute anchoring
+				- Acts as an inline hook for unique node identifiers (`id="node-123"`), graph attributes (`data-predicate="refutes"`), and event listeners directly over any target character range.
+			- Arbitrary granularity
+				- Can wrap a sentence, phrase, single word, or punctuation mark without disrupting document layout or styling.
+		- Unified.js AST mapping to TerminusDB substrate
+			- Granularity mapping
+				- Document level (`root` in mdast) corresponds to the page or section document container node.
+				- Block level (`listItem` / `paragraph` in mdast) corresponds to individual outliner blocks with parent-child graph edges.
+				- Phrase or entity level (`link` / `span` in hast) corresponds to on-demand reified nodes for addressed inline spans.
+				- Word or token level (`nlcst`) acts as ephemeral parser nodes used strictly during transduction passes, reified into graph nodes only when explicitly touched.
+			- Offset tracking and synchronization
+				- Unified tracks exact source offsets (`position: {start, end}`) across all AST nodes.
+				- When an inline span is addressed, the transducer uses offsets to split the parent AST text node and assign an ID to the newly created span node without disturbing surrounding text.
+	- Development Roadmap of Aperas
+		- Meta-Aperas Ontological Alignment
+			- The engineering roadmap is itself a self-instantiation of the Aperas ontology: starting in the unconditioned substrate (Apeiron) and crystallizing typed interfaces (Perata) on demand as human–agent coordination needs emerge.
+		- Phase 0: Substrate and core skills (Apeiron direct)
+			- Direct database integration
+				- The primary coding agent connects directly to the **TerminusDB** substrate without any intermediate UI layer.
+				- System provides baseline skill definitions (`SKILL.md`) covering schema initialization, document CRUD, WOQL and GraphQL query execution, and temporal commit management.
+			- Verification without UI overhead
+				- Validates core graph operations, transaction safety, and agent reasoning loops directly against the canonical store.
+		- Phase 1: First Peras (Human–agent co-navigation)
+			- SolidJS read projection
+				- Constructs the initial **SolidJS + Unified.js** projection interface for deep-read human inspection.
+				- Renders continuous Markdown outliner trees directly from TerminusDB AST nodes.
+			- Multi-faceted node interface
+				- Surface projections reveal the multi-tab reference model (Article, Source, Talk, History) so humans and agents navigate the exact same operational state.
+		- Phase 2: Skill expansion and perata maturation
+			- Incremental capability growth
+				- Develops specialized procedural skills including ingestion (parsing external text into AST nodes), graph search (structural traversals and WOQL/GraphQL pattern matching, with vector support evaluated later), and refactoring (lazy atomization of spans and node merging).
+			- Co-evolution of tools and perata
+				- Each new skill definition naturally introduces corresponding tooling and new **perata** (specialized view projections).
+		- Phase 3: Multi-agent specialization and Aperas Agent interfaces
+			- Sub-agent spawning for coding agents without background API access
+				- Equips primary coding agents with specialized `SKILL.md` definitions that allow them to spawn local sub-agents via headless CLI calls, native sub-agent tools, or local execution scripts.
+				- Preserves the direct Phase 0/2 skill set so local coding agents perform deep structural graph operations, AST transductions, and multi-node updates using existing lab harnesses without secondary API costs.
+			- Dedicated agent swarms (API-enabled environments)
+				- For environments with secondary API access, specialized multi-agent subgraphs (built with **LangGraph**) run on dedicated model endpoints for complex background tasks.
+			- Triple interface continuum for user coding agents
+				- **Manual skill mode (procedural / CLI execution):** The coding agent executes raw procedural skills (`SKILL.md`) directly against the substrate, preserving full operational autonomy without API dependencies.
+				- **Tool mode (active query):** Exposes high-level perata tools and service endpoints for the coding agent to interact directly with the Aperas Agent on demand.
+				- **Hook mode (automatic context engineering):** Injects perata and context projections directly into the context window of the coding agent via background events and triggers.
+	- Open-Source Stack for Agentic Knowledge Graph Architectures
+		- System architecture layers
+			- Canonical graph storage layer (the substrate)
+				- **TerminusDB** (chosen primary substrate) provides revision control on knowledge graphs with Git-like branches, delta layers, diffs, and merge requests.
+				- **FalkorDB** and **Neo4j Community** offer property graph engines with sub-millisecond Cypher querying.
+				- **SQLite** and **DuckDB** with DuckPGQ offer local-first, lightweight deployments.
+			- UI rendering and projection layer
+				- **SolidJS** (chosen UI framework) provides fine-grained signal-based reactivity without Virtual DOM overhead for rendering deep-read outliners and reified inline spans.
+				- **React Flow** / **XYFlow** and **Mermaid.js** offer visual graph and diagram rendering utilities.
+			- Agent swarm and orchestration layer
+				- **LangGraph** enables stateful, cyclical multi-agent orchestration to model read–write loops across intake, validation, and impact sweep agents.
+				- **PydanticAI** provides type-safe, schema-guided agent definitions ensuring outputs adhere to exact block-tree entity schemas.
+			- Interoperability, procedures, and boundary validation
+				- **Agent Skills** (`SKILL.md`) serves as an open standard for defining modular, loadable agent instructions and view templates.
+				- **TypeBox** / **Zod** (TypeScript) and **Pydantic** (Python) serve as boundary transducers enforcing schema contracts at network edges.
+				- Direct Service APIs (GraphQL or REST) serve as direct communication interfaces between agents and backend services.
+			- Surface editor and AST parsing layer
+				- **Unified.js** (`remark` / `rehype`) acts as the bidirectional AST parsing engine for Markdown to MDAST conversion, offset tracking, and block extraction.
+		- Minimal prototype architecture
+			- View layer
+				- SolidJS reactive tree views render projected subgraphs and inline `<span>` addressability.
+				- Unified.js converts raw Markdown into structural AST nodes for extraction and offset tracking.
+			- Agent layer
+				- LangGraph and PydanticAI service agents equipped with dynamically loaded Agent Skills.
+				- Projection agents read subgraphs via GraphQL or REST and render Markdown or specs according to skill workflows.
+				- Ingestion agents parse unstructured inputs directly into structured block-tree deltas.
+				- Impact agents traverse edges and flag stale views.
+			- Storage layer
+				- TerminusDB maintains reified assertion nodes, immutable commit deltas, and temporal branch management.
+	- Stack Selection Rationales & Discussions
+		- Canonical graph storage substrate rationale
+			- Selection: TerminusDB
+			- Immutable delta-layer architecture
+				- Operates on succinct, bit-packed immutable layers backed by Rust and Prolog, where every mutation appends a diff layer without overwriting past state.
+				- Grants native Git-like time travel, branching, diffing, and merging, allowing agents and humans to draft speculative updates on proposal branches.
+				- Provides strict revision auditability where every assertion and invalidation is intrinsically tied to a commit author, timestamp, and message.
+			- Isomorphism with block-tree and hybrid projection models
+				- Models data as JSON-LD Document Classes, offering direct structural mapping to outliner block-trees (Logseq/Roam style) and nested subdocuments.
+				- Supports the multi-faceted node reference pattern, storing full Markdown text for human UI rendering alongside structured assertion fields and triple relationships.
+			- Dual-query interface capabilities
+				- Employs WOQL (Web Object Query Language) powered by Datalog for pattern matching, recursive transitive dependency traversals, and impact propagation calculations.
+				- Exposes automatically generated GraphQL endpoints for projection agents to perform fast, multi-hop contextual fetches during view rendering.
+		- UI projection layer rationale
+			- Selection: SolidJS
+			- Fine-grained signal reactivity without Virtual DOM overhead
+				- Compiles template JSX into direct DOM mutations without virtual DOM reconciliation cascades.
+				- Updating an inline `<span>`, reified node badge, or discourse trail tag updates only the exact target DOM element with near-zero CPU footprint.
+				- Prevents micro-stutters and re-rendering cascades across massive, deeply nested outliner trees.
+			- Optimization for agentic deep-read views
+				- Since AI agents execute structural graph edits via backend transducers, the UI functions primarily as a high-performance **deep-read projection layer** with light human annotation.
+				- Signals subscribe directly to background streaming deltas, updating rendered views surgically as agents commit updates.
+			- Relativistic context ergonomics
+				- Solid primitives (`createSignal`, `createContext`, `createStore`) map naturally to relativistic node scoping, allowing child nodes and inline spans to bind locally without triggering parent component re-evaluations.
+		- Preservation of manual skills & zero-background-API sub-agent execution rationale
+			- Background constraint: Coding-agent-only environment
+				- In enterprise or research lab environments, developers are provided access exclusively to primary coding agents (e.g., Claude Code, Antigravity) via local harnesses, while secondary external LLM API keys are strictly blocked or restricted.
+				- Traditional agentic memory frameworks (such as Letta/MemGPT, Mem0, or Zep) rely on background API servers running continuous summarization and vector indexing loops, making them unusable under zero-API constraints.
+				- Basic model-less agent wikis provide local file reading, but lack structured multi-faceted node semantics (Article, Source, Talk, History), on-demand reification, and dependency tracking.
+			- Solution: Local sub-agent spawning via standard `SKILL.md` contracts
+				- Aperas retains the lightweight procedural skill set (`SKILL.md`) in Phase 3 rather than forcing background API dependencies.
+				- Primary coding agents leverage native CLI primitives (headless process execution like `claude -p`), internal sub-agent tools, or direct local execution scripts to spawn isolated local child agents.
+				- Child sub-agents execute focused graph operations (AST parsing, WOQL traversals, span reification, Talk ledger updates) using the developer's existing authorized agent harness without incurring secondary API costs.
+			- Cognitive shift: Intelligence in data topology and transducers
+				- Advanced agentic memory is achieved through deterministic TerminusDB schemas, Unified.js transducers, and structured `SKILL.md` instructions rather than perpetual background LLM calls.
+		- Boundary validation & schema generation rationale
+			- Selection: TypeBox / Zod (TypeScript) & Pydantic (Python)
+			- Role as perimeter transducers
+				- Enforces strict schema contracts exclusively at external API, LLM tool-calling, and DB mutation boundaries.
+				- Keeps the core graph substrate fluid and unconstrained while guaranteeing type safety when communicating with deterministic runtimes.
+		- AST parsing & surface synchronization rationale
+			- Selection: Unified.js (`remark` / `rehype`)
+			- Role in surface translation
+				- Parses Markdown surface views into clean syntax trees (MDAST), enabling bidirectional extraction of block IDs, wikilinks, and metadata tags for sync back to the underlying graph.
+		- Agent procedure and communication layer rationale
+			- Selection: Loadable Agent Skills (`SKILL.md`) + Direct Service APIs
+			- Primary role of Agent Skills
+				- Encapsulates procedural knowledge, view-projection templates, sub-agent spawning contracts, and domain rules into human-readable Markdown files.
+				- Enables progressive context loading where agents load specific skill definitions dynamically when executing targeted tasks rather than bloating the system prompt.
+				- Provides portable, vendor-agnostic behavioral definitions allowing any agent model or framework to execute projection and ingestion routines predictably.
+			- Elimination of persistent protocol middleware
+				- Replaces permanently running RPC servers with direct service calls (GraphQL / REST endpoints) to system service agents.
+				- Maintains a clean service boundary between procedural guidance (skills) and backend execution (service endpoints).
+	-
+	    
+	  Multi-Agent Division of Labor on a Knowledge Graph  
+		- Historical precedent and human wetware substrate
+			- Multi-faceted reference model: Inspired by long-standing collaborative systems like Wikipedia (Article, Talk, History, Source), human knowledge work has always relied on multi-perspective nodes rather than monolithic text blobs.
+			- Software engineering and science operate as a distributed graph running across human mental models and neural networks.
+			- Artifacts like source code, architecture diagrams, and tickets are lossy projections rendered from an underlying mental graph.
+			- Deep reads historically relied on manual navigation, while deep writes relied on mental impact tracing across dependencies.
+		- Role of LLMs and agents in the architecture
+			- LLMs function as bidirectional projection engines rather than the primary enterprise brain.
+			- The knowledge graph serves as the shared, explicit substrate representing the externalized mental model.
+			- Specialized agents act as dynamic lenses translating between high-dimensional graph topology and low-dimensional human interfaces.
+		- Division of agent roles
+			- Projection agents (read side / rendering)
+				- View-specific synthesis extracts subgraphs – such as nodes, edges, evidence, and ADRs – projecting them into target formats like source code, executive summaries, API specs, or Mermaid diagrams.
+				- Context pruning and zoom levels filter graph depth based on the target audience.
+				- Transclusion annotators attach backlink references and provenance pointers to UI elements so readers can drill back into the underlying subgraph.
+			- Intake and ingestion agents (write side / interpretation)
+				- Input parsing ingests unstructured human artifacts – including PR comments, chat threads, commit messages, and raw notes – resolving them into structured semantic entities and relationships.
+				- Reification and provenance create explicit assertion nodes tracking who stated a requirement, when, and under what rationale instead of overwriting nodes.
+			- Impact and coherence agents (ripple managers)
+				- Semantic dependency traversal walks the graph along `affects`, `derives_from`, or `constrains` edges to map potential impact zones when a node changes.
+				- Advisory invalidation marks affected views or nodes as “stale” or “questioned”, preparing diff proposals or triage queues for human review rather than blindly rewriting downstream documents.
+				- Contradiction sweeping identifies edge conflicts before they silently pollute other views.
+		- Pitfalls of complete automation
+			- Full automation creates brittle, over-constrained systems that fight human intuition and fluid workflow context.
+			- Human mental graphs handle ambiguity, shifting constraints, and informal consensus seamlessly, which deterministic engines collapse.
+			- Complete automated overwriting risks context collapse by treating exploratory comments or questions as hard state updates.
+			- The goal is explicit externalization and human-in-the-loop advisory feedback, not autonomous machine control.
+		- Key design challenges
+			- Idempotent round-tripping requires updating only the modified delta when an agent parses human edits on rendered Markdown without clobbering unrendered graph metadata.
+			- Granularity of nodes requires balancing atomic entities to avoid noise and coarse documents to preserve deep read benefits.
+			- Loose coupling of agent roles keeps agents stateless and lets the graph own canonical state so any agent can crash or be swapped out seamlessly.
+	- State of the Art in Agentic Knowledge Graphs
+		- Convergence of paradigm
+			- Current frontier systems combine neurosymbolic AI, dynamic GraphRAG, and bidirectional knowledge maintenance.
+			- Knowledge graphs are treated as living, canonical state machines rather than static retrieval databases, with multi-agent swarms acting as read–write transducers.
+		- Key architectural pillars
+			- Temporal and non-destructive graph maintenance
+				- Systems attach assertion timestamps and validity intervals rather than mutating or overwriting nodes.
+				- Reified evidence nodes store assertions alongside provenance pointers like source conversation, commit, and rationale.
+				- State-of-the-art frameworks maintain continuous memory graphs that track state transitions across multi-hop reasoning paths.
+			- Multi-agent division of labor
+				- Intent and parsing agents convert unstructured human inputs into structured graph operations.
+				- Graph traversal and subgraph fetchers execute multi-hop traversals to pull contextual clusters including decisions, backlinks, and evidence.
+				- Synthesis and projection agents render retrieved subgraphs into target artifacts like Markdown runbooks, API specs, or Mermaid diagrams.
+		- Spectrum of maturity across read–write capabilities
+			- Deep read (provenance projection)
+				- Uses subgraph extraction and multi-hop GraphRAG.
+				- Reached high maturity in frameworks like Microsoft GraphRAG, Neo4j Agentic ADK, and HippoRAG.
+			- Write ingestion (text to knowledge graph)
+				- Uses schema-guided extraction with human-intent agents.
+				- Reached medium–high maturity in systems like AGENTiGraph and LlamaIndex Property Graphs.
+			- Advisory impact propagation
+				- Uses dependency traversal flagging stale nodes or diff queues.
+				- Reached medium maturity in temporal KG agents and reactive engines.
+			- Bidirectional round-tripping
+				- Edits a rendered view to update only delta nodes in the knowledge graph.
+				- Remains an emerging bleeding-edge capability explored in moldable development and project lenses.
+		- Open challenges on the bleeding edge
+			- Lossless round-trip synchronization struggles to parse human edits on high-level summaries back into exact graph diffs without dropping unrendered metadata.
+			- Granularity calibration frequently pulls too much AST-level noise or too little contextual rationale during subgraph extraction.
+			- Human–agent advisory loops shift away from autonomous destructive overwrites toward advisory invalidation, generating visual diffs and triage queues for human verification.
