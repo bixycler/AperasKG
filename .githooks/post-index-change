@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Auto-runs a full `kg:track` sweep after any index write that actually touched the
+# working tree -- covers `git reset --hard`, which fires no other hook at all (confirmed:
+# neither `post-commit` nor `post-checkout` see a bare `reset`).
+# Installed via: git config core.hooksPath .githooks (see AperasKG/.githooks/README.md)
+#
+# Arg (git-supplied): $1 = 1 if the working tree was updated, 0 if only the index changed
+# (e.g. `git reset` without `--hard`) -- skip in the latter case, since on-disk artifact
+# content (what `kg:track` actually hashes) hasn't changed.
+#
+# No before/after ref pair is available here (unlike post-commit/post-checkout), and this
+# hook fires for index writes beyond just `reset`, so this runs an unscoped sweep across
+# all artifacts rather than a targeted diff. trackArtifact hashes each file's actual disk
+# content, making that a cheap no-op for anything unchanged.
+set -euo pipefail
+
+working_tree_updated="$1"
+[ "$working_tree_updated" = "0" ] && exit 0
+
+repo_root="$(git rev-parse --show-toplevel)"
+web_dir="$repo_root/../Aperas/web"
+
+if [ ! -d "$web_dir" ]; then
+  echo "[kg:track hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
+  exit 0
+fi
+
+echo "[kg:track hook] Index change with working-tree update detected -- running full kg:track sweep."
+
+if ! (cd "$web_dir" && npm run kg:track); then
+  echo "[kg:track hook] kg:track failed — run 'npm run kg:track' manually in Aperas/web to retry." >&2
+fi
