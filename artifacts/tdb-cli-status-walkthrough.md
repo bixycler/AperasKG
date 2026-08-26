@@ -1,6 +1,6 @@
 # TerminusDB CLI Status Walkthrough & Operational Reference
 
-Operational reference for checking status, commit logs, document contents, and remote state of the `aperas_apeiron` database using the `tdb` CLI shortcut.
+Operational reference for checking status, commit logs, document contents, and remote state of the `aperas_apeiron` database using the `tdb` CLI shortcut. For complete reference of TerminusDB CLI, see the [official documentation](https://terminusdb.org/docs/terminusdb-cli-commands/).
 
 ```bash
 alias tdb='docker exec terminusdb /app/terminusdb/terminusdb'

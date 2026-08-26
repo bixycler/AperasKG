@@ -8,12 +8,12 @@
 		- Temporal commit management — done.
 		- Verification harness (`npm run verify:phase0 -- --db`) — passes cleanly and idempotently on repeated runs.
 		- Artifact tracking & on-demand ingestion (`kg:track`/`kg:ingest`) — done, verified against the live substrate across multiple artifacts and re-ingestion cycles.
+		- Automated tracking trigger (`AperasKG/.githooks/post-commit`) — done: auto-runs `kg:track` on commit whenever `artifacts/*.md` files change.
 		- KG backup/restore — done: same-store snapshot/rollback via `bundle`/`unbundle`, and whole-volume tarball for real cross-machine transfer, confirmed working in both directions across independent host instances.
 		- Cross-machine remotes — done: reciprocal SSH-tunneled TerminusDB remotes (reciprocal remote endpoints), `fetch` confirmed both directions; `push`/`pull` (reconciling the diverged histories) not yet attempted.
 		- Reference tooling — `skills/terminusdb/references/cli.md` audited end-to-end against a live server and the official CLI docs.
 	- Not yet started
 		- Phase 1: SolidJS read-projection wiring to real TerminusDB AST nodes. (`web/` scaffolding — SolidJS/Vite + dependencies — was added as a placeholder for the overall project structure; no Phase 1 work itself has begun.)
-		- Automated tracking trigger (e.g. a git hook in `AperasKG` running `kg:track` on commit) — currently `kg:track`/`kg:ingest` are manual commands only.
 		- Phase 2+ skills: ingestion-from-arbitrary-sources, graph search skill, refactoring/lazy-atomization skill.
 		- Reconciling separate hosts' diverged `aperas_apeiron` histories (push/pull, possibly rebase) — currently only fetched-and-inspected, not merged.
 	- ## Appendix: cross-store `bundle`/`unbundle` incompatibility investigation

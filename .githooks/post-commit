@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Auto-runs `kg:track` after a commit that touches artifacts/*.md, so ArtifactNodes
+# stay in sync without a manual `npm run kg:track` step.
+# Installed via: git config core.hooksPath .githooks (see AperasKG/.githooks/README.md)
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+changed_artifacts="$(git diff-tree --no-commit-id --name-only -r HEAD -- 'artifacts/*.md')"
+
+if [ -z "$changed_artifacts" ]; then
+  exit 0
+fi
+
+web_dir="$repo_root/../Aperas/web"
+
+if [ ! -d "$web_dir" ]; then
+  echo "[kg:track hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
+  exit 0
+fi
+
+echo "[kg:track hook] Artifact(s) changed in this commit:"
+echo "$changed_artifacts" | sed 's/^/  - /'
+
+# Track only the changed files (paths relative to artifacts/), not the whole directory —
+# trackAllArtifacts re-writes a KG commit for every artifact on every call, so scoping this
+# keeps a 1 git-commit -> 1 KG-commit ratio instead of 1 -> N.
+relative_paths=$(echo "$changed_artifacts" | sed 's#^artifacts/##')
+
+if ! (cd "$web_dir" && npm run kg:track -- $relative_paths); then
+  echo "[kg:track hook] kg:track failed — run 'npm run kg:track -- $relative_paths' manually in Aperas/web to retry." >&2
+fi

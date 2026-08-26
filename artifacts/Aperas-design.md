@@ -139,6 +139,10 @@
 				- Develops specialized procedural skills including ingestion (parsing external text into AST nodes), graph search (structural traversals and WOQL/GraphQL pattern matching, with vector support evaluated later), and refactoring (lazy atomization of spans and node merging).
 			- Co-evolution of tools and perata
 				- Each new skill definition naturally introduces corresponding tooling and new **perata** (specialized view projections).
+			- Collaboration perata: review/merge-request workflow
+				- TerminusDB's `rebase`/`apply` give branch reconciliation but no GitHub-style review layer — no proposal-with-discussion, approval state, or inline comment thread sits between "diverged branches" and "merged."
+				- Aperas extends the multi-faceted node model (Discourse view / Talk) to a first-class review document type: a proposal node wrapping a source/target branch pair, with discussion threads, review state, and conflict-resolution notes stored as subdocuments in the KG rather than in an external tool.
+				- Keeps Aperas GitHub-like as well as Git-like: comments, issues, and review decisions become graph-native, queryable, and provenance-tracked alongside the commits they discuss, instead of living in a bolted-on external system.
 		- Phase 3: Multi-agent specialization and Aperas Agent interfaces
 			- Sub-agent spawning for coding agents without background API access
 				- Equips primary coding agents with specialized `SKILL.md` definitions that allow them to spawn local sub-agents via headless CLI calls, native sub-agent tools, or local execution scripts.
