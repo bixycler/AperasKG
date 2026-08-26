@@ -1,45 +1,29 @@
 - ## Aperas Development Status
+	- See `Aperas-architecture.md` for how everything below is actually built (schema, CRUD, WOQL/GraphQL, version control, artifact ingestion, KG backup/restore, cross-machine remotes).
 	- Phase 0: Substrate and Core Skills — In Progress
-		- `AperasKG` is its own git repo (symlinked into `Aperas/`).
-		- Schema initialization
-			- `DocumentNode`, `BlockNode`, `SpanNode`, `TripleAssertion`, `ArtifactNode` JSON-LD schema objects (TypeScript interfaces, not classes) defined in `web/src/lib/schema.ts`.
-			- Applied via `full_replace` for idempotent re-initialization; requires an explicit `@context` document in the schema set.
-		- Document CRUD
-			- `web/src/lib/crud.ts` — insert/delete for documents, blocks, spans, and triple assertions against the real `terminusdb` npm client (`addDocument`/`updateDocument`/`deleteDocument`).
-			- Idempotent reset helpers (`deleteDocumentIfExists`, `deleteDocumentsIfExist`, `deleteTripleAssertionsInvolvingNode`) so seed/demo/ingestion runs are re-runnable.
-			- `deleteDocumentsIfExist` batches many ids into a single `deleteDocument` call/commit — added after a cleanup loop over per-id deletes produced 530 separate "Reset demo state" commits; the ingestion re-run path below now uses it to clear a doc + all its stale blocks in one commit.
-		- WOQL query execution
-			- `web/src/lib/woql.ts` — real WOQL queries via `client.query(...)`, including impact-propagation traversal along the `impacts` predicate.
-			- Literal comparisons require explicit `WOQL.string(...)` wrapping — bare strings are treated as node references, not literals.
-		- GraphQL query execution
-			- `web/src/lib/graphql.ts` — queries the auto-generated GraphQL endpoint (`api/graphql/<org>/<db>`) via `client.sendCustomRequest`.
-		- Temporal commit management
-			- `web/src/lib/versionControl.ts` — branch create/checkout/delete, commit history, document history, JSON/version diffing, merge (via `apply`), reset.
-		- Verification harness
-			- `web/src/lib/verifyPhase0.ts` (`npm run verify:phase0 -- --db`) — end-to-end pass across AST parsing, span reification, document/block commit, triple assertion + WOQL traversal, GraphQL query, and branch/commit-log checks. Passes cleanly and idempotently on repeated runs.
-		- Artifact tracking & on-demand ingestion
-			- `web/src/lib/artifacts.ts` + `web/src/lib/kgCli.ts` (`npm run kg:track`, `npm run kg:ingest`).
-			- Artifacts under `AperasKG/artifacts/` are registered as lightweight `ArtifactNode`s (path + content hash) on `track`; full AST-parse-and-commit into `DocumentNode`/`BlockNode`s only happens on `ingest`, and only for artifacts whose content hash has changed since last ingestion.
-			- Verified against the live substrate: tracked and ingested `Aperas-design.md`, `Aperas-dev-status.md`, and `tdb-cli-status-walkthrough.md`, confirmed no-op behavior when unchanged, via `client.updateDocument(..., create: true)` upserts on the `ArtifactNode` tracking record.
-			- Re-ingestion (content changed since last ingest) confirmed to correctly replace the prior `DocumentNode` + all its `BlockNode`s in a single commit via `deleteDocumentsIfExist`, rather than leaving orphaned blocks from a shrunk/changed block tree.
-		- KG backup/restore
-			- `AperasKG/db/restore.sh` (`backup` / `restore <bundle-file>` / `verify <bundle-file>`) wraps the TerminusDB `bundle`/`unbundle` CLI commands.
-			- `backup` now self-verifies every snapshot by unbundling it into a disposable throwaway database (deleted immediately after) before reporting success — added after an office-made snapshot (`aperas_apeiron_20260825_184754.bundle`) turned out to be silently corrupted (deterministic `unknown_layer_reference` on restore) and went undetected from the moment it was written until we happened to try restoring it. See the appendix below for the full corruption investigation; the file has been kept for forensics rather than deleted.
-			- Snapshots land in `AperasKG/db/snapshots/`, git-tracked as coarse checkpoints — separate from TerminusDB's own fine-grained internal commit history, which stays in the Docker-volume-backed store (`terminusdb_storage`).
-		- Reference tooling
-			- `skills/terminusdb/references/cli.md` audited end-to-end against a live server and the official CLI docs; corrected several inaccurate flag/usage examples (query syntax, reset, push/pull, diff, role create, bundle/unbundle).
+		- Schema initialization — done.
+		- Document CRUD — done.
+		- WOQL query execution — done.
+		- GraphQL query execution — done.
+		- Temporal commit management — done.
+		- Verification harness (`npm run verify:phase0 -- --db`) — passes cleanly and idempotently on repeated runs.
+		- Artifact tracking & on-demand ingestion (`kg:track`/`kg:ingest`) — done, verified against the live substrate across multiple artifacts and re-ingestion cycles.
+		- KG backup/restore — done: same-store snapshot/rollback via `bundle`/`unbundle`, and whole-volume tarball for real cross-machine transfer, confirmed working in both directions across independent host instances.
+		- Cross-machine remotes — done: reciprocal SSH-tunneled TerminusDB remotes (reciprocal remote endpoints), `fetch` confirmed both directions; `push`/`pull` (reconciling the diverged histories) not yet attempted.
+		- Reference tooling — `skills/terminusdb/references/cli.md` audited end-to-end against a live server and the official CLI docs.
 	- Not yet started
 		- Phase 1: SolidJS read-projection wiring to real TerminusDB AST nodes. (`web/` scaffolding — SolidJS/Vite + dependencies — was added as a placeholder for the overall project structure; no Phase 1 work itself has begun.)
 		- Automated tracking trigger (e.g. a git hook in `AperasKG` running `kg:track` on commit) — currently `kg:track`/`kg:ingest` are manual commands only.
 		- Phase 2+ skills: ingestion-from-arbitrary-sources, graph search skill, refactoring/lazy-atomization skill.
-	- ## Appendix: `aperas_apeiron_20260825_184754.bundle` corruption investigation
-		- Symptom: every unbundle attempt fails identically with `error(unknown_layer_reference("0938bcd3ce56850a24b4cb1f9cf29a53d5b48612"))` — 100% deterministic across repeated tries, which rules out a timing/race explanation up front.
-		- Ruled out TerminusDB's `auto-optimize` community plugin (`/plugins/auto-optimize.pl`) as the cause. Its "GC" is just SWI-Prolog in-memory `garbage_collect`/`trim_stacks` (VM heap hygiene, unrelated to on-disk layers); its "optimization" is a probabilistic layer squash. Stress-tested directly against a throwaway database: 60 rapid commits, 15 back-to-back commit→bundle→restore cycles, and an explicit forced `optimize` (squash) immediately before a restore — zero failures in every case. Bundles are self-contained and survive squash/GC.
-		- Ruled out git as the transport/corruption vector. `AperasKG` is its own git repo (symlinked into `Aperas/`); `git cat-file -p 5d1edf1:db/snapshots/aperas_apeiron_20260825_184754.bundle` produces a blob with md5 `9326f8249a3d70ee64b07dd50b8c9c5f`, byte-identical to the working-tree file. Git recorded it as a binary diff (`Bin 0 -> 166415 bytes`) in the same commit that added `restore.sh` itself — so the corruption predates that commit entirely; git only ever transported bytes that were already bad.
-		- Ruled out git's EOL/`autocrlf` handling specifically. `core.autocrlf`/`core.eol` are both unset (no conversion) on this machine, and regardless of setting, EOL conversion can only insert/strip a `\r` next to each `\n` — a change bounded by the file's LF count (346 in this file, i.e. ±346 bytes max). The actual corruption requires a 60,512-byte discrepancy to resolve (166,415 → 105,903 bytes), over 170× larger than EOL conversion could produce. Added `AperasKG/.gitattributes` (`/db/snapshots/* binary`) regardless, as defense-in-depth against any future git config doing this on a different machine.
-		- Byte-level evidence points to a Latin-1 → UTF-8 mojibake transcoding somewhere before that commit:
-			- A hex dump of the file start shows a plausible 40-char ASCII hex header (`23e4e61447b0ce621f0aaf11a15b78580fc27fc4` — likely a SHA-1 layer id) immediately followed by `1f c2 8b 08 00...` where a clean gzip stream should begin with `1f 8b 08`. The stray `c2` is the textbook signature of a raw byte ≥ 0x80 (here, `0x8b`) having been re-encoded as a 2-byte UTF-8 sequence.
-			- Reversing that transform on the whole file (`data.decode('utf-8').encode('latin-1')`) shrank it from 166,415 → 105,903 bytes and produced a byte-perfect gzip header (`1f 8b 08 00 00 00 00 00 00 ff`) at exactly the offset (40) where the ASCII hash header ends — strong confirmation every high byte in the file had been doubled this way.
-			- Full reversal still didn't yield a restorable bundle — unbundling the "fixed" file failed differently, with `Illegal UTF-8 start`, meaning the format has more internal structure than one flat Latin-1/UTF-8 swap can undo. The file was not fully recoverable by this method.
-		- Open question: exactly which step on the originating (office) machine turned raw bytes into mojibake before `git add` is unconfirmed. `restore.sh`'s own `backup` steps (`docker exec ... bundle`, `docker cp`) are binary-safe and don't explain it; whatever did this happened outside the script, or is a bug we didn't manage to reproduce. Not pursued further, since `restore.sh verify` (above) catches this class of problem regardless of root cause.
-
+		- Reconciling separate hosts' diverged `aperas_apeiron` histories (push/pull, possibly rebase) — currently only fetched-and-inspected, not merged.
+	- ## Appendix: cross-store `bundle`/`unbundle` incompatibility investigation
+		- Symptom: `aperas_apeiron_snapshot_A.bundle` (made on Host A) and `aperas_apeiron_snapshot_B.bundle` (made on Host B) each verify cleanly **only on their own origin machine**, and fail deterministically with `error(unknown_layer_reference(<hash>))` on the other — a different specific missing-layer hash each time.
+		- An earlier pass at this investigation, run on a single host in isolation, found a byte pattern in a snapshot that looked like Latin-1/UTF-8 mojibake corruption (reversing it produced a plausible gzip header) and concluded the file was corrupted. **That conclusion was wrong and has been retracted** — the same file was later shown to unbundle perfectly on its own origin host, which a genuinely corrupted file cannot do. The byte pattern was a coincidental artifact, not evidence of corruption.
+		- Ruled out version mismatch: both machines confirmed running byte-identical `TerminusDB v12.0.7 (57f2093baeafd65e16004e84b7b58e0c5cf72858)` / `terminusdb-store v0.19.8`.
+		- Ruled out the `auto-optimize` community plugin (`/plugins/auto-optimize.pl`, a probabilistic post-commit layer squash/GC): disabled on both machines (moved the plugin file out, restarted), re-tested with a brand-new minimal scratch database — still failed cross-host identically.
+		- Ruled out store "age": reproduced with a store `store init`'d seconds before the test, same as the destination.
+		- **Decisive isolation, no second machine needed**: ran two independent TerminusDB containers (`terminusdb` and a throwaway `terminusdb-freshtest`, same image, same physical host, plugin off on both) and bundled/unbundled between them. Same failure. A positive control — unbundling the same file back into a *different database within its own originating container* — succeeded every time. This isolates the variable precisely: **it's not host A vs. host B, or even separate machines at all — it's any two independent TerminusDB stores (server instances/storage directories), even side-by-side on one host.**
+		- Cross-checked against prior art: [terminusdb/terminusdb#1147](https://github.com/terminusdb/terminusdb/issues/1147) reports the identical symptom moving a bundle between two instances, never reproduced by the maintainer, closed stale/not-planned. [terminusdb/terminusdb#1235](https://github.com/terminusdb/terminusdb/pull/1235) ("an initial effort to figure out #1147 without success") added CLI bundle/unbundle tests that call `store.init()` exactly once and share that one store across every test — so its test suite never actually exercises the cross-store case, which is the one that fails.
+		- The official ["move a database between servers" backup/restore guide](https://terminusdb.org/docs/enterprise-backup-restore/) is scoped to **Enterprise edition** (different mechanism: `/api/bundle` + `/api/unbundle` REST endpoints, target pre-created) — not a documented guarantee for the Community-edition CLI commands we're using.
+		- Filed as [terminusdb/terminusdb#2509](https://github.com/terminusdb/terminusdb/issues/2509), including the two-store repro and a note about the test-coverage gap in #1235. Draft/record kept at `terminusdb-issue-bundle-cross-store.md`.
+		- Conclusion for this project: `bundle`/`unbundle`/`restore.sh` remain valid for same-store snapshot/rollback, but are not to be relied on for cross-machine transfer.
