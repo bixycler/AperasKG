@@ -28,10 +28,10 @@ tdb log admin/aperas_apeiron | less
 ```
 
 ### Compact Local-Time History
-Use `tdb-log.sh` (located in `AperasKG/db/`) for local-time formatting and auto-paging. Output defaults to 20 commits (`--count` parameter is only needed when overriding, e.g., `--count 50` or `--count -1`):
+Use `tdb-log.sh` (located in `Aperas/scripts/`) for local-time formatting and auto-paging. Output defaults to 20 commits (`--count` parameter is only needed when overriding, e.g., `--count 50` or `--count -1`):
 
 ```bash
-./db/tdb-log.sh
+Aperas/scripts/tdb-log.sh
 ```
 
 ### Document History Filtering
@@ -39,7 +39,7 @@ Use `tdb-log.sh` (located in `AperasKG/db/`) for local-time formatting and auto-
 
 ```bash
 # Fast message filter via tdb-log.sh
-./db/tdb-log.sh --filter "Aperas-dev-status.md"
+Aperas/scripts/tdb-log.sh --filter "Aperas-dev-status.md"
 
 # Fast JSON filter via raw CLI & jq
 tdb log admin/aperas_apeiron --json --count -1 2>/dev/null \
@@ -50,7 +50,7 @@ tdb log admin/aperas_apeiron --json --count -1 2>/dev/null \
 
 ## 3. Substrate Document Inspection
 
-Retrieve stored documents by JSON-LD class (`ArtifactNode`, `DocumentNode`, `BlockNode`, `TripleAssertion`):
+Retrieve stored documents by JSON-LD class (`ArtifactNode`, `BlockNode`, `BaseLink`, `BaseEdge`):
 
 ### Raw JSONL Output
 `tdb doc get` outputs raw JSONL (one JSON object per line) with UTC timestamps and literal `\n`/`\t` escape sequences:
@@ -64,7 +64,7 @@ tdb doc get admin/aperas_apeiron --type="ArtifactNode" | jq | less
 Use `tdb-doc.sh` to unescape embedded line breaks into readable text and convert ISO UTC timestamps to local time:
 
 ```bash
-./db/tdb-doc.sh --type="DocumentNode"
+Aperas/scripts/tdb-doc.sh --type="BlockNode"
 ```
 
 ---
@@ -118,14 +118,14 @@ Inspect fetched remote branches before merging into local state:
 tdb log admin/aperas_apeiron/remote_node/branch/main | less
 
 # View remote document content
-TERMINUSDB_DB_SPEC="admin/aperas_apeiron/remote_node/branch/main" ./db/tdb-doc.sh --id="ArtifactNode/Aperas-dev-status.md"
+TERMINUSDB_DB_SPEC="admin/aperas_apeiron/remote_node/branch/main" Aperas/scripts/tdb-doc.sh --id="ArtifactNode/Aperas-dev-status.md"
 ```
 
 ---
 
 ## 6. Backup & Recovery Operations
 
-- **Whole-Volume Tarball (`restore.sh backup-full | verify-full | restore-full`)**:
+- **Whole-Volume Tarball (`Aperas/scripts/restore.sh backup-full | verify-full | restore-full`)**:
   **Primary adopted backup & transfer mechanism**. Captures consistent cold snapshots of `terminusdb_storage` for cross-machine host transfers.
-- **Same-Store Snapshot (`restore.sh backup | verify | restore`)**:
+- **Same-Store Snapshot (`Aperas/scripts/restore.sh backup | verify | restore`)**:
   CLI `.bundle` exports are restricted to same-instance local rollbacks only (due to cross-store layer reference incompatibility issue #2509).
