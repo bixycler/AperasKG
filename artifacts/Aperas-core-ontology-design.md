@@ -124,13 +124,13 @@ The graph topology models all content as an infinite fractal tree spanning acros
 Inherits from `BaseNode`. Represents a directory in the filesystem, acting as a seamless bridge in the infinite tree. 
 *   **`README.md` Ingestion**: A separate `README.md` file is a legacy "dumb folder" workaround. The `README.md` is fully absorbed into the `FolderNode`. Its content populates the folder's `text` (abstract) and initial `children` blocks. The `README.md` is not exposed as a separate `ArtifactNode`.
 *   **`children`**: Contains other nested `FolderNode`s and `ArtifactNode`s, alongside the parsed block children from the `README.md`.
-Keyed on `path` (Lexical), the same as `ArtifactNode` — a folder's identity is its filesystem location, not its content, so re-running folder ingestion upserts the same document rather than creating duplicates.
+
+**Identity**: a Snowflake-style generated id, same scheme as `BlockNode` (§1.A); `path` is a plain, mutable field, not part of the key (Appendix G).
 ```json
 {
   "@id": "FolderNode",
   "@type": "Class",
   "@inherits": ["BaseNode"],
-  "@key": { "@type": "Lexical", "@fields": ["path"] },
   "title": "xsd:string",
   "path": "xsd:string",
   "text": { "@type": "Optional", "@class": "xsd:string" },
@@ -140,14 +140,21 @@ Keyed on `path` (Lexical), the same as `ArtifactNode` — a folder's identity is
 
 ### B. ArtifactNode (The Physical Anchor)
 Represents the physical file on disk. It handles file metadata and holds a single pointer to the root of the block tree. Inherits from `BaseNode` — without this, no `BaseLink`/`BaseEdge` could target or originate from a whole file, contradicting §3's universal-addressability goal.
+
+**Identity**: Snowflake-generated, same as `FolderNode` above; `path` is a plain, mutable field, not the key (Appendix G). Gains `title`/`text` to match the folding philosophy (§5) uniformly across the whole fractal lineage: `title` is the filename, `text` is an abstract of the file's own content (naive fallback — first paragraph — until AI-driven summarization, §5 enhancement backlog, actually exists).
 ```json
 {
   "@id": "ArtifactNode",
   "@type": "Class",
   "@inherits": ["BaseNode"],
+  "title": "xsd:string",
   "path": "xsd:string",
-  "contentHash": "xsd:string",
-  "root": "BlockNode"
+  "text": { "@type": "Optional", "@class": "xsd:string" },
+  "fileHash": "xsd:string",
+  "lastTrackedAt": "xsd:dateTime",
+  "ingestedHash": { "@type": "Optional", "@class": "xsd:string" },
+  "lastIngestedAt": { "@type": "Optional", "@class": "xsd:dateTime" },
+  "root": { "@type": "Optional", "@class": "BlockNode" }
 }
 ```
 
@@ -221,3 +228,13 @@ The content-addressed scheme from Appendix A (`@id = hash(parent context + conte
 Resolved by decoupling the two entirely: `@id` is now a Snowflake-style generated identifier, assigned once and fully independent of content (§1.A) — collision-avoidance is deterministic (timestamp + machine identity + sequence counter), not derived from what the node contains. The content fingerprint (§1.B) turned out not to need a recursive/structural hash at all.
 
 A first attempt at §1.B proposed reusing the bottom-up construction from this section — a recursive, per-`BlockNode` `treeHash` — for three things: detecting the DB-ahead-of-file case (by comparing it against `fileHash`), scoping reconciliation to only the diverged subtrees, and cross-checking the identity-matcher's decisions. The first use rested on a category error: `fileHash` hashes a flat string and a tree fingerprint hashes a nested structure — outputs of different functions over different domains, never meaningfully comparable regardless of whether real drift exists. Once that's gone, the DB-ahead-of-file case is better solved by direct on-write signaling instead (§1.B), and the remaining two uses (reconciliation scoping, cross-check) didn't justify a persisted, per-edit-maintained field on their own — reconciliation is rare and artifacts are bounded, human-document-sized trees, so a best-effort matcher can simply run over the whole tree each time without a hash-based pre-filter. Dropped entirely, not kept even as an on-demand technique — leaving two flat file-domain hashes (`fileHash`/`ingestedHash`) as the whole of the fingerprint design, and reconciliation itself resolved at the strategy level as best-effort content matching over the whole tree, with the specific matching algorithm left as an implementation detail.
+
+### G. Separating Artifact/Folder Identity from Location
+
+`ArtifactNode` and `FolderNode` were originally Lexical-keyed on `path` — not a deliberated design decision, just the obvious, simple choice made in an early, undesigned prototyping pass, before this document's identity/fingerprint rigor (§1, Appendix F) existed at all.
+
+On inspection, while designing reconciliation matching (see `Aperas-reconciliation-matching-design.md`), this turned out to be the same category error Appendix F already fixed once for `BlockNode`, just on a different axis: identity conflated with a mutable property. There, the mutable property was content; here, it's location. A file or folder rename is a routine edit, exactly like a paragraph edit, not an identity change — but `path`-as-`@id` makes every rename destructive by construction, since the `@id` is *recomputed* from the new path, orphaning the old document's identity and everything that ever referenced it directly. The only way to route around that self-inflicted damage is to detect the rename after the fact and manually transplant `root` onto a freshly-identified document — real, working, but entirely unnecessary machinery, built to compensate for the identity scheme rather than because the problem demanded it.
+
+Resolved the same way as Appendix F: `ArtifactNode` and `FolderNode` both get a Snowflake-generated identity (§1.A), and `path` becomes an ordinary mutable field. A detected rename (matched by content, same as everything else — see §4.A/B's `title`/`text` and the reconciliation doc's file/folder-matching design) becomes a field update on the same document, not a new identity; anything that referenced the artifact or folder by id keeps working with no transplant needed. `root` only ever needed transplanting because the container around it couldn't survive a move — fix the container, and the transplant machinery becomes unnecessary for this case (still needed for the case where a match genuinely fails and a new identity is warranted).
+
+Two costs were weighed before committing to this: losing the free, deterministic `id`-from-`path` lookup, and losing the database-enforced guarantee that no two documents can claim the same path. The first turned out not to be a cost at all — benchmarked, a `path`-filtered query came back faster than the direct id lookup it would replace (~7.5ms vs ~48ms at 50 documents). The second is real in shape (an application-level check-then-upsert race could in principle create duplicate `path`s) but not practically significant given how this project is actually deployed — one local TerminusDB per machine, reconciled via fetch/push, not a single server multiple machines write into concurrently; worth remembering if that deployment model ever changes.
