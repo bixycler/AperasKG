@@ -29,7 +29,7 @@
 				- Etymologically layered:
 					- *A-* (without) + *Peras* (limit) = **Unbound**: Not merely “unlimited” in size, but intrinsically free from rigid constraints.
 					- *Aperas* in Esperanto = “Appears / Emerges”: The active manifestation where structured forms materialize out of the fluid core on demand.
-					- Appam / Flatbread: The warm, versatile, round flatbread – simple, wholesome, and adaptable to any filling or shape.
+					- *Aperis* (Latin verb meaning “open, uncover”): The open-source act of laying knowledge bare, mirroring its legal fluidity under [The Unlicense](https://unlicense.org/) by refusing rigid cages or ownership.
 				- While daily interaction imposes limits and fixed roles, the liberated soul breaks through the illusion of rigid division, realizing its inner ground is identical in essence to the boundless Apeiron.
 			- Peras – Bound (The Interface – Transient Boundary)
 				- The limit, boundary, or transient interface where interaction occurs.
@@ -71,8 +71,8 @@
 				- Enables deep write capabilities where edits trigger impact traversals along `affects` or `constrains` edges, calculating downstream ripple effects and queuing advisory invalidations.
 		- System Taxonomy and Vocabulary
 			- System / Platform: **Aperas** – The unbound environment where structure emerges (“appears”).
-			- Fluid Core Substrate: **Apeiron** (`aperas-apeiron` / `core`) – The unconditioned, schema-free continuum where thoughts and semantic links flow without artificial boundaries.
-			- Boundary Projections / Interfaces: **Peras** (`aperas-peras` / `projections`) – The transient, typed structures (JSON Schema, Zod/Pydantic models, AST trees, DB mutations).
+			- Fluid Core Substrate: **Apeiron** – The unconditioned, schema-free continuum where thoughts and semantic links flow without artificial boundaries.
+			- Boundary Projections / Interfaces: **Peras** – The transient, typed structures (JSON Schema, Zod/Pydantic models, AST trees, DB mutations).
 			- Transduction Process: **Aperas** (*to appear / materialize*) – The active emergence of structured Peras out of the unconditioned Apeiron.
 		- Coding Agent Interface Continuum
 			- Manual skill mode (procedural recipes)
@@ -101,6 +101,7 @@
 				- The continuous, readable Markdown or HTML text flow where prose reads naturally without visual disruption.
 			- Stored plane (Substrate Apeiron)
 				- The backing store in TerminusDB preserving content as coarse or fine AST nodes and character offset ranges.
+				- Mirrored bidirectionally as plain JSON-LD files under `AperasKG/Apeiron/` (`Aperas-architecture.md` §5) — a portable, engine-agnostic round-trip of the same content, independent of TerminusDB's own storage internals.
 			- Graph plane (Relational Peras)
 				- The explicit network of nodes and edges connecting addressed entities (documents, blocks, clauses, words, punctuation) to the rest of the knowledge graph.
 		- Universal inline addressability (`<span>` tag pattern)
@@ -153,6 +154,18 @@
 				- **Manual skill mode (procedural / CLI execution):** The coding agent executes raw procedural skills (`SKILL.md`) directly against the substrate, preserving full operational autonomy without API dependencies.
 				- **Tool mode (active query):** Exposes high-level perata tools and service endpoints for the coding agent to interact directly with the Aperas Agent on demand.
 				- **Hook mode (automatic context engineering):** Injects perata and context projections directly into the context window of the coding agent via background events and triggers.
+		- Phase 4: Substrate Evolution — ApeironNgn (native Rust successor, speculative)
+			- Motivation: right-sizing the substrate to what Aperas actually exercises
+				- TerminusDB Community brings a general-purpose Prolog/WOQL Datalog engine, enterprise-oriented tooling, and its own bundle/layer format for versioning — capability well beyond what Phase 0-3 skills exercise (document CRUD, one-hop impact traversal, branch/commit/merge as a review workflow).
+				- The bidirectional JSON-LD mirror (`AperasKG/Apeiron/`, `Aperas-architecture.md` §5) demonstrates this directly: the canonical graph content already round-trips as plain JSON-LD files, decoupled from TerminusDB's own storage internals — nothing about the substrate's actual content depends on TerminusDB being the engine underneath it.
+			- ApeironNgn: a minimal engine sized to exactly what Aperas needs
+				- A small, embeddable Rust graph engine scoped to the primitives Phase 0-3 actually use: the `BaseNode`/`BaseLink`/`BaseEdge` document model and simple pattern-match queries (source/predicate/target lookups, bounded-depth traversal) — no general Datalog/Prolog solver, no auto-generated GraphQL schema, no multi-tenant/enterprise surface.
+				- No separate commit-layer engine to build: `AperasKG/Apeiron/` already lives inside a real git repository, so a JSON-LD write followed by an ordinary `git commit` over that directory *is* the version control — immutable history, diffing, and branching all come from git itself, not a bespoke bundle/layer format ApeironNgn would otherwise have to reimplement. TerminusDB needed its own commit-layer machinery because it owns an opaque store with no git underneath it; once Aperas is managing history directly against `AperasKG/Apeiron/`, ApeironNgn doesn't need to.
+			- Migration surface: the same modules stand in for the same role, one changing shape
+				- `client.ts`, `crud.ts`, `woql.ts`, and `graphql.ts` (`Aperas-architecture.md` §3) already isolate every TerminusDB-specific call behind a small, named set of modules — that boundary is what ApeironNgn would need to implement to stand in for TerminusDB, with `AperasKG/Apeiron/` as the on-disk state `kg:export`/`kg:import` already round-trip through.
+				- `versionControl.ts` doesn't carry over as-is — its branch/commit/diff/merge calls would delegate straight to real `git` operations on the `AperasKG` repository instead of TerminusDB's git-like API, since the KG's "commit" *is* a git commit once ApeironNgn is the engine.
+			- Status: unscheduled and speculative
+				- Contingent on Phase 0-3 confirming that TerminusDB Community edition's rough edges — cross-store `bundle`/`unbundle` incompatibility (`terminusdb/terminusdb#2509`) and the `List`-typed `@unfold` gap (`terminusdb/terminusdb#2512`), both documented in `Aperas-dev-status.md` — are structural rather than incidental before committing engineering effort to a replacement.
 	- Open-Source Stack for Agentic Knowledge Graph Architectures
 		- System architecture layers
 			- Canonical graph storage layer (the substrate)
@@ -195,6 +208,8 @@
 			- Dual-query interface capabilities
 				- Employs WOQL (Web Object Query Language) powered by Datalog for pattern matching, recursive transitive dependency traversals, and impact propagation calculations.
 				- Exposes automatically generated GraphQL endpoints for projection agents to perform fast, multi-hop contextual fetches during view rendering.
+			- Future substrate alternative under consideration
+				- ApeironNgn — a minimal Rust graph engine scoped to exactly what Aperas exercises — is sketched as a speculative future replacement; see Development Roadmap "Phase 4: Substrate Evolution".
 		- UI projection layer rationale
 			- Selection: SolidJS
 			- Fine-grained signal reactivity without Virtual DOM overhead

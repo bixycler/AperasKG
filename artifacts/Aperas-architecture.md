@@ -24,6 +24,7 @@ Aperas/                               # Core Engine (Maintained by Core Dev Team
 │
 └── AperasKG/                         # Domain KG (Maintained by Community)
     ├── artifacts/                    # Plain-text Markdown domain projections & documentation
+    ├── Apeiron/                      # Portable JSON-LD substrate mirror (schema + instances), bidirectional — see §5
     ├── schema/                       # Domain-specific JSON-LD schemas extending core
     ├── ontology/                     # Domain-specific predicate taxonomy / vocabularies
     └── transducers/                  # Domain-specific ingestion/parsing scripts
@@ -57,7 +58,7 @@ The canonical schema is implemented in `web/src/lib/schema.json` (pure JSON-LD, 
 
 | Module | Location | Responsibilities & Protocol Constraints |
 | :--- | :--- | :--- |
-| **Client Manager** | `web/src/lib/client.ts` | Configures `TerminusDB.WOQLClient`, creates `aperas_apeiron` database, applies idempotent schema initialization via `full_replace` from `schema.json`. |
+| **Client Manager** | `web/src/lib/client.ts` | Configures `TerminusDB.WOQLClient`, creates `aperas` database, applies idempotent schema initialization via `full_replace` from `schema.json`. |
 | **Node Identity** | `web/src/lib/snowflake.ts` | Generates the 64-bit Snowflake-style `blockId` (timestamp + machine identity + sequence, 13-char Crockford Base32) — see `Aperas-core-ontology-design.md` §1.A. |
 | **AST Transducer** | `web/src/lib/astParser.ts` | Uses `unified.js` (`remark-parse`) to recursively convert Markdown into a nested `BlockNode` tree, assigning each block a fresh Snowflake id via `snowflake.ts` (identity is never derived from content or position). |
 | **Artifact Tracking & Ingestion** | `web/src/lib/artifacts.ts` | Computes `fileHash`, tracks/upserts lightweight `ArtifactNode`s, and ingests the full `BlockNode` tree on change — see §4 below. |
@@ -66,6 +67,7 @@ The canonical schema is implemented in `web/src/lib/schema.json` (pure JSON-LD, 
 | **WOQL Engine** | `web/src/lib/woql.ts` | Builds and executes WOQL queries over `Assertion` — `queryNodeAssertions` (both directions) and `traceImpactPropagation` (one-hop sweep along a predicate like `impacts`). |
 | **GraphQL Client** | `web/src/lib/graphql.ts` | `getArtifactTreeViaGraphQL` fetches an `ArtifactNode` and its full nested `BlockNode` tree (bounded depth) via the auto-generated GraphQL endpoint — see the note below on why this is the *only* full-tree read path. |
 | **Version Control** | `web/src/lib/versionControl.ts` | Manages branches, temporal commit histories, version diffing, merge applications (`apply`), and state resets. Class-agnostic — unaffected by the schema redesign. |
+| **JSON-LD Import/Export** | `web/src/lib/export.ts` | `exportJsonLd`/`importJsonLd` mirror the current schema plus every instance document (per class) between TerminusDB and plain JSON-LD files in `AperasKG/Apeiron/` — see §5. |
 
 > **Read-path note**: `client.getDocument()` on an `ArtifactNode` returns `root` as a bare reference id string, not the nested tree, and likewise for `BlockNode.children`. This is *not* because `@subdocument` is required for unfolding (a natural-sounding but wrong assumption we initially made) — it's simply that `BlockNode` isn't schema-annotated as unfoldable. TerminusDB has two independent schema-level annotations that control this: property-level `"@unfold": true` and class-level `"@unfoldable": []`. We benchmarked marking `BlockNode` class-level `@unfoldable` (which does work, including through the recursive `List<BlockNode>` children) against the real 149-block `Aperas-core-ontology-design.md` tree, and it was ~3.5x slower than `getArtifactTreeViaGraphQL`'s GraphQL query (~48ms vs ~13.5ms steady-state) — so we kept GraphQL as the tree-read path rather than adopting it. Separately, we found that the *property-level* `"@unfold": true` variant silently does nothing on `List`-typed fields specifically (works on `Set`/`Optional`/`Cardinality`) — an upstream bug, filed as [terminusdb/terminusdb#2512](https://github.com/terminusdb/terminusdb/issues/2512), traced to `List`'s internal RDF-linked-list (`Cons`/`rdf:first`/`rdf:rest`) representation not being reachable from the property-level unfold check. That bug doesn't affect our decision (we'd have used class-level `@unfoldable`, which is unaffected), but is a useful data point that this part of TerminusDB is new and still maturing.
 
@@ -83,7 +85,33 @@ Managed via `web/src/lib/artifacts.ts` and CLI entrypoint `web/src/lib/kgCli.ts`
 
 ---
 
-## 5. Backup, Disaster Recovery & Synchronization Strategy
+## 5. JSON-LD Substrate Import/Export
+
+`web/src/lib/export.ts`, wired through `kgCli.ts`, bidirectionally mirrors the schema and every instance document between TerminusDB and plain JSON-LD files in `AperasKG/Apeiron/`:
+
+| File | Contents |
+| :--- | :--- |
+| `schema.jsonld` | The full schema graph (`getDocument({ graph_type: 'schema' })`), verbatim. |
+| `ArtifactNode.jsonld`, `FolderNode.jsonld`, `BlockNode.jsonld`, `Assertion.jsonld` | One file per instance class — a leading `@context` document, then every live (`getDocument({ type, as_list: true })`) instance of that class, sorted by id for diff-stable re-exports. |
+
+- **`npm run kg:export`** — writes all of the above from the current TerminusDB state, overwriting the files.
+- **`npm run kg:import`** — reads the files back: applies `schema.jsonld` via `full_replace`, then upserts each class's instances (every document already carries its own `@id`, so a matching document is updated in place, not duplicated). Each class is submitted as a single batched `updateDocument` call, in the dependency order `BlockNode` → `ArtifactNode` → `FolderNode` → `Assertion`, so a document is never written before something it references — `BlockNode`'s own parent/child references resolve within its own batch (one commit, so intra-batch forward references are fine); everything after it can then safely reference already-committed ids. Every write is its own TerminusDB commit, so before writing the schema or a given class, its content hash is compared (`hashDocSet` in `client.ts` — the same order-independent hash already used to skip a no-op schema apply) against what's currently live, and the write is skipped entirely when nothing changed, rather than landing a no-op commit.
+
+### Purpose: how `AperasKG` holds a backup of its own KG
+
+This round-trip — not a TerminusDB-level backup — is the correct answer to "how does `AperasKG` hold a record of its KG," per its original design goal of storing both the artifacts and the KG. `AperasKG/Apeiron/` is the canonical graph content, materialized as plain, diffable JSON-LD text and committed to the same git repository as `AperasKG/artifacts/` — an ordinary `git commit` over that directory *is* the KG's backup, with all the history, diffing, and portability that implies, and `kg:import` is the restore path (bootstrap a fresh database, or recover state) back out of it. This also happens to make the content engine-agnostic — `AperasKG/Apeiron/` is a snapshot any future substrate engine could read without a bespoke migration script (see `Aperas-design.md`'s Development Roadmap, "Phase 4: Substrate Evolution") — but that's a secondary benefit of the same design, not the primary reason it exists.
+
+### Scope and non-goals
+
+- **Flat, not nested.** Instances are dumped and read back exactly as `getDocument`/`updateDocument` handle them — `BlockNode.children` and `ArtifactNode.root` are reference ids, not inlined subtrees (see §2's "Read-path note"), matching how TerminusDB itself stores documents and keeping per-class diffs scoped to that class alone.
+- **Includes tombstoned documents.** The export/import round-trip is a full audit snapshot, not a live-only view — reconciliation's `tombstonedAt` markers (`Aperas-reconciliation-matching-design.md`) are preserved rather than filtered out.
+- **Whole-class granularity, not a merge.** Import upserts every document in a class file; it doesn't diff against the live database or reconcile divergence — reconciliation (`reconcile.ts`) only ever runs against `AperasKG/artifacts/` content during `kg:ingest`, not against this export/import path.
+
+---
+
+## 6. TerminusDB Server Operational Backup
+
+This section is server infrastructure for the TerminusDB instance itself — Docker-volume-level disaster recovery, unrelated to `AperasKG`'s own record of its content. It answers "how do I recover this TerminusDB server if its volume is lost," not "how does `AperasKG` hold a backup of its KG." That second question is answered by §5: `AperasKG/Apeiron/` plus `kg:export`/`kg:import`, git-tracked alongside `AperasKG/artifacts/` like any other content in the domain-KG repo — not by storing TerminusDB-level snapshots in or near `AperasKG` at all, which an earlier design iteration tried (`db/` briefly lived under `AperasKG/`) before being reconsidered as the wrong coupling: a git-tracked domain repo has no good way to diff, merge, or meaningfully version an opaque binary DB snapshot, and (per the investigation below) those snapshots aren't even portable between independent TerminusDB stores.
 
 ### Whole-Volume Disaster Recovery (`restore.sh backup-full | verify-full | restore-full`)
 - **Primary Adopted Method**: Creates a tarball of the backing Docker volume `terminusdb_storage` via a temporary Alpine container with the TerminusDB container temporarily stopped to ensure on-disk head consistency.
@@ -96,19 +124,19 @@ Managed via `web/src/lib/artifacts.ts` and CLI entrypoint `web/src/lib/kgCli.ts`
 
 ---
 
-## 6. SSH-Tunneled Remotes
+## 7. SSH-Tunneled Remotes
 
 TerminusDB remotes communicate over HTTP REST endpoints. Cross-machine communication between separate hosts utilizes SSH local port forwarding:
 
 1. **Transport Rationale**: Native remote commands (`push`/`pull`/`fetch`/`clone`) speak HTTP(S) only. TerminusDB itself listens on `0.0.0.0:6363` inside the container (confirmed via `/proc/net/tcp`) — the loopback-only restriction (`127.0.0.1:6363`) is this project's own `docker run -p 127.0.0.1:6363:6363` deployment choice, not a TerminusDB default. Either way, this project's containers are loopback-only, so cross-machine transport requires an SSH tunnel.
 2. **Tunnel Endpoint**: `ssh -N -f -L 0.0.0.0:6364:localhost:6363 <user>@<remote-host>`
 3. **Firewall Access**: `sudo ufw allow from 172.17.0.0/16 to any port 6364 proto tcp`
-4. **Bridge Addressing**: Remote URLs target the host's Docker bridge gateway (`http://172.17.0.1:6364/admin/aperas_apeiron`).
+4. **Bridge Addressing**: Remote URLs target the host's Docker bridge gateway (`http://172.17.0.1:6364/admin/aperas`).
 5. **Remote Tracking**: `fetch` updates local remote-tracking descriptors (`<org>/<db>/<remote>/branch/<branch>`). `fetch` must be executed before `push` or `pull` can resolve remote heads.
 
 ---
 
-## 7. Verification & Operational Utilities
+## 8. Verification & Operational Utilities
 
 - **Verification Test Harness**: `npm run verify:phase0 -- --db` (`web/src/lib/verifyPhase0.ts`) — end-to-end, idempotent, self-cleaning live test: AST parsing, schema init, artifact track/ingest, GraphQL tree read, `FolderNode` ingestion, `Assertion` CRUD + WOQL impact propagation, and temporal commit management (branch + commit log). Demo-state cleanup has to happen in reference-reversed order — `FolderNode` before `ArtifactNode` before its `BlockNode`s — since TerminusDB enforces referential integrity and rejects deleting a still-referenced document.
 - **`Aperas/scripts/tdb-log.sh`**: Provides compact, local-time commit history (`--count 20` by default) with fast client-side message filtering (`--filter`). Avoids sluggish `tdb history` diffs.

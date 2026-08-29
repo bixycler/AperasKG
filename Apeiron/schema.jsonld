@@ -1,0 +1,132 @@
+[
+  {
+    "@base": "terminusdb:///data/",
+    "@schema": "terminusdb:///schema#",
+    "@type": "@context"
+  },
+  {
+    "@id": "ArtifactNode",
+    "@inherits": "BaseNode",
+    "@key": {
+      "@fields": [
+        "artifactId"
+      ],
+      "@type": "Lexical"
+    },
+    "@type": "Class",
+    "artifactId": "xsd:string",
+    "fileHash": "xsd:string",
+    "ingestedHash": {
+      "@class": "xsd:string",
+      "@type": "Optional"
+    },
+    "lastIngestedAt": {
+      "@class": "xsd:dateTime",
+      "@type": "Optional"
+    },
+    "lastTrackedAt": "xsd:dateTime",
+    "path": "xsd:string",
+    "root": {
+      "@class": "BlockNode",
+      "@type": "Optional"
+    },
+    "text": {
+      "@class": "xsd:string",
+      "@type": "Optional"
+    },
+    "title": "xsd:string"
+  },
+  {
+    "@id": "Assertion",
+    "@inherits": "BaseEdge",
+    "@type": "Class"
+  },
+  {
+    "@abstract": [],
+    "@id": "BaseEdge",
+    "@inherits": "BaseLink",
+    "@type": "Class",
+    "source": "BaseNode"
+  },
+  {
+    "@abstract": [],
+    "@id": "BaseLink",
+    "@inherits": "BaseNode",
+    "@type": "Class",
+    "predicate": "xsd:string",
+    "target": "BaseNode"
+  },
+  {
+    "@abstract": [],
+    "@id": "BaseNode",
+    "@type": "Class",
+    "links": {
+      "@class": "BaseLink",
+      "@type": "Set"
+    },
+    "tombstonedAt": {
+      "@class": "xsd:dateTime",
+      "@type": "Optional"
+    }
+  },
+  {
+    "@id": "BlockNode",
+    "@inherits": "BaseNode",
+    "@key": {
+      "@fields": [
+        "blockId"
+      ],
+      "@type": "Lexical"
+    },
+    "@type": "Class",
+    "blockId": "xsd:string",
+    "checked": {
+      "@class": "xsd:boolean",
+      "@type": "Optional"
+    },
+    "children": {
+      "@class": "BlockNode",
+      "@type": "List"
+    },
+    "ordered": {
+      "@class": "xsd:boolean",
+      "@type": "Optional"
+    },
+    "start": {
+      "@class": "xsd:integer",
+      "@type": "Optional"
+    },
+    "text": {
+      "@class": "xsd:string",
+      "@type": "Optional"
+    },
+    "title": "xsd:string",
+    "type": "xsd:string",
+    "unfolded": {
+      "@class": "xsd:boolean",
+      "@type": "Optional"
+    }
+  },
+  {
+    "@id": "FolderNode",
+    "@inherits": "BaseNode",
+    "@key": {
+      "@fields": [
+        "folderId"
+      ],
+      "@type": "Lexical"
+    },
+    "@type": "Class",
+    "children": {
+      "@class": "BaseNode",
+      "@type": "List"
+    },
+    "folderId": "xsd:string",
+    "path": "xsd:string",
+    "text": {
+      "@class": "xsd:string",
+      "@type": "Optional"
+    },
+    "title": "xsd:string"
+  }
+]

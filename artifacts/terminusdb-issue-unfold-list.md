@@ -51,7 +51,7 @@ docker exec tdb terminusdb doc get admin/unfold_test --id=ListHolder/lh1
 **What still works**
 Marking the target class `@unfoldable: []` (class-level) instead of the property `@unfold: true` correctly unfolds `List` properties, including through a self-referential recursive `List<Self>` (verified 3 levels deep, cycle-protected). So the container-type gap is specific to the property-level `@unfold` mechanism, not to unfolding-through-`List` in general.
 
-**Info (please complete the following information):**
+**Info:**
  - OS: Ubuntu 26.04 LTS
  - How did you run terminus-server: Using Docker directly
    - `terminusdb/terminusdb-server:v12` (Docker image)
@@ -59,24 +59,36 @@ Marking the target class `@unfoldable: []` (class-level) instead of the property
    - `terminusdb-store v0.19.8`
 
 **Additional context**
-Traced the likely root cause into the #2321 diff. `json.pl`'s unfold decision predicate (added by #2321):
+Traced the actual root cause into `src/rust/terminusdb-community/src/doc/mod.rs`. For TerminusDB v12, a single-document `doc get` doesn't go through `json.pl`'s `get_document`/`get_document_` at all — it goes through the Rust foreign predicate `print_document_json`, which calls `DocumentContext::get_id_document`. That's where field-level `@unfold` is actually decided, via a `(parent_type_id, predicate_id)` pair (`unfold_pairs`) read off the *enclosing* stack frame:
 
-```prolog
-should_unfold_property(DB, _ParentId, _P, TargetClass) :-
-    is_subdocument(DB, TargetClass), !.
-should_unfold_property(DB, _ParentId, _P, TargetClass) :-
-    is_unfoldable(DB, TargetClass), !.
-should_unfold_property(DB, ParentId, P, _TargetClass) :-
-    instance_of(DB, ParentId, ParentClass),
-    property_is_unfold(DB, ParentClass, P, true), !.
+```rust
+let field_level_unfold = match (parent_type_id, predicate_id) {
+    (Some(pt), Some(pr)) => self.unfold_pairs.contains(&(pt, pr)),
+    _ => false,
+};
 ```
 
-The third clause (property-level `@unfold`) needs `ParentId` plus the property name `P` to look up `property_is_unfold/4`. The first two clauses need only `TargetClass`, resolvable from anywhere.
+`parent_type_id`/`predicate_id` come from `StackEntry::document_type_id()` / `current_predicate()`:
 
-- `List`-typed values are represented internally as an RDF Collection: a chain of `Cons` cells linked by `rdf:first`/`rdf:rest`, not a direct edge from the parent to the target instance.
-- Confirmed via raw triple inspection: a `Set` property's target is one hop from the parent; a `List` property's target is behind two additional hops, through an intermediate `Cons` node.
-- Per the #2321 diff, `List` materialization goes through a separate, pre-existing routine, `list_type_id_predicate_value/8`, which does not call `should_unfold_property/3` at all. So the property-level `@unfold` signal (clause 3 above, tied to `ParentId`/`P`) never reaches the code that walks the `Cons` chain.
-- Class-level `@unfoldable` (clause 2 above) keeps working regardless, because it only needs the target class, which is still resolvable at each `Cons` hop through whatever does check it there.
+```rust
+fn document_type_id(&self) -> Option<u64> {
+    match self {
+        Self::Document { type_id, .. } => *type_id,
+        _ => None,
+    }
+}
+
+fn current_predicate(&mut self) -> Option<u64> {
+    match self {
+        Self::Document { fields, .. } => fields.as_mut().and_then(|f| f.peek().map(|t| t.predicate)),
+        _ => None,
+    }
+}
+```
+
+- `Set`/`Optional`/`Cardinality` values sit as direct triples on the document, so the enclosing frame is always `StackEntry::Document`, and both lookups succeed — this is why they work.
+- `List` and `Array` values instead sit behind an intermediate `StackEntry::List` / `StackEntry::Array` frame (the RDF Cons chain for `List`, the array's index triples for `Array`), pushed onto the traversal stack while the document's field is walked. Neither variant carries the parent document's type/predicate forward, so `document_type_id()`/`current_predicate()` fall through the wildcard arm above and return `None` for anything nested inside a `List` or `Array` — silently disabling field-level `@unfold` for their elements regardless of what the schema says.
+- Class-level `@unfoldable` keeps working regardless, because it's checked via `self.unfoldables.contains(&t.object)`, which only needs the target's own type, not the enclosing frame.
 
 The PR's own test for `List` only asserts the schema round-trips the annotation, never that it actually unfolds at read time:
 
@@ -90,8 +102,7 @@ it('should accept @unfold on List property', async function () {
 
 That's why it passes CI regardless of whether unfolding actually happens at read time.
 
-Two open questions for maintainers:
-- Is `List` support for property-level `@unfold` intended (matching the docs), making this a bug in the `list_type_id_predicate_value/8` path? Or was `List` never actually meant to be supported at the property level, only via class-level `@unfoldable`, making this a docs bug in `document-unfolding-reference` and `schema-reference-guide` instead?
-- If the former, would a PR adding an actual data-retrieval test for the `List` case (not just the schema round-trip currently in `field-level-unfold.js`) be welcome, to close the CI gap that let this ship?
+**Fix**
+Capture the parent's `type_id`/`predicate_id` before pushing the `List`/`Array` frame and thread it through `StackEntry::List` and `ArrayStackEntry` so nested elements still match against `unfold_pairs`. Verified against a from-source build: the fix compiles, all existing Rust unit tests still pass, `cargo clippy` shows no new warnings, and new integration tests for `List` retrieval and a 2D `Array` case (added to `tests/test/field-level-unfold.js`, per the request in [the maintainer reply](https://github.com/terminusdb/terminusdb/issues/2512#issuecomment-5463157961)) pass against a live server built from the fix.
 
 Related: #2321
