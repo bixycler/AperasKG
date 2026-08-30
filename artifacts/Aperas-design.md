@@ -29,6 +29,8 @@
 				- Etymologically layered:
 					- *A-* (without) + *Peras* (limit) = **Unbound**: Not merely “unlimited” in size, but intrinsically free from rigid constraints.
 					- *Aperas* in Esperanto = “Appears / Emerges”: The active manifestation where structured forms materialize out of the fluid core on demand.
+					- *Aperas* (Spanish verb meaning “equip, harness”): The functional act of provisioning an agent with the vital instruments, tools, and memory required to navigate and execute operations.
+ 					- *Apera* (Botanical Genus / [Windgrass](https://en.wikipedia.org/wiki/Apera)): The organic paradigm of fluid resilience, the ability to keep wholeness (*a-pēros*) by gracefully bending and naturalizing across any environment without breaking.
 					- *Aperis* (Latin verb meaning “open, uncover”): The open-source act of laying knowledge bare, mirroring its legal fluidity under [The Unlicense](https://unlicense.org/) by refusing rigid cages or ownership.
 				- While daily interaction imposes limits and fixed roles, the liberated soul breaks through the illusion of rigid division, realizing its inner ground is identical in essence to the boundless Apeiron.
 			- Peras – Bound (The Interface – Transient Boundary)
@@ -123,13 +125,21 @@
 	- Development Roadmap of Aperas
 		- Meta-Aperas Ontological Alignment
 			- The engineering roadmap is itself a self-instantiation of the Aperas ontology: starting in the unconditioned substrate (Apeiron) and crystallizing typed interfaces (Perata) on demand as human–agent coordination needs emerge.
-		- Phase 0: Substrate and core skills (Apeiron direct)
+		- Phase 0: Infrastructure and basic tools (Apeiron direct)
 			- Direct database integration
 				- The primary coding agent connects directly to the **TerminusDB** substrate without any intermediate UI layer.
 				- System provides baseline skill definitions (`SKILL.md`) covering schema initialization, document CRUD, WOQL and GraphQL query execution, and temporal commit management.
 			- Verification without UI overhead
 				- Validates core graph operations, transaction safety, and agent reasoning loops directly against the canonical store.
-		- Phase 1: First Peras (Human–agent co-navigation)
+			- Basic assertion authoring (moved earlier from Phase 2, see `Aperas-basic-assertion-skill-design.md`)
+				- `Assertion` (the concrete `BaseEdge`) was already a working CRUD/WOQL primitive; this adds manual CLI commands (`kg:assert`/`kg:assertions`/`kg:unassert`) so a human or agent can actually write and inspect a real one, with no automated traversal or agent behavior attached.
+				- Built here rather than waiting for Phase 1, so Phase 1's skill-building work starts with it already available instead of blocked on it — and ahead of the SolidJS UI, since Artifact Projection (mode 1 of §5.A) already covers the monitoring need the UI was originally assumed to be required for.
+			- Agentic query tools (moved earlier from Phase 1, see `Aperas-agentic-query-tools-design.md`)
+				- Mode 3 of §5.A ("Agentic Interface, BFS Traversal") made concrete as three CLI tools: `kg:tree` (a deep, title-only structural map — depth-first, not BFS despite the mode's name), `kg:unfold`/`kg:fold` (the real breadth-first primitive — one level, full content, persisting the long-inert `BlockNode.unfolded` flag for the first time), and `kg:search` (keyword/regex content search via WOQL, closing a previously-unfilled gap).
+				- Moved here for the same reason as basic assertion authoring: closes the block-level addressing gap that authoring left open, and doesn't need the UI to exist first.
+		- Phase 1: Core skills & UI Peras (Human–agent co-navigation)
+			- Assertion skill(s)
+				- A loadable `SKILL.md` (Agent Skills, per the Open-Source Stack section below) teaching a coding agent when and how to use the `kg:assert`/`kg:assertions`/`kg:unassert` CLI built in Phase 0 — not yet designed.
 			- SolidJS read projection
 				- Constructs the initial **SolidJS + Unified.js** projection interface for deep-read human inspection.
 				- Renders continuous Markdown outliner trees directly from TerminusDB AST nodes.
@@ -137,7 +147,7 @@
 				- Surface projections reveal the multi-tab reference model (Article, Source, Talk, History) so humans and agents navigate the exact same operational state.
 		- Phase 2: Skill expansion and perata maturation
 			- Incremental capability growth
-				- Develops specialized procedural skills including ingestion (parsing external text into AST nodes), graph search (structural traversals and WOQL/GraphQL pattern matching, with vector support evaluated later), and refactoring (lazy atomization of spans and node merging).
+				- Develops specialized procedural skills including ingestion (parsing external text into AST nodes), *automated* graph search (structural traversals and WOQL/GraphQL pattern matching, with vector support evaluated later — the manual assertion primitive itself moved to Phase 1, above), and refactoring (lazy atomization of spans and node merging).
 			- Co-evolution of tools and perata
 				- Each new skill definition naturally introduces corresponding tooling and new **perata** (specialized view projections).
 			- Collaboration perata: review/merge-request workflow
@@ -250,9 +260,7 @@
 			- Elimination of persistent protocol middleware
 				- Replaces permanently running RPC servers with direct service calls (GraphQL / REST endpoints) to system service agents.
 				- Maintains a clean service boundary between procedural guidance (skills) and backend execution (service endpoints).
-	-
-	    
-	  Multi-Agent Division of Labor on a Knowledge Graph  
+	- Multi-Agent Division of Labor on a Knowledge Graph  
 		- Historical precedent and human wetware substrate
 			- Multi-faceted reference model: Inspired by long-standing collaborative systems like Wikipedia (Article, Talk, History, Source), human knowledge work has always relied on multi-perspective nodes rather than monolithic text blobs.
 			- Software engineering and science operate as a distributed graph running across human mental models and neural networks.

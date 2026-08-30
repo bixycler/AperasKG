@@ -64,6 +64,10 @@
       "@class": "BaseLink",
       "@type": "Set"
     },
+    "props": {
+      "@class": "Prop",
+      "@type": "Set"
+    },
     "tombstonedAt": {
       "@class": "xsd:dateTime",
       "@type": "Optional"
@@ -80,21 +84,9 @@
     },
     "@type": "Class",
     "blockId": "xsd:string",
-    "checked": {
-      "@class": "xsd:boolean",
-      "@type": "Optional"
-    },
     "children": {
       "@class": "BlockNode",
       "@type": "List"
-    },
-    "ordered": {
-      "@class": "xsd:boolean",
-      "@type": "Optional"
-    },
-    "start": {
-      "@class": "xsd:integer",
-      "@type": "Optional"
     },
     "text": {
       "@class": "xsd:string",
@@ -128,5 +120,27 @@
       "@type": "Optional"
     },
     "title": "xsd:string"
+  },
+  {
+    "@abstract": [],
+    "@id": "Prop",
+    "@subdocument": [],
+    "@type": "Class",
+    "key": "xsd:string"
+  },
+  {
+    "@id": "StringProp",
+    "@inherits": "Prop",
+    "@key": {
+      "@type": "Random"
+    },
+    "@subdocument": [],
+    "@type": "Class",
+    "value": "xsd:string"
+  },
+  {
+    "@id": "Link",
+    "@inherits": "BaseLink",
+    "@type": "Class"
   }
 ]

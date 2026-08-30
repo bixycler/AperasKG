@@ -95,6 +95,16 @@ An abstract class representing independent semantic claims asserted from the out
 }
 ```
 
+### E. Link (The Concrete Intrinsic Edge)
+`BaseLink` is abstract too — the same gap as `BaseEdge`/`Assertion`, just noticed later, once `BlockNode.links` extraction (Aperas-markdown-fractal-mapping-design.md §4) actually needed to write one. `Link` is `BaseLink`'s one concrete leaf: no fields of its own, just makes the `target`/`predicate` (+ inherited `links`) lineage instantiable. Used for an inline Markdown link whose target resolves to an internal node (`[title]([[code]])`) — the `predicate` is always the fixed constant `"references"` for this use, distinguishing structural inline links from `Assertion`'s deliberately-chosen semantic predicates at query time.
+```json
+{
+  "@id": "Link",
+  "@type": "Class",
+  "@inherits": ["BaseLink"]
+}
+```
+
 ## 3. Universal Addressability & Ownership
 *   **No Subdocuments**: `BaseLink` and `BaseEdge` are standard TerminusDB Classes, *not* `@subdocument`s. Every relationship possesses a global `@id`, enabling graph reification (assertions about assertions).
 *   **Author-Based Placement**: Extrinsic assertions (`BaseEdge`) are never embedded into the nodes they connect. They are stored in the branch or artifact owned by the **Asserter** (the author). This ensures that agents can assert claims about human-authored nodes without mutating the human's artifact.
