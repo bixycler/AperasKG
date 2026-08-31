@@ -19,7 +19,8 @@ concept and the gap first identified in `Aperas-basic-assertion-skill-design.md`
   own `title` plus the full `text` of each of its immediate children (first level only) — no
   recursion, no depth param, since "first level" is the whole point. Named `fold`/`unfold` (not
   `collapse`/`expand`) to match the ontology's own existing vocabulary — see §3, this is also
-  the first thing to ever give the long-inert `BlockNode.unfolded` schema field a real effect.
+  the first thing to ever give the long-inert `unfolded` schema field (§4: promoted from
+  `BlockNode` to `BaseNode`) a real effect.
   This is the real analog of `Aperas-core-ontology-design.md` §5.A mode 3's "BFS tool calls to
   expand subtrees": a single frontier-expansion step an agent calls repeatedly, choosing which
   child to unfold next based on what it just read.
@@ -102,13 +103,21 @@ Command: `kg:unfold <path>`
   true content-less container per §2) ever has nothing to show — it prints
   `<id>  [<kind>]  (no text of its own — see kg:unfold <id>)`. Every other child kind now has
   something real to display.
-- **Persists**, not just displays: also sets `BlockNode.unfolded = true` on the target node —
-  the first code path to ever write `true` to that field (it's existed since early in the
-  schema, defaulted `false` on creation, carried forward by reconciliation, but never
-  meaningfully written or read — confirmed live by grepping the codebase). Implementation note:
-  `BlockNode.children` is a required `List`, so the write has to resubmit the full existing
-  document with only `unfolded` changed (fetch-then-resubmit), the same pattern
-  `tombstoneSubtree` (`reconcile.ts`) already uses for a different field on the same class.
+- **Persists**, not just displays: also sets `unfolded = true` on the target node — the first
+  code path to ever write `true` to that field (it's existed since early in the schema,
+  defaulted `false` on creation, carried forward by reconciliation, but never meaningfully
+  written or read — confirmed live by grepping the codebase). Implementation note: a node's
+  `children` (or, for `ArtifactNode`, its singular `root`) is a required field, so the write has
+  to resubmit the full existing document with only `unfolded` changed (fetch-then-resubmit), the
+  same pattern `tombstoneSubtree` (`reconcile.ts`) already uses for a different field.
+- **`unfolded` is a `BaseNode` field, not a `BlockNode`-only one** — corrected from an earlier
+  version of this design that scoped it to `BlockNode`. That scoping was a loophole, not a
+  deliberate choice: `unfolded` was designed back when `BlockNode` was the only concrete kind,
+  and simply never got carried onto `ArtifactNode`/`FolderNode` when the ontology split into
+  three. There's nothing BlockNode-specific about "has this node's children been revealed" — an
+  `ArtifactNode`/`FolderNode` target is just as real a thing to fold or unfold. So `kg:unfold`/
+  `kg:fold` now have genuine, persisted effect against every node kind, not display-only
+  no-ops for two of the three (§4.1 depends on this being uniform).
 - `kg:fold <path>` is the exact inverse: sets `unfolded = false` on the target node, no content
   printed beyond a confirmation — there's nothing new to show by re-collapsing.
 
@@ -117,12 +126,53 @@ Command: `kg:unfold <path>`
 `unfold y` → ...) whose results a reader has to mentally combine — not a single artifact. What
 "composable" should actually mean: the *persisted* `unfolded` state left behind by a sequence of
 `kg:fold`/`kg:unfold` calls is a standing, queryable shape — "a selectively expanded tree" — not
-just this session's scrollback. This design doesn't yet specify a single command that renders
-that combined shape in one shot (e.g. a `kg:tree` variant that shows full text at nodes flagged
-`unfolded` and stops at folded ones, rather than uniformly title-only) — that's a natural next
-step once `kg:fold`/`kg:unfold` exist and something has actually been unfolded, but it's a real
-design fork (should `kg:tree` change its default behavior, or should this be a separate command)
-worth settling deliberately rather than folding in by assumption here.
+just this session's scrollback. §4.1 settles the fork this section used to leave open (should
+`kg:tree` change its default behavior, or should this be a separate command): an opt-in flag on
+`kg:tree` itself, default behavior unchanged.
+
+### 4.1. `kg:tree --unfolded` — rendering the combined shape
+
+Decided: an opt-in flag on `kg:tree`, not a new command or a changed default — `kg:tree` without
+the flag stays exactly the uniform title-only walk of §3; `--unfolded` swaps in a second render
+rule that reads the very state `kg:fold`/`kg:unfold` (§4) persist, so a sequence of those calls
+becomes visible as one tree instead of separate scrollback.
+
+Command: `kg:tree [path] [--depth N] [--no-holders] [--unfolded]` — `--unfolded` composes with
+both existing flags unchanged (`--depth` still a hard ceiling, `--no-holders` still transparent
+per §7.5 of `Aperas-deep-path-resolution-design.md`).
+
+**Rule** (applied per node during the same recursive walk, no second pass): a node is rendered
+with its full `text` instead of `title` exactly when *its own parent* has `unfolded === true` —
+i.e., exactly the set of nodes a real `kg:unfold <parent>` call against that parent would have
+shown. Now that `unfolded` lives on `BaseNode` (§4), this applies uniformly to `BlockNode`,
+`ArtifactNode`, and `FolderNode` alike — no kind gets special-cased. Concretely:
+
+- The node `kg:tree` was pointed at (the root of this particular walk) is always rendered
+  title-only, regardless of its own `unfolded` state — same convention `kg:unfold` itself already
+  uses for its own target (§4: the target's line is title, only its children get full text). A
+  tree rooted partway into an already-unfolded chain still opens on a title line.
+- A node whose own `unfolded` is `true`: its children are rendered full-text (per the rule above)
+  **and** the walk recurses beneath each of them, carrying the same rule forward — a grandchild
+  gets full text too, exactly when *its* parent (this child) is itself unfolded. This is what
+  makes multiple persisted `kg:unfold` calls compose into one shape: unfolding a great-grandchild
+  earlier makes it show up expanded here too, at whatever depth it sits, and unfolding a
+  `FolderNode`/`ArtifactNode` reveals the abstracts of the files/subfolders inside it exactly the
+  same way unfolding a `BlockNode` reveals its children's text.
+- A node whose own `unfolded` is not `true` (folded, including the never-unfolded default): the
+  walk does **not** descend into its children at all — they haven't been revealed, so showing
+  them would assert something no `kg:unfold` call ever established. If it has children, one line
+  is printed in their place: `…  (folded — kg:unfold <id> to expand)` — the same affordance as
+  the existing list-type message in §4, naming the exact command that would reveal them. This is
+  the "stops at folded ones" half of the shape, and it now applies at a folder or artifact
+  boundary too, not just inside a block tree.
+- The one content-less case from §4 (a `list`-type `BlockNode`, the only kind with genuinely
+  nothing of its own) prints the same `(no text of its own — see kg:unfold <id>)` line it does in
+  `kg:unfold`'s own output, rather than an empty string.
+- `--depth N` is checked first, as an unconditional ceiling — it can still truncate inside an
+  unfolded chain (printing the existing `…` marker), independent of any node's `unfolded` state.
+- A holder (`Aperas-deep-path-resolution-design.md` §7.5) is rendered by the same rule as any
+  other node — its `(holder)` tag is orthogonal to whether it's shown full-text or title-only, and
+  `--no-holders` keeps hiding its own line while still descending through it exactly as before.
 
 ## 5. `kg:search` — keyword/regex content search
 

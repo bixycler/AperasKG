@@ -109,23 +109,48 @@ An abstract class representing independent semantic claims asserted from the out
 *   **No Subdocuments**: `BaseLink` and `BaseEdge` are standard TerminusDB Classes, *not* `@subdocument`s. Every relationship possesses a global `@id`, enabling graph reification (assertions about assertions).
 *   **Author-Based Placement**: Extrinsic assertions (`BaseEdge`) are never embedded into the nodes they connect. They are stored in the branch or artifact owned by the **Asserter** (the author). This ensures that agents can assert claims about human-authored nodes without mutating the human's artifact.
 
-### A. Native Backlinks & Bidirectional Traversal
-Because TerminusDB is built on RDF triples under the hood, it natively indexes all edges in both directions. This gives the architecture two massive graph superpowers without requiring any custom backlink tables:
+### A. Native Backlinks & Bidirectional Traversal — only for `Set`-typed fields, not `List`
 
-1. **Upward Breadcrumbs (Context Retrieval)**:
-   Because `BaseLink` is a fully addressable Document, it does not need a physical `parent` pointer. If a user addresses a leaf node directly (`BaseLink/123`), they can follow the breadcrumbs "upward" to find the parent context:
+Because TerminusDB is built on RDF triples under the hood, `Set`-typed fields — `BaseNode.links:
+Set<BaseLink>`, `BaseEdge.source`/`target: BaseNode` — really do produce one direct triple per
+value, so a generic `t(X, Predicate, Target)` query genuinely finds anything pointing at a target
+through one of those, no custom backlink table needed. **Confirmed live**:
+`t(X, 'links', 'Link/y8LuGtix5YFbBn6Y')` correctly returned the owning `BlockNode` as `X`.
+
+That does **not** extend to `List`-typed fields — and the tree's actual containment structure
+(`BlockNode.children`, `ArtifactNode.root`, `FolderNode.children`) is `List`, not `Set`,
+deliberately: child order is semantically meaningful (document/section order; `project.ts`'s
+serializer depends on it) and `Set` is unordered. TerminusDB represents `List` membership through
+intermediate cons-cell/RDF-list structure at the triple level, not a direct `Parent predicate
+Child` triple. **Confirmed live**: `t(X, 'children', '<a known child's id>')` returned zero
+bindings, even though that id is genuinely present in its parent's `children` list. So "upward
+breadcrumbs" and "universal backlink tracing" *do* work for `links` (item 1's own example happens
+to pick a `Set` field, so it was never actually wrong) but do **not** give you a node's structural
+parent, or an id→path conversion, for free — that would need either a schema change (a persisted
+`parentId`/back-reference field on `BlockNode`, the standard trade of write-time bookkeeping for
+O(1) reverse lookup) or an explicit downward search from a known root, not a generic triple query.
+Not built as of this writing — see `Aperas-deep-path-resolution-design.md`, which covers the
+*other* direction (path → id) only; id → path remains a real, separate, unbuilt gap.
+
+1. **Upward Breadcrumbs via a `Set` field (Context Retrieval)**:
+   Because `BaseLink` is a fully addressable Document, it does not need a physical `parent`
+   pointer for this specific case. If a user addresses a `Link`/`BaseLink` directly
+   (`Link/123`), they can follow the breadcrumbs "upward" to find the parent context, since
+   `links` is `Set`-typed:
    ```javascript
    // What ParentNode has a 'links' property pointing to me?
-   WOQL.triple("v:ParentNode", "links", "BaseLink/123")
+   WOQL.triple("v:ParentNode", "links", "Link/123")
    ```
 
-2. **Universal Backlink Tracing (Logseq/Roam style)**:
-   You can instantly query the entire graph for *anything* that points to a specific target node, regardless of the predicate or origin.
+2. **Backlink Tracing, scoped to `Set`-typed edges (Logseq/Roam style)**:
+   You can instantly query the graph for anything pointing to a target *through a `Set`-typed
+   field* — `links`, or `Assertion.source`/`target` — regardless of the predicate:
    ```javascript
-   // What nodes point to this block, and via what relationship?
+   // What nodes point to this block via a Set-typed field, and via what relationship?
    WOQL.triple("v:SourceNode", "v:Predicate", "BlockNode/MyTargetBlock")
    ```
-   This instantly returns every intrinsic `BaseLink`, extrinsic `BaseEdge`, or parent document that references the target, enabling ultra-fast, database-native backlink panels.
+   This returns every intrinsic `BaseLink`/`Link` or extrinsic `BaseEdge`/`Assertion` referencing
+   the target — but never a structural parent, since `children`/`root` aren't reachable this way.
 
 ## 4. The Unbounded Block Tree (Node Typology)
 The graph topology models all content as an unbounded fractal tree spanning across folders, files, and blocks — "unbounded" in the same sense **Apeiron** (§Philosophy) names the unconditioned, boundless substrate: no fixed depth limit, not merely "very large." The rigid boundaries between structural layers are eliminated to form a single continuous tree.

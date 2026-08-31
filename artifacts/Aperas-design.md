@@ -138,8 +138,8 @@
 				- Mode 3 of §5.A ("Agentic Interface, BFS Traversal") made concrete as three CLI tools: `kg:tree` (a deep, title-only structural map — depth-first, not BFS despite the mode's name), `kg:unfold`/`kg:fold` (the real breadth-first primitive — one level, full content, persisting the long-inert `BlockNode.unfolded` flag for the first time), and `kg:search` (keyword/regex content search via WOQL, closing a previously-unfilled gap).
 				- Moved here for the same reason as basic assertion authoring: closes the block-level addressing gap that authoring left open, and doesn't need the UI to exist first.
 		- Phase 1: Core skills & UI Peras (Human–agent co-navigation)
-			- Assertion skill(s)
-				- A loadable `SKILL.md` (Agent Skills, per the Open-Source Stack section below) teaching a coding agent when and how to use the `kg:assert`/`kg:assertions`/`kg:unassert` CLI built in Phase 0 — not yet designed.
+			- Apeiron operating skills
+				- Agent Skills (`SKILL.md`) teaching a coding agent how to use the CLI to operate and manage the KG.
 			- SolidJS read projection
 				- Constructs the initial **SolidJS + Unified.js** projection interface for deep-read human inspection.
 				- Renders continuous Markdown outliner trees directly from TerminusDB AST nodes.
