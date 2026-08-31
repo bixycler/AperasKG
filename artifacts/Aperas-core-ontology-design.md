@@ -127,11 +127,24 @@ Because TerminusDB is built on RDF triples under the hood, it natively indexes a
    ```
    This instantly returns every intrinsic `BaseLink`, extrinsic `BaseEdge`, or parent document that references the target, enabling ultra-fast, database-native backlink panels.
 
-## 4. The Infinite Block Tree (Node Typology)
-The graph topology models all content as an infinite fractal tree spanning across folders, files, and blocks. The rigid boundaries between structural layers are eliminated to form a single continuous tree.
+## 4. The Unbounded Block Tree (Node Typology)
+The graph topology models all content as an unbounded fractal tree spanning across folders, files, and blocks — "unbounded" in the same sense **Apeiron** (§Philosophy) names the unconditioned, boundless substrate: no fixed depth limit, not merely "very large." The rigid boundaries between structural layers are eliminated to form a single continuous tree.
+
+> **Recurring pitfall when designing tools against this ontology**: reaching for "file" as a unit
+> of scope. A path like `foo.md` names one `ArtifactNode` — a single node in the same uniform
+> tree as every `FolderNode`/`BlockNode` around it, not a bounded container with its own
+> traversal rules. There is no "whole file" tier to recurse into or out of; a command that walks
+> "everything under `<path>`" is doing exactly the same walk whether `<path>` resolves to a
+> `BlockNode`, an `ArtifactNode`, or a `FolderNode` — see `kg:tree`'s `childRefs`/`printTree`
+> (`kgCli.ts:47-51,59`), which already recurses through all three with no kind-based branching.
+> Any new command's scoping flags should be designed against depth/traversal-cost concerns (e.g.
+> "should this default to walking descendants at all," per
+> `Aperas-interactive-summarization-design.md` §3/§7), never against a file/folder/block
+> distinction — that distinction doesn't exist here, and designing as if it does is the mistake
+> to catch early.
 
 ### A. FolderNode (The Structural Container)
-Inherits from `BaseNode`. Represents a directory in the filesystem, acting as a seamless bridge in the infinite tree. 
+Inherits from `BaseNode`. Represents a directory in the filesystem, acting as a seamless bridge in the unbounded tree. 
 *   **`README.md` Ingestion**: A separate `README.md` file is a legacy "dumb folder" workaround. The `README.md` is fully absorbed into the `FolderNode`. Its content populates the folder's `text` (abstract) and initial `children` blocks. The `README.md` is not exposed as a separate `ArtifactNode`.
 *   **`children`**: Contains other nested `FolderNode`s and `ArtifactNode`s, alongside the parsed block children from the `README.md`.
 
@@ -193,7 +206,7 @@ Inherits from `BaseNode`. Every distinct piece of content is a `BlockNode`. The 
 ```
 
 ## 5. The Folding Philosophy & Graph Traversal
-The entire architecture is governed by the philosophy of **Abstraction by Folding**: an infinite subtree folds into an abstract (`text`), which folds into a semantic label (`title`), which folds into a hidden `@id`.
+The entire architecture is governed by the philosophy of **Abstraction by Folding**: an unbounded subtree folds into an abstract (`text`), which folds into a semantic label (`title`), which folds into a hidden `@id`.
 
 ### A. The Three Projection Modes
 How this folded state is handled depends strictly on the interaction interface:
@@ -229,7 +242,7 @@ TerminusDB's `@subdocument` feature was initially considered for `BaseNode.links
 ### D. Resolving Provenance
 Initially, `provenance` was modeled as a hardcoded string or dedicated context object on an edge. By making `BaseLink` inherit from `BaseNode`, every link gets its own `links` array. Provenance is now simply achieved by pushing a new `BaseLink` (e.g., `predicate: "asserted_by"`) into the parent link's array, unifying the ontology completely.
 
-### E. The Infinite Block Tree
+### E. The Unbounded Block Tree
 Initially, the schema enforced a rigid structural hierarchy (`DocumentNode` -> `BlockNode`). However, this rigid "solid" paradigm was abandoned in favor of a fractal, Logseq-inspired block tree. `DocumentNode` was eliminated entirely, as a document is conceptually just a root `BlockNode`. Flattening the graph to Markdown is now handled cleanly via an `unfolded` flag in the projection layer.
 
 ### F. Separating Identity from Content Fingerprint

@@ -34,7 +34,7 @@ Not implicit (a document that just stops being referenced carries no signal it w
 
 Applies uniformly across `BlockNode`, `ArtifactNode`, and `FolderNode` (see §4).
 
-## 4. Scope: the whole infinite tree, and a prerequisite identity fix
+## 4. Scope: the whole unbounded tree, and a prerequisite identity fix
 
 Reconciliation covers `FolderNode`/`ArtifactNode` structural drift too, not just within-artifact `BlockNode` content — a file renamed or moved on disk is the same kind of event as a block moved to a different section, and gets the same treatment.
 

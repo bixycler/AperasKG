@@ -6,9 +6,9 @@ Markdown/mdast is a **loose** structure: node shapes vary per type (a `heading` 
 content differently from a `paragraph`; `list`/`listItem` nest oddly; whole categories of block
 exist that the parser doesn't even recognize without extra plugins), and remark itself parses
 headings as flat siblings rather than a nesting construct. `BlockNode` is meant to be a **tight**,
-uniform, infinitely-recursive structure — the same three-part shape at every depth, described by
-`Aperas-core-ontology-design.md` §5's "Abstraction by Folding": *"an infinite subtree folds into
-an abstract (`text`), which folds into a semantic label (`title`), which folds into a hidden
+uniform structure with no fixed depth bound — the same three-part shape at every depth, described
+by `Aperas-core-ontology-design.md` §5's "Abstraction by Folding": *"an unbounded subtree folds
+into an abstract (`text`), which folds into a semantic label (`title`), which folds into a hidden
 `@id`."* That's a claim of **uniformity** — every node, regardless of its mdast origin, is
 supposed to look the same shape-wise. In practice, the mapping in `astParser.ts` has grown
 ad hoc, one exception at a time (heading gets special title handling, containers get emptied
