@@ -137,6 +137,21 @@
 			- Agentic query tools (moved earlier from Phase 1, see `Aperas-agentic-query-tools-design.md`)
 				- Mode 3 of §5.A ("Agentic Interface, BFS Traversal") made concrete as three CLI tools: `kg:tree` (a deep, title-only structural map — depth-first, not BFS despite the mode's name), `kg:unfold`/`kg:fold` (the real breadth-first primitive — one level, full content, persisting the long-inert `BlockNode.unfolded` flag for the first time), and `kg:search` (keyword/regex content search via WOQL, closing a previously-unfilled gap).
 				- Moved here for the same reason as basic assertion authoring: closes the block-level addressing gap that authoring left open, and doesn't need the UI to exist first.
+		- Phase 0.1: Substrate Evolution — ApeironNgn (native Rust successor, in progress)
+			- Motivation: right-sizing the substrate to what Aperas actually exercises
+				- TerminusDB Community brings a general-purpose Prolog/WOQL Datalog engine, enterprise-oriented tooling, and its own bundle/layer format for versioning — capability well beyond what Phase 0-3 skills exercise (document CRUD, one-hop impact traversal, branch/commit/merge as a review workflow).
+				- The bidirectional JSON-LD mirror (`AperasKG/Apeiron/`, `Aperas-architecture.md` §5) demonstrates this directly: the canonical graph content already round-trips as plain JSON-LD files, decoupled from TerminusDB's own storage internals — nothing about the substrate's actual content depends on TerminusDB being the engine underneath it.
+			- ApeironNgn: a minimal engine sized to exactly what Aperas needs
+				- A small, embeddable Rust graph engine scoped to the primitives Phase 0-3 actually use: the `BaseNode`/`BaseLink`/`BaseEdge` document model and simple pattern-match queries (source/predicate/target lookups, bounded-depth traversal) — no general Datalog/Prolog solver, no auto-generated GraphQL schema, no multi-tenant/enterprise surface.
+				- No separate commit-layer engine to build: `AperasKG/Apeiron/` already lives inside a real git repository, so a JSON-LD write followed by an ordinary `git commit` over that directory *is* the version control — immutable history, diffing, and branching all come from git itself, not a bespoke bundle/layer format ApeironNgn would otherwise have to reimplement. TerminusDB needed its own commit-layer machinery because it owns an opaque store with no git underneath it; once Aperas is managing history directly against `AperasKG/Apeiron/`, ApeironNgn doesn't need to.
+			- Migration surface: the same modules stand in for the same role, one changing shape
+				- `client.ts`, `crud.ts`, `woql.ts`, and `graphql.ts` (`Aperas-architecture.md` §3) already isolate every TerminusDB-specific call behind a small, named set of modules — that boundary is what ApeironNgn would need to implement to stand in for TerminusDB, with `AperasKG/Apeiron/` as the on-disk state `kg:export`/`kg:import` already round-trip through.
+				- `versionControl.ts` doesn't carry over as-is — its branch/commit/diff/merge calls would delegate straight to real `git` operations on the `AperasKG` repository instead of TerminusDB's git-like API, since the KG's "commit" *is* a git commit once ApeironNgn is the engine.
+			- Status: in progress — see `Aperas-apeironngn-design.md`
+				- The original contingency — Phase 0-3 confirming that TerminusDB Community edition's rough edges (cross-store `bundle`/`unbundle` incompatibility, `terminusdb/terminusdb#2509`; the `List`-typed `@unfold` gap, `terminusdb/terminusdb#2512`, both documented in `Aperas-dev-status.md`) are structural rather than incidental — is now resolved rather than open: live-verified against the real database (`Aperas-kg-foundational-design.md`, `Aperas-apeironngn-design.md` §2), `List` gives no shortcut in either traversal direction, the abstract-class GraphQL gap is structural, and node-by-node reconstruction loses to bulk fetch by 47–240x. Moved up from the originally-speculative Phase 4 slot accordingly — not deferred substrate evolution, active work.
+				- `Aperas-apeironngn-design.md` names a concrete candidate engine (Oxigraph, embeddable Rust RDF store) and design (reified-triple ordered containment instead of `rdf:List`, the OOP class as schema, `a.b.c` as lazy composed traversal, git-native versioning already free per above, no concurrent access by design — cross-instance sync via `git merge` instead).
+			- Rollout: incremental, not a cutover — see `Aperas-apeironngn-design.md` §4
+				- Build the engine (two-tier caching — JS-level on top of Oxigraph/RocksDB's own byte-level caching — plus the `a.b.c` prop-access interface), migrate `kgCli.ts` scripts one by one against the same real data with each one diffed against its existing TerminusDB output before being considered done, then archive (not delete) the TerminusDB-based scripts once every one has migrated clean.
 		- Phase 1: Core skills & UI Peras (Human–agent co-navigation)
 			- Apeiron operating skills
 				- Agent Skills (`SKILL.md`) teaching a coding agent how to use the CLI to operate and manage the KG.
@@ -164,18 +179,6 @@
 				- **Manual skill mode (procedural / CLI execution):** The coding agent executes raw procedural skills (`SKILL.md`) directly against the substrate, preserving full operational autonomy without API dependencies.
 				- **Tool mode (active query):** Exposes high-level perata tools and service endpoints for the coding agent to interact directly with the Aperas Agent on demand.
 				- **Hook mode (automatic context engineering):** Injects perata and context projections directly into the context window of the coding agent via background events and triggers.
-		- Phase 4: Substrate Evolution — ApeironNgn (native Rust successor, speculative)
-			- Motivation: right-sizing the substrate to what Aperas actually exercises
-				- TerminusDB Community brings a general-purpose Prolog/WOQL Datalog engine, enterprise-oriented tooling, and its own bundle/layer format for versioning — capability well beyond what Phase 0-3 skills exercise (document CRUD, one-hop impact traversal, branch/commit/merge as a review workflow).
-				- The bidirectional JSON-LD mirror (`AperasKG/Apeiron/`, `Aperas-architecture.md` §5) demonstrates this directly: the canonical graph content already round-trips as plain JSON-LD files, decoupled from TerminusDB's own storage internals — nothing about the substrate's actual content depends on TerminusDB being the engine underneath it.
-			- ApeironNgn: a minimal engine sized to exactly what Aperas needs
-				- A small, embeddable Rust graph engine scoped to the primitives Phase 0-3 actually use: the `BaseNode`/`BaseLink`/`BaseEdge` document model and simple pattern-match queries (source/predicate/target lookups, bounded-depth traversal) — no general Datalog/Prolog solver, no auto-generated GraphQL schema, no multi-tenant/enterprise surface.
-				- No separate commit-layer engine to build: `AperasKG/Apeiron/` already lives inside a real git repository, so a JSON-LD write followed by an ordinary `git commit` over that directory *is* the version control — immutable history, diffing, and branching all come from git itself, not a bespoke bundle/layer format ApeironNgn would otherwise have to reimplement. TerminusDB needed its own commit-layer machinery because it owns an opaque store with no git underneath it; once Aperas is managing history directly against `AperasKG/Apeiron/`, ApeironNgn doesn't need to.
-			- Migration surface: the same modules stand in for the same role, one changing shape
-				- `client.ts`, `crud.ts`, `woql.ts`, and `graphql.ts` (`Aperas-architecture.md` §3) already isolate every TerminusDB-specific call behind a small, named set of modules — that boundary is what ApeironNgn would need to implement to stand in for TerminusDB, with `AperasKG/Apeiron/` as the on-disk state `kg:export`/`kg:import` already round-trip through.
-				- `versionControl.ts` doesn't carry over as-is — its branch/commit/diff/merge calls would delegate straight to real `git` operations on the `AperasKG` repository instead of TerminusDB's git-like API, since the KG's "commit" *is* a git commit once ApeironNgn is the engine.
-			- Status: unscheduled and speculative
-				- Contingent on Phase 0-3 confirming that TerminusDB Community edition's rough edges — cross-store `bundle`/`unbundle` incompatibility (`terminusdb/terminusdb#2509`) and the `List`-typed `@unfold` gap (`terminusdb/terminusdb#2512`), both documented in `Aperas-dev-status.md` — are structural rather than incidental before committing engineering effort to a replacement.
 	- Open-Source Stack for Agentic Knowledge Graph Architectures
 		- System architecture layers
 			- Canonical graph storage layer (the substrate)
@@ -218,8 +221,8 @@
 			- Dual-query interface capabilities
 				- Employs WOQL (Web Object Query Language) powered by Datalog for pattern matching, recursive transitive dependency traversals, and impact propagation calculations.
 				- Exposes automatically generated GraphQL endpoints for projection agents to perform fast, multi-hop contextual fetches during view rendering.
-			- Future substrate alternative under consideration
-				- ApeironNgn — a minimal Rust graph engine scoped to exactly what Aperas exercises — is sketched as a speculative future replacement; see Development Roadmap "Phase 4: Substrate Evolution".
+			- Substrate replacement in progress
+				- ApeironNgn — a minimal Rust graph engine scoped to exactly what Aperas exercises — is in progress as the replacement; see Development Roadmap "Phase 0.1: Substrate Evolution" and `Aperas-apeironngn-design.md`.
 		- UI projection layer rationale
 			- Selection: SolidJS
 			- Fine-grained signal reactivity without Virtual DOM overhead

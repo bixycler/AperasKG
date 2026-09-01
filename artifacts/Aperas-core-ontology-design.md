@@ -126,11 +126,14 @@ Child` triple. **Confirmed live**: `t(X, 'children', '<a known child's id>')` re
 bindings, even though that id is genuinely present in its parent's `children` list. So "upward
 breadcrumbs" and "universal backlink tracing" *do* work for `links` (item 1's own example happens
 to pick a `Set` field, so it was never actually wrong) but do **not** give you a node's structural
-parent, or an id→path conversion, for free — that would need either a schema change (a persisted
-`parentId`/back-reference field on `BlockNode`, the standard trade of write-time bookkeeping for
-O(1) reverse lookup) or an explicit downward search from a known root, not a generic triple query.
-Not built as of this writing — see `Aperas-deep-path-resolution-design.md`, which covers the
-*other* direction (path → id) only; id → path remains a real, separate, unbuilt gap.
+parent, or an id→path conversion, for free — that needs either a schema change (a persisted
+back-reference field, the standard trade of write-time bookkeeping for O(1) reverse lookup) or an
+explicit downward search from a known root, not a generic triple query. **Implemented**: a typed
+`parent: Optional<BaseNode>` field on `BlockNode` (`Aperas-deep-path-resolution-design.md` §8),
+stamped by `astParser.ts`/`artifacts.ts`/`folders.ts` and walked by `nodeRef.ts`'s `resolveIdToPath`
+(`kg:path`). Currently `BlockNode`-only, not yet promoted to `BaseNode` — `FolderNode`-to-`FolderNode`
+nesting and a `FolderNode`'s `ArtifactNode` references have no back-pointer set today, the same shape
+of gap `unfolded` had before its own `BaseNode` promotion (§4 agentic-query-tools design).
 
 1. **Upward Breadcrumbs via a `Set` field (Context Retrieval)**:
    Because `BaseLink` is a fully addressable Document, it does not need a physical `parent`
