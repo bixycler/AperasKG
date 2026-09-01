@@ -15,7 +15,10 @@
     },
     "@type": "Class",
     "artifactId": "xsd:string",
-    "fileHash": "xsd:string",
+    "fileHash": {
+      "@class": "xsd:string",
+      "@type": "Optional"
+    },
     "ingestedHash": {
       "@class": "xsd:string",
       "@type": "Optional"
@@ -24,7 +27,10 @@
       "@class": "xsd:dateTime",
       "@type": "Optional"
     },
-    "lastTrackedAt": "xsd:dateTime",
+    "lastTrackedAt": {
+      "@class": "xsd:dateTime",
+      "@type": "Optional"
+    },
     "path": "xsd:string",
     "root": {
       "@class": "BlockNode",
@@ -60,6 +66,10 @@
     "@abstract": [],
     "@id": "BaseNode",
     "@type": "Class",
+    "holder": {
+      "@class": "xsd:boolean",
+      "@type": "Optional"
+    },
     "links": {
       "@class": "BaseLink",
       "@type": "Set"
@@ -70,6 +80,10 @@
     },
     "tombstonedAt": {
       "@class": "xsd:dateTime",
+      "@type": "Optional"
+    },
+    "unfolded": {
+      "@class": "xsd:boolean",
       "@type": "Optional"
     }
   },
@@ -88,16 +102,16 @@
       "@class": "BlockNode",
       "@type": "List"
     },
+    "parent": {
+      "@class": "BaseNode",
+      "@type": "Optional"
+    },
     "text": {
       "@class": "xsd:string",
       "@type": "Optional"
     },
     "title": "xsd:string",
-    "type": "xsd:string",
-    "unfolded": {
-      "@class": "xsd:boolean",
-      "@type": "Optional"
-    }
+    "type": "xsd:string"
   },
   {
     "@id": "FolderNode",
@@ -122,6 +136,11 @@
     "title": "xsd:string"
   },
   {
+    "@id": "Link",
+    "@inherits": "BaseLink",
+    "@type": "Class"
+  },
+  {
     "@abstract": [],
     "@id": "Prop",
     "@subdocument": [],
@@ -137,10 +156,5 @@
     "@subdocument": [],
     "@type": "Class",
     "value": "xsd:string"
-  },
-  {
-    "@id": "Link",
-    "@inherits": "BaseLink",
-    "@type": "Class"
   }
 ]

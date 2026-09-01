@@ -89,18 +89,37 @@ What schema actually does, concretely, in this project:
 
   | Approach | Time | vs. bulk |
   |---|---|---|
-  | Bulk GraphQL (`getArtifactTreeViaGraphQL`) | 17.8ms | 1x |
-  | Node-by-node, GraphQL (shallow query/node) | 834ms | 47x |
-  | Node-by-node, WOQL | 2772ms | 156x |
-  | Node-by-node, Document API (`getDocument({id})`) | 4283ms | 240x |
+  | ApeironNgn (in-process Oxigraph, post-rehydration walk — `Aperas-apeironngn-design.md`) | 5.6ms | 0.3x |
+  | Bulk GraphQL (`getArtifactTreeViaGraphQL`) | 18.3ms | 1x |
+  | Node-by-node, GraphQL (shallow query/node) | 826ms | 45x |
+  | Node-by-node, WOQL | 2882ms | 158x |
+  | Node-by-node, Document API (`getDocument({id})`) | 4364ms | 239x |
 
-  Bulk wins by nearly two orders of magnitude over *every* node-by-node alternative, regardless of
-  API — confirming §2's premise concretely rather than by argument alone: the win is specifically in
-  amortizing round-trip count via schema-declared nesting, not in which API happens to serve the
-  bulk request. Surprising detail: Document API node-by-node was the *slowest* of the three, despite
-  needing exactly one call per node and no extra indirection — suggesting the JS client's
-  single-document-by-id path carries more fixed per-call overhead than either a raw WOQL dispatch or
-  a GraphQL POST, independent of query complexity.
+  Bulk wins by nearly two orders of magnitude over *every* TerminusDB node-by-node alternative,
+  regardless of API — confirming §2's premise concretely rather than by argument alone: the win is
+  specifically in amortizing round-trip count via schema-declared nesting, not in which API happens
+  to serve the bulk request. ApeironNgn beats even the bulk path, for a different reason — no round
+  trip at all, bulk or otherwise, since the store lives in-process; its one cost the others don't
+  carry is a one-time whole-store rehydration (270ms this run), amortized across every artifact a
+  running process touches, not repeated per request.
+
+  **Why the TerminusDB ordering is Document API (slowest) > WOQL (middle) > GraphQL (fastest), not
+  ranked by call count** — instrumented directly (`bench-tree-fetch-strategies.ts`'s `callCounts`),
+  not inferred:
+
+  | API | Calls | Cost/call |
+  |---|---|---|
+  | Document API | 91 | 48.0ms |
+  | GraphQL | 91 | 9.1ms |
+  | WOQL | 454 | 6.3ms |
+
+  WOQL makes 5x more calls than either of the other two (the cons-cell chain walk costs one extra
+  round trip per list element, on top of the per-node type/title/text/head lookups — §3), yet still
+  finishes faster in total than Document API, because its per-call cost is the *cheapest* of the
+  three. Document API loses on both axes that matter: not fewer calls than WOQL, and far more
+  expensive per call than either alternative — real extra server-side work per single-document
+  fetch (schema-aware document assembly/validation) and client-side work (fuller object
+  materialization by the `terminusdb` JS package), not just "one call, therefore cheap."
 
   **The heterogeneous-node problem is identical for WOQL and GraphQL, and it's the real reason
   node-by-node can't just be "ask for whatever fields this node has."** Neither the RDF triple layer
@@ -114,7 +133,7 @@ What schema actually does, concretely, in this project:
   `ArtifactNode.root` uses `root`); (2) fetch **homogeneous per-type fragments** — one query per
   concrete type, since within a type the fields are uniform; (3) **stitch** — join topology and
   fragments back into one nested tree by id, client-side. Step 3 is the true second pass, and it's
-  where GraphQL's bulk-fetch win actually comes from: `getArtifactTreeViaGraphQL`'s 17.8ms *already
+  where GraphQL's bulk-fetch win actually comes from: `getArtifactTreeViaGraphQL`'s ~18ms *already
   includes* that stitching, done server-side as part of query execution, which is exactly why a
   from-scratch node-by-node rebuild (paying for traversal, per-type fragments, *and* client-side
   stitching separately) loses by two orders of magnitude to a mechanism that does all three in one

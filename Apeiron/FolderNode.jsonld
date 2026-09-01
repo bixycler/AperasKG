@@ -5,26 +5,28 @@
     "@schema": "terminusdb:///schema#"
   },
   {
-    "@id": "FolderNode/00C5FN74HR000",
+    "@id": "FolderNode/00C7BJZY4R000",
     "@type": "FolderNode",
-    "children": [
-      "ArtifactNode/00C67F0RS0000",
-      "ArtifactNode/00C5FP8DVR000",
-      "ArtifactNode/00C5H15NT0000",
-      "ArtifactNode/00C66H6T9G000",
-      "ArtifactNode/00C5FP8EER000",
-      "ArtifactNode/00C5FP8F2G000",
-      "ArtifactNode/00C5FP8FNR000",
-      "ArtifactNode/00C5FP8G8G000",
-      "ArtifactNode/00C5FP8GW0000",
-      "ArtifactNode/00C6HQ9K68000",
-      "ArtifactNode/00C5FP8HFG000",
-      "ArtifactNode/00C5FP8J2R000",
-      "ArtifactNode/00C5FP8JN8000",
-      "ArtifactNode/00C5FP8K7R000"
-    ],
-    "title": "Artifacts",
     "path": ".",
-    "folderId": "00C5FN74HR000"
+    "title": "Artifacts",
+    "children": [
+      "ArtifactNode/00C7BJHGCG000",
+      "ArtifactNode/00C7BJX2HG000",
+      "ArtifactNode/00C7BJX360000",
+      "ArtifactNode/00C7BJX3S0000",
+      "ArtifactNode/00C7BJHG3R000",
+      "ArtifactNode/00C7BJHG40000",
+      "ArtifactNode/00C7BJHG28000",
+      "ArtifactNode/00C7BJHG4G000",
+      "ArtifactNode/00C7BJX5YR000",
+      "ArtifactNode/00C7BJX6JG000",
+      "ArtifactNode/00C7BJX82G000",
+      "ArtifactNode/00C7BJX8MR000",
+      "ArtifactNode/00C7BJX980000",
+      "ArtifactNode/00C7BJXATR000",
+      "ArtifactNode/00C7BJXCC8000",
+      "ArtifactNode/00C7BJXDYG000"
+    ],
+    "folderId": "00C7BJZY4R000"
   }
 ]

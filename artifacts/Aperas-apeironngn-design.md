@@ -10,8 +10,10 @@ for that work, not a still-open proposal.
 ## 1. The actual reason, stated first, not derived from a benchmark
 
 This is not a response to a measured bottleneck — the production access pattern this project
-actually uses today (bulk tree fetch via `getArtifactTreeViaGraphQL`) is fast, 17.8ms for a
-91-node tree. The reason is architectural fit with Aperas's own stated philosophy
+actually uses today (bulk tree fetch via `getArtifactTreeViaGraphQL`) is fast, ~18ms for a
+91-node tree (`Aperas-kg-foundational-design.md` §2's benchmark table — where ApeironNgn's own
+number, 5.6ms for the same tree post-rehydration, also now lives). The reason is architectural fit
+with Aperas's own stated philosophy
 (`Aperas-design.md`'s "Metaphysical foundation," `Aperas-kg-foundational-design.md` §1): a boundary
 agent is supposed to "sample the fluid core (Apeiron) and project it into rigid, type-safe
 structures (Peras)." TerminusDB forces that projection to happen *twice*, redundantly and
@@ -74,15 +76,19 @@ this session, all against the real `aperas` TerminusDB instance:
 - **Schema: the OOP class itself**, not a declarative schema language. The class enforces shape on
   every read/write; an unmatched read/write either fails hard or fills the gap, per the class's own
   policy — no second, independently-evolving schema representation for the class to drift from.
-- **Query: `a.b.c` as literal property access, not a separate query language** — with the one
-  caveat that has to be designed in from the start, not discovered after the fact: `.b` must return
-  a lazy, composable, not-yet-executed reference, not materialized data. The naive version (every
-  `.` eagerly fetches) reproduces the exact node-by-node cost measured in §2. The correct version is
-  isomorphic to a Gremlin-style traversal builder (`g.V(a).out('b').out('c')`) under the hood —
-  the whole chain accumulates as an unforced expression, executed once, only when a concrete value
-  is actually demanded — just wearing dot-syntax instead of method calls. This is the one piece of
-  the design that most needs to be gotten right before anything else, since getting it wrong
-  silently reintroduces the exact problem the switch exists to escape.
+- **Query: `a.b.c` as literal property access, not a separate query language** — implemented as a
+  `Proxy` per node (`web/src/lib/apeironNgn/node.ts`), live-verified against the entire real
+  `AperasKG/Apeiron/` mirror (`apeironNgnSmokeTest.ts`: every artifact's tree, node-for-node,
+  against the raw JSON-LD as ground truth). The earlier framing of this as needing
+  `valueOf`/`Symbol.toPrimitive`-style deferred-forcing machinery, isomorphic to a Gremlin
+  traversal builder, was written while it was still an open question whether Oxigraph's Node
+  binding would be sync or async — it's confirmed sync (`oxigraph` skill), so there's no I/O gap
+  for a Promise-like wrapper to hide, and no such wrapper exists in the implementation. The
+  laziness that actually matters survives anyway, at the right granularity for free: `.b` returns
+  a fresh Proxy naming its neighbor via the one triple needed to identify it — none of *that*
+  neighbor's own fields are read until something asks for them — so `a.b.c` costs exactly two
+  `store.match()` calls, not a subtree's worth. Getting this granularity right was still the part
+  that most needed care; it just didn't need the mechanism originally assumed.
 - **Versioning: git-native, already built, not new work.** Per the existing Phase 4 plan
   (`Aperas-design.md`): `AperasKG/Apeiron/` already lives inside a real git repository, so a
   JSON-LD write followed by an ordinary `git commit` *is* the version control — no bespoke
@@ -100,14 +106,32 @@ this session, all against the real `aperas` TerminusDB instance:
 
 ## 4. Rollout sequence
 
-1. **ApeironNgn development.** The engine per §3, plus two concrete pieces of its own:
-   - **Two-tier caching.** Oxigraph's own on-disk store (RocksDB) already gives byte/block-level
-     caching; a JS-level cache sits above it in the Node process — materialized objects and
-     traversal results kept warm across accesses within a run, not a replacement for RocksDB's
-     cache but a second tier on top of it, closer to where `a.b.c` actually reads from.
-   - **The prop-access interface.** §3's `a.b.c` lazy-composed-traversal mechanism, built as its
-     own deliverable — the Gremlin-isomorphic deferred-execution model, not assumed to fall out of
-     the storage layer for free.
+1. **ApeironNgn development — implemented, live-verified against the real mirror.**
+   `web/src/lib/apeironNgn/` (`vocab.ts`/`store.ts`/`node.ts`), checked via
+   `apeironNgnSmokeTest.ts` against every artifact in `AperasKG/Apeiron/` (23 artifacts, 1594
+   BlockNodes, node-for-node against the raw JSON-LD as ground truth — no TerminusDB dependency at
+   all, by design).
+   - **Storage: in-memory only, deliberately, for now.** Checked live (`oxigraph` skill,
+     `references/persistence.md`): the Node/WASM build has no RocksDB, no on-disk option at all —
+     `Store` is pure in-process memory, rehydrated from `AperasKG/Apeiron/`'s JSON-LD at process
+     start (`store.ts`'s `rehydrateStore`). Decided: stay here rather than reach for `pyoxigraph`
+     (native, RocksDB-backed, but a second language/process needing its own projection bridge to
+     the Node UI) or a native non-WASM Node binding (real engineering work of its own) — revisit
+     only once the KG's actual size makes in-memory rehydration or working-set size a real problem
+     (GB-level), not before. No separate JS-level cache on top of it, for the same reason — one
+     memory tier, not two, kept simple until something actually demands otherwise.
+   - **The prop-access interface.** §3's `a.b.c` traversal (`node.ts`'s `wrapNode`) — see §3's
+     updated note on why this ended up as a plain per-node `Proxy` rather than the Gremlin-
+     isomorphic deferred-execution model originally sketched.
+   - **A real, pre-existing gap surfaced, not fixed here:** `export.ts`'s `INSTANCE_CLASSES`
+     doesn't include `Link` (the one concrete `BaseLink` leaf instantiated by `BlockNode.links`),
+     so any `Link/...` id referenced from the mirror would have no document to rehydrate its own
+     `target`/`predicate` from. `rehydrateStore` surfaces this as a count rather than silently
+     dropping such references — currently 0, since the mirror (re-exported after a DB reset) has no
+     `links` field populated on anything right now, but the gap in `export.ts` itself is unchanged
+     and will resurface the moment content with real `links` exists again. Fixing `export.ts` to
+     also export `Link` is follow-up work for whichever migrated script first actually needs to
+     traverse a `Link`'s target, not done speculatively ahead of that need.
 2. **Migrate Aperas scripts one by one, comparing output against the TerminusDB version per
    script.** Incremental, verified, not a big-bang cutover — each `kgCli.ts` command (`kg:track`,
    `kg:ingest`, `kg:tree`, `kg:unfold`/`kg:fold`, `kg:search`, `kg:assert`/`kg:assertions`/
@@ -121,8 +145,11 @@ this session, all against the real `aperas` TerminusDB instance:
 
 ## 5. Open questions
 
-- Oxigraph's Node.js story (native bindings vs WASM) needs checking before this is more than a
-  paper design — not yet verified live, unlike everything in §2.
+- Deferred, not forgotten: what happens when the KG grows to GB scale, given in-memory-only
+  storage means the whole thing is rehydrated from `AperasKG/Apeiron/`'s JSON-LD on every process
+  start and held entirely in RAM while running. Explicitly not solved now — revisit (`pyoxigraph`
+  + a projection bridge, a native non-WASM Node binding, or something else) once size actually
+  makes it a problem, not speculatively ahead of it.
 - What pairs with Oxigraph for the regex/full-text secondary index (§3) — a hand-rolled index over
   the reified triples, or an existing embeddable engine (e.g. Tantivy)?
 - `client.ts`/`crud.ts`/`woql.ts`/`graphql.ts` already isolate every TerminusDB-specific call
