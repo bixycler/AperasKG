@@ -28,7 +28,8 @@
     "ingestedHash": "694819ea0d1b9484be7e159b8dbc203ab7389c9c59400f841943d26004681559",
     "lastIngestedAt": "2026-08-31T23:02:36.409Z",
     "root": "BlockNode/00C7BJZ8Y8000",
-    "text": "This document defines the core semantic graph ontology for Aperas. It establishes mathematically rigorous identity, strong polymorphic typing, and universal addressability for all graph components."
+    "text": "This document defines the core semantic graph ontology for Aperas. It establishes mathematically rigorous identity, strong polymorphic typing, and universal addressability for all graph components.",
+    "unfolded": false
   },
   {
     "@id": "ArtifactNode/00C7BJHG40000",
@@ -225,8 +226,8 @@
     "@id": "ArtifactNode/00C7Z1866G000",
     "@type": "ArtifactNode",
     "artifactId": "00C7Z1866G000",
-    "fileHash": "c46c9b73d19158fca4892d6ed549ade599b5bba96d681c6cc23b5d6d95feac4d",
-    "lastTrackedAt": "2026-09-01T23:52:51.757Z",
+    "fileHash": "6b66c589b164157347aa435dabde08739815a51305d697a312f5685c85b9fcd7",
+    "lastTrackedAt": "2026-09-02T00:05:27.534Z",
     "path": "Aperas-apeironngn-design.md",
     "title": "Aperas-apeironngn-design.md"
   }
