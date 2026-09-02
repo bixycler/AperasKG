@@ -123,15 +123,21 @@ this session, all against the real `aperas` TerminusDB instance:
    - **The prop-access interface.** §3's `a.b.c` traversal (`node.ts`'s `wrapNode`) — see §3's
      updated note on why this ended up as a plain per-node `Proxy` rather than the Gremlin-
      isomorphic deferred-execution model originally sketched.
-   - **A real, pre-existing gap surfaced, not fixed here:** `export.ts`'s `INSTANCE_CLASSES`
-     doesn't include `Link` (the one concrete `BaseLink` leaf instantiated by `BlockNode.links`),
-     so any `Link/...` id referenced from the mirror would have no document to rehydrate its own
-     `target`/`predicate` from. `rehydrateStore` surfaces this as a count rather than silently
-     dropping such references — currently 0, since the mirror (re-exported after a DB reset) has no
-     `links` field populated on anything right now, but the gap in `export.ts` itself is unchanged
-     and will resurface the moment content with real `links` exists again. Fixing `export.ts` to
-     also export `Link` is follow-up work for whichever migrated script first actually needs to
-     traverse a `Link`'s target, not done speculatively ahead of that need.
+   - **The `export.ts`/`Link` gap — fixed and live-verified, not just noted.** `INSTANCE_CLASSES`
+     now includes `Link`; `apeironNgn/store.ts`'s `INSTANCE_FILES` reads it too, so a `Link`'s own
+     `target`/`predicate` rehydrate correctly instead of leaving a dangling reference. The fix
+     needed more than adding a name to a list: `BlockNode` and `Link` form a genuine two-way
+     reference cycle (`BlockNode.links` -> `Link` id, `Link.target` -> a `BlockNode` id — the same
+     cycle `crud.ts`'s `findLinkIdsTargeting` already documents for deletion), and TerminusDB
+     checks referential integrity per commit, not across commits — live-verified: a `BlockNode`
+     referencing a not-yet-existing `Link` id fails even when that `Link` is created in the very
+     next separate call, but succeeds when both are submitted together in one commit, in either
+     order. `importJsonLd` now commits `BlockNode`+`Link` together as one group
+     (`IMPORT_COMMIT_GROUPS`) rather than as two separate per-class calls. Round-trip verified live:
+     created a real embedded-literal `Link` (server-assigned id, same shape `artifacts.ts`'s
+     `resolveBlockLinks` produces in normal use) referencing a target `BlockNode`, exported it,
+     deleted both from TerminusDB, re-imported from the mirror, and confirmed both documents came
+     back at their original ids with the reference intact in both directions.
 2. **Migrate Aperas scripts one by one, comparing output against the TerminusDB version per
    script.** Incremental, verified, not a big-bang cutover — each `kgCli.ts` command (`kg:track`,
    `kg:ingest`, `kg:tree`, `kg:unfold`/`kg:fold`, `kg:search`, `kg:assert`/`kg:assertions`/

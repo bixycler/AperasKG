@@ -216,8 +216,8 @@
     "@id": "ArtifactNode/00C7Z185S0000",
     "@type": "ArtifactNode",
     "artifactId": "00C7Z185S0000",
-    "fileHash": "4a7ba726b48a71a8f48aaa6732daecfa1696f6289a4e3cfbee57a64802bc6378",
-    "lastTrackedAt": "2026-09-01T21:41:59.652Z",
+    "fileHash": "6f4956536416ea688e9c689e97311a5d192269f2ee2b8999797f4e1722b27ff5",
+    "lastTrackedAt": "2026-09-01T23:48:30.405Z",
     "path": "Aperas-kg-foundational-design.md",
     "title": "Aperas-kg-foundational-design.md"
   },
@@ -225,8 +225,8 @@
     "@id": "ArtifactNode/00C7Z1866G000",
     "@type": "ArtifactNode",
     "artifactId": "00C7Z1866G000",
-    "fileHash": "4508220e15809afa2f21dea695023466c875f09501c90351a59d05292e53d424",
-    "lastTrackedAt": "2026-09-01T23:30:38.236Z",
+    "fileHash": "c46c9b73d19158fca4892d6ed549ade599b5bba96d681c6cc23b5d6d95feac4d",
+    "lastTrackedAt": "2026-09-01T23:52:51.757Z",
     "path": "Aperas-apeironngn-design.md",
     "title": "Aperas-apeironngn-design.md"
   }
