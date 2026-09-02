@@ -363,17 +363,318 @@ this session, all against the real `aperas` TerminusDB instance:
      migrated script's own identifying tag normalized out of the per-line comparison. Replaces the
      by-hand bash diffing `kg:tree`'s migration used; every script in this list re-verifies against
      it instead of a fresh ad hoc comparison each time.
-3. **Fold migrated functions into class methods.** §3's classes are deliberately *mere schema* at
-   first — field access and shape enforcement only, no behavior — specifically so step 2's
-   migrations stay easy (point an existing free function at a class instance, don't simultaneously
-   rewrite it into method form). Once a function has been migrated and diffed clean per step 2,
-   this step folds it onto its natural class as a method (e.g. `project.ts`'s Markdown serializer
-   → a `BlockNode` method) — one function at a time, each fold diffed against the still-standing
-   free-function version before being considered done, same discipline as step 2 itself. This is
-   what actually closes §1's "ties data structure directly with control structure" mental model;
-   without this step the classes would stay permanently schema-only, which was never the intent.
+3. **Fold migrated functions into class methods — done, verified.** Real per-class accessor
+   properties replaced the `Proxy` (`node.ts`'s `wrap()`, `Object.seal`ed instances); the class
+   hierarchy went real (`ApeironInstance` -> `BaseNode` -> `TreeNode` -> `{BlockNode, ArtifactNode,
+   FolderNode}`, `Link`/`StringProp` as leaf subdocs), closing §1's "ties data structure directly
+   with control structure" model. See "Class hierarchy refactor" and "Classification" below for
+   exactly what changed and where every migrated function landed.
 4. **Archive the TerminusDB-based scripts once every script has migrated and verified clean.**
    Archived, not deleted — kept for reference/rollback, not discarded.
+5. **A shared service process — not started, to be designed later.** Every `kg*Ngn.ts` invocation
+   today calls `rehydrateStore()` cold and discards the `Store` at process exit; no state survives
+   between CLI calls. Measured against the real corpus: rehydration itself is ~256ms (9671 quads,
+   1482 nodes), but a full CLI invocation is ~1.6s wall-clock — so the rehydrate is actually the
+   *minor* cost, most of it being Node/tsx process spawn and TypeScript transpilation, which a
+   persistent process would eliminate outright regardless of corpus size (a different concern from
+   §5's already-open "what happens at GB scale" question — this is per-invocation setup cost, not
+   working-set size). Deliberately deferred: a shared process reintroduces exactly the concurrency/
+   shared-mutable-state question §3 opted out of ("no shared mutable database, no locking, no
+   transaction isolation to build") and needs real answers for write-serialization across
+   concurrent CLI callers, an IPC/RPC transport, and a staleness story (noticing when
+   `AperasKG/Apeiron/` changes underneath it, e.g. from a `git pull`) before it's worth building.
+
+### Step 3: fold migrated functions into class methods — implemented, verified
+
+**Mechanism: real accessors, not `Proxy`.** `node.ts`'s old `get` trap returned `undefined` for
+any prop not in a class's `SHAPE` table — a method would have silently resolved to `undefined`
+through it instead of being called. Fixed by dropping the `Proxy` entirely: `wrap()` is now
+`const instance = new (classForId(id))(store, id); Object.seal(instance); return instance;`, and
+each leaf class gets real `get`/`set` accessor properties generated once per class at module load
+(`node.ts`'s `defineAccessors`, closing over each field's name and `FieldSpec`, calling the same
+`readField`/`writeField` helpers the old traps used). `Object.seal` is what preserves "an unknown
+field read returns `undefined`, an unknown field write throws" without any trap logic — a sealed
+instance rejects a brand-new own-property in strict mode. Methods are ordinary prototype methods
+now — `this.title`/`this.children` inside one hit the real accessor directly, no receiver-binding
+to reason about. One accepted behavior change: an unknown-field write's error is now a generic
+strict-mode `TypeError` (`Cannot add property 'x', object is not extensible`) instead of the old
+custom `ApeironNgn: 'x' isn't a declared field on Y.` message — an internal-invariant check a
+script author would hit while developing, not a documented CLI-facing contract. (The alternative
+considered — keeping the `Proxy` and adding a `Reflect`-based method fallback in its `get` trap,
+binding a matched method to the receiver — was rejected: a smaller diff, but a subtler mechanism
+to carry forward for the receiver-binding, plus an extra `prop in target` check on every field
+access, for no real benefit once the accessor approach was confirmed to work.)
+
+`classes.ts` no longer exists as a separate file — merged into `node.ts`. The classes needed to
+call back into `wrap()` for recursive hydration/reconciliation (`BlockNode.hydrateFromParsed`,
+etc.), and `wrap()` needs `classForId`, so keeping them in two files would have created a real
+circular import between them for no benefit; one cohesive module (the class hierarchy plus the
+instantiation mechanism) removes the cycle by construction.
+
+**Class hierarchy refactor — done.** The old flat hierarchy (every concrete class extending
+`ApeironInstance` directly, `BASE_NODE_FIELDS` spread by hand into each leaf `SHAPE`) is now a real
+hierarchy — real `extends`, one level per genuinely shared shape:
+
+```
+ApeironInstance          -- store/id only, no fields (unchanged)
+  └─ BaseNode             -- unchanged: links, props, tombstonedAt, holder, unfolded
+       └─ TreeNode         -- new: title, text, key (derived, not stored — see below)
+            ├─ BlockNode    -- own: type, parent, children
+            ├─ ArtifactNode -- own: path, fileHash, lastTrackedAt, ingestedHash, lastIngestedAt, root
+            └─ FolderNode   -- own: path, children
+```
+
+`BaseNode` keeps exactly its current five fields — `title`/`text`/`key` move up to the new
+`TreeNode` level, not into `BaseNode` itself, since `Link`/`StringProp` (below) don't participate
+in the tree and shouldn't gain them.
+
+- **`key`, derived, not stored.** `blockId`/`artifactId`/`folderId` are three separately-named
+  literal fields today, but each is always identical to its own id's local part by construction
+  (`writeBlockTree` sets `n.blockId = node.blockId` for the very id it just `wrap()`ped as
+  `` `BlockNode/${node.blockId}` ``, same pattern for `artifactId`/`folderId`) — the old
+  TerminusDB schema's own `@key: {Lexical, @fields: [blockId]}` directive already said as much:
+  the field's whole purpose was generating the id, not carrying independent information. `TreeNode`
+  replaces all three with one derived getter, `get key() { return this.id.slice(this.id.indexOf('/')
+  + 1); }` — never its own triple, so nothing to keep in sync and nothing for `writeField` to
+  validate. Every current reader of `blockId`/`artifactId`/`folderId` switches to `.key`.
+- **`children`: already dissolved into `parent`/`siblingIndex` — not a new change, confirmed.**
+  This was already true before this session (§3 "Ordered containment: reified triples, not
+  `rdf:List`") — `children` has never been a stored triple in ApeironNgn; `node.ts`'s `childrenOf`
+  already derives it by reverse-querying `PARENT_PRED`, sorted by `SIBLING_INDEX_PRED`. Restated
+  here only because it's the working precedent for `key` above: both are derived, on-the-fly
+  properties on top of the real stored facts (`parent`/`siblingIndex` triples; the id string
+  itself), not independently-stored data that could drift from them.
+- **`Link` becomes a subdocument, sibling to `Prop`/`StringProp`, not a top-level node.** Today
+  `Link` is addressable (`Link/<snowflake>`, its own `Link.jsonld` file, `BASE_NODE_FIELDS` spread
+  into `LINK_SHAPE` alongside `target`/`predicate`) purely because it inherited from `BaseEdge` ->
+  `BaseLink` -> `BaseNode` in the old TerminusDB schema. Once `Assertion`/`BaseEdge` are gone (next
+  bullet), nothing still needs `Link` to be independently addressable or to carry `links`/`props`/
+  `tombstonedAt`/`holder`/`unfolded` of its own — it becomes exactly `Prop`'s shape of thing: `{
+  target, predicate }` only, minted as `${parentId}/links/Link/<snowflake>` (mirroring `props`'
+  `${parentId}/props/StringProp/<snowflake>`), `BASE_NODE_FIELDS.links`'s `storageKind` flipped
+  from `reference` to `embed`. Checked live against the actual generic machinery, not assumed: both
+  `dehydrate.ts`'s `decodeField`/`serializeDoc` (branches on `spec.storageKind === 'embed'`, already
+  fully generic — not `props`-specific) and `store.ts`'s `encodeDoc` (recurses into any nested
+  object carrying its own `@id`, also not `props`-specific) already do exactly the right thing for
+  an embedded `Link` with zero new code — only `dehydrate.ts`'s `DEHYDRATE_CLASSES` and `store.ts`'s
+  `INSTANCE_FILES` need `'Link'` removed (no more standalone `Link.jsonld`). This also directly
+  removes the "create then attach" workaround `kgLinkNgn.ts`/`artifacts.ts`'s `resolveBlockLinks`
+  both currently need (today's generic `mintEmbedded`-via-`writeField` auto-mint always shapes a
+  fresh id as `.../props/<type>/...`, wrong for a top-level `Link` — moot once `Link` really is
+  `storageKind: 'embed'`, since the existing generic embed-mint path becomes correct for it too).
+  **Decided: `Link` sheds `BASE_NODE_FIELDS` entirely** — its shape becomes exactly `{ target,
+  predicate }`, nothing else, matching `Prop`'s own minimal `{ key }`/`{ key, value }` shape. A
+  side effect worth stating plainly: since `StringProp` already didn't spread `BASE_NODE_FIELDS`
+  either, `BaseNode` (and everything it carries — `links`/`props`/`tombstonedAt`/`holder`/
+  `unfolded`) ends up used only by `TreeNode` and its descendants once this lands; nothing else in
+  the hierarchy extends it. Kept as its own level anyway (per the earlier instruction that
+  `BaseNode` stays parent of `TreeNode`) — it still documents a real conceptual boundary
+  ("participates in the links/props/lifecycle system") separate from `TreeNode`'s ("has a
+  title and a position in the tree"), even though only one branch uses it today.
+- **`Assertion`/`BaseEdge` are not migrated in any form — the capability is subsumed, not
+  ported.** Previously "permanently out of scope" meant "no `kg:assert`/`kg:assertions`/
+  `kg:unassert` port"; this finalizes it one step further — there is no ApeironNgn class for
+  `Assertion`/`BaseEdge` at all, ever, because the thing they were for (recording a claim linking
+  two nodes, with justification) is already fully expressible as ordinary artifact content: a
+  `BlockNode` holding the claim in prose, with a wikilink resolving to a real `Link` at ingest time
+  (the same mechanism `kg:ingest`'s `resolveBlockLinks` already uses for every other in-text
+  wikilink) — e.g. "Through the analysis of this investigation, we conclude that
+  `[X](../../reportX/sectionY)` is wrong." This is strictly more capable than the old model, not a
+  reduced substitute: the justification *is* the surrounding prose (not a separate, easy-to-neglect
+  field), and it projects to/from a real Markdown artifact for free (`kg:project`/`kg:ingest`
+  already round-trip any `BlockNode` with a wikilink) — `Assertion` never had that, which is the
+  concrete problem this resolves, not just a naming preference. Checked live: the real
+  `AperasKG/Apeiron/Assertion.jsonld` has zero documents today (the basic-assertion-authoring work
+  was only ever exercised by a synthetic edge in `verifyPhase0.ts`'s test harness, per
+  `Aperas-basic-assertion-skill-design.md` §0) — nothing to migrate or convert, so finalizing this
+  costs nothing. This also closes a real latent gap noticed while checking: `store.ts`'s
+  `INSTANCE_FILES` still reads `Assertion.jsonld` on every rehydrate (its fields land as raw quads,
+  since `encodeDoc` doesn't consult any class registry) while `dehydrate.ts`'s `DEHYDRATE_CLASSES`
+  never writes it back out — today, any real `Assertion` doc would silently vanish on the next
+  dehydrate. Removing `'Assertion'` from `INSTANCE_FILES` (alongside dropping it from
+  `ID_PREFIX_RE`/`KIND_RE` in `vocab.ts`) closes the gap by removing the read path entirely, rather
+  than by adding the write path back.
+
+**Classification — as actually implemented.** A function folds onto a class only when a single
+already-identified node is a natural `this` for it; a function that searches across the whole
+store, or sweeps every node of a kind, stays free (it has no one node to be `this` until *after*
+it runs). Each level gets only the methods whose governing field(s) — or whose need for a
+title/position in the tree — actually live at that level; a subclass doesn't restate a fold its
+parent already covers. One correction from the original proposal, caught while implementing:
+`collectBlockNodes` folds onto `TreeNode`, not `BlockNode` — the starting node passed to it can be
+any tree-positioned kind (an `ArtifactNode`/`FolderNode` root, not just a `BlockNode`), so it needs
+`treeChildren`'s polymorphism the same way `renderTree`/`toPath`/`findChild` do; putting it on
+`BlockNode` alone would have made it uncallable from the common `kg:title`/`kg:link` entry point.
+
+- **`BaseNode` (`links`/`props`/`tombstonedAt`/`holder`/`unfolded` — used only by `TreeNode` and
+  below now that `Link`/`StringProp` don't extend it):**
+  - `unfold.ts`'s `setUnfolded(store, id, value)` → `node.fold()` / `node.unfold()`.
+  - **New, not a fold of an existing function but the direct payoff of `Link` becoming
+    `storageKind: 'embed'`:** `node.addLink(predicate, target)` →
+    `this.links = [...(this.links ?? []), { predicate, target }]`. This is what actually replaces
+    `kgLinkNgn.ts` and `artifacts.ts`'s `resolveBlockLinks`'s hand-rolled "mint a `Link/<snowflake>`
+    id, `wrap()` it, set `target`/`predicate`, attach by id" — once `links` is embed-kind, the
+    generic `mintEmbedded` path handles a fresh `{ predicate, target }` literal correctly on its
+    own (already true for `props`), so the workaround both call sites used to need is gone
+    entirely, not just moved. Verified live against a scratch copy: a fresh link mints as
+    `BlockNode/<id>/links/Link/<snowflake>`, decodes back through `.links` as a real wrapped `Link`
+    with `.target`/`.predicate` correct.
+  - **A second real bug, found by a pointed question about id persistence, not by the standing
+    test matrix (the real corpus has zero `BlockNode`s with any `links` today, so nothing had ever
+    exercised this path live): re-ingesting a block with an existing `Link` silently destroyed it.**
+    `reconcile.ts`'s `carryForwardFields` carries an unchanged block's `links` forward as *bare
+    ref-id strings* (`toReconcileShape()`'s own output shape, `["BlockNode/.../links/Link/xyz"]`) —
+    correct for the old `storageKind: 'reference'`, where a bare string was exactly what `writeField`
+    expected. Once `links` became `storageKind: 'embed'`, `writeField`'s embed branch only recognized
+    "already has an identity, reuse it" for an *object* carrying `@id`/`id` — a bare string fell
+    through to `mintEmbedded`, which then ran `Object.entries()` on the string itself (JS treats a
+    string as array-like: index → character), producing a brand-new `Link` with none of the
+    original's `target`/`predicate` and silently orphaning the real one. Confirmed live before the
+    fix: gave a real block a real link, re-ingested its (unchanged) artifact, watched the link's
+    `predicate`/`target` both vanish and its id change. Fixed by treating a bare string the same as
+    an object-with-`@id` in the embed branch (`node.ts`'s `writeField`) — reuse its id, never mint.
+    Re-verified the same reproduction afterward: the link's id, `target`, and `predicate` all
+    survive a reconcile-as-unchanged re-ingest intact.
+  - **A third bug, same family, found by asking whether ids actually persist across a rehydrate
+    cycle at all: `props` churned a fresh id on every single ingest, for every prop, regardless of
+    whether anything changed.** Unlike `links`, `props` is genuinely rebuilt from the fresh parse
+    every ingest (list numbering, checkbox state — re-derived from the current document, not a
+    separately asserted fact `resolveBlockLinks` merges in afterward), and `astParser.ts`'s
+    `setProp` never attaches an id to what it builds — so every prop on every block looked "brand
+    new" to `writeField`'s embed branch on every single ingest, even for blocks reconciliation
+    itself classifies as content-unchanged. Confirmed live against the real corpus's own current
+    `StringProp` entries (still carrying their original TerminusDB-era random keys, since neither
+    `kg:track:ngn` nor `kg:ingest:ngn` had ever actually been run for real yet) that a forced
+    re-ingest of genuinely unchanged content would replace every one of them at once — a large,
+    permanent, purely-cosmetic git diff on the very first real run, and again on every run after.
+    Fixed at the `reconcile.ts` level, not `node.ts`: `BlockNode.toReconcileShape()` now includes
+    `props` as `{id, key, value}` triples (previously omitted from the reconcile shape entirely),
+    and `carryForwardFields` matches the old and new prop lists by `key` (a block has at most one
+    prop per key today), carrying the old id forward only when the *value* also matches exactly —
+    a genuinely changed value still mints a fresh id, same as a new prop would. Safe for the
+    TerminusDB-backed path sharing this same `reconcile.ts` function: `graphql.ts`'s own old-tree
+    fetch (`props { key _json }`) never requests an id in the first place (TDB's own
+    `@key: {"@type": "Random"}` mints its own on every write regardless), so `old.id === undefined`
+    there and the new carry-forward branch is a guarded no-op, leaving that path's behavior
+    unchanged. Re-verified live: forced a re-ingest of `Aperas-design.md` (real, unchanged content)
+    against a scratch copy and confirmed a real block's `orderedList`/`startIndex` prop ids —
+    including their original TerminusDB-era values — came back byte-identical afterward.
+  - **Real bug found and fixed while implementing, unrelated to the fold itself:** every "is this
+    node live" filter across `artifacts.ts`/`folders.ts`/`resolve.ts`/`resolveCreate.ts` checked
+    `node.tombstonedAt !== true` — but `tombstonedAt` is written as an ISO date *string*
+    (`new Date().toISOString()`), never the literal boolean `true`, so that comparison was
+    unconditionally `true` regardless of whether a node was actually tombstoned. The original
+    TerminusDB-backed code these were ported from always checked plain truthiness (`!d.tombstonedAt`,
+    `artifacts.ts`/`folders.ts`), which the ApeironNgn port had silently drifted from. Only surfaced
+    now because real per-field types (`declare tombstonedAt?: string`) let the compiler flag the
+    comparison as suspicious — under the old `Proxy`'s `unknown`-typed reads, nothing could catch
+    it. Fixed everywhere to `!node.tombstonedAt`, matching the original semantics.
+- **`TreeNode` (`title`/`text`/`key` — shared by every tree-positioned kind):**
+  - `tree.ts`'s `renderTree(store, rootId, opts)` → `node.renderTree(opts)`; `childIds`/
+    `displayLabel` — `displayLabel` stays a small free helper in `tree.ts` (still used directly by
+    two CLIs outside a full tree render); `childIds` is gone, superseded by `treeChildren`.
+  - `path.ts`'s `resolveIdToPath(store, id)` → `node.toPath()`; `path.ts` itself is deleted.
+  - `collect.ts`'s `collectBlockNodes(store, id, recursive)` → `node.collectDescendants(recursive)`
+    (moved here from the original proposal's `BlockNode` placement — see the correction above);
+    `collect.ts` itself is deleted.
+  - `resolve.ts`'s `descend`/`resolveCreate.ts`'s equivalent (single-hop "given this node, find the
+    child matching this segment") → `node.findChild(text)`, used internally by the still-free
+    outer resolver rather than being its own CLI-facing fold. Read-only, throws on ambiguity, same
+    as the free functions it replaced.
+  - **New, needed to make the methods above (and `resolve.ts`'s per-hop descent) polymorphic
+    instead of branching on kind:** `get treeChildren(): TreeNode[]` (throws if a concrete class
+    doesn't override it — never actually reached, since `classForId` only ever dispatches to a
+    leaf class) plus `appendChild(childId: string): void`, both overridden per concrete class below
+    — together they replace `tree.ts`'s old `childNodes(node, kind)` and `resolve.ts`'s/
+    `resolveCreate.ts`'s equivalent kind-switches with ordinary virtual calls.
+- **`BlockNode`:**
+  - `treeChildren`/`appendChild` → `this.children` (read) / append to it (write).
+  - `project.ts`'s block-rendering half of `projectArtifactToMarkdown`/`projectFolderToReadme`
+    (today's `serializeBlock` call) → `node.toMarkdown()`.
+  - `artifacts.ts`'s `writeBlockTree(store, parsed)` → `node.hydrateFromParsed(parsed)` (recursive:
+    the node is `wrap()`ped first at the known target id, then hydrates itself and its children).
+  - `artifacts.ts`'s `materializeBlockTree(store, id)` → `node.toReconcileShape()` (recursive;
+    produces the plain object `reconcile.ts` expects — still keyed `blockId` in its *output*, since
+    that's `reconcile.ts`'s own external contract, unaffected by `key` replacing the stored field
+    internally).
+- **`ArtifactNode`:**
+  - `treeChildren` → `this.root ? [this.root] : []`; `appendChild` sets `this.root`, throwing if
+    one already exists (a node that already has a root can't gain a second one this way — same
+    schema-shape constraint `nodeRef.ts` documents against real TerminusDB behavior). The rich,
+    title-specific version of that error (`` `${id} already has a root block — can't create
+    '${title}' as a second one...` ``) stays in `resolveCreate.ts`'s own pre-check, run *before*
+    minting a holder so a rejected create never leaves an orphan `BlockNode` behind;
+    `appendChild`'s own version is a generic backstop, never actually the one a real caller sees.
+  - `project.ts`'s `projectArtifactToMarkdown`'s render half → `node.toMarkdown()` (frontmatter via
+    `withFrontmatter` plus `this.root.toMarkdown()`; `null` when there's no root yet).
+  - `artifacts.ts`'s `trackArtifact`'s per-node half → `node.trackFromDisk(artifactPath)` — takes
+    the path explicitly (not `this.path`), since a brand-new, not-yet-tracked instance has no path
+    of its own yet. Folding this onto the class turned out to remove real duplication: the old
+    free function needed separate "new node" (mint an `artifactId`, set every field) and "existing
+    node" (check the hash, maybe skip, set every field) branches; once `key` replaced the separate
+    `artifactId` field, there's nothing left to mint, so one method body now handles both — a
+    fresh node's `fileHash` just reads `undefined`, unconditionally "changed."
+  - `artifacts.ts`'s `ingestArtifact`'s per-node half → `node.ingestFromDisk()`, returning
+    `{ blockCount, reconciliation, pendingLinks }`. Deliberately does *not* also resolve the
+    `pendingLinks` itself — that's `artifacts.ts`'s `resolveBlockLinks`, a multi-block sweep with
+    no single node to be `this`, run by the free `ingestArtifact` wrapper immediately after.
+  - `artifacts.ts`'s `getArtifactPath(store, id)` → deleted outright; every caller already just
+    wants `node.path`, a plain field read.
+- **`FolderNode`:**
+  - `treeChildren`/`appendChild` → `this.children` (read) / append to it (write) — same shape as
+    `BlockNode`'s, kept as its own separate implementation rather than shared on `TreeNode` (no
+    4th hierarchy level was introduced for this).
+  - `project.ts`'s `projectFolderToReadme`'s render half → `node.toReadme()`.
+  - `folders.ts`'s `writeFolderTree(store, parsed)` → `node.hydrateFromParsed(parsed)` (recursive,
+    mirrors `BlockNode`'s of the same name — kept as its own override rather than a shared
+    `TreeNode` method, since a folder's children mix `BlockNode`/`FolderNode`/`ArtifactNode`
+    3-ways where a block's are homogeneous).
+- **`Link`/`StringProp` (leaf subdocs, no `BaseNode`/`TreeNode` in their chain):** no folds — they
+  carry data only (`target`/`predicate`; `key`/`value`), never a `this` for any migrated function.
+- **Stays free (store-wide search/sweep, or harness — no single node is `this` yet):**
+  - `store.ts` (`rehydrateStore`/`getApeironExportDir`) — builds the store itself, before any node
+    exists.
+  - `dehydrate.ts` (`allIdsOfKind`/`dehydrateToJsonLd`) — whole-class/whole-store sweep.
+  - `vocab.ts` — id/IRI/literal encoding; substrate infrastructure `node.ts` itself sits on, never
+    in scope for folding.
+  - `tree.ts`'s `findByExactPath`/`resolveTreeRef` — store-wide search for a *starting* node.
+  - `resolve.ts`/`resolveCreate.ts`'s outer search (`resolveArtifactOrFolderPrefix`,
+    `resolveDeepPath`, `resolveDeepPathDetail`, `createImaginedPrefix`) — multi-root search and
+    cross-node creation across the whole store; calls `.findChild()`/`.appendChild()` per hop now.
+  - `artifacts.ts`'s `trackAllArtifacts`/`ingestAllArtifacts`/`findLiveArtifactByPath`/
+    `resolveBlockLinks` — sweep over every artifact or every pending wikilink, or search by path,
+    before any one node is known; `trackAllArtifacts`/`ingestAllArtifacts` are now thin loops
+    calling `.trackFromDisk()`/`.ingestFromDisk()`.
+  - `folders.ts`'s `getFolderRecord`/`ingestFolderTree` — same shape; `ingestFolderTree` is now a
+    thin loop calling `.hydrateFromParsed()` at the end.
+  - `compareMigration.ts` — test harness, not domain logic; never folds.
+
+**Mirror format consequence, decided.** `dehydrateToJsonLd` no longer writes `blockId`/
+`artifactId`/`folderId` into `AperasKG/Apeiron/*.jsonld` at all now (derived-not-stored, per
+`key`) — confirmed via a structural diff against the real mirror before this was decided. That
+field is also what the *old* TerminusDB schema's `@key: {Lexical, @fields: [blockId]}` uses to
+assign a document's own key on import, so a mirror dehydrated by the new code is no longer
+re-importable via the old `kg:import`. Decided to accept this rather than have `dehydrate.ts`
+special-case emitting the field output-only: consistent with `kg:export`/`kg:import` already being
+slated for retirement (§4 point 2's "not really migrated so much as retired"), not something this
+migration needs to keep working through.
+
+**Sequencing, as it actually happened** (same one-at-a-time / diff-before-next discipline as
+step 2): the hierarchy refactor first (verified via a scratch-copy rehydrate → mutate → dehydrate
+→ re-rehydrate round trip, `danglingRefs: []`, zero semantic diff besides harmless `Set`-order
+noise in `props`/`links` — the same kind already accepted for the original dehydrate work); then
+`BaseNode` (`fold`/`unfold`/`addLink`, verified live: a fresh embedded `Link` mints and decodes
+correctly); then `TreeNode` and all three `treeChildren`/`appendChild` overrides together (verified
+against the real corpus: `renderTree`/`kg:tree`'s full 1048-line output and `kg:path`/`kg:resolve`
+including a real 3-hop deep path all diffed byte-identical against TerminusDB; `findChild` +
+`appendChild` verified end-to-end via a real `--create-holder` run against a scratch copy — correct
+multi-hop descent, correct holder attachment, immediately re-resolvable, and confirmed the
+`ArtifactNode`-already-has-a-root guard rejects *before* minting, leaving no orphan node behind);
+then `BlockNode`/`ArtifactNode`/`FolderNode`'s own methods (verified via a real `kg:track`+
+`kg:ingest` sweep against a scratch copy of the actual corpus — genuine, non-manufactured drift on
+4 real artifacts, correct reconciliation stats, zero dangling references on round-trip); then the
+`resolve.ts`/`resolveCreate.ts` family's `descend` switched to call `.findChild()`/`.appendChild()`
+internally, verified as part of the same `--create-holder` run above.
 
 ## 5. Open questions
 
