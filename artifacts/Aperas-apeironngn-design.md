@@ -715,6 +715,8 @@ then `BlockNode`/`ArtifactNode`/`FolderNode`'s own methods (verified via a real 
 `resolve.ts`/`resolveCreate.ts` family's `descend` switched to call `.findChild()`/`.appendChild()`
 internally, verified as part of the same `--create-holder` run above.
 
+### Step 4: real-corpus validation, then archive the TerminusDB-backed half — implemented, verified
+
 **First real-corpus run of `kg:track:ngn`/`kg:ingest:ngn`, and non-dry-run `kg:project:ngn`.**
 Everything above through step 3 had only ever been verified against scratch copies. Ran the real
 pipeline for the first time against the actual `AperasKG/artifacts/` corpus: reverted the working
@@ -736,8 +738,11 @@ lost, closing out the unexplained reconciliation delta.
 `kg:track:ngn`.** Not a deliberate deferral like `kg:export`/`kg:import`'s retirement — a plain
 oversight, since the hooks live outside `web/src/lib/kgCli.ts` entirely and call `kg:track` as a
 hardcoded string, so migrating the underlying script never touched them. Fixed: both hooks (and
-`.githooks/README.md`) now call `kg:track:ngn`; re-ran `post-index-change` directly afterward; 
-confirmed it completes with no TerminusDB connection at all; and move `post-commit` to `pre-commit` to sync the mirror in the same commit.
+`.githooks/README.md`) now call `kg:track:ngn`; re-ran `post-index-change` directly afterward and
+confirmed it completes with no TerminusDB connection at all. Separately moved `post-commit` to
+`pre-commit` (staging the mirror sync's own output via `git add`) so it lands in the same commit
+as the artifact change it reflects, instead of trailing it as a separate leftover working-tree
+change right after the commit completes.
 
 **`verifyPhase0.ts` replaced by `verifyApeironNgn.ts`.** `client.ts`/`crud.ts`/`woql.ts`/
 `graphql.ts`/`versionControl.ts` (and `export.ts`'s `kg:export`/`kg:import`) are all abandoned
@@ -766,6 +771,57 @@ first run against a real self-link. Fixed by checking `shape[k]?.storageKind ===
 first, regardless of whether `v` is a string or an object (`idOf` already handles both) — falling
 through to the literal branch only when the field isn't a reference. Re-verified: the same check
 passes after the fix.
+
+**TDB-backed code renamed and archived; ApeironNgn scripts promoted to the plain command names.**
+With every `kg:*` command's real-corpus write path now verified (above) and `verify.ts` covering
+what `verifyPhase0.ts` used to, the TDB-backed half no longer needed first-class command names —
+renamed and archived rather than deleted outright, kept for reference for some time before final
+removal (some mechanism may only exist in code, not written up in a doc). Two more files turned
+out to be mixed TDB/engine-agnostic, the same way `artifacts.ts`/`project.ts` were (§4 rollout
+step 2): `folders.ts` (`getFolderRecord`/`ingestFolderTree` split out to `foldersTdb.ts`) and
+`nodeRef.ts` (the whole `client`-based deep-path resolver split out to `nodeRefTdb.ts`, leaving
+only `slugify`/`tokenize`/`pathToNameTokens`/`Token` — what `apeironNgn/node.ts`/`resolveCreate.ts`/
+`resolve.ts` actually import — behind). `bench-tree-fetch-strategies.ts` (a TDB-vs-ApeironNgn
+fetch-strategy comparison, not wired into any npm script) archived too, once its TDB half had
+nothing live left to compare against.
+
+Renaming scheme: every TDB-backed file gets a `Tdb` suffix (`kgCli.ts` → `kgCliTdb.ts`,
+`client.ts` → `clientTdb.ts`, etc.); every ApeironNgn `kgXxxNgn.ts` drops the `Ngn` suffix
+(`kgTreeNgn.ts` → `kgTree.ts`, ..., `verifyApeironNgn.ts` → `verify.ts`) and its npm command
+loses `:ngn` (`kg:tree:ngn` → `kg:tree`) to take over the plain name. Every TDB npm command got a
+matching `:tdb` suffix for the final regression pass (`kg:track:tdb`, `verify:tdb`, ...) — both
+`verify` and `verify:tdb` were run for real after the rename (the latter against live
+TerminusDB, full pass including Assertion/WOQL and branch/commit management) before archiving,
+then the `:tdb` npm script entries were deleted entirely (not left pointing at `.archive/`) once
+the files actually moved, matching the earlier decision to drop rather than keep them reachable
+via `npm run`.
+
+Final location: `.archive/scripts/` (`restore.sh`/`tdb-log.sh`/`tdb-doc.sh`/`README.md` — no code
+dependencies, unaffected either way) and `web/.archive/src/lib/` for the renamed `*Tdb.ts` files
+plus `bench-tree-fetch-strategies.ts`. `web/.archive/`, not a repo-root `.archive/web/`,
+deliberately: the first attempt (mirroring the full `web/src/lib/...` path under a repo-root
+`.archive/`) left the archive syntactically self-contained (`./artifacts`, `./reconcile`, etc. all
+copied in alongside, not reached-back-into) but *unrunnable* — Node resolves an external package
+(`terminusdb`) by walking up from the importing file looking for `node_modules`, and a repo-root
+`.archive/web/src/lib/` never passes through the real `web/node_modules` on that walk. Nesting one
+level shallower inside `web/` itself (`web/.archive/src/lib/`) fixes that — confirmed live,
+`npx tsx web/.archive/src/lib/kgCliTdb.ts tree ...` actually runs — while staying outside
+`tsconfig.app.json`'s `include: ["src"]`, so it's still never swept into routine type-checking.
+Every shared dependency the archived files need (`artifacts.ts`, `project.ts`, `folders.ts`,
+`nodeRef.ts`, `reconcile.ts`, `props.ts`, `astParser.ts`, `snowflake.ts`, `lineReader.ts`) is
+copied in alongside them, not reached-back-into — a deliberate frozen snapshot, since those live
+files are free to keep evolving and nothing should silently break the archive later. The one
+exception: `bench-tree-fetch-strategies.ts`'s `apeironNgn/store.ts`/`apeironNgn/node.ts` imports
+reach back into the real `web/src/lib/apeironNgn/` rather than being copied — unlike the TDB
+modules, that code isn't abandoned, it's the live implementation, so freezing a copy of it would
+just go stale instead of staying accurate.
+
+Not done as part of this pass, flagged as a follow-up rather than silently left inconsistent:
+`Aperas-architecture.md` still describes the now-archived TDB implementation as the current
+system spec (directory layout, module table, `kg:track`/`kg:ingest`/`kg:export` description, etc.)
+— unlike this doc's own rollout narrative (correctly historical, left as-is), that one presents
+itself as current-state architecture and needs an actual rewrite to describe ApeironNgn, not just
+a note. Deferred by explicit choice, not an oversight.
 
 ## 5. Open questions
 
