@@ -373,18 +373,28 @@ this session, all against the real `aperas` TerminusDB instance:
    exactly what changed and where every migrated function landed.
 4. **Archive the TerminusDB-based scripts once every script has migrated and verified clean.**
    Archived, not deleted — kept for reference/rollback, not discarded.
-5. **A shared service process — not started, to be designed later.** Every `kg*Ngn.ts` invocation
-   today calls `rehydrateStore()` cold and discards the `Store` at process exit; no state survives
-   between CLI calls. Measured against the real corpus: rehydration itself is ~256ms (9671 quads,
-   1482 nodes), but a full CLI invocation is ~1.6s wall-clock — so the rehydrate is actually the
-   *minor* cost, most of it being Node/tsx process spawn and TypeScript transpilation, which a
-   persistent process would eliminate outright regardless of corpus size (a different concern from
-   §5's already-open "what happens at GB scale" question — this is per-invocation setup cost, not
-   working-set size). Deliberately deferred: a shared process reintroduces exactly the concurrency/
-   shared-mutable-state question §3 opted out of ("no shared mutable database, no locking, no
-   transaction isolation to build") and needs real answers for write-serialization across
-   concurrent CLI callers, an IPC/RPC transport, and a staleness story (noticing when
-   `AperasKG/Apeiron/` changes underneath it, e.g. from a `git pull`) before it's worth building.
+5. **A shared service process — implemented and running, not deferred.**
+   `web/src/lib/apeironNgn/service.ts` holds one `rehydrateStore()`'d `Store` in memory across CLI
+   calls instead of every `kg*Ngn.ts` invocation rehydrating/dehydrating cold, closing the
+   per-invocation setup cost this bullet originally measured (~1.6s wall-clock per call, mostly
+   Node/tsx spawn and TypeScript transpilation, not the ~256ms rehydrate itself — a different
+   concern from §5's "what happens at GB scale" working-set question). The concurrency/shared-
+   mutable-state tension §3 opted out of ("no shared mutable database, no locking, no transaction
+   isolation to build") is resolved here by an in-process request queue (`enqueue()`), not a
+   database-level lock — every request across every connection is serialized strictly one at a
+   time, so the "no locking" stance in §3 still holds; it's this one owning process, not the store
+   itself, that enforces it. Transport: a Unix domain socket (`node:net`), auto-started on demand
+   by `serviceClient.ts#ensureServiceRunning` with a lock file (`serviceLock.ts`) claiming ownership
+   and guarding the start race. Flushes to `AperasKG/Apeiron/`'s JSON-LD mirror every 10s if dirty,
+   or immediately on a request's `flush: true`; a second, independent interval/dirty-flag pair does
+   the same for `Profile`/`TreeView`'s own gitignored `.state/` mirror
+   (`Aperas-treeview-design.md` §8 — expand/collapse churns more often than content edits, tuned
+   separately rather than riding the content mirror's cadence). Exits after 30 idle minutes or on
+   SIGTERM/SIGINT, flushing both if dirty either way. **Still genuinely open, not solved by this**:
+   the staleness story — the service holds one `Store` snapshot from whenever it started, with
+   nothing that notices `AperasKG/Apeiron/` changing underneath it (e.g. a `git pull` landing
+   someone else's commit); a stale service currently needs a manual restart, not something this
+   step addresses.
 
 ### Step 3: fold migrated functions into class methods — implemented, verified
 

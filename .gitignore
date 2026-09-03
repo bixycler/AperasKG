@@ -1,3 +1,4 @@
 *.bundle
 *.tar.gz
 snapshots/
+Apeiron/.state/
