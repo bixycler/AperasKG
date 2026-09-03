@@ -20,11 +20,14 @@ A `BlockNode`'s `@id` is a **Snowflake-style generated identifier**. It is assig
 | **Sequence** | 8 | Per-machine-identity counter, reset each millisecond — allows 256 ids/ms/machine. |
 
 **Deterministic Collision Avoidance**: 
-Collisions are prevented by construction rather than probability. Timestamps separate different times, the sequence counter disambiguates same-millisecond generation on one machine, and the machine ID separates different machines. 
+Collisions are prevented by construction rather than probability. Timestamps separate different times, the sequence counter disambiguates same-millisecond generation on one machine, and the machine ID separates different machines.
 
 **Handling Local Clock Anomalies (NTP corrections)**:
+
 1. **Prevention**: NTP uses gradual "slew" adjustments instead of "step" (instant jumps).
+
 2. **Absorption**: The generator uses a high-water-mark (`max(now, last_emitted)`). Small backward jumps are absorbed by the sequence counter.
+
 3. **Failover**: If a backward jump is too large (risking counter overflow), the generator flips its anomaly bit to use a distinct failover machine ID, preventing collisions with its normal output.
 
 *(Note: While extreme, unbounded backward jumps under sustained load remain theoretically possible, they require deliberate clock tampering.)*
@@ -35,18 +38,23 @@ Once a `BlockNode` tree is ingested into the database, **the DB becomes the sour
 
 **Minimal Fingerprinting on `ArtifactNode`**:
 Only two flat, file-level hashes are maintained (no structural hashes):
-1. **`fileHash`**: Hash of the raw file's current content, recomputed on every `track` event.
-2. **`ingestedHash`**: Hash of the raw file's content as of the last confirmed sync (ingestion or projection). 
 
-**Reconciliation Trigger**: If `fileHash !== ingestedHash`, an unwitnessed edit occurred outside the DB, triggering reconciliation. 
+1. **`fileHash`**: Hash of the raw file's current content, recomputed on every `track` event.
+
+2. **`ingestedHash`**: Hash of the raw file's content as of the last confirmed sync (ingestion or projection).
+
+**Reconciliation Trigger**: If `fileHash !== ingestedHash`, an unwitnessed edit occurred outside the DB, triggering reconciliation.
 
 **DB-to-File Changes**: No hash is needed for DB updates. Because DB writes are always witnessed, the system can mark the corresponding artifact as needing re-projection within the same transaction.
 
 ## 2. The Universal Node-Link-Edge Lineage
+
 The core graph is built on a clean, fractal inheritance lineage. Every relationship is a fully addressable, first-class Document.
 
 ### A. BaseNode (The Root)
+
 The abstract root of all addressable content (inherited by `BlockNode`, `ArtifactNode`, `FolderNode`). It explicitly owns an array of its intrinsic links.
+
 ```json
 {
   "@id": "BaseNode",
@@ -57,9 +65,13 @@ The abstract root of all addressable content (inherited by `BlockNode`, `Artifac
 ```
 
 ### B. BaseLink (Intrinsic Connections)
+
 An abstract class representing connections authored physically *inside* a source node (e.g., Markdown hyperlinks).
-*   **Inheritance**: Inherits from `BaseNode`. (This means links themselves possess a `links` array, allowing arbitrary depth for provenance or comments).
-*   **Implicit Source**: Because a `BaseLink` resides within the `BaseNode.links` array, the node holding the array is implicitly the source.
+
+- **Inheritance**: Inherits from `BaseNode`. (This means links themselves possess a `links` array, allowing arbitrary depth for provenance or comments).
+
+- **Implicit Source**: Because a `BaseLink` resides within the `BaseNode.links` array, the node holding the array is implicitly the source.
+
 ```json
 {
   "@id": "BaseLink",
@@ -72,9 +84,13 @@ An abstract class representing connections authored physically *inside* a source
 ```
 
 ### C. BaseEdge (Extrinsic Assertions)
+
 An abstract class representing independent semantic claims asserted from the outside (e.g., an AI Agent deducing a relationship).
-*   **Inheritance**: Inherits from `BaseLink`.
-*   **Explicit Source**: Because it floats independently of any node's `links` array, it adds a `source` pointer to explicitly declare its origin.
+
+- **Inheritance**: Inherits from `BaseLink`.
+
+- **Explicit Source**: Because it floats independently of any node's `links` array, it adds a `source` pointer to explicitly declare its origin.
+
 ```json
 {
   "@id": "BaseEdge",
@@ -86,7 +102,9 @@ An abstract class representing independent semantic claims asserted from the out
 ```
 
 ### D. Assertion (The Concrete Extrinsic Edge)
+
 `BaseEdge` is abstract, so it can never be instantiated directly — something concrete has to exist to actually write an extrinsic claim (`impacts`, `verifies`, `derived_from`, `affects`, ...). `Assertion` is that one generic leaf: it adds no fields of its own, just makes the `source`/`predicate`/`target` (+ inherited `links`) lineage instantiable.
+
 ```json
 {
   "@id": "Assertion",
@@ -96,7 +114,9 @@ An abstract class representing independent semantic claims asserted from the out
 ```
 
 ### E. Link (The Concrete Intrinsic Edge)
+
 `BaseLink` is abstract too — the same gap as `BaseEdge`/`Assertion`, just noticed later, once `BlockNode.links` extraction (Aperas-markdown-fractal-mapping-design.md §4) actually needed to write one. `Link` is `BaseLink`'s one concrete leaf: no fields of its own, just makes the `target`/`predicate` (+ inherited `links`) lineage instantiable. Used for an inline Markdown link whose target resolves to an internal node (`[title]([[code]])`) — the `predicate` is always the fixed constant `"references"` for this use, distinguishing structural inline links from `Assertion`'s deliberately-chosen semantic predicates at query time.
+
 ```json
 {
   "@id": "Link",
@@ -106,8 +126,10 @@ An abstract class representing independent semantic claims asserted from the out
 ```
 
 ## 3. Universal Addressability & Ownership
-*   **No Subdocuments**: `BaseLink` and `BaseEdge` are standard TerminusDB Classes, *not* `@subdocument`s. Every relationship possesses a global `@id`, enabling graph reification (assertions about assertions).
-*   **Author-Based Placement**: Extrinsic assertions (`BaseEdge`) are never embedded into the nodes they connect. They are stored in the branch or artifact owned by the **Asserter** (the author). This ensures that agents can assert claims about human-authored nodes without mutating the human's artifact.
+
+- **No Subdocuments**: `BaseLink` and `BaseEdge` are standard TerminusDB Classes, *not* `@subdocument`s. Every relationship possesses a global `@id`, enabling graph reification (assertions about assertions).
+
+- **Author-Based Placement**: Extrinsic assertions (`BaseEdge`) are never embedded into the nodes they connect. They are stored in the branch or artifact owned by the **Asserter** (the author). This ensures that agents can assert claims about human-authored nodes without mutating the human's artifact.
 
 ### A. Native Backlinks & Bidirectional Traversal — only for `Set`-typed fields, not `List`
 
@@ -136,26 +158,30 @@ nesting and a `FolderNode`'s `ArtifactNode` references have no back-pointer set 
 of gap `unfolded` had before its own `BaseNode` promotion (§4 agentic-query-tools design).
 
 1. **Upward Breadcrumbs via a `Set` field (Context Retrieval)**:
-   Because `BaseLink` is a fully addressable Document, it does not need a physical `parent`
-   pointer for this specific case. If a user addresses a `Link`/`BaseLink` directly
-   (`Link/123`), they can follow the breadcrumbs "upward" to find the parent context, since
-   `links` is `Set`-typed:
+      Because `BaseLink` is a fully addressable Document, it does not need a physical `parent`
+      pointer for this specific case. If a user addresses a `Link`/`BaseLink` directly
+      (`Link/123`), they can follow the breadcrumbs "upward" to find the parent context, since
+      `links` is `Set`-typed:
+   
    ```javascript
    // What ParentNode has a 'links' property pointing to me?
    WOQL.triple("v:ParentNode", "links", "Link/123")
    ```
 
 2. **Backlink Tracing, scoped to `Set`-typed edges (Logseq/Roam style)**:
-   You can instantly query the graph for anything pointing to a target *through a `Set`-typed
-   field* — `links`, or `Assertion.source`/`target` — regardless of the predicate:
+      You can instantly query the graph for anything pointing to a target *through a `Set`-typed
+      field* — `links`, or `Assertion.source`/`target` — regardless of the predicate:
+   
    ```javascript
    // What nodes point to this block via a Set-typed field, and via what relationship?
    WOQL.triple("v:SourceNode", "v:Predicate", "BlockNode/MyTargetBlock")
    ```
+   
    This returns every intrinsic `BaseLink`/`Link` or extrinsic `BaseEdge`/`Assertion` referencing
    the target — but never a structural parent, since `children`/`root` aren't reachable this way.
 
 ## 4. The Unbounded Block Tree (Node Typology)
+
 The graph topology models all content as an unbounded fractal tree spanning across folders, files, and blocks — "unbounded" in the same sense **Apeiron** (§Philosophy) names the unconditioned, boundless substrate: no fixed depth limit, not merely "very large." The rigid boundaries between structural layers are eliminated to form a single continuous tree.
 
 > **Recurring pitfall when designing tools against this ontology**: reaching for "file" as a unit
@@ -172,11 +198,15 @@ The graph topology models all content as an unbounded fractal tree spanning acro
 > to catch early.
 
 ### A. FolderNode (The Structural Container)
-Inherits from `BaseNode`. Represents a directory in the filesystem, acting as a seamless bridge in the unbounded tree. 
-*   **`README.md` Ingestion**: A separate `README.md` file is a legacy "dumb folder" workaround. The `README.md` is fully absorbed into the `FolderNode`. Its content populates the folder's `text` (abstract) and initial `children` blocks. The `README.md` is not exposed as a separate `ArtifactNode`.
-*   **`children`**: Contains other nested `FolderNode`s and `ArtifactNode`s, alongside the parsed block children from the `README.md`.
+
+Inherits from `BaseNode`. Represents a directory in the filesystem, acting as a seamless bridge in the unbounded tree.
+
+- **`README.md` Ingestion**: A separate `README.md` file is a legacy "dumb folder" workaround. The `README.md` is fully absorbed into the `FolderNode`. Its content populates the folder's `text` (abstract) and initial `children` blocks. The `README.md` is not exposed as a separate `ArtifactNode`.
+
+- **`children`**: Contains other nested `FolderNode`s and `ArtifactNode`s, alongside the parsed block children from the `README.md`.
 
 **Identity**: a Snowflake-style generated id, same scheme as `BlockNode` (§1.A); `path` is a plain, mutable field, not part of the key (Appendix G).
+
 ```json
 {
   "@id": "FolderNode",
@@ -190,9 +220,11 @@ Inherits from `BaseNode`. Represents a directory in the filesystem, acting as a 
 ```
 
 ### B. ArtifactNode (The Physical Anchor)
+
 Represents the physical file on disk. It handles file metadata and holds a single pointer to the root of the block tree. Inherits from `BaseNode` — without this, no `BaseLink`/`BaseEdge` could target or originate from a whole file, contradicting §3's universal-addressability goal.
 
 **Identity**: Snowflake-generated, same as `FolderNode` above; `path` is a plain, mutable field, not the key (Appendix G). Gains `title`/`text` to match the folding philosophy (§5) uniformly across the whole fractal lineage: `title` is the filename, `text` is an abstract of the file's own content (naive fallback — first paragraph — until AI-driven summarization, §5 enhancement backlog, actually exists).
+
 ```json
 {
   "@id": "ArtifactNode",
@@ -210,16 +242,24 @@ Represents the physical file on disk. It handles file metadata and holds a singl
 ```
 
 ### C. BlockNode (The Fractal Atom)
+
 Inherits from `BaseNode`. Every distinct piece of content is a `BlockNode`. The schema is driven by the philosophy of **Abstraction by Folding**: a block's children fold into its `text` (abstract), which folds into a `title`, which folds into a hidden `@id`.
 
-*   **`title` (The Semantic Label)**: Used for wikilinks and graph queries.
-    *   For direct UI input: The author is prompted to provide a title.
-    *   For Markdown ingestion: The parser uses an AI agent to summarize the block into a title. If AI is unavailable, it falls back to the block ID.
-*   **`text` (The Abstract/Body)**: The actual content shown in the current document.
-*   **`children`**: An ordered `List` of child `BlockNode`s.
-*   **`unfolded`**: A boolean flag representing the persistent view-state for UIs and Agents.
-    *   **Human UI & Agent Interface**: When rendering to a screen or an AI prompt, the graph defaults to *folded* (`false`) to manage cognitive/token overload. Only the current block's `text` and the children's `title`s are shown. If this flag is `true`, the subtree auto-expands on load.
-    *   **Artifact Projection**: When syncing to a physical `.md` file, the tree is ALWAYS 100% unfolded (writing the full document to disk). This flag is ignored.
+- **`title` (The Semantic Label)**: Used for wikilinks and graph queries.
+  
+  - For direct UI input: The author is prompted to provide a title.
+  
+  - For Markdown ingestion: The parser uses an AI agent to summarize the block into a title. If AI is unavailable, it falls back to the block ID.
+
+- **`text` (The Abstract/Body)**: The actual content shown in the current document.
+
+- **`children`**: An ordered `List` of child `BlockNode`s.
+
+- **`unfolded`**: A boolean flag representing the persistent view-state for UIs and Agents.
+  
+  - **Human UI & Agent Interface**: When rendering to a screen or an AI prompt, the graph defaults to *folded* (`false`) to manage cognitive/token overload. Only the current block's `text` and the children's `title`s are shown. If this flag is `true`, the subtree auto-expands on load.
+  
+  - **Artifact Projection**: When syncing to a physical `.md` file, the tree is ALWAYS 100% unfolded (writing the full document to disk). This flag is ignored.
 
 ```json
 {
@@ -234,23 +274,36 @@ Inherits from `BaseNode`. Every distinct piece of content is a `BlockNode`. The 
 ```
 
 ## 5. The Folding Philosophy & Graph Traversal
+
 The entire architecture is governed by the philosophy of **Abstraction by Folding**: an unbounded subtree folds into an abstract (`text`), which folds into a semantic label (`title`), which folds into a hidden `@id`.
 
 ### A. The Three Projection Modes
+
 How this folded state is handled depends strictly on the interaction interface:
+
 1. **Artifact Projection (File Syncing)**: When the system serializes a graph back to a physical `.md` file, the tree is ALWAYS 100% unfolded. The persistent `unfolded` state is ignored, as the physical file must contain the entire document body. For `FolderNode`s, the block children are serialized back out to the folder's `README.md`.
+
 2. **Human UI (Phase 1 Web App)**: The UI is folded by default and traverses seamlessly across folder/file boundaries. Users see the `text` (abstract) of the current node (`FolderNode`, `ArtifactNode`, or `BlockNode`) and the abstracts of its direct children. Expanding a `FolderNode` reveals child files/folders and its own `README.md` blocks inline without context switching.
+
 3. **Agentic Interface (BFS Traversal)**: AI agents interact with the graph exactly like the Human UI to manage token limitations. They receive folded views and can navigate continuously from a workspace root `FolderNode` down to a deeply nested `BlockNode` using BFS tool calls to expand subtrees.
 
 ### B. Link Targeting & "Hover Previews"
+
 We distinguish between **Intrinsic Links** (`BaseNode.links`) and **Extrinsic Edges** (`BaseEdge`):
-*   **Intrinsic Links (`links`)**: Links and metadata (tags, properties) authored directly inside the node. Stored in `BaseNode.links`.
-*   **Extrinsic Edges (`BaseEdge`)**: Independent assertions created by external authors/agents. They float independently (to avoid mutating the source node) and are discovered via WOQL queries.
-*   **UI Display**: The UI displays non-inline metadata/properties from `links` and queried extrinsic `BaseEdge`s in dedicated reference panels. Inline links remain rendered naturally inside the `text` body.
-*   **The Preview Mechanism**: 
-    *   **Human UI**: Humans receive the preview interactively by **hovering** over a link or wikilink in the UI, popping up the target block's abstract (`text`).
-    *   **Agent Interface**: Agents receive the target block's abstract (`text`) embedded directly in the `links` list returned by the projection/tool call, providing instant preview context without requiring UI hover triggers.
-*   **Manual Jump**: If the user or agent needs more context than the target's abstract, they manually "jump" to the target block to explore its children.
+
+- **Intrinsic Links (`links`)**: Links and metadata (tags, properties) authored directly inside the node. Stored in `BaseNode.links`.
+
+- **Extrinsic Edges (`BaseEdge`)**: Independent assertions created by external authors/agents. They float independently (to avoid mutating the source node) and are discovered via WOQL queries.
+
+- **UI Display**: The UI displays non-inline metadata/properties from `links` and queried extrinsic `BaseEdge`s in dedicated reference panels. Inline links remain rendered naturally inside the `text` body.
+
+- **The Preview Mechanism**:
+  
+  - **Human UI**: Humans receive the preview interactively by **hovering** over a link or wikilink in the UI, popping up the target block's abstract (`text`).
+  
+  - **Agent Interface**: Agents receive the target block's abstract (`text`) embedded directly in the `links` list returned by the projection/tool call, providing instant preview context without requiring UI hover triggers.
+
+- **Manual Jump**: If the user or agent needs more context than the target's abstract, they manually "jump" to the target block to explore its children.
 
 ---
 
@@ -259,21 +312,27 @@ We distinguish between **Intrinsic Links** (`BaseNode.links`) and **Extrinsic Ed
 This section archives the original problems that necessitated this design.
 
 ### A. The Positional Identity Flaw
+
 In Phase 0, `BlockNode` IDs were positional (`doc1_block_1`). If an author inserted a paragraph at the top of a document, all subsequent blocks shifted their IDs. This silently broke or orphaned any semantic edges pointing to those blocks upon re-ingestion. Moving to **Content-Addressed Identity** resolves this — though content-addressing itself was later found to have its own problems and was superseded; see Appendix F.
 
 ### B. The `xsd:string` Anti-Pattern
+
 Initially, relationships defined `subjectId` and `objectId` as `xsd:string`. This treated relationships as flat text rather than true graph edges, destroying referential integrity. Introducing `BaseNode` as a polymorphic type target resolves this, forcing all edges to point to actual documents in the database.
 
 ### C. The Rejection of Subdocuments
+
 TerminusDB's `@subdocument` feature was initially considered for `BaseNode.links` to tightly couple intrinsic links to their parent. However, subdocuments lose their global `@id`. In Aperas, every entity—even a single parsed link or punctuation mark—must be universally addressable so that external agents can comment on or refute it. Thus, subdocuments were rejected, and `BaseLink` was promoted to a full Document class.
 
 ### D. Resolving Provenance
+
 Initially, `provenance` was modeled as a hardcoded string or dedicated context object on an edge. By making `BaseLink` inherit from `BaseNode`, every link gets its own `links` array. Provenance is now simply achieved by pushing a new `BaseLink` (e.g., `predicate: "asserted_by"`) into the parent link's array, unifying the ontology completely.
 
 ### E. The Unbounded Block Tree
+
 Initially, the schema enforced a rigid structural hierarchy (`DocumentNode` -> `BlockNode`). However, this rigid "solid" paradigm was abandoned in favor of a fractal, Logseq-inspired block tree. `DocumentNode` was eliminated entirely, as a document is conceptually just a root `BlockNode`. Flattening the graph to Markdown is now handled cleanly via an `unfolded` flag in the projection layer.
 
 ### F. Separating Identity from Content Fingerprint
+
 The content-addressed scheme from Appendix A (`@id = hash(parent context + content)`) conflated two requirements that pull in opposite directions: identity needs to stay constant across edits and moves so external references don't break; a content fingerprint needs to change whenever content changes, for dedup and change-detection. A single content-derived hash cannot satisfy both. Concretely, it broke two ways: (1) two independently-authored blocks with coincidentally identical text collapsed onto the same `@id`, silently merging distinct entities and their assertions; (2) because the hash was computed bottom-up through the tree, any edit to a leaf changed the hash of every ancestor up to the artifact root, orphaning assertions on whole sections for a single-word edit anywhere beneath them.
 
 Resolved by decoupling the two entirely: `@id` is now a Snowflake-style generated identifier, assigned once and fully independent of content (§1.A) — collision-avoidance is deterministic (timestamp + machine identity + sequence counter), not derived from what the node contains. The content fingerprint (§1.B) turned out not to need a recursive/structural hash at all.

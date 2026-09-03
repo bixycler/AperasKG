@@ -7,10 +7,11 @@
   {
     "@id": "FolderNode/00C7BJZY4R000",
     "@type": "FolderNode",
-    "path": ".",
     "title": "Artifacts",
+    "path": ".",
     "children": [
       "ArtifactNode/00C7BJHGCG000",
+      "ArtifactNode/00C7Z1866G000",
       "ArtifactNode/00C7BJX2HG000",
       "ArtifactNode/00C7BJX360000",
       "ArtifactNode/00C7BJX3S0000",
@@ -21,12 +22,12 @@
       "ArtifactNode/00C7BJX5YR000",
       "ArtifactNode/00C7BJX6JG000",
       "ArtifactNode/00C7BJX82G000",
+      "ArtifactNode/00C7Z185S0000",
       "ArtifactNode/00C7BJX8MR000",
       "ArtifactNode/00C7BJX980000",
       "ArtifactNode/00C7BJXATR000",
       "ArtifactNode/00C7BJXCC8000",
       "ArtifactNode/00C7BJXDYG000"
-    ],
-    "folderId": "00C7BJZY4R000"
+    ]
   }
 ]

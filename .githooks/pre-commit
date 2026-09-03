@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Auto-runs `kg:track:ngn` (ApeironNgn) for artifacts staged in this commit, then stages whatever
+# it updates in AperasKG/Apeiron/ -- pre-commit, not post-commit, specifically so the mirror sync
+# lands in the SAME commit as the artifact change it reflects, rather than as a separate leftover
+# working-tree change sitting there right after the commit completes.
+# Installed via: git config core.hooksPath .githooks (see AperasKG/.githooks/README.md)
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+changed_artifacts="$(git diff --cached --name-only -- 'artifacts/*.md')"
+
+if [ -z "$changed_artifacts" ]; then
+  exit 0
+fi
+
+web_dir="$repo_root/../Aperas/web"
+
+if [ ! -d "$web_dir" ]; then
+  echo "[kg:track hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
+  exit 0
+fi
+
+echo "[kg:track hook] Artifact(s) staged for this commit:"
+echo "$changed_artifacts" | sed 's/^/  - /'
+
+# Track only the staged files (paths relative to artifacts/), not the whole directory -- same
+# 1 git-commit -> 1 KG-commit scoping reasoning as before. A staged deletion is passed through
+# unchanged (pre-existing limitation, not introduced by moving this to pre-commit): kg:track:ngn's
+# scoped path mode reads the file from disk to hash it, so it'll fail for a path that no longer
+# exists -- only trackAllArtifacts's full, no-args sweep detects removals.
+relative_paths=$(echo "$changed_artifacts" | sed 's#^artifacts/##')
+
+if ! (cd "$web_dir" && npm run kg:track:ngn -- $relative_paths); then
+  echo "[kg:track hook] kg:track:ngn failed — run 'npm run kg:track:ngn -- $relative_paths' manually in Aperas/web to retry, then re-commit." >&2
+  exit 0
+fi
+
+# Stage whatever kg:track:ngn's dehydrate rewrote so it's included in this same commit -- a no-op
+# `git add` on an unchanged file is harmless, so no need to check which of the three actually moved.
+git add Apeiron/ArtifactNode.jsonld Apeiron/BlockNode.jsonld Apeiron/FolderNode.jsonld

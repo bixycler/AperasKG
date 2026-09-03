@@ -268,7 +268,8 @@ this session, all against the real `aperas` TerminusDB instance:
      root" error cases), checking the resulting JSON-LD structurally against the pre-write original
      — see the "Write-path verification" bullet below for why scratch copies, not live diffing, is
      this step's actual verification method from here on.
-   - **`kg:project --dry-run` — done, diffed clean.** `apeironNgn/project.ts`
+   - **`kg:project` — done, diffed clean; non-dry-run (real write) mode also implemented.**
+     `apeironNgn/project.ts`
      (`projectArtifactToMarkdown`/`projectFolderToReadme`) plus `kgProjectNgn.ts`
      (`npm run kg:project:ngn -- <path> --dry-run`), reusing `project.ts`'s own
      `serializeBlock`/`renderChildren`/`withFrontmatter` directly — a `Proxy`'s property reads are
@@ -280,7 +281,8 @@ this session, all against the real `aperas` TerminusDB instance:
      `API Error Code: 500` at that document's size — the GraphQL bulk-fetch path breaking down at
      scale is exactly §1's stated reason for this whole migration, not a gap in this port (ApeironNgn
      itself projects the same document in under a second, no error). Non-dry-run mode (writes the
-     artifact file) is still out of scope — that write targets the filesystem, not this step.
+     artifact file / folder `README.md`) was added later, once `kg:track:ngn`/`kg:ingest:ngn` had a
+     real corpus run to project from — see "First real-corpus run" below.
    - **Write-back path — implemented and round-trip verified.** `apeironNgn/dehydrate.ts`'s
      `dehydrateToJsonLd`, rehydration's inverse: rewrites a whole class's JSON-LD file at a time
      from the `Store`'s current content, using §3's `SHAPE` tables to know exactly how each field
@@ -559,6 +561,36 @@ any tree-positioned kind (an `ArtifactNode`/`FolderNode` root, not just a `Block
     unchanged. Re-verified live: forced a re-ingest of `Aperas-design.md` (real, unchanged content)
     against a scratch copy and confirmed a real block's `orderedList`/`startIndex` prop ids —
     including their original TerminusDB-era values — came back byte-identical afterward.
+  - **Same bug family, found later by inspection, not live reproduction: the fix above only
+    covered per-block props, not the artifact/folder-level singular `frontmatter` prop.**
+    `ArtifactNode.ingestFromDisk` (`node.ts`) and the shared `folders.ts`'s `buildFolderTree`
+    (README frontmatter) each built a brand-new id-less `StringProp` literal on every write,
+    unconditionally — neither goes through `reconcile.ts`'s per-block machinery at all, so the
+    block-level fix never reached them. Not yet exercised against the real corpus (none of the 18
+    tracked artifacts currently carry YAML frontmatter), so no live repro; caught by re-reading the
+    fix's own reasoning and noticing it didn't generalize. Fixed by factoring the carry-forward
+    rule out into a new shared `props.ts#carryForwardProp(existing, key, value)` (reuse the old id
+    only when both `key` and `value` already match) and calling it from both sites — unit-verified
+    directly (all four branches: fresh/no-existing, reuse/value-unchanged, fresh/value-changed,
+    fresh/key-not-found), not yet live-reproduced for the same reason it was never exercised
+    before. Safe for the TerminusDB-backed `folders.ts` caller for the same reason as the original
+    fix: its own `existingByPath` doesn't populate `props`, so the carry-forward is a guarded
+    no-op there regardless of whether TDB's own `@key: {"@type": "Random"}` would honor a supplied
+    id anyway.
+  - **Related but distinct bug, found by inspection: a `Set`-cardinality field's own array
+    *order* wasn't stable, not just its ids.** `dehydrate.ts`'s `decodeField` returned
+    `matches.map(decodeOne)` for `links`/`props` straight from `store.match()`, with no sort —
+    Oxigraph's match order for a `Set`-typed field isn't guaranteed stable across a
+    rehydrate/dehydrate cycle, so a `links`/`props` array with more than one entry could come back
+    in a different order on every write even with the id-churn fixes above in place, reshuffling
+    into git-diff noise despite no real content change. Fixed by sorting `decodeField`'s `set`
+    branch by a stable key, generalizing the existing `stableId` helper (previously top-level-
+    document-only, `doc['@id']`) to also handle a decoded set entry — an embed object (sorts by
+    its own `@id`), a bare reference-id string, or a plain literal — the same "sorted so re-exports
+    produce clean, content-driven diffs" principle `dehydrateToJsonLd` already applies to top-level
+    documents, just not previously applied inside a nested `Set` field. Not live-reproduced (no
+    real artifact currently has more than one `links`/`props` entry to actually shuffle) — fixed by
+    direct reasoning and confirmed independently by the user, not by exercising real reordering.
   - **Real bug found and fixed while implementing, unrelated to the fold itself:** every "is this
     node live" filter across `artifacts.ts`/`folders.ts`/`resolve.ts`/`resolveCreate.ts` checked
     `node.tombstonedAt !== true` — but `tombstonedAt` is written as an ISO date *string*
@@ -569,6 +601,13 @@ any tree-positioned kind (an `ArtifactNode`/`FolderNode` root, not just a `Block
     now because real per-field types (`declare tombstonedAt?: string`) let the compiler flag the
     comparison as suspicious — under the old `Proxy`'s `unknown`-typed reads, nothing could catch
     it. Fixed everywhere to `!node.tombstonedAt`, matching the original semantics.
+  - **Minor, pre-existing bug found while implementing `kg:project:ngn`'s real (non-dry-run) write
+    mode:** `project.ts`'s shared `withFrontmatter` — the one exit point both the TerminusDB-backed
+    `kg:project` and `kgProjectNgn.ts` funnel through before `writeFileSync`-ing straight to disk —
+    never appended a final trailing newline, since neither it nor `serializeBlock`/`renderChildren`
+    (nor their ApeironNgn equivalents) add one after the last block. Affected both engines equally
+    (same shared function), not something the ApeironNgn port introduced. Fixed by having
+    `withFrontmatter` guarantee its return value ends in exactly one `\n`.
 - **`TreeNode` (`title`/`text`/`key` — shared by every tree-positioned kind):**
   - `tree.ts`'s `renderTree(store, rootId, opts)` → `node.renderTree(opts)`; `childIds`/
     `displayLabel` — `displayLabel` stays a small free helper in `tree.ts` (still used directly by
@@ -675,6 +714,58 @@ then `BlockNode`/`ArtifactNode`/`FolderNode`'s own methods (verified via a real 
 4 real artifacts, correct reconciliation stats, zero dangling references on round-trip); then the
 `resolve.ts`/`resolveCreate.ts` family's `descend` switched to call `.findChild()`/`.appendChild()`
 internally, verified as part of the same `--create-holder` run above.
+
+**First real-corpus run of `kg:track:ngn`/`kg:ingest:ngn`, and non-dry-run `kg:project:ngn`.**
+Everything above through step 3 had only ever been verified against scratch copies. Ran the real
+pipeline for the first time against the actual `AperasKG/artifacts/` corpus: reverted the working
+tree to the last committed mirror as ground truth, ran `kg:track:ngn`+`kg:ingest:ngn` for real, and
+confirmed every one of the 13 artifacts with no genuine content change came back byte-identical
+(same block ids, same content — the critical idempotency property, and a stronger result than the
+TerminusDB-backed full-sweep `kg:ingest` gets on the same corpus, see `Aperas-dev-status.md`'s
+appendix). The 5 artifacts that did change all reconciled sanely; one (`Aperas-core-ontology-
+design.md`) reconciled 6 added/6 removed blocks despite an unchanged file hash, traced to the
+astParser/mapping rules having evolved since it was last really ingested, not a defect. Non-dry-run
+`kg:project:ngn` was then implemented (mirroring `kgCli.ts`'s `project` write branch: writes to the
+artifact's own file, or the folder's `README.md`) and used for real to project that reconciled tree
+back to `Aperas-core-ontology-design.md` — confirmed the only differences from the original file
+were canonical formatting normalization (blank-line list spacing, `*`→`-` bullets), zero content
+lost, closing out the unexplained reconciliation delta.
+
+**Found in the process, outside the rollout plan's own scope: `AperasKG/.githooks/post-commit`/
+`post-index-change` were still invoking the TerminusDB-backed `npm run kg:track`, not
+`kg:track:ngn`.** Not a deliberate deferral like `kg:export`/`kg:import`'s retirement — a plain
+oversight, since the hooks live outside `web/src/lib/kgCli.ts` entirely and call `kg:track` as a
+hardcoded string, so migrating the underlying script never touched them. Fixed: both hooks (and
+`.githooks/README.md`) now call `kg:track:ngn`; re-ran `post-index-change` directly afterward; 
+confirmed it completes with no TerminusDB connection at all; and move `post-commit` to `pre-commit` to sync the mirror in the same commit.
+
+**`verifyPhase0.ts` replaced by `verifyApeironNgn.ts`.** `client.ts`/`crud.ts`/`woql.ts`/
+`graphql.ts`/`versionControl.ts` (and `export.ts`'s `kg:export`/`kg:import`) are all abandoned
+along with TerminusDB itself, per the same decision as their retirement above — so the project's
+main correctness harness needed an ApeironNgn-only replacement, not a `--db`-gated branch onto a
+dead dependency. New `web/src/lib/verifyApeironNgn.ts` (`npm run verify:ngn`) ports everything
+`verifyPhase0.ts` covered except Assertion/WOQL (the model doesn't have `Assertion` anymore) and
+temporal commit management (ordinary `git branch`/`commit`/`diff` on `AperasKG/Apeiron/` already
+covers that, nothing ApeironNgn-specific needed). Runs entirely against an in-memory `Store`
+rehydrated from the real mirror — never dehydrates back to it, so the real `AperasKG/Apeiron/`
+files are untouched by every run (confirmed live: ran it twice back-to-back, zero git diff both
+times); the one dehydrate/rehydrate check uses its own scratch directory. The demo artifact/folder
+still have to live under a real (if disposable) `__verify_apeironngn_demo/` subfolder of
+`AperasKG/artifacts/` — `getArtifactsDir()`/`ingestFolderTree` have no directory-override param,
+unlike `rehydrateStore`/`dehydrateToJsonLd` — cleaned up in a `finally` regardless of pass/fail.
+
+**Real bug found on its very first run, not by inspection this time: `mintEmbedded` (`node.ts`)
+stored a freshly-minted `Link.target` as a literal, not a node reference.** Its per-field loop
+checked `typeof v === 'string'` before consulting the field's own declared `storageKind`, so
+`BaseNode.addLink(predicate, target)` — whose normal calling convention passes `target` as a bare
+id *string* — always fell into the literal branch even though `LINK_SHAPE` declares `target` as
+`storageKind: 'reference'`. Every freshly-minted link's target decoded back as a plain string on
+read, not a wrapped node, so `.target.id` (and any reverse-traversal through it) silently read
+`undefined`. Reproduced live by `verifyApeironNgn.ts`'s own link-extraction check (§5b) on its
+first run against a real self-link. Fixed by checking `shape[k]?.storageKind === 'reference'`
+first, regardless of whether `v` is a string or an object (`idOf` already handles both) — falling
+through to the literal branch only when the field isn't a reference. Re-verified: the same check
+passes after the fix.
 
 ## 5. Open questions
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Auto-runs a full `kg:track` sweep after any index write that actually touched the
-# working tree -- covers `git reset --hard`, which fires no other hook at all (confirmed:
-# neither `post-commit` nor `post-checkout` see a bare `reset`).
+# Auto-runs a full `kg:track:ngn` (ApeironNgn) sweep after any index write that actually
+# touched the working tree -- covers `git reset --hard`, which fires no other hook at all
+# (confirmed: neither `post-commit` nor `post-checkout` see a bare `reset`).
 # Installed via: git config core.hooksPath .githooks (see AperasKG/.githooks/README.md)
 #
 # Arg (git-supplied): $1 = 1 if the working tree was updated, 0 if only the index changed
@@ -25,8 +25,8 @@ if [ ! -d "$web_dir" ]; then
   exit 0
 fi
 
-echo "[kg:track hook] Index change with working-tree update detected -- running full kg:track sweep."
+echo "[kg:track hook] Index change with working-tree update detected -- running full kg:track:ngn sweep."
 
-if ! (cd "$web_dir" && npm run kg:track); then
-  echo "[kg:track hook] kg:track failed — run 'npm run kg:track' manually in Aperas/web to retry." >&2
+if ! (cd "$web_dir" && npm run kg:track:ngn); then
+  echo "[kg:track hook] kg:track:ngn failed — run 'npm run kg:track:ngn' manually in Aperas/web to retry." >&2
 fi
