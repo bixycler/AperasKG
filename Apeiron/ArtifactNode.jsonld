@@ -214,8 +214,8 @@
     "title": "Aperas-apeironngn-design.md",
     "text": "**Status: in progress — Phase 0.1.** Moved up from `Aperas-design.md`'s originally-speculative\nPhase 4 slot: the roadmap item's stated precondition — \"confirming that TerminusDB Community\nedition's rough edges... are structural rather than incidental before committing engineering\neffort to a replacement\" — is resolved by this session's live-verified findings (§2), and the\nswitch itself has been decided. This doc is the concrete engine, storage encoding, and query model\nfor that work, not a still-open proposal.",
     "path": "Aperas-apeironngn-design.md",
-    "fileHash": "87a41c91029631591d4a0f4347501f5a01b2208b84ddb9a5e328ed34ef8dad31",
-    "lastTrackedAt": "2026-09-03T13:43:40.642Z",
+    "fileHash": "9b8b665559c7c8164c26c53f9f2bd257b10b4aedcc4ef981f648389aa4621061",
+    "lastTrackedAt": "2026-09-03T13:51:48.722Z",
     "ingestedHash": "e70ba41710f7d03d13045e6135c46e448bd2b2b92f06a06cda0c8d7ed19cc5a1",
     "lastIngestedAt": "2026-09-03T03:46:40.119Z",
     "root": "BlockNode/00C8RVBTX8000"

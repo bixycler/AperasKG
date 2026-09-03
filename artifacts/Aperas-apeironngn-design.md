@@ -390,11 +390,16 @@ this session, all against the real `aperas` TerminusDB instance:
    the same for `Profile`/`TreeView`'s own gitignored `.state/` mirror
    (`Aperas-treeview-design.md` §8 — expand/collapse churns more often than content edits, tuned
    separately rather than riding the content mirror's cadence). Exits after 30 idle minutes or on
-   SIGTERM/SIGINT, flushing both if dirty either way. **Still genuinely open, not solved by this**:
-   the staleness story — the service holds one `Store` snapshot from whenever it started, with
-   nothing that notices `AperasKG/Apeiron/` changing underneath it (e.g. a `git pull` landing
-   someone else's commit); a stale service currently needs a manual restart, not something this
-   step addresses.
+   SIGTERM/SIGINT, flushing both if dirty either way. **The staleness story — solved.** The service
+   still holds one `Store` snapshot from whenever it was last (re)hydrated, with nothing that
+   *automatically* notices `AperasKG/Apeiron/` changing underneath it (e.g. a `git pull` landing
+   someone else's commit) — but a manual restart is no longer the only fix: `kg:reload`
+   (`{ op: 'reload' }`) flushes both dirty flags first, then rehydrates a fresh `Store` and swaps it
+   in, live, without killing the process — the revived TDB-era `kg:import`'s equivalent
+   (`kg:export` stays retired; there's no second store to export *to* anymore). Every read-only op
+   (`kg:tree`/`kg:project`/`kg:path`) also takes its own `reload: boolean`, the reciprocal of a
+   mutating op's `flush`: `flush` forces a sync *out* immediately after a write, `reload` forces a
+   sync *in* immediately before that read, one round trip instead of two.
 
 ### Step 3: fold migrated functions into class methods — implemented, verified
 
