@@ -823,6 +823,146 @@ system spec (directory layout, module table, `kg:track`/`kg:ingest`/`kg:export` 
 itself as current-state architecture and needs an actual rewrite to describe ApeironNgn, not just
 a note. Deferred by explicit choice, not an oversight.
 
+### Step 5: shared service process — implemented, verified
+
+Every `kg:xxx` script today starts a fresh process on each invocation: `rehydrateStore()` (a full
+parse of `BlockNode.jsonld`/`ArtifactNode.jsonld`/`FolderNode.jsonld` into a brand-new `Store`),
+followed, for mutating ops, by an unconditional full-rewrite `dehydrateToJsonLd(store)` before
+exit. Cost scales with the whole mirror's size on every single call, including the
+`pre-commit`/`post-index-change` git hooks, which fire on every commit, branch switch, and reset.
+
+This step replaces that with a single long-running service process
+(`web/src/lib/apeironNgn/service.ts`) holding one `Store` in memory across invocations. Every
+`kg:xxx` script becomes a thin client: parse argv, `ensureServiceRunning()` (auto-start if nothing
+is listening), send one request, print the result, exit. Only `service.ts` calls
+`rehydrateStore()`/`dehydrateToJsonLd()` — the CLI scripts no longer do. No fallback "standalone,
+no service" mode is planned: auto-start already makes the service transparent on a cold
+invocation, so a fallback would just duplicate the old rehydrate/dehydrate logic for no benefit.
+
+**Transport and locking.** The service listens on a Unix domain socket (`node:net`, no new
+dependency) at `web/.run/apeironngn.sock`. "No concurrency" is enforced two ways: a file lock
+(`web/.run/apeironngn.lock`, holding `{pid, socketPath, startedAt, status}`) guarantees only one
+service process ever owns the mirror directory, and an in-process promise-chain queue inside that
+one service guarantees its own concurrent socket connections are handled strictly one at a time,
+regardless of transport concurrency:
+```ts
+let queue: Promise<unknown> = Promise.resolve();
+function enqueue<T>(fn: () => T | Promise<T>): Promise<T> {
+  const result = queue.then(fn, fn);
+  queue = result.then(() => undefined, () => undefined);
+  return result;
+}
+```
+
+**Auto-start and the lock race.** A client checks liveness by connecting to the socket and sending
+`{op:'ping'}` (more reliable than trusting a PID alone, since PIDs get reused); a failed connect
+plus an existing lock file means either a live-but-slow-to-answer service or a stale lock left by a
+crashed one — `process.kill(pid, 0)` (throws `ESRCH` if dead) combined with a `status:'starting'`
+timestamp older than ~10s disambiguates, unlinking both lock and socket files if stale. The
+would-be starter claims the lock via `fs.openSync(lockPath, 'wx')` — atomic exclusive create;
+`EEXIST` means someone else is already starting it, so this client polls-connect with backoff
+instead of spawning a second copy. The winner spawns `npx tsx service.ts` detached and unref'd
+(same invocation style every `kg:xxx` script already uses via `npx tsx`, so no new devDependency),
+and the spawned process itself overwrites the lock with its own pid and `status:'ready'` once
+`listen()` succeeds — the lock always reflects the actual owning process, not the process that
+happened to start it.
+
+**Dirty-tracking and flush.** A `dirty` flag is set by any mutating op handler after it runs; a
+`setInterval(..., 10_000)` flushes via the unchanged `dehydrateToJsonLd(store)` if dirty, then
+clears the flag. `flush` is a field on the request payload rather than a separate message
+(`{op:'track', paths, flush: true}`); when true, the flush happens synchronously before the
+response is sent, so the calling CLI process — and the `pre-commit` hook's `git add` right after it
+— only proceeds once the mirror is actually on disk. `--flush` is parsed out of argv the same way
+each script already parses its other flags (`kgTree.ts`'s `--no-holders`/`--unfolded`, etc.). One
+behavior change this implies: a plain `kg:track` invocation without `--flush` now marks the store
+dirty and returns, with the on-disk mirror catching up within 10s rather than synchronously — the
+intended effect of centralizing dehydrate, not a bug.
+
+**Wire protocol.** Newline-delimited JSON, one request per connection (client connects, writes one
+line, reads one line, closes) — `JSON.stringify` always escapes an embedded `\n`, so this framing
+needs no parser beyond a string split.
+```ts
+type ServiceRequest =
+  | { op: 'ping' }
+  | { op: 'track'; paths: string[]; flush: boolean }
+  | { op: 'ingest'; flush: boolean }
+  | { op: 'unfold'; ref: string; flush: boolean }
+  | { op: 'fold'; ref: string; flush: boolean }
+  | { op: 'resolve'; paths: string[]; base?: string; createHolder: boolean; titles?: string[]; flush: boolean }
+  | { op: 'titleCandidates'; pathArg: string; recursive: boolean }         // read-only, lists kg:title's prompt targets
+  | { op: 'setBlockTitle'; blockId: string; title: string; flush: boolean }
+  | { op: 'linkCandidates'; pathArg: string; recursive: boolean; all: boolean } // read-only, lists kg:link's prompt targets
+  | { op: 'addBlockLink'; blockId: string; targetRef: string; flush: boolean }  // targetRef resolved server-side
+  | { op: 'project'; path: string }                              // read-only; result carries rendered markdown
+  | { op: 'tree'; pathArg: string; maxDepth?: number; noHolders: boolean; unfoldedMode: boolean }
+  | { op: 'path'; idArg: string };
+
+type ServiceResponse = { ok: true; result: unknown } | { ok: false; error: string };
+```
+
+**Per-script refactor.** Each `kg:xxx.ts` currently calls `main()` unconditionally at module
+bottom; the refactor adds the same self-invocation guard `verify.ts` already uses
+(`if (process.argv[1]?.endsWith('kgTrack.ts')) main();`) so `service.ts` can import each script's
+operation function without triggering its CLI side effects. `kgTrack.ts`/`kgIngest.ts`/
+`kgUnfold.ts`/`kgFold.ts` are one-shot batch mutators (rehydrate → one operation → dehydrate once)
+and split cleanly into an exported `run*(store, ...args)` plus a thin client `main()`.
+`kgResolve.ts` only dehydrates inside its `--create-holder` branch — plain lookup mode is
+read-only. `kgTitle.ts` and `kgLink.ts` are interactive (readline against stdin), dehydrating after
+every accepted answer rather than once at the end, so they need granular per-answer ops instead of
+one request per invocation: a read-only `titleCandidates`/`linkCandidates` op lists what to prompt
+for in one round trip, then each accepted answer is its own `setBlockTitle`/`addBlockLink` round
+trip. `kg:link`'s target resolution (`resolveDeepPath` on the raw answer text) moves server-side
+too — `addBlockLink` takes the unresolved `targetRef` and reports back whether it resolved, so an
+invalid answer can be re-prompted without the readline loop needing its own store access.
+`kgProject.ts`/
+`kgTree.ts`/`kgPath.ts` never call `dehydrateToJsonLd` at all; they route through the service
+purely for the rehydrate-avoidance win. `kgProject.ts`'s rendered `.md` write stays client-side
+(the service returns the markdown string; the CLI wrapper writes the file) so the service's own
+disk-write footprint stays limited to exactly the 3 mirror files.
+
+**Idle shutdown.** The service exits after 30 minutes with no requests handled (any `op`, including
+`ping`, resets the idle timer — in practice a `ping` is always immediately followed by real work,
+so it's a fine proxy for "someone's using it"). On fire it goes through the same graceful-shutdown
+path as `SIGTERM`/`SIGINT`: flush if dirty, unlink lock and socket, exit. The next `kg:xxx`
+invocation (or git hook) auto-starts a fresh service exactly like any other cold start.
+
+**Disk locations.** `web/.run/apeironngn.sock` and `web/.run/apeironngn.lock`, resolved relative to
+`__dirname` the same way `getApeironExportDir()` already is — not `cwd`. Added to `web/.gitignore`
+(`.run/`). Deliberately not under `AperasKG/` — that directory's contents are otherwise all
+git-tracked mirror data.
+
+**Git hook.** `AperasKG/.githooks/pre-commit`'s `npm run kg:track -- $relative_paths` gains
+`--flush`, so the mirror is guaranteed on disk before the hook's `git add`. `post-index-change`
+doesn't `git add` anything after `kg:track` (it only exists to keep the mirror's hash-comparison
+cache warm), so it stays flush-less, relying on the 10s timer.
+
+**Failure handling.** A hard crash (SIGKILL/OOM) loses up to 10s of unflushed mutations —
+acceptable, since the one path that must not lose data (commits) always goes through `--flush`,
+which blocks until the write is confirmed on disk. A clean stop (`SIGTERM`/`SIGINT`) stops
+accepting new connections, finishes the in-flight request, flushes if dirty, and unlinks the lock
+and socket files before exiting, so a deliberate stop never leaves a stale lock or drops recent
+changes.
+
+**Verified live**, against the real `AperasKG/Apeiron/` mirror (not a scratch copy — every op here
+is idempotent on unchanged content, so a no-op re-track/re-flush was safe to run for real):
+cold start from a removed `.run/` (service auto-spawns, lock ends at `status:'ready'` with the
+service's own pid, correct output); warm reuse immediately after (no second rehydrate — the same
+pid answers, an order of magnitude faster than the cold call); two and three simultaneous cold
+invocations racing on an empty `.run/` (exactly one service ends up running each time, every
+invocation still gets correct output); two simultaneous mutating `--flush` calls (both land, all 6
+mirror files stay valid JSON, zero diff since nothing actually changed); the 10s auto-flush
+(mutate without `--flush`, mirror mtime provably unchanged immediately after, flips ~10-15s later,
+zero content diff); `--flush` writing synchronously before the CLI process exits; a hard `kill -9`
+followed by a fresh invocation (dead lock detected, clean restart, correct output — the crash
+scenario the "starting" grace window and `status:'ready'` liveness check exist for); a graceful
+`SIGTERM` after a real (reversible) mutation with no flush yet, confirming it flushes-then-exits
+when dirty and skips the write when not (used deliberately to discard a test mutation without
+touching disk, then re-verified the next cold rehydrate reflects the correct on-disk state).
+`kgTitle.ts`/`kgLink.ts`'s interactive round trips and the git hook's actual `git commit` path
+were checked by direct invocation and code inspection rather than a live end-to-end run — the
+underlying mechanics (`--flush` argv parsing, `kg:track -- <paths> --flush`) are already covered
+by the tests above.
+
 ## 5. Open questions
 
 - Deferred, not forgotten: what happens when the KG grows to GB scale, given in-memory-only
