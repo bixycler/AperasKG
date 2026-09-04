@@ -115,8 +115,11 @@ this session, all against the real `aperas` TerminusDB instance:
   never `"links": "Link/xyz"`; one `props` entry serializes as `"props": [{"@id": ..., "@type":
   "StringProp", "key": ..., "value": ...}]` (array, full object); `title` always serializes as a
   bare string, never `["…"]`, regardless of how the underlying `match()` call happens to shape its
-  result. `ArtifactNode`/`FolderNode` follow the same pattern (`root`/`children` as `reference`,
-  their own scalar fields as `one`/`optional`), inheriting `links`/`props` from `BaseNode`.
+  result. `ArtifactNode`/`FolderNode` follow the same pattern for their own scalar fields
+  (`one`/`optional`), each inheriting `links`/`props`/`title`/`text` from `BaseNode`/`TreeNode` as
+  before; `ArtifactNode` alone also inherits `type`/`parent`/`children` from `BlockNode` (§4 Step 7
+  — originally a separate `root` reference field; `ArtifactNode` was later merged with its own root
+  document outright, `FolderNode` deliberately left out of that merge — see Step 7 for why).
 - **Schema = class — implemented and live-verified, not just designed.** One real class per
   concrete type, not the single generic function `wrapNode` used to be:
   `web/src/lib/apeironNgn/shape.ts` (the `SHAPE` tables), `classes.ts` (`BlockNode`, `ArtifactNode`,
@@ -396,10 +399,60 @@ this session, all against the real `aperas` TerminusDB instance:
    someone else's commit) — but a manual restart is no longer the only fix: `kg:reload`
    (`{ op: 'reload' }`) flushes both dirty flags first, then rehydrates a fresh `Store` and swaps it
    in, live, without killing the process — the revived TDB-era `kg:import`'s equivalent
-   (`kg:export` stays retired; there's no second store to export *to* anymore). Every read-only op
-   (`kg:tree`/`kg:project`/`kg:path`) also takes its own `reload: boolean`, the reciprocal of a
-   mutating op's `flush`: `flush` forces a sync *out* immediately after a write, `reload` forces a
-   sync *in* immediately before that read, one round trip instead of two.
+   (`kg:export` stays retired; there's no second store to export *to* anymore). Every op that reads
+   the store's current content also takes its own `reload: boolean`, the reciprocal of a mutating
+   op's `flush`: `flush` forces a sync *out* immediately after a write, `reload` forces a sync *in*
+   immediately before the op runs — one round trip instead of two, and safe to combine with a
+   mutation in the same request (`reload` then the write then `flush`) since `reloadStore()` flushes
+   any dirty work first rather than discarding it. That's not just the read-only trio
+   (`kg:tree`/`kg:project`/`kg:path`) — `kg:track`/`kg:ingest`/`kg:unfold`/`kg:fold`/`kg:resolve` all
+   take it too, letting a write pick up an external change before it runs rather than needing a
+   separate `kg:reload` first. The two exceptions are `kg:title`/`kg:link`'s per-answer submission
+   ops (`setBlockTitle`/`addBlockLink`) — each is one sub-step of an already-in-progress interactive
+   session, where reloading mid-loop would invalidate the `blockId`s the session's own candidate
+   list (`titleCandidates`/`linkCandidates`, which *does* take `reload`, for the same one-round-trip
+   reason as everything else) already handed back.
+
+   **Flushing safely: a divergence guard, and how to resolve a real conflict.**
+   `dehydrateToJsonLd`/`dehydrateStateToJsonLd` are blind full-file replaces, not merges — every
+   flush overwrites a managed `.jsonld` file with exactly (and only) what's currently in memory. That
+   makes any flush capable of silently destroying an external write (another process's `git pull`, a
+   hand-edit) that landed on a mirror file while this service held its own unflushed local mutation:
+   flushing first, as `reload` used to do unconditionally, clobbers the external content before ever
+   reading it. `flushIfDirty`/`flushStateIfDirty` guard against this with a content-hash stamp per
+   managed file, taken after every read or write — a flush first checks whether the file's current
+   hash still matches what this process last saw, and refuses (throws, nothing written, the pending
+   mutation stays `dirty`) on a mismatch instead of overwriting. Keyed on the hash, not the `dirty`
+   flag alone: `dirty` by itself is the ordinary, harmless case (a pending local edit, no external
+   activity at all) — only an actual divergence is worth refusing over. This sits at the flush
+   chokepoint, so it protects every path that flushes: the timers, any op's `flush: true`, and
+   `reload`'s own internal flush.
+
+   A genuine conflict — both `dirty` and a real divergence — has no automatic resolution (there's no
+   merge capability here, deliberately, matching §3's "no shared mutable database" stance); it takes
+   an explicit choice, made through one of two symmetric primitives. `kg:reload --discard`
+   (`{ op: 'reload', discard: true }`) keeps the external change: skips the flush entirely rather
+   than trying and failing, drops the pending local mutation, and rehydrates fresh from disk as-is.
+   `kg:flush --clobber` (`{ op: 'flush', clobber: true }`) keeps the local mutation instead: writes
+   current memory over disk unconditionally, no dirty check, no divergence check, discarding whatever
+   external content was there. `kg:flush` is otherwise a new, minimal standalone op — the same
+   guarded flush every mutating op's own `flush: true` already triggers, but on demand and
+   independent of any specific mutation, useful on its own just to *learn about* a conflict (it
+   throws) without the side effects of running an unrelated op to get there. Neither `discard` nor
+   `clobber` is ever implied by an op's own bare `reload`/`flush` flag — both stay opt-in, deliberate,
+   spelled out at the call site, since silently picking a side would be exactly the kind of surprise
+   the guard exists to prevent in the first place. Named `clobber`, not `force`: `npm run kg:flush
+   --force`, run without npm's own `--` separator, has npm intercept `--force` as one of *its* CLI
+   flags rather than forwarding it to the script's argv — the flush then runs unclobbered and hits
+   the guard, with no indication anything was misrouted beyond npm's own generic force-flag warning.
+   `clobber` isn't an npm option, so it always reaches the script regardless of invocation style.
+
+   A stop (`SIGTERM`/`SIGINT`) still has to complete no matter what, so it can't defer to that same
+   deliberate choice: `shutdown()` tries each guarded flush independently (a divergence in one mirror
+   must not skip the unrelated other) and catches whatever either throws — logged, then the process
+   exits regardless, accepting the local mutation as lost on this one path rather than either hanging
+   or (the bug this closed) letting the flush's rejection go unhandled while `clearLock()`/
+   `process.exit()` ran anyway, silently discarding the same pending work with no trace of it at all.
 
 ### Step 3: fold migrated functions into class methods — implemented, verified
 
@@ -652,13 +705,11 @@ any tree-positioned kind (an `ArtifactNode`/`FolderNode` root, not just a `Block
     that's `reconcile.ts`'s own external contract, unaffected by `key` replacing the stored field
     internally).
 - **`ArtifactNode`:**
-  - `treeChildren` → `this.root ? [this.root] : []`; `appendChild` sets `this.root`, throwing if
-    one already exists (a node that already has a root can't gain a second one this way — same
-    schema-shape constraint `nodeRef.ts` documents against real TerminusDB behavior). The rich,
-    title-specific version of that error (`` `${id} already has a root block — can't create
-    '${title}' as a second one...` ``) stays in `resolveCreate.ts`'s own pre-check, run *before*
-    minting a holder so a rejected create never leaves an orphan `BlockNode` behind;
-    `appendChild`'s own version is a generic backstop, never actually the one a real caller sees.
+  - `treeChildren` → `this.root ? [this.root] : []` (unchanged — still what rendering/`kg:tree` see).
+    `findChild`/`appendChild` as originally built here matched/attached against `root` itself as a
+    single opaque child, `appendChild` throwing once a root already existed; §4 Step 6 replaced both
+    with the current behavior (delegate through to the root document, root and artifact addressed as
+    one logical node) — see Step 6 for why and the mechanics.
   - `project.ts`'s `projectArtifactToMarkdown`'s render half → `node.toMarkdown()` (frontmatter via
     `withFrontmatter` plus `this.root.toMarkdown()`; `null` when there's no root yet).
   - `artifacts.ts`'s `trackArtifact`'s per-node half → `node.trackFromDisk(artifactPath)` — takes
@@ -692,9 +743,11 @@ any tree-positioned kind (an `ArtifactNode`/`FolderNode` root, not just a `Block
   - `vocab.ts` — id/IRI/literal encoding; substrate infrastructure `node.ts` itself sits on, never
     in scope for folding.
   - `tree.ts`'s `findByExactPath`/`resolveTreeRef` — store-wide search for a *starting* node.
-  - `resolve.ts`/`resolveCreate.ts`'s outer search (`resolveArtifactOrFolderPrefix`,
-    `resolveDeepPath`, `resolveDeepPathDetail`, `createImaginedPrefix`) — multi-root search and
-    cross-node creation across the whole store; calls `.findChild()`/`.appendChild()` per hop now.
+  - `resolve.ts`/`resolveCreate.ts`'s outer search (`resolveDeepPath`, `resolveDeepPathDetail`,
+    `createImaginedPrefix`) — multi-root search and cross-node creation across the whole store;
+    calls `.findChild()`/`.appendChild()` per hop now, folder/file segments included (§4 Step 6 —
+    an intermediate `resolveArtifactOrFolderPrefix` whole-string search briefly stood in for this,
+    since removed).
   - `artifacts.ts`'s `trackAllArtifacts`/`ingestAllArtifacts`/`findLiveArtifactByPath`/
     `resolveBlockLinks` — sweep over every artifact or every pending wikilink, or search by path,
     before any one node is known; `trackAllArtifacts`/`ingestAllArtifacts` are now thin loops
@@ -876,11 +929,11 @@ crashed one — `process.kill(pid, 0)` (throws `ESRCH` if dead) combined with a 
 timestamp older than ~10s disambiguates, unlinking both lock and socket files if stale. The
 would-be starter claims the lock via `fs.openSync(lockPath, 'wx')` — atomic exclusive create;
 `EEXIST` means someone else is already starting it, so this client polls-connect with backoff
-instead of spawning a second copy. The winner spawns `npx tsx service.ts` detached and unref'd
-(same invocation style every `kg:xxx` script already uses via `npx tsx`, so no new devDependency),
-and the spawned process itself overwrites the lock with its own pid and `status:'ready'` once
-`listen()` succeeds — the lock always reflects the actual owning process, not the process that
-happened to start it.
+instead of spawning a second copy. The winner spawns `service.ts` directly via the local `tsx`
+binary (`node_modules/.bin/tsx`, `tsx` a devDependency — see "Toolchain: dropping `npx`" below),
+detached and unref'd, and the spawned process itself overwrites the lock with its own pid and
+`status:'ready'` once `listen()` succeeds — the lock always reflects the actual owning process, not
+the process that happened to start it.
 
 **Dirty-tracking and flush.** A `dirty` flag is set by any mutating op handler after it runs; a
 `setInterval(..., 10_000)` flushes via the unchanged `dehydrateToJsonLd(store)` if dirty, then
@@ -893,24 +946,50 @@ behavior change this implies: a plain `kg:track` invocation without `--flush` no
 dirty and returns, with the on-disk mirror catching up within 10s rather than synchronously — the
 intended effect of centralizing dehydrate, not a bug.
 
+**Invoking any flag through `npm run`.** Every `--flag` across the whole `kg:xxx` suite
+(`--flush`/`--reload`/`--discard`/`--clobber`/`--recursive`/`--view`/etc.) needs npm's own `--`
+separator to actually reach the script when run as `npm run kg:xxx`: `npm run kg:xxx --flush`
+(no `--`) has npm's own CLI parser consume `--flush` itself — silently, with no forwarded flag and
+often no visible warning at all (a *recognized* npm option like `--force` at least prints
+"npm warn using --force"; an unrecognized one like `--clobber` doesn't print anything, and just
+vanishes) — while a plain, unprefixed positional word (a path, a ref) passes through untouched
+either way. The correct invocation is always `npm run kg:xxx -- --flush` (`--` before the flag), or
+skip `npm run` entirely and call the script directly:
+`node_modules/.bin/tsx src/lib/kgTrack.ts --flush`. This isn't specific to any one flag or op — it's
+a property of `npm run` itself, so no flag name choice avoids it.
+
+**Toolchain: dropping `npx`.** Every `kg:xxx` script and the service's own auto-start both ran
+`npx tsx <entry>` originally. `tsx` isn't a local devDependency, so each call pays `npx`'s own
+package-resolution overhead on top of actually running `tsx` — measured at ~1s of the ~1.45s a
+bare `npm run kg:tree` took, even with `tsx` already cached and fully offline (`npx --offline`
+still took ~1s; the cached `tsx` binary called directly took ~0.3s). Fixed by adding `tsx` as a
+devDependency and calling it directly — `package.json`'s `kg:xxx` scripts read `tsx <entry>` (no
+`npx`; `npm run` resolves the local `node_modules/.bin` automatically) and `serviceClient.ts`'s
+`spawnService` calls `node_modules/.bin/tsx` explicitly (used for auto-start, and — since a code
+change requires restarting the service by hand to take effect, see the workflow note in "Manual
+kill target" below — for every manual restart during development too). Brought `npm run kg:tree`
+down to ~0.6s, unrelated to and stacking with the rehydrate-avoidance win this whole step is about.
+
 **Wire protocol.** Newline-delimited JSON, one request per connection (client connects, writes one
 line, reads one line, closes) — `JSON.stringify` always escapes an embedded `\n`, so this framing
 needs no parser beyond a string split.
 ```ts
 type ServiceRequest =
   | { op: 'ping' }
-  | { op: 'track'; paths: string[]; flush: boolean }
-  | { op: 'ingest'; flush: boolean }
-  | { op: 'unfold'; ref: string; flush: boolean }
-  | { op: 'fold'; ref: string; flush: boolean }
-  | { op: 'resolve'; paths: string[]; base?: string; createHolder: boolean; titles?: string[]; flush: boolean }
-  | { op: 'titleCandidates'; pathArg: string; recursive: boolean }         // read-only, lists kg:title's prompt targets
+  | { op: 'reload'; discard: boolean }                             // reload the store from disk
+  | { op: 'flush'; clobber: boolean }                               // force an immediate dehydrate
+  | { op: 'track'; paths: string[]; flush: boolean; reload: boolean }
+  | { op: 'ingest'; paths: string[]; flush: boolean; reload: boolean; track: boolean }
+  | { op: 'unfold'; ref: string; viewRef?: string; flush: boolean; reload: boolean }
+  | { op: 'fold'; ref: string; viewRef?: string; flush: boolean; reload: boolean }
+  | { op: 'resolve'; paths: string[]; base?: string; createHolder: boolean; titles?: string[]; flush: boolean; reload: boolean }
+  | { op: 'titleCandidates'; pathArg: string; recursive: boolean; reload: boolean } // read-only, lists kg:title's prompt targets
   | { op: 'setBlockTitle'; blockId: string; title: string; flush: boolean }
-  | { op: 'linkCandidates'; pathArg: string; recursive: boolean; all: boolean } // read-only, lists kg:link's prompt targets
+  | { op: 'linkCandidates'; pathArg: string; recursive: boolean; all: boolean; reload: boolean } // read-only, lists kg:link's prompt targets
   | { op: 'addBlockLink'; blockId: string; targetRef: string; flush: boolean }  // targetRef resolved server-side
-  | { op: 'project'; path: string }                              // read-only; result carries rendered markdown
-  | { op: 'tree'; pathArg: string; maxDepth?: number; noHolders: boolean; unfoldedMode: boolean }
-  | { op: 'path'; idArg: string };
+  | { op: 'project'; path: string; reload: boolean }               // read-only; result carries rendered markdown
+  | { op: 'tree'; pathArg: string; maxDepth?: number; noHolders: boolean; viewRef?: string; reload: boolean }
+  | { op: 'path'; idArg: string; reload: boolean };
 
 type ServiceResponse = { ok: true; result: unknown } | { ok: false; error: string };
 ```
@@ -958,6 +1037,36 @@ accepting new connections, finishes the in-flight request, flushes if dirty, and
 and socket files before exiting, so a deliberate stop never leaves a stale lock or drops recent
 changes.
 
+**Manual kill target.** Calling the local `tsx` binary directly (no `npx`) keeps this a two-PID
+chain, not the four-PID one an `npx tsx` spawn would produce: `node_modules/.bin/tsx` (a small
+loader process) spawns the actual runtime — `node --require .../preflight.cjs --import
+.../loader.mjs service.ts` — as its one child, confirmed via `ps -o pid,ppid,pgid,sid`. The
+`SIGTERM`/`SIGINT` handler above lives only in that inner `node` process (the one actually running
+`service.ts`'s code); the `tsx` wrapper PID above it installs no handler of its own. Linux does not
+cascade a signal from parent to child automatically — `kill -TERM <pid>` (a bare, positive PID)
+reaches exactly that one process, nothing downstream of it — so killing the wrapper PID this way
+leaves the real service running, orphaned, still holding the lock/socket, while only the wrapper
+exits.
+
+There are two correct ways to stop it. Either signal the inner `node` PID directly (cross-check
+`web/.run/apeironngn.lock`'s own `pid` field if unsure which PID that is — the service always keeps
+that field pointed at itself; see "Auto-start and the lock race" above) — or signal the whole
+process group at once with a *negative* PID, `kill -TERM -<pgid>`: `detached: true` at spawn time
+made the `tsx` wrapper the leader of a fresh process group, and the `node` process spawned
+downstream of it inherited that same group without re-detaching, so both PIDs share one PGID
+(numerically equal to the wrapper PID) and `kill -TERM -<pgid>` delivers the signal to both
+simultaneously — the leaf process runs its normal graceful shutdown, the wrapper just dies on the
+same signal (no handler, default terminate, harmless). The minus sign is what selects the group
+instead of a single PID; leaving it off is the wrapper-PID mistake above. Find both PIDs (and
+confirm they share a PGID) with `ps -o pid,pgid,cmd -C node | grep apeironNgn/service`.
+
+**Restart-on-code-change, a standing rule.** The service holds `apeironNgn/*.ts` in memory from the
+moment it starts — editing any of those files has no effect on an already-running service, same as
+any other long-lived process. There's no file-watcher/hot-reload; a code change only takes effect
+once the service is killed (one of the two correct ways above) and a `kg:xxx` invocation auto-starts
+a fresh one. Forgetting this reads as a baffling "the fix isn't working" until the stale process is
+the thing actually still running.
+
 **Verified live**, against the real `AperasKG/Apeiron/` mirror (not a scratch copy — every op here
 is idempotent on unchanged content, so a no-op re-track/re-flush was safe to run for real):
 cold start from a removed `.run/` (service auto-spawns, lock ends at `status:'ready'` with the
@@ -978,6 +1087,587 @@ were checked by direct invocation and code inspection rather than a live end-to-
 underlying mechanics (`--flush` argv parsing, `kg:track -- <paths> --flush`) are already covered
 by the tests above.
 
+### Step 6: ingest ordering, `--track`, link-resolution reporting, and root-document addressing — implemented, verified
+
+`kg:ingest --track` folds `kg:track`'s own refresh into the same call: `kg:ingest`'s change
+detection is `ingestedHash === fileHash` (has the *tracked* hash moved since last ingestion), a
+different question from whether the file on disk has actually changed — without a fresh track
+first, an on-disk edit to an already-tracked artifact is invisible to a plain `kg:ingest`.
+`kg:ingest <path> --track` is `kg:track <path> && kg:ingest <path>` in one call (`kgIngest.ts`'s
+`runIngest` runs `runTrack` first when the flag is set).
+
+**Link-resolution outcome is its own report line, separate from reconciliation.**
+Reconciliation's `changed` count reflects a block's own authored content (text/structure) only — a
+wikilink's *resolution outcome* (dangling → resolved, or the reverse) can flip purely because
+something *else* in the graph changed between ingestions, which reconciliation can't see (it runs
+before `resolveBlockLinks` does, on the tree as freshly parsed, without knowing yet what any link
+will resolve to). `artifacts.ts`'s `resolveBlockLinks` now returns its own `LinkResolutionStats`
+(`{ resolved, dangling, changed }`), diffing each block's freshly-resolved link targets against its
+*previous* resolved targets (`ArtifactNode.ingestFromDisk` collects those before reconciliation
+overwrites anything, threading them through as `oldLinkTargets`). `kgIngest.ts` prints it as its own
+line under the reconciliation summary: `Links: N resolved, M dangling, K changed.`
+
+**Ingest ordering: track and rebuild the folder tree before parsing any content or resolving any
+link.** `kgIngest.ts`'s `runIngest` used to rebuild the `FolderNode` tree (`ingestFolderTree`) only
+*after* every target artifact had already been tracked, parsed into its fractal `BlockNode` tree,
+and had its wikilinks resolved. `ingestFolderTree` only ever needs artifacts to be *tracked* (have a
+`path`) — never their parsed content — so nothing actually depended on that ordering. The cost of
+getting it backwards: `resolveBlockLinks` resolves a wikilink relative to its own block's ancestry,
+which for a brand-new artifact climbs back up into the artifact's own *not-yet-attached* place in
+the folder tree — a tree-based lookup at that point can't find a real, already-tracked path it
+hasn't reached yet, and (worse) `--create-holder`'s fallback then mints a duplicate holder chain for
+something that already exists. Fixed by reordering: `runIngest` now tracks every explicit path (and
+runs `ingestFolderTree`) *before* calling `ingestArtifacts`/`ingestAllArtifacts` — the tree is
+always consistent by the time any content gets parsed or any link resolved, for every artifact in
+the batch, including ones newly tracked in the very same call. `ingestArtifacts` itself no longer
+tracks inline (that guarantee is now the caller's job, made explicit); any direct caller of
+`trackArtifact`/`ingestArtifact` outside `runIngest` (`verify.ts`'s own demo harness included) needs
+to rebuild the folder tree between the two for the same reason.
+
+**Folder/file path segments match the same way headings always did.** The deep-path grammar's
+folder/file tier used to be its own whole-string search (`resolveArtifactOrFolderPrefix`, since
+removed): join the leading NAME tokens, look the joined string up as one literal `path` value. That
+gave folder/file segments only exact matching, never the prefix tolerance headings already had via
+`TreeNode.findChild`. With the ingest-ordering fix above guaranteeing the tree is always consistent
+by the time `resolve.ts`/`resolveCreate.ts` run, `findChild`'s exact-then-prefix slug matching was
+generalized (it matched `BlockNode` children only before) to match a `FolderNode`/`ArtifactNode`
+child the same way — so `t` now prefix-matches a real `test.md`/`test/` the same way it already
+prefix-matched a `# Test` heading, and multi-segment paths resolve hop-by-hop through `treeChildren`
+uniformly at every tier, not just within one document.
+
+**An artifact and its root document are the same logical node for addressing.** Every artifact's
+content lives under a synthetic root `BlockNode` (`type: 'root'`, title `"Document Root"`) —
+real, still visible in `kg:tree`'s rendering and still `ArtifactNode.root` in storage, but never
+meant to be a real addressing boundary of its own: an artifact only ever has the one document, so
+"the artifact" and "its root document" name the same thing. The deep-path grammar used to treat the
+root block as an ordinary intermediate segment regardless — a heading `H` directly under an
+artifact's root resolved as `<artifact>/document-root/<heading>`, and `..` from `H` landed on the
+synthetic root block itself, not the artifact. Both corrected to treat the root block as invisible:
+  - `ArtifactNode.findChild(text)` (`node.ts`) delegates straight to `this.root.findChild(text)`
+    instead of matching `text` against `[root]`'s own title — so `<artifact>/<heading>` resolves in
+    one hop, `<artifact>/document-root/<heading>` no longer resolves at all (the segment doesn't
+    exist to match against).
+  - `ArtifactNode.appendChild(childId)` delegates to `this.root.appendChild(childId)` (resetting
+    `childId`'s own `.parent` to `this.root`, overriding whatever the caller set) when a root
+    already exists, rather than throwing — attaching a new top-level heading directly under an
+    artifact is the *normal* case now (creating one via `--create-holder` no longer needs an
+    explicit `document-root` hop first), not an error; only becoming the very first root (no
+    existing one to delegate to) still sets `this.root` directly, unchanged from before.
+  - `TreeNode.toPath()` skips emitting a path segment for a block whose `type === 'root'`, walking
+    straight through to its `.parent` (already stamped to the owning `ArtifactNode` at ingestion
+    time) — so a heading's own computed path is `<artifact>/<heading>`, never
+    `<artifact>/document-root/<heading>`.
+  - `resolve.ts`'s and `resolveCreate.ts`'s `descend`, on `..` from a `BlockNode`: after following
+    `.parent` once, if that landed on a `type === 'root'` block, follows `.parent` *again*
+    (already stamped to the `ArtifactNode`) before continuing — so `..` from a top-level heading
+    reaches the artifact directly, matching `toPath()`'s own treatment of the same hop.
+
+None of this touches storage or `kg:tree`'s rendering — the root block still exists, still holds
+`children`, still prints as its own `[root] Document Root` line. Only the deep-path grammar (and
+`--create-holder`'s attachment logic) treats it as transparent. (Superseded by Step 7 below: the
+root block was later removed from storage entirely, not just made addressing-transparent.)
+
+**A separate, pre-existing nuance this interacts with: a heading's *first* paragraph is a different
+addressing level than its later ones.** `Aperas-markdown-fractal-mapping-design.md` §2's consuming
+rule — a heading (or `listItem`) absorbs its immediately-following paragraph as its own `text`,
+rather than making it a child `BlockNode` — means a wikilink written in that *first* paragraph is,
+for addressing purposes, a link *from the heading itself*: the containing block's own path is
+`<artifact>/<heading>`, so a sibling sub-heading is reachable directly, `subheading`, no `..`
+needed. A *second* (or later) paragraph under the same heading is never absorbed — it's a real,
+separate `BlockNode` one level *below* the heading (a sibling of any sub-headings, not the same node
+as the heading), defaulting to its own generated id as its title (nothing else names it, until
+`kg:title` overrides it). A wikilink written there needs one extra `..` to reach the same
+sub-heading: `../subheading`. The two paragraphs *read* identically in the rendered document —
+nothing about the surface markdown marks which addressing level a given paragraph's links resolve
+from — so a link's correct `..` count depends on whether it's the heading's first paragraph or not,
+not just on how many headings visually separate it from its target. Unrelated to the root-document
+fix above (a `BlockNode`-to-`BlockNode` structural fact, not an artifact/root one), but easy to
+conflate with it since both change how many `..` a link needs relative to what the prose visually
+suggests.
+
+**Verified live**, against the real corpus mirror (`test/test.md`, already containing a nested
+heading): `test/test.md/test` resolves the heading in one hop where `test/test.md/document-root/
+test` now correctly misses; `kg:path` on that heading reports `test/test.md/--test` (no
+`document-root` segment); `--base <heading-id> ..` resolves to the artifact directly; `--create-
+holder` on a brand-new top-level heading under that already-ingested artifact attaches it as a real
+sibling of the existing content (confirmed via `kg:tree`), not a rejected "already has a root"
+error; a temporary second paragraph added under `test/test.md`'s `# Test` heading confirmed the
+first-paragraph-vs-later-paragraph addressing split directly (`sub` resolved from the first
+paragraph's own base, missed from the second paragraph's base, `../sub` resolved from there) before
+being reverted. `npm run verify`'s own demo harness (`verify.ts`) needed the same
+tracking-then-folder-rebuild reordering applied to its own direct `trackArtifact`/`ingestArtifact`
+calls (it doesn't go through `runIngest`), and its "truly dangling" wikilink fixture needed its
+hardcoded `..` count increased by one level — the same literal `../../../../` that used to correctly
+overshoot into unresolvable territory under the old (one-level-deeper) tree shape now lands validly
+on the artifact's own document, since a hop that used to be consumed by the synthetic root segment
+no longer exists to consume it. `test/test.md`'s own real wikilink had the identical, pre-existing
+staleness (written against the old, one-level-deeper shape) and needed the same one-level `..`
+correction, found by exactly this recalibration check — a concrete reminder that any wikilink
+written before this fix landed may need re-auditing, not just the two test fixtures caught here.
+
+### Step 7: `ArtifactNode extends BlockNode`, the root block retired outright, `text` a copied abstract for both — implemented, verified
+
+Two problems with Step 6's design, found on review rather than in the field:
+
+**The synthetic root block was addressing-transparent but still physically real** — a second
+document per artifact purely because `kg:track` and `kg:ingest` used to be separate free functions,
+each needing "the artifact" and "its content" as separate things to mint/wire up. Once folded onto
+one class each (§4 Step 3), that separation was no longer a technical necessity, just left over from
+it — Step 6 patched every place the two-node split leaked into addressing (`findChild`/`appendChild`
+delegation, `toPath`'s `type === 'root'` skip, `descend`'s double `.parent` hop on `..`, an
+"already has a root" guard against a second one) rather than removing the split itself.
+
+**`FolderNode.text`'s consuming rule required a literal top-level leading paragraph, which a
+realistically-formatted README rarely has.** `folders.ts`'s `buildFolderTree` only consumed an
+abstract when the README's parsed root's *first child* was a bare `paragraph` — a README that opens
+with a heading (the normal case: `# Title` first) produced an empty `FolderNode.text` every time,
+silently. `ArtifactNode.text` never had this problem (`extractAbstract` already searched
+pre-order, not just the first child), so the two node kinds had quietly diverged in robustness
+without that being a deliberate choice.
+
+**Resolved by merging `ArtifactNode` into its own document content, and reusing `extractAbstract`
+for both node kinds:**
+
+- **`ArtifactNode extends BlockNode` now** (`node.ts`), not `TreeNode` directly — the class
+  hierarchy is `BaseNode -> TreeNode -> BlockNode -> ArtifactNode`. `ArtifactNode` no longer has a
+  `root` field; it *is* its own root document (`type`/`children`/`text` live on it directly, same
+  as any `BlockNode`), inheriting `type` as `optional` rather than `BlockNode`'s `one` (unset until
+  something's actually been ingested). **`FolderNode` deliberately stays on `TreeNode` directly**,
+  not `BlockNode` — considered and rejected: a folder was never merged with anything (a README's
+  content already lived straight in `FolderNode.children`, no synthetic wrapper to begin with), so
+  unlike `ArtifactNode` it has no genuine claim to `BlockNode`'s shape. Audited field by field, it
+  would inherit nothing it actually uses — `type`/`parent` never set or read, `treeChildren`/
+  `appendChild` always overridden (a folder's children are a real 3-way `BlockNode`/`FolderNode`/
+  `ArtifactNode` mix, never `BlockNode`'s homogeneous assumption), and `toMarkdown`/
+  `hydrateFromParsed` actively wrong (`FolderNode`'s own `hydrateFromParsed` takes a
+  `ParsedFolderNode`, a genuinely different, incompatible shape from `BlockNode`'s
+  `ParsedBlockNode` — an early draft of this step had `FolderNode extends BlockNode` too, for a
+  uniform-looking `BlockNode -> {ArtifactNode, FolderNode}` diagram, and that parameter-shape clash
+  forced renaming the method to avoid an invalid override; reverted once the audit showed the
+  `extends` relationship itself was the actual problem, not the name). `FolderNode` keeps declaring
+  its own `children` independently, same as before this step.
+- **All four of Step 6's addressing patches are gone, not just satisfied** — with no second node
+  to be transparent about, there's nothing left to patch: `ArtifactNode.findChild`/`.appendChild`/
+  `.treeChildren` are `BlockNode`'s own plain versions, inherited unmodified (a top-level heading
+  is an ordinary child; appending one is an ordinary ordered-containment append); `TreeNode.toPath`
+  no longer special-cases `type === 'root'` (no node ever has that type anymore); `resolve.ts`'s
+  and `resolveCreate.ts`'s `descend` no longer double-hops on `..` (a top-level heading's `.parent`
+  already points straight at the owning `ArtifactNode`); the "already has a root" guard is gone
+  outright (no singular-root concept left to guard).
+- **`ArtifactNode.ingestFromDisk` (`node.ts`) reconciles against `this` directly** instead of a
+  separate `oldRoot` — `toReconcileShape`/`hydrateFromParsed` are `BlockNode`'s own inherited
+  methods, called on `this`; nothing about `reconcile.ts` itself needed to change; a freshly-parsed
+  document's own top-level `blockId`/`parent` are discarded rather than materialized (only its
+  `children` become real `BlockNode`s, each stamped straight to `this.id`). "Has this artifact ever
+  been ingested before" is `this.ingestedHash !== undefined`, not `this.children !== undefined` —
+  `children` is `orderedContainment`, which always reads back as a real (possibly empty) array,
+  never `undefined`, so it can't tell "never ingested" apart from "ingested with zero top-level
+  blocks."
+- **`ArtifactNode.text`/`FolderNode.text` are both a copied abstract now** (`extractAbstract`,
+  `astParser.ts` — a pre-order search for the first descendant with non-blank text), never
+  consumed out of `children` the way §2's heading/listItem rule consumes a heading's own leading
+  paragraph. `folders.ts`'s `buildFolderTree` no longer special-cases a bare leading paragraph at
+  all — `readmeText = extractAbstract(parsedRoot)`, `readmeChildren = parsedRoot.children`
+  unconditionally, both node kinds sharing the identical mechanism `ArtifactNode` already used.
+  This is a deliberate, named departure from §1 of `Aperas-markdown-fractal-mapping-design.md`
+  ("`text` is never a duplicate of something addressable elsewhere") rather than a quiet violation
+  of it: a heading has its own leading sentence as genuine content; an artifact or folder is a pure
+  container with no content of its own, so its `text` is honestly a derived preview, expected to
+  duplicate whatever the first real descendant with content already is. The corollary:
+  `FolderNode.toReadme()` no longer re-emits `this.text` into the projected body ahead of
+  `children` — doing so would print the same sentence twice in the actual file now that nothing is
+  removed from `children` to make room for it (`ArtifactNode.toMarkdown()` never re-emitted `text`
+  either, for the same reason).
+- **The real `AperasKG/Apeiron/` mirror was empty at the time this landed** (mid-rebuild from an
+  unrelated in-progress change) — no migration story needed; the new shape is simply what the next
+  `kg:track`+`kg:ingest` sweep produces.
+
+**Verified**: `npm run build` (`tsc -b && vite build`) clean; `npm run verify`'s full demo harness
+passing end to end against the merged shape — tracking, ingestion, re-ingestion reconciliation
+(`18 matched, 0 moved, 0 changed, 2 added` on the edited re-ingest), `BlockNode.links` extraction
+(self-link now resolving to the `ArtifactNode` itself rather than a separate root `BlockNode`),
+`FolderNode` README projection (including a new explicit assertion that `FolderNode.text` picks up
+a *headed* README's abstract — `# Demo Folder` first, `Intro sentence...` second — the exact shape
+the old top-level-paragraph consuming rule produced an empty abstract for), and a dehydrate ->
+rehydrate round-trip (`{"BlockNode":27,"ArtifactNode":1,"FolderNode":4}`, 0 dangling references).
+`apeironNgnSmokeTest.ts` (ground-truth-vs-live-Store comparison against the real mirror) updated to
+pick an artifact by `type !== undefined && children.length > 0` instead of a `root` reference, but
+not itself re-verified end to end here — the real mirror is empty until the next real ingest sweep.
+
+### Step 8: `Link.props`, occurrence positions, and target-deduped wikilink edges — implemented, verified
+
+**The gap.** Nothing correlates a specific `[[wikilink]]` occurrence in a block's `text` with the
+`Link` object it resolved to. Given a block whose text mentions two different targets (or the same
+target twice), a reader has `text` (raw, with the literal `[[code]]` substrings still in it) and
+`links` (a `Set` of `{predicate, target}`) but no way to line the two up short of independently
+re-running wikilink detection and hoping the order matches. Separately (found while designing a fix
+for this): `resolveBlockLinks` (`artifacts.ts`, and the wikilink-regeneration fix earlier in this
+doc's own narrative) mints one `Link` per raw occurrence, not per distinct target — so a block
+mentioning the same target twice already produces two edges to it today. That's a real problem
+beyond tidiness: `.links` is a genuine second traversal axis alongside `children` (`TreeView.fold`,
+`node.ts`, walks both), so a duplicate edge to the same target is a graph-correctness smell, not
+just a display nit.
+
+**Resolved by generalizing `props` (Aperas-markdown-fractal-mapping-design.md §7) onto `Link`
+itself, rather than inventing a bespoke field for position specifically:**
+
+- **One `Link` per distinct `(predicate, target)` pair per block, not per raw occurrence.** A block
+  mentioning the same target twice keeps one edge, carrying every position that target occurs at.
+- **Position storage: `Link` gains `props: { cardinality: 'set', storageKind: 'embed' }`** — the
+  exact same `Set<StringProp>` mechanism `BlockNode`/`ArtifactNode`/`FolderNode` already use for
+  "a new piece of type-conditional metadata never needs its own schema field" (§7's own framing,
+  applied here to `Link` for the first time). A wikilink-derived `Link` carries one `{key:
+  'position', value: '<offset>'}` prop entry per occurrence of that target in the block's text —
+  a real multiset, reusing already-proven embed/mint/dehydrate/carry-forward machinery instead of
+  being the first thing to exercise a raw `cardinality: 'set'` *literal* field (which the
+  `writeField`/`readField` machinery already supports generically, just never exercised — `props`
+  is the safer, already-tested route to the same multiset capability). This settles a design
+  question `Link`'s own shape has carried since the original fractal-tree draft: `Link extends
+  BaseNode` (full inheritance, giving `props` but also an unwanted `links`/`tombstonedAt`/`holder`
+  — a link having its *own* outbound links or independent tombstone lifecycle corresponds to
+  nothing real) was tried and judged overkill; a single simple scalar field (enough for "one note
+  per link," not enough for a set of positions without re-serializing into that one string) was
+  tried next and judged insufficient. Cherry-picking just `props` onto `Link` directly in
+  `LINK_SHAPE` — no `extends BaseNode`, since `SHAPE` tables are already fully flattened
+  per-class and don't rely on the class hierarchy for field composition — is the middle point:
+  exactly the one field actually needed, reusing the mechanism already proven elsewhere, nothing
+  dragged along unused.
+- **Non-wikilink (`kg:link`, `'references'`-predicate) `Link`s share the same `props` slot** for
+  whatever metadata they might want later (a note, a timestamp) — no dedicated schema field needed
+  for that either, by the same §7 principle. `position` itself is only ever populated on
+  `WIKILINK_PREDICATE` links; a manual link has no source-text occurrence to position.
+- **One number per occurrence — mdast's own link-node start offset** — not a start/end range and
+  not per-target-array-of-two-numbers. A single start position is sufficient to correlate an
+  occurrence with its `Link`; recovering the full span, if ever needed, re-applies the same
+  wikilink grammar starting from that known point rather than storing a redundant end offset.
+- **Block-relative, never file-relative — deliberately, not as an afterthought.** Storing a
+  position relative to the whole file would reintroduce exactly the fragility git patches suffer
+  from (every edit before a link shifts its file offset, needing fuzzy context-matching to cope) —
+  precisely the class of problem the fractal block architecture exists to avoid by construction.
+  mdast's own link-node `position.start.offset` is file-relative by default; converting it to be
+  relative to the owning block's own (already-`.trim()`-ed) `text` needs to be one clean, correctly-
+  built primitive extending `rawSlice`'s own offset math (`astParser.ts`), not a subtraction
+  reinvented at each call site that happens to need it.
+- **Headings excluded from link-scanning entirely, not just from this position scheme.** A heading
+  functions as an anchor/target itself (other content links *to* it by title); a link nested inside
+  its own title text is an HTML nested-anchor situation (invalid per spec, and in practice exactly
+  as confusable as the spec's ban implies — confirmed the hard way, independent of this design).
+  `astParser.ts`'s heading case should stop calling `collectLinkCodes` on the heading's own title
+  line — only its consumed leading-paragraph `text` (§2's consuming rule) may still contain links.
+  Beyond the correctness case for banning it, this has a direct simplifying payoff for the position
+  scheme: with title excluded, every block's wikilink positions are relative to `text` alone,
+  uniformly — no `field: 'title' | 'text'` discriminant needed anywhere. (Real behavior change for
+  existing content: a wikilink written inside a heading's own title line stops resolving as a
+  `Link` edge on the next ingestion — the raw title text is unaffected, still a verbatim slice,
+  it simply stops being extracted.)
+- **API gap to fill:** `props.ts`'s `getProp` is `.find()` — first match only, correct for
+  genuinely single-valued props (`frontmatter`, `orderedList`, `checked`). `position` is
+  legitimately multi-valued per `Link`, so it needs a plural sibling, `getProps(node, key):
+  string[]`, alongside the existing singular accessor.
+
+**Implemented as designed**, matching the surface sketched above one-for-one:
+- `shape.ts`: `LINK_SHAPE` gains `props: { cardinality: 'set', storageKind: 'embed' }`.
+- `node.ts`: `Link` gains `declare props?: ApeironNode[]`. `BaseNode` gains `addWikilink(target,
+  positions)` — mints one fresh `Link` (predicate `WIKILINK_PREDICATE`), sets its `props` to one
+  `{key: 'position', value: '<offset>'}` entry per position, and attaches it by id. A dedicated
+  method, not an overload of `addLink` (which `kg:link` also calls, with no position or
+  dedup-by-target concept of its own) — and, necessarily, back to the "mint id, `wrap()`, set
+  fields, attach by id" shape `addLink`'s own doc comment says `links` becoming `storageKind:
+  'embed'` retired: `mintEmbedded` only writes an entry's own top-level fields, it doesn't recurse
+  into a nested `Set`-typed one, so a single-call `{predicate, target, props}` literal can't mint
+  `props` correctly — safe to always mint fresh here (never merge into an existing same-target
+  `Link`) since every wikilink-derived `Link` on a block is already stripped before this runs
+  (Step 7's `hydrateFromParsed` fix). (Superseded by Step 9: `addWikilink` split into a
+  non-attaching `mintWikilink`, and `hydrateFromParsed` no longer strips wikilinks up front — the
+  "always mint fresh, nothing to reuse" premise here no longer holds.)
+- `astParser.ts`: `sliceWithOffset`/`relativeOffset` (the `rawSlice`-adjacent primitive, block-
+  relative offset conversion in one place); `collectLinkCodes` now takes `(containerNode,
+  markdown)` and returns `LinkOccurrence[]` (`{code, position}`) instead of `string[]`; the heading
+  case no longer calls it on the heading's own title line, only on a consumed leading paragraph.
+  `ParsedBlockNode.linkCodes` retyped accordingly, threading through `PendingLinkCodes`
+  (`artifacts.ts`) and `extractLinkCodes` unchanged otherwise (it only ever moved the field around,
+  never inspected its shape).
+- `apeironNgn/artifacts.ts`'s `resolveBlockLinks`: resolves every code, groups successes by target
+  in a per-block `Map<target, position[]>`, then calls `addWikilink` once per distinct target.
+- `props.ts`: `getProps(node, key): string[]` alongside the existing singular `getProp`.
+- `verify.ts` (§5d): confirms two occurrences of the same target in one block produce one `Link`
+  carrying two `position` props (not two `Link`s), and that each position lands on the opening `[`
+  of its wikilink construct in `block.text`.
+
+**Two real bugs surfaced during implementation, both found by the existing test suite catching
+something it wasn't specifically written to catch — fixed as part of this step, not deferred:**
+
+- **`vocab.ts`'s `nodeKindFromId` misclassified a `Link`'s own `props` entries.** `SUBDOC_RE`
+  (`/\/(?:props|links)\/([A-Za-z]+)\//`) was matched non-globally, returning the *first* `/props/`
+  or `/links/` segment in an id. Every id shaped this way used to have exactly one such segment —
+  `Link.props` is the first case of a subdocument nested *inside* another subdocument
+  (`.../links/Link/<snowflake>/props/StringProp/<snowflake>`), so the first-match regex found the
+  outer `/links/Link/` and `wrap()`ed every `position` prop as a second `Link` instead of a
+  `StringProp` — quads written correctly, `.key`/`.value` reading back `undefined` on the
+  misclassified wrapper. Fixed: match globally, take the *last* (deepest/rightmost) segment, which
+  is always the id's real, immediate kind regardless of nesting depth.
+- **Reassigning an embed field only ever detached the old subdocument, never deleted it** —
+  `writeField`'s `clearField` removes the forward reference quad but left whatever it used to point
+  at sitting in the store forever, unreferenced. Harmless to the JSON-LD mirror (`dehydrateToJsonLd`
+  only walks structure reachable from a live top-level sweep, so an orphan is simply never visited,
+  never written) but a real, slowly-growing footprint in the long-lived `service.ts` process, which
+  keeps one `Store` alive across every `kg:track`/`kg:ingest` call for its whole uptime rather than
+  starting fresh each command. Pre-existing since the wikilink-regeneration fix (a dropped stale
+  wikilink `Link` was already leaking its `target`/`predicate` quads), `Link.props` just made each
+  leaked instance bigger (a `props` entry's own `key`/`value` quads too) and this step's own new
+  4-ingestion test in `verify.ts` finally pushed the leak past the dehydrate/rehydrate round-trip's
+  exact-quad-count check. Fixed generally, not narrowly for wikilinks: `writeField` now, for any
+  `storageKind: 'embed'` field, computes which currently-referenced ids survive into the new value
+  and recursively deletes (`deleteSubdocument`, new) whichever don't, before clearing the forward
+  reference — covers every embed field's reassignment (also, incidentally, an equivalent pre-
+  existing leak on an ordinary `props` value change via `carryForwardFields`'s per-key merge in
+  `reconcile.ts`, not just `links`), not just the one call site that surfaced it.
+
+**Verified**: `npm run build` (`tsc -b && vite build`) clean; `npm run verify`'s full suite passing,
+including both new cases above and (unchanged) every prior one — the dehydrate/rehydrate round-trip
+in particular now passes with the orphan-cleanup fix in place, confirmed via a deliberate before/
+after check (reverting the fix reproduces the exact quad-count mismatch the fix resolves).
+
+### Step 9: consistent tombstoning (incl. recursive artifact removal) and wikilink `Link` identity stability — implemented, verified
+
+Resolves §5's two tombstoning open questions (as they stood after Step 8's sweep), both left
+open at the time.
+
+**Tombstone consistency.** All three tombstone sites now clear `children`/`links`/`props` alike,
+matching `applyTombstone`'s own original rationale ("a dead node has no more use for `X`"):
+- `node.ts`'s `applyTombstone` (reconcile-driven, per removed block) now also clears `props` (it
+  already cleared `children`/`links`).
+- `folders.ts`'s folder-tombstone now also clears `links`/`props` (it already cleared `children`).
+- `artifacts.ts`'s artifact-tombstone previously cleared *nothing* but its own `tombstonedAt` flag
+  — checking why turned up a second, larger gap than the props-consistency question alone: unlike
+  the reconcile path (`reconcile.ts`'s `tombstoneSubtree` already recurses the whole removed old
+  subtree, one tombstone record per descendant) or the folder path (every folder path, nested or
+  not, is independently listed, so a removed subfolder gets tombstoned on its own regardless of its
+  parent), a whole artifact's *own* BlockNode subtree isn't tracked by file path at all — only the
+  artifact's path is. So deleting a tracked markdown file used to leave its entire fractal tree, and
+  every block's own `links`/`props`, fully live and permanently unreferenced: the same invisible-
+  garbage class as Step 8's `Link` leak, one level up, once per artifact removal instead of once per
+  stale wikilink. Fixed with a new `node.ts` function, `tombstoneLiveSubtree(node, now)` — walks
+  `children` depth-first, tombstoning every descendant the same way (`children`/`links`/`props`
+  cleared, `tombstonedAt` set) before doing the same to the artifact itself. Unlike `applyTombstone`
+  it operates directly on the live tree, not a captured old-shape record — there's no separate old/
+  new distinction on this path, just one live tree being marked dead all at once.
+
+**Wikilink `Link` identity stability** (§5's "tractable half"). A wikilink `Link` used to get a
+fresh id on every re-ingestion even when its target and occurrence positions hadn't changed at all
+— `hydrateFromParsed` dropped every carried-forward wikilink `Link` unconditionally before
+`resolveBlockLinks` ran, so there was never anything left to reuse. Fixed by moving the decision
+into `resolveBlockLinks`, where the fresh target/position groupings are actually known:
+- `hydrateFromParsed` now carries `links` forward unconditionally (manual *and* wikilink alike) —
+  the id-churn fix no longer depends on stripping anything early.
+- `ingestFromDisk` snapshots each matched block's *old* wikilink `Link`s (id, target, positions) via
+  a new `collectOldWikilinksByBlock`, at the same point (and for the same reason) it already
+  snapshots `oldLinkTargets` — before anything below it touches the tree.
+- `resolveBlockLinks` sweeps the *union* of blocks with pending `[[wikilink]]` codes and blocks that
+  had old wikilink `Link`s — not just the former, which would miss a block whose wikilinks were all
+  removed (`extractLinkCodes` never records a block with zero codes, so a naive "just walk
+  `pending`" sweep would leave such a block's now-stale `Link`s live forever, the exact bug class
+  this whole step is about, just newly reachable through this specific gap). For each block: a
+  fresh target reuses an old wikilink `Link`'s id whenever some old entry names the *same target* —
+  **`target` alone is the identity key, not the position list** (a correction made after an initial
+  version of this fix matched on target *and* exact position equality: position drifts from any
+  unrelated edit earlier in the same block's own text, so requiring an exact position match would
+  still churn the id on nearly every real edit, defeating the fix's own point). When a matched old
+  `Link`'s stored positions differ from the fresh ones, they're rewritten in place — `Link.props` is
+  itself `storageKind: 'embed'` (Step 8), so this reassignment's own embed-diff cleans up the stale
+  `position` `StringProp`s and mints the fresh ones without touching the `Link`'s own id, `target`,
+  or `predicate`. A target with no old match at all mints fresh via `mintWikilink` (renamed from
+  `addWikilink`, and no longer self-attaching — see below). `block.links` is written exactly once, as
+  `[...manualIds, ...survivingOrFreshWikilinkIds]` — `writeField`'s own embed-diff cleanup (Step 8)
+  is what deletes every wikilink `Link` that isn't in that final list, i.e. one whose target
+  disappeared from the block's text entirely.
+- `BaseNode.addWikilink` renamed to `mintWikilink` and no longer attaches its result to `this.links`
+  itself — it only mints the `Link` and returns its id, so `resolveBlockLinks` can decide the whole
+  block's final surviving id list before writing `.links` once, rather than the old "always append"
+  shape that made reuse impossible in the first place.
+
+**Verified**: `npm run build` clean; `npm run verify`'s full suite passing, plus three new cases:
+§5e confirms the self-link wikilink `Link` from §5c/5d keeps the exact same id across a further,
+unrelated re-ingestion of the same artifact (the forward-reference wikilink in the same paragraph is
+deliberately excluded from this check — its *target* is a freshly-minted holder BlockNode each time,
+a separate, pre-existing holder-churn question this step isn't about); §5f confirms the
+target-only-matching correction directly — inserting a clause before a block's two wikilink mentions
+shifts both occurrences' positions while keeping the same `Link` id, with `position` props updated
+to the new offsets.
+
+**Left open at the time, by explicit choice**: §5's "hard half" (a genuinely-deleted `Link`/
+`StringProp` leaving a dangling `TreeView.unfolds` reference with no trace) was unchanged by this
+step — deferred to a later discussion. Resolved by Step 10, immediately below.
+
+### Step 10: visible tombstones and dangling-`unfolds` cleanup — implemented, verified
+
+Resolves §5's "hard half," the piece Step 9 explicitly left open: a tombstoned `BlockNode`
+reached through a stale reference rendered with no signal it had died, and a genuinely-deleted
+`Link`/`StringProp` left its `TreeView.unfolds` entry dangling forever with zero trace. Both
+findings came from tracing the actual rendering/deletion code rather than assuming — see Step 9's
+own write-up for the precise "invisible but reads as alive" vs. "invisible with zero trace" framing
+that motivated fixing both.
+
+- **Tombstones are now visible.** A `(tombstoned)` tag is appended to a node's rendered title line
+  wherever one gets printed: `renderTreeLines` (plain tree), `renderViewLines` (view-based tree), and
+  all three of `renderLinkLine`'s output lines (a link's plain preview, its canonical full render, and
+  its "see elsewhere" pointer) — the last of these specifically because a `Link.target` is exactly the
+  "reached through a still-live reference elsewhere" case the original trace flagged as the more
+  misleading of the two failure modes (silently showing stale content as current). One shared
+  `tombstoneTag(node)` helper (`node.ts`) keeps the check and the marker text in one place rather than
+  four independent copies.
+- **Dangling `unfolds` entries are now swept automatically on delete.** `deleteSubdocument` (Step 8)
+  is the *only* place a `Link`/`StringProp` is ever actually removed — every current deletion path
+  (wikilink regeneration, Step 9's tombstone-consistency cleanup) already funnels through it. A new
+  `removeDanglingUnfolds(store, deletedId)` runs there, right before an id's own quads are deleted:
+  it sweeps every `TreeView`'s `unfolds` field for a reference to that id and removes it. Since
+  `deleteSubdocument` already recurses into nested embeds (a `Link`'s own `props`), this call fires
+  once per id at every level, covering both possible `unfolds` targets (`Link` and `StringProp`)
+  uniformly, with no new call site needed at any deletion site, present or future.
+- **Match-by-target reuse (Step 9) turned this from a design question into a correction opportunity
+  worth noting for the record**: the original design for the tractable half of §5 (Step 9) required
+  an *exact* target-and-position match to reuse a wikilink `Link`'s id — a real user correction
+  caught this before implementation drifted further, since position drift alone (from an unrelated
+  edit earlier in the same block) would have kept churning ids despite the fix's own goal. No new
+  code here — noted because it's the same "identity vs. incidental metadata" distinction this step's
+  own tombstone-visibility fix leans on (a tombstoned node's `title` isn't cleared either — it stays
+  as last-known content, deliberately, not as an oversight).
+- **Two brainstorming questions, answered and worth keeping on record:**
+  - *When are tombstones themselves ever removed?* At the time this was asked: never — a tombstoned
+    node kept its own quads (`title`/`type`/`text`/`tombstonedAt`) forever, mirroring TerminusDB's
+    soft-delete model (a permanent "this used to exist, here's its last known state" record), with
+    no expiry/compaction pass anywhere in the design. **Superseded by Step 11**: a tombstoned node
+    is removed once nothing live can reach it any more (its own structural subtree already cleared
+    at tombstoning time; the remaining question was always *incoming* references from elsewhere) —
+    see Step 11's mark-and-sweep GC for the actual mechanism and when it runs.
+  - *Is `deleteSubdocument`'s orphan cleanup a correctness requirement, or just eager garbage
+    collection?* The latter, precisely — and more consequential than ordinary GC'd-language cleanup
+    would be, for a reason specific to this runtime. Nothing is semantically broken by an orphaned
+    `Link`/`StringProp` sitting around — `dehydrateToJsonLd` only walks structure reachable from its
+    own top-level sweep (Step 8's own framing), so an orphan is invisible to the mirror either way.
+    But `service.ts`'s `Store` is Rust compiled to WASM (`wasm-bindgen`), not a JS object — it lives
+    entirely in the WASM module's own linear memory, managed by Rust's ownership model, not the JS
+    GC. Rust's own collections do free memory internally when an entry is removed, reusable by later
+    allocations *within* that linear memory — but WebAssembly linear memory itself can only *grow*
+    (`memory.grow`); there is no instruction to shrink it back down. Whatever peak size the heap
+    reaches, the WASM instance holds for the rest of the process's life, however much of it is later
+    freed internally and sitting idle. So for this long-lived process specifically, letting orphans
+    accumulate before cleaning them up — rather than never creating them in the first place — would
+    leave a **permanent, irreversible** high-water mark: unlike a GC'd runtime, there is no way to
+    ever hand that memory back to the OS short of restarting the process. Eager cleanup avoids that
+    peak from forming at all, which is strictly more valuable here than the same cleanup would be in
+    a language with a real tracing GC underneath. (Not independently verified against Oxigraph's own
+    allocator/data-structure internals — this follows from WASM's memory model generally, which is
+    well established; if it ever matters enough to confirm precisely, measuring process RSS across a
+    long ingest-heavy `service.ts` session would settle it directly.)
+
+**Verified**: `npm run build` clean; `npm run verify`'s full suite passing, plus two new cases run
+*after* §7's dehydrate/rehydrate round-trip check (deliberately — both mint a `TreeView`/`Profile`
+via `ensureDefaultView`, which is per-viewer state dehydrated separately from the main JSON-LD mirror,
+Aperas-treeview-design.md §8, and so is out of scope for what §7's round-trip check exercises or
+expects present in the store): §8 constructs a standalone tombstoned `BlockNode`, links to it from an
+already-ingested block, and confirms the rendered line for that target carries `(tombstoned)`; §9
+unfolds a freshly-minted `Link`, deletes it via the same `writeField`-embed-diff path Step 8 already
+exercises, and confirms its `unfolds` entry disappears with it, with no dangling entry left behind.
+
+### Step 11: `parent`/`PARENT_PRED` merge, mark-and-sweep tombstone GC, and `kg:unlink` — implemented, verified
+
+Three related changes from one thread of questions about `PARENT_PRED`/`siblingIndex` internals and
+the "hard half" GC design from Step 10.
+
+**`parent`/`PARENT_PRED` merge.** `TreeNode.parent` (a `BlockNode`-only field) and `PARENT_PRED`
+(the private `__parent` reification predicate every `orderedContainment` write already stamped on
+each child) turned out to be two independently-written quads recording the exact same fact — every
+write site set both, always in sync by convention, never by construction, confirmed by checking all
+three: `hydrateFromParsed`'s per-child stamp, `ingestFromDisk`'s top-level stamp, and
+`resolveCreate.ts`'s holder creation (which set `.parent` explicitly *and* called `appendChild`,
+which stamps the same fact again). `ParsedBlockNode.parent`'s own doc comment gave away why the
+separate field existed at all: a TDB-era workaround, since TerminusDB's `List`-typed `children`
+couldn't be reverse-queried as a direct triple — precisely the constraint `PARENT_PRED`'s reified-
+triples design was invented to eliminate. The field had simply outlived its own justification.
+Fixed by merging: `parent` promoted to `TREE_NODE_SHAPE` (every tree-positioned kind gets it now,
+`FolderNode`/`ArtifactNode` included, not just `BlockNode`), `PARENT_PRED` changed to
+`predIri('parent')` (the exact IRI the generic field accessor already used), and every explicit
+`.parent = ...` write site deleted — the `orderedContainment` write path (`writeField`,
+`appendOrderedChild`) is now the *sole* writer, as a side effect of whichever container's `children`
+write includes a given id. This retired `astParser.ts`'s `stampParents` entirely, along with the
+"must be re-run after reconciliation reassigns ids" fragility its own doc comment described as a
+confirmed-live bug before this was understood — there's no separate early stamp any more to go
+stale, since the real `parent` quad is now written exactly once, using final ids, as part of the
+container's own write. `structuralParentOf` collapsed from a `BlockNode`-vs-everything-else
+dispatch to a single uniform `.parent` read for any kind. One residual hazard worth flagging, not
+worth structurally preventing here: since the predicate is now shared, an ordinary `someNode.parent
+= x` write (the generic optional-reference field setter, not the containment path) would make `x`'s
+own `.children` include `someNode` too, with no `siblingIndex` recorded — landing it at sort-index 0
+among `x`'s other children. Nothing after this merge ever assigns `.parent` directly any more; if
+that changes, go through `.children`/`appendChild` instead (`vocab.ts`'s own doc comment on
+`PARENT_PRED` carries this warning at the point someone would actually hit it).
+
+**Aside, correcting something said in-session and worth getting right for the record:** the JSON-LD
+mirror's plain `children: [...]` array (as opposed to the live store's `parent`/`siblingIndex`
+reification) is *not* a design choice made for ApeironNgn's file format — it's inherited directly
+from TerminusDB's own document-JSON export of a `List`-typed field (TDB's document view always
+serializes a `List` as a plain array, Cons-chain or not, underneath), kept through the migration for
+continuity. It happens to also be the *right* shape for a JSON file regardless of that history — a
+JSON array's own position already encodes order, so there's nothing to reify at the file level the
+way RDF triples need — but that's a fortunate fit, not the reason the shape exists. `dehydrate.ts`'s
+`orderedChildIds`/`store.ts`'s `encodeDoc` translate losslessly between the two representations in
+both directions (confirmed by §7's round-trip check, which compares exact quad counts).
+`siblingIndex` stays private/internal, deliberately not promoted alongside `parent`: `parent` earns
+public status because it's independently useful information about a node; `siblingIndex` is
+meaningless outside its own container's context, so `parent` (up) plus `children` (down, ordered)
+already cover both directions without it. Its values are contiguous `0..N-1` per parent today by
+construction (every removal path is a full `children` rewrite, which always re-normalizes from array
+position) rather than by any enforced invariant — worth a future guard if a surgical single-child
+removal path is ever added without going through a full rewrite, not urgent now.
+
+**Mark-and-sweep tombstone GC** — a new mechanism identified in a follow-up discussion after Step
+10 shipped, extending the *same* deletion machinery (`hardDeleteNode`/`removeDanglingUnfolds`) to
+top-level tombstoned documents, not just embedded `Link`/`StringProp` subdocuments. An initial
+design for it checked each tombstoned candidate for *any* incoming reference at all, dead or alive,
+and was caught before implementation as exactly the failure mode refcounting GC has with cycles — a
+cluster of mutually-referencing tombstoned nodes, with nothing live pointing in from
+outside, would show a nonzero referrer count from each other forever, and never qualify for
+collection. Fixed with real mark-and-sweep instead (`node.ts`'s `pruneUnreachableTombstones`): the
+mark phase starts from every live `ArtifactNode`/`FolderNode` (the only genuine roots — a live
+`BlockNode` is always reachable transitively through its owning artifact) and walks `treeChildren`
+plus each visited node's own `Link.target`s; anything tombstoned that's never marked — including a
+whole disconnected dead cluster — is genuinely unreachable and gets hard-deleted. `deleteSubdocument`
+(Step 8) renamed to `hardDeleteNode` and reused unmodified for this — it was already written
+generically off `SHAPE_BY_KIND`, so it needed no changes to also delete a top-level kind, not just an
+embedded one; it also already calls `removeDanglingUnfolds` (Step 10), so a pruned node's own
+`unfolds` entries get swept in the same pass, no separate handling needed. Mutates the *live* store
+directly rather than filtering what a subsequent dehydrate writes, so both `dehydrateToJsonLd` and
+the separate `dehydrateStateToJsonLd` (over `TreeView`/`Profile`) see a consistent post-prune state
+for free. Wired into `service.ts` at the three points that either always flush both mirrors together
+or represent the "next startup" boundary directly: `reloadStore` (skipped on `discard`, which throws
+away in-memory state instead of flushing it), `clobberFlush`, and `shutdown` (idle-timeout exit
+included, each wrapped so a GC failure can't block the shutdown itself) — matching the "gone at the
+next service startup" framing a prior conversation used to describe the intended behavior, now
+actually true.
+
+**`kg:unlink`** — the missing removal counterpart to `kg:link`, and the piece that actually lets the
+GC above make progress on a real manual reference: without it, a `kg:link` pointing at a since-
+tombstoned node had no way to ever be removed short of tombstoning its own owning block, permanently
+pinning that target alive from the GC's perspective. `kgLink.ts`'s `runRemoveBlockLink(store,
+blockRef, targetRef)` resolves both endpoints via deep-path resolution (unlike `runAddBlockLink`'s
+`blockId`, which only ever arrives pre-resolved from `linkCandidates`' interactive flow — `kg:unlink`
+has no candidate list to resolve it for you, so both sides need to accept a path here), then removes
+any `predicate === 'references'` link on that block whose target matches, via the usual "read
+current, filter, write once" `.links` reassignment — `writeField`'s embed-diff (`hardDeleteNode`)
+handles the rest. Deliberately scoped to manual links only: a wikilink is self-managing (Step 9) and
+would just reappear on the next ingestion if force-removed here. New `kgUnlink.ts` CLI, non-
+interactive (unlike `kg:link`, a removal already needs both endpoints named, so there's no useful
+candidate list to prompt over) — `kg:unlink -- <block> <target> [--flush]`. New service op
+`removeBlockLink`, mirroring `addBlockLink`.
+
+**Verified**: `npm run build` clean; `npm run verify`'s full suite passing, plus two new cases: §10
+constructs two tombstoned `BlockNode`s referencing only each other (no live root reaches either) plus
+a third tombstoned node kept alive by a manual link from a still-live block, and confirms the mutual
+pair is pruned while the referenced one survives; §11 removes that surviving manual link via
+`runRemoveBlockLink` and confirms a further GC pass then collects it, proving `kg:unlink` and the GC
+compose correctly end-to-end.
+
 ## 5. Open questions
 
 - Deferred, not forgotten: what happens when the KG grows to GB scale, given in-memory-only
@@ -993,3 +1683,35 @@ by the tests above.
   behind named modules (`Aperas-architecture.md` §3) — does that boundary hold as-is for
   ApeironNgn, or does the lazy-traversal query model (§3) need a different shaped seam than
   "swap the implementation behind the same functions"?
+- **Tombstoning consistency across the three places it happens — resolved by Step 9.** All three
+  now clear `children`/`links`/`props` alike (`artifacts.ts`'s artifact-tombstone also gained
+  recursive whole-subtree tombstoning, a second gap found while fixing the first) — see Step 9's
+  own write-up in §4 for the full story.
+- **`Link`/`StringProp` have no tombstone concept at all** — TerminusDB's `@subdocument` has no
+  independent address, so nothing outside its owner could ever reference one; this entire class of
+  problem is structurally impossible there. ApeironNgn's embedded subdocuments are real,
+  independently addressable documents (their own `wrap()`-able snowflake-suffixed ids, dispatched
+  through the same `classForId`/`nodeKindFromId` machinery as everything else) — a deliberate
+  simplification (one uniform id/dispatch scheme, no second opaque storage mode for embeds), but it
+  means they're peers, not truly enclosed, and can accumulate a dangling-reference problem ordinary
+  top-level documents have tombstoning specifically to manage gracefully. `Link`/`StringProp` extend
+  `ApeironInstance` directly, not `BaseNode` — no `tombstonedAt` field exists for them to carry, so
+  `deleteSubdocument` (Step 8) is a genuine hard delete, no soft-delete step available even if
+  wanted. Checked the actual blast radius before deciding how much this matters: `TreeView.unfolds`
+  is the *only* `reference`-kind field anywhere in the schema whose target can be a `Link`/
+  `StringProp` at all (`Link.target`/`BlockNode.parent` only ever point at `TreeNode`-kind things)
+  — so whatever this becomes, it's narrowly scoped today, not a general problem.
+  - **The tractable half: wikilink `Link`s used to churn identity even when nothing changed —
+    resolved by Step 9.** See Step 9's own write-up in §4 for the full mechanism (moving the
+    reuse-or-remint decision from `hydrateFromParsed` into `resolveBlockLinks`, keyed on `target`
+    alone against a snapshot of each block's prior wikilink `Link`s — `position` drift alone
+    updates a matched `Link`'s `props` in place rather than reminting).
+  - **The hard half: a genuinely *removed* `Link`/`StringProp` used to have no graceful-degradation
+    story beyond "silently absent" — resolved by Step 10.** Traced first (`renderTreeWithView`/
+    `buildViewRenderContext`/`renderLinkLine`, `node.ts`) to answer precisely rather than assumed:
+    the real prior behavior was **"a tombstoned node still renders as if alive" vs. "a deleted
+    `Link` in `unfolds` renders with zero trace at all"** — two different invisible failure modes,
+    not "tombstone marker vs. nothing" as first assumed, with the tombstoned case arguably the more
+    misleading of the two since it actively shows stale content as current. Step 10 fixes both: a
+    `(tombstoned)` render tag for the first, an automatic `unfolds`-sweep on delete for the second.
+    See Step 10's own write-up in §4 for the mechanism.

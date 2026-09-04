@@ -1,7 +1,0 @@
-[
-  {
-    "@type": "@context",
-    "@base": "terminusdb:///data/",
-    "@schema": "terminusdb:///schema#"
-  }
-]
