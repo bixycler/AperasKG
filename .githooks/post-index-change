@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
-# Auto-runs a full `kg:track` (ApeironNgn) sweep after any index write that actually
-# touched the working tree -- covers `git reset --hard`, which fires no other hook at all
-# (confirmed: neither `post-commit` nor `post-checkout` see a bare `reset`).
+# Auto-reloads the shared ApeironNgn service's in-memory graph from AperasKG/Apeiron/ after any
+# index write that actually touched the working tree -- covers `git reset --hard`, which fires no
+# other hook at all (confirmed: neither `post-commit` nor `post-checkout` see a bare `reset`).
+#
+# Phase 1+ direction (Aperas-crud-design.md §14/§15/§16): AperasKG/Apeiron/*.jsonld, not
+# artifacts/*.md, is the primary git-tracked content the graph is built from now -- a git-level
+# operation that rewrites the working tree (reset/checkout) can change the mirror files themselves,
+# leaving the running service's in-memory graph stale relative to what's now on disk. `kg:reload`
+# is the fix for exactly that ("the only way to pick up a change that landed on disk after the
+# service started" — its own doc comment), not `kg:track` (which only ever refreshed disk-vs-graph
+# bookkeeping for *artifacts*, the old Phase 0 direction, and never re-reads the mirror itself).
+#
+# --discard: nothing here can interactively resolve a flush conflict, and discarding pending local
+# mutations in favor of whatever git just put in the working tree is exactly the correct resolution
+# for this hook's own purpose -- unlike pre-commit's own flush, which deliberately does NOT
+# auto-resolve a conflict, because there the risk runs the other way (silently discarding someone
+# else's content instead of the reverse).
 # Installed via: git config core.hooksPath .githooks (see AperasKG/.githooks/README.md)
 #
 # Arg (git-supplied): $1 = 1 if the working tree was updated, 0 if only the index changed
-# (e.g. `git reset` without `--hard`) -- skip in the latter case, since on-disk artifact
-# content (what `kg:track` actually hashes) hasn't changed.
-#
-# No before/after ref pair is available here (unlike post-commit/post-checkout), and this
-# hook fires for index writes beyond just `reset`, so this runs an unscoped sweep across
-# all artifacts rather than a targeted diff. trackArtifact hashes each file's actual disk
-# content, making that a cheap no-op for anything unchanged.
-#
-# --force: this IS the unscoped sweep that can detect real removals (e.g. a `git reset --hard`
-# that dropped a tracked artifact) -- kg:track holds those back for interactive confirmation by
-# default (Aperas-crud-design.md §14), but nothing here can answer a prompt, so this always
-# applies them unconditionally, same as it always has.
+# (e.g. `git reset` without `--hard`) -- skip in the latter case, since the mirror files on disk
+# (what `kg:reload` actually reads) haven't changed.
 set -euo pipefail
 
 working_tree_updated="$1"
@@ -26,12 +30,12 @@ repo_root="$(git rev-parse --show-toplevel)"
 web_dir="$repo_root/../Aperas/web"
 
 if [ ! -d "$web_dir" ]; then
-  echo "[kg:track hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
+  echo "[kg hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
   exit 0
 fi
 
-echo "[kg:track hook] Index change with working-tree update detected -- running full kg:track sweep."
+echo "[kg hook] Index change with working-tree update detected -- reloading ApeironNgn from disk."
 
-if ! (cd "$web_dir" && npm run kg:track -- --force); then
-  echo "[kg:track hook] kg:track failed — run 'npm run kg:track -- --force' manually in Aperas/web to retry." >&2
+if ! (cd "$web_dir" && npm run kg:reload -- --discard); then
+  echo "[kg hook] kg:reload failed — run 'npm run kg:reload -- --discard' manually in Aperas/web to retry." >&2
 fi

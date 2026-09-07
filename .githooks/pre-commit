@@ -1,48 +1,44 @@
 #!/usr/bin/env bash
-# Auto-runs `kg:track` (ApeironNgn) for artifacts staged in this commit, then stages whatever
-# it updates in AperasKG/Apeiron/ -- pre-commit, not post-commit, specifically so the mirror sync
-# lands in the SAME commit as the artifact change it reflects, rather than as a separate leftover
-# working-tree change sitting there right after the commit completes. `--flush` is required here:
-# the shared ApeironNgn service (Aperas-apeironngn-design.md §4 rollout step 5) only flushes to
-# disk every 10s by default, so without it the `git add` below could run before this commit's
-# change has actually reached AperasKG/Apeiron/.
+# Auto-flushes the shared ApeironNgn service's in-memory graph out to AperasKG/Apeiron/ before
+# every commit, then stages whatever changed -- pre-commit, not post-commit, specifically so the
+# mirror sync lands in the SAME commit as whatever prompted it, rather than as a separate leftover
+# working-tree change sitting there right after the commit completes.
+#
+# Phase 1+ direction (Aperas-crud-design.md §14/§15/§16): the graph is the primary content now,
+# edited directly via kg:insert/kg:update/kg:remove/kg:project rather than by hand-editing
+# artifacts/*.md, so there's no longer a "staged artifact file" signal to scope this to the way the
+# old kg:track-based version did -- this now runs unconditionally on every commit. Cheap and safe:
+# a flush with nothing dirty is a no-op, and a no-op `git add` on an unchanged file is harmless.
+#
+# No --clobber here (deliberately, unlike post-index-change's own --discard): a real flush conflict
+# means the mirror changed on disk since this service last read it -- e.g. a `git pull`/merge landed
+# without a `kg:reload` first -- which is a real external change this hook should surface, not
+# silently overwrite. If it happens, the fix is `kg:reload` (or `kg:reload --discard` to take disk's
+# side, or `kg:flush --clobber` to keep the local side) run manually, then re-commit.
+#
+# `kg:track --reverse` warns (never blocks -- no automatic projection, ever, per the same
+# Phase 1+ direction) if any real ArtifactNode/FolderNode has graph-side content `kg:project` hasn't
+# caught up to yet, so a commit doesn't silently ship a stale projection with no one told.
 # Installed via: git config core.hooksPath .githooks (see AperasKG/.githooks/README.md)
 set -euo pipefail
 
 repo_root="$(git rev-parse --show-toplevel)"
-
-changed_artifacts="$(git diff --cached --name-only -- 'artifacts/*.md')"
-
-if [ -z "$changed_artifacts" ]; then
-  exit 0
-fi
-
 web_dir="$repo_root/../Aperas/web"
 
 if [ ! -d "$web_dir" ]; then
-  echo "[kg:track hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
+  echo "[kg hook] Skipping: expected Aperas/web as a sibling of AperasKG at '$web_dir', not found." >&2
   exit 0
 fi
 
-echo "[kg:track hook] Artifact(s) staged for this commit:"
-echo "$changed_artifacts" | sed 's/^/  - /'
-
-# Track only the staged files (paths relative to artifacts/), not the whole directory -- same
-# 1 git-commit -> 1 KG-commit scoping reasoning as before. A staged deletion is passed through
-# unchanged (pre-existing limitation, not introduced by moving this to pre-commit): kg:track's
-# scoped path mode reads the file from disk to hash it, so it'll fail for a path that no longer
-# exists -- only trackAllArtifacts's full, no-args sweep detects removals.
-relative_paths=$(echo "$changed_artifacts" | sed 's#^artifacts/##')
-
-# --force: a scoped path list never actually hits the removal sweep (see the comment above), so
-# this is a no-op today -- kept anyway so this hook stays correct unattended if that ever changes,
-# same reasoning as post-index-change's own --force (Aperas-crud-design.md §14): nothing here can
-# answer an interactive confirmation prompt.
-if ! (cd "$web_dir" && npm run kg:track -- $relative_paths --flush --force); then
-  echo "[kg:track hook] kg:track failed — run 'npm run kg:track -- $relative_paths --flush --force' manually in Aperas/web to retry, then re-commit." >&2
+if ! (cd "$web_dir" && npm run kg:flush); then
+  echo "[kg hook] kg:flush failed — run 'npm run kg:flush' manually in Aperas/web to see why, then re-commit." >&2
   exit 0
 fi
 
-# Stage whatever kg:track's dehydrate rewrote so it's included in this same commit -- a no-op
+if ! (cd "$web_dir" && npm run kg:track -- --reverse); then
+  echo "[kg hook] kg:track --reverse failed to run — not fatal, continuing." >&2
+fi
+
+# Stage whatever kg:flush's dehydrate rewrote so it's included in this same commit -- a no-op
 # `git add` on an unchanged file is harmless, so no need to check which of the three actually moved.
 git add Apeiron/ArtifactNode.jsonld Apeiron/BlockNode.jsonld Apeiron/FolderNode.jsonld
