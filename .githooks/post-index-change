@@ -12,6 +12,11 @@
 # hook fires for index writes beyond just `reset`, so this runs an unscoped sweep across
 # all artifacts rather than a targeted diff. trackArtifact hashes each file's actual disk
 # content, making that a cheap no-op for anything unchanged.
+#
+# --force: this IS the unscoped sweep that can detect real removals (e.g. a `git reset --hard`
+# that dropped a tracked artifact) -- kg:track holds those back for interactive confirmation by
+# default (Aperas-crud-design.md §14), but nothing here can answer a prompt, so this always
+# applies them unconditionally, same as it always has.
 set -euo pipefail
 
 working_tree_updated="$1"
@@ -27,6 +32,6 @@ fi
 
 echo "[kg:track hook] Index change with working-tree update detected -- running full kg:track sweep."
 
-if ! (cd "$web_dir" && npm run kg:track); then
-  echo "[kg:track hook] kg:track failed — run 'npm run kg:track' manually in Aperas/web to retry." >&2
+if ! (cd "$web_dir" && npm run kg:track -- --force); then
+  echo "[kg:track hook] kg:track failed — run 'npm run kg:track -- --force' manually in Aperas/web to retry." >&2
 fi

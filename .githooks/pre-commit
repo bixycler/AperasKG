@@ -34,8 +34,12 @@ echo "$changed_artifacts" | sed 's/^/  - /'
 # exists -- only trackAllArtifacts's full, no-args sweep detects removals.
 relative_paths=$(echo "$changed_artifacts" | sed 's#^artifacts/##')
 
-if ! (cd "$web_dir" && npm run kg:track -- $relative_paths --flush); then
-  echo "[kg:track hook] kg:track failed — run 'npm run kg:track -- $relative_paths --flush' manually in Aperas/web to retry, then re-commit." >&2
+# --force: a scoped path list never actually hits the removal sweep (see the comment above), so
+# this is a no-op today -- kept anyway so this hook stays correct unattended if that ever changes,
+# same reasoning as post-index-change's own --force (Aperas-crud-design.md §14): nothing here can
+# answer an interactive confirmation prompt.
+if ! (cd "$web_dir" && npm run kg:track -- $relative_paths --flush --force); then
+  echo "[kg:track hook] kg:track failed — run 'npm run kg:track -- $relative_paths --flush --force' manually in Aperas/web to retry, then re-commit." >&2
   exit 0
 fi
 
