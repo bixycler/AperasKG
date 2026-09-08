@@ -1,0 +1,17 @@
+# Internal Linking & Addressing — Discussion
+
+<a name='---motivation--the-syntax-clash' class='aperas-anchor aperas-tree'></a>
+## Motivation: the syntax clash
+Refactoring `documentation.md` surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.
+
+<a name='---considered--obsidian-and-logseq-s-answers' class='aperas-anchor aperas-tree'></a>
+## Considered: Obsidian and Logseq's answers
+Both invent syntax that's never confused with a resolvable link: Obsidian's `[[Page]]`/`[[Page#^blockid]]`, Logseq's `((block-uuid))` (every block gets an id for free, since Logseq's document model is an outline). Both degrade gracefully in a plain renderer — inert bracketed text, not a link that looks clickable and 404s. Considered and set aside for now: a custom `apeiron://`-only bracket scheme would need new machinery Aperas didn't strictly need, since the trailing-address problem (not the bracket problem) turned out to be the real friction.
+
+<a name='---the-trade-off-that-doesn-t-go-away' class='aperas-anchor aperas-tree'></a>
+## The trade-off that doesn't go away
+Two orthogonal axes were in play — syntax (does the bracket/escaping shape confuse a renderer?) and target (is the address a stable id, or a readable path?). Node-ID addressing and a custom `aperas://` URI scheme both already existed in the engine (`vocab.ts`'s `NODE_BASE`, `snowflake.ts`), so neither needed inventing. What was missing was a *target* form usable before ingestion at all: a snowflake only exists after a node is created, so hand-authoring or refactoring docs pre-ingestion has no id to reference. Slugified paths fill that gap, at the cost of breaking silently if the heading text they're derived from changes — a real trade-off, not one that picking "the right syntax" dissolves.
+
+<a name='---landing-on-standard-links---injected-anchors' class='aperas-anchor aperas-tree'></a>
+## Landing on standard links + injected anchors
+The resolution that stuck: use plain `[title](target)` syntax throughout (no `[[...]]` wrapper needed, at least for now), splitting cross-file navigation (an ordinary relative path) from in-file addressing (a `#fragment` matched against an explicit `<a name="...">` anchor built from `slugify()`'s own output, joined by `/` per heading level). This was prototyped and validated live in `test-slugifed-path.md` before being written up as the design (see [Topology](../design/linking.md#---topology)). It also produced a cleaner mental model than "two permanent addressing styles to pick between": slug-path addressing is inherently the *manual, pre-ingestion* form, and ingestion adds a node-ID anchor alongside it rather than replacing it — so an existing reference never breaks, and rename-fragility isn't something needing repair tooling at all, just an eventual cleanup once every referrer has moved off the compatibility form.
