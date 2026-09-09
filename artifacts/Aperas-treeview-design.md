@@ -859,3 +859,47 @@ promoting the whole view outward to accommodate it.
 (likely generalizing past just the *initial* apex to any cone already active in the current
 discovery chain, not only the root) and the exact rendering shape for a link that declines to
 recurse this way.
+
+## 14. Known gap: stale `TreeView.unfolds` references (identified, not yet fixed)
+
+`TreeView.unfold(ref)` (`apeironNgn/node.ts:1064-1067`) appends `ref` to `unfolds` with no existence
+check at all. The only cleanup that exists, `removeDanglingUnfolds` (`apeironNgn/node.ts:240-258`),
+is purely reactive: it fires exclusively from inside `hardDeleteNode`, at the exact moment that
+specific id is hard-deleted, and strips only that one id from every `unfolds` list. Nothing else
+ever revisits an *existing* `unfolds` entry — there is no independent sweep that re-validates the
+whole list against what's currently live. Mark-and-sweep GC (`pruneUnreachableTombstones`,
+`apeironNgn/node.ts:1677-1707`) never treats `unfolds` as a reachability root either (correctly — a
+view shouldn't keep content alive), so a node reachable only via some view's fold-state is pruned
+like any other unreachable tombstone, and `removeDanglingUnfolds` only cleans that up if the
+`unfolds` entry already existed *at the moment of that specific deletion*.
+
+The realistic failure mode is the ordering these two facts leave open: a node gets unfolded while it
+is genuinely live, and is only removed *afterward*, through whatever content-side path that removal
+actually takes — reconciliation replacing a block with a new id on edit, an artifact-level removal,
+GC's own tombstone sweep running at a different time than expected. None of those paths are
+obligated to know that some view still names the id they're removing. Confirmed live, not
+hypothetical: `.state/TreeView.jsonld`'s `default` view currently names 10 `BlockNode` ids with no
+corresponding document at all — caught by `rehydrateStore()`'s own dangling-reference detector
+(`apeironNgn/store.ts`, its second pass over every RDF triple's object position) — after unrelated,
+heavy reconciliation churn elsewhere in the corpus reassigned/removed the blocks those ids used to
+name.
+
+**Two ways to close this gap**, not mutually exclusive:
+
+1. **Write-time validation.** `TreeView.unfold(ref)` refuses (or silently no-ops) when `ref` doesn't
+   resolve to a live node at the moment of the call. Cheap, but doesn't address the failure mode
+   actually observed: the id was perfectly valid when unfolded, and went stale afterward through a
+   completely unrelated edit — this check never runs again once the entry is already in place.
+2. **An audit/prune sweep.** Walk every `TreeView`'s own `unfolds` list — on some cadence, or on
+   demand via a command — and strip any entry that no longer resolves to a live node. This is the
+   piece that actually closes the gap, and it's the same shape of fix `retryDanglingRefs`
+   (`apeironNgn/artifacts.ts`; see AperasKG/artifacts/history/linking.md's Milestones and
+   AperasKG/artifacts/discussion/linking.md's "Cross-artifact link staleness") just built for a
+   different kind of derived pointer state (a dangling link code, there, instead of a dangling
+   `unfolds` entry, here): something that points at another node's existence needs to be revisited
+   when that existence changes, and nothing does that automatically without a dedicated sweep.
+
+**Status: identified, not yet implemented; option 2 is the one that actually closes the gap** (option
+1 is a cheap complementary safety check worth adding alongside it, not a substitute). The 10 already-
+stale ids in the live `.state/TreeView.jsonld` need a one-time manual cleanup regardless of when (or
+whether) the general sweep gets built.
