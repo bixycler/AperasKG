@@ -10,8 +10,9 @@ To achieve pure Perata (clean projections for the reader), the storage layer mus
 
 1. **Design Docs:** Pure architectural specifications, data models, and rules.
 2. **Issue Docs:** Bug reports, architectural gaps, and pending fixes.
-3. **History/Status Docs:** What was implemented, when it was verified, and milestones.
-4. **Discussion Docs:** Rejected ideas, motivation, and theoretical context.
+3. **Planning Docs:** Implementation plans, task breakdowns, and step-by-step execution guides.
+4. **History/Status Docs:** What was implemented, when it was verified, and milestones.
+5. **Discussion Docs:** Rejected ideas, motivation, and theoretical context.
 
 This guarantees that a reader parsing the "Design Doc" sees *only* the design, without needing complex transducers to strip out bug reports and history logs.
 
@@ -28,6 +29,8 @@ artifacts/
   ├── issues/
   │   ├── crud.md                 (Bugs, gaps, pending tasks)
   │   └── network.md
+  ├── planning/
+  │   └── crud.md                 (Implementation plans, step-by-step execution guides)
   ├── history/
   │   └── crud.md                 (Implementation status, log of changes)
   └── discussion/
@@ -35,14 +38,16 @@ artifacts/
 ```
 
 ### Document-Level Skeletons
-To ensure uniformity across the corpus, each concern document should follow a strict top-level heading structure. Standardizing these paths (e.g., `crud/design.md/Data-Model`) allows the agent to reliably address them.
+To ensure uniformity across the corpus, each concern document should follow a strict top-level heading structure. Standardizing these paths (e.g., `design/crud.md/Data-Model`) allows the agent to reliably address them.
 
-- **`design.md` (The Pure Spec)**: Only normative, current-state architectural facts. No "I think we should..."
-  - `# Context` — a factual index of this concern's `discussion.md`, `issues.md`, and `history.md`: one link plus a brief, non-argumentative summary per doc (what exists, not why). Rationale, rejected alternatives, and narrative stay in the linked Discussion doc — never inline here.
+- **Design Docs (`design/*.md`)**: Only normative, current-state architectural facts. No "I think we should..."
+  - `# Context` — a factual index of this concern's discussion, issue, planning, and history docs: one link plus a brief, non-argumentative summary per doc (what exists, not why). Rationale, rejected alternatives, and narrative stay in the linked Discussion doc — never inline here.
   - `# Architecture`, `# Topology`, `# Workflows`
-- **`issues.md` (The Task Tracker)**: Actionable, resolvable nodes.
+- **Issue Docs (`issues/*.md`)**: Actionable, resolvable nodes.
   - `# Open Issues`, `# Pending Tasks`, `# Resolved`
-- **`history.md` (The State and Timeline)**: Chronological or state-based facts.
+- **Planning Docs (`planning/*.md`)**: Actionable steps and plans for implementation.
+  - `# Implementation Plan`, `# Task Breakdown`, `# Verification Plan`
+- **History Docs (`history/*.md`)**: Chronological or state-based facts.
   - `# Current Status`, `# Milestones`
 
 ## Workflows
@@ -60,6 +65,7 @@ The top of the freeflow document acts as a control panel. The agent authors stru
 ## Dashboard
 [Current Architecture](../design/crud.md/Architecture)
 [The Bug Report](../issues/crud.md/Open-Issues/Nowhere-Problem)
+[The Plan](../planning/crud.md/Implementation-Plan)
 [Status](../history/crud.md/Current-Status)
 ```
 *(By linking these, the agent anchors the formal state into their workspace. When unfolded via `TreeView`, it projects all these scattered formal blocks into a single localized lens).*
@@ -83,12 +89,15 @@ Instead of leaving that crystallized rule buried in the freeflow text, the agent
 # Push the crystallized rule to the formal design block
 kg:update design/crud.md/Architecture --text "A placeholder is a flag, not a distinct kind..."
 
+# Push the execution steps to the formal planning block
+kg:update planning/crud.md/Task-Breakdown --text "- [ ] Add placeholder flag to nodes\n- [ ] Reconcile missing parents"
+
 # Push the resolution status to the formal history block
 kg:update history/crud.md/Current-Status --text "Resolved Nowhere Problem via placeholder flags."
 ```
 
 ### The Resulting Ecosystem
 This creates a perfect symbiosis:
-- The **Freeflow Document** retains the entire historical journey of the thought process, the rejected ideas, and the dashboard of links that defined the task context.
-- The **Formal Documents** (`design.md`, `issues.md`) remain pristine and strictly isolated, containing only the crystallized reality of the system.
+- The **Freeflow Document** (in `discussion/`) retains the entire historical journey of the thought process, the rejected ideas, and the dashboard of links that defined the task context.
+- The **Formal Documents** (in `design/`, `issues/`, `planning/`, `history/`) remain pristine and strictly isolated, containing only the crystallized reality of the system.
 - The **Agent** navigates the graph easily, using the freeflow document as a central hub that fans out to the formal specs.

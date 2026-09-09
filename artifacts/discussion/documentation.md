@@ -10,4 +10,4 @@ No transducer or adapter can automatically untangle this. A single artifact toda
 - **Discussion & Rationale:** Why something was built a certain way, or rejected (e.g., `12. Considered and rejected`).
 - **Implementation Details:** Notes to self about code structure.
 
-This is the evidence base for adopting block-based separation of concerns (see [Architecture](../design/documentation.md/Architecture)): splitting design, issues, history, and discussion into strictly isolated documents so a reader parsing a Design doc sees only the design.
+This is the evidence base for adopting block-based separation of concerns (see [Architecture](../design/documentation.md/Architecture)): splitting design, issues, planning, history, and discussion into strictly isolated documents so a reader parsing a Design doc sees only the design.
