@@ -480,7 +480,9 @@ migration, no default-view seeding needed.
   one bootstrap path, not for everyday CLI use. Used by `kg:unfold`/`kg:fold` when `--view` is omitted;
   `kg:tree` deliberately does *not* fall back to it ([§5](<[[/Aperas-treeview-design.md/# TreeView & Profile — Design/5. Rendering: three display tiers; `kg:unfold` touches exactly one ref]]>)) — omitting `--view` there keeps the plain
   no-view default instead. See [§11](<[[/Aperas-treeview-design.md/# TreeView & Profile — Design/11. `Profile` becomes real identity — `kg:profile`]]>) for why this bootstrap doesn't make `"default"` permanently
-  special beyond that one first-use moment.
+  special beyond that one first-use moment. **Corrected in [§15](<[[/Aperas-treeview-design.md/# TreeView & Profile — Design/15. Correction: a bare `kg:unfold` (no `--view` at all) should never mutate any view]]>)
+  — the `kg:unfold` half of this was a misdesign, not a refinement: a bare `kg:unfold` with no
+  `--view` should never have fallen back to mutating this default view at all.**
 
 ## 11. `Profile` becomes real identity — `kg:profile`
 
@@ -903,3 +905,32 @@ name.
 1 is a cheap complementary safety check worth adding alongside it, not a substitute). The 10 already-
 stale ids in the live `.state/TreeView.jsonld` need a one-time manual cleanup regardless of when (or
 whether) the general sweep gets built.
+
+## 15. Correction: a bare `kg:unfold` (no `--view` at all) should never mutate any view
+
+A live check against `kgUnfold.ts`, prompted by a suspected regression, confirmed the suspected bug
+was real after all — just not a coding regression. The original intent, from before
+[§10](<[[/Aperas-treeview-design.md/# TreeView & Profile — Design/10. Open questions — all resolved]]>)'s
+"Open questions — all resolved" pass, was that `kg:unfold <ref>` with no `--view` at all is a
+read-only peek: resolve the ref, print its title/children/links preview, and touch no `TreeView`
+state at all — the exact non-mutating default `kg:tree` already keeps for itself when its own
+`--view` is omitted. §10's resolution instead had `kg:unfold`/`kg:fold` fall back to auto-creating
+and mutating the `"default"`-named view whenever `--view` was omitted — approved at the time as a
+convenience (a first-time caller never needs a separate bootstrap step), but that was a misreading
+of the original peek design, not a refinement of it: it silently turns every plain, "just let me
+look at this" `kg:unfold` call into a state-mutating one, with no way to actually peek at all once
+a `TreeView` existed.
+
+**Corrected design**: `kg:unfold <ref>` — no `--view` flag at all — peeks: resolves and prints the
+same preview as today, but calls neither `view.unfold(id)` nor `ensureDefaultView(store)`; nothing
+is created or written. `kg:unfold <ref> --view`, the flag present with no name following it, is
+what actually falls back to the `"default"`-named view — auto-creating it (and a `Profile` with
+`handle: "default"` to own it) on first use, and adding `<ref>` to its `unfolds`, matching the
+bootstrap convenience §10 originally wanted. `kg:fold`'s own no-`--view` case isn't resolved by
+this correction — folding presupposes some view's state to collapse, so a peek-equivalent doesn't
+obviously apply the same way; left open rather than guessed at here.
+
+**Status: design corrected; implementation not yet updated.** `kgUnfold.ts`'s `runUnfold` (and
+whatever service-side code resolves/creates the default view on its behalf today) still
+unconditionally calls `view.unfold(id)` — this section records the corrected intent; the code
+change itself is a separate step.

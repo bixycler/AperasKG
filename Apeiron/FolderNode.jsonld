@@ -1,1 +1,172 @@
-[]
+[
+  {
+    "@id": "FolderNode:00CDBYV47G000",
+    "@type": "FolderNode",
+    "title": "Artifacts",
+    "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode` content in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both documentation and a live corpus the substrate ingests itself.",
+    "path": ".",
+    "children": [
+      "BlockNode:00CDBYV4A0001",
+      "FolderNode:00CDBYV4A8000",
+      "FolderNode:00CDBYV4BR000",
+      "FolderNode:00CDBYV4BR001",
+      "FolderNode:00CDBYV4BR002",
+      "FolderNode:00CDBYV4BR003",
+      "FolderNode:00CDBYV4BR004",
+      "FolderNode:00CDBYV4BR005"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4A8000",
+    "@type": "FolderNode",
+    "title": "archive",
+    "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original top-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the older TerminusDB-backed designs that migration replaced.",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "archive",
+    "children": [
+      "BlockNode:00CDBYV4B0001",
+      "FolderNode:00CDBYV4B0002",
+      "FolderNode:00CDBYV4B0003",
+      "FolderNode:00CDBYV4B0004",
+      "FolderNode:00CDBYV4B0005",
+      "FolderNode:00CDBYV4B0006",
+      "FolderNode:00CDBYV4B0007"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4B0002",
+    "@type": "FolderNode",
+    "title": "design",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/design",
+    "children": []
+  },
+  {
+    "@id": "FolderNode:00CDBYV4B0003",
+    "@type": "FolderNode",
+    "title": "discussion",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/discussion",
+    "children": []
+  },
+  {
+    "@id": "FolderNode:00CDBYV4B0004",
+    "@type": "FolderNode",
+    "title": "history",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/history",
+    "children": []
+  },
+  {
+    "@id": "FolderNode:00CDBYV4B0005",
+    "@type": "FolderNode",
+    "title": "issues",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/issues",
+    "children": []
+  },
+  {
+    "@id": "FolderNode:00CDBYV4B0006",
+    "@type": "FolderNode",
+    "title": "planning",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/planning",
+    "children": []
+  },
+  {
+    "@id": "FolderNode:00CDBYV4B0007",
+    "@type": "FolderNode",
+    "title": "tdb-era",
+    "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration (`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind decisions still in force today, not as current guidance — none of these describe the live system.",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/tdb-era",
+    "children": [
+      "BlockNode:00CDBYV4BG001"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4BR000",
+    "@type": "FolderNode",
+    "title": "design",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "design",
+    "children": [
+      "ArtifactNode:00CDBYV460000"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4BR001",
+    "@type": "FolderNode",
+    "title": "discussion",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "discussion",
+    "children": [
+      "ArtifactNode:00CDBYV46R000"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4BR002",
+    "@type": "FolderNode",
+    "title": "history",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "history",
+    "children": [
+      "ArtifactNode:00CDBYV46G000"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4BR003",
+    "@type": "FolderNode",
+    "title": "issues",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "issues",
+    "children": [
+      "ArtifactNode:00CDBYV468000"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4BR004",
+    "@type": "FolderNode",
+    "title": "planning",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "planning",
+    "children": [
+      "ArtifactNode:00CDBYV46R001"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4BR005",
+    "@type": "FolderNode",
+    "title": "reports",
+    "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while investigating unexpected behavior in the live system.",
+    "parent": "FolderNode:00CDBYV47G000",
+    "path": "reports",
+    "children": [
+      "BlockNode:00CDBYV4C0001",
+      "FolderNode:00CDBYV4C0002"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4C0002",
+    "@type": "FolderNode",
+    "title": "bugs",
+    "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn substrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so the investigation stays around as a record. No open reports at the moment.",
+    "parent": "FolderNode:00CDBYV4BR005",
+    "path": "reports/bugs",
+    "children": [
+      "BlockNode:00CDBYV4CG001",
+      "FolderNode:00CDBYV4CG002"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDBYV4CG002",
+    "@type": "FolderNode",
+    "title": "resolved",
+    "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was verified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
+    "parent": "FolderNode:00CDBYV4C0002",
+    "path": "reports/bugs/resolved",
+    "children": [
+      "BlockNode:00CDBYV4D0001"
+    ]
+  }
+]

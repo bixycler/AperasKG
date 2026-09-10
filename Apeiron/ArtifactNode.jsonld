@@ -1,1 +1,88 @@
-[]
+[
+  {
+    "@id": "ArtifactNode:00CDBYV460000",
+    "@type": "ArtifactNode",
+    "title": "linking.md",
+    "text": "**Discussion**: <a name='id/BlockNode:00CDBYV4T0004' class='aperas-anchor aperas-id'></a> [Why this syntax, and what we considered instead](../discussion/linking.md).",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDBYV4T0001"
+    ],
+    "path": "design/linking.md",
+    "fileHash": "bfbf81480f8dd5b9379f4df44347ea2d106766129fe376ab978c5f9e0845172f",
+    "lastTrackedAt": "2026-09-10T07:14:29.305Z",
+    "ingestedHash": "bfbf81480f8dd5b9379f4df44347ea2d106766129fe376ab978c5f9e0845172f",
+    "lastIngestedAt": "2026-09-10T08:01:34.379Z",
+    "projectedHash": "bfbf81480f8dd5b9379f4df44347ea2d106766129fe376ab978c5f9e0845172f"
+  },
+  {
+    "@id": "ArtifactNode:00CDBYV468000",
+    "@type": "ArtifactNode",
+    "title": "linking.md",
+    "text": "None open currently.",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDBYV5A8001"
+    ],
+    "path": "issues/linking.md",
+    "fileHash": "f57f8d6cc84292fa9a15b5951dbcf46c7cc7ba7248c43822f9955189751a1cc6",
+    "lastTrackedAt": "2026-09-10T07:14:29.305Z",
+    "ingestedHash": "f57f8d6cc84292fa9a15b5951dbcf46c7cc7ba7248c43822f9955189751a1cc6",
+    "lastIngestedAt": "2026-09-10T07:53:07.392Z",
+    "projectedHash": "f57f8d6cc84292fa9a15b5951dbcf46c7cc7ba7248c43822f9955189751a1cc6"
+  },
+  {
+    "@id": "ArtifactNode:00CDBYV46G000",
+    "@type": "ArtifactNode",
+    "title": "linking.md",
+    "text": "Two internal-reference conventions coexist: node-ID addressing (currently implemented as `[[code]]`-wrapped `Kind:snowflake`, verified in `astParser.ts`/`resolve.ts`; the target design drops the `[[...]]` wrapper in favor of `aperas://id/<ID>` or `#id/<ID>`, see [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002) and [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007)) and slug-anchor addressing (`#fragment` matched against an injected `<a name=\"...\">`, prototyped but not yet adopted corpus-wide — see [Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002)).",
+    "parent": "FolderNode:00CDBYV4BR002",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDBZ7698001"
+    ],
+    "path": "history/linking.md",
+    "fileHash": "795f4e91bb2dca21dc6ba323c5ce9b15617d9b3a0f122e014488d7a496cce0a3",
+    "lastTrackedAt": "2026-09-10T07:14:29.306Z",
+    "ingestedHash": "795f4e91bb2dca21dc6ba323c5ce9b15617d9b3a0f122e014488d7a496cce0a3",
+    "lastIngestedAt": "2026-09-10T07:53:08.025Z",
+    "projectedHash": "795f4e91bb2dca21dc6ba323c5ce9b15617d9b3a0f122e014488d7a496cce0a3"
+  },
+  {
+    "@id": "ArtifactNode:00CDBYV46R000",
+    "@type": "ArtifactNode",
+    "title": "linking.md",
+    "text": "Refactoring `documentation.md` surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDBZ76T8001",
+      "BlockNode:00CDCTB49R001"
+    ],
+    "path": "discussion/linking.md",
+    "fileHash": "e919e7d9cc0b32a853a9fa87f19a8993972240c700ba141d0e24124ae21b876a",
+    "lastTrackedAt": "2026-09-10T07:14:29.306Z",
+    "ingestedHash": "e919e7d9cc0b32a853a9fa87f19a8993972240c700ba141d0e24124ae21b876a",
+    "lastIngestedAt": "2026-09-10T08:10:30.212Z",
+    "projectedHash": "e919e7d9cc0b32a853a9fa87f19a8993972240c700ba141d0e24124ae21b876a"
+  },
+  {
+    "@id": "ArtifactNode:00CDBYV46R001",
+    "@type": "ArtifactNode",
+    "title": "linking.md",
+    "text": "Two slices carry [design/linking.md](../design/linking.md)'s addressing convention to a working implementation:",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDBZ77EG001"
+    ],
+    "path": "planning/linking.md",
+    "fileHash": "0cecdd87e73002b0779fd2bcac58e07d9f0e6a5e4a4af0b6885aa6e3b7997a46",
+    "lastTrackedAt": "2026-09-10T07:14:29.307Z",
+    "ingestedHash": "0cecdd87e73002b0779fd2bcac58e07d9f0e6a5e4a4af0b6885aa6e3b7997a46",
+    "lastIngestedAt": "2026-09-10T07:58:37.819Z",
+    "projectedHash": "0cecdd87e73002b0779fd2bcac58e07d9f0e6a5e4a4af0b6885aa6e3b7997a46"
+  }
+]
