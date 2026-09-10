@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CDCTCZP0001",
+    "title": "00CDDBVX5G001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CDCTCZP8001",
+    "title": "00CDDBVX60001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CDCTCZQ0001",
+    "title": "00CDDBVX78001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -31,7 +31,6 @@
     "@type": "BlockNode",
     "title": "00CDCTCZQ8001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
-    "parent": "FolderNode:00CDBYV4BR005",
     "type": "paragraph",
     "children": []
   },
@@ -40,7 +39,6 @@
     "@type": "BlockNode",
     "title": "00CDCTCZQG001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
-    "parent": "FolderNode:00CDBYV4C0002",
     "type": "paragraph",
     "children": []
   },
@@ -49,7 +47,6 @@
     "@type": "BlockNode",
     "title": "00CDCTCZQG003",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
-    "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
     "children": []
   },
@@ -2943,6 +2940,833 @@
     "title": "00CDCTB4A0002",
     "text": "**Status: identified, not yet implemented.** No fix landed this pass — recorded here first, per the deliberate policy going forward to document a gap like this before touching code. A real fix would need `ingestArtifacts`/`ingestAllArtifacts` to either stop after the first failure and report exactly which paths already committed (least invasive), or gain real transactional semantics across a whole batch (bigger, would need every mutation this session has relied on — `hydrateFromParsed`, `applyTombstone`, `resolveBlockLinks` — to be stageable and revocable, not just applied directly).",
     "parent": "BlockNode:00CDCTB49R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68DZG001",
+    "@type": "BlockNode",
+    "title": "00CDDBVX68001",
+    "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
+    "parent": "FolderNode:00CDD68DZ8000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E00001",
+    "@type": "BlockNode",
+    "title": "00CDDBVX6G001",
+    "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
+    "parent": "FolderNode:00CDD68DZR000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E08001",
+    "@type": "BlockNode",
+    "title": "00CDDBVX70001",
+    "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
+    "parent": "FolderNode:00CDBYV4CG002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E80001",
+    "@type": "BlockNode",
+    "title": "# Architecture of Documents: Separation of Concerns & Matrix Workflow",
+    "parent": "ArtifactNode:00CDD68DS8000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E80002",
+      "BlockNode:00CDD68E80007",
+      "BlockNode:00CDD68E8000E",
+      "BlockNode:00CDD68E88002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E80002",
+    "@type": "BlockNode",
+    "title": "## Context",
+    "parent": "BlockNode:00CDD68E80001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E80003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E80003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E80003:props:StringProp:00CDD68EQG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E80003:props:StringProp:00CDD68EQG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDDBQ8RG003",
+    "parent": "BlockNode:00CDD68E80002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDD68E80004",
+      "BlockNode:00CDD68E80005",
+      "BlockNode:00CDD68E80006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E80004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDD68E80004:links:Link:00CDDBQ9G0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68EV8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDD68E80004:links:Link:00CDDBQ9G0000:props:StringProp:00CDDBQ9G0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
+    "title": "**Discussion**",
+    "text": "**Discussion**: [Motivation — the mixing problem](../discussion/documentation.md#id/BlockNode:00CDD68EV8002) — rationale for adopting block-based separation, evidenced by the pre-Phase-1.1 corpus.",
+    "parent": "BlockNode:00CDD68E80003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E80005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDD68E80005:links:Link:00CDDBQ9G0002",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68FE0004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDD68E80005:links:Link:00CDDBQ9G0002:props:StringProp:00CDDBQ9G8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [Resolved: Context/Discussion boundary](../issues/documentation.md#id/BlockNode:00CDD68FE0004) — Context conflicted with Discussion's \"motivation\"; resolved by defining Context as a factual index, not narrative.",
+    "parent": "BlockNode:00CDD68E80003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E80006",
+    "@type": "BlockNode",
+    "title": "**History**",
+    "text": "**History**: to be updated.",
+    "parent": "BlockNode:00CDD68E80003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E80007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E80007:props:StringProp:00CDD68EQR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDD68E80007:props:StringProp:00CDD68EQR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Architecture",
+    "text": "To achieve pure Perata (clean projections for the reader), the storage layer must adopt a **Block-Based Separation of Concerns**. Instead of one mixed file, the Apeiron stores strictly isolated documents (or trees):",
+    "parent": "BlockNode:00CDD68E80001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E80008",
+      "BlockNode:00CDD68E80009",
+      "BlockNode:00CDD68E8000A",
+      "BlockNode:00CDD68E8000B",
+      "BlockNode:00CDD68E8000C",
+      "BlockNode:00CDD68E8000D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E80008",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG008",
+    "text": "**Design Docs:** Pure architectural specifications, data models, and rules.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E80009",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG009",
+    "text": "**Issue Docs:** Bug reports, architectural gaps, and pending fixes.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000A",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00A",
+    "text": "**Planning Docs:** Implementation plans, task breakdowns, and step-by-step execution guides.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000B",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00B",
+    "text": "**History/Status Docs:** What was implemented, when it was verified, and milestones.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000C",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00C",
+    "text": "**Discussion Docs:** Rejected ideas, motivation, and theoretical context.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000D",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00D",
+    "text": "This guarantees that a reader parsing the \"Design Doc\" sees *only* the design, without needing complex transducers to strip out bug reports and history logs.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000E",
+    "@type": "BlockNode",
+    "title": "## Topology",
+    "text": "A rigid physical directory structure inevitably fails because software development requires different lenses at different times (e.g., building a feature vs. fixing a cross-cutting bug). Because all edits happen on the unbounded tree (Apeiron), we optimize physical storage for the **Reader** (stability) and use TreeViews/Freeflow documents for the **Agent** (dynamic tasks).",
+    "parent": "BlockNode:00CDD68E80001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E8000F",
+      "BlockNode:00CDD68E8000H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000F",
+    "@type": "BlockNode",
+    "title": "### Physical Storage: Concern-Centric",
+    "text": "At the file-system layer, artifacts are strictly grouped by concern. This forms the system-wide documentation naturally.",
+    "parent": "BlockNode:00CDD68E8000E",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E8000G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000G",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00G",
+    "text": "```text\nartifacts/\n  ├── design/\n  │   ├── crud.md                 (Pure Perata: Architecture, Models, Specs)\n  │   └── treeview.md\n  ├── issues/\n  │   ├── crud.md                 (Bugs, gaps, pending tasks)\n  │   └── network.md\n  ├── planning/\n  │   └── crud.md                 (Implementation plans, step-by-step execution guides)\n  ├── history/\n  │   └── crud.md                 (Implementation status, log of changes)\n  └── discussion/\n      └── crud.md                 (Rationale, rejected ideas, unstructured thought)\n```",
+    "parent": "BlockNode:00CDD68E8000F",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000H",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E8000H:props:StringProp:00CDD68ERR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E8000H:props:StringProp:00CDD68ERR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "### Document-Level Skeletons",
+    "text": "To ensure uniformity across the corpus, each concern document should follow a strict top-level heading structure. Standardizing these paths (e.g., `design/crud.md/Data-Model`) allows the agent to reliably address them.",
+    "parent": "BlockNode:00CDD68E8000E",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E8000J",
+      "BlockNode:00CDD68E8000N",
+      "BlockNode:00CDD68E8000Q",
+      "BlockNode:00CDD68E88000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E8000J:props:StringProp:00CDD68ERR002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E8000J:props:StringProp:00CDD68ERR003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Design Docs (`design/*.md`)**",
+    "text": "**Design Docs (`design/*.md`)**: <a name='id/BlockNode:00CDD68E8000J' class='aperas-anchor aperas-id'></a> Only normative, current-state architectural facts. No \"I think we should...\"",
+    "parent": "BlockNode:00CDD68E8000H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CDD68E8000K",
+      "BlockNode:00CDD68E8000M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000K",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00K",
+    "text": "`# Context` — a factual index of this concern's discussion, issue, planning, and history docs: one link plus a brief, non-argumentative summary per doc (what exists, not why). Rationale, rejected alternatives, and narrative stay in the linked Discussion doc — never inline here.",
+    "parent": "BlockNode:00CDD68E8000J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000M",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RG00M",
+    "text": "`# Architecture`, `# Topology`, `# Workflows`",
+    "parent": "BlockNode:00CDD68E8000J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000N",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E8000N:props:StringProp:00CDD68ES0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E8000N:props:StringProp:00CDD68ES0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Issue Docs (`issues/*.md`)**",
+    "text": "**Issue Docs (`issues/*.md`)**: <a name='id/BlockNode:00CDD68E8000N' class='aperas-anchor aperas-id'></a> Actionable, resolvable nodes.",
+    "parent": "BlockNode:00CDD68E8000H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CDD68E8000P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000P",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR001",
+    "text": "`# Open Issues`, `# Pending Tasks`, `# Resolved`",
+    "parent": "BlockNode:00CDD68E8000N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000Q",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E8000Q:props:StringProp:00CDD68ESG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E8000Q:props:StringProp:00CDD68ESG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Planning Docs (`planning/*.md`)**",
+    "text": "**Planning Docs (`planning/*.md`)**: <a name='id/BlockNode:00CDD68E8000Q' class='aperas-anchor aperas-id'></a> Actionable steps and plans for implementation.",
+    "parent": "BlockNode:00CDD68E8000H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CDD68E8000R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8000R",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR003",
+    "text": "`# Implementation Plan`, `# Task Breakdown`, `# Verification Plan`",
+    "parent": "BlockNode:00CDD68E8000Q",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E88000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E88000:props:StringProp:00CDD68ESG002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E88000:props:StringProp:00CDD68ESG003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**History Docs (`history/*.md`)**",
+    "text": "**History Docs (`history/*.md`)**: <a name='id/BlockNode:00CDD68E88000' class='aperas-anchor aperas-id'></a> Chronological or state-based facts.",
+    "parent": "BlockNode:00CDD68E8000H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CDD68E88001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E88001",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR005",
+    "text": "`# Current Status`, `# Milestones`",
+    "parent": "BlockNode:00CDD68E88000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E88002",
+    "@type": "BlockNode",
+    "title": "## Workflows",
+    "text": "The strict physical isolation of concerns is necessary for long-term health, but it is hostile to the creative process. The Aperas workflow bridges this gap by using a **Freeflow Artifact** in the `discussion/` directory as the active workspace.",
+    "parent": "BlockNode:00CDD68E80001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E88003",
+      "BlockNode:00CDD68E88004",
+      "BlockNode:00CDD68E88008",
+      "BlockNode:00CDD68E8800B",
+      "BlockNode:00CDD68E8800E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E88003",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR007",
+    "text": "When starting a task, the agent doesn't jump between `design.md` and `issues.md`. They create a freeflow discussion document, which serves two simultaneous purposes:",
+    "parent": "BlockNode:00CDD68E88002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E88004",
+    "@type": "BlockNode",
+    "title": "### The Dashboard (Context Assembly)",
+    "text": "The top of the freeflow document acts as a control panel. The agent authors structural links to all the formal blocks across the corpus that are relevant to the current task.",
+    "parent": "BlockNode:00CDD68E88002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E88005",
+      "BlockNode:00CDD68E88006",
+      "BlockNode:00CDD68E88007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E88005",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR009",
+    "text": "**`discussion/crud-reconciliation-task.md`**",
+    "parent": "BlockNode:00CDD68E88004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E88006",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00A",
+    "text": "```markdown\n# CRUD Reconciliation Task\n\n## Dashboard\n[Current Architecture](../design/crud.md/Architecture)\n[The Bug Report](../issues/crud.md/Open-Issues/Nowhere-Problem)\n[The Plan](../planning/crud.md/Implementation-Plan)\n[Status](../history/crud.md/Current-Status)\n```",
+    "parent": "BlockNode:00CDD68E88004",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E88007",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00B",
+    "text": "*(By linking these, the agent anchors the formal state into their workspace. When unfolded via `TreeView`, it projects all these scattered formal blocks into a single localized lens).*",
+    "parent": "BlockNode:00CDD68E88004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E88008",
+    "@type": "BlockNode",
+    "title": "### The Scratchpad (Freeflow Authoring)",
+    "text": "Beneath the dashboard, the agent dumps unstructured, messy thoughts exactly as they do today.",
+    "parent": "BlockNode:00CDD68E88002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E88009",
+      "BlockNode:00CDD68E8800A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E88009",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00D",
+    "text": "```markdown\n## Brainstorming\nSo the issue happens because the parent node is missing.\nIf we use a placeholder flag on the node, it could reconcile safely...\n```",
+    "parent": "BlockNode:00CDD68E88008",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800A",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00E",
+    "text": "This is pure Apeiron. It is unbounded, unstructured, and safe from strict schema rules. It exists only in the discussion concern.",
+    "parent": "BlockNode:00CDD68E88008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800B",
+    "@type": "BlockNode",
+    "title": "### Crystallization (The Update Loop)",
+    "text": "Eventually, the brainstorming yields a concrete decision. The thought *crystallizes* from a messy idea into a formal architectural rule, or a formal task.",
+    "parent": "BlockNode:00CDD68E88002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E8800C",
+      "BlockNode:00CDD68E8800D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800C",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00G",
+    "text": "Instead of leaving that crystallized rule buried in the freeflow text, the agent projects it back to the formal block using the CRUD surface:",
+    "parent": "BlockNode:00CDD68E8800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800D",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00H",
+    "text": "```bash\n# Push the crystallized rule to the formal design block\nkg:update design/crud.md/Architecture --text \"A placeholder is a flag, not a distinct kind...\"\n\n# Push the execution steps to the formal planning block\nkg:update planning/crud.md/Task-Breakdown --text \"- [ ] Add placeholder flag to nodes\\n- [ ] Reconcile missing parents\"\n\n# Push the resolution status to the formal history block\nkg:update history/crud.md/Current-Status --text \"Resolved Nowhere Problem via placeholder flags.\"\n```",
+    "parent": "BlockNode:00CDD68E8800B",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800E",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68E8800E:props:StringProp:00CDD68ET8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68E8800E:props:StringProp:00CDD68ETG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "### The Resulting Ecosystem",
+    "text": "This creates a perfect symbiosis:",
+    "parent": "BlockNode:00CDD68E88002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68E8800F",
+      "BlockNode:00CDD68E8800G",
+      "BlockNode:00CDD68E8800H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800F",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00K",
+    "text": "The **Freeflow Document** (in `discussion/`) retains the entire historical journey of the thought process, the rejected ideas, and the dashboard of links that defined the task context.",
+    "parent": "BlockNode:00CDD68E8800E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800G",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00M",
+    "text": "The **Formal Documents** (in `design/`, `issues/`, `planning/`, `history/`) remain pristine and strictly isolated, containing only the crystallized reality of the system.",
+    "parent": "BlockNode:00CDD68E8800E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68E8800H",
+    "@type": "BlockNode",
+    "title": "00CDDBQ8RR00N",
+    "text": "The **Agent** navigates the graph easily, using the freeflow document as a central hub that fans out to the formal specs.",
+    "parent": "BlockNode:00CDD68E8800E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8001",
+    "@type": "BlockNode",
+    "title": "# Documentation Architecture — Discussion",
+    "parent": "ArtifactNode:00CDD68DSG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68EV8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8002",
+    "@type": "BlockNode",
+    "title": "## Motivation: The Mixing Problem",
+    "text": "Currently, documents in `AperasKG/artifacts/` are massive mixtures of completely different logical concerns. Looking at actual project files (e.g., `Aperas-crud-design.md` and `Aperas-treeview-design.md`), the writer often mixes everything into a single document and sometimes even the same paragraph.",
+    "parent": "BlockNode:00CDD68EV8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68EV8003",
+      "BlockNode:00CDDBVXAR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68EV8003:props:StringProp:00CDD68FCR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68EV8003:props:StringProp:00CDD68FCR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDDBVXAG003",
+    "text": "No transducer or adapter can automatically untangle this. A single artifact today contains:",
+    "parent": "BlockNode:00CDD68EV8002",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDD68EV8004",
+      "BlockNode:00CDD68EV8005",
+      "BlockNode:00CDD68EV8006",
+      "BlockNode:00CDD68EV8007",
+      "BlockNode:00CDD68EV8008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8004",
+    "@type": "BlockNode",
+    "title": "00CDDBVXAG004",
+    "text": "**Core Design:** The actual specification (e.g., `3. Core model: placeholder is a flag`).",
+    "parent": "BlockNode:00CDD68EV8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8005",
+    "@type": "BlockNode",
+    "title": "00CDDBVXAG005",
+    "text": "**Issues & Gaps:** Bugs discovered live during implementation (e.g., `6. Bookkeeping gaps found while designing this`).",
+    "parent": "BlockNode:00CDD68EV8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8006",
+    "@type": "BlockNode",
+    "title": "00CDDBVXAG006",
+    "text": "**History & Status:** Implementation progress and verification records (e.g., `Status: implemented, live-verified against a synthetic graph`).",
+    "parent": "BlockNode:00CDD68EV8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8007",
+    "@type": "BlockNode",
+    "title": "00CDDBVXAR000",
+    "text": "**Discussion & Rationale:** Why something was built a certain way, or rejected (e.g., `12. Considered and rejected`).",
+    "parent": "BlockNode:00CDD68EV8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68EV8008",
+    "@type": "BlockNode",
+    "title": "00CDDBVXAR001",
+    "text": "**Implementation Details:** Notes to self about code structure.",
+    "parent": "BlockNode:00CDD68EV8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68FE0001",
+    "@type": "BlockNode",
+    "title": "# Documentation — Issues",
+    "parent": "ArtifactNode:00CDD68DSG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68FE0002",
+      "BlockNode:00CDD68FE0003",
+      "BlockNode:00CDD68FE0004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68FE0002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "text": "None.",
+    "parent": "BlockNode:00CDD68FE0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68FE0003",
+    "@type": "BlockNode",
+    "title": "## Pending Tasks",
+    "text": "None.",
+    "parent": "BlockNode:00CDD68FE0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDD68FE0004",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "parent": "BlockNode:00CDD68FE0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDD68FE0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68FE0005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDD68FE0005:props:StringProp:00CDD68G38000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDD68FE0005:props:StringProp:00CDD68G38001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDDBQ9J0005",
+    "parent": "BlockNode:00CDD68FE0004",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDD68FE0006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDD68FE0006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60000",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68E80002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60000:props:StringProp:00CDDBQA60001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "491"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60002",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68E8000H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60002:props:StringProp:00CDDBQA60003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "560"
+          }
+        ]
+      }
+    ],
+    "title": "00CDDBQ9J0006",
+    "text": "**Context/Discussion boundary was undefined.** `design.md`'s skeleton named `# Context` as a heading, while the concern taxonomy filed \"motivation\" under Discussion Docs — with no stated line between the two, Context could silently regrow into narrative.\n    Resolved by defining `# Context` as a factual index: a link plus a brief, non-argumentative summary per linked doc (what exists, not why). Rationale and narrative stay in the linked `discussion.md`, never inline in `design.md`. See [Context](../design/documentation.md#id/BlockNode:00CDD68E80002) and [Document-Level Skeletons](../design/documentation.md#id/BlockNode:00CDD68E8000H).",
+    "parent": "BlockNode:00CDD68FE0005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDBVXAR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDBVXAR002:links:Link:00CDDBVXXG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68E80007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDBVXAR002:links:Link:00CDDBVXXG000:props:StringProp:00CDDBVXXR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "79"
+          }
+        ]
+      }
+    ],
+    "title": "00CDDBVXAR002",
+    "text": "This is the evidence base for adopting block-based separation of concerns (see [Architecture](../design/documentation.md#id/BlockNode:00CDD68E80007)): splitting design, issues, planning, history, and discussion into strictly isolated documents so a reader parsing a Design doc sees only the design.",
+    "parent": "BlockNode:00CDD68EV8002",
     "type": "paragraph",
     "children": []
   }

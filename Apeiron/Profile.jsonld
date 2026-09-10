@@ -3,5 +3,11 @@
     "@id": "Profile:00CA03JXD8000",
     "@type": "Profile",
     "handle": "default"
+  },
+  {
+    "@id": "Profile:00CDD5NTXG000",
+    "@type": "Profile",
+    "handle": "claude-sonnet",
+    "name": "Claude Sonnet"
   }
 ]

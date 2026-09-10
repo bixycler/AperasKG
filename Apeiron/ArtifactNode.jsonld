@@ -84,5 +84,56 @@
     "ingestedHash": "0cecdd87e73002b0779fd2bcac58e07d9f0e6a5e4a4af0b6885aa6e3b7997a46",
     "lastIngestedAt": "2026-09-10T07:58:37.819Z",
     "projectedHash": "0cecdd87e73002b0779fd2bcac58e07d9f0e6a5e4a4af0b6885aa6e3b7997a46"
+  },
+  {
+    "@id": "ArtifactNode:00CDD68DS8000",
+    "@type": "ArtifactNode",
+    "title": "documentation.md",
+    "text": "**Discussion**: [Motivation — the mixing problem](../discussion/documentation.md#id/BlockNode:00CDD68EV8002) — rationale for adopting block-based separation, evidenced by the pre-Phase-1.1 corpus.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDD68E80001"
+    ],
+    "path": "design/documentation.md",
+    "fileHash": "a2d1bc67daf6f76afd048cf27f0ce65a2dd3da5260799370cf7c1dd5bbd1502d",
+    "lastTrackedAt": "2026-09-10T08:48:21.034Z",
+    "ingestedHash": "a2d1bc67daf6f76afd048cf27f0ce65a2dd3da5260799370cf7c1dd5bbd1502d",
+    "lastIngestedAt": "2026-09-10T08:48:45.843Z",
+    "projectedHash": "a2d1bc67daf6f76afd048cf27f0ce65a2dd3da5260799370cf7c1dd5bbd1502d"
+  },
+  {
+    "@id": "ArtifactNode:00CDD68DSG000",
+    "@type": "ArtifactNode",
+    "title": "documentation.md",
+    "text": "Currently, documents in `AperasKG/artifacts/` are massive mixtures of completely different logical concerns. Looking at actual project files (e.g., `Aperas-crud-design.md` and `Aperas-treeview-design.md`), the writer often mixes everything into a single document and sometimes even the same paragraph.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDD68EV8001"
+    ],
+    "path": "discussion/documentation.md",
+    "fileHash": "e83e44d86508b223ad8c9f8b9ebc9a8bd746ea1f778eb603298cde4a3cc62e3c",
+    "lastTrackedAt": "2026-09-10T08:48:21.035Z",
+    "ingestedHash": "e83e44d86508b223ad8c9f8b9ebc9a8bd746ea1f778eb603298cde4a3cc62e3c",
+    "lastIngestedAt": "2026-09-10T08:48:46.443Z",
+    "projectedHash": "e83e44d86508b223ad8c9f8b9ebc9a8bd746ea1f778eb603298cde4a3cc62e3c"
+  },
+  {
+    "@id": "ArtifactNode:00CDD68DSG001",
+    "@type": "ArtifactNode",
+    "title": "documentation.md",
+    "text": "None.",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDD68FE0001"
+    ],
+    "path": "issues/documentation.md",
+    "fileHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3",
+    "lastTrackedAt": "2026-09-10T08:48:21.035Z",
+    "ingestedHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3",
+    "lastIngestedAt": "2026-09-10T08:48:47.022Z",
+    "projectedHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3"
   }
 ]

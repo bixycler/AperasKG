@@ -12,8 +12,7 @@
       "FolderNode:00CDBYV4BR001",
       "FolderNode:00CDBYV4BR002",
       "FolderNode:00CDBYV4BR003",
-      "FolderNode:00CDBYV4BR004",
-      "FolderNode:00CDBYV4BR005"
+      "FolderNode:00CDBYV4BR004"
     ]
   },
   {
@@ -30,6 +29,7 @@
       "FolderNode:00CDBYV4B0004",
       "FolderNode:00CDBYV4B0005",
       "FolderNode:00CDBYV4B0006",
+      "FolderNode:00CDD68DZ8000",
       "FolderNode:00CDBYV4B0007"
     ]
   },
@@ -91,6 +91,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "design",
     "children": [
+      "ArtifactNode:00CDD68DS8000",
       "ArtifactNode:00CDBYV460000"
     ]
   },
@@ -101,6 +102,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "discussion",
     "children": [
+      "ArtifactNode:00CDD68DSG000",
       "ArtifactNode:00CDBYV46R000"
     ]
   },
@@ -121,6 +123,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "issues",
     "children": [
+      "ArtifactNode:00CDD68DSG001",
       "ArtifactNode:00CDBYV468000"
     ]
   },
@@ -135,38 +138,38 @@
     ]
   },
   {
-    "@id": "FolderNode:00CDBYV4BR005",
-    "@type": "FolderNode",
-    "title": "reports",
-    "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while investigating unexpected behavior in the live system.",
-    "parent": "FolderNode:00CDBYV47G000",
-    "path": "reports",
-    "children": [
-      "BlockNode:00CDBYV4C0001",
-      "FolderNode:00CDBYV4C0002"
-    ]
-  },
-  {
-    "@id": "FolderNode:00CDBYV4C0002",
-    "@type": "FolderNode",
-    "title": "bugs",
-    "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn substrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so the investigation stays around as a record. No open reports at the moment.",
-    "parent": "FolderNode:00CDBYV4BR005",
-    "path": "reports/bugs",
-    "children": [
-      "BlockNode:00CDBYV4CG001",
-      "FolderNode:00CDBYV4CG002"
-    ]
-  },
-  {
     "@id": "FolderNode:00CDBYV4CG002",
     "@type": "FolderNode",
     "title": "resolved",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was verified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
-    "parent": "FolderNode:00CDBYV4C0002",
-    "path": "reports/bugs/resolved",
+    "parent": "FolderNode:00CDD68DZR000",
+    "path": "archive/reports/bugs/resolved",
     "children": [
-      "BlockNode:00CDBYV4D0001"
+      "BlockNode:00CDD68E08001"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDD68DZ8000",
+    "@type": "FolderNode",
+    "title": "reports",
+    "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while investigating unexpected behavior in the live system.",
+    "parent": "FolderNode:00CDBYV4A8000",
+    "path": "archive/reports",
+    "children": [
+      "BlockNode:00CDD68DZG001",
+      "FolderNode:00CDD68DZR000"
+    ]
+  },
+  {
+    "@id": "FolderNode:00CDD68DZR000",
+    "@type": "FolderNode",
+    "title": "bugs",
+    "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn substrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so the investigation stays around as a record. No open reports at the moment.",
+    "parent": "FolderNode:00CDD68DZ8000",
+    "path": "archive/reports/bugs",
+    "children": [
+      "BlockNode:00CDD68E00001",
+      "FolderNode:00CDBYV4CG002"
     ]
   }
 ]
