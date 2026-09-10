@@ -3752,7 +3752,10 @@
     "children": [
       "BlockNode:00CDDVBXHG000",
       "BlockNode:00CDDVBXHG005",
-      "BlockNode:00CDGTZHSR001"
+      "BlockNode:00CDGTZHSR001",
+      "BlockNode:00CDHSJQE8001",
+      "BlockNode:00CDY7PGG0001",
+      "BlockNode:00CDW3R42G001"
     ]
   },
   {
@@ -3869,8 +3872,24 @@
   {
     "@id": "BlockNode:00CDDVBXHG005",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVBXHG005:links:Link:00CDH87740000",
+        "@type": "Link",
+        "target": "BlockNode:00CDGTZHSR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVBXHG005:links:Link:00CDH87740000:props:StringProp:00CDH87740001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "627"
+          }
+        ]
+      }
+    ],
     "title": "## Architecture",
-    "text": "The published CLI is a single `aperas` binary that argv-dispatches to a subcommand per verb (`aperas ingest`, `aperas tree`, `aperas unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router.",
+    "text": "The published CLI is a single `aperas` binary that argv-dispatches to a subcommand per verb (`aperas ingest`, `aperas tree`, `aperas unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router. That dispatcher lives in its own package (`packages/cli`), never merged with the graph engine it drives (`packages/core`): the same engine a CLI invocation loads in-process today is what a future UI (`packages/web`) would embed directly, with no CLI layer in between. See [Topology](#id/BlockNode:00CDGTZHSR001) for the concrete package boundaries this implies.",
     "parent": "BlockNode:00CDDVBXH8001",
     "type": "heading",
     "children": []
@@ -4093,84 +4112,28 @@
     "@id": "BlockNode:00CDDVC8N0002",
     "@type": "BlockNode",
     "title": "## Open Issues",
+    "text": "None.",
     "parent": "BlockNode:00CDDVC8N0001",
     "type": "heading",
-    "children": [
-      "BlockNode:00CDDVC8N0003"
-    ]
-  },
-  {
-    "@id": "BlockNode:00CDDVC8N0003",
-    "@type": "BlockNode",
-    "props": [
-      {
-        "@id": "BlockNode:00CDDVC8N0003:props:StringProp:00CDDVC958000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CDDVC8N0003:props:StringProp:00CDDVC958001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
-    "title": "00CDF8EQSR003",
-    "parent": "BlockNode:00CDDVC8N0002",
-    "type": "list",
-    "children": [
-      "BlockNode:00CDDVC8N0004",
-      "BlockNode:00CDDVC8N0005"
-    ]
+    "children": []
   },
   {
     "@id": "BlockNode:00CDDVC8N0004",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDGMBPCR000",
-        "@type": "Link",
-        "target": "BlockNode:00CDDVC33G006",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDGMBPCR000:props:StringProp:00CDGMBPCR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "264"
-          }
-        ]
-      }
-    ],
+    "tombstonedAt": "2026-09-11T02:41:59.380Z",
     "title": "00CDF8EQSR004",
-    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/packaging.md#id/BlockNode:00CDDVC33G006).",
-    "parent": "BlockNode:00CDDVC8N0003",
+    "text": "`aperas` builds to a real `bin`: `packages/cli/build.mjs` (`esbuild`, `oxigraph` external) produces a self-contained `packages/cli/dist/` (bundle + minimal `package.json` with a `bin` entry). Verified running standalone via plain `node`, no `tsx`, against the real graph — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWP69B8001).",
+    "parent": "BlockNode:00CDHFMMKR001",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDDVC8N0005",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDGMBTMG000",
-        "@type": "Link",
-        "target": "BlockNode:00CDDVC33G00A",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDGMBTMG000:props:StringProp:00CDGMBTMG001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "234"
-          }
-        ]
-      }
-    ],
+    "tombstonedAt": "2026-09-11T02:41:08.475Z",
     "title": "00CDF8EQSR005",
-    "text": "**The graph's location is hardcoded.** `getArtifactsDir()` resolves `AperasKG/artifacts` as a fixed sibling of `web/` — true only for this repo's own layout, not for an installed CLI running against an arbitrary user's own graph. See [discussion](../discussion/packaging.md#id/BlockNode:00CDDVC33G00A).",
-    "parent": "BlockNode:00CDDVC8N0003",
+    "text": "Replace `getArtifactsDir()`'s hardcoded hop-counting with `identity.json` + `aperas.config.json` discovery (design settled, see [Configuration](../design/packaging.md#id/BlockNode:00CDHSJQE8001)).",
+    "parent": "BlockNode:00CDHFMMKR001",
     "type": "listItem",
     "children": []
   },
@@ -4181,16 +4144,20 @@
     "text": "None.",
     "parent": "BlockNode:00CDDVC8N0001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CDHFMMKR001",
+      "BlockNode:00CDWB3KBG001"
+    ]
   },
   {
     "@id": "BlockNode:00CDDVC8N0007",
     "@type": "BlockNode",
     "title": "## Resolved",
-    "text": "None.",
     "parent": "BlockNode:00CDDVC8N0001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CDWQ0V88001"
+    ]
   },
   {
     "@id": "BlockNode:00CDDVCDW8001",
@@ -4223,22 +4190,22 @@
         ]
       },
       {
-        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDGMDC90001",
+        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDY8D820000",
         "@type": "Link",
-        "target": "BlockNode:00CDDVBXHG005",
+        "target": "BlockNode:00CDDVCKCG002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDGMDC90001:props:StringProp:00CDGMDC90002",
+            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDY8D820000:props:StringProp:00CDY8D820001",
             "@type": "StringProp",
             "key": "position",
-            "value": "120"
+            "value": "169"
           }
         ]
       }
     ],
     "title": "## Implementation Plan",
-    "text": "To be broken down once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
+    "text": "Broken down below once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) had an answer. All 19 numbered steps are done and verified — see [history](../history/packaging.md#id/BlockNode:00CDDVCKCG002) for the closing summary.",
     "parent": "BlockNode:00CDDVCDW8001",
     "type": "heading",
     "children": []
@@ -4277,22 +4244,50 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDH1B1XG000",
+        "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDY7DNH0000",
         "@type": "Link",
-        "target": "BlockNode:00CDGTZHSR001",
+        "target": "BlockNode:00CDHSJQE8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDH1B1XG000:props:StringProp:00CDH1B1XR000",
+            "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDY7DNH0000:props:StringProp:00CDZQYJ2G000",
             "@type": "StringProp",
             "key": "position",
-            "value": "162"
+            "value": "325"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDY7DNH0002",
+        "@type": "Link",
+        "target": "BlockNode:00CDW3R42G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDY7DNH0002:props:StringProp:00CDZQYJ5R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "460"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDZQYJ2G001",
+        "@type": "Link",
+        "target": "BlockNode:00CDY7PGG0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDZQYJ2G001:props:StringProp:00CDZQYJ2G002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "393"
           }
         ]
       }
     ],
     "title": "## Current Status",
-    "text": "The rename to `packaging.md` and the 3-way workspace split (`packages/core`/`cli`/`web` under a renamed `Aperas/monorepo/` root) are both done and verified — see [Workspace Split](../design/packaging.md#id/BlockNode:00CDGTZHSR001). Still planning: the dispatcher binary itself (`aperas`), and the open packaging/graph-location questions.",
+    "text": "The full packaging effort is done, with no open gaps: the rename to `packaging.md`, the 3-way workspace split, the `aperas` dispatcher, `identity.json`/`aperas.config.json` configuration (including two independent path roots), a real build-to-`bin`, and the explicit-start service redesign are all shipped and verified — see [Configuration](../design/packaging.md#id/BlockNode:00CDHSJQE8001), [Workflow](../design/packaging.md#id/BlockNode:00CDY7PGG0001), and [Distribution](../design/packaging.md#id/BlockNode:00CDW3R42G001). `kg:show <ref>` — a raw single-node inspection command, once tracked here — turned out to be a TreeView/node-rendering gap rather than a packaging one, and moved to `AperasKG/artifacts/archive/Aperas-treeview-design.md`.",
     "parent": "BlockNode:00CDDVCKCG001",
     "type": "heading",
     "children": []
@@ -4304,7 +4299,13 @@
     "parent": "BlockNode:00CDDVCKCG001",
     "type": "heading",
     "children": [
-      "BlockNode:00CDH1CNN8001"
+      "BlockNode:00CDH1CNN8001",
+      "BlockNode:00CDHAY1P8001",
+      "BlockNode:00CDY84BJ8001",
+      "BlockNode:00CDY85ZQG001",
+      "BlockNode:00CDY87KN8000",
+      "BlockNode:00CDY8A3KG001",
+      "BlockNode:00CDZQWM0G001"
     ]
   },
   {
@@ -4968,21 +4969,7 @@
   {
     "@id": "BlockNode:00CDGTZHSR001",
     "@type": "BlockNode",
-    "props": [
-      {
-        "@id": "BlockNode:00CDGTZHSR001:props:StringProp:00CDGTZJK0000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CDGTZHSR001:props:StringProp:00CDGTZJK0001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
-    "title": "## Workspace Split",
+    "title": "## Topology",
     "text": "An npm workspace under a renamed root (`Aperas/monorepo/`, replacing `Aperas/web/` — a directory called \"web\" stopped meaning \"the frontend\" once it also housed the whole engine and CLI), three packages:",
     "parent": "BlockNode:00CDDVBXH8001",
     "type": "heading",
@@ -5055,7 +5042,8 @@
       "BlockNode:00CDGV1RKR001",
       "BlockNode:00CDGV1RKR002",
       "BlockNode:00CDGV1RKR003",
-      "BlockNode:00CDGV1RKR004"
+      "BlockNode:00CDGV1RKR004",
+      "BlockNode:00CDH90MNG001"
     ]
   },
   {
@@ -5158,6 +5146,2119 @@
     "title": "Workspace split",
     "text": "Workspace split: `packages/core`/`cli`/`web` under `Aperas/monorepo/`, all three type-check clean, full `npm run verify` harness (18 checks) passes end-to-end from the new location.",
     "parent": "BlockNode:00CDH1CNN8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8S908001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDH8S908001:links:Link:00CDH8S9Q8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVBXHG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDH8S908001:links:Link:00CDH8S9Q8000:props:StringProp:00CDH8S9Q8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "75"
+          }
+        ]
+      }
+    ],
+    "title": "## Freeflow: planning the `aperas` dispatcher itself",
+    "text": "The workspace split is done; the dispatcher it was meant to make room for ([Architecture](../design/packaging.md#id/BlockNode:00CDDVBXHG005)) still doesn't exist. Working out the concrete shape before writing any of it.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDH8S908002",
+      "BlockNode:00CDH8S908003",
+      "BlockNode:00CDH8S908004",
+      "BlockNode:00CDH8S908005",
+      "BlockNode:00CDH8S90G000",
+      "BlockNode:00CDH8S90G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDH8S908002",
+    "@type": "BlockNode",
+    "title": "**Verb → module**",
+    "text": "**Verb → module**: a static table in the new `packages/cli/src/aperas.ts` (verb string -> the matching `kgX.ts` module), not filesystem auto-discovery — there are ~19 fixed commands, a static map is simpler and makes an unrecognized verb a clean, listable error rather than \"whatever happens to be on disk.\"",
+    "parent": "BlockNode:00CDH8S908001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8S908003",
+    "@type": "BlockNode",
+    "title": "00CDH8S908003",
+    "text": "**The real gap: every `kgX.ts`'s `main()` is private.** Each file already separates a pure `run*` function from its own `main()` (argv-parsing, stdin, printing) — but `main()` itself is never exported, only invoked at the bottom of the file behind `if (process.argv[1]?.endsWith('kgX.ts')) main()...`. A dispatcher importing the module and expecting to call its `main()` needs that export added, in every one of the ~19 files. The self-invocation guard stays exactly as-is underneath that export — direct `tsx kgX.ts` (what the existing `kg:*` npm scripts still do) keeps working unchanged; the dispatcher is a second caller of the same exported function, not a replacement for the first.",
+    "parent": "BlockNode:00CDH8S908001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8S908004",
+    "@type": "BlockNode",
+    "title": "00CDH8S908004",
+    "text": "**argv re-slicing.** `main()` reads `process.argv.slice(2)` directly (not a parameter) expecting its own args to start there. Invoked as `aperas <verb> <rest...>`, `process.argv` is `[node, aperas.ts, <verb>, ...rest]` — one extra element ahead of what any `main()` expects. The dispatcher has to splice the verb back out of `process.argv` itself before calling the target's `main()`, since nothing here can change what `main()` reads from.",
+    "parent": "BlockNode:00CDH8S908001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8S908005",
+    "@type": "BlockNode",
+    "title": "00CDH8S908005",
+    "text": "**No verb / unrecognized verb / `--help`.** The static verb table doubles as the source for a top-level listing (verb + one-line description, authored once in `aperas.ts`, not scraped from each command's own `kgHelp.ts` output — that's only reachable by actually invoking a specific command's `--help`, not introspectable ahead of time without doing so). `aperas <verb> --help` forwards straight into that verb's own existing `main()`, which already implements it via `wantsHelp`/`printHelp` — nothing new needed there.",
+    "parent": "BlockNode:00CDH8S908001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8S90G000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDH8S90G000:links:Link:00CDH8S9Q8002",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDH8S90G000:links:Link:00CDH8S9Q8002:props:StringProp:00CDH8S9QG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "298"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDH8S90G000:links:Link:00CDH8S9QG001",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC8N0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDH8S90G000:links:Link:00CDH8S9QG001:props:StringProp:00CDH8S9QG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "443"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDH8S90G000:links:Link:00CDH8S9QG003",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVCDW8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDH8S90G000:links:Link:00CDH8S9QG003:props:StringProp:00CDH8S9QG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "641"
+          }
+        ]
+      }
+    ],
+    "title": "00CDH8S90G000",
+    "text": "**Entry point, deliberately punted on the bigger question.** A root `\"aperas\": \"tsx packages/cli/src/aperas.ts\"` script (`npm run aperas -- <verb> <args>`) is enough to make the dispatcher real and testable today, same mechanism every `kg:*` script already uses. This deliberately does *not* touch [the runtime question](#id/BlockNode:00CDDVC33G009) (a real compiled build + `bin` field + shebang, for an actual installable global command) or [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) — both stay open, tracked separately; the dispatcher mechanism itself doesn't depend on either being answered first ([Implementation Plan](../planning/packaging.md#id/BlockNode:00CDDVCDW8002) already says as much).",
+    "parent": "BlockNode:00CDH8S908001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8S90G001",
+    "@type": "BlockNode",
+    "title": "**Verification**",
+    "text": "**Verification**: spot-check a handful of verbs through `aperas <verb>` against their `kg:<verb>` equivalent (same output), and re-run the full `npm run verify` harness — it calls `run*` functions directly, so the dispatcher layer shouldn't be able to affect it either way; a regression there would mean something broke in a shared file, not the dispatcher itself.",
+    "parent": "BlockNode:00CDH8S908001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8WQV8000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDH8WQV8000:props:StringProp:00CDH8WRHR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDH8WQV8000:props:StringProp:00CDH8WRHR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "7"
+      }
+    ],
+    "title": "00CDH8WQV8000",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDH8WQV8001",
+      "BlockNode:00CDH8WQV8002",
+      "BlockNode:00CDH8WQV8003",
+      "BlockNode:00CDH8WQV8004",
+      "BlockNode:00CDH8WQV8005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDH8WQV8001",
+    "@type": "BlockNode",
+    "title": "00CDH8WQV8001",
+    "text": "Export `main` from every `kgX.ts` (leaving the existing `if (process.argv[1]?.endsWith(...)) main()` self-invocation guard untouched underneath it).",
+    "parent": "BlockNode:00CDH8WQV8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8WQV8002",
+    "@type": "BlockNode",
+    "title": "Add `packages/cli/src/aperas.ts`",
+    "text": "Add `packages/cli/src/aperas.ts`: a static verb-to-module table (also doubling as the top-level `--help`/no-args listing), argv re-slicing before calling the target's `main()`, and a clean error listing valid verbs on an unrecognized one.",
+    "parent": "BlockNode:00CDH8WQV8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8WQV8003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDH8WQV8003:links:Link:00CDH8WRJ8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDH8WQV8003:links:Link:00CDH8WRJ8000:props:StringProp:00CDH8WRJ8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "127"
+          }
+        ]
+      }
+    ],
+    "title": "Root `package.json`",
+    "text": "Root `package.json`: add an `\"aperas\": \"tsx packages/cli/src/aperas.ts\"` script — deliberately not a real `bin`/build yet (see [the runtime question](../discussion/packaging.md#id/BlockNode:00CDDVC33G009), still open).",
+    "parent": "BlockNode:00CDH8WQV8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8WQV8004",
+    "@type": "BlockNode",
+    "title": "00CDH8WQV8004",
+    "text": "Spot-check a handful of verbs through `aperas <verb>` against their `kg:<verb>` equivalent, confirm identical output.",
+    "parent": "BlockNode:00CDH8WQV8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH8WQV8005",
+    "@type": "BlockNode",
+    "title": "00CDH8WQV8005",
+    "text": "Re-run `npm run verify` (calls `run*` directly, so it should be unaffected either way — a regression there means something broke in a shared file, not the dispatcher).",
+    "parent": "BlockNode:00CDH8WQV8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH90MNG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDH90MNG001:props:StringProp:00CDH90NFG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDH90MNG001:props:StringProp:00CDH90NFG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "7"
+      }
+    ],
+    "title": "00CDH90MNG001",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDH90MNG002",
+      "BlockNode:00CDH90MNG003",
+      "BlockNode:00CDH90MNG004",
+      "BlockNode:00CDH90MNG005",
+      "BlockNode:00CDH90MNG006",
+      "BlockNode:00CDHSZ05G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDH90MNG002",
+    "@type": "BlockNode",
+    "title": "00CDH90MNG002",
+    "text": "Export `main` from every `kgX.ts` (leaving the existing `if (process.argv[1]?.endsWith(...)) main()` self-invocation guard untouched underneath it).",
+    "parent": "BlockNode:00CDH90MNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH90MNG003",
+    "@type": "BlockNode",
+    "title": "Add `packages/cli/src/aperas.ts`",
+    "text": "Add `packages/cli/src/aperas.ts`: a static verb-to-module table (also doubling as the top-level `--help`/no-args listing), argv re-slicing before calling the target's `main()`, and a clean error listing valid verbs on an unrecognized one.",
+    "parent": "BlockNode:00CDH90MNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH90MNG004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDH90MNG004:links:Link:00CDH90NG0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDH90MNG004:links:Link:00CDH90NG0000:props:StringProp:00CDH90NG0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "127"
+          }
+        ]
+      }
+    ],
+    "title": "Root `package.json`",
+    "text": "Root `package.json`: add an `\"aperas\": \"tsx packages/cli/src/aperas.ts\"` script — deliberately not a real `bin`/build yet (see [the runtime question](../discussion/packaging.md#id/BlockNode:00CDDVC33G009), still open).",
+    "parent": "BlockNode:00CDH90MNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH90MNG005",
+    "@type": "BlockNode",
+    "title": "00CDH90MNG005",
+    "text": "Spot-check a handful of verbs through `aperas <verb>` against their `kg:<verb>` equivalent, confirm identical output.",
+    "parent": "BlockNode:00CDH90MNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH90MNG006",
+    "@type": "BlockNode",
+    "title": "00CDH90MNG006",
+    "text": "Re-run `npm run verify` (calls `run*` directly, so it should be unaffected either way — a regression there means something broke in a shared file, not the dispatcher).",
+    "parent": "BlockNode:00CDH90MNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHAY1P8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDHAY1P8001:props:StringProp:00CDHAY2QG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDHAY1P8001:props:StringProp:00CDHAY2QR000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDHAY1P8001",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDHAY1P8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHAY1P8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDHAY1P8002:links:Link:00CDHAY2R0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDHAY1P8002:links:Link:00CDHAY2R0000:props:StringProp:00CDHAY2R0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "347"
+          }
+        ]
+      }
+    ],
+    "title": "`aperas` dispatcher",
+    "text": "`aperas` dispatcher: every `kgX.ts` exports its own `main()`, a static verb table in `packages/cli/src/aperas.ts` argv-dispatches to it, `npm run aperas -- <verb> <args>` verified identical to the matching `kg:<verb>` script for several read/write verbs, and the full `verify` harness still passes. Still not an installable global binary — that's [the runtime question](../discussion/packaging.md#id/BlockNode:00CDDVC33G009), deliberately untouched.",
+    "parent": "BlockNode:00CDHAY1P8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFMMKR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDHFMMKR001:props:StringProp:00CDHFMMM0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDHFMMKR001:props:StringProp:00CDHFMMM0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDHFMMKR001",
+    "parent": "BlockNode:00CDDVC8N0006",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDHFMMKR002",
+      "BlockNode:00CDDVC8N0004",
+      "BlockNode:00CDDVC8N0005",
+      "BlockNode:00CDWBDX30001",
+      "BlockNode:00CDWB8NB0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHFMMKR002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T02:41:58.734Z",
+    "title": "00CDHFMMKR002",
+    "text": "Each command's own `--help` usage line (and its missing-required-arg fallback) now prints `aperas <verb>` instead of `kg:X --` — rewritten across all 18 `kgX.ts` files.",
+    "parent": "BlockNode:00CDHFMMKR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFW4R8001",
+    "@type": "BlockNode",
+    "title": "## Freeflow: why the runtime question isn't just \"run tsc\"",
+    "text": "Asked to explain why this stays open rather than being a trivial build step. Recorded here since it bundles a few real sub-decisions, not one.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDHFW4RG000",
+      "BlockNode:00CDHFW4RG001",
+      "BlockNode:00CDHFW4RG004",
+      "BlockNode:00CDHFW4RG005",
+      "BlockNode:00CDHFW4RG006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG000",
+    "@type": "BlockNode",
+    "title": "**The immediate problem**",
+    "text": "**The immediate problem**: every `kgX.ts`/`aperas.ts` is executed via `tsx` — an on-the-fly TypeScript-to-JS transpiler, listed as a `devDependency`. That's fine for dogfooding (`npm run aperas -- tree` inside this checkout, `tsx` already installed as part of `npm install`), but a published package's `bin` entry has to be something Node can execute directly on an end user's machine, with nothing but the shebang line to go on (`#!/usr/bin/env node`) — raw `.ts` isn't that, on the range of Node versions a published package would need to support.",
+    "parent": "BlockNode:00CDHFW4R8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDHFW4RG001:props:StringProp:00CDHFW5G0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDHFW4RG001:props:StringProp:00CDHFW5G0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDHFW4RG001",
+    "text": "**At least two genuinely different shapes this could take, not yet chosen between**:",
+    "parent": "BlockNode:00CDHFW4R8001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDHFW4RG002",
+      "BlockNode:00CDHFW4RG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG002",
+    "@type": "BlockNode",
+    "title": "00CDHFW4RG002",
+    "text": "Compile to plain JS at publish time (`tsc`/`esbuild`), ship the output, `bin` points at a `#!/usr/bin/env node`-shebanged compiled entrypoint. No runtime TS dependency for the end user, but now there's a real build step and a decision about *how* to compile (see below).",
+    "parent": "BlockNode:00CDHFW4RG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG003",
+    "@type": "BlockNode",
+    "title": "00CDHFW4RG003",
+    "text": "Ship the `.ts` source as-is and make `tsx` (or an equivalent) a real dependency rather than a dev one, with the `bin` shebang invoking it directly. No build step, but every invocation pays transpilation cost, and it's an unusual shape for a published CLI (most don't ship raw TS to end users).",
+    "parent": "BlockNode:00CDHFW4RG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG004",
+    "@type": "BlockNode",
+    "title": "**The concrete complication that makes \"just bundle it\" non-trivial**",
+    "text": "**The concrete complication that makes \"just bundle it\" non-trivial**: `oxigraph` — the graph store this whole engine is built on — ships as a WASM binary (`node_bg.wasm`) plus a thin JS wrapper, not plain JS. A single-file bundle (esbuild et al.) can't just inline that the way it would inline ordinary TS/JS; it either needs to be left external (`--external:oxigraph`, meaning the published package still needs real `node_modules` dependency resolution, not a single self-contained script) or the wasm asset needs to be copied alongside the bundle output and referenced correctly. Either way, \"compile everything into one file\" isn't the free win it would be for a pure-JS/TS codebase.",
+    "parent": "BlockNode:00CDHFW4R8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG005",
+    "@type": "BlockNode",
+    "title": "**One more thing a build step forces a decision on**",
+    "text": "**One more thing a build step forces a decision on**: `packages/core`'s (and `cli`'s) own `exports` map today points straight at `.ts` source (`\"./*\": \"./src/*.ts\"`) — correct for the dev workspace, where every package is a sibling symlink and `tsx` handles the extension. A published package needs its own answer for what those exports point at instead (compiled `dist/*.js`, most likely) — and whether that's a *second*, publish-only exports shape layered on top of the dev one (conditional exports keyed by `\"import\"`/`\"development\"` or similar), or a wholesale switch, is itself an open call.",
+    "parent": "BlockNode:00CDHFW4R8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHFW4RG006",
+    "@type": "BlockNode",
+    "title": "00CDHFW4RG006",
+    "text": "None of this is decided yet — flagged as open specifically because answering it means picking a compiler, a bundling strategy that accounts for `oxigraph`'s WASM binary, and how the workspace's own `exports` maps adapt for a built artifact, not just running one command.",
+    "parent": "BlockNode:00CDHFW4R8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHJGZV0001",
+    "@type": "BlockNode",
+    "title": "Settled",
+    "text": "Settled: `esbuild` (not `tsc`) bundling `packages/core`+`packages/cli` into one output file, `oxigraph` marked `--external` (it's WASM-backed, can't be inlined, and staying external is normal for a published package). The dev workspace's own `exports` maps (pointing at `.ts` source) stay exactly as they are — a separate build step produces its own `dist/`+minimal package.json for publishing, rather than one config trying to serve both dev and published via conditional exports. Trade-off accepted: a second thing to maintain (a build config), in exchange for the already-verified dev loop never having to change for a publish pipeline that doesn't exist yet.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSCK8R001",
+    "@type": "BlockNode",
+    "title": "## Settled: graph discovery via two separate config files, not env-var-only",
+    "text": "Started from a concrete pain point: `APERAS_MACHINE_NUMBER` (the snowflake id generator's machine-uniqueness input) is env-var-only today, left unset because there was nowhere better to put it, and warns on every single invocation as a result. That, plus a much bigger piece of context — the graph this all points at won't stay a single flat corpus. It's meant to grow into a tree: a corp graph, team graphs under it, member graphs under those, each mergeable up into its parent, the same shape a member's private notes eventually get merged into a team's, and a team's into the corp's. A bare \"walk up from cwd looking for an `AperasKG/` directory\" (the plain-search idea floated earlier) only ever finds *one* graph — it has no way to express \"this graph's parent is that one,\" so it doesn't fit this shape at all. A real config file does.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDHSCK90000",
+      "BlockNode:00CDHSCK90003",
+      "BlockNode:00CDHSCK90004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHSCK90000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDHSCK90000:props:StringProp:00CDHSCM28000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDHSCK90000:props:StringProp:00CDHSCM2G000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDHSCK90000",
+    "text": "**Two separate files, not one, because they're different *kinds* of setting with different lifecycles:**",
+    "parent": "BlockNode:00CDHSCK8R001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDHSCK90001",
+      "BlockNode:00CDHSCK90002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHSCK90001",
+    "@type": "BlockNode",
+    "title": "00CDHSCK90001",
+    "text": "**`identity.json`** — machine-local, never committed (gitignored, or living outside the repo entirely, e.g. `~/.config/aperas/identity.json`). Holds `APERAS_MACHINE_NUMBER`'s replacement: a `machineNumber` that must differ across machines by construction. Putting it in a *shared* config would be actively wrong, not just untidy — every clone/checkout would inherit the same committed number and start colliding on generated ids, silently, which is the worst way for a uniqueness mechanism to fail. Solving this also directly kills the \"complains every time\" annoyance: set once per machine instead of once per shell session.",
+    "parent": "BlockNode:00CDHSCK90000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSCK90002",
+    "@type": "BlockNode",
+    "title": "00CDHSCK90002",
+    "text": "**`aperas.config.json`** — shared, committed, describes a graph's own place in the corp/team/member tree. Kept deliberately minimal for now rather than designing the merge mechanics today (a separate, bigger question): just two pointers, `graph` (this level's own artifacts root) and `parent` (the graph above it to eventually merge into, absent for a root graph). Enough to express the hierarchy and be discoverable, without committing yet to *how* a merge actually walks it.",
+    "parent": "BlockNode:00CDHSCK90000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSCK90003",
+    "@type": "BlockNode",
+    "title": "00CDHSCK90003",
+    "text": "Both replace the current `getArtifactsDir()`'s `__dirname`-relative hop-counting, which only ever made sense for \"the CLI's own source lives a fixed number of directories below the one graph it drives\" — never true for an installed CLI, and now also not expressive enough for a tree of graphs regardless of install-vs-source-checkout.",
+    "parent": "BlockNode:00CDHSCK8R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSCK90004",
+    "@type": "BlockNode",
+    "title": "Not yet decided (separate, later passes)",
+    "text": "Not yet decided (separate, later passes): the actual merge mechanics (what \"member graph merges into team graph\" does at the node/id level), and how upward discovery behaves when *no* `aperas.config.json` is found at all (this repo's own dev setup should probably keep working via some fallback, likely the existing hardcoded-relative-path behavior, so the split docs/graph work already done doesn't need its own migration just to keep functioning).",
+    "parent": "BlockNode:00CDHSCK8R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSJQE8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDHSJQE8001:props:StringProp:00CDHSJR80000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDHSJQE8001:props:StringProp:00CDHSJR80001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Configuration",
+    "text": "Two separate config files, not one — different lifecycles, never mixed:",
+    "parent": "BlockNode:00CDDVBXH8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDHSJQEG000",
+      "BlockNode:00CDHSJQEG001",
+      "BlockNode:00CDHSJQEG002",
+      "BlockNode:00CDXSVBNG001",
+      "BlockNode:00CDXSVBNR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHSJQEG000",
+    "@type": "BlockNode",
+    "title": "00CDHSJQEG000",
+    "text": "`identity.json` — machine-local, never committed. Lives at `$XDG_CONFIG_HOME/aperas/identity.json`, falling back to `~/.config/aperas/identity.json` when that variable is unset — the same place any other CLI tool's machine-local preferences go. Holds `machineNumber` (replacing the env-var-only `APERAS_MACHINE_NUMBER`), which must differ across machines by construction; a shared/committed home for it would make every clone inherit the same number and silently collide on generated ids.",
+    "parent": "BlockNode:00CDHSJQE8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSJQEG001",
+    "@type": "BlockNode",
+    "title": "00CDHSJQEG001",
+    "text": "`aperas.config.json` — shared, committed, sits at a graph's own root: the directory directly containing that graph's `artifacts/` and `Apeiron/` (for this repo, `AperasKG/aperas.config.json`, `{ \"graph\": \".\" }`). Describes that graph's place in a tree (corp > teams > members, each mergeable into its parent). Its `graph` field takes either shape: a plain path (shorthand — both `artifacts/` and `Apeiron/` co-located directly under it, as above) or `{ \"apeiron\": \"<path>\", \"artifacts\": \"<path>\" }` (two independently-specifiable roots, for a graph whose data and markdown tree aren't co-located). `parent`: a path/url to the graph above, or absent for a root graph. Discovered the way `git` finds `.git` — walking up from a starting directory, nearest file wins — so a member's own graph is found before its team's, a team's before its corp's.",
+    "parent": "BlockNode:00CDHSJQE8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSJQEG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDHSJQEG002:links:Link:00CDHSJR88000",
+        "@type": "Link",
+        "target": "BlockNode:00CDHSCK8R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDHSJQEG002:links:Link:00CDHSJR88000:props:StringProp:00CDXSREF0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "484"
+          }
+        ]
+      }
+    ],
+    "title": "00CDHSJQEG002",
+    "text": "Both replace `getArtifactsDir()`'s original `__dirname`-relative hop-counting (correct only for \"the CLI's own source sits a fixed number of directories below the one graph it drives\" — never true for an installed CLI, and not expressive enough for a tree of graphs regardless); a config-free checkout (no `aperas.config.json` found anywhere above the starting directory) falls back to that same hop-counted path unmigrated, so this repo's own dev setup keeps working either way. See [discussion](../discussion/packaging.md#id/BlockNode:00CDHSCK8R001).",
+    "parent": "BlockNode:00CDHSJQE8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSZ05G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDHSZ05G001:props:StringProp:00CDHSZ0YG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDHSZ05G001:props:StringProp:00CDHSZ0YG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "12"
+      }
+    ],
+    "title": "00CDHSZ05G001",
+    "parent": "BlockNode:00CDH90MNG001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDHSZ05G002",
+      "BlockNode:00CDHSZ05G003",
+      "BlockNode:00CDHSZ05G004",
+      "BlockNode:00CDW3XN08001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDHSZ05G002",
+    "@type": "BlockNode",
+    "title": "00CDHSZ05G002",
+    "text": "Add `identity.json` (machine-local, gitignored) reader/writer replacing `APERAS_MACHINE_NUMBER` env-var-only lookup in `snowflake.ts`.",
+    "parent": "BlockNode:00CDHSZ05G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSZ05G003",
+    "@type": "BlockNode",
+    "title": "Add `aperas.config.json` discovery",
+    "text": "Add `aperas.config.json` discovery: upward search from cwd, resolving `graph`/`parent` pointers; fall back to today's hop-counted `getArtifactsDir()` when none is found (so this repo's own dev setup keeps working unmigrated).",
+    "parent": "BlockNode:00CDHSZ05G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDHSZ05G004",
+    "@type": "BlockNode",
+    "title": "Verify",
+    "text": "Verify: a config-free checkout (this repo, for now) still resolves the graph exactly as before; a synthetic nested config (a fake team/member pair of directories) resolves both levels and their `parent` link correctly.",
+    "parent": "BlockNode:00CDHSZ05G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDW3R42G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDW3R42G001:links:Link:00CDW3R50R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDHJGZV0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDW3R42G001:links:Link:00CDW3R50R000:props:StringProp:00CDW3R50R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "112"
+          }
+        ]
+      }
+    ],
+    "title": "## Distribution",
+    "text": "Publishing is a separate build step, not a second mode of the dev workspace's own `package.json`/`exports` (see [discussion](../discussion/packaging.md#id/BlockNode:00CDHJGZV0001)): `esbuild` bundles `packages/cli/src/aperas.ts` (pulling in `core` transitively) into one output file, `oxigraph` marked `--external` since it's WASM-backed and can't be inlined, with a `#!/usr/bin/env node` banner. The build also writes its own minimal `package.json` alongside the bundle — `name`/`version` synced from source, `bin` pointing at the bundle, `oxigraph` (and any other external) listed as a real `dependencies` entry — making the build output a self-contained publishable unit, never touching `packages/cli/package.json`'s own dev-mode `exports` (which keeps pointing at `.ts` source for the workspace, unaffected).",
+    "parent": "BlockNode:00CDDVBXH8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDW3XN08001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDW3XN08001:props:StringProp:00CDW3XNQR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDW3XN08001:props:StringProp:00CDW3XNQR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "15"
+      }
+    ],
+    "title": "00CDW3XN08001",
+    "parent": "BlockNode:00CDHSZ05G001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDW3XN08002",
+      "BlockNode:00CDW3XN08003",
+      "BlockNode:00CDW3XN08004",
+      "BlockNode:00CDW3XN08005",
+      "BlockNode:00CDX7VWY0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDW3XN08002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDW3XN08002:links:Link:00CDW3XNR0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDW3R42G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDW3XN08002:links:Link:00CDW3XNR0000:props:StringProp:00CDW3XNR0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "282"
+          }
+        ]
+      }
+    ],
+    "title": "Build script (e.g. `packages/cli/build.mjs`)",
+    "text": "Build script (e.g. `packages/cli/build.mjs`): `esbuild` bundling `aperas.ts` to `packages/cli/dist/aperas.js` (`--external:oxigraph`, `#!/usr/bin/env node` banner), plus a generated minimal `dist/package.json` (`bin`, synced `name`/`version`, `oxigraph` as a real dependency) — see [Distribution](../design/packaging.md#id/BlockNode:00CDW3R42G001).",
+    "parent": "BlockNode:00CDW3XN08001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDW3XN08003",
+    "@type": "BlockNode",
+    "title": "Verify the built bundle standalone",
+    "text": "Verify the built bundle standalone: `node packages/cli/dist/aperas.js tree --depth 1` (no `tsx`) against the real graph, confirm it matches the dev-mode dispatcher's output.",
+    "parent": "BlockNode:00CDW3XN08001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDW3XN08004",
+    "@type": "BlockNode",
+    "title": "00CDW3XN08004",
+    "text": "Rewrite each `kgX.ts`'s own `printHelp({ usage: ... })` string(s) from `kg:X --` to `aperas <verb>`, dropping the npm-script-only ` --` separator that `aperas` doesn't need.",
+    "parent": "BlockNode:00CDW3XN08001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDW3XN08005",
+    "@type": "BlockNode",
+    "title": "Verify",
+    "text": "Verify: `aperas <verb> --help` for a handful of commands now shows `aperas <verb> ...` as its usage line; the `kg:X` npm scripts (still pointing at the same files directly) are unaffected, since this only changes the printed label, not the actual argv parsing.",
+    "parent": "BlockNode:00CDW3XN08001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWB1Y6R001",
+    "@type": "BlockNode",
+    "title": "## Freeflow: a real gap — no raw single-node inspection command",
+    "text": "Noticed while investigating: reaching for a Python one-liner against `BlockNode.jsonld` directly, rather than any `kg:*`/`aperas` command, to check a node's exact `.text`/`.props`/`.tombstonedAt`/`.path`. Not because list/heading structure is opaque to `kg:tree` — it isn't, given enough `--depth` it shows every list/listItem id, falling back to the bare id as its own label when there's no title. The actual gap: `kg:tree`/`kg:backlinks --text` only ever show a *rendered preview* (title + truncated, anchor-stripped abstract) — the right thing for browsing, but not for verifying a stored field is exactly what's about to be pushed back, or reading a field `kg:tree` never shows at all (`props`, `tombstonedAt`). `kg:project --dry-run` reconstructs real markdown but only at the whole-artifact level, anchors included. No command exists for \"dump this one node's raw stored state, untransformed.\"",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWB3KBG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T02:15:55.072Z",
+    "title": "Add `kg:show <ref>` (`aperas show <ref>` once dispatched)",
+    "text": "Add `kg:show <ref>` (`aperas show <ref>` once dispatched): raw field dump for one node — `text`, `props`, `tombstonedAt`, `path`/`title`/`type` as actually stored, untruncated, no anchor-stripping. Today this requires falling back to direct `AperasKG/Apeiron/*.jsonld` inspection outside the CLI entirely — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWB1Y6R001).",
+    "parent": "BlockNode:00CDDVC8N0006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWB8NB0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T02:16:16.594Z",
+    "title": "Add `kg:show <ref>` (`aperas show <ref>` once dispatched)",
+    "text": "Add `kg:show <ref>` (`aperas show <ref>` once dispatched): raw field dump for one node — `text`, `props`, `tombstonedAt`, `path`/`title`/`type` as actually stored, untruncated, no anchor-stripping. Today this requires falling back to direct `AperasKG/Apeiron/*.jsonld` inspection outside the CLI entirely — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWB1Y6R001).",
+    "parent": "BlockNode:00CDHFMMKR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWBDX30001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWBDX30001:props:StringProp:00CDWBDXT8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWBDX30001:props:StringProp:00CDWBDXT8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDWBDX30001",
+    "parent": "BlockNode:00CDHFMMKR001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDWBDX30002",
+      "BlockNode:00CDX5YSQ0001",
+      "BlockNode:00CDXGAFFR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWBDX30002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T04:26:51.449Z",
+    "title": "Add `kg:show <ref>` (`aperas show <ref>` once dispatched)",
+    "text": "Add `kg:show <ref>` (`aperas show <ref>` once dispatched): raw field dump for one node — `text`, `props`, `tombstonedAt`, `path`/`title`/`type` as actually stored, untruncated, no anchor-stripping. Today this requires falling back to direct `AperasKG/Apeiron/*.jsonld` inspection outside the CLI entirely — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWB1Y6R001).",
+    "parent": "BlockNode:00CDWBDX30001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWNYSRG001:props:StringProp:00CDWNYTV0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWNYSRG001:props:StringProp:00CDWNYTV0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Resolved: identity.json + `aperas identity`, build-to-`bin`, and help-text rewrite",
+    "text": "Three of the planned items landed clean:",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDWNYSRG002",
+      "BlockNode:00CDWNYSRR000",
+      "BlockNode:00CDWNYSRR001",
+      "BlockNode:00CDWNYSRR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRG002",
+    "@type": "BlockNode",
+    "title": "00CDWNYSRG002",
+    "text": "`identity.json` (`@aperas/core/identity`) wired into `snowflake.ts`'s machine-number lookup (env var still wins if set, then identity.json, then the same defaulting warning as before) — plus `aperas identity show`/`set <n>` (`kgIdentity.ts`), since a reader/writer with no way to actually invoke the writer wasn't really usable. Verified on this machine: the \"APERAS_MACHINE_NUMBER not set\" warning that printed on every single command all session is gone after `aperas identity set 0`.",
+    "parent": "BlockNode:00CDWNYSRG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRR000",
+    "@type": "BlockNode",
+    "title": "00CDWNYSRR000",
+    "text": "Every `kgX.ts`'s `printHelp`/missing-arg usage strings rewritten from `kg:X --` to `aperas <verb>` (both the `--help` path and the plain missing-required-arg fallback, since leaving one fixed and the other stale would be a half-done job). `npm run verify`'s full 18-check suite still passes.",
+    "parent": "BlockNode:00CDWNYSRG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRR001",
+    "@type": "BlockNode",
+    "title": "`packages/cli/build.mjs`",
+    "text": "`packages/cli/build.mjs`: `esbuild` bundles `aperas.ts` (+ `core` transitively) to `packages/cli/dist/aperas.js`, `oxigraph` external, shebang banner, plus a generated minimal `dist/package.json` (name `aperas`, `bin`, `oxigraph` as a real dependency). Verified the bundle actually runs standalone — `node packages/cli/dist/aperas.js tree`/`backlinks`/`flush`, no `tsx` anywhere — against the real graph.",
+    "parent": "BlockNode:00CDWNYSRG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWNYSRR002:props:StringProp:00CDWNYTV8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWNYSRR002:props:StringProp:00CDWNYTVG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDWNYSRR002",
+    "text": "**What the build verification actually exposed, and had to be fixed for it to work at all** (not scope creep — the build was correctly planned to be verified standalone, and it didn't work on the first real attempt):",
+    "parent": "BlockNode:00CDWNYSRG001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDWNYSRR003",
+      "BlockNode:00CDWNYSRR004",
+      "BlockNode:00CDWNYSS0000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRR003",
+    "@type": "BlockNode",
+    "title": "00CDWNYSRR003",
+    "text": "`spawnService()` hardcoded spawning `tsx` + a separate `service.ts` file — which doesn't exist once bundled (`service.ts`'s code is inlined into the one `aperas.js`, no file of its own anymore). Fixed: `service.ts` now exports its own `main`; `aperas.ts` recognizes a hidden `--__service` verb (checked before normal dispatch) that dynamically imports and runs it — the dynamic import is also what makes `esbuild` include `service.ts`'s code in the bundle at all, since nothing else reachable from `aperas.ts` ever imported it; `spawnService()` now detects dev-vs-built (does `service.ts` still exist as a sibling file?) and either spawns `tsx service.ts` (dev, unchanged) or re-invokes the running bundle itself with plain `node` + `--__service` (built).",
+    "parent": "BlockNode:00CDWNYSRR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWNYSRR004",
+    "@type": "BlockNode",
+    "title": "00CDWNYSRR004",
+    "text": "`serviceLock.ts`'s `getRunDir()`, `apeironNgn/store.ts`'s `getApeironExportDir()`, and `artifacts.ts`'s `getArtifactsDir()` all compute their path via a *hardcoded* number of `../` hops from their own file's location — correct only as long as that file sits exactly as deep as it did when the hop count was written. `esbuild` bundling collapses everything into one file at `packages/cli/dist/`, a different depth than the original source tree, so a fixed hop count silently pointed at the *wrong directory* once built rather than erroring — caught concretely: `getRunDir()`'s lock/socket landed one level *above* the actual workspace root entirely (a real, empty-looking `.run/` sitting right where it was expected masked this at first). Fixed all three with an `existsSync`-based dev-vs-built check (does a known dev-only sibling file still exist?), each branching to the right hop count for its actual layout.",
+    "parent": "BlockNode:00CDWNYSRR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWNYSS0000",
+    "@type": "BlockNode",
+    "title": "00CDWNYSS0000",
+    "text": "`computeCodeFingerprint()` (`codeVersion.ts`) unconditionally `readdirSync`'d `packages/{core,cli}/src` to build its staleness fingerprint — paths that don't exist at all once bundled, which would have crashed every single invocation of the built binary immediately. Fixed: returns a fixed `'built'` fingerprint when no dev source tree is found (nothing to detect as \"stale\" in a published build anyway — the code *is* whatever was installed).",
+    "parent": "BlockNode:00CDWNYSRR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWP69B8001:props:StringProp:00CDWP6ABG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWP69B8001:props:StringProp:00CDWP6ABG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Resolved: identity.json + `aperas identity`, build-to-`bin`, and help-text rewrite",
+    "text": "Three of the planned items landed clean:",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDWP69B8002",
+      "BlockNode:00CDWP69B8003",
+      "BlockNode:00CDWP69B8004",
+      "BlockNode:00CDWP69B8005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8002",
+    "@type": "BlockNode",
+    "title": "00CDWP69B8002",
+    "text": "`identity.json` (`@aperas/core/identity`) wired into `snowflake.ts`'s machine-number lookup (env var still wins if set, then identity.json, then the same defaulting warning as before) — plus `aperas identity show`/`set <n>` (`kgIdentity.ts`), since a reader/writer with no way to actually invoke the writer wasn't really usable. Verified on this machine: the \"APERAS_MACHINE_NUMBER not set\" warning that printed on every single command all session is gone after `aperas identity set 0`.",
+    "parent": "BlockNode:00CDWP69B8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8003",
+    "@type": "BlockNode",
+    "title": "00CDWP69B8003",
+    "text": "Every `kgX.ts`'s `printHelp`/missing-arg usage strings rewritten from `kg:X --` to `aperas <verb>` (both the `--help` path and the plain missing-required-arg fallback, since leaving one fixed and the other stale would be a half-done job). `npm run verify`'s full 18-check suite still passes.",
+    "parent": "BlockNode:00CDWP69B8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8004",
+    "@type": "BlockNode",
+    "title": "`packages/cli/build.mjs`",
+    "text": "`packages/cli/build.mjs`: `esbuild` bundles `aperas.ts` (+ `core` transitively) to `packages/cli/dist/aperas.js`, `oxigraph` external, shebang banner, plus a generated minimal `dist/package.json` (name `aperas`, `bin`, `oxigraph` as a real dependency). Verified the bundle actually runs standalone — `node packages/cli/dist/aperas.js tree`/`backlinks`/`flush`, no `tsx` anywhere — against the real graph.",
+    "parent": "BlockNode:00CDWP69B8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWP69B8005:props:StringProp:00CDWP6ABR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWP69B8005:props:StringProp:00CDWP6ABR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDWP69B8005",
+    "text": "**What the build verification actually exposed, and had to be fixed for it to work at all** (not scope creep — the build was correctly planned to be verified standalone, and it didn't work on the first real attempt):",
+    "parent": "BlockNode:00CDWP69B8001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDWP69B8006",
+      "BlockNode:00CDWP69B8007",
+      "BlockNode:00CDWP69B8008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8006",
+    "@type": "BlockNode",
+    "title": "00CDWP69B8006",
+    "text": "`spawnService()` hardcoded spawning `tsx` + a separate `service.ts` file — which doesn't exist once bundled (`service.ts`'s code is inlined into the one `aperas.js`, no file of its own anymore). Fixed: `service.ts` now exports its own `main`; `aperas.ts` recognizes a hidden `--__service` verb (checked before normal dispatch) that dynamically imports and runs it — the dynamic import is also what makes `esbuild` include `service.ts`'s code in the bundle at all, since nothing else reachable from `aperas.ts` ever imported it; `spawnService()` now detects dev-vs-built (does `service.ts` still exist as a sibling file?) and either spawns `tsx service.ts` (dev, unchanged) or re-invokes the running bundle itself with plain `node` + `--__service` (built).",
+    "parent": "BlockNode:00CDWP69B8005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8007",
+    "@type": "BlockNode",
+    "title": "00CDWP69B8007",
+    "text": "`serviceLock.ts`'s `getRunDir()`, `apeironNgn/store.ts`'s `getApeironExportDir()`, and `artifacts.ts`'s `getArtifactsDir()` all compute their path via a *hardcoded* number of `../` hops from their own file's location — correct only as long as that file sits exactly as deep as it did when the hop count was written. `esbuild` bundling collapses everything into one file at `packages/cli/dist/`, a different depth than the original source tree, so a fixed hop count silently pointed at the *wrong directory* once built rather than erroring — caught concretely: `getRunDir()`'s lock/socket landed one level *above* the actual workspace root entirely (a real, empty-looking `.run/` sitting right where it was expected masked this at first). Fixed all three with an `existsSync`-based dev-vs-built check (does a known dev-only sibling file still exist?), each branching to the right hop count for its actual layout.",
+    "parent": "BlockNode:00CDWP69B8005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWP69B8008",
+    "@type": "BlockNode",
+    "title": "00CDWP69B8008",
+    "text": "`computeCodeFingerprint()` (`codeVersion.ts`) unconditionally `readdirSync`'d `packages/{core,cli}/src` to build its staleness fingerprint — paths that don't exist at all once bundled, which would have crashed every single invocation of the built binary immediately. Fixed: returns a fixed `'built'` fingerprint when no dev source tree is found (nothing to detect as \"stale\" in a published build anyway — the code *is* whatever was installed).",
+    "parent": "BlockNode:00CDWP69B8005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWPCC3G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWPCC3G001:props:StringProp:00CDX5H6ZG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWPCC3G001:props:StringProp:00CDX5H6ZG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Settled: no concurrency — one active graph at a time, explicit start/restart only",
+    "text": "Clarified a confusion in the write-up above: a service holding a graph that's stable for its whole lifetime *was* the intent all along — the actual bug was that any command could *silently* auto-spawn one, so whichever command happened to run first invisibly decided the binding for as long as that process lived. The fix isn't to thread cwd through every request (that would mean re-resolving, i.e. potentially re-binding, on every call — not stable, and not the intent); it's to make the one moment of binding explicit and human-driven instead of accidental.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDX5H5MG002",
+      "BlockNode:00CDX5H5MG003",
+      "BlockNode:00CDX5H5MG004",
+      "BlockNode:00CDX5H5MG005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWQ0V88001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDWQ0V88001:props:StringProp:00CDWQ0W88000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDWQ0V88001:props:StringProp:00CDWQ0W88001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDWQ0V88001",
+    "parent": "BlockNode:00CDDVC8N0007",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDWQ0V88002",
+      "BlockNode:00CDWQ0V88003",
+      "BlockNode:00CDXG7H30001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDWQ0V88002",
+    "@type": "BlockNode",
+    "title": "00CDWQ0V88002",
+    "text": "Each command's own `--help` usage line (and its missing-required-arg fallback) now prints `aperas <verb>` instead of `kg:X --` — rewritten across all 18 `kgX.ts` files.",
+    "parent": "BlockNode:00CDWQ0V88001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDWQ0V88003",
+    "@type": "BlockNode",
+    "title": "`aperas` builds to a real `bin`",
+    "text": "`aperas` builds to a real `bin`: `packages/cli/build.mjs` (`esbuild`, `oxigraph` external) produces a self-contained `packages/cli/dist/` (bundle + minimal `package.json` with a `bin` entry). Verified running standalone via plain `node`, no `tsx`, against the real graph — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWP69B8001).",
+    "parent": "BlockNode:00CDWQ0V88001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX5H5MG002",
+    "@type": "BlockNode",
+    "title": "00CDX5H5MG002",
+    "text": "`aperas service start` (new — today's `kg:service` only has `restart`) is the *only* place that ever reads `process.cwd()` for this. It resolves the graph (`aperas.config.json` discovery, or the dev fallback) and binds the spawned service to it, permanently, for that process's life.",
+    "parent": "BlockNode:00CDWPCC3G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX5H5MG003",
+    "@type": "BlockNode",
+    "title": "00CDX5H5MG003",
+    "text": "Every other command never touches cwd for this at all. It looks for the currently running service at one fixed, well-known location — not derived from cwd, and not derived from where the code itself is installed (which also sidesteps the dev-vs-built hop-counting fragility fixed above entirely, as a side benefit: a fixed location doesn't care where the code physically sits). If nothing's there, it errors (\"no service running — run `aperas service start`\") instead of silently auto-spawning one bound to whatever cwd it happened to be called from.",
+    "parent": "BlockNode:00CDWPCC3G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX5H5MG004",
+    "@type": "BlockNode",
+    "title": "00CDX5H5MG004",
+    "text": "`aperas service restart` becomes \"stop whatever's running, and re-resolve+rebind from wherever *this* invocation's cwd is\" — still explicit, still a deliberate human action.",
+    "parent": "BlockNode:00CDWPCC3G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX5H5MG005",
+    "@type": "BlockNode",
+    "title": "Deliberately no concurrency",
+    "text": "Deliberately no concurrency: one active graph system-wide at a time, not one service per graph root. Working in two different graphs at once means explicitly restarting the service when switching, not two processes running side by side. Confirmed as the actual intent, not a limitation being settled for.",
+    "parent": "BlockNode:00CDWPCC3G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX5YSQ0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDX5YSQ0001:props:StringProp:00CDX5YTK8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDX5YSQ0001:props:StringProp:00CDX5YTK8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDX5YSQ0001",
+    "parent": "BlockNode:00CDWBDX30001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDX5YSQ0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDX5YSQ0002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T03:36:45.965Z",
+    "title": "Ship the explicit-start service redesign",
+    "text": "Ship the explicit-start service redesign: drop auto-spawn from `ensureServiceRunning()` (error instead, telling the user to run `aperas service start`), add `aperas service start` (the only place that reads cwd, resolving + binding the graph once), move the lock/socket to a fixed location independent of both cwd and code install path — see [Settled](../discussion/packaging.md#id/BlockNode:00CDWPCC3G001).",
+    "parent": "BlockNode:00CDX5YSQ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX7VWY0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDX7VWY0001:props:StringProp:00CDX7VXYG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDX7VWY0001:props:StringProp:00CDX7VXYG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "19"
+      }
+    ],
+    "title": "00CDX7VWY0001",
+    "parent": "BlockNode:00CDW3XN08001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDX7VWY0002",
+      "BlockNode:00CDX7VWY8000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDX7VWY0002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDX7VWY0002:links:Link:00CDXGSQBR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDXFWK3R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDX7VWY0002:links:Link:00CDXGSQBR000:props:StringProp:00CDXGSQBR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "514"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDX7VWY0002:links:Link:00CDZVPRR0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDZM30JG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDX7VWY0002:links:Link:00CDZVPRR0000:props:StringProp:00CDZVPRR0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "721"
+          }
+        ]
+      }
+    ],
+    "title": "Ship the explicit-start service redesign",
+    "text": "**Done.** Shipped the explicit-start service redesign: dropped auto-spawn from `ensureServiceRunning()` (errors, pointing at `aperas service start`); added `aperas service start` (binds a fresh service to the graph resolved from that invocation's own cwd) and updated `restart` to re-resolve+rebind the same way; moved the lock/socket to a fixed `$XDG_RUNTIME_DIR`-based location, independent of cwd and code install path. Verified live in dev and built-bundle modes, full `npm run verify` suite still clean — see [Resolved](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001). The one gap this pass left (client-side `getArtifactsDir()` callers not honoring the bound graph root) was closed in a follow-up pass — see [Resolved: two-path graph config](../discussion/packaging.md#id/BlockNode:00CDZM30JG001).",
+    "parent": "BlockNode:00CDX7VWY0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDX7VWY8000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDX7VWY8000:links:Link:00CDY8ZXQR002",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVCKCG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDX7VWY8000:links:Link:00CDY8ZXQR002:props:StringProp:00CDZVRH3G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "412"
+          }
+        ]
+      }
+    ],
+    "title": "Add `kg:show <ref>` (`aperas show <ref>`)",
+    "text": "**Done — this Task Breakdown is complete, no open gaps.** `kg:show <ref>` (previously tracked here) turned out to be a TreeView/node-rendering gap rather than a packaging one, and moved to `AperasKG/artifacts/archive/Aperas-treeview-design.md` §16, to be picked up when that document itself gets migrated. The client-side `getArtifactsDir()` graph-root gap flagged during item 19 has since been closed too — see [history](../history/packaging.md#id/BlockNode:00CDDVCKCG002) for the closing summary.",
+    "parent": "BlockNode:00CDX7VWY0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXFWK3R001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDXFWK3R001:props:StringProp:00CDXFWMB0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDXFWK3R001:props:StringProp:00CDXFWMB0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Resolved: the explicit-start service redesign, shipped and verified",
+    "text": "`ensureServiceRunning()` no longer auto-spawns — it just pings, and throws `No ApeironNgn service running. Start one with: aperas service start` if nothing answers. `kgService.ts` gained `aperas service start` (binds a freshly-spawned service to the graph resolved from *this* invocation's own `process.cwd()`, or reports the existing binding if one's already running) alongside the existing `restart` (now also re-resolving and rebinding, not just restarting the process). `serviceLock.ts`'s `getRunDir()` dropped the dev-vs-built hop-counting entirely in favor of a fixed location: `$XDG_RUNTIME_DIR/aperas`, falling back to a uid-namespaced `tmpdir()` path when unset — exactly the kind of ephemeral, per-session state `XDG_RUNTIME_DIR` exists for, and the same pattern `identity.json` already established for `$XDG_CONFIG_HOME`.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDXFWK3R002",
+      "BlockNode:00CDXFWK40000",
+      "BlockNode:00CDXFWK40001",
+      "BlockNode:00CDY3GA70001",
+      "BlockNode:00CDXFWK40002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDXFWK3R002",
+    "@type": "BlockNode",
+    "title": "00CDXFWK3R002",
+    "text": "`graphConfig.ts` gained `resolveEffectiveGraphRoot(startDir?)` — `aperas.config.json` discovery if found, else the fixed dev fallback (now computed in one place, not duplicated across `artifacts.ts`/`store.ts`). `getArtifactsDir()`/`getApeironExportDir()` both take an optional explicit `graphRoot` now: a standalone dev tool (`verify.ts`, `apeironNgnSmokeTest.ts`) omits it and keeps the old cwd-or-fallback default; `apeironNgn/service.ts` passes the graph root it was actually bound to (via `APERAS_GRAPH_ROOT`, set in the spawned child's environment by `serviceClient.ts#spawnService` — not the child's own `process.cwd()`, which is set to a fixed directory for unrelated reasons and would otherwise silently disagree with what `start` resolved).",
+    "parent": "BlockNode:00CDXFWK3R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXFWK40000",
+    "@type": "BlockNode",
+    "title": "The service's own `dehydrateToJsonLd`/`dehydrateStateToJsonLd` calls (all 4 call sites",
+    "text": "The service's own `dehydrateToJsonLd`/`dehydrateStateToJsonLd` calls (all 4 call sites: `flushIfDirty`, `flushStateIfDirty`, `clobberFlush`) now pass their bound `contentDir`/`stateDir` explicitly too, instead of each defaulting to a fresh (and, before this fix, potentially divergent) resolution of its own — otherwise the \"one binding for the whole process lifetime\" guarantee would only have covered the *read* path (`rehydrateStore`), not the *write* path.",
+    "parent": "BlockNode:00CDXFWK3R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXFWK40001",
+    "@type": "BlockNode",
+    "title": "Verified live, both ways",
+    "text": "Verified live, both ways: (1) dev mode — `aperas service start` binds and reports the graph root, a second `start` reports \"already running\", `restart` stops+rebinds, killing the service and running any ordinary command reports the new error instead of silently spawning one, the full `npm run verify` suite (18 checks) still passes clean; (2) built mode — a fresh `esbuild` bundle cold-started via `node packages/cli/dist/aperas.js service start` (no `tsx` anywhere) binds correctly and answers a real `tree` read.",
+    "parent": "BlockNode:00CDXFWK3R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXFWK40002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDXFWK40002:links:Link:00CDZM5APR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDZM30JG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDXFWK40002:links:Link:00CDZM5APR000:props:StringProp:00CDZM5APR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1165"
+          }
+        ]
+      }
+    ],
+    "title": "**A gap flagged, not fixed, in this pass**",
+    "text": "**A gap flagged, not fixed, in this pass** (corrected below — the original write-up here was itself imprecise about where the gap actually lives): `getApeironExportDir()` got its explicit `graphRoot` argument threaded through in this pass, but `getArtifactsDir()` didn't — every caller (`apeironNgn/artifacts.ts`/`folders.ts`/`node.ts`'s `trackAllArtifacts`/`trackArtifactsScoped`/`ingestFolderTree`/`ArtifactNode.trackFromDisk`, plus `kgProject.ts`'s own `runProject`) still calls it with no argument. Those calls execute **inside the service process itself** — `service.ts`'s `handle()` invokes `runTrack`/`runIngest`/`runProject` directly on each RPC request, not the short-lived CLI client — so the resolution that runs is the *service's own* `process.cwd()`, fixed by `spawnService()` to wherever the code is installed, never the graph root `aperas service start` actually resolved and bound. Harmless today only because this repo's one `aperas.config.json` sits where the service's own cwd never reaches by walking up, so it always falls through to the cwd-independent fallback either way — a coincidence of this repo's layout, not a property of the fix. See [Resolved](../discussion/packaging.md#id/BlockNode:00CDZM30JG001) below for the actual fix.",
+    "parent": "BlockNode:00CDXFWK3R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXG5WGR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDXG5WGR001:props:StringProp:00CDXG5XD0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDXG5WGR001:props:StringProp:00CDXG5XD8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDXG5WGR001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDXG5WGR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDXG5WGR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDXG5WGR002:links:Link:00CDXG5XDG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDXFWK3R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDXG5WGR002:links:Link:00CDXG5XDG000:props:StringProp:00CDXG5XDG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "400"
+          }
+        ]
+      }
+    ],
+    "title": "Shipped the explicit-start service redesign",
+    "text": "Shipped the explicit-start service redesign: `ensureServiceRunning()` errors instead of auto-spawning; `aperas service start`/`restart` (`kgService.ts`) are now the only places that read `process.cwd()` to resolve+bind the graph; the lock/socket moved to a fixed `$XDG_RUNTIME_DIR`-based location, independent of both cwd and code install path. Verified live in both dev and built-bundle modes — see [discussion](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001).",
+    "parent": "BlockNode:00CDXG5WGR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXG7H30001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDXG7H30001:props:StringProp:00CDXG7HYG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDXG7H30001:props:StringProp:00CDXG7HYG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDXG7H30001",
+    "parent": "BlockNode:00CDWQ0V88001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDXG7H30002",
+      "BlockNode:00CDY7A3P0001",
+      "BlockNode:00CDZQJVG8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDXG7H30002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDXG7H30002:links:Link:00CDXG7HYR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDXFWK3R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDXG7H30002:links:Link:00CDXG7HYR000:props:StringProp:00CDY3Y5CR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "490"
+          }
+        ]
+      }
+    ],
+    "title": "Shipped the explicit-start service redesign",
+    "text": "Shipped the explicit-start service redesign: `ensureServiceRunning()` errors instead of auto-spawning; `aperas service start`/`stop`/`restart` (`kgService.ts`) are now the only places that read `process.cwd()` to resolve+bind the graph (`stop` doesn't itself read cwd, but completes the trio alongside the two that do); the lock/socket moved to a fixed `$XDG_RUNTIME_DIR`-based location, independent of both cwd and code install path. Verified live in both dev and built-bundle modes — see [discussion](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001).",
+    "parent": "BlockNode:00CDXG7H30001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXGAFFR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDXGAFFR001:props:StringProp:00CDXGAGB8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDXGAFFR001:props:StringProp:00CDXGAGB8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDXGAFFR001",
+    "parent": "BlockNode:00CDWBDX30001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDXGAFFR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDXGAFFR002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:12:18.966Z",
+    "title": "Close the client-side graph-root gap flagged during the explicit-start redesign",
+    "text": "Close the client-side graph-root gap flagged during the explicit-start redesign: `getArtifactsDir()` callers outside the service process itself (`kgProject.ts`, and the lower-level `apeironNgn/artifacts.ts`/`folders.ts`/`node.ts` functions it shares with the service) still resolve via the default cwd-or-fallback path instead of reading the currently-bound service's own graph root — harmless today (no `aperas.config.json` exists anywhere in this checkout), a real latent mismatch once the corp/team/member multi-graph-tree scenario is in actual use — see [discussion](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001).",
+    "parent": "BlockNode:00CDXGAFFR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXSVBNG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T04:28:17.560Z",
+    "title": "00CDXSVBNG001",
+    "text": "**Binding workflow** — the shared ApeironNgn service holds exactly one graph for its whole lifetime, chosen once and deliberately rather than inherited from whichever command happens to run first:",
+    "parent": "BlockNode:00CDHSJQE8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDXSVBNR002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T04:28:18.297Z",
+    "title": "00CDXSVBNR002",
+    "text": "See [Settled](../discussion/packaging.md#id/BlockNode:00CDWPCC3G001) and [Resolved](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001) for how this was arrived at and verified.",
+    "parent": "BlockNode:00CDHSJQE8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY3GA70001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY3GA70001:props:StringProp:00CDY3GBB8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY3GA70001:props:StringProp:00CDY3GBB8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY3GA70001",
+    "parent": "BlockNode:00CDXFWK3R001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDY3GA70002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY3GA70002",
+    "@type": "BlockNode",
+    "title": "`aperas service stop` (added afterward, on request)",
+    "text": "`aperas service stop` (added afterward, on request): the explicit, graceful counterpart to finding the service's pid and `kill`-ing it by hand — same SIGTERM-and-wait `restart` already used as its own first half, factored out into a shared `stopIfRunning()` so `stop` and `restart` share one implementation. A no-op (with a status line) if nothing's running.",
+    "parent": "BlockNode:00CDY3GA70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7A3P0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY7A3P0001:props:StringProp:00CDY7A4KG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY7A3P0001:props:StringProp:00CDY7A4KG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY7A3P0001",
+    "parent": "BlockNode:00CDXG7H30001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDY7A3P0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY7A3P0002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDY7A3P0002:links:Link:00CDY7A4KR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDWB1Y6R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY7A3P0002:links:Link:00CDY7A4KR000:props:StringProp:00CDY7A4M0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "272"
+          }
+        ]
+      }
+    ],
+    "title": "`kg:show <ref>` — relocated, not implemented",
+    "text": "`kg:show <ref>` — relocated, not implemented: on reflection this is a TreeView/node-rendering gap, not a packaging one, so it moved to `AperasKG/artifacts/archive/Aperas-treeview-design.md` §16, to be picked up when that document itself gets migrated into the graph — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWB1Y6R001) for the original write-up of the gap.",
+    "parent": "BlockNode:00CDY7A3P0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7PGG0001",
+    "@type": "BlockNode",
+    "title": "## Workflow",
+    "parent": "BlockNode:00CDDVBXH8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDY7T61R001",
+      "BlockNode:00CDY7T620002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY7T61R001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY7T61R001:props:StringProp:00CDY7T6ZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY7T61R001:props:StringProp:00CDY7T6ZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY7T61R001",
+    "text": "The shared ApeironNgn service holds exactly one graph for its whole lifetime, chosen once and deliberately rather than inherited from whichever command happens to run first:",
+    "parent": "BlockNode:00CDY7PGG0001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDY7T61R002",
+      "BlockNode:00CDY7T61R003",
+      "BlockNode:00CDY7T61R004",
+      "BlockNode:00CDY7T620000",
+      "BlockNode:00CDY7T620001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY7T61R002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDY7T61R002:links:Link:00CDY7T70R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDHSJQE8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY7T61R002:links:Link:00CDY7T70R000:props:StringProp:00CDZMJ1R0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "198"
+          }
+        ]
+      }
+    ],
+    "title": "00CDY7T61R002",
+    "text": "`aperas service start` is the only command that ever reads `process.cwd()`. It resolves the graph's Apeiron root and artifacts root from there (`aperas.config.json` discovery, or the fallback — see [Configuration](#id/BlockNode:00CDHSJQE8001)), sets both as environment variables on a freshly-spawned service, and binds it for that process's life; already running, it reports the existing binding instead of starting a second one.",
+    "parent": "BlockNode:00CDY7T61R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7T61R003",
+    "@type": "BlockNode",
+    "title": "00CDY7T61R003",
+    "text": "Every other command connects to whatever's already running, at a fixed location (`$XDG_RUNTIME_DIR/aperas`, falling back to a uid-namespaced path under the OS temp directory when unset) — never derived from cwd or from where the code itself is installed. Nothing running? It errors (\"no service running — run `aperas service start`\") rather than silently starting one bound to an accidental cwd.",
+    "parent": "BlockNode:00CDY7T61R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7T61R004",
+    "@type": "BlockNode",
+    "title": "00CDY7T61R004",
+    "text": "`aperas service stop` gracefully stops whatever's running (same SIGTERM-and-wait as the first half of `restart` below) without starting a replacement — the explicit counterpart to finding its pid and killing it by hand.",
+    "parent": "BlockNode:00CDY7T61R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7T620000",
+    "@type": "BlockNode",
+    "title": "00CDY7T620000",
+    "text": "`aperas service restart` stops whatever's running and re-resolves + rebinds from wherever *that* invocation's own cwd is — the only way to both pick up a source-code change and move the service to a different graph.",
+    "parent": "BlockNode:00CDY7T61R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7T620001",
+    "@type": "BlockNode",
+    "title": "Deliberately no concurrency",
+    "text": "Deliberately no concurrency: one active graph system-wide at a time. Working across two graphs means explicitly restarting when switching, never two service processes side by side.",
+    "parent": "BlockNode:00CDY7T61R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY7T620002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDY7T620002:links:Link:00CDY7T710000",
+        "@type": "Link",
+        "target": "BlockNode:00CDWPCC3G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY7T620002:links:Link:00CDY7T710000:props:StringProp:00CDY7T710001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDY7T620002:links:Link:00CDY7T710002",
+        "@type": "Link",
+        "target": "BlockNode:00CDXFWK3R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY7T620002:links:Link:00CDY7T710002:props:StringProp:00CDZMQ658000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "70"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDY7T620002:links:Link:00CDZMQ658001",
+        "@type": "Link",
+        "target": "BlockNode:00CDZM30JG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY7T620002:links:Link:00CDZMQ658001:props:StringProp:00CDZMQ658002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "141"
+          }
+        ]
+      }
+    ],
+    "title": "00CDY7T620002",
+    "text": "See [Settled](../discussion/packaging.md#id/BlockNode:00CDWPCC3G001), [Resolved](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001), and [Resolved: two-path config](../discussion/packaging.md#id/BlockNode:00CDZM30JG001) for how this was arrived at and verified.",
+    "parent": "BlockNode:00CDY7PGG0001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY84BJ8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY84BJ8001:props:StringProp:00CDY84CH0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY84BJ8001:props:StringProp:00CDY84CH0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY84BJ8001",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDY84BJ8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY84BJ8002",
+    "@type": "BlockNode",
+    "title": "`identity.json` + `aperas identity`, help-text rewrite",
+    "text": "`identity.json` + `aperas identity`, help-text rewrite: machine-local `machineNumber` moved out of the env-var-only `APERAS_MACHINE_NUMBER` lookup into `$XDG_CONFIG_HOME/aperas/identity.json` (reader/writer plus `aperas identity show`/`set <n>`); every `kgX.ts`'s own `--help`/missing-arg usage line rewritten from `kg:X --` to `aperas <verb>`. Full `verify` suite still passes.",
+    "parent": "BlockNode:00CDY84BJ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY85ZQG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY85ZQG001:props:StringProp:00CDY860N8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY85ZQG001:props:StringProp:00CDY860N8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY85ZQG001",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDY85ZQG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY85ZQG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDY85ZQG002:links:Link:00CDY860NG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY85ZQG002:links:Link:00CDY860NG000:props:StringProp:00CDY860NR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "284"
+          }
+        ]
+      }
+    ],
+    "title": "Build-to-`bin`",
+    "text": "Build-to-`bin`: `packages/cli/build.mjs` (`esbuild`, `oxigraph` external) produces a self-contained `packages/cli/dist/` — bundle plus a generated minimal `package.json` with a real `bin` entry. Verified running standalone via plain `node`, no `tsx`, against the real graph. Resolves [the runtime question](../discussion/packaging.md#id/BlockNode:00CDDVC33G009).",
+    "parent": "BlockNode:00CDY85ZQG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY87KN8000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY87KN8000:props:StringProp:00CDY87MJG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY87KN8000:props:StringProp:00CDY87MJG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY87KN8000",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDY87KN8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY87KN8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDY87KN8001:links:Link:00CDY87MJR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G00A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY87KN8001:links:Link:00CDY87MJR000:props:StringProp:00CDY87MJR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "427"
+          }
+        ]
+      }
+    ],
+    "title": "Explicit-start service redesign",
+    "text": "Explicit-start service redesign: `ensureServiceRunning()` no longer auto-spawns — `aperas service start`/`stop`/`restart` (`kgService.ts`) are the only commands touching the service process directly, `start`/`restart` the only place `process.cwd()` is read to resolve+bind a graph. Lock/socket moved to a fixed `$XDG_RUNTIME_DIR`-based location. Verified live in dev and built-bundle modes, full `verify` suite clean. Resolves [the graph-location question](../discussion/packaging.md#id/BlockNode:00CDDVC33G00A).",
+    "parent": "BlockNode:00CDY87KN8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDY8A3KG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDY8A3KG001:props:StringProp:00CDY8A4JR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDY8A3KG001:props:StringProp:00CDY8A4JR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDY8A3KG001",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDY8A3KG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDY8A3KG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDY8A3KG002:links:Link:00CDY8A4K0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDHSJQE8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY8A3KG002:links:Link:00CDY8A4K0000:props:StringProp:00CDY8A4K0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "144"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDY8A3KG002:links:Link:00CDY8A4K0002",
+        "@type": "Link",
+        "target": "BlockNode:00CDY7PGG0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDY8A3KG002:links:Link:00CDY8A4K0002:props:StringProp:00CDY8A4K0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "215"
+          }
+        ]
+      }
+    ],
+    "title": "`aperas.config.json`",
+    "text": "`aperas.config.json`: created at `AperasKG/aperas.config.json` (`{ \"graph\": \".\" }`), marking `AperasKG` as its own graph root; the design doc's [Configuration](../design/packaging.md#id/BlockNode:00CDHSJQE8001) and [Workflow](../design/packaging.md#id/BlockNode:00CDY7PGG0001) sections written up to match. Verified live: stopped the service, cold-started the built bundle from a cwd deep inside `AperasKG/artifacts/`, confirmed it discovered the config by walking up (not the dev fallback) and bound to the real path; an ordinary command run from an unrelated cwd (`monorepo/`) still connected correctly through the fixed-location socket.",
+    "parent": "BlockNode:00CDY8A3KG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDZM30JG001",
+    "@type": "BlockNode",
+    "title": "## Resolved: two-path graph config + env-var default resolution closes the artifacts-dir gap",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDZM8GP8001",
+      "BlockNode:00CDZM8GP8002",
+      "BlockNode:00CDZM8GP8003",
+      "BlockNode:00CDZM8GP8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDZM8GP8001",
+    "@type": "BlockNode",
+    "title": "`aperas.config.json`'s `graph` field now accepts two shapes",
+    "text": "`aperas.config.json`'s `graph` field now accepts two shapes: a plain string (shorthand — both `<root>/Apeiron` and `<root>/artifacts` co-located, exactly today's behavior, unchanged) or `{ \"apeiron\": \"<path>\", \"artifacts\": \"<path>\" }` (two independently-specifiable roots, for a graph whose data and markdown tree aren't co-located). `resolveGraphConfig()` resolves both forms into one `GraphConfig { apeironRoot, artifactsRoot, parent, configPath }`.",
+    "parent": "BlockNode:00CDZM30JG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDZM8GP8002",
+    "@type": "BlockNode",
+    "title": "00CDZM8GP8002",
+    "text": "`graphConfig.ts` gained `resolveEffectiveApeironRoot(startDir?)`/`resolveEffectiveArtifactsRoot(startDir?)`, replacing the single `resolveEffectiveGraphRoot()`. Each checks its own env var first (`APERAS_APEIRON_ROOT`/`APERAS_ARTIFACTS_ROOT`), then `aperas.config.json` discovery, then the fixed dev fallback. `getApeironExportDir()`/`getArtifactsDir()`'s own default parameters call these — unchanged call sites everywhere else, since the env-var check now lives inside the shared default resolution itself rather than being each caller's job.",
+    "parent": "BlockNode:00CDZM30JG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDZM8GP8003",
+    "@type": "BlockNode",
+    "title": "00CDZM8GP8003",
+    "text": "`aperas service start`/`restart` (`kgService.ts`) resolve both roots once, from that one invocation's own cwd — still the only place cwd is read — and `spawnService()` sets both env vars on the child. Every function that calls `getArtifactsDir()`/`getApeironExportDir()` with no argument (`runTrack`, `runIngest`, `runProject`, and the shared `apeironNgn/artifacts.ts`/`folders.ts`/`node.ts` helpers) now resolves correctly with **zero signature or call-site changes**, because they're all running inside the one process that already has both env vars set for its whole lifetime — the same guarantee the \"no concurrency, one bound graph per process\" design already committed to.",
+    "parent": "BlockNode:00CDZM30JG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDZM8GP8004",
+    "@type": "BlockNode",
+    "title": "00CDZM8GP8004",
+    "text": "This replaces the parameter-threading approach the gap note above originally assumed was necessary: threading an explicit root through `runTrack`/`runIngest`/`runProject` and every function they call would have meant touching upwards of a dozen call sites across `apeironNgn/artifacts.ts`, `folders.ts`, `node.ts`, plus every one of `verify.ts`'s direct calls into them. The env-var default achieves the same correctness for free, because the architecture already guarantees a service process is bound to exactly one graph for its entire life — parameter-threading would only earn its keep if a single process needed to serve different graphs per call, which this design deliberately never does.",
+    "parent": "BlockNode:00CDZM30JG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDZQJVG8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDZQJVG8001:props:StringProp:00CDZQJWQ8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDZQJVG8001:props:StringProp:00CDZQJWQ8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDZQJVG8001",
+    "parent": "BlockNode:00CDXG7H30001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDZQJVG8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDZQJVG8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDZQJVG8002:links:Link:00CDZQJWR8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDZM30JG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDZQJVG8002:links:Link:00CDZQJWR8000:props:StringProp:00CDZQJWR8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "920"
+          }
+        ]
+      }
+    ],
+    "title": "Closed the client-side graph-root gap",
+    "text": "Closed the client-side graph-root gap: `aperas.config.json`'s `graph` field now takes either a plain path (shorthand) or `{ \"apeiron\": \"...\", \"artifacts\": \"...\" }` (independent roots); `resolveEffectiveApeironRoot()`/`resolveEffectiveArtifactsRoot()` (`graphConfig.ts`) each check their own env var (`APERAS_APEIRON_ROOT`/`APERAS_ARTIFACTS_ROOT`, set by `aperas service start`/`restart`) before config discovery/the fallback. `getArtifactsDir()`'s existing callers — `runTrack`/`runIngest`/`runProject` and the shared `apeironNgn/artifacts.ts`/`folders.ts`/`node.ts` helpers — needed no signature changes at all. Verified live: cold-started the built bundle from a cwd deep inside `AperasKG/`, confirmed the lock recorded the real (non-fallback) discovered paths for both roots, then ran `aperas project` from an unrelated cwd (`monorepo/`) and confirmed it read and wrote against the correctly-bound `artifacts/` — see [discussion](../discussion/packaging.md#id/BlockNode:00CDZM30JG001).",
+    "parent": "BlockNode:00CDZQJVG8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDZQWM0G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDZQWM0G001:props:StringProp:00CDZQWN3R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDZQWM0G001:props:StringProp:00CDZQWN3R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDZQWM0G001",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDZQWM0G002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDZQWM0G002",
+    "@type": "BlockNode",
+    "title": "Two-path graph config, gap closed",
+    "text": "Two-path graph config, gap closed: `aperas.config.json`'s `graph` field now takes either a plain path (shorthand) or `{ \"apeiron\": \"...\", \"artifacts\": \"...\" }` (independent roots). `getArtifactsDir()`'s remaining callers (`runTrack`/`runIngest`/`runProject`, the shared `apeironNgn/artifacts.ts`/`folders.ts`/`node.ts` helpers) now resolve correctly via an env-var-first default (`APERAS_ARTIFACTS_ROOT`, set alongside `APERAS_APEIRON_ROOT` at `aperas service start`/`restart` time), with zero signature changes anywhere. Verified live: cold-started the built bundle from a cwd deep inside `AperasKG/`, confirmed the lock recorded the real discovered paths for both roots (not the coincidental fallback), then ran `aperas project` from an unrelated cwd and confirmed it read/wrote against the correctly-bound `artifacts/`. Closes the one gap flagged in the previous milestone.",
+    "parent": "BlockNode:00CDZQWM0G001",
     "type": "listItem",
     "children": []
   }

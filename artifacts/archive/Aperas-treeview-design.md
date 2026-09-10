@@ -934,3 +934,33 @@ obviously apply the same way; left open rather than guessed at here.
 whatever service-side code resolves/creates the default view on its behalf today) still
 unconditionally calls `view.unfold(id)` — this section records the corrected intent; the code
 change itself is a separate step.
+
+## 16. Migrated task: `kg:show <ref>` / raw single-node inspection (moved from packaging)
+
+Noticed during the `aperas` packaging/dispatcher pass (AperasKG/artifacts/discussion/packaging.md's
+"Freeflow: a real gap — no raw single-node inspection command"), tracked there as a pending task,
+and moved here since it's really a TreeView/node-rendering gap, not a packaging one — the same
+family as §13.3/§14 above.
+
+`kg:tree`/`kg:backlinks --text` only ever show a *rendered preview* of a node: title plus a
+truncated, anchor-stripped abstract. Right for browsing, but not for two things that come up
+repeatedly while working directly against the graph:
+
+- Verifying a stored field is exactly what's about to be pushed back via `kg:update`/`kg:insert`
+  (any transcription slip in a hand-typed re-send silently tombstones+recreates the block, losing
+  its id — see the `aperas` skill's own editing-discipline notes).
+- Reading a field no existing command shows at all: `props`, `tombstonedAt`.
+
+`kg:project --dry-run` reconstructs real projected markdown, but only at the whole-artifact level,
+with anchors spliced back in — not a raw per-node dump either. Today, the only way to see a node's
+exact `.text`/`.props`/`.tombstonedAt`/`.path` as actually stored is reaching outside the CLI
+entirely, straight into `AperasKG/Apeiron/BlockNode.jsonld`/`ArtifactNode.jsonld` (a direct
+Python/node one-liner).
+
+**Proposed shape**: `kg:show <ref>` (`aperas show <ref>` once dispatched) — resolve `<ref>` the same
+way every other command does, then print its raw stored fields untransformed: full `text`, `props`,
+`tombstonedAt`, and its `path`/`title`/`type` as actually recorded, no truncation, no anchor
+stripping, no rendering.
+
+**Status: identified, not yet implemented** — to be picked up whenever this document itself gets
+migrated into the graph and resolved, not before.

@@ -147,11 +147,11 @@
       "BlockNode:00CDDVBXH8001"
     ],
     "path": "design/packaging.md",
-    "fileHash": "3f607bcf683f53160610a4568c647bc5dd1da0ea9e309047912b9615bf836c58",
+    "fileHash": "f3b15e92a1703747c0c71eef3afd247a977c02a883a3c389a878addde5ddd24c",
     "lastTrackedAt": "2026-09-10T12:38:08.500Z",
-    "ingestedHash": "3f607bcf683f53160610a4568c647bc5dd1da0ea9e309047912b9615bf836c58",
-    "lastIngestedAt": "2026-09-10T13:04:55.228Z",
-    "projectedHash": "3f607bcf683f53160610a4568c647bc5dd1da0ea9e309047912b9615bf836c58"
+    "ingestedHash": "f3b15e92a1703747c0c71eef3afd247a977c02a883a3c389a878addde5ddd24c",
+    "lastIngestedAt": "2026-09-11T06:06:22.275Z",
+    "projectedHash": "f3b15e92a1703747c0c71eef3afd247a977c02a883a3c389a878addde5ddd24c"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
@@ -169,63 +169,72 @@
       "BlockNode:00CDGPBDKG001",
       "BlockNode:00CDGPTZ7G000",
       "BlockNode:00CDGS4BBG001",
+      "BlockNode:00CDH8S908001",
+      "BlockNode:00CDHFW4R8001",
+      "BlockNode:00CDHJGZV0001",
+      "BlockNode:00CDHSCK8R001",
+      "BlockNode:00CDWB1Y6R001",
+      "BlockNode:00CDWP69B8001",
+      "BlockNode:00CDWPCC3G001",
+      "BlockNode:00CDXFWK3R001",
+      "BlockNode:00CDZM30JG001",
       "BlockNode:00CDG9DD4R001"
     ],
     "path": "discussion/packaging.md",
-    "fileHash": "f57606a6c0ccad2d0b4bff515bba366dc63fce3710413895a6819f21bcdabbfb",
+    "fileHash": "ff30dd8b70ec5c9cb44a494394cf7a25caa7a5b18f65450af26cc5e0609f78ad",
     "lastTrackedAt": "2026-09-10T12:38:09.339Z",
-    "ingestedHash": "f57606a6c0ccad2d0b4bff515bba366dc63fce3710413895a6819f21bcdabbfb",
-    "lastIngestedAt": "2026-09-10T12:47:22.312Z",
-    "projectedHash": "f57606a6c0ccad2d0b4bff515bba366dc63fce3710413895a6819f21bcdabbfb"
+    "ingestedHash": "ff30dd8b70ec5c9cb44a494394cf7a25caa7a5b18f65450af26cc5e0609f78ad",
+    "lastIngestedAt": "2026-09-11T06:05:24.172Z",
+    "projectedHash": "ff30dd8b70ec5c9cb44a494394cf7a25caa7a5b18f65450af26cc5e0609f78ad"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",
     "@type": "ArtifactNode",
     "title": "packaging.md",
-    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/packaging.md#id/BlockNode:00CDDVC33G006).",
+    "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CDDVC8N0001"
     ],
     "path": "issues/packaging.md",
-    "fileHash": "04f262342d2b505e1dbb2fd542dbeb06522aac74d70802a554ba43308742829d",
+    "fileHash": "f3b9a9caee4301cd9b1b3e813960938fcb897a27eee0312c26ddb4e2a71bbf52",
     "lastTrackedAt": "2026-09-10T12:38:10.045Z",
-    "ingestedHash": "04f262342d2b505e1dbb2fd542dbeb06522aac74d70802a554ba43308742829d",
-    "lastIngestedAt": "2026-09-10T12:38:33.614Z",
-    "projectedHash": "04f262342d2b505e1dbb2fd542dbeb06522aac74d70802a554ba43308742829d"
+    "ingestedHash": "f3b9a9caee4301cd9b1b3e813960938fcb897a27eee0312c26ddb4e2a71bbf52",
+    "lastIngestedAt": "2026-09-11T06:12:59.319Z",
+    "projectedHash": "f3b9a9caee4301cd9b1b3e813960938fcb897a27eee0312c26ddb4e2a71bbf52"
   },
   {
     "@id": "ArtifactNode:00CDDTC3S0000",
     "@type": "ArtifactNode",
     "title": "packaging.md",
-    "text": "To be broken down once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
+    "text": "Broken down below once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) had an answer. All 19 numbered steps are done and verified — see [history](../history/packaging.md#id/BlockNode:00CDDVCKCG002) for the closing summary.",
     "parent": "FolderNode:00CDBYV4BR004",
     "type": "root",
     "children": [
       "BlockNode:00CDDVCDW8001"
     ],
     "path": "planning/packaging.md",
-    "fileHash": "68240ef44cce0930569adf3b110b312e1a9c42928c281cbf7405e253aeeb0d0b",
+    "fileHash": "3b7092db384d1583d4419ffbb4ce14c77861c1093bc4bd245f6523c40bcd282b",
     "lastTrackedAt": "2026-09-10T12:38:10.743Z",
-    "ingestedHash": "68240ef44cce0930569adf3b110b312e1a9c42928c281cbf7405e253aeeb0d0b",
-    "lastIngestedAt": "2026-09-10T12:51:33.764Z",
-    "projectedHash": "68240ef44cce0930569adf3b110b312e1a9c42928c281cbf7405e253aeeb0d0b"
+    "ingestedHash": "3b7092db384d1583d4419ffbb4ce14c77861c1093bc4bd245f6523c40bcd282b",
+    "lastIngestedAt": "2026-09-11T06:21:45.895Z",
+    "projectedHash": "3b7092db384d1583d4419ffbb4ce14c77861c1093bc4bd245f6523c40bcd282b"
   },
   {
     "@id": "ArtifactNode:00CDDTC8H0000",
     "@type": "ArtifactNode",
     "title": "packaging.md",
-    "text": "The rename to `packaging.md` and the 3-way workspace split (`packages/core`/`cli`/`web` under a renamed `Aperas/monorepo/` root) are both done and verified — see [Workspace Split](../design/packaging.md#id/BlockNode:00CDGTZHSR001). Still planning: the dispatcher binary itself (`aperas`), and the open packaging/graph-location questions.",
+    "text": "The full packaging effort is done, with no open gaps: the rename to `packaging.md`, the 3-way workspace split, the `aperas` dispatcher, `identity.json`/`aperas.config.json` configuration (including two independent path roots), a real build-to-`bin`, and the explicit-start service redesign are all shipped and verified — see [Configuration](../design/packaging.md#id/BlockNode:00CDHSJQE8001), [Workflow](../design/packaging.md#id/BlockNode:00CDY7PGG0001), and [Distribution](../design/packaging.md#id/BlockNode:00CDW3R42G001). `kg:show <ref>` — a raw single-node inspection command, once tracked here — turned out to be a TreeView/node-rendering gap rather than a packaging one, and moved to `AperasKG/artifacts/archive/Aperas-treeview-design.md`.",
     "parent": "FolderNode:00CDBYV4BR002",
     "children": [
       "BlockNode:00CDDVCKCG001"
     ],
     "path": "history/packaging.md",
-    "fileHash": "8aad0bc268c9193f5def9debbdc2735f706b511fbf2f3bba61ded77d42856aa1",
+    "fileHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c",
     "lastTrackedAt": "2026-09-10T12:38:11.449Z",
-    "ingestedHash": "8aad0bc268c9193f5def9debbdc2735f706b511fbf2f3bba61ded77d42856aa1",
-    "lastIngestedAt": "2026-09-10T13:05:24.944Z",
-    "projectedHash": "8aad0bc268c9193f5def9debbdc2735f706b511fbf2f3bba61ded77d42856aa1"
+    "ingestedHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c",
+    "lastIngestedAt": "2026-09-11T06:13:26.411Z",
+    "projectedHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c"
   }
 ]
