@@ -96,11 +96,11 @@
       "BlockNode:00CDD68E80001"
     ],
     "path": "design/documentation.md",
-    "fileHash": "a2d1bc67daf6f76afd048cf27f0ce65a2dd3da5260799370cf7c1dd5bbd1502d",
+    "fileHash": "16fed0efd4f00fca653bb1700467bd9c8d4e823e80c5f81667b708bf7992288a",
     "lastTrackedAt": "2026-09-10T08:48:21.034Z",
-    "ingestedHash": "a2d1bc67daf6f76afd048cf27f0ce65a2dd3da5260799370cf7c1dd5bbd1502d",
-    "lastIngestedAt": "2026-09-10T08:48:45.843Z",
-    "projectedHash": "a2d1bc67daf6f76afd048cf27f0ce65a2dd3da5260799370cf7c1dd5bbd1502d"
+    "ingestedHash": "16fed0efd4f00fca653bb1700467bd9c8d4e823e80c5f81667b708bf7992288a",
+    "lastIngestedAt": "2026-09-10T10:59:48.038Z",
+    "projectedHash": "16fed0efd4f00fca653bb1700467bd9c8d4e823e80c5f81667b708bf7992288a"
   },
   {
     "@id": "ArtifactNode:00CDD68DSG000",
@@ -147,11 +147,11 @@
       "BlockNode:00CDDVBXH8001"
     ],
     "path": "design/cli-packaging.md",
-    "fileHash": "7ac608a62b1836af892f82397d5fef5c6e6f931ac8306f26a3f1f627fc617083",
+    "fileHash": "5cfcf13014297797a2e0d177c1eff085e0c73382081d96aa13672cbae04ff7a1",
     "lastTrackedAt": "2026-09-10T10:39:40.931Z",
-    "ingestedHash": "7ac608a62b1836af892f82397d5fef5c6e6f931ac8306f26a3f1f627fc617083",
-    "lastIngestedAt": "2026-09-10T10:41:15.906Z",
-    "projectedHash": "7ac608a62b1836af892f82397d5fef5c6e6f931ac8306f26a3f1f627fc617083"
+    "ingestedHash": "5cfcf13014297797a2e0d177c1eff085e0c73382081d96aa13672cbae04ff7a1",
+    "lastIngestedAt": "2026-09-10T11:54:24.601Z",
+    "projectedHash": "5cfcf13014297797a2e0d177c1eff085e0c73382081d96aa13672cbae04ff7a1"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
@@ -161,31 +161,35 @@
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
     "children": [
-      "BlockNode:00CDDVC338001"
+      "BlockNode:00CDDVC338001",
+      "BlockNode:00CDG18FP0001",
+      "BlockNode:00CDGAFQQR001",
+      "BlockNode:00CDGGTE6R001",
+      "BlockNode:00CDG9DD4R001"
     ],
     "path": "discussion/cli-packaging.md",
-    "fileHash": "574ee968615f4c9384b4bd7b33bd7298ebda286432d90620507085ab6320d597",
+    "fileHash": "6676a2d5f090334ffffb5fe6d483d77efb9c0b28344630cc0128a3115f132ee9",
     "lastTrackedAt": "2026-09-10T10:39:40.930Z",
-    "ingestedHash": "574ee968615f4c9384b4bd7b33bd7298ebda286432d90620507085ab6320d597",
-    "lastIngestedAt": "2026-09-10T10:41:16.615Z",
-    "projectedHash": "574ee968615f4c9384b4bd7b33bd7298ebda286432d90620507085ab6320d597"
+    "ingestedHash": "6676a2d5f090334ffffb5fe6d483d77efb9c0b28344630cc0128a3115f132ee9",
+    "lastIngestedAt": "2026-09-10T12:29:16.947Z",
+    "projectedHash": "6676a2d5f090334ffffb5fe6d483d77efb9c0b28344630cc0128a3115f132ee9"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",
     "@type": "ArtifactNode",
     "title": "cli-packaging.md",
-    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `kg` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
+    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CDDVC8N0001"
     ],
     "path": "issues/cli-packaging.md",
-    "fileHash": "ff71840c686bf18a91e63c517a853b2eb3f556fab43c78d0a5d99c0691e89afd",
+    "fileHash": "a91b6d43b64b169d8a819863363c1794c62bca7e2cdc8f3f38cc11e033566d9c",
     "lastTrackedAt": "2026-09-10T10:39:40.929Z",
-    "ingestedHash": "ff71840c686bf18a91e63c517a853b2eb3f556fab43c78d0a5d99c0691e89afd",
-    "lastIngestedAt": "2026-09-10T10:41:17.234Z",
-    "projectedHash": "ff71840c686bf18a91e63c517a853b2eb3f556fab43c78d0a5d99c0691e89afd"
+    "ingestedHash": "a91b6d43b64b169d8a819863363c1794c62bca7e2cdc8f3f38cc11e033566d9c",
+    "lastIngestedAt": "2026-09-10T11:54:25.928Z",
+    "projectedHash": "a91b6d43b64b169d8a819863363c1794c62bca7e2cdc8f3f38cc11e033566d9c"
   },
   {
     "@id": "ArtifactNode:00CDDTC3S0000",
@@ -201,7 +205,7 @@
     "fileHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b",
     "lastTrackedAt": "2026-09-10T10:39:40.929Z",
     "ingestedHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b",
-    "lastIngestedAt": "2026-09-10T10:41:17.883Z",
+    "lastIngestedAt": "2026-09-10T12:13:51.639Z",
     "projectedHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b"
   },
   {
@@ -217,7 +221,21 @@
     "fileHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32",
     "lastTrackedAt": "2026-09-10T10:39:40.930Z",
     "ingestedHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32",
-    "lastIngestedAt": "2026-09-10T10:41:18.490Z",
+    "lastIngestedAt": "2026-09-10T11:54:27.209Z",
     "projectedHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32"
+  },
+  {
+    "@id": "ArtifactNode:00CDGG8828000",
+    "@type": "ArtifactNode",
+    "tombstonedAt": "2026-09-10T12:28:34.735Z",
+    "title": "_scratch-retitle-test.md",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [],
+    "path": "design/_scratch-retitle-test.md",
+    "fileHash": "2983398b41126b18cfe4a15cc8a878acf0dc5220518b8f69f8e5a0ba9c6f6b4c",
+    "lastTrackedAt": "2026-09-10T12:27:57.833Z",
+    "ingestedHash": "2983398b41126b18cfe4a15cc8a878acf0dc5220518b8f69f8e5a0ba9c6f6b4c",
+    "lastIngestedAt": "2026-09-10T12:27:57.880Z"
   }
 ]

@@ -76,10 +76,10 @@ The top of the freeflow document acts as a control panel. The agent authors stru
 # CRUD Reconciliation Task
 
 ## Dashboard
-[Current Architecture](../design/crud.md/Architecture)
-[The Bug Report](../issues/crud.md/Open-Issues/Nowhere-Problem)
-[The Plan](../planning/crud.md/Implementation-Plan)
-[Status](../history/crud.md/Current-Status)
+[Current Architecture](../design/crud.md#id/BlockNode:00C0000000001)
+[The Bug Report](../issues/crud.md#id/BlockNode:00C0000000002)
+[The Plan](../planning/crud.md#id/BlockNode:00C0000000003)
+[Status](../history/crud.md#id/BlockNode:00C0000000004)
 ```
 
 *(By linking these, the agent anchors the formal state into their workspace. When unfolded via `TreeView`, it projects all these scattered formal blocks into a single localized lens).*
@@ -100,17 +100,17 @@ This is pure Apeiron. It is unbounded, unstructured, and safe from strict schema
 
 Eventually, the brainstorming yields a concrete decision. The thought *crystallizes* from a messy idea into a formal architectural rule, or a formal task.
 
-Instead of leaving that crystallized rule buried in the freeflow text, the agent projects it back to the formal block using the CRUD surface:
+Instead of leaving that crystallized rule buried in the freeflow text, the agent projects it back to the formal block using the CRUD surface — `aperas update` always takes the replacement content on stdin, never as a flag:
 
 ```bash
 # Push the crystallized rule to the formal design block
-kg:update design/crud.md/Architecture --text "A placeholder is a flag, not a distinct kind..."
+echo "A placeholder is a flag, not a distinct kind..." | aperas update design/crud.md/Architecture
 
 # Push the execution steps to the formal planning block
-kg:update planning/crud.md/Task-Breakdown --text "- [ ] Add placeholder flag to nodes\n- [ ] Reconcile missing parents"
+printf '%s\n' "- [ ] Add placeholder flag to nodes" "- [ ] Reconcile missing parents" | aperas update planning/crud.md/Task-Breakdown
 
 # Push the resolution status to the formal history block
-kg:update history/crud.md/Current-Status --text "Resolved Nowhere Problem via placeholder flags."
+echo "Resolved Nowhere Problem via placeholder flags." | aperas update history/crud.md/Current-Status
 ```
 
 ### The Resulting Ecosystem <a name='id/BlockNode:00CDD68E8800E' class='aperas-anchor aperas-id'></a>

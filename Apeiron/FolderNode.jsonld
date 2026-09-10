@@ -91,6 +91,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "design",
     "children": [
+      "ArtifactNode:00CDGG8828000",
       "ArtifactNode:00CDDTBJBG000",
       "ArtifactNode:00CDD68DS8000",
       "ArtifactNode:00CDBYV460000"

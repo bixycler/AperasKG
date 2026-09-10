@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CDEYP36G001",
+    "title": "00CDGG8888001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CDEYP378001",
+    "title": "00CDGG8890001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CDEYP38G001",
+    "title": "00CDGG88B0001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -2946,7 +2946,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CDEYP37G001",
+    "title": "00CDGG889R001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -2955,7 +2955,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CDEYP380001",
+    "title": "00CDGG88A0001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -2964,7 +2964,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CDEYP388001",
+    "title": "00CDGG88AG001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -3010,7 +3010,7 @@
         "value": "1"
       }
     ],
-    "title": "00CDDBQ8RG003",
+    "title": "00CDF7V7VR003",
     "parent": "BlockNode:00CDD68E80002",
     "type": "list",
     "children": [
@@ -3111,7 +3111,7 @@
   {
     "@id": "BlockNode:00CDD68E80008",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG008",
+    "title": "00CDF7V7VR008",
     "text": "**Design Docs:** Pure architectural specifications, data models, and rules.",
     "parent": "BlockNode:00CDD68E80007",
     "type": "listItem",
@@ -3120,7 +3120,7 @@
   {
     "@id": "BlockNode:00CDD68E80009",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG009",
+    "title": "00CDF7V7VR009",
     "text": "**Issue Docs:** Bug reports, architectural gaps, and pending fixes.",
     "parent": "BlockNode:00CDD68E80007",
     "type": "listItem",
@@ -3129,7 +3129,7 @@
   {
     "@id": "BlockNode:00CDD68E8000A",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00A",
+    "title": "00CDF7V7VR00A",
     "text": "**Planning Docs:** Implementation plans, task breakdowns, and step-by-step execution guides.",
     "parent": "BlockNode:00CDD68E80007",
     "type": "listItem",
@@ -3138,7 +3138,7 @@
   {
     "@id": "BlockNode:00CDD68E8000B",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00B",
+    "title": "00CDF7V7VR00B",
     "text": "**History/Status Docs:** What was implemented, when it was verified, and milestones.",
     "parent": "BlockNode:00CDD68E80007",
     "type": "listItem",
@@ -3147,7 +3147,7 @@
   {
     "@id": "BlockNode:00CDD68E8000C",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00C",
+    "title": "00CDF7V7VR00C",
     "text": "**Discussion Docs:** Rejected ideas, motivation, and theoretical context.",
     "parent": "BlockNode:00CDD68E80007",
     "type": "listItem",
@@ -3156,7 +3156,7 @@
   {
     "@id": "BlockNode:00CDD68E8000D",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00D",
+    "title": "00CDF7V7VR00D",
     "text": "This guarantees that a reader parsing the \"Design Doc\" sees *only* the design, without needing complex transducers to strip out bug reports and history logs.",
     "parent": "BlockNode:00CDD68E80007",
     "type": "paragraph",
@@ -3188,7 +3188,7 @@
   {
     "@id": "BlockNode:00CDD68E8000G",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00G",
+    "title": "00CDF7V7VR00G",
     "text": "```text\nartifacts/\n  ├── design/\n  │   ├── crud.md                 (Pure Perata: Architecture, Models, Specs)\n  │   └── treeview.md\n  ├── issues/\n  │   ├── crud.md                 (Bugs, gaps, pending tasks)\n  │   └── network.md\n  ├── planning/\n  │   └── crud.md                 (Implementation plans, step-by-step execution guides)\n  ├── history/\n  │   └── crud.md                 (Implementation status, log of changes)\n  └── discussion/\n      └── crud.md                 (Rationale, rejected ideas, unstructured thought)\n```",
     "parent": "BlockNode:00CDD68E8000F",
     "type": "code",
@@ -3240,7 +3240,7 @@
       }
     ],
     "title": "**Design Docs (`design/*.md`)**",
-    "text": "**Design Docs (`design/*.md`)**: <a name='id/BlockNode:00CDD68E8000J' class='aperas-anchor aperas-id'></a> Only normative, current-state architectural facts. No \"I think we should...\"",
+    "text": "**Design Docs (`design/*.md`)**: Only normative, current-state architectural facts. No \"I think we should...\"",
     "parent": "BlockNode:00CDD68E8000H",
     "type": "listItem",
     "children": [
@@ -3251,7 +3251,7 @@
   {
     "@id": "BlockNode:00CDD68E8000K",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00K",
+    "title": "00CDF7V7VR00K",
     "text": "`# Context` — a factual index of this concern's discussion, issue, planning, and history docs: one link plus a brief, non-argumentative summary per doc (what exists, not why). Rationale, rejected alternatives, and narrative stay in the linked Discussion doc — never inline here.",
     "parent": "BlockNode:00CDD68E8000J",
     "type": "listItem",
@@ -3260,7 +3260,7 @@
   {
     "@id": "BlockNode:00CDD68E8000M",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RG00M",
+    "title": "00CDF7V7VR00M",
     "text": "`# Architecture`, `# Topology`, `# Workflows`",
     "parent": "BlockNode:00CDD68E8000J",
     "type": "listItem",
@@ -3284,7 +3284,7 @@
       }
     ],
     "title": "**Issue Docs (`issues/*.md`)**",
-    "text": "**Issue Docs (`issues/*.md`)**: <a name='id/BlockNode:00CDD68E8000N' class='aperas-anchor aperas-id'></a> Actionable, resolvable nodes.",
+    "text": "**Issue Docs (`issues/*.md`)**: Actionable, resolvable nodes.",
     "parent": "BlockNode:00CDD68E8000H",
     "type": "listItem",
     "children": [
@@ -3294,7 +3294,7 @@
   {
     "@id": "BlockNode:00CDD68E8000P",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR001",
+    "title": "00CDF7V7VR00P",
     "text": "`# Open Issues`, `# Pending Tasks`, `# Resolved`",
     "parent": "BlockNode:00CDD68E8000N",
     "type": "listItem",
@@ -3318,7 +3318,7 @@
       }
     ],
     "title": "**Planning Docs (`planning/*.md`)**",
-    "text": "**Planning Docs (`planning/*.md`)**: <a name='id/BlockNode:00CDD68E8000Q' class='aperas-anchor aperas-id'></a> Actionable steps and plans for implementation.",
+    "text": "**Planning Docs (`planning/*.md`)**: Actionable steps and plans for implementation.",
     "parent": "BlockNode:00CDD68E8000H",
     "type": "listItem",
     "children": [
@@ -3328,7 +3328,7 @@
   {
     "@id": "BlockNode:00CDD68E8000R",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR003",
+    "title": "00CDF7V7VR00R",
     "text": "`# Implementation Plan`, `# Task Breakdown`, `# Verification Plan`",
     "parent": "BlockNode:00CDD68E8000Q",
     "type": "listItem",
@@ -3352,7 +3352,7 @@
       }
     ],
     "title": "**History Docs (`history/*.md`)**",
-    "text": "**History Docs (`history/*.md`)**: <a name='id/BlockNode:00CDD68E88000' class='aperas-anchor aperas-id'></a> Chronological or state-based facts.",
+    "text": "**History Docs (`history/*.md`)**: Chronological or state-based facts.",
     "parent": "BlockNode:00CDD68E8000H",
     "type": "listItem",
     "children": [
@@ -3362,7 +3362,7 @@
   {
     "@id": "BlockNode:00CDD68E88001",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR005",
+    "title": "00CDF7V7VR00T",
     "text": "`# Current Status`, `# Milestones`",
     "parent": "BlockNode:00CDD68E88000",
     "type": "listItem",
@@ -3386,7 +3386,7 @@
   {
     "@id": "BlockNode:00CDD68E88003",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR007",
+    "title": "00CDF7V7VR00W",
     "text": "When starting a task, the agent doesn't jump between `design.md` and `issues.md`. They create a freeflow discussion document, which serves two simultaneous purposes:",
     "parent": "BlockNode:00CDD68E88002",
     "type": "paragraph",
@@ -3401,32 +3401,23 @@
     "type": "heading",
     "children": [
       "BlockNode:00CDD68E88005",
-      "BlockNode:00CDD68E88006",
+      "BlockNode:00CDF7V7VR00Z",
       "BlockNode:00CDD68E88007"
     ]
   },
   {
     "@id": "BlockNode:00CDD68E88005",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR009",
+    "title": "00CDF7V7VR00Y",
     "text": "**`discussion/crud-reconciliation-task.md`**",
     "parent": "BlockNode:00CDD68E88004",
     "type": "paragraph",
     "children": []
   },
   {
-    "@id": "BlockNode:00CDD68E88006",
-    "@type": "BlockNode",
-    "title": "00CDDBQ8RR00A",
-    "text": "```markdown\n# CRUD Reconciliation Task\n\n## Dashboard\n[Current Architecture](../design/crud.md/Architecture)\n[The Bug Report](../issues/crud.md/Open-Issues/Nowhere-Problem)\n[The Plan](../planning/crud.md/Implementation-Plan)\n[Status](../history/crud.md/Current-Status)\n```",
-    "parent": "BlockNode:00CDD68E88004",
-    "type": "code",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CDD68E88007",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR00B",
+    "title": "00CDF7V7VR010",
     "text": "*(By linking these, the agent anchors the formal state into their workspace. When unfolded via `TreeView`, it projects all these scattered formal blocks into a single localized lens).*",
     "parent": "BlockNode:00CDD68E88004",
     "type": "paragraph",
@@ -3447,7 +3438,7 @@
   {
     "@id": "BlockNode:00CDD68E88009",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR00D",
+    "title": "00CDF7V7VR012",
     "text": "```markdown\n## Brainstorming\nSo the issue happens because the parent node is missing.\nIf we use a placeholder flag on the node, it could reconcile safely...\n```",
     "parent": "BlockNode:00CDD68E88008",
     "type": "code",
@@ -3456,7 +3447,7 @@
   {
     "@id": "BlockNode:00CDD68E8800A",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR00E",
+    "title": "00CDF7V7VR013",
     "text": "This is pure Apeiron. It is unbounded, unstructured, and safe from strict schema rules. It exists only in the discussion concern.",
     "parent": "BlockNode:00CDD68E88008",
     "type": "paragraph",
@@ -3470,27 +3461,9 @@
     "parent": "BlockNode:00CDD68E88002",
     "type": "heading",
     "children": [
-      "BlockNode:00CDD68E8800C",
-      "BlockNode:00CDD68E8800D"
+      "BlockNode:00CDF7V7VR015",
+      "BlockNode:00CDF7V7VR016"
     ]
-  },
-  {
-    "@id": "BlockNode:00CDD68E8800C",
-    "@type": "BlockNode",
-    "title": "00CDDBQ8RR00G",
-    "text": "Instead of leaving that crystallized rule buried in the freeflow text, the agent projects it back to the formal block using the CRUD surface:",
-    "parent": "BlockNode:00CDD68E8800B",
-    "type": "paragraph",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CDD68E8800D",
-    "@type": "BlockNode",
-    "title": "00CDDBQ8RR00H",
-    "text": "```bash\n# Push the crystallized rule to the formal design block\nkg:update design/crud.md/Architecture --text \"A placeholder is a flag, not a distinct kind...\"\n\n# Push the execution steps to the formal planning block\nkg:update planning/crud.md/Task-Breakdown --text \"- [ ] Add placeholder flag to nodes\\n- [ ] Reconcile missing parents\"\n\n# Push the resolution status to the formal history block\nkg:update history/crud.md/Current-Status --text \"Resolved Nowhere Problem via placeholder flags.\"\n```",
-    "parent": "BlockNode:00CDD68E8800B",
-    "type": "code",
-    "children": []
   },
   {
     "@id": "BlockNode:00CDD68E8800E",
@@ -3522,7 +3495,7 @@
   {
     "@id": "BlockNode:00CDD68E8800F",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR00K",
+    "title": "00CDF7V7VR018",
     "text": "The **Freeflow Document** (in `discussion/`) retains the entire historical journey of the thought process, the rejected ideas, and the dashboard of links that defined the task context.",
     "parent": "BlockNode:00CDD68E8800E",
     "type": "listItem",
@@ -3531,7 +3504,7 @@
   {
     "@id": "BlockNode:00CDD68E8800G",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR00M",
+    "title": "00CDF7V7W0000",
     "text": "The **Formal Documents** (in `design/`, `issues/`, `planning/`, `history/`) remain pristine and strictly isolated, containing only the crystallized reality of the system.",
     "parent": "BlockNode:00CDD68E8800E",
     "type": "listItem",
@@ -3540,7 +3513,7 @@
   {
     "@id": "BlockNode:00CDD68E8800H",
     "@type": "BlockNode",
-    "title": "00CDDBQ8RR00N",
+    "title": "00CDF7V7W0001",
     "text": "The **Agent** navigates the graph easily, using the freeflow document as a central hub that fans out to the formal specs.",
     "parent": "BlockNode:00CDD68E8800E",
     "type": "listItem",
@@ -3808,7 +3781,7 @@
         "value": "1"
       }
     ],
-    "title": "00CDEZB7V8003",
+    "title": "00CDF804RR003",
     "parent": "BlockNode:00CDDVBXHG000",
     "type": "list",
     "children": [
@@ -3896,7 +3869,7 @@
     "@id": "BlockNode:00CDDVBXHG005",
     "@type": "BlockNode",
     "title": "## Architecture",
-    "text": "The published CLI is a single `kg` binary that argv-dispatches to a subcommand per verb (`kg ingest`, `kg tree`, `kg unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router.",
+    "text": "The published CLI is a single `aperas` binary that argv-dispatches to a subcommand per verb (`aperas ingest`, `aperas tree`, `aperas unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router.",
     "parent": "BlockNode:00CDDVBXH8001",
     "type": "heading",
     "children": []
@@ -3916,6 +3889,7 @@
       "BlockNode:00CDDVC33G006",
       "BlockNode:00CDDVC33G007",
       "BlockNode:00CDDVC33G008",
+      "BlockNode:00CDF8B3TG00A",
       "BlockNode:00CDDVC33G009",
       "BlockNode:00CDDVC33G00A"
     ]
@@ -3947,7 +3921,7 @@
         "value": "1"
       }
     ],
-    "title": "00CDEZBDK8003",
+    "title": "00CDF8B3TG002",
     "parent": "BlockNode:00CDDVC33G000",
     "type": "list",
     "children": [
@@ -3976,7 +3950,7 @@
         ]
       }
     ],
-    "title": "00CDEZBDK8004",
+    "title": "00CDF8B3TG003",
     "text": "[Design](../design/cli-packaging.md#id/BlockNode:00CDDVBXH8001) — architecture decisions once crystallized.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
@@ -4001,7 +3975,7 @@
         ]
       }
     ],
-    "title": "00CDEZBDK8005",
+    "title": "00CDF8B3TG004",
     "text": "[Issues](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0001) — gaps this reasoning surfaces.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
@@ -4026,7 +4000,7 @@
         ]
       }
     ],
-    "title": "00CDEZBDK8006",
+    "title": "00CDF8B3TG005",
     "text": "[Planning](../planning/cli-packaging.md#id/BlockNode:00CDDVCDW8001) — task breakdown once a shape is agreed.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
@@ -4051,7 +4025,7 @@
         ]
       }
     ],
-    "title": "00CDEZBDK8007",
+    "title": "00CDF8B3TG006",
     "text": "[History](../history/cli-packaging.md#id/BlockNode:00CDDVCKCG001) — status/milestones.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
@@ -4070,7 +4044,7 @@
     "@id": "BlockNode:00CDDVC33G007",
     "@type": "BlockNode",
     "title": "## Considered: one bin per verb",
-    "text": "Register each existing `kgX.ts` as its own `bin` entry (`kg-ingest`, `kg-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the `kg <verb>` grouping every doc and code comment already writes commands as (e.g. `kg:update design/crud.md/Architecture --text ...` in design/documentation.md's Workflows).",
+    "text": "Register each existing `kgX.ts` as its own `bin` entry (`aperas-ingest`, `aperas-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the single `aperas <verb>` entrypoint every illustrative example in the corpus already assumes (e.g. design/documentation.md's Workflows: `echo \"...\" | aperas update design/crud.md/Architecture`).",
     "parent": "BlockNode:00CDDVC338001",
     "type": "heading",
     "children": []
@@ -4079,7 +4053,7 @@
     "@id": "BlockNode:00CDDVC33G008",
     "@type": "BlockNode",
     "title": "## Landing on: one dispatcher binary",
-    "text": "A single `kg` executable that argv-dispatches to a subcommand (`kg ingest ...`, `kg tree ...`, ...). Low-risk refactor: every `kgX.ts` already separates a pure `run*` function (e.g. `runIngest`, `runProject`) from its own `main()`'s argv-parsing/help-printing glue — the dispatcher only needs to own argv routing and reuse the existing `run*`/`request()` calls and `kgHelp.ts` machinery, not rewrite any command's logic.",
+    "text": "A single `aperas` executable that argv-dispatches to a subcommand (`aperas ingest ...`, `aperas tree ...`, ...). Low-risk refactor: every `kgX.ts` already separates a pure `run*` function (e.g. `runIngest`, `runProject`) from its own `main()`'s argv-parsing/help-printing glue — the dispatcher only needs to own argv routing and reuse the existing `run*`/`request()` calls and `kgHelp.ts` machinery, not rewrite any command's logic.",
     "parent": "BlockNode:00CDDVC338001",
     "type": "heading",
     "children": []
@@ -4097,7 +4071,7 @@
     "@id": "BlockNode:00CDDVC33G00A",
     "@type": "BlockNode",
     "title": "## Open question: where's the graph?",
-    "text": "`getArtifactsDir()` resolves `AperasKG/artifacts` as a hardcoded sibling of `web/` — true for us, not for an end user with no such sibling folder. Packaging needs some answer for where an installed `kg` binary finds (or creates) its own graph — cwd-relative discovery, an env var, a config file — that's still open, and probably the biggest remaining unknown, separate from the dispatcher/bundling mechanics above.",
+    "text": "`getArtifactsDir()` resolves `AperasKG/artifacts` as a hardcoded sibling of `web/` — true for us, not for an end user with no such sibling folder. Packaging needs some answer for where an installed `aperas` binary finds (or creates) its own graph — cwd-relative discovery, an env var, a config file — that's still open, and probably the biggest remaining unknown, separate from the dispatcher/bundling mechanics above.",
     "parent": "BlockNode:00CDDVC338001",
     "type": "heading",
     "children": []
@@ -4141,7 +4115,7 @@
         "value": "1"
       }
     ],
-    "title": "00CDEZBJKR003",
+    "title": "00CDF8EQSR003",
     "parent": "BlockNode:00CDDVC8N0002",
     "type": "list",
     "children": [
@@ -4168,8 +4142,8 @@
         ]
       }
     ],
-    "title": "00CDEZBJKR004",
-    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `kg` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
+    "title": "00CDF8EQSR004",
+    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
     "parent": "BlockNode:00CDDVC8N0003",
     "type": "listItem",
     "children": []
@@ -4193,7 +4167,7 @@
         ]
       }
     ],
-    "title": "00CDEZBJKR005",
+    "title": "00CDF8EQSR005",
     "text": "**The graph's location is hardcoded.** `getArtifactsDir()` resolves `AperasKG/artifacts` as a fixed sibling of `web/` — true only for this repo's own layout, not for an installed CLI running against an arbitrary user's own graph. See [discussion](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G00A).",
     "parent": "BlockNode:00CDDVC8N0003",
     "type": "listItem",
@@ -4254,10 +4228,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R002:props:StringProp:00CDDW708R003",
+            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R002:props:StringProp:00CDG9M9A0000",
             "@type": "StringProp",
             "key": "position",
-            "value": "114"
+            "value": "124"
           }
         ]
       }
@@ -4351,7 +4325,7 @@
   {
     "@id": "BlockNode:00CDEB141G003",
     "@type": "BlockNode",
-    "title": "00CDEZBDK800F",
+    "title": "00CDF8B3T800C",
     "text": "**The only real rename detection (Gestalt-match) lives in the full, path-less sweep** (`trackAllArtifacts`), and that sweep walks every file under `AperasKG/artifacts/` with no exclusion for `archive/` — which has never been swept before now. It aborted immediately on a pre-existing full-slug-path collision between two blocks in `archive/Aperas-dev-status.md`, before writing anything.",
     "parent": "BlockNode:00CDEB141G001",
     "type": "listItem",
@@ -4360,7 +4334,7 @@
   {
     "@id": "BlockNode:00CDEB141G004",
     "@type": "BlockNode",
-    "title": "00CDEZBDK800G",
+    "title": "00CDF8B3TG000",
     "text": "Recovered by restoring `Apeiron/*.jsonld` from the git index (the last known-good staged state) and reverting the disk `mv`. No dedicated \"rename an artifact\" primitive exists yet — this needs a real design, not another ad hoc attempt.",
     "parent": "BlockNode:00CDEB141G001",
     "type": "paragraph",
@@ -4401,7 +4375,7 @@
   {
     "@id": "BlockNode:00CDEM7DVG002",
     "@type": "BlockNode",
-    "title": "00CDEZBDK800M",
+    "title": "00CDF8B3T8006",
     "text": "First attempt reused `trackAllArtifacts`'s own `matchLeftoverByAbstract` (the Gestalt/Ratcliff-Obershelp recursion `reconcile.ts` uses everywhere else) and only matched 2 of 5 batch-renamed files — not from ambiguity, but because that algorithm is position-sensitive: it works for reconciling siblings that share a rough common order across an edit, not for an unordered bag of whole-artifact identities scattered across concern folders. A match's recursive split can discard a whole quadrant of otherwise-valid candidates just because the corresponding range on the other side is empty. Replaced with `matchByExactKey`: same \"decline rather than guess\" principle (a key occurring more than once on either side stays unmatched), but no positional requirement — confirmed via debug trace, then verified live (4 of 5 correctly renamed, identity preserved).",
     "parent": "BlockNode:00CDEM7DVG001",
     "type": "paragraph",
@@ -4410,7 +4384,7 @@
   {
     "@id": "BlockNode:00CDEM7DVR000",
     "@type": "BlockNode",
-    "title": "00CDEZBDK800N",
+    "title": "00CDF8B3T8007",
     "text": "**Left open, a distinct bug:** the 5th case still doesn't match, and a separate block-level reconciliation surfaced the same shape of problem — an ArtifactNode's (or BlockNode's) cached abstract `.text` is snapshotted at ingestion time, before `kg:project` ever splices an inline `id/<ID>` anchor into a list-item/paragraph's rendered form. Once a block has been through even one project cycle, its stored text and its freshly-reparsed disk text differ by exactly that anchor — breaking any matcher that requires exact equality, ours included. Not attempted here; needs its own fix (re-deriving the stored abstract with anchors stripped, or comparing anchor-insensitively).",
     "parent": "BlockNode:00CDEM7DVG001",
     "type": "paragraph",
@@ -4431,7 +4405,7 @@
   {
     "@id": "BlockNode:00CDEZ1A68002",
     "@type": "BlockNode",
-    "title": "00CDEZBDK800Q",
+    "title": "00CDF8B3T8003",
     "text": "That got the batch rename to report \"5 renamed\" — but a direct check of the graph showed all 5 *still* duplicated. The real, deeper bug was in `ArtifactNode.trackFromDisk` (`node.ts`): its \"skip if unchanged\" guard compared `fileHash` alone, `this.path` never entered it. A pure rename is exactly the case where the hash *is* unchanged (nothing but the location moved) — so the guard's early return skipped the `this.path = artifactPath` write below it every time, on every rename, while still reporting `{ tracked: true }`-shaped success to its caller. `trackAllArtifacts`'s own rename path had carried this same bug the whole time; it just never surfaced because a real-world rename usually carries a content edit alongside it, which masked the hash match. Fixed: the guard now requires the path to match too, not just the hash — a rename (same hash, different path) now correctly falls through and updates `path`/`title`/`fileHash`/`lastTrackedAt`.",
     "parent": "BlockNode:00CDEZ1A68001",
     "type": "paragraph",
@@ -4443,6 +4417,188 @@
     "title": "All three fixes together, re-verified",
     "text": "All three fixes together, re-verified: batch-renaming the 5 `cli.md` docs to `cli-packaging.md` now reports \"5 renamed\" *and* the graph shows exactly 5 ArtifactNodes (no duplicates), each still carrying its original id and its original BlockNode children — confirmed via direct inspection, not just the summary line.",
     "parent": "BlockNode:00CDEZ1A68001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDF7V7VR00Z",
+    "@type": "BlockNode",
+    "title": "00CDF7V7VR00Z",
+    "text": "```markdown\n# CRUD Reconciliation Task\n\n## Dashboard\n[Current Architecture](../design/crud.md#id/BlockNode:00C0000000001)\n[The Bug Report](../issues/crud.md#id/BlockNode:00C0000000002)\n[The Plan](../planning/crud.md#id/BlockNode:00C0000000003)\n[Status](../history/crud.md#id/BlockNode:00C0000000004)\n```",
+    "parent": "BlockNode:00CDD68E88004",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDF7V7VR015",
+    "@type": "BlockNode",
+    "title": "00CDF7V7VR015",
+    "text": "Instead of leaving that crystallized rule buried in the freeflow text, the agent projects it back to the formal block using the CRUD surface — `aperas update` always takes the replacement content on stdin, never as a flag:",
+    "parent": "BlockNode:00CDD68E8800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDF7V7VR016",
+    "@type": "BlockNode",
+    "title": "00CDF7V7VR016",
+    "text": "```bash\n# Push the crystallized rule to the formal design block\necho \"A placeholder is a flag, not a distinct kind...\" | aperas update design/crud.md/Architecture\n\n# Push the execution steps to the formal planning block\nprintf '%s\\n' \"- [ ] Add placeholder flag to nodes\" \"- [ ] Reconcile missing parents\" | aperas update planning/crud.md/Task-Breakdown\n\n# Push the resolution status to the formal history block\necho \"Resolved Nowhere Problem via placeholder flags.\" | aperas update history/crud.md/Current-Status\n```",
+    "parent": "BlockNode:00CDD68E8800B",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDF8B3TG00A",
+    "@type": "BlockNode",
+    "title": "## Naming: `aperas`, not `kg`",
+    "text": "`kg` is short and matches the existing `kg:*` script prefix, but it collides too easily with other tools people already have on their PATH (a common `kubectl` alias, among others) — a real risk once this is something end users install globally, not just an internal npm script name scoped to this repo. Settled on `aperas` instead: unambiguous, matches the project's own name, no realistic collision.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDG18FP0001",
+    "@type": "BlockNode",
+    "title": "## Resolved (partially): retitling a heading, and a deeper wikilink gap it exposed",
+    "text": "Renaming this doc set (`cli-packaging.md` -> `packaging.md`) needed each doc's own H1 retitled too (`# CLI Packaging — X` -> `# Packaging — X`). Pushed the whole corrected document through `kg:update` targeting the *ArtifactNode* (`design/packaging.md`), the same way the `kg -> aperas` content fix worked earlier — and it blew up all 7 blocks into fresh \"added\" ones (0 matched), tombstoning every original BlockNode id in the process.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDG18FP0002",
+      "BlockNode:00CDG18FP0003",
+      "BlockNode:00CDG18FP0004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDG18FP0002",
+    "@type": "BlockNode",
+    "title": "**Root cause:** `kg:update` *does* have a retitle-in-place feature (`kgUpdate.ts`",
+    "text": "**Root cause:** `kg:update` *does* have a retitle-in-place feature (`kgUpdate.ts`: when the piped input's own first child is a heading of matching depth, it relabels `title`/`text` in place, no restructuring) — but it only fires when the *target itself* is that heading BlockNode. Targeting the ArtifactNode instead routes the whole document through the generic `reconcileTree`/Gestalt matcher, where a heading's match key is `title` alone (`reconcile.ts`'s `leafKey`) — no positional or depth-aware fallback. A title change is therefore an exact-key mismatch at the very top of the tree, and since nothing above it can anchor a match, the *entire* subtree reconciles as removed+added instead of \"one heading changed, rest unchanged.\" Artifact-level renames get a real \"same identity, new label\" primitive (`trackFromDisk`, after this session's earlier fix); heading-level retitling only gets one when addressed directly, not through a whole-document push.",
+    "parent": "BlockNode:00CDG18FP0001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDG18FP0003",
+    "@type": "BlockNode",
+    "title": "00CDG18FP0003",
+    "text": "**A second, deeper gap this exposed:** neither `kg:update` nor `kg:insert` ever calls `resolveBlockLinks` — grepped every call site; it only ever runs from `ingestArtifact` (the `kg:ingest`/disk-first path). A block that's \"matched\" (untouched) keeps whatever links it already had, but anything reconciled as \"changed\" or \"added\" via `kg:update`/`kg:insert` gets *no* link resolution at all, silently. Confirmed directly: a fresh \"added\" list item's own BlockNode has no `links` field whatsoever. `documentation.md` and `linking.md` were unaffected (their wikilink-bearing blocks only ever went through \"matched\" `kg:update` passes, carrying forward resolution from an earlier real `kg:ingest`) — this doc set is the one place it actually broke, because the retitle accident forced every block through \"added\".",
+    "parent": "BlockNode:00CDG18FP0001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDG18FP0004",
+    "@type": "BlockNode",
+    "title": "00CDG18FP0004",
+    "text": "Recovered by restoring `Apeiron/*.jsonld` from the git index and reprojecting from the graph (the disk `.md` files needed a `kg:project` to come back after a restore mishap deleted them outright — recoverable because the graph itself, not the working tree, was the actual source of truth here). Not yet fixed: the rename to `packaging.md` (still `cli-packaging.md` on disk) and the wikilink-resolution gap in `kg:update`/`kg:insert` — tracked, not resolved.",
+    "parent": "BlockNode:00CDG18FP0001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDG9DD4R001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-10T12:13:15.220Z",
+    "title": "## Test: wikilink resolution fix check",
+    "text": "See [Architecture](../design/cli-packaging.md#id/BlockNode:00CDDVBXHG005) for the target.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGAFQQR001",
+    "@type": "BlockNode",
+    "title": "## Resolved: `kg:update`/`kg:insert` now resolve wikilinks",
+    "text": "Both commands now call `resolveBlockLinks` (`apeironNgn/artifacts.ts`) themselves, the same wrapper `ingestArtifact` already used — closing the gap the retitle incident above exposed.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGAFQR0000",
+      "BlockNode:00CDGAFQR0001",
+      "BlockNode:00CDGAFQR0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGAFQR0000",
+    "@type": "BlockNode",
+    "title": "The pieces needed were already in `node.ts`, just private to `ingestFromDisk`",
+    "text": "The pieces needed were already in `node.ts`, just private to `ingestFromDisk`: `collectLinkTargetsByBlock`/`collectOldWikilinksByBlock` snapshot a block's pre-mutation resolved link state, and `extractLinkCodes` (`artifacts.ts`) reads the `linkCodes` a fresh parse already stashes per node. Both are now exported, plus a new `findEnclosingArtifactId` (mirroring `artifactPathOfBlock`'s walk, but returning an id) so a command that starts from an arbitrary Block/ArtifactNode target — not `ingestArtifact`'s own already-known artifact id — can still find the right node for `resolveBlockLinks`'s `danglingRef` bookkeeping.",
+    "parent": "BlockNode:00CDGAFQQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGAFQR0001",
+    "@type": "BlockNode",
+    "title": "`kg:update`",
+    "text": "`kg:update`: the old-link snapshot is taken right after `oldShape` (before any mutation); whichever branch (`--text-only` or the default reconcile) builds the new tree also now extracts pending link codes from it *before* hydrating — same order `ingestFromDisk` uses, since `extractLinkCodes` strips the schema-unknown `linkCodes` field as it walks. `kg:insert`'s create mode does the same over its freshly-parsed `topLevel`, with empty old-state maps (nothing existed before).",
+    "parent": "BlockNode:00CDGAFQQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGAFQR0002",
+    "@type": "BlockNode",
+    "title": "Verified two ways",
+    "text": "Verified two ways: a throwaway `kg:insert`'d block with a `#id/...` link resolved immediately (`kg:backlinks` showed the new block as a real backlink, not just a reported count); and a no-op `kg:update` reconcile of an existing two-link block reused both `Link` ids rather than minting duplicates (`kg:backlinks` afterward showed the same two entries, unchanged).",
+    "parent": "BlockNode:00CDGAFQQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGG88E0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-10T12:28:34.735Z",
+    "title": "# Scratch Retitle Test RENAMED",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGG88E0002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-10T12:28:34.735Z",
+    "title": "## Section One",
+    "text": "Some body text for section one.",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGG88E0003",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-10T12:28:34.735Z",
+    "title": "## Section Two",
+    "text": "Some body text for section two.",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGGTE6R001",
+    "@type": "BlockNode",
+    "title": "## Resolved: heading retitle-in-place, at the reconcile level too",
+    "text": "`kg:update`'s direct-heading-retitle feature only ever covered *targeting the heading itself*; a whole-document/whole-tree push (targeting the ArtifactNode, or a real `kg:ingest` re-parse of an edited file) still went through `reconcile.ts`'s generic `diffChildren`, where a heading's Stage A match key is `title` alone (`leafKey`) — an edited title was an exact-key miss with nothing to fall back on, so the entire subtree beneath a retitled heading reconciled as wholesale removed+added, exactly what happened above.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGGTE6R002",
+      "BlockNode:00CDGGTE6R003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGGTE6R002",
+    "@type": "BlockNode",
+    "title": "Added a Stage A2 to `diffChildren`",
+    "text": "Added a Stage A2 to `diffChildren`: headings still unmatched after Stage A's exact-title pass get a positional fallback — bucketed by depth (`astParser.ts`'s new `headingDepth`, reading the title's own leading `#` run, so a `##` can never fool-match a `#`), then paired in original relative order within each bucket. Same \"position is the anchor\" trade-off Stage B already accepts for `list`/`listItem` containers, just extended to headings once title itself is off the table as a key. A pair matched this way (or via Stage A's own text-only case) that differs in `title` and/or `text` is counted as `changed`, not folded into `matched` (`headingChanged`, generalized from the old `headingTextChanged`).",
+    "parent": "BlockNode:00CDGGTE6R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGGTE6R003",
+    "@type": "BlockNode",
+    "title": "Verified on a throwaway test artifact",
+    "text": "Verified on a throwaway test artifact: retitling its H1 through a whole-document `kg:update` (the same shape of push that caused the original incident) now reports \"2 matched, 1 changed, 0 added, 0 removed\" — the two section headings matched cleanly, the retitled H1 counted as changed, and disk projection confirmed all three BlockNode ids were preserved (no tombstones).",
+    "parent": "BlockNode:00CDGGTE6R001",
     "type": "paragraph",
     "children": []
   }

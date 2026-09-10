@@ -8,4 +8,4 @@
 
 ## Architecture <a name='id/BlockNode:00CDDVBXHG005' class='aperas-anchor aperas-id'></a>
 
-The published CLI is a single `kg` binary that argv-dispatches to a subcommand per verb (`kg ingest`, `kg tree`, `kg unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router.
+The published CLI is a single `aperas` binary that argv-dispatches to a subcommand per verb (`aperas ingest`, `aperas tree`, `aperas unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router.
