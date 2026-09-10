@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CDDBVX5G001",
+    "title": "00CDEYP36G001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CDDBVX60001",
+    "title": "00CDEYP378001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CDDBVX78001",
+    "title": "00CDEYP38G001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -2946,7 +2946,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CDDBVX68001",
+    "title": "00CDEYP37G001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -2955,7 +2955,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CDDBVX6G001",
+    "title": "00CDEYP380001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -2964,7 +2964,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CDDBVX70001",
+    "title": "00CDEYP388001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -3767,6 +3767,682 @@
     "title": "00CDDBVXAR002",
     "text": "This is the evidence base for adopting block-based separation of concerns (see [Architecture](../design/documentation.md#id/BlockNode:00CDD68E80007)): splitting design, issues, planning, history, and discussion into strictly isolated documents so a reader parsing a Design doc sees only the design.",
     "parent": "BlockNode:00CDD68EV8002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVBXH8001",
+    "@type": "BlockNode",
+    "title": "# CLI Packaging — Design",
+    "parent": "ArtifactNode:00CDDTBJBG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVBXHG000",
+      "BlockNode:00CDDVBXHG005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVBXHG000",
+    "@type": "BlockNode",
+    "title": "## Context",
+    "parent": "BlockNode:00CDDVBXH8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVBXHG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVBXHG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDDVBXHG001:props:StringProp:00CDDVBY4R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDDVBXHG001:props:StringProp:00CDDVBY4R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDEZB7V8003",
+    "parent": "BlockNode:00CDDVBXHG000",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDDVBXHG002",
+      "BlockNode:00CDDVBXHG003",
+      "BlockNode:00CDDVBXHG004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVBXHG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVBXHG002:links:Link:00CDDW6Y6G000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVBXHG002:links:Link:00CDDW6Y6G000:props:StringProp:00CDDW6Y6G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
+    "title": "**Discussion**",
+    "text": "**Discussion**: [Motivation and the options considered](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
+    "parent": "BlockNode:00CDDVBXHG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVBXHG003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVBXHG003:links:Link:00CDDW6Y6R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC8N0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVBXHG003:links:Link:00CDDW6Y6R000:props:StringProp:00CDDW6Y6R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [Open gaps a real install exposes](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0002).",
+    "parent": "BlockNode:00CDDVBXHG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVBXHG004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVBXHG004:links:Link:00CDDW6Y6R002",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVCKCG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVBXHG004:links:Link:00CDDW6Y6R002:props:StringProp:00CDDW6Y6R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13"
+          }
+        ]
+      }
+    ],
+    "title": "**History**",
+    "text": "**History**: [Planning — nothing shipped yet](../history/cli-packaging.md#id/BlockNode:00CDDVCKCG002).",
+    "parent": "BlockNode:00CDDVBXHG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVBXHG005",
+    "@type": "BlockNode",
+    "title": "## Architecture",
+    "text": "The published CLI is a single `kg` binary that argv-dispatches to a subcommand per verb (`kg ingest`, `kg tree`, `kg unfold`, ...), reusing each command's existing `run*` function and `request()` call against the shared ApeironNgn service — only the argv-parsing/help-printing glue currently duplicated per-file collapses into one router.",
+    "parent": "BlockNode:00CDDVBXH8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC338001",
+    "@type": "BlockNode",
+    "title": "# CLI Packaging — Discussion",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDEZ1A68001",
+      "BlockNode:00CDEM7DVG001",
+      "BlockNode:00CDEEJ8PR001",
+      "BlockNode:00CDEB141G001",
+      "BlockNode:00CDDVC33G000",
+      "BlockNode:00CDDVC33G006",
+      "BlockNode:00CDDVC33G007",
+      "BlockNode:00CDDVC33G008",
+      "BlockNode:00CDDVC33G009",
+      "BlockNode:00CDDVC33G00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G000",
+    "@type": "BlockNode",
+    "title": "## Dashboard",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVC33G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDDVC33G001:props:StringProp:00CDDVC3MG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDDVC33G001:props:StringProp:00CDDVC3MG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDEZBDK8003",
+    "parent": "BlockNode:00CDDVC33G000",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDDVC33G002",
+      "BlockNode:00CDDVC33G003",
+      "BlockNode:00CDDVC33G004",
+      "BlockNode:00CDDVC33G005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVC33G002:links:Link:00CDDW6YY0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVBXH8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVC33G002:links:Link:00CDDW6YY0000:props:StringProp:00CDDW6YY0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CDEZBDK8004",
+    "text": "[Design](../design/cli-packaging.md#id/BlockNode:00CDDVBXH8001) — architecture decisions once crystallized.",
+    "parent": "BlockNode:00CDDVC33G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVC33G003:links:Link:00CDDW6YY0002",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC8N0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVC33G003:links:Link:00CDDW6YY0002:props:StringProp:00CDDW6YY0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CDEZBDK8005",
+    "text": "[Issues](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0001) — gaps this reasoning surfaces.",
+    "parent": "BlockNode:00CDDVC33G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVC33G004:links:Link:00CDDW6YY8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVCDW8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVC33G004:links:Link:00CDDW6YY8000:props:StringProp:00CDDW6YY8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CDEZBDK8006",
+    "text": "[Planning](../planning/cli-packaging.md#id/BlockNode:00CDDVCDW8001) — task breakdown once a shape is agreed.",
+    "parent": "BlockNode:00CDDVC33G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVC33G005:links:Link:00CDDW6YY8002",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVCKCG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVC33G005:links:Link:00CDDW6YY8002:props:StringProp:00CDDW6YY8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CDEZBDK8007",
+    "text": "[History](../history/cli-packaging.md#id/BlockNode:00CDDVCKCG001) — status/milestones.",
+    "parent": "BlockNode:00CDDVC33G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G006",
+    "@type": "BlockNode",
+    "title": "## Motivation: dogfooding vs. shipping",
+    "text": "Every `kg:*` command today is its own `tsx`-run entrypoint (`web/src/lib/kgX.ts`) invoked as `npm run kg:X -- <args>` — that only works inside a source checkout of this repo, with `tsx` and every other devDependency installed. That's fine for us dogfooding the skills we write against this CLI, but the skills under `skills/` are meant for end users, who won't have this repo cloned. Before more skills lean on `kg:*` commands, the CLI itself needs to be something installable and runnable standalone.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G007",
+    "@type": "BlockNode",
+    "title": "## Considered: one bin per verb",
+    "text": "Register each existing `kgX.ts` as its own `bin` entry (`kg-ingest`, `kg-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the `kg <verb>` grouping every doc and code comment already writes commands as (e.g. `kg:update design/crud.md/Architecture --text ...` in design/documentation.md's Workflows).",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G008",
+    "@type": "BlockNode",
+    "title": "## Landing on: one dispatcher binary",
+    "text": "A single `kg` executable that argv-dispatches to a subcommand (`kg ingest ...`, `kg tree ...`, ...). Low-risk refactor: every `kgX.ts` already separates a pure `run*` function (e.g. `runIngest`, `runProject`) from its own `main()`'s argv-parsing/help-printing glue — the dispatcher only needs to own argv routing and reuse the existing `run*`/`request()` calls and `kgHelp.ts` machinery, not rewrite any command's logic.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G009",
+    "@type": "BlockNode",
+    "title": "## Open question: the runtime",
+    "text": "`tsx` (on-the-fly TypeScript execution) is a devDependency today, not something to ship a published CLI depending on. Needs a real build step (`esbuild`/`tsc`) compiling to plain JS, with `bin` pointing at the built entrypoint (a `#!/usr/bin/env node` shebang) — `npm run kg:X` during development can keep using `tsx` unchanged; only the published artifact needs to be compiled.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC33G00A",
+    "@type": "BlockNode",
+    "title": "## Open question: where's the graph?",
+    "text": "`getArtifactsDir()` resolves `AperasKG/artifacts` as a hardcoded sibling of `web/` — true for us, not for an end user with no such sibling folder. Packaging needs some answer for where an installed `kg` binary finds (or creates) its own graph — cwd-relative discovery, an env var, a config file — that's still open, and probably the biggest remaining unknown, separate from the dispatcher/bundling mechanics above.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0001",
+    "@type": "BlockNode",
+    "title": "# CLI Packaging — Issues",
+    "parent": "ArtifactNode:00CDDTBYG0000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVC8N0002",
+      "BlockNode:00CDDVC8N0006",
+      "BlockNode:00CDDVC8N0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "parent": "BlockNode:00CDDVC8N0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVC8N0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDDVC8N0003:props:StringProp:00CDDVC958000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDDVC8N0003:props:StringProp:00CDDVC958001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDEZBJKR003",
+    "parent": "BlockNode:00CDDVC8N0002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDDVC8N0004",
+      "BlockNode:00CDDVC8N0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDDW6ZJG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDDW6ZJG000:props:StringProp:00CDDW6ZJG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "260"
+          }
+        ]
+      }
+    ],
+    "title": "00CDEZBJKR004",
+    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `kg` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
+    "parent": "BlockNode:00CDDVC8N0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDDW6ZJR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC33G00A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDDW6ZJR000:props:StringProp:00CDDW6ZJR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "234"
+          }
+        ]
+      }
+    ],
+    "title": "00CDEZBJKR005",
+    "text": "**The graph's location is hardcoded.** `getArtifactsDir()` resolves `AperasKG/artifacts` as a fixed sibling of `web/` — true only for this repo's own layout, not for an installed CLI running against an arbitrary user's own graph. See [discussion](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G00A).",
+    "parent": "BlockNode:00CDDVC8N0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0006",
+    "@type": "BlockNode",
+    "title": "## Pending Tasks",
+    "text": "None.",
+    "parent": "BlockNode:00CDDVC8N0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVC8N0007",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "text": "None.",
+    "parent": "BlockNode:00CDDVC8N0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVCDW8001",
+    "@type": "BlockNode",
+    "title": "# CLI Packaging — Planning",
+    "parent": "ArtifactNode:00CDDTC3S0000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVCDW8002",
+      "BlockNode:00CDDVCDW8003",
+      "BlockNode:00CDDVCDW8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVCDW8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC8N0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R000:props:StringProp:00CDDW708R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "23"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R002",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVBXHG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R002:props:StringProp:00CDDW708R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "114"
+          }
+        ]
+      }
+    ],
+    "title": "## Implementation Plan",
+    "text": "To be broken down once [the graph-location question](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/cli-packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
+    "parent": "BlockNode:00CDDVCDW8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVCDW8003",
+    "@type": "BlockNode",
+    "title": "## Task Breakdown",
+    "parent": "BlockNode:00CDDVCDW8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVCDW8004",
+    "@type": "BlockNode",
+    "title": "## Verification Plan",
+    "parent": "BlockNode:00CDDVCDW8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVCKCG001",
+    "@type": "BlockNode",
+    "title": "# CLI Packaging — History",
+    "parent": "ArtifactNode:00CDDTC8H0000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDDVCKCG002",
+      "BlockNode:00CDDVCKCG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDDVCKCG002",
+    "@type": "BlockNode",
+    "title": "## Current Status",
+    "text": "Planning — reasoning captured in discussion/issues/design; no code changed yet.",
+    "parent": "BlockNode:00CDDVCKCG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDDVCKCG003",
+    "@type": "BlockNode",
+    "title": "## Milestones",
+    "parent": "BlockNode:00CDDVCKCG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEB141G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDEB141G001:props:StringProp:00CDEB14R0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDEB141G001:props:StringProp:00CDEB14R0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Incident: artifact rename has no working path yet",
+    "text": "Tried to exercise a rename (`cli.md` -> `cli-packaging.md`) to see whether the system's rename detection preserves block identity or silently treats it as delete+create. Neither scoped nor full ingestion actually renames safely today:",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDEB141G002",
+      "BlockNode:00CDEB141G003",
+      "BlockNode:00CDEB141G004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDEB141G002",
+    "@type": "BlockNode",
+    "title": "**Scoped `kg:ingest --track <paths>` doesn't rename at all.** `kgTrack.ts` documents this",
+    "text": "**Scoped `kg:ingest --track <paths>` doesn't rename at all.** `kgTrack.ts` documents this: an explicit-path track/ingest never runs the whole-corpus rename/removal sweep. Moving the file on disk and ingesting the new path just created a brand-new ArtifactNode with fresh BlockNode IDs — and left the old ArtifactNode worse off than a clean removal: the FolderNode structural sweep detached it from the tree (invisible to `kg:tree`) without tombstoning it, so it kept squatting on the old `path` as a live, orphaned node.",
+    "parent": "BlockNode:00CDEB141G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEB141G003",
+    "@type": "BlockNode",
+    "title": "00CDEZBDK800F",
+    "text": "**The only real rename detection (Gestalt-match) lives in the full, path-less sweep** (`trackAllArtifacts`), and that sweep walks every file under `AperasKG/artifacts/` with no exclusion for `archive/` — which has never been swept before now. It aborted immediately on a pre-existing full-slug-path collision between two blocks in `archive/Aperas-dev-status.md`, before writing anything.",
+    "parent": "BlockNode:00CDEB141G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEB141G004",
+    "@type": "BlockNode",
+    "title": "00CDEZBDK800G",
+    "text": "Recovered by restoring `Apeiron/*.jsonld` from the git index (the last known-good staged state) and reverting the disk `mv`. No dedicated \"rename an artifact\" primitive exists yet — this needs a real design, not another ad hoc attempt.",
+    "parent": "BlockNode:00CDEB141G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEEJ8PR001",
+    "@type": "BlockNode",
+    "title": "## Practice: stage checkpoints myself, leave commits to the user",
+    "text": "The rename incident above recovered cleanly only because `Apeiron/*.jsonld` happened to already be staged from an earlier point — `git restore` could reset the working tree to that known-good index state in one step. That shouldn't be luck: after each verified-stable step (a clean round-trip, a successful reconciliation with no unexpected removals), stage the change (`git add`) immediately, so the git index is always a running checkpoint. If a later step goes wrong, `git restore`/`git diff` against the index recovers it without guesswork.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDEEJ8PR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDEEJ8PR002",
+    "@type": "BlockNode",
+    "title": "This is deliberately staging only, never committing",
+    "text": "This is deliberately staging only, never committing: `git commit` stays a decision for the user to make explicitly, reviewing what accumulated. Staging is not that — it's a private safety net, the same role `git stash` or a snapshot would play, just reusing git's own index instead of a separate mechanism.",
+    "parent": "BlockNode:00CDEEJ8PR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEM7DVG001",
+    "@type": "BlockNode",
+    "title": "## Resolved: scoped rename detection, without a full-corpus sweep",
+    "text": "Added `trackArtifactsScoped` (`apeironNgn/artifacts.ts`), wired into `kg:track`/`kg:ingest`'s explicit-`<path>...` branch. It detects a rename by pairing only the paths the caller actually gave against already-tracked ArtifactNodes whose recorded path no longer exists on disk — never a directory listing, so `archive/` (or anything else not yet migrated) can't enter either side, no matter how large it gets.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDEM7DVG002",
+      "BlockNode:00CDEM7DVR000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDEM7DVG002",
+    "@type": "BlockNode",
+    "title": "00CDEZBDK800M",
+    "text": "First attempt reused `trackAllArtifacts`'s own `matchLeftoverByAbstract` (the Gestalt/Ratcliff-Obershelp recursion `reconcile.ts` uses everywhere else) and only matched 2 of 5 batch-renamed files — not from ambiguity, but because that algorithm is position-sensitive: it works for reconciling siblings that share a rough common order across an edit, not for an unordered bag of whole-artifact identities scattered across concern folders. A match's recursive split can discard a whole quadrant of otherwise-valid candidates just because the corresponding range on the other side is empty. Replaced with `matchByExactKey`: same \"decline rather than guess\" principle (a key occurring more than once on either side stays unmatched), but no positional requirement — confirmed via debug trace, then verified live (4 of 5 correctly renamed, identity preserved).",
+    "parent": "BlockNode:00CDEM7DVG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEM7DVR000",
+    "@type": "BlockNode",
+    "title": "00CDEZBDK800N",
+    "text": "**Left open, a distinct bug:** the 5th case still doesn't match, and a separate block-level reconciliation surfaced the same shape of problem — an ArtifactNode's (or BlockNode's) cached abstract `.text` is snapshotted at ingestion time, before `kg:project` ever splices an inline `id/<ID>` anchor into a list-item/paragraph's rendered form. Once a block has been through even one project cycle, its stored text and its freshly-reparsed disk text differ by exactly that anchor — breaking any matcher that requires exact equality, ours included. Not attempted here; needs its own fix (re-deriving the stored abstract with anchors stripped, or comparing anchor-insensitively).",
+    "parent": "BlockNode:00CDEM7DVG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEZ1A68001",
+    "@type": "BlockNode",
+    "title": "## Resolved: anchor-drift strip, and a real trackFromDisk bug underneath it",
+    "text": "Added `stripInlineAnchors` (`astParser.ts`) and applied it everywhere a block's stored abstract/text gets compared against a fresh disk parse for exact equality: `extractAbstract` (before truncating, so a mid-window anchor can't survive as a mangled fragment either), `reconcile.ts`'s `leafKey` (block-level Gestalt matching), and the rename matchers' own key computation (`apeironNgn/artifacts.ts`). Verified against the two real cases that surfaced this (`design/cli.md`'s Discussion bullet, `discussion/cli.md`'s staging-practice paragraph): stripped text now round-trips exactly.",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDEZ1A68002",
+      "BlockNode:00CDEZ1A68003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDEZ1A68002",
+    "@type": "BlockNode",
+    "title": "00CDEZBDK800Q",
+    "text": "That got the batch rename to report \"5 renamed\" — but a direct check of the graph showed all 5 *still* duplicated. The real, deeper bug was in `ArtifactNode.trackFromDisk` (`node.ts`): its \"skip if unchanged\" guard compared `fileHash` alone, `this.path` never entered it. A pure rename is exactly the case where the hash *is* unchanged (nothing but the location moved) — so the guard's early return skipped the `this.path = artifactPath` write below it every time, on every rename, while still reporting `{ tracked: true }`-shaped success to its caller. `trackAllArtifacts`'s own rename path had carried this same bug the whole time; it just never surfaced because a real-world rename usually carries a content edit alongside it, which masked the hash match. Fixed: the guard now requires the path to match too, not just the hash — a rename (same hash, different path) now correctly falls through and updates `path`/`title`/`fileHash`/`lastTrackedAt`.",
+    "parent": "BlockNode:00CDEZ1A68001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDEZ1A68003",
+    "@type": "BlockNode",
+    "title": "All three fixes together, re-verified",
+    "text": "All three fixes together, re-verified: batch-renaming the 5 `cli.md` docs to `cli-packaging.md` now reports \"5 renamed\" *and* the graph shows exactly 5 ArtifactNodes (no duplicates), each still carrying its original id and its original BlockNode children — confirmed via direct inspection, not just the summary line.",
+    "parent": "BlockNode:00CDEZ1A68001",
     "type": "paragraph",
     "children": []
   }

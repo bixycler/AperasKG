@@ -135,5 +135,89 @@
     "ingestedHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3",
     "lastIngestedAt": "2026-09-10T08:48:47.022Z",
     "projectedHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3"
+  },
+  {
+    "@id": "ArtifactNode:00CDDTBJBG000",
+    "@type": "ArtifactNode",
+    "title": "cli-packaging.md",
+    "text": "**Discussion**: [Motivation and the options considered](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDDVBXH8001"
+    ],
+    "path": "design/cli-packaging.md",
+    "fileHash": "7ac608a62b1836af892f82397d5fef5c6e6f931ac8306f26a3f1f627fc617083",
+    "lastTrackedAt": "2026-09-10T10:39:40.931Z",
+    "ingestedHash": "7ac608a62b1836af892f82397d5fef5c6e6f931ac8306f26a3f1f627fc617083",
+    "lastIngestedAt": "2026-09-10T10:41:15.906Z",
+    "projectedHash": "7ac608a62b1836af892f82397d5fef5c6e6f931ac8306f26a3f1f627fc617083"
+  },
+  {
+    "@id": "ArtifactNode:00CDDTBQWG000",
+    "@type": "ArtifactNode",
+    "title": "cli-packaging.md",
+    "text": "Added `stripInlineAnchors` (`astParser.ts`) and applied it everywhere a block's stored abstract/text gets compared against a fresh disk parse for exact equality: `extractAbstract` (before truncating, so a mid-window anchor can't survive as a mangled fragment either), `reconcile.ts`'s `leafKey` (block-level Gestalt matching), and the rename matchers' own key computation (`apeironNgn/artifacts.ts`). Verified against the two real cases that surfaced this (`design/cli.md`'s Discussion bullet, `discussion/cli.md`'s staging-practice paragraph): stripped text now round-trips exactly.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDDVC338001"
+    ],
+    "path": "discussion/cli-packaging.md",
+    "fileHash": "574ee968615f4c9384b4bd7b33bd7298ebda286432d90620507085ab6320d597",
+    "lastTrackedAt": "2026-09-10T10:39:40.930Z",
+    "ingestedHash": "574ee968615f4c9384b4bd7b33bd7298ebda286432d90620507085ab6320d597",
+    "lastIngestedAt": "2026-09-10T10:41:16.615Z",
+    "projectedHash": "574ee968615f4c9384b4bd7b33bd7298ebda286432d90620507085ab6320d597"
+  },
+  {
+    "@id": "ArtifactNode:00CDDTBYG0000",
+    "@type": "ArtifactNode",
+    "title": "cli-packaging.md",
+    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `kg` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDDVC8N0001"
+    ],
+    "path": "issues/cli-packaging.md",
+    "fileHash": "ff71840c686bf18a91e63c517a853b2eb3f556fab43c78d0a5d99c0691e89afd",
+    "lastTrackedAt": "2026-09-10T10:39:40.929Z",
+    "ingestedHash": "ff71840c686bf18a91e63c517a853b2eb3f556fab43c78d0a5d99c0691e89afd",
+    "lastIngestedAt": "2026-09-10T10:41:17.234Z",
+    "projectedHash": "ff71840c686bf18a91e63c517a853b2eb3f556fab43c78d0a5d99c0691e89afd"
+  },
+  {
+    "@id": "ArtifactNode:00CDDTC3S0000",
+    "@type": "ArtifactNode",
+    "title": "cli-packaging.md",
+    "text": "To be broken down once [the graph-location question](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/cli-packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CDDVCDW8001"
+    ],
+    "path": "planning/cli-packaging.md",
+    "fileHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b",
+    "lastTrackedAt": "2026-09-10T10:39:40.929Z",
+    "ingestedHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b",
+    "lastIngestedAt": "2026-09-10T10:41:17.883Z",
+    "projectedHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b"
+  },
+  {
+    "@id": "ArtifactNode:00CDDTC8H0000",
+    "@type": "ArtifactNode",
+    "title": "cli-packaging.md",
+    "text": "Planning — reasoning captured in discussion/issues/design; no code changed yet.",
+    "parent": "FolderNode:00CDBYV4BR002",
+    "children": [
+      "BlockNode:00CDDVCKCG001"
+    ],
+    "path": "history/cli-packaging.md",
+    "fileHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32",
+    "lastTrackedAt": "2026-09-10T10:39:40.930Z",
+    "ingestedHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32",
+    "lastIngestedAt": "2026-09-10T10:41:18.490Z",
+    "projectedHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32"
   }
 ]
