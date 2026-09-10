@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CDGG8888001",
+    "title": "00CDGMY22R001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CDGG8890001",
+    "title": "00CDGMY230001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CDGG88B0001",
+    "title": "00CDGMY24G001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -2946,7 +2946,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CDGG889R001",
+    "title": "00CDGMY238001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -2955,7 +2955,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CDGG88A0001",
+    "title": "00CDGMY23G001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -2964,7 +2964,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CDGG88AG001",
+    "title": "00CDGMY248001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -3746,12 +3746,13 @@
   {
     "@id": "BlockNode:00CDDVBXH8001",
     "@type": "BlockNode",
-    "title": "# CLI Packaging — Design",
+    "title": "# Packaging — Design",
     "parent": "ArtifactNode:00CDDTBJBG000",
     "type": "heading",
     "children": [
       "BlockNode:00CDDVBXHG000",
-      "BlockNode:00CDDVBXHG005"
+      "BlockNode:00CDDVBXHG005",
+      "BlockNode:00CDGTZHSR001"
     ]
   },
   {
@@ -3795,13 +3796,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVBXHG002:links:Link:00CDDW6Y6G000",
+        "@id": "BlockNode:00CDDVBXHG002:links:Link:00CDGM2T0R000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC33G006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVBXHG002:links:Link:00CDDW6Y6G000:props:StringProp:00CDDW6Y6G001",
+            "@id": "BlockNode:00CDDVBXHG002:links:Link:00CDGM2T0R000:props:StringProp:00CDGM2T0R001",
             "@type": "StringProp",
             "key": "position",
             "value": "16"
@@ -3810,7 +3811,7 @@
       }
     ],
     "title": "**Discussion**",
-    "text": "**Discussion**: [Motivation and the options considered](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
+    "text": "**Discussion**: [Motivation and the options considered](../discussion/packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
     "parent": "BlockNode:00CDDVBXHG001",
     "type": "listItem",
     "children": []
@@ -3820,13 +3821,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVBXHG003:links:Link:00CDDW6Y6R000",
+        "@id": "BlockNode:00CDDVBXHG003:links:Link:00CDGM2Y7R000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC8N0002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVBXHG003:links:Link:00CDDW6Y6R000:props:StringProp:00CDDW6Y6R001",
+            "@id": "BlockNode:00CDDVBXHG003:links:Link:00CDGM2Y7R000:props:StringProp:00CDGM2Y7R001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -3835,7 +3836,7 @@
       }
     ],
     "title": "**Issues**",
-    "text": "**Issues**: [Open gaps a real install exposes](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0002).",
+    "text": "**Issues**: [Open gaps a real install exposes](../issues/packaging.md#id/BlockNode:00CDDVC8N0002).",
     "parent": "BlockNode:00CDDVBXHG001",
     "type": "listItem",
     "children": []
@@ -3845,13 +3846,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVBXHG004:links:Link:00CDDW6Y6R002",
+        "@id": "BlockNode:00CDDVBXHG004:links:Link:00CDGM32D0000",
         "@type": "Link",
         "target": "BlockNode:00CDDVCKCG002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVBXHG004:links:Link:00CDDW6Y6R002:props:StringProp:00CDDW6Y6R003",
+            "@id": "BlockNode:00CDDVBXHG004:links:Link:00CDGM32D0000:props:StringProp:00CDGM32D8000",
             "@type": "StringProp",
             "key": "position",
             "value": "13"
@@ -3860,7 +3861,7 @@
       }
     ],
     "title": "**History**",
-    "text": "**History**: [Planning — nothing shipped yet](../history/cli-packaging.md#id/BlockNode:00CDDVCKCG002).",
+    "text": "**History**: [Planning — nothing shipped yet](../history/packaging.md#id/BlockNode:00CDDVCKCG002).",
     "parent": "BlockNode:00CDDVBXHG001",
     "type": "listItem",
     "children": []
@@ -3877,7 +3878,7 @@
   {
     "@id": "BlockNode:00CDDVC338001",
     "@type": "BlockNode",
-    "title": "# CLI Packaging — Discussion",
+    "title": "# Packaging — Discussion",
     "parent": "ArtifactNode:00CDDTBQWG000",
     "type": "heading",
     "children": [
@@ -3936,13 +3937,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVC33G002:links:Link:00CDDW6YY0000",
+        "@id": "BlockNode:00CDDVC33G002:links:Link:00CDGM9H2R000",
         "@type": "Link",
         "target": "BlockNode:00CDDVBXH8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVC33G002:links:Link:00CDDW6YY0000:props:StringProp:00CDDW6YY0001",
+            "@id": "BlockNode:00CDDVC33G002:links:Link:00CDGM9H2R000:props:StringProp:00CDGM9H2R001",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -3951,7 +3952,7 @@
       }
     ],
     "title": "00CDF8B3TG003",
-    "text": "[Design](../design/cli-packaging.md#id/BlockNode:00CDDVBXH8001) — architecture decisions once crystallized.",
+    "text": "[Design](../design/packaging.md#id/BlockNode:00CDDVBXH8001) — architecture decisions once crystallized.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
     "children": []
@@ -3961,13 +3962,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVC33G003:links:Link:00CDDW6YY0002",
+        "@id": "BlockNode:00CDDVC33G003:links:Link:00CDGM9ND0000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC8N0001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVC33G003:links:Link:00CDDW6YY0002:props:StringProp:00CDDW6YY0003",
+            "@id": "BlockNode:00CDDVC33G003:links:Link:00CDGM9ND0000:props:StringProp:00CDGM9ND8000",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -3976,7 +3977,7 @@
       }
     ],
     "title": "00CDF8B3TG004",
-    "text": "[Issues](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0001) — gaps this reasoning surfaces.",
+    "text": "[Issues](../issues/packaging.md#id/BlockNode:00CDDVC8N0001) — gaps this reasoning surfaces.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
     "children": []
@@ -3986,13 +3987,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVC33G004:links:Link:00CDDW6YY8000",
+        "@id": "BlockNode:00CDDVC33G004:links:Link:00CDGM9SNG000",
         "@type": "Link",
         "target": "BlockNode:00CDDVCDW8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVC33G004:links:Link:00CDDW6YY8000:props:StringProp:00CDDW6YY8001",
+            "@id": "BlockNode:00CDDVC33G004:links:Link:00CDGM9SNG000:props:StringProp:00CDGM9SNR000",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -4001,7 +4002,7 @@
       }
     ],
     "title": "00CDF8B3TG005",
-    "text": "[Planning](../planning/cli-packaging.md#id/BlockNode:00CDDVCDW8001) — task breakdown once a shape is agreed.",
+    "text": "[Planning](../planning/packaging.md#id/BlockNode:00CDDVCDW8001) — task breakdown once a shape is agreed.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
     "children": []
@@ -4011,13 +4012,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVC33G005:links:Link:00CDDW6YY8002",
+        "@id": "BlockNode:00CDDVC33G005:links:Link:00CDGM9XT0000",
         "@type": "Link",
         "target": "BlockNode:00CDDVCKCG001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVC33G005:links:Link:00CDDW6YY8002:props:StringProp:00CDDW6YY8003",
+            "@id": "BlockNode:00CDDVC33G005:links:Link:00CDGM9XT0000:props:StringProp:00CDGM9XT0001",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -4026,7 +4027,7 @@
       }
     ],
     "title": "00CDF8B3TG006",
-    "text": "[History](../history/cli-packaging.md#id/BlockNode:00CDDVCKCG001) — status/milestones.",
+    "text": "[History](../history/packaging.md#id/BlockNode:00CDDVCKCG001) — status/milestones.",
     "parent": "BlockNode:00CDDVC33G001",
     "type": "listItem",
     "children": []
@@ -4079,7 +4080,7 @@
   {
     "@id": "BlockNode:00CDDVC8N0001",
     "@type": "BlockNode",
-    "title": "# CLI Packaging — Issues",
+    "title": "# Packaging — Issues",
     "parent": "ArtifactNode:00CDDTBYG0000",
     "type": "heading",
     "children": [
@@ -4128,22 +4129,22 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDDW6ZJG000",
+        "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDGMBPCR000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC33G006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDDW6ZJG000:props:StringProp:00CDDW6ZJG001",
+            "@id": "BlockNode:00CDDVC8N0004:links:Link:00CDGMBPCR000:props:StringProp:00CDGMBPCR001",
             "@type": "StringProp",
             "key": "position",
-            "value": "260"
+            "value": "264"
           }
         ]
       }
     ],
     "title": "00CDF8EQSR004",
-    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
+    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/packaging.md#id/BlockNode:00CDDVC33G006).",
     "parent": "BlockNode:00CDDVC8N0003",
     "type": "listItem",
     "children": []
@@ -4153,13 +4154,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDDW6ZJR000",
+        "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDGMBTMG000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC33G00A",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDDW6ZJR000:props:StringProp:00CDDW6ZJR001",
+            "@id": "BlockNode:00CDDVC8N0005:links:Link:00CDGMBTMG000:props:StringProp:00CDGMBTMG001",
             "@type": "StringProp",
             "key": "position",
             "value": "234"
@@ -4168,7 +4169,7 @@
       }
     ],
     "title": "00CDF8EQSR005",
-    "text": "**The graph's location is hardcoded.** `getArtifactsDir()` resolves `AperasKG/artifacts` as a fixed sibling of `web/` — true only for this repo's own layout, not for an installed CLI running against an arbitrary user's own graph. See [discussion](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G00A).",
+    "text": "**The graph's location is hardcoded.** `getArtifactsDir()` resolves `AperasKG/artifacts` as a fixed sibling of `web/` — true only for this repo's own layout, not for an installed CLI running against an arbitrary user's own graph. See [discussion](../discussion/packaging.md#id/BlockNode:00CDDVC33G00A).",
     "parent": "BlockNode:00CDDVC8N0003",
     "type": "listItem",
     "children": []
@@ -4194,7 +4195,7 @@
   {
     "@id": "BlockNode:00CDDVCDW8001",
     "@type": "BlockNode",
-    "title": "# CLI Packaging — Planning",
+    "title": "# Packaging — Planning",
     "parent": "ArtifactNode:00CDDTC3S0000",
     "type": "heading",
     "children": [
@@ -4208,13 +4209,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R000",
+        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDGMDC8R000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC8N0002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R000:props:StringProp:00CDDW708R001",
+            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDGMDC8R000:props:StringProp:00CDGMDC90000",
             "@type": "StringProp",
             "key": "position",
             "value": "23"
@@ -4222,22 +4223,22 @@
         ]
       },
       {
-        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R002",
+        "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDGMDC90001",
         "@type": "Link",
         "target": "BlockNode:00CDDVBXHG005",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDDW708R002:props:StringProp:00CDG9M9A0000",
+            "@id": "BlockNode:00CDDVCDW8002:links:Link:00CDGMDC90001:props:StringProp:00CDGMDC90002",
             "@type": "StringProp",
             "key": "position",
-            "value": "124"
+            "value": "120"
           }
         ]
       }
     ],
     "title": "## Implementation Plan",
-    "text": "To be broken down once [the graph-location question](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/cli-packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
+    "text": "To be broken down once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
     "parent": "BlockNode:00CDDVCDW8001",
     "type": "heading",
     "children": []
@@ -4248,7 +4249,9 @@
     "title": "## Task Breakdown",
     "parent": "BlockNode:00CDDVCDW8001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CDGV1RKG001"
+    ]
   },
   {
     "@id": "BlockNode:00CDDVCDW8004",
@@ -4261,7 +4264,7 @@
   {
     "@id": "BlockNode:00CDDVCKCG001",
     "@type": "BlockNode",
-    "title": "# CLI Packaging — History",
+    "title": "# Packaging — History",
     "parent": "ArtifactNode:00CDDTC8H0000",
     "type": "heading",
     "children": [
@@ -4272,8 +4275,24 @@
   {
     "@id": "BlockNode:00CDDVCKCG002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDH1B1XG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDGTZHSR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDDVCKCG002:links:Link:00CDH1B1XG000:props:StringProp:00CDH1B1XR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "162"
+          }
+        ]
+      }
+    ],
     "title": "## Current Status",
-    "text": "Planning — reasoning captured in discussion/issues/design; no code changed yet.",
+    "text": "The rename to `packaging.md` and the 3-way workspace split (`packages/core`/`cli`/`web` under a renamed `Aperas/monorepo/` root) are both done and verified — see [Workspace Split](../design/packaging.md#id/BlockNode:00CDGTZHSR001). Still planning: the dispatcher binary itself (`aperas`), and the open packaging/graph-location questions.",
     "parent": "BlockNode:00CDDVCKCG001",
     "type": "heading",
     "children": []
@@ -4284,7 +4303,9 @@
     "title": "## Milestones",
     "parent": "BlockNode:00CDDVCKCG001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CDH1CNN8001"
+    ]
   },
   {
     "@id": "BlockNode:00CDEB141G001",
@@ -4547,32 +4568,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CDGG88E0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-10T12:28:34.735Z",
-    "title": "# Scratch Retitle Test RENAMED",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CDGG88E0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-10T12:28:34.735Z",
-    "title": "## Section One",
-    "text": "Some body text for section one.",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CDGG88E0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-10T12:28:34.735Z",
-    "title": "## Section Two",
-    "text": "Some body text for section two.",
-    "type": "heading",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CDGGTE6R001",
     "@type": "BlockNode",
     "title": "## Resolved: heading retitle-in-place, at the reconcile level too",
@@ -4600,6 +4595,570 @@
     "text": "Verified on a throwaway test artifact: retitling its H1 through a whole-document `kg:update` (the same shape of push that caused the original incident) now reports \"2 matched, 1 changed, 0 added, 0 removed\" — the two section headings matched cleanly, the retitled H1 counted as changed, and disk projection confirmed all three BlockNode ids were preserved (no tombstones).",
     "parent": "BlockNode:00CDGGTE6R001",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGN9FMR001",
+    "@type": "BlockNode",
+    "title": "## Resolved: the `cli-packaging.md` → `packaging.md` rename itself",
+    "text": "Redone now that both blockers above are fixed. Sequence used, per doc: (1) retitle the H1 directly (`kg:update --text-only` targeting the heading BlockNode itself, not the ArtifactNode) — confirmed first that none of the five H1s carried their own `.text`/`.props`, so `--text-only`'s unconditional overwrite of those fields on a heading-target update was a no-op, not a loss; (2) fix each internal cross-reference bullet's own path text (`cli-packaging.md` → `packaging.md`) via `kg:update` targeting that specific leaf block directly, one at a time — not a whole-document push, so Stage A's ordinary exact-key matching (unaffected by the title/path edits happening elsewhere in the same document) is what reconciles each one, with nothing at stake beyond that one block's own identity; (3) `git mv` each file, then scoped `kg:ingest --track --flush`, one concern at a time.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGN9FMR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGN9FMR002",
+    "@type": "BlockNode",
+    "title": "Verified past the summary line",
+    "text": "Verified past the summary line: every renamed ArtifactNode still carries its original id (`00CDDTBJBG000`/`00CDDTBQWG000`/`00CDDTBYG0000`/`00CDDTC3S0000`/`00CDDTC8H0000`), none tombstoned, and no orphaned `cli-packaging.md`-pathed entry survives. A couple of the cross-reference bullets (the ones with no bold lead-in term, so no rendered id-anchor — e.g. the Dashboard list) had never actually had their `[[wikilink]]`s resolved at all before this pass, since they were authored before the `kg:update`/`kg:insert` link-resolution fix above existed; fixing their path text was incidentally also the first time they got resolved.",
+    "parent": "BlockNode:00CDGN9FMR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG001",
+    "@type": "BlockNode",
+    "title": "## Freeflow: 3-way workspace split — inventory before deciding shape",
+    "text": "Starting the investigation the user asked for (\"do... the 3-way split refactor\") before moving any files, per the practice above (discussion first). Dumping raw findings here as I go rather than only writing a polished plan at the end — this doc is the scratchpad.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGPBDKG002",
+      "BlockNode:00CDGPBDKG003",
+      "BlockNode:00CDGPBDKG004",
+      "BlockNode:00CDGPBDKG005",
+      "BlockNode:00CDGPBDKG006",
+      "BlockNode:00CDGPBDKG007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG002",
+    "@type": "BlockNode",
+    "title": "**Current `web/src` inventory** (`find src -type f`)",
+    "text": "**Current `web/src` inventory** (`find src -type f`): the entire engine + CLI lives under `src/lib/` — `apeironNgn/*.ts` (the graph engine: `node.ts`, `artifacts.ts`, `folders.ts`, `reconcile.ts`, `store.ts`, `service.ts`, `serviceClient.ts`, `shape.ts`, `vocab.ts`, `dehydrate.ts`, `tree.ts`, `resolve*.ts`, `codeVersion.ts`, `compareMigration.ts`), plus parsing/shared (`astParser.ts`, `reconcile.ts`, `props.ts`, `project.ts`, `snowflake.ts`, `leadingPart.ts`, `nodeRef.ts`, `lineReader.ts`, `folders.ts`, `artifacts.ts`, `verify.ts`), plus every `kgX.ts` CLI entrypoint (`kgIngest.ts`, `kgUpdate.ts`, `kgInsert.ts`, ... `kgService.ts`, `kgHelp.ts`) and `apeironNgnSmokeTest.ts`. Frontend is just `App.tsx`/`index.tsx`/`App.css`/`index.css`/`assets/*` at `src/` root.",
+    "parent": "BlockNode:00CDGPBDKG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG003",
+    "@type": "BlockNode",
+    "title": "00CDGPBDKG003",
+    "text": "**Important finding: the \"frontend\" isn't actually a real UI yet.** Read `App.tsx` (106 lines) — it's the unmodified Vite+Solid scaffold template (hero image, framework logos, a counter button, links to Vite/Solid/GitHub/Discord docs). Nothing in it touches the graph, ApeironNgn, or any `kg:*` concept. So \"3-way split\" today is really \"extract engine + CLI out of a project that also happens to carry unused scaffolding,\" not \"separate two things that both have real content.\" Doesn't block the split, but changes the risk profile — there's no real `web` behavior to preserve/test, just a build target to keep working (or drop).",
+    "parent": "BlockNode:00CDGPBDKG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG004",
+    "@type": "BlockNode",
+    "title": "**`package.json` scripts**",
+    "text": "**`package.json` scripts**: `dev`/`build`/`preview` (vite, frontend-only) + `verify` (`tsx src/lib/verify.ts`) + 19 `kg:*` entries, all `tsx src/lib/kgX.ts` — no `bin` field yet, no built/compiled output anywhere, everything runs from source via `tsx`.",
+    "parent": "BlockNode:00CDGPBDKG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG005",
+    "@type": "BlockNode",
+    "title": "**Dependencies** (already checked once this session, re-confirmed)",
+    "text": "**Dependencies** (already checked once this session, re-confirmed): `oxigraph`, `@rdfjs/data-model`, `remark-parse`/`remark-gfm`/`remark-frontmatter`/`unified`/`unist-util-visit` are core/cli. `solid-js`/`lucide-solid`/`clsx` are web-only. Two more worth flagging: `terminusdb` and `rehype-stringify`/`remark-rehype` — grepped `src/` for both, **zero hits**. Likely dead deps left over from the pre-ApeironNgn TerminusDB era (`AperasKG/artifacts/archive/tdb-era/`) and some abandoned markdown->HTML rendering path. Candidates to drop entirely rather than assign to any package — need a decision, not just a mechanical move.",
+    "parent": "BlockNode:00CDGPBDKG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG006",
+    "@type": "BlockNode",
+    "title": "**Build config**",
+    "text": "**Build config**: one `tsconfig.app.json` covers ALL of `src` today (`jsx: preserve`, `jsxImportSource: solid-js`, `lib: [\"ES2023\", \"DOM\"]`) — meaning the engine/CLI code currently compiles under a config that also demands DOM types and a JSX pragma it never uses. A 3-way split needs at least 2 distinct tsconfigs (core/cli: node target, no DOM/JSX; web: current app config), maybe 3 if cli wants its own (e.g. to add a `bin`-oriented build step) separate from core's plain library build.",
+    "parent": "BlockNode:00CDGPBDKG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDGPBDKG007:props:StringProp:00CDGPBEA0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDGPBDKG007:props:StringProp:00CDGPBEA0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDGPBDKG007",
+    "text": "**Not yet decided / need to think through before moving anything**:",
+    "parent": "BlockNode:00CDGPBDKG001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDGPBDKG008",
+      "BlockNode:00CDGPBDKG009",
+      "BlockNode:00CDGPBDKG00A",
+      "BlockNode:00CDGPBDKG00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG008",
+    "@type": "BlockNode",
+    "title": "00CDGPBDKG008",
+    "text": "Where exactly is the core/cli boundary? Every `kgX.ts` is a thin argv/stdio wrapper around a `run*` function + `request()` call to the shared service — is `kgHelp.ts` core or cli-only? Is `apeironNgn/serviceClient.ts` (the RPC client) cli, or does core need it too (probably cli/service-layer, not pure graph engine)?",
+    "parent": "BlockNode:00CDGPBDKG007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG009",
+    "@type": "BlockNode",
+    "title": "00CDGPBDKG009",
+    "text": "`apeironNgn/service.ts` — the actual long-running service process — core, or its own thing entirely (arguably neither \"library\" nor \"CLI command\", it's a daemon)?",
+    "parent": "BlockNode:00CDGPBDKG007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG00A",
+    "@type": "BlockNode",
+    "title": "00CDGPBDKG00A",
+    "text": "What happens to the totally-unused Vite/Solid scaffold — carry it forward as `packages/web`'s starting point, or drop it and create `packages/web` empty/minimal until there's an actual UI to build? Dropping avoids moving dead weight but throws away working build tooling (vite config, tsconfig) that'd have to be recreated later anyway.",
+    "parent": "BlockNode:00CDGPBDKG007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPBDKG00B",
+    "@type": "BlockNode",
+    "title": "`terminusdb`/`rehype-stringify`/`remark-rehype`",
+    "text": "`terminusdb`/`rehype-stringify`/`remark-rehype`: drop now (as part of this refactor, since we're already touching package.json) or leave alone (out of scope, separate cleanup)?",
+    "parent": "BlockNode:00CDGPBDKG007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G000",
+    "@type": "BlockNode",
+    "title": "## Freeflow: 3-way split — proposed package boundaries",
+    "text": "Working through the open questions from the inventory above.",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGPTZ7G001",
+      "BlockNode:00CDGPTZ7G005",
+      "BlockNode:00CDGPTZ7G006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDGPTZ7G001:props:StringProp:00CDGPTZXR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDGPTZ7G001:props:StringProp:00CDGPTZXR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDGPTZ7G001",
+    "text": "**core vs cli boundary, resolved:** the service/RPC layer (`apeironNgn/service.ts`, `serviceClient.ts`, `serviceLock.ts`, `serviceProtocol.ts`) is CLI-scoped, not core — its whole reason to exist is letting many short-lived `tsx kgX.ts` processes share one warm in-memory graph, which is a CLI-ergonomics problem specifically. A different future consumer (a web server embedding the engine in-process) would just hold its own `Store` via `core` directly, no service needed. So:",
+    "parent": "BlockNode:00CDGPTZ7G000",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDGPTZ7G002",
+      "BlockNode:00CDGPTZ7G003",
+      "BlockNode:00CDGPTZ7G004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G002",
+    "@type": "BlockNode",
+    "title": "**`packages/core`**",
+    "text": "**`packages/core`**: `apeironNgn/{node,artifacts,folders,dehydrate,shape,vocab,tree,resolve,resolveCreate,store,codeVersion,compareMigration}.ts`, `astParser.ts`, `reconcile.ts`, `props.ts`, `project.ts`, `snowflake.ts`, `leadingPart.ts`, `nodeRef.ts`, `lineReader.ts`, top-level `folders.ts`/`artifacts.ts`, `verify.ts`. Pure graph engine + markdown parsing, no process/argv/RPC concerns, no DOM.",
+    "parent": "BlockNode:00CDGPTZ7G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G003",
+    "@type": "BlockNode",
+    "title": "**`packages/cli`**",
+    "text": "**`packages/cli`**: every `kgX.ts`, `kgHelp.ts`, `apeironNgn/service.ts` + `serviceClient.ts` + `serviceLock.ts` + `serviceProtocol.ts`, `apeironNgnSmokeTest.ts`. Depends on `core`. Future `aperas.ts` dispatcher lands here too.",
+    "parent": "BlockNode:00CDGPTZ7G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G004",
+    "@type": "BlockNode",
+    "title": "**`packages/web`** (open question below)",
+    "text": "**`packages/web`** (open question below): `App.tsx`/`index.tsx`/`App.css`/`index.css`/`assets/*`, `vite.config.ts`, `tsconfig.app.json`. Depends on `core` (a real UI would query the graph directly or via its own client, not shell out to CLI commands).",
+    "parent": "BlockNode:00CDGPTZ7G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G005",
+    "@type": "BlockNode",
+    "title": "00CDGPTZ7G005",
+    "text": "**Dead-dependency cleanup, proposed as part of this same refactor** (not separately, since splitting `package.json` into 3 means deciding a home for every dep anyway, and these two have none): drop `terminusdb` and `rehype-stringify`/`remark-rehype` — confirmed zero `src/` references to any of the three, leftover from the pre-ApeironNgn TerminusDB era and an abandoned markdown-to-HTML path.",
+    "parent": "BlockNode:00CDGPTZ7G000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDGPTZ7G006:props:StringProp:00CDGPTZY0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDGPTZ7G006:props:StringProp:00CDGPTZY8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDGPTZ7G006",
+    "text": "**Two real judgment calls, not mine to make silently — surfacing them in chat rather than deciding here:**",
+    "parent": "BlockNode:00CDGPTZ7G000",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CDGPTZ7G007",
+      "BlockNode:00CDGPTZ7G008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G007",
+    "@type": "BlockNode",
+    "title": "00CDGPTZ7G007",
+    "text": "What happens to the Vite/Solid scaffold in `packages/web` — it's 100% unmodified template content (hero image, framework logos, a counter, links to Vite/Solid/GitHub/Discord). Options: carry the build tooling (vite config, tsconfig) forward but strip the demo content to a bare placeholder; drop `packages/web` entirely for now and recreate it when there's an actual UI to build; or leave it as-is (ship the literal template).",
+    "parent": "BlockNode:00CDGPTZ7G006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGPTZ7G008",
+    "@type": "BlockNode",
+    "title": "00CDGPTZ7G008",
+    "text": "The workspace root's own name. `Aperas/web/` becomes the npm workspace root once it contains `packages/{core,cli,web}` — every skill instruction and habit this session says \"run from `Aperas/web/`\", and `getArtifactsDir()` resolves the graph as a sibling of `web/`. Keeping the directory named `web` while it no longer *is* \"the web frontend\" (that's now `packages/web` one level down) reads oddly, but renaming it is a bigger, separately-risky move (git history, the skill file, `getArtifactsDir()`'s sibling assumption). Leaning toward: keep the directory named `web` for now (minimize blast radius on this already-large refactor), revisit the name later if it actually causes confusion in practice.",
+    "parent": "BlockNode:00CDGPTZ7G006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGS4BBG001",
+    "@type": "BlockNode",
+    "title": "## Freeflow: root-rename blast radius, actually measured",
+    "text": "Asked to calculate this rather than guess. Grepped every `.md`/`.json`/`.ts`/`.tsx`/`.yml`/`.yaml` in the repo (excluding `AperasKG/artifacts/archive/`) for `Aperas/web`, `../web`, or `/web/` path references — **exactly one hit**: `skills/kg-doc-ingest/SKILL.md` (its `.agents/skills`/`.claude/skills` copies are symlinks to the same file, so that's one edit, not three).",
+    "parent": "ArtifactNode:00CDDTBQWG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGS4BBR000",
+      "BlockNode:00CDGS4BBR001",
+      "BlockNode:00CDGS4BBR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGS4BBR000",
+    "@type": "BlockNode",
+    "title": "00CDGS4BBR000",
+    "text": "`getArtifactsDir()` (`artifacts.ts`) turned out *not* to be part of this blast radius at all — it never hardcodes the string `\"web\"`; it walks up a fixed number of `..` hops from its own file's location (`import.meta.url`) to the repo root, then descends into `AperasKG/artifacts` (itself a symlink to a sibling of the repo, resolved transparently by the OS either way). That hop count needs updating regardless of what the root directory is named, purely because the file is moving one level deeper (`web/src/lib/artifacts.ts` → `<root>/packages/core/src/artifacts.ts`) — the split causes this change, not the rename.",
+    "parent": "BlockNode:00CDGS4BBG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGS4BBR001",
+    "@type": "BlockNode",
+    "title": "00CDGS4BBR001",
+    "text": "No `.vscode/`, CI config, Dockerfile, or other doc anywhere references `web/` as a path. `web/package.json`'s own `\"name\": \"web\"` field is cosmetic (never published, root-of-workspace only) and can change independently of the directory name either way.",
+    "parent": "BlockNode:00CDGS4BBG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGS4BBR002",
+    "@type": "BlockNode",
+    "title": "00CDGS4BBR002",
+    "text": "So the actual added cost of renaming the root beyond what the split needs anyway: one text edit to the skill file's \"run from Aperas/web/\" instructions, plus a one-time habit adjustment in conversation — much smaller than initially estimated. Reporting this back rather than deciding unilaterally, since the recommendation changes given real numbers instead of a guess.",
+    "parent": "BlockNode:00CDGS4BBG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTX55R001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDGTX55R001:props:StringProp:00CDGTX5YG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDGTX55R001:props:StringProp:00CDGTX5YG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Workspace Split",
+    "text": "An npm workspace under a renamed root (`Aperas/monorepo/`, replacing `Aperas/web/` — a directory called \"web\" stopped meaning \"the frontend\" once it also housed the whole engine and CLI), three packages:",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGTX55R002",
+      "BlockNode:00CDGTX55R003",
+      "BlockNode:00CDGTX55R004",
+      "BlockNode:00CDGTX55R005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGTX55R002",
+    "@type": "BlockNode",
+    "title": "`packages/core` — the ApeironNgn engine and markdown parsing",
+    "text": "`packages/core` — the ApeironNgn engine and markdown parsing: `apeironNgn/*`, `astParser.ts`, `reconcile.ts`, `props.ts`, `project.ts`, `snowflake.ts`, `leadingPart.ts`, `nodeRef.ts`, `lineReader.ts`, `folders.ts`, `artifacts.ts`, `verify.ts`. No process/argv/RPC concerns.",
+    "parent": "BlockNode:00CDGTX55R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTX55R003",
+    "@type": "BlockNode",
+    "title": "00CDGTX55R003",
+    "text": "`packages/cli` — every `kgX.ts` command, `kgHelp.ts`, the service/RPC layer (`apeironNgn/service.ts`, `serviceClient.ts`, `serviceLock.ts`, `serviceProtocol.ts` — moving here since the service exists purely to let many short-lived CLI processes share one warm graph, a CLI concern, not a core one), and `apeironNgnSmokeTest.ts`. Depends on `core`.",
+    "parent": "BlockNode:00CDGTX55R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTX55R004",
+    "@type": "BlockNode",
+    "title": "00CDGTX55R004",
+    "text": "`packages/web` — the Solid/Vite app, stripped to a placeholder (its current content is 100% unmodified scaffold, never built out). Depends on `core`.",
+    "parent": "BlockNode:00CDGTX55R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTX55R005",
+    "@type": "BlockNode",
+    "title": "00CDGTX55R005",
+    "text": "Cross-package imports go through each package's own `exports` map (`\"./*\": \"./src/*.ts\"`), not relative dot-paths — `import ... from '@aperas/core/apeironNgn/node'` instead of `'../apeironNgn/node'` — resolved by npm workspace symlinking, the same subpath shape the code already uses today, so the rewrite is a mechanical prefix swap, not a redesign. Root `package.json` keeps the existing `kg:*` script names (pointing at their new `packages/cli/src/...` locations) so the dogfooding workflow (`npm run kg:X -- <args>`, now run from `Aperas/monorepo/`) is unchanged in shape. Two unused dependencies (`terminusdb`, `rehype-stringify`/`remark-rehype` — confirmed zero references anywhere in `src/`) are dropped rather than assigned to any package.",
+    "parent": "BlockNode:00CDGTX55R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTZHSR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDGTZHSR001:props:StringProp:00CDGTZJK0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDGTZHSR001:props:StringProp:00CDGTZJK0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "## Workspace Split",
+    "text": "An npm workspace under a renamed root (`Aperas/monorepo/`, replacing `Aperas/web/` — a directory called \"web\" stopped meaning \"the frontend\" once it also housed the whole engine and CLI), three packages:",
+    "parent": "BlockNode:00CDDVBXH8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CDGTZHSR002",
+      "BlockNode:00CDGTZHSR003",
+      "BlockNode:00CDGTZHSR004",
+      "BlockNode:00CDGTZHSR005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGTZHSR002",
+    "@type": "BlockNode",
+    "title": "`packages/core` — the ApeironNgn engine and markdown parsing",
+    "text": "`packages/core` — the ApeironNgn engine and markdown parsing: `apeironNgn/*` (everything except the service/RPC layer, which is CLI-scoped — see below), `astParser.ts`, `reconcile.ts`, `props.ts`, `project.ts`, `snowflake.ts`, `leadingPart.ts`, `nodeRef.ts`, `lineReader.ts`, `folders.ts`, `artifacts.ts`. No process/argv/RPC concerns.",
+    "parent": "BlockNode:00CDGTZHSR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTZHSR003",
+    "@type": "BlockNode",
+    "title": "00CDGTZHSR003",
+    "text": "`packages/cli` — every `kgX.ts` command, `kgHelp.ts`, the service/RPC layer (`apeironNgn/service.ts`, `serviceClient.ts`, `serviceLock.ts`, `serviceProtocol.ts`, `apeironNgn/codeVersion.ts` — moving here since the service exists purely to let many short-lived CLI processes share one warm graph, a CLI concern, not a core one), `apeironNgnSmokeTest.ts`, and `verify.ts` (the end-to-end test harness — it calls `kgX.ts`'s own `run*` functions directly, so it depends on both core and cli and can't live in core without core depending back on cli). Depends on `core`.",
+    "parent": "BlockNode:00CDGTZHSR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTZHSR004",
+    "@type": "BlockNode",
+    "title": "00CDGTZHSR004",
+    "text": "`packages/web` — the Solid/Vite app, stripped to a placeholder (its current content is 100% unmodified scaffold, never built out). Depends on `core`.",
+    "parent": "BlockNode:00CDGTZHSR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGTZHSR005",
+    "@type": "BlockNode",
+    "title": "00CDGTZHSR005",
+    "text": "Cross-package imports go through each package's own `exports` map (`\"./*\": \"./src/*.ts\"`), not relative dot-paths — `import ... from '@aperas/core/apeironNgn/node'` instead of `'../apeironNgn/node'` — resolved by npm workspace symlinking, the same subpath shape the code already uses today, so the rewrite is a mechanical prefix swap, not a redesign. Root `package.json` keeps the existing `kg:*` script names (pointing at their new `packages/cli/src/...` locations) so the dogfooding workflow (`npm run kg:X -- <args>`, now run from `Aperas/monorepo/`) is unchanged in shape. Two unused dependencies (`terminusdb`, `rehype-stringify`/`remark-rehype` — confirmed zero references anywhere in `src/`) are dropped rather than assigned to any package.",
+    "parent": "BlockNode:00CDGTZHSR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDGV1RKG001:props:StringProp:00CDGV1RM0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CDGV1RKG001:props:StringProp:00CDGV1RM0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDGV1RKG001",
+    "parent": "BlockNode:00CDDVCDW8003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDGV1RKG002",
+      "BlockNode:00CDGV1RKR000",
+      "BlockNode:00CDGV1RKR001",
+      "BlockNode:00CDGV1RKR002",
+      "BlockNode:00CDGV1RKR003",
+      "BlockNode:00CDGV1RKR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDGV1RKG002:links:Link:00CDGV1RMR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDGTZHSR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDGV1RKG002:links:Link:00CDGV1RMR000:props:StringProp:00CDGV1RMR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "112"
+          }
+        ]
+      }
+    ],
+    "title": "00CDGV1RKG002",
+    "text": "Create `packages/{core,cli,web}` with their own `package.json`/`tsconfig.json`, matching the file assignment in [Workspace Split](../design/packaging.md#id/BlockNode:00CDGTZHSR001).",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKR000",
+    "@type": "BlockNode",
+    "title": "00CDGV1RKR000",
+    "text": "Move files via `git mv` (preserve history), rewrite cross-package imports to the `@aperas/core/...` subpath form.",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKR001",
+    "@type": "BlockNode",
+    "title": "Root `package.json`",
+    "text": "Root `package.json`: workspaces field, updated `kg:*` script paths, dropped dead deps.",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKR002",
+    "@type": "BlockNode",
+    "title": "00CDGV1RKR002",
+    "text": "Rename `Aperas/web/` -> `Aperas/monorepo/`; update `skills/kg-doc-ingest/SKILL.md`'s path references (the only other place in the repo naming this directory).",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKR003",
+    "@type": "BlockNode",
+    "title": "00CDGV1RKR003",
+    "text": "`npm install` at the new root (materializes workspace symlinks), `npx tsc --noEmit` in each package.",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDGV1RKR004",
+    "@type": "BlockNode",
+    "title": "Smoke-test",
+    "text": "Smoke-test: restart the ApeironNgn service and run a couple of real `kg:*` commands (`kg:tree`, `kg:backlinks`) from the new location against the real graph, confirm output matches pre-split.",
+    "parent": "BlockNode:00CDGV1RKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CDH1CNN8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CDH1CNN8001:props:StringProp:00CDH1CPCR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CDH1CNN8001:props:StringProp:00CDH1CPCR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CDH1CNN8001",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CDH1CNN8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CDH1CNN8002",
+    "@type": "BlockNode",
+    "title": "Workspace split",
+    "text": "Workspace split: `packages/core`/`cli`/`web` under `Aperas/monorepo/`, all three type-check clean, full `npm run verify` harness (18 checks) passes end-to-end from the new location.",
+    "parent": "BlockNode:00CDH1CNN8001",
+    "type": "listItem",
     "children": []
   }
 ]

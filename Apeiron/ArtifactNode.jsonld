@@ -139,24 +139,24 @@
   {
     "@id": "ArtifactNode:00CDDTBJBG000",
     "@type": "ArtifactNode",
-    "title": "cli-packaging.md",
-    "text": "**Discussion**: [Motivation and the options considered](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
+    "title": "packaging.md",
+    "text": "**Discussion**: [Motivation and the options considered](../discussion/packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
     "parent": "FolderNode:00CDBYV4BR000",
     "type": "root",
     "children": [
       "BlockNode:00CDDVBXH8001"
     ],
-    "path": "design/cli-packaging.md",
-    "fileHash": "5cfcf13014297797a2e0d177c1eff085e0c73382081d96aa13672cbae04ff7a1",
-    "lastTrackedAt": "2026-09-10T10:39:40.931Z",
-    "ingestedHash": "5cfcf13014297797a2e0d177c1eff085e0c73382081d96aa13672cbae04ff7a1",
-    "lastIngestedAt": "2026-09-10T11:54:24.601Z",
-    "projectedHash": "5cfcf13014297797a2e0d177c1eff085e0c73382081d96aa13672cbae04ff7a1"
+    "path": "design/packaging.md",
+    "fileHash": "3f607bcf683f53160610a4568c647bc5dd1da0ea9e309047912b9615bf836c58",
+    "lastTrackedAt": "2026-09-10T12:38:08.500Z",
+    "ingestedHash": "3f607bcf683f53160610a4568c647bc5dd1da0ea9e309047912b9615bf836c58",
+    "lastIngestedAt": "2026-09-10T13:04:55.228Z",
+    "projectedHash": "3f607bcf683f53160610a4568c647bc5dd1da0ea9e309047912b9615bf836c58"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
     "@type": "ArtifactNode",
-    "title": "cli-packaging.md",
+    "title": "packaging.md",
     "text": "Added `stripInlineAnchors` (`astParser.ts`) and applied it everywhere a block's stored abstract/text gets compared against a fresh disk parse for exact equality: `extractAbstract` (before truncating, so a mid-window anchor can't survive as a mangled fragment either), `reconcile.ts`'s `leafKey` (block-level Gestalt matching), and the rename matchers' own key computation (`apeironNgn/artifacts.ts`). Verified against the two real cases that surfaced this (`design/cli.md`'s Discussion bullet, `discussion/cli.md`'s staging-practice paragraph): stripped text now round-trips exactly.",
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
@@ -165,77 +165,67 @@
       "BlockNode:00CDG18FP0001",
       "BlockNode:00CDGAFQQR001",
       "BlockNode:00CDGGTE6R001",
+      "BlockNode:00CDGN9FMR001",
+      "BlockNode:00CDGPBDKG001",
+      "BlockNode:00CDGPTZ7G000",
+      "BlockNode:00CDGS4BBG001",
       "BlockNode:00CDG9DD4R001"
     ],
-    "path": "discussion/cli-packaging.md",
-    "fileHash": "6676a2d5f090334ffffb5fe6d483d77efb9c0b28344630cc0128a3115f132ee9",
-    "lastTrackedAt": "2026-09-10T10:39:40.930Z",
-    "ingestedHash": "6676a2d5f090334ffffb5fe6d483d77efb9c0b28344630cc0128a3115f132ee9",
-    "lastIngestedAt": "2026-09-10T12:29:16.947Z",
-    "projectedHash": "6676a2d5f090334ffffb5fe6d483d77efb9c0b28344630cc0128a3115f132ee9"
+    "path": "discussion/packaging.md",
+    "fileHash": "f57606a6c0ccad2d0b4bff515bba366dc63fce3710413895a6819f21bcdabbfb",
+    "lastTrackedAt": "2026-09-10T12:38:09.339Z",
+    "ingestedHash": "f57606a6c0ccad2d0b4bff515bba366dc63fce3710413895a6819f21bcdabbfb",
+    "lastIngestedAt": "2026-09-10T12:47:22.312Z",
+    "projectedHash": "f57606a6c0ccad2d0b4bff515bba366dc63fce3710413895a6819f21bcdabbfb"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",
     "@type": "ArtifactNode",
-    "title": "cli-packaging.md",
-    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/cli-packaging.md#id/BlockNode:00CDDVC33G006).",
+    "title": "packaging.md",
+    "text": "**`kg:*` only runs from inside this source checkout.** Every command requires `npm run kg:X --` from `Aperas/web`, with `tsx` and the rest of the devDependencies installed — not something an end user installing a skill that shells out to `aperas` can rely on. See [Motivation](../discussion/packaging.md#id/BlockNode:00CDDVC33G006).",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CDDVC8N0001"
     ],
-    "path": "issues/cli-packaging.md",
-    "fileHash": "a91b6d43b64b169d8a819863363c1794c62bca7e2cdc8f3f38cc11e033566d9c",
-    "lastTrackedAt": "2026-09-10T10:39:40.929Z",
-    "ingestedHash": "a91b6d43b64b169d8a819863363c1794c62bca7e2cdc8f3f38cc11e033566d9c",
-    "lastIngestedAt": "2026-09-10T11:54:25.928Z",
-    "projectedHash": "a91b6d43b64b169d8a819863363c1794c62bca7e2cdc8f3f38cc11e033566d9c"
+    "path": "issues/packaging.md",
+    "fileHash": "04f262342d2b505e1dbb2fd542dbeb06522aac74d70802a554ba43308742829d",
+    "lastTrackedAt": "2026-09-10T12:38:10.045Z",
+    "ingestedHash": "04f262342d2b505e1dbb2fd542dbeb06522aac74d70802a554ba43308742829d",
+    "lastIngestedAt": "2026-09-10T12:38:33.614Z",
+    "projectedHash": "04f262342d2b505e1dbb2fd542dbeb06522aac74d70802a554ba43308742829d"
   },
   {
     "@id": "ArtifactNode:00CDDTC3S0000",
     "@type": "ArtifactNode",
-    "title": "cli-packaging.md",
-    "text": "To be broken down once [the graph-location question](../issues/cli-packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/cli-packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
+    "title": "packaging.md",
+    "text": "To be broken down once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) has an answer — [the dispatcher refactor itself](../design/packaging.md#id/BlockNode:00CDDVBXHG005) doesn't depend on it, but shipping a usable package does.",
     "parent": "FolderNode:00CDBYV4BR004",
     "type": "root",
     "children": [
       "BlockNode:00CDDVCDW8001"
     ],
-    "path": "planning/cli-packaging.md",
-    "fileHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b",
-    "lastTrackedAt": "2026-09-10T10:39:40.929Z",
-    "ingestedHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b",
-    "lastIngestedAt": "2026-09-10T12:13:51.639Z",
-    "projectedHash": "052c0c0ed552e3d2aaf56173339f1422dcdd5bdee132bbff3c217168e685cd4b"
+    "path": "planning/packaging.md",
+    "fileHash": "68240ef44cce0930569adf3b110b312e1a9c42928c281cbf7405e253aeeb0d0b",
+    "lastTrackedAt": "2026-09-10T12:38:10.743Z",
+    "ingestedHash": "68240ef44cce0930569adf3b110b312e1a9c42928c281cbf7405e253aeeb0d0b",
+    "lastIngestedAt": "2026-09-10T12:51:33.764Z",
+    "projectedHash": "68240ef44cce0930569adf3b110b312e1a9c42928c281cbf7405e253aeeb0d0b"
   },
   {
     "@id": "ArtifactNode:00CDDTC8H0000",
     "@type": "ArtifactNode",
-    "title": "cli-packaging.md",
-    "text": "Planning — reasoning captured in discussion/issues/design; no code changed yet.",
+    "title": "packaging.md",
+    "text": "The rename to `packaging.md` and the 3-way workspace split (`packages/core`/`cli`/`web` under a renamed `Aperas/monorepo/` root) are both done and verified — see [Workspace Split](../design/packaging.md#id/BlockNode:00CDGTZHSR001). Still planning: the dispatcher binary itself (`aperas`), and the open packaging/graph-location questions.",
     "parent": "FolderNode:00CDBYV4BR002",
     "children": [
       "BlockNode:00CDDVCKCG001"
     ],
-    "path": "history/cli-packaging.md",
-    "fileHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32",
-    "lastTrackedAt": "2026-09-10T10:39:40.930Z",
-    "ingestedHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32",
-    "lastIngestedAt": "2026-09-10T11:54:27.209Z",
-    "projectedHash": "6fb4f53462b2201349e6981e53bb906fa4c91886e0b8df1a8a10515eebdc3f32"
-  },
-  {
-    "@id": "ArtifactNode:00CDGG8828000",
-    "@type": "ArtifactNode",
-    "tombstonedAt": "2026-09-10T12:28:34.735Z",
-    "title": "_scratch-retitle-test.md",
-    "parent": "FolderNode:00CDBYV4BR000",
-    "type": "root",
-    "children": [],
-    "path": "design/_scratch-retitle-test.md",
-    "fileHash": "2983398b41126b18cfe4a15cc8a878acf0dc5220518b8f69f8e5a0ba9c6f6b4c",
-    "lastTrackedAt": "2026-09-10T12:27:57.833Z",
-    "ingestedHash": "2983398b41126b18cfe4a15cc8a878acf0dc5220518b8f69f8e5a0ba9c6f6b4c",
-    "lastIngestedAt": "2026-09-10T12:27:57.880Z"
+    "path": "history/packaging.md",
+    "fileHash": "8aad0bc268c9193f5def9debbdc2735f706b511fbf2f3bba61ded77d42856aa1",
+    "lastTrackedAt": "2026-09-10T12:38:11.449Z",
+    "ingestedHash": "8aad0bc268c9193f5def9debbdc2735f706b511fbf2f3bba61ded77d42856aa1",
+    "lastIngestedAt": "2026-09-10T13:05:24.944Z",
+    "projectedHash": "8aad0bc268c9193f5def9debbdc2735f706b511fbf2f3bba61ded77d42856aa1"
   }
 ]
