@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CDGMY22R001",
+    "title": "00CE0Z6NQ0001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CDGMY230001",
+    "title": "00CE0Z6NQG001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CDGMY24G001",
+    "title": "00CE0Z6NSG001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -2946,7 +2946,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CDGMY238001",
+    "title": "00CE0Z6NQR001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -2955,7 +2955,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CDGMY23G001",
+    "title": "00CE0Z6NR0001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -2964,7 +2964,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CDGMY248001",
+    "title": "00CE0Z6NS0001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -4115,7 +4115,9 @@
     "text": "None.",
     "parent": "BlockNode:00CDDVC8N0001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CE09R858001"
+    ]
   },
   {
     "@id": "BlockNode:00CDDVC8N0004",
@@ -5531,7 +5533,9 @@
       "BlockNode:00CDDVC8N0004",
       "BlockNode:00CDDVC8N0005",
       "BlockNode:00CDWBDX30001",
-      "BlockNode:00CDWB8NB0001"
+      "BlockNode:00CDWB8NB0001",
+      "BlockNode:00CE0GFKA8002",
+      "BlockNode:00CE0GFKA8001"
     ]
   },
   {
@@ -7259,6 +7263,1413 @@
     "title": "Two-path graph config, gap closed",
     "text": "Two-path graph config, gap closed: `aperas.config.json`'s `graph` field now takes either a plain path (shorthand) or `{ \"apeiron\": \"...\", \"artifacts\": \"...\" }` (independent roots). `getArtifactsDir()`'s remaining callers (`runTrack`/`runIngest`/`runProject`, the shared `apeironNgn/artifacts.ts`/`folders.ts`/`node.ts` helpers) now resolve correctly via an env-var-first default (`APERAS_ARTIFACTS_ROOT`, set alongside `APERAS_APEIRON_ROOT` at `aperas service start`/`restart` time), with zero signature changes anywhere. Verified live: cold-started the built bundle from a cwd deep inside `AperasKG/`, confirmed the lock recorded the real discovered paths for both roots (not the coincidental fallback), then ran `aperas project` from an unrelated cwd and confirmed it read/wrote against the correctly-bound `artifacts/`. Closes the one gap flagged in the previous milestone.",
     "parent": "BlockNode:00CDZQWM0G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG001",
+    "@type": "BlockNode",
+    "title": "# Archive Migration — Design",
+    "parent": "ArtifactNode:00CE01XZ88000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01XZPG002",
+      "BlockNode:00CE01XZPG008",
+      "BlockNode:00CE01XZPR000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG002",
+    "@type": "BlockNode",
+    "title": "## Context",
+    "parent": "BlockNode:00CE01XZPG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01XZPG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE01XZPG003:props:StringProp:00CE01Y0R0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE01XZPG003:props:StringProp:00CE01Y0R0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE01XZPG003",
+    "parent": "BlockNode:00CE01XZPG002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE01XZPG004",
+      "BlockNode:00CE01XZPG005",
+      "BlockNode:00CE01XZPG006",
+      "BlockNode:00CE01XZPG007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01XZPG004:links:Link:00CE0YPCY8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0YFEN0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPG004:links:Link:00CE0YPCY8000:props:StringProp:00CE0YPCY8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
+    "title": "**Discussion**",
+    "text": "**Discussion**: [Inventory and open questions](../discussion/archive-migration.md#id/BlockNode:00CE0YFEN0003) — what's in `artifacts/archive/`, and decisions still open about how to split it.",
+    "parent": "BlockNode:00CE01XZPG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01XZPG005:links:Link:00CE0991C0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y0T0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPG005:links:Link:00CE0991C0000:props:StringProp:00CE0991C8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [Open Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002) — hazards and pending decomposition calls.",
+    "parent": "BlockNode:00CE01XZPG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01XZPG006:links:Link:00CE0996QR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y1Z8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPG006:links:Link:00CE0996QR000:props:StringProp:00CE0996QR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "**Planning**",
+    "text": "**Planning**: [Task Breakdown](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003) — the ordered sub-task list.",
+    "parent": "BlockNode:00CE01XZPG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01XZPG007:links:Link:00CE099C5G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y320002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPG007:links:Link:00CE099C5G000:props:StringProp:00CE099C5G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13"
+          }
+        ]
+      }
+    ],
+    "title": "**History**",
+    "text": "**History**: [Current Status](../history/archive-migration.md#id/BlockNode:00CE01Y320002) — progress so far.",
+    "parent": "BlockNode:00CE01XZPG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG008",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01XZPG008:links:Link:00CE01Y0RR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68E8000E",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPG008:links:Link:00CE01Y0RR000:props:StringProp:00CE01Y0RR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "62"
+          }
+        ]
+      }
+    ],
+    "title": "## Architecture",
+    "text": "`artifacts/archive/` holds hand-written docs that predate the [Document Topology](../design/documentation.md#id/BlockNode:00CDD68E8000E)'s concern-based separation — each one mixes design, issues, planning, and history for its subject into a single file. Migrating one means splitting it into its own concern-doc-set (`design/`, `issues/`, `planning/`, `history/`, `discussion/`) under a new concern name, using the disk-first path the `kg-doc-ingest` skill defines for a genuinely new, not-yet-tracked doc set: author the split `.md` files directly, then `aperas ingest --track --flush`, verify round-trip fidelity, project, and upgrade any legacy prose cross-references into real wikilinks.",
+    "parent": "BlockNode:00CE01XZPG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01XZPG009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01XZPG009",
+    "@type": "BlockNode",
+    "title": "00CE01XZPG009",
+    "text": "Each legacy doc (or tight cluster of docs covering one subsystem) becomes its own sub-task, run to completion — including folding whatever's learned back into the `aperas`/`kg-doc-ingest` skills — before the next one starts. Sub-tasks proceed newest era to oldest: the ApeironNgn-era top-level docs first, then `reports/bugs/`, then `tdb-era/` last, since the newer docs describe the substrate this migration itself runs on and are the most load-bearing to have in the graph early.",
+    "parent": "BlockNode:00CE01XZPG008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01XZPR000",
+    "@type": "BlockNode",
+    "title": "## Topology",
+    "text": "`archive/{design,discussion,issues,history,planning}/linking.md` are pre-migration snapshots of a doc set already fully migrated to the top-level `linking.md` concern docs — no sub-task needed for those; they stay archived as-is for history.",
+    "parent": "BlockNode:00CE01XZPG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01XZPR001",
+      "BlockNode:00CE0HPRV8001",
+      "BlockNode:00CE0HPRV8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01XZPR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01XZPR001:links:Link:00CE09AW08000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y1Z8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPR001:links:Link:00CE09AW08000:props:StringProp:00CE09AW08001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "122"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE01XZPR001:links:Link:00CE09AW08002",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y0T0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01XZPR001:links:Link:00CE09AW08002:props:StringProp:00CE09AW0G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "225"
+          }
+        ]
+      }
+    ],
+    "title": "00CE01XZPR001",
+    "text": "Everything else in `archive/` still needs a sub-task. Target concern names are decided per sub-task, not fixed here — see [Task Breakdown](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003) for the current list and [Open Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002) for the ones whose split isn't obvious yet.",
+    "parent": "BlockNode:00CE01XZPR000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0001",
+    "@type": "BlockNode",
+    "title": "# Archive Migration — Issues",
+    "parent": "ArtifactNode:00CE01XZ8G000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y0T0002",
+      "BlockNode:00CE01Y0T0006",
+      "BlockNode:00CE01Y0T0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "parent": "BlockNode:00CE01Y0T0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y0T0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE01Y0T0003:props:StringProp:00CE01Y1X0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE01Y0T0003:props:StringProp:00CE01Y1X8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE01Y0T0003",
+    "parent": "BlockNode:00CE01Y0T0002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE01Y0T0004",
+      "BlockNode:00CE01Y0T0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y0T0004:links:Link:00CE0HRNBG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0H8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y0T0004:links:Link:00CE0HRNBG000:props:StringProp:00CE0RVDVG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "217"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE01Y0T0004:links:Link:00CE0RVDVR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HPRV8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y0T0004:links:Link:00CE0RVDVR000:props:StringProp:00CE0RVDVR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "418"
+          }
+        ]
+      }
+    ],
+    "title": "**Large source files may need decomposition, not a 1:1 rename**",
+    "text": "**`Aperas-design.md` needs a dedicated brainstorm, not a mechanical split**: unlike every other doc in this migration, it doesn't map cleanly onto one subsystem's design/issues/planning/history/discussion shape — see [Open Questions](../discussion/archive-migration.md#id/BlockNode:00CE0HD0H8001). (`Aperas-dev-status.md` is no longer grouped here — it's TDB-era in origin and follows that era's settled approach; see [design](../design/archive-migration.md#id/BlockNode:00CE0HPRV8001).)",
+    "parent": "BlockNode:00CE01Y0T0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y0T0005:links:Link:00CE01Y1XG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDEB141G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y0T0005:links:Link:00CE01Y1XG000:props:StringProp:00CE01Y1XG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "89"
+          }
+        ]
+      }
+    ],
+    "title": "**A full-corpus rename sweep once collided on `archive/Aperas-dev-status.md`**",
+    "text": "**A full-corpus rename sweep once collided on `archive/Aperas-dev-status.md`**: noted in [Packaging — Discussion](../discussion/packaging.md#id/BlockNode:00CDEB141G001) — a path-less `aperas track`/`ingest` sweep aborted on a slug-path collision inside that file. Scoped, path-given ingestion (as this whole migration uses) isn't affected, but nothing should ever invoke a path-less sweep while `archive/` still holds untracked legacy content.",
+    "parent": "BlockNode:00CE01Y0T0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y0T0006:links:Link:00CE09C488000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y1Z8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y0T0006:links:Link:00CE09C488000:props:StringProp:00CE09C488001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
+    "title": "## Pending Tasks",
+    "text": "See [Task Breakdown](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003) for the full ordered list.",
+    "parent": "BlockNode:00CE01Y0T0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y0T0007",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "text": "None yet.",
+    "parent": "BlockNode:00CE01Y0T0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8001",
+    "@type": "BlockNode",
+    "title": "# Archive Migration — Planning",
+    "parent": "ArtifactNode:00CE01XZ8G001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y1Z8002",
+      "BlockNode:00CE01Y1Z8003",
+      "BlockNode:00CE01Y1Z800D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8002",
+    "@type": "BlockNode",
+    "title": "## Implementation Plan",
+    "text": "Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the `aperas`/`kg-doc-ingest` skills before starting the next sub-task.",
+    "parent": "BlockNode:00CE01Y1Z8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8003",
+    "@type": "BlockNode",
+    "title": "## Task Breakdown",
+    "parent": "BlockNode:00CE01Y1Z8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y1Z8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE01Y1Z8004:props:StringProp:00CE01Y308000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE01Y1Z8004:props:StringProp:00CE01Y308001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE07YNJ8002",
+    "parent": "BlockNode:00CE01Y1Z8003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE07TC0G003",
+      "BlockNode:00CE07TC0G004",
+      "BlockNode:00CE07TC0G005",
+      "BlockNode:00CE07TC0G006",
+      "BlockNode:00CE07TC0G007",
+      "BlockNode:00CE07TC0G008",
+      "BlockNode:00CE07TC0G009",
+      "BlockNode:00CE07YNJ800A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8005",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z8005",
+    "text": "Archive migration meta-task doc set (this doc set) — created and tracked.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8006",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z8006",
+    "text": "[ ] `Aperas-treeview-design.md` → concern name TBD (likely `treeview`)",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8007",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z8007",
+    "text": "[ ] `Aperas-crud-design.md` → concern name TBD (likely `crud`)",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8008",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z8008",
+    "text": "[ ] `Aperas-apeironngn-design.md` → concern name(s) TBD, decomposition question open (see [Issues](../issues/archive-migration.md))",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z8009",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z8009",
+    "text": "[ ] `Aperas-dev-status.md` → concern name(s) TBD, decomposition question open (see [Issues](../issues/archive-migration.md))",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z800A",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z800A",
+    "text": "[ ] `Aperas-design.md` (the original pre-ApeironNgn roadmap) → concern name TBD (likely `roadmap`)",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z800B",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z800B",
+    "text": "[ ] `reports/bugs/` → inventory, then map into whichever subsystem's `issues/` concern each report actually belongs to",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z800C",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:47:33.871Z",
+    "title": "00CE01Y1Z800C",
+    "text": "[ ] `tdb-era/*` (16 files, oldest, describes the superseded TerminusDB substrate) → approach TBD; may not warrant the same design/issues/planning/history split as live subsystems, since the substrate itself is retired",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y1Z800D",
+    "@type": "BlockNode",
+    "title": "## Verification Plan",
+    "text": "A sub-task is done when: the round-trip diff is clean, `aperas backlinks` confirms every upgraded cross-reference actually resolves, `aperas tree` shows the new concern docs in place, and the corresponding legacy file (or the piece of it that's now covered) is either retired from `archive/` top level or left with a note that it's superseded.",
+    "parent": "BlockNode:00CE01Y1Z8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y320001",
+    "@type": "BlockNode",
+    "title": "# Archive Migration — History",
+    "parent": "ArtifactNode:00CE01XZ8G002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y320002",
+      "BlockNode:00CE01Y320003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y320002",
+    "@type": "BlockNode",
+    "title": "## Current Status",
+    "text": "Meta-task kicked off 2026-09-11: this doc set created and tracked. No sub-task has started yet.",
+    "parent": "BlockNode:00CE01Y320001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y320003",
+    "@type": "BlockNode",
+    "title": "## Milestones",
+    "parent": "BlockNode:00CE01Y320001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y320004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y320004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE01Y320004:props:StringProp:00CE01Y41G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE01Y320004:props:StringProp:00CE01Y41R000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE01Y320004",
+    "parent": "BlockNode:00CE01Y320003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE01Y320005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y320005",
+    "@type": "BlockNode",
+    "title": "00CE01Y320005",
+    "text": "2026-09-11 — Doc set created.",
+    "parent": "BlockNode:00CE01Y320004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R001",
+    "@type": "BlockNode",
+    "title": "# Archive Migration — Discussion",
+    "parent": "ArtifactNode:00CE01XZ8R000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y42R002",
+      "BlockNode:00CE0HD0H8001",
+      "BlockNode:00CE0HD0HG000",
+      "BlockNode:00CE0HD0HG004",
+      "BlockNode:00CE0YFEN0001",
+      "BlockNode:00CE01Y42R008",
+      "BlockNode:00CE01Y42R00D",
+      "BlockNode:00CE01Y42R00E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R002",
+    "@type": "BlockNode",
+    "title": "## Dashboard",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE01Y42R003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE01Y42R003:props:StringProp:00CE01Y5BR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE01Y42R003:props:StringProp:00CE01Y5BR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE01Y42R003",
+    "parent": "BlockNode:00CE01Y42R002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE01Y42R004",
+      "BlockNode:00CE01Y42R005",
+      "BlockNode:00CE01Y42R006",
+      "BlockNode:00CE01Y42R007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y42R004:links:Link:00CE09GSHG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01XZPG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y42R004:links:Link:00CE09GSHG000:props:StringProp:00CE09GSHG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE01Y42R004",
+    "text": "[Design](../design/archive-migration.md#id/BlockNode:00CE01XZPG001) — architecture/topology once crystallized.",
+    "parent": "BlockNode:00CE01Y42R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y42R005:links:Link:00CE09GYZ0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y0T0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y42R005:links:Link:00CE09GYZ0000:props:StringProp:00CE09GYZ0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE01Y42R005",
+    "text": "[Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0001) — gaps this reasoning surfaces.",
+    "parent": "BlockNode:00CE01Y42R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y42R006:links:Link:00CE09H4BR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y1Z8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y42R006:links:Link:00CE09H4BR000:props:StringProp:00CE09H4BR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE01Y42R006",
+    "text": "[Planning](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8001) — task breakdown.",
+    "parent": "BlockNode:00CE01Y42R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y42R007:links:Link:00CE09H9S8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y320001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y42R007:links:Link:00CE09H9S8000:props:StringProp:00CE09H9S8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE01Y42R007",
+    "text": "[History](../history/archive-migration.md#id/BlockNode:00CE01Y320001) — status/milestones.",
+    "parent": "BlockNode:00CE01Y42R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R008",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:38:04.943Z",
+    "title": "## Freeflow: inventory of `artifacts/archive/`",
+    "text": "Contents as found:",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R009",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:38:04.943Z",
+    "title": "Top-level (ApeironNgn era, mixed-concern, newest)",
+    "text": "Top-level (ApeironNgn era, mixed-concern, newest): `Aperas-treeview-design.md`, `Aperas-crud-design.md`, `Aperas-apeironngn-design.md`, `Aperas-design.md` (the pre-ApeironNgn roadmap).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R00A",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:38:04.943Z",
+    "title": "00CE01Y42R00A",
+    "text": "`reports/bugs/` — working bug reports, not yet inventoried in detail.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R00B",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:38:04.943Z",
+    "title": "00CE01Y42R00B",
+    "text": "`design/`, `discussion/`, `issues/`, `history/`, `planning/` (each holding a `linking.md`) — pre-migration snapshots of the doc set already fully live at the top-level `linking.md` concern docs. Confirmed by diff: same content modulo slug-path vs. id-based anchors. Nothing to migrate here; archived for history only.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R00C",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:38:04.943Z",
+    "title": "00CE01Y42R00C",
+    "text": "`tdb-era/` — 16 files describing the TerminusDB-backed substrate ApeironNgn replaced, plus `Aperas-dev-status.md`: TDB-era in origin despite sitting at the `archive/` top level, pulled out of `tdb-era/` only because its coverage spans many future dev phases too broad for that folder. Treated the same as the rest of this era — see [Settled](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG002). Oldest, and lowest priority for this pass.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R00D",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:38:05.725Z",
+    "title": "## Freeflow: why newest-first",
+    "text": "The ApeironNgn-era docs describe the substrate this migration itself runs on (`store.ts`, `artifacts.ts`, reconciliation, addressing) — getting that into the graph early means later sub-tasks (including the TDB-era ones, which are pure history at this point) can link back to live design docs instead of archived prose. TDB-era docs don't block anything downstream, so they go last.",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE01Y42R00E",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:09:06.091Z",
+    "title": "## Freeflow: open question — is `tdb-era/` even a design/issues/planning/history split?",
+    "text": "Everything in `tdb-era/` describes a retired substrate. Design docs are supposed to be \"current-state architectural facts,\" but none of that architecture is current anymore. Leaning toward treating it more like a history-heavy concern doc set (maybe skipping `issues`/`planning` entirely, since there's nothing left to plan or fix) — not settled; revisit when that sub-task actually starts.",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNT8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNT8001",
+    "type": "list",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNT8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNT8002",
+    "text": "`Aperas-treeview-design.md` → concern name TBD (likely `treeview`)",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNT8003",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNT8003",
+    "text": "`Aperas-crud-design.md` → concern name TBD (likely `crud`)",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNT8004",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNT8004",
+    "text": "`Aperas-apeironngn-design.md` → concern name(s) TBD, decomposition question open (see [Issues](../issues/archive-migration.md))",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNT8005",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNT8005",
+    "text": "`Aperas-dev-status.md` → concern name(s) TBD, decomposition question open (see [Issues](../issues/archive-migration.md))",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNT8006",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNT8006",
+    "text": "`Aperas-design.md` (the original pre-ApeironNgn roadmap) → concern name TBD (likely `roadmap`)",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNV0000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNV0000",
+    "text": "`reports/bugs/` → inventory, then map into whichever subsystem's `issues/` concern each report actually belongs to",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07KNV0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T06:48:01.459Z",
+    "title": "00CE07KNV0001",
+    "text": "`tdb-era/*` (16 files, oldest, describes the superseded TerminusDB substrate) → approach TBD; may not warrant the same design/issues/planning/history split as live subsystems, since the substrate itself is retired",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G003",
+    "@type": "BlockNode",
+    "title": "00CE07YNJ8003",
+    "text": "Archive migration meta-task doc set (this doc set) — created and tracked. Done.",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G004",
+    "@type": "BlockNode",
+    "title": "00CE07YNJ8004",
+    "text": "`Aperas-treeview-design.md` → concern name TBD (likely `treeview`)",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G005",
+    "@type": "BlockNode",
+    "title": "00CE07YNJ8005",
+    "text": "`Aperas-crud-design.md` → concern name TBD (likely `crud`)",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE07TC0G006:links:Link:00CE09F120000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y0T0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G006:links:Link:00CE09F120000:props:StringProp:00CE0HV1RR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "126"
+          }
+        ]
+      }
+    ],
+    "title": "00CE07YNJ8006",
+    "text": "`Aperas-apeironngn-design.md` → settled: decompose into multiple concern-doc-sets. Which ones and how many is still open (see [Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002)).",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE07TC0G007:links:Link:00CE0RXD6G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G007:links:Link:00CE0RXD6G000:props:StringProp:00CE0RXD78000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "316"
+          }
+        ]
+      }
+    ],
+    "title": "00CE07YNJ8007",
+    "text": "`Aperas-dev-status.md` → TDB-era in origin despite sitting at the `archive/` top level (pulled out of `tdb-era/` only because its coverage spans many future dev phases too broad for that folder); treated the same as `tdb-era/*` below: brainstorm a structure, then write new docs from scratch, not decomposition (see [Settled](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG002)).",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G008",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE07TC0G008:links:Link:00CE0HVDAR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0H8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G008:links:Link:00CE0HVDAR000:props:StringProp:00CE0RXK8R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "172"
+          }
+        ]
+      }
+    ],
+    "title": "00CE07YNJ8008",
+    "text": "`Aperas-design.md` (the original pre-ApeironNgn roadmap) → needs its own brainstorm for a proper structure — doesn't map onto a normal subsystem shape like the others (see [Open Questions](../discussion/archive-migration.md#id/BlockNode:00CE0HD0H8001)).",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07TC0G009",
+    "@type": "BlockNode",
+    "title": "00CE07YNJ8009",
+    "text": "`reports/bugs/` → inventory, then map into whichever subsystem's `issues/` concern each report actually belongs to",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE07YNJ800A",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE07YNJ800A:links:Link:00CE0HVJRR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07YNJ800A:links:Link:00CE0HVJRR000:props:StringProp:00CE0HVJRR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "356"
+          }
+        ]
+      }
+    ],
+    "title": "00CE07YNJ800A",
+    "text": "`tdb-era/*` (16 files, oldest) → not a mechanical decomposition: for whatever knowledge in them is still live in the current system, write *new* concern docs reflecting today's understanding, following Document Topology from the start with concern names chosen up front to avoid collision. Superseded content goes to that concern's `history` doc only (see [Settled](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG002)).",
+    "parent": "BlockNode:00CE01Y1Z8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE09R858001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:36:36.766Z",
+    "title": "00CE09R858001",
+    "parent": "BlockNode:00CDDVC8N0002",
+    "type": "list",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE09R858002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:36:36.766Z",
+    "title": "**GFM task-list items round-trip broken**",
+    "text": "**GFM task-list items round-trip broken**: piping a piped/ingested `- [ ] text` item stores the literal `[ ] ` marker inside the block's own `.text` *alongside* a separate `checked: false` prop, instead of stripping it — so `aperas project` re-emits `- [ ] ` as a prefix on top of the leftover `[ ] `, doubling to `- [ ] [ ] text`. Confirmed via a direct `BlockNode.jsonld` read while drafting [Archive Migration — Planning](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003)'s Task Breakdown. Worked around there by using plain bullets instead of GFM checkboxes; the parser/serializer bug itself (likely `astParser.ts`'s task-list handling) is unfixed.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0GFKA8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:07:08.617Z",
+    "title": "00CE0GFKA8001",
+    "parent": "BlockNode:00CDHFMMKR001",
+    "type": "list",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0GFKA8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T07:36:37.532Z",
+    "title": "00CE0GFKA8002",
+    "text": "Let a `List` be consumed by its preceding `Heading` the same way a single trailing paragraph already is: today, only a heading's *one* immediately-following paragraph folds into the heading's own `.text` field (confirmed via a direct `BlockNode.jsonld` read); a list in that same position always becomes a separate child `BlockNode` instead, even when it's the heading's only content. Extend the same consumption rule to a directly-following list.",
+    "parent": "BlockNode:00CDHFMMKR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HD0H8001",
+    "@type": "BlockNode",
+    "title": "## Open Questions",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE0HD0H8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0HD0H8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE0HD0H8002:props:StringProp:00CE0HD1MR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE0HD0H8002:props:StringProp:00CE0HD1MR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE0HD0H8002",
+    "parent": "BlockNode:00CE0HD0H8001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE0HD0H8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0HD0H8003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE0HD0H8003:links:Link:00CE0RQD0R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE0HD0H8003:links:Link:00CE0RQD0R000:props:StringProp:00CE0RQD0R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "327"
+          }
+        ]
+      }
+    ],
+    "title": "00CE0HD0H8003",
+    "text": "**What's the proper structure for `Aperas-design.md` (the pre-ApeironNgn roadmap)?** It doesn't map cleanly onto one subsystem's design/issues/planning/history/discussion shape like every other doc migrated so far — needs a dedicated brainstorm before that sub-task starts. (`Aperas-dev-status.md` no longer belongs here — see [Settled](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG002): it's TDB-era in origin and follows that era's already-settled approach.)",
+    "parent": "BlockNode:00CE0HD0H8002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG000",
+    "@type": "BlockNode",
+    "title": "## Settled",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE0HD0HG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE0HD0HG001:props:StringProp:00CE0HD1MR002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE0HD0HG001:props:StringProp:00CE0HD1MR003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE0HD0HG001",
+    "parent": "BlockNode:00CE0HD0HG000",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE0HD0HG002",
+      "BlockNode:00CE0HD0HG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG002",
+    "@type": "BlockNode",
+    "title": "**TDB-era migration approach**",
+    "text": "**TDB-era migration approach**: don't decompose `tdb-era/` docs 1:1 (this includes `Aperas-dev-status.md`, which is TDB-era in origin despite sitting at the `archive/` top level — pulled out of `tdb-era/` only because its coverage spans many future dev phases too broad for that folder). For whatever knowledge in them is still live in the current (ApeironNgn) system, author brand-new concern docs reflecting today's understanding — following Document Topology from the start, with concern names chosen up front to avoid any collision (no post-hoc rename needed, unlike the `cli.md` → `packaging.md` incident). Anything no longer live goes to that concern's `history` doc as retired background, not carried into `design`.",
+    "parent": "BlockNode:00CE0HD0HG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE0HD0HG003:links:Link:00CE0HHYV8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y0T0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE0HD0HG003:links:Link:00CE0HHYV8000:props:StringProp:00CE0HHYV8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "149"
+          }
+        ]
+      }
+    ],
+    "title": "**`Aperas-apeironngn-design.md` decomposition**",
+    "text": "**`Aperas-apeironngn-design.md` decomposition**: settled — split into multiple concern-doc-sets, not one. Which ones and how many is still open (see [Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002)).",
+    "parent": "BlockNode:00CE0HD0HG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG004",
+    "@type": "BlockNode",
+    "title": "## Checkpoints",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE0HD0HG005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE0HD0HG005:props:StringProp:00CE0HD1N0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE0HD0HG005:props:StringProp:00CE0HD1N0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE0HD0HG005",
+    "parent": "BlockNode:00CE0HD0HG004",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE0HD0HG006",
+      "BlockNode:00CE0HD0HG007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG006",
+    "@type": "BlockNode",
+    "title": "00CE0HD0HG006",
+    "text": "Meta-task doc set (`archive-migration`) created, round-trip verified, cross-references upgraded to real wikilinks.",
+    "parent": "BlockNode:00CE0HD0HG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HD0HG007",
+    "@type": "BlockNode",
+    "title": "Two ingest/parser gaps found and logged in Packaging — Issues",
+    "text": "Two ingest/parser gaps found while drafting the Task Breakdown — a GFM task-list round-trip bug (checkbox items double on projection: piping `- [ ] text` stores the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` re-emits `- [ ] ` on top of it) and `List` not being consumed by a preceding `Heading` the way a single trailing paragraph already is. Neither has a real home yet — holding both here until `Aperas-apeironngn-design.md` is actually decomposed and a concern for the ingest/parser/reconcile engine exists to receive them. (Wrongly logged in Packaging — Issues at first; reverted.)",
+    "parent": "BlockNode:00CE0HD0HG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HPRV8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE0HPRV8001:links:Link:00CE0HPSTG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE0HPRV8001:links:Link:00CE0HPSTG000:props:StringProp:00CE0RSHF0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "716"
+          }
+        ]
+      }
+    ],
+    "title": "For `tdb-era/` specifically",
+    "text": "For `tdb-era/` specifically (this includes `Aperas-dev-status.md`, which is TDB-era in origin despite sitting at the `archive/` top level — pulled out only because its coverage spans many future dev phases too broad for that folder): don't decompose the old docs 1:1. Instead, for whatever knowledge in them is still live in the current (ApeironNgn) system, author brand-new concern docs reflecting today's understanding — following Document Topology from the start, with concern names chosen up front to avoid any collision (no post-hoc rename needed, unlike the `cli.md` → `packaging.md` incident). Anything no longer live goes to that concern's `history` doc as retired background, not carried into `design`. See [Settled](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG002).",
+    "parent": "BlockNode:00CE01XZPR000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0HPRV8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE0HPRV8002:links:Link:00CE0HPSTG002",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0H8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE0HPRV8002:links:Link:00CE0HPSTG002:props:StringProp:00CE0RSQ8G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "347"
+          }
+        ]
+      }
+    ],
+    "title": "`Aperas-apeironngn-design.md` is settled",
+    "text": "`Aperas-apeironngn-design.md` is settled: decompose into multiple concern-doc-sets — it's too broad for one. `Aperas-design.md` (the pre-ApeironNgn roadmap) is different: it doesn't map cleanly onto a single subsystem's design/issues/planning/history/discussion shape, unlike every other doc migrated so far. Its structure isn't decided yet — see [Open Questions](../discussion/archive-migration.md#id/BlockNode:00CE0HD0H8001).",
+    "parent": "BlockNode:00CE01XZPR000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0001",
+    "@type": "BlockNode",
+    "title": "## Freeflow",
+    "parent": "BlockNode:00CE01Y42R001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE0YFEN0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE0YFEN0002:props:StringProp:00CE0YFFQG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE0YFEN0002:props:StringProp:00CE0YFFQR000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE0YFEN0002",
+    "parent": "BlockNode:00CE0YFEN0001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE0YFEN0003",
+      "BlockNode:00CE0YFEN0008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE0YFEN0003:props:StringProp:00CE0YFFQR001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE0YFEN0003:props:StringProp:00CE0YFFR0000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Inventory of `artifacts/archive/`**",
+    "text": "**Inventory of `artifacts/archive/`**: Contents as found:",
+    "parent": "BlockNode:00CE0YFEN0002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CE0YFEN0004",
+      "BlockNode:00CE0YFEN0005",
+      "BlockNode:00CE0YFEN0006",
+      "BlockNode:00CE0YFEN0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0004",
+    "@type": "BlockNode",
+    "title": "Top-level (ApeironNgn era, mixed-concern, newest)",
+    "text": "Top-level (ApeironNgn era, mixed-concern, newest): `Aperas-treeview-design.md`, `Aperas-crud-design.md`, `Aperas-apeironngn-design.md`, `Aperas-design.md` (the pre-ApeironNgn roadmap).",
+    "parent": "BlockNode:00CE0YFEN0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0005",
+    "@type": "BlockNode",
+    "title": "00CE0YFEN0005",
+    "text": "`reports/bugs/` — working bug reports, not yet inventoried in detail.",
+    "parent": "BlockNode:00CE0YFEN0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0006",
+    "@type": "BlockNode",
+    "title": "00CE0YFEN0006",
+    "text": "`design/`, `discussion/`, `issues/`, `history/`, `planning/` (each holding a `linking.md`) — pre-migration snapshots of the doc set already fully live at the top-level `linking.md` concern docs. Confirmed by diff: same content modulo slug-path vs. id-based anchors. Nothing to migrate here; archived for history only.",
+    "parent": "BlockNode:00CE0YFEN0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE0YFEN0007:links:Link:00CE0YFFR8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE0YFEN0007:links:Link:00CE0YFFR8000:props:StringProp:00CE0YFFRG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "332"
+          }
+        ]
+      }
+    ],
+    "title": "`tdb-era/` — 16 files describing the TerminusDB-backed substrate ApeironNgn replaced, plus `Aperas-dev-status.md`",
+    "text": "`tdb-era/` — 16 files describing the TerminusDB-backed substrate ApeironNgn replaced, plus `Aperas-dev-status.md`: TDB-era in origin despite sitting at the `archive/` top level, pulled out of `tdb-era/` only because its coverage spans many future dev phases too broad for that folder. Treated the same as the rest of this era — see [Settled](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG002). Oldest, and lowest priority for this pass.",
+    "parent": "BlockNode:00CE0YFEN0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE0YFEN0008",
+    "@type": "BlockNode",
+    "title": "**Why newest-first**",
+    "text": "**Why newest-first**: The ApeironNgn-era docs describe the substrate this migration itself runs on (`store.ts`, `artifacts.ts`, reconciliation, addressing) — getting that into the graph early means later sub-tasks (including the TDB-era ones, which are pure history at this point) can link back to live design docs instead of archived prose. TDB-era docs don't block anything downstream, so they go last.",
+    "parent": "BlockNode:00CE0YFEN0002",
     "type": "listItem",
     "children": []
   }

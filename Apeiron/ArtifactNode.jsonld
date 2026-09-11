@@ -201,7 +201,7 @@
     "fileHash": "f3b9a9caee4301cd9b1b3e813960938fcb897a27eee0312c26ddb4e2a71bbf52",
     "lastTrackedAt": "2026-09-10T12:38:10.045Z",
     "ingestedHash": "f3b9a9caee4301cd9b1b3e813960938fcb897a27eee0312c26ddb4e2a71bbf52",
-    "lastIngestedAt": "2026-09-11T06:12:59.319Z",
+    "lastIngestedAt": "2026-09-11T07:37:04.202Z",
     "projectedHash": "f3b9a9caee4301cd9b1b3e813960938fcb897a27eee0312c26ddb4e2a71bbf52"
   },
   {
@@ -236,5 +236,90 @@
     "ingestedHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c",
     "lastIngestedAt": "2026-09-11T06:13:26.411Z",
     "projectedHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c"
+  },
+  {
+    "@id": "ArtifactNode:00CE01XZ88000",
+    "@type": "ArtifactNode",
+    "title": "archive-migration.md",
+    "text": "**Discussion**: [Inventory and open questions](../discussion/archive-migration.md#id/BlockNode:00CE0YFEN0003) — what's in `artifacts/archive/`, and decisions still open about how to split it.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE01XZPG001"
+    ],
+    "path": "design/archive-migration.md",
+    "fileHash": "3336dc2ab280129ab6d433eb3338d9d80510ec30ae9f870b372932025defc079",
+    "lastTrackedAt": "2026-09-11T06:35:09.601Z",
+    "ingestedHash": "3336dc2ab280129ab6d433eb3338d9d80510ec30ae9f870b372932025defc079",
+    "lastIngestedAt": "2026-09-11T07:38:11.530Z",
+    "projectedHash": "3336dc2ab280129ab6d433eb3338d9d80510ec30ae9f870b372932025defc079"
+  },
+  {
+    "@id": "ArtifactNode:00CE01XZ8G000",
+    "@type": "ArtifactNode",
+    "title": "archive-migration.md",
+    "text": "**`Aperas-design.md` needs a dedicated brainstorm, not a mechanical split**: unlike every other doc in this migration, it doesn't map cleanly onto one subsystem's design/issues/planning/history/discussion shape — see [Open Questions](../discussion/archive-migration.md#id/BlockNode:00CE0HD0H8001). (`Aperas-dev-status.md` is no longer grouped here — it's TDB-era in origin and follows that era's settled approach; see [design](../design/archive-migration.md#id/BlockNode:00CE0HPRV8001).)",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE01Y0T0001"
+    ],
+    "path": "issues/archive-migration.md",
+    "fileHash": "e5c31048392bed3cea93a9e82ada3b78423a7d5aed0b43877e4c7d492f4212d1",
+    "lastTrackedAt": "2026-09-11T06:35:09.602Z",
+    "ingestedHash": "e5c31048392bed3cea93a9e82ada3b78423a7d5aed0b43877e4c7d492f4212d1",
+    "lastIngestedAt": "2026-09-11T07:25:29.621Z",
+    "projectedHash": "e5c31048392bed3cea93a9e82ada3b78423a7d5aed0b43877e4c7d492f4212d1"
+  },
+  {
+    "@id": "ArtifactNode:00CE01XZ8G001",
+    "@type": "ArtifactNode",
+    "title": "archive-migration.md",
+    "text": "Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the `aperas`/`kg-doc-ingest` skills before starting the next sub-task.",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE01Y1Z8001"
+    ],
+    "path": "planning/archive-migration.md",
+    "fileHash": "7fc91424a9dc543a079281e6fd88314f455b2fa2ab20ef54c0e4127e4ebfe5b9",
+    "lastTrackedAt": "2026-09-11T06:35:09.602Z",
+    "ingestedHash": "7fc91424a9dc543a079281e6fd88314f455b2fa2ab20ef54c0e4127e4ebfe5b9",
+    "lastIngestedAt": "2026-09-11T07:25:30.320Z",
+    "projectedHash": "7fc91424a9dc543a079281e6fd88314f455b2fa2ab20ef54c0e4127e4ebfe5b9"
+  },
+  {
+    "@id": "ArtifactNode:00CE01XZ8G002",
+    "@type": "ArtifactNode",
+    "title": "archive-migration.md",
+    "text": "Meta-task kicked off 2026-09-11: this doc set created and tracked. No sub-task has started yet.",
+    "parent": "FolderNode:00CDBYV4BR002",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE01Y320001"
+    ],
+    "path": "history/archive-migration.md",
+    "fileHash": "c46bc1bce36b7dadddd3f5bdd2b851191faa244b279d9d6767b7686fa1dbb081",
+    "lastTrackedAt": "2026-09-11T06:35:09.602Z",
+    "ingestedHash": "c46bc1bce36b7dadddd3f5bdd2b851191faa244b279d9d6767b7686fa1dbb081",
+    "lastIngestedAt": "2026-09-11T06:48:33.530Z",
+    "projectedHash": "c46bc1bce36b7dadddd3f5bdd2b851191faa244b279d9d6767b7686fa1dbb081"
+  },
+  {
+    "@id": "ArtifactNode:00CE01XZ8R000",
+    "@type": "ArtifactNode",
+    "title": "archive-migration.md",
+    "text": "[Design](../design/archive-migration.md#id/BlockNode:00CE01XZPG001) — architecture/topology once crystallized.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE01Y42R001"
+    ],
+    "path": "discussion/archive-migration.md",
+    "fileHash": "ee546fc72fb4ee1ba27f1fed4a655a0d800084d11c596a546325ff7434e511d9",
+    "lastTrackedAt": "2026-09-11T06:35:09.603Z",
+    "ingestedHash": "ee546fc72fb4ee1ba27f1fed4a655a0d800084d11c596a546325ff7434e511d9",
+    "lastIngestedAt": "2026-09-11T07:39:05.577Z",
+    "projectedHash": "ee546fc72fb4ee1ba27f1fed4a655a0d800084d11c596a546325ff7434e511d9"
   }
 ]
