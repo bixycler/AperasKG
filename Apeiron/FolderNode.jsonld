@@ -94,6 +94,7 @@
       "ArtifactNode:00CE01XZ88000",
       "ArtifactNode:00CDD68DS8000",
       "ArtifactNode:00CDBYV460000",
+      "ArtifactNode:00CE32GQ0R000",
       "ArtifactNode:00CDDTBJBG000",
       "ArtifactNode:00CE1GW4B0000"
     ]
@@ -108,6 +109,7 @@
       "ArtifactNode:00CE01XZ8R000",
       "ArtifactNode:00CDD68DSG000",
       "ArtifactNode:00CDBYV46R000",
+      "ArtifactNode:00CE32GQ1G000",
       "ArtifactNode:00CDDTBQWG000",
       "ArtifactNode:00CE1DDEHG000"
     ]
@@ -121,6 +123,7 @@
     "children": [
       "ArtifactNode:00CE01XZ8G002",
       "ArtifactNode:00CDBYV46G000",
+      "ArtifactNode:00CE32GQ18000",
       "ArtifactNode:00CDDTC8H0000",
       "ArtifactNode:00CE1GW4B8002"
     ]
@@ -135,6 +138,7 @@
       "ArtifactNode:00CE01XZ8G000",
       "ArtifactNode:00CDD68DSG001",
       "ArtifactNode:00CDBYV468000",
+      "ArtifactNode:00CE32GQ0R001",
       "ArtifactNode:00CDDTBYG0000",
       "ArtifactNode:00CE1GW4B8000"
     ]
@@ -148,6 +152,7 @@
     "children": [
       "ArtifactNode:00CE01XZ8G001",
       "ArtifactNode:00CDBYV46R001",
+      "ArtifactNode:00CE32GQ10000",
       "ArtifactNode:00CDDTC3S0000",
       "ArtifactNode:00CE1GW4B8001"
     ]

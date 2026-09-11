@@ -8,10 +8,6 @@ None.
 
 None.
 
-
-
-
-
 ## Resolved <a name='id/BlockNode:00CDDVC8N0007' class='aperas-anchor aperas-id'></a>
 
 - Each command's own `--help` usage line (and its missing-required-arg fallback) now prints `aperas <verb>` instead of `kg:X --` — rewritten across all 18 `kgX.ts` files.
