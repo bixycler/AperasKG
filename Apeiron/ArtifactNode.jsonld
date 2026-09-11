@@ -96,11 +96,11 @@
       "BlockNode:00CDD68E80001"
     ],
     "path": "design/documentation.md",
-    "fileHash": "16fed0efd4f00fca653bb1700467bd9c8d4e823e80c5f81667b708bf7992288a",
+    "fileHash": "53018e16f0dd7bb014676982df632cf9d1f3362683ea505c862e7ffccea31a03",
     "lastTrackedAt": "2026-09-10T08:48:21.034Z",
-    "ingestedHash": "16fed0efd4f00fca653bb1700467bd9c8d4e823e80c5f81667b708bf7992288a",
-    "lastIngestedAt": "2026-09-11T12:41:25.627Z",
-    "projectedHash": "16fed0efd4f00fca653bb1700467bd9c8d4e823e80c5f81667b708bf7992288a"
+    "ingestedHash": "53018e16f0dd7bb014676982df632cf9d1f3362683ea505c862e7ffccea31a03",
+    "lastIngestedAt": "2026-09-11T17:50:24.961Z",
+    "projectedHash": "53018e16f0dd7bb014676982df632cf9d1f3362683ea505c862e7ffccea31a03"
   },
   {
     "@id": "ArtifactNode:00CDD68DSG000",
@@ -333,11 +333,11 @@
       "BlockNode:00CE1DDF4G001"
     ],
     "path": "discussion/treeview.md",
-    "fileHash": "1f266e17f861ebe67ea880b802bd4d5e6a238872f16f02ebef4c65a0093476e8",
+    "fileHash": "970f004f0494d863c73795855ad65bd3d07c43b63af4655d4d7065e715c2ad10",
     "lastTrackedAt": "2026-09-11T08:10:09.094Z",
-    "ingestedHash": "1f266e17f861ebe67ea880b802bd4d5e6a238872f16f02ebef4c65a0093476e8",
-    "lastIngestedAt": "2026-09-11T12:41:31.380Z",
-    "projectedHash": "1f266e17f861ebe67ea880b802bd4d5e6a238872f16f02ebef4c65a0093476e8"
+    "ingestedHash": "970f004f0494d863c73795855ad65bd3d07c43b63af4655d4d7065e715c2ad10",
+    "lastIngestedAt": "2026-09-11T16:47:56.376Z",
+    "projectedHash": "970f004f0494d863c73795855ad65bd3d07c43b63af4655d4d7065e715c2ad10"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B0000",
@@ -367,11 +367,11 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "38f96064069947189c3e9cf0e09b98ad2bc121a81674221821b0868b73860aa6",
+    "fileHash": "0dc9f6894bba8022fad860c8e6b800e2afd27cc492b2856c4b6993bc57b8a9a2",
     "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "38f96064069947189c3e9cf0e09b98ad2bc121a81674221821b0868b73860aa6",
-    "lastIngestedAt": "2026-09-11T13:32:08.325Z",
-    "projectedHash": "38f96064069947189c3e9cf0e09b98ad2bc121a81674221821b0868b73860aa6"
+    "ingestedHash": "0dc9f6894bba8022fad860c8e6b800e2afd27cc492b2856c4b6993bc57b8a9a2",
+    "lastIngestedAt": "2026-09-11T16:47:57.317Z",
+    "projectedHash": "0dc9f6894bba8022fad860c8e6b800e2afd27cc492b2856c4b6993bc57b8a9a2"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -486,10 +486,95 @@
       "BlockNode:00CE32GXH0001"
     ],
     "path": "discussion/list-consumption.md",
-    "fileHash": "9ec10b1d2018d2d1453b640378ba158a907624db7e4a68c0a97f44964b6593de",
+    "fileHash": "65bc72f61e8c08f1bbf07da7a224aab9ebebcbdac6bb9262345d79ceb8623697",
     "lastTrackedAt": "2026-09-11T10:06:09.286Z",
-    "ingestedHash": "9ec10b1d2018d2d1453b640378ba158a907624db7e4a68c0a97f44964b6593de",
-    "lastIngestedAt": "2026-09-11T13:57:13.123Z",
-    "projectedHash": "9ec10b1d2018d2d1453b640378ba158a907624db7e4a68c0a97f44964b6593de"
+    "ingestedHash": "65bc72f61e8c08f1bbf07da7a224aab9ebebcbdac6bb9262345d79ceb8623697",
+    "lastIngestedAt": "2026-09-11T16:30:16.417Z",
+    "projectedHash": "65bc72f61e8c08f1bbf07da7a224aab9ebebcbdac6bb9262345d79ceb8623697"
+  },
+  {
+    "@id": "ArtifactNode:00CE8XWYYG000",
+    "@type": "ArtifactNode",
+    "title": "aperas-skill.md",
+    "text": "[Design](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG003) — the four-level shape, abstract to concrete, the rewrite is aiming at.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE8XWZJR001"
+    ],
+    "path": "discussion/aperas-skill.md",
+    "fileHash": "39ed3ac430477d52be872f9dde340bca74fd3b284b7f78e501eed06a5837a467",
+    "lastTrackedAt": "2026-09-11T16:55:29.915Z",
+    "ingestedHash": "39ed3ac430477d52be872f9dde340bca74fd3b284b7f78e501eed06a5837a467",
+    "lastIngestedAt": "2026-09-12T00:34:38.207Z",
+    "projectedHash": "39ed3ac430477d52be872f9dde340bca74fd3b284b7f78e501eed06a5837a467"
+  },
+  {
+    "@id": "ArtifactNode:00CEA5KVFR000",
+    "@type": "ArtifactNode",
+    "title": "aperas-skill.md",
+    "text": "None — all six are resolved by the v1 restructure, see Resolved below. New gaps found while working the graph are parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CEA5KW4G001"
+    ],
+    "path": "issues/aperas-skill.md",
+    "fileHash": "a0f02a5a5860c9781ab78c7667b3f05ca10555c19957a5725cd542702801cc3e",
+    "lastTrackedAt": "2026-09-11T18:22:15.487Z",
+    "ingestedHash": "a0f02a5a5860c9781ab78c7667b3f05ca10555c19957a5725cd542702801cc3e",
+    "lastIngestedAt": "2026-09-11T21:05:00.572Z",
+    "projectedHash": "a0f02a5a5860c9781ab78c7667b3f05ca10555c19957a5725cd542702801cc3e"
+  },
+  {
+    "@id": "ArtifactNode:00CEA5M69R000",
+    "@type": "ArtifactNode",
+    "title": "aperas-skill.md",
+    "text": "Restructure in place rather than rewriting from a blank file. Every existing item was paid for by a live incident, so the content is the asset and the arrangement is the defect — a fresh draft would silently drop hard-won specifics that no one would notice missing until the incident recurred.",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CEA5M6S8001"
+    ],
+    "path": "planning/aperas-skill.md",
+    "fileHash": "be47255c6d36f6755af352ef99da45db631aa38d96e8cc3011bce89c3aaa9879",
+    "lastTrackedAt": "2026-09-11T18:22:16.871Z",
+    "ingestedHash": "be47255c6d36f6755af352ef99da45db631aa38d96e8cc3011bce89c3aaa9879",
+    "lastIngestedAt": "2026-09-11T22:13:56.854Z",
+    "projectedHash": "be47255c6d36f6755af352ef99da45db631aa38d96e8cc3011bce89c3aaa9879"
+  },
+  {
+    "@id": "ArtifactNode:00CEA5MGZR000",
+    "@type": "ArtifactNode",
+    "title": "aperas-skill.md",
+    "text": "The restructure has landed. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is now v1: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, each item marked `[current]`, `[superseded]` or `[unverified]`, with a scope statement and a worked example at each of the first three levels.",
+    "parent": "FolderNode:00CDBYV4BR002",
+    "type": "root",
+    "children": [
+      "BlockNode:00CEA5MHD8001"
+    ],
+    "path": "history/aperas-skill.md",
+    "fileHash": "3bdfffdc50d1902c4041d9b9b66bd880e9a86e93cdcd021c5ac75b7449daddf8",
+    "lastTrackedAt": "2026-09-11T18:22:18.239Z",
+    "ingestedHash": "3bdfffdc50d1902c4041d9b9b66bd880e9a86e93cdcd021c5ac75b7449daddf8",
+    "lastIngestedAt": "2026-09-12T00:34:39.403Z",
+    "projectedHash": "3bdfffdc50d1902c4041d9b9b66bd880e9a86e93cdcd021c5ac75b7449daddf8"
+  },
+  {
+    "@id": "ArtifactNode:00CEA5Y4Y8000",
+    "@type": "ArtifactNode",
+    "title": "aperas-skill.md",
+    "text": "**Discussion**: [Settled](../discussion/aperas-skill.md#id/BlockNode:00CEA56A0G001) — the philosophy this design is drawn from, and the incidents it was drawn from.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00CEA5Y5J8001"
+    ],
+    "path": "design/aperas-skill.md",
+    "fileHash": "efbb707267feffdf6a067c855b3a882b0ba7d8436f1afa349b43671815226649",
+    "lastTrackedAt": "2026-09-11T18:22:57.657Z",
+    "ingestedHash": "efbb707267feffdf6a067c855b3a882b0ba7d8436f1afa349b43671815226649",
+    "lastIngestedAt": "2026-09-11T22:13:55.876Z",
+    "projectedHash": "efbb707267feffdf6a067c855b3a882b0ba7d8436f1afa349b43671815226649"
   }
 ]

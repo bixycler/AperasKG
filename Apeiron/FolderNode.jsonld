@@ -91,6 +91,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "design",
     "children": [
+      "ArtifactNode:00CEA5Y4Y8000",
       "ArtifactNode:00CE01XZ88000",
       "ArtifactNode:00CDD68DS8000",
       "ArtifactNode:00CDBYV460000",
@@ -106,6 +107,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "discussion",
     "children": [
+      "ArtifactNode:00CE8XWYYG000",
       "ArtifactNode:00CE01XZ8R000",
       "ArtifactNode:00CDD68DSG000",
       "ArtifactNode:00CDBYV46R000",
@@ -121,6 +123,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "history",
     "children": [
+      "ArtifactNode:00CEA5MGZR000",
       "ArtifactNode:00CE01XZ8G002",
       "ArtifactNode:00CDBYV46G000",
       "ArtifactNode:00CE32GQ18000",
@@ -135,6 +138,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "issues",
     "children": [
+      "ArtifactNode:00CEA5KVFR000",
       "ArtifactNode:00CE01XZ8G000",
       "ArtifactNode:00CDD68DSG001",
       "ArtifactNode:00CDBYV468000",
@@ -150,6 +154,7 @@
     "parent": "FolderNode:00CDBYV47G000",
     "path": "planning",
     "children": [
+      "ArtifactNode:00CEA5M69R000",
       "ArtifactNode:00CE01XZ8G001",
       "ArtifactNode:00CDBYV46R001",
       "ArtifactNode:00CE32GQ10000",

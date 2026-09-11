@@ -96,6 +96,8 @@ If we use a placeholder flag on the node, it could reconcile safely...
 
 This is pure Apeiron. It is unbounded, unstructured, and safe from strict schema rules. It exists only in the discussion concern.
 
+In practice the scratchpad grows as an unbounded *list*, not a flat set of headings: a few dedicated top-level slots right after the Dashboard (`## Open Questions`, `## Settled`, `## Checkpoints`) give whatever's concern-shaped enough a fixed home, but the content piling up under each is nested list structure, not further headings — a heading is the tool for a small, fixed, predefined set of sections, while a list nests natively and indefinitely through indentation, which is what actually lets a `TreeView`'s fold/unfold act on a growing subtree. Moving an item between slots (an Open Questions bullet resolving into a Settled one, say) is a real move, not remove-then-insert: repositioning the existing node preserves its id, its backlinks, and its place in history — reach for remove-and-recreate only when the wording is changing enough that it's genuinely a different thought.
+
 ### Crystallization (The Update Loop) <a name='id/BlockNode:00CDD68E8800B' class='aperas-anchor aperas-id'></a>
 
 Eventually, the brainstorming yields a concrete decision. The thought *crystallizes* from a messy idea into a formal architectural rule, or a formal task.
