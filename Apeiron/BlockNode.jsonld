@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CE0Z6NQ0001",
+    "title": "00CE1JZ9R0001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CE0Z6NQG001",
+    "title": "00CE1JZ9R8001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CE0Z6NSG001",
+    "title": "00CE1JZ9SG001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -2946,7 +2946,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CE0Z6NQR001",
+    "title": "00CE1JZ9RR001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -2955,7 +2955,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CE0Z6NR0001",
+    "title": "00CE1JZ9S0001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -2964,7 +2964,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CE0Z6NS0001",
+    "title": "00CE1JZ9S8001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -7805,8 +7805,24 @@
   {
     "@id": "BlockNode:00CE01Y320002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE01Y320002:links:Link:00CE1JX3D0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE01Y1Z8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE01Y320002:links:Link:00CE1JX3D0000:props:StringProp:00CE1JX3D0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "157"
+          }
+        ]
+      }
+    ],
     "title": "## Current Status",
-    "text": "Meta-task kicked off 2026-09-11: this doc set created and tracked. No sub-task has started yet.",
+    "text": "Meta-task kicked off 2026-09-11: doc set created and tracked. First sub-task done: `Aperas-treeview-design.md` migrated to `treeview`'s concern-doc-set (see [Task Breakdown](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003)). Next up: `crud`.",
     "parent": "BlockNode:00CE01Y320001",
     "type": "heading",
     "children": []
@@ -7838,19 +7854,20 @@
         "value": "1"
       }
     ],
-    "title": "00CE01Y320004",
+    "title": "00CE1JRAC0002",
     "parent": "BlockNode:00CE01Y320003",
     "type": "list",
     "children": [
-      "BlockNode:00CE01Y320005"
+      "BlockNode:00CE1JRAC0003",
+      "BlockNode:00CE1JRAC0004"
     ]
   },
   {
     "@id": "BlockNode:00CE01Y320005",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T08:21:33.278Z",
     "title": "00CE01Y320005",
     "text": "2026-09-11 — Doc set created.",
-    "parent": "BlockNode:00CE01Y320004",
     "type": "listItem",
     "children": []
   },
@@ -8157,8 +8174,80 @@
   {
     "@id": "BlockNode:00CE07TC0G004",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q0000:props:StringProp:00CE1JK3Q0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "47"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q0002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q0002:props:StringProp:00CE1JK3Q8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "106"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q8001",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q8001:props:StringProp:00CE1JK3Q8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "165"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q8003",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW8T8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q8003:props:StringProp:00CE1JK3Q8004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "228"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q8005",
+        "@type": "Link",
+        "target": "BlockNode:00CE1DDF4G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE07TC0G004:links:Link:00CE1JK3Q8005:props:StringProp:00CE1JK3Q8006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "289"
+          }
+        ]
+      }
+    ],
     "title": "00CE07YNJ8004",
-    "text": "`Aperas-treeview-design.md` → concern name TBD (likely `treeview`)",
+    "text": "`Aperas-treeview-design.md` → done: split into [design](../design/treeview.md#id/BlockNode:00CE1GW4Y8001)/[issues](../issues/treeview.md#id/BlockNode:00CE1GW638001)/[planning](../planning/treeview.md#id/BlockNode:00CE1GW7CG001)/[history](../history/treeview.md#id/BlockNode:00CE1GW8T8001)/[discussion](../discussion/treeview.md#id/BlockNode:00CE1DDF4G001) as `treeview`. Round-trip verified, cross-references upgraded, backlinks confirmed.",
     "parent": "BlockNode:00CE01Y1Z8004",
     "type": "listItem",
     "children": []
@@ -8493,8 +8582,24 @@
   {
     "@id": "BlockNode:00CE0HD0HG007",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE0HD0HG007:links:Link:00CE1JF83R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE0HD0HG007:links:Link:00CE1JF83R000:props:StringProp:00CE1JF83R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "272"
+          }
+        ]
+      }
+    ],
     "title": "Two ingest/parser gaps found and logged in Packaging — Issues",
-    "text": "Two ingest/parser gaps found while drafting the Task Breakdown — a GFM task-list round-trip bug (checkbox items double on projection: piping `- [ ] text` stores the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` re-emits `- [ ] ` on top of it) and `List` not being consumed by a preceding `Heading` the way a single trailing paragraph already is. Neither has a real home yet — holding both here until `Aperas-apeironngn-design.md` is actually decomposed and a concern for the ingest/parser/reconcile engine exists to receive them. (Wrongly logged in Packaging — Issues at first; reverted.)",
+    "text": "Two ingest/parser gaps found while drafting the Task Breakdown — a GFM task-list round-trip bug and `List` not being consumed by a preceding `Heading` — were parked here with no real home (wrongly logged in Packaging — Issues at first; reverted). Both have since moved to [TreeView — Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002), filed alongside that concern's own gaps and slated to be fixed together.",
     "parent": "BlockNode:00CE0HD0HG005",
     "type": "listItem",
     "children": []
@@ -8670,6 +8775,1442 @@
     "title": "**Why newest-first**",
     "text": "**Why newest-first**: The ApeironNgn-era docs describe the substrate this migration itself runs on (`store.ts`, `artifacts.ts`, reconciliation, addressing) — getting that into the graph early means later sub-tasks (including the TDB-era ones, which are pure history at this point) can link back to live design docs instead of archived prose. TDB-era docs don't block anything downstream, so they go last.",
     "parent": "BlockNode:00CE0YFEN0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF4G001",
+    "@type": "BlockNode",
+    "title": "# TreeView — Discussion",
+    "parent": "ArtifactNode:00CE1DDEHG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1HQW18001",
+      "BlockNode:00CE1DDF58000",
+      "BlockNode:00CE1DDF58003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58000",
+    "@type": "BlockNode",
+    "title": "## Settled",
+    "parent": "BlockNode:00CE1DDF4G001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1DDF58001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1DDF58001:props:StringProp:00CE1DDGCR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1DDF58001:props:StringProp:00CE1DDGCR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1FFSR8002",
+    "parent": "BlockNode:00CE1DDF58000",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1DDF58002",
+      "BlockNode:00CE1FFSR8004",
+      "BlockNode:00CE1FFSR8005",
+      "BlockNode:00CE1FFSR8006",
+      "BlockNode:00CE1FFSR8007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58002",
+    "@type": "BlockNode",
+    "title": "**Implementation-status verification (`Aperas-treeview-design.md` §11/§13.3/§14/§15/§16)**",
+    "text": "**Implementation-status verification (`Aperas-treeview-design.md` §11/§13.3/§14/§15/§16)**: checked directly against `apeironNgn`/CLI source. §11 (`Profile`/`kg:profile`) and §13.3 (the upward-pointing-link fix in viewcone zoom) are fully implemented — the archived doc's \"not yet implemented\" claims were stale; both move to `history/treeview.md`. §14 (stale `TreeView.unfolds` references), §15 (bare `kg:unfold` should peek, not mutate), and §16 (`kg:show <ref>`) are confirmed still not implemented — all three move to `issues/treeview.md` + `planning/treeview.md`.",
+    "parent": "BlockNode:00CE1DDF58001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58003",
+    "@type": "BlockNode",
+    "title": "## Freeflow",
+    "parent": "BlockNode:00CE1DDF4G001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1DDF58004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1DDF58004:props:StringProp:00CE1DDGD0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1DDF58004:props:StringProp:00CE1DDGD0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1DDF58004",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1DDF58005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1DDF58005:props:StringProp:00CE1DDGD0002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1DDF58005:props:StringProp:00CE1DDGD0003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1DDF58005",
+    "text": "**Inventory of `Aperas-treeview-design.md`** (967 lines, header + 16 numbered sections, several with subsections): a mature, mostly-settled design doc for the `Profile`/`TreeView` data model, the fold/unfold mechanic, the three-tier rendering algorithm, the canonical-position rule for multi-path nodes, and viewcone zoom — most sections are marked `Status: implemented`. Proposed per-section split:",
+    "parent": "BlockNode:00CE1DDF58004",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CE1DDF58006",
+      "BlockNode:00CE1DDF58007",
+      "BlockNode:00CE1DDF58008",
+      "BlockNode:00CE1DDF58009",
+      "BlockNode:00CE1DDF5800A",
+      "BlockNode:00CE1DDF5800B",
+      "BlockNode:00CE1DDF5800C",
+      "BlockNode:00CE1DDF5800D",
+      "BlockNode:00CE1DDF5800E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58006",
+    "@type": "BlockNode",
+    "title": "00CE1DDF58006",
+    "text": "Header block + §1 (motivation for replacing the single shared `unfolded` flag with per-viewer `TreeView`s) → `discussion/treeview.md` itself (rationale/motivation, matching how other design Context sections link out to a specific discussion heading rather than restating the \"why\" inline).",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58007",
+    "@type": "BlockNode",
+    "title": "00CE1DDF58007",
+    "text": "§2 (three tiers of perata), §3 (`Profile`/`TreeView` data model), §4 (worked example), §5 (rendering: three display tiers), §6 (two paths to the same node — canonical position rule), §7 (`Profile`: lightweight identity), §8 (git separation, `.state/` vs. tracked mirror), §9 (migrating existing `unfolded` data), §12 (depth legibility marker), §13 (viewcone zoom + its own worked example and resolved cross-cone rule) → `design/treeview.md`, as the normative current-state architecture — stripped of \"corrected from an earlier draft\"/\"loosened from a narrower version\" narrative, which reads as history, not standing design (matching `design/packaging.md`'s own precedent: no \"corrected from X\" language survives into Design there either).",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58008",
+    "@type": "BlockNode",
+    "title": "00CE1DDF58008",
+    "text": "§10 (\"Open questions — all resolved\") → mostly `history/treeview.md`, as a resolved-decision log; the one still-live crystallized behavior it describes (the `\"default\"` `Profile`/`TreeView` bootstrap) gets folded into `design/treeview.md`'s own description of that behavior directly, not left phrased as a Q&A.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF58009",
+    "@type": "BlockNode",
+    "title": "00CE1DDF58009",
+    "text": "§13.3 (upward-pointing-link gap in viewcone zoom) and §14 (stale `TreeView.unfolds` references) → `issues/treeview.md` if still open, `history/treeview.md` if the verification pass above finds them fixed; either way the two options weighed for each fix are `discussion/treeview.md` material (rationale for the chosen direction), not `design`.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF5800A",
+    "@type": "BlockNode",
+    "title": "00CE1DDF5800A",
+    "text": "§15 (bare `kg:unfold` should peek, not mutate, when `--view` is fully omitted) → same split as above, pending verification: `history/treeview.md` if landed, `issues/treeview.md` + `planning/treeview.md` if not.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF5800B",
+    "@type": "BlockNode",
+    "title": "00CE1DDF5800B",
+    "text": "§16 (`kg:show <ref>` / raw single-node inspection, relocated here from packaging) → `issues/treeview.md` + `planning/treeview.md`. Confirmed still genuinely open: `issues/packaging.md`'s own Resolved section explicitly deferred it here (\"moved to `AperasKG/artifacts/archive/Aperas-treeview-design.md` §16, to be picked up when that document itself gets migrated\"), and the `aperas` skill's own item 8 independently names the same gap.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF5800C",
+    "@type": "BlockNode",
+    "title": "00CE1DDF5800C",
+    "text": "§11 (`Profile` becomes real identity — `kg:profile`) claims `Status: designed, not yet implemented` — contradicted directly by this session's own use of `aperas profile create`/`create-view`/`list`/`list-view`/`remove`/`remove-view`. Pending the verification pass, this very likely becomes a `history/treeview.md` entry (done), not a `planning/treeview.md` task.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF5800D",
+    "@type": "BlockNode",
+    "title": "00CE1DDF5800D",
+    "text": "Cross-references into `Aperas-apeironngn-design.md`, `Aperas-artifact-projection-design.md`, `Aperas-agentic-query-tools-design.md`, and `Aperas-core-ontology-design.md` (all still archived, unmigrated) can't become real wikilinks yet — kept as plain prose mentions, same treatment already established for `tdb-era/` cross-references in `archive-migration`'s own doc set.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1DDF5800E",
+    "@type": "BlockNode",
+    "title": "Concern name",
+    "text": "Concern name: `treeview`, as already anticipated in `archive-migration`'s Task Breakdown — no collision with any live concern.",
+    "parent": "BlockNode:00CE1DDF58005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1FFSR8004",
+    "@type": "BlockNode",
+    "title": "**The two ingest/parser gaps parked in `discussion/archive-migration.md`'s Checkpoints move here**",
+    "text": "**The two ingest/parser gaps parked in `discussion/archive-migration.md`'s Checkpoints move here**: per direct instruction, the GFM task-list round-trip bug and `List`-not-consumed-by-`Heading` gap get fixed together with the treeview-specific gaps above — filed into `issues/treeview.md` alongside them, a real dedicated home now that one exists, rather than staying parked indefinitely.",
+    "parent": "BlockNode:00CE1DDF58001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1FFSR8005",
+    "@type": "BlockNode",
+    "title": "00CE1FFSR8005",
+    "text": "**Depth-legibility marker: option B (`'│ '` per level) over option A (full box-drawing art)**: option A doesn't actually fix the underlying problem (depth is still `prefixWidth / perLevelWidth`, just spread across a wider glyph unit) and needs a full sibling-lookahead pass first; option B is self-describing (count the marker glyph) with no lookahead cost, at the same 2-characters-per-level width as the plain-space indent it replaces.",
+    "parent": "BlockNode:00CE1DDF58001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1FFSR8006",
+    "@type": "BlockNode",
+    "title": "00CE1FFSR8006",
+    "text": "**Stale `TreeView.unfolds` references: an audit/prune sweep (option 2), not just write-time validation (option 1)**: write-time validation only catches a ref that was already dead *at unfold time* — the actually-observed failure mode is a ref going stale *afterward*, through an unrelated edit or GC pass. Only a sweep that revisits existing `unfolds` entries on some cadence closes that; write-time validation is worth adding too, but as a cheap complementary check, not a substitute.",
+    "parent": "BlockNode:00CE1DDF58001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1FFSR8007",
+    "@type": "BlockNode",
+    "title": "00CE1FFSR8007",
+    "text": "**Upward-pointing-link gap: stop recursion at a container in the chain (option 1), not re-root to the maximal ancestor (option 2)**: option 2 is structurally cleaner in isolation but silently changes what the query is even about — `aperas tree` promising \"show me the tree from *this* apex\" would get violated the moment some deep node happens to link back to an ancestor. Option 1 preserves that contract exactly, degrading the link to a flat, non-recursing reference instead.",
+    "parent": "BlockNode:00CE1DDF58001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8001",
+    "@type": "BlockNode",
+    "title": "# TreeView — Design",
+    "parent": "ArtifactNode:00CE1GW4B0000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW4Y8002",
+      "BlockNode:00CE1GW4Y8008",
+      "BlockNode:00CE1GW4Y800B",
+      "BlockNode:00CE1GW4Y800G",
+      "BlockNode:00CE1GW4YG008",
+      "BlockNode:00CE1GW4YG00C",
+      "BlockNode:00CE1GW4YG00D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8002",
+    "@type": "BlockNode",
+    "title": "## Context",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW4Y8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1GW4Y8003:props:StringProp:00CE1GW60G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1GW4Y8003:props:StringProp:00CE1GW60R000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1GW4Y8003",
+    "parent": "BlockNode:00CE1GW4Y8002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1GW4Y8004",
+      "BlockNode:00CE1GW4Y8005",
+      "BlockNode:00CE1GW4Y8006",
+      "BlockNode:00CE1GW4Y8007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW4Y8004:links:Link:00CE1HSYP0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1DDF58005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW4Y8004:links:Link:00CE1HSYP0000:props:StringProp:00CE1HSYP0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
+    "title": "**Discussion**",
+    "text": "**Discussion**: [Inventory and split rationale](../discussion/treeview.md#id/BlockNode:00CE1DDF58005) — how `Aperas-treeview-design.md` was divided across concerns.",
+    "parent": "BlockNode:00CE1GW4Y8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW4Y8005:links:Link:00CE1HT538000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW4Y8005:links:Link:00CE1HT538000:props:StringProp:00CE1HT538001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [Open Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002) — stale `unfolds` tracking, bare-`unfold` mutation, no raw node inspection, plus two ingest/parser gaps.",
+    "parent": "BlockNode:00CE1GW4Y8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW4Y8006:links:Link:00CE1HTAK8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW4Y8006:links:Link:00CE1HTAK8000:props:StringProp:00CE1HTAK8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "**Planning**",
+    "text": "**Planning**: [Task Breakdown](../planning/treeview.md#id/BlockNode:00CE1GW7CG003) — the fixes for the above.",
+    "parent": "BlockNode:00CE1GW4Y8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW4Y8007:links:Link:00CE1HTG3G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW8T8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW4Y8007:links:Link:00CE1HTG3G000:props:StringProp:00CE1HTG3G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13"
+          }
+        ]
+      }
+    ],
+    "title": "**History**",
+    "text": "**History**: [Current Status](../history/treeview.md#id/BlockNode:00CE1GW8T8002) — what's implemented and verified.",
+    "parent": "BlockNode:00CE1GW4Y8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8008",
+    "@type": "BlockNode",
+    "title": "## Architecture",
+    "text": "Structural `children` and `links` are two independent structures over the same graph: `children` is the physical, authored, positional containment tree, the same for every viewer; `links` are the mental structure — nodes related enough right now to think about together, regardless of physical distance. Folding `links` into the same walk as `children` lets a view bring mentally-related content into direct proximity without moving or duplicating anything in the physical tree — but physical structure always wins wherever the two collide (the canonical-position rule, below).",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW4Y8009",
+      "BlockNode:00CE1GW4Y800A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y8009",
+    "@type": "BlockNode",
+    "title": "Three tiers of perata, not one",
+    "text": "Three tiers of perata, not one: **artifact projection** (the existing always-fully-unfolded `.md` sync — `BlockNode.children` stays the source of truth for document structure, ignoring fold state entirely); **i-projection** — `TreeView`, the graph's own internal, indexable idea of \"what a viewer currently sees,\" sitting between the raw substrate and any outward render; **UI projection** — a Human UI or Agentic Interface consuming an i-projection, rather than reading a raw fold-state flag off the graph directly.",
+    "parent": "BlockNode:00CE1GW4Y8008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800A",
+    "@type": "BlockNode",
+    "title": "00CE1GW4Y800A",
+    "text": "This replaces a single shared `BaseNode.unfolded` boolean, written by whoever last called `unfold`/`fold` — a human expanding a subtree and an agent doing its own traversal were the same writer as far as the graph was concerned, with no \"expanded for me\" versus \"expanded in the underlying data.\"",
+    "parent": "BlockNode:00CE1GW4Y8008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800B",
+    "@type": "BlockNode",
+    "title": "## Data Model",
+    "text": "Two top-level classes, un-suffixed (`Profile`/`TreeView`, not `ProfileNode`/`TreeViewNode`) since neither is a `TreeNode` subclass — no title/text/tree position of its own, matching `Link`/`StringProp`'s naming, not `BlockNode`/`ArtifactNode`/`FolderNode`'s:",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW4Y800C",
+      "BlockNode:00CE1GW4Y800D",
+      "BlockNode:00CE1GW4Y800E",
+      "BlockNode:00CE1GW4Y800F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800C",
+    "@type": "BlockNode",
+    "title": "00CE1GW4Y800C",
+    "text": "```\nProfile\n  handle:      One, xsd:string           -- stable, addressable slug (\"default\", \"will\", \"claude-agent-1\")\n  name:        Optional xsd:string       -- display/social name\n  kind:        Optional xsd:string       -- open label, suggested {\"human\",\"agent\"}; no enforced enum, no auth\n  preferences: Set, embed -> StringProp  -- arbitrary key/value bag, same shape as BlockNode.props\n\nTreeView\n  profile: One, reference -> Profile\n  name:    One, xsd:string               -- stable, globally-unique addressable handle\n  unfolds: Set, reference -> (TreeNode | Link)\n```",
+    "parent": "BlockNode:00CE1GW4Y800B",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800D",
+    "@type": "BlockNode",
+    "title": "00CE1GW4Y800D",
+    "text": "A `TreeView` is a lens over the one real graph, not a parallel structure with its own copy of nodes — rendering walks the real `TreeNode`/`Link` graph directly, consulting a `TreeView`'s `unfolds` membership at each hop. `Profile > TreeView` is one-to-many via a backlink query on `TreeView.profile` (the same pattern every other one-to-many relationship in this graph resolves), not a stored `views` list on `Profile` — kind-agnostic for free, since a future non-`TreeView` view kind needs zero extra plumbing as long as it also stores a forward `profile` reference.",
+    "parent": "BlockNode:00CE1GW4Y800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800E",
+    "@type": "BlockNode",
+    "title": "Global uniqueness on `TreeView.name`, not per-profile",
+    "text": "Global uniqueness on `TreeView.name`, not per-profile: two different `Profile`s can never share a view name.",
+    "parent": "BlockNode:00CE1GW4Y800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800F",
+    "@type": "BlockNode",
+    "title": "00CE1GW4Y800F",
+    "text": "`Profile` has no auth or permissions, matching this solo-local-dev tool's stance everywhere else (the ApeironNgn service assumes one trusted local caller).",
+    "parent": "BlockNode:00CE1GW4Y800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4Y800G",
+    "@type": "BlockNode",
+    "title": "## Rendering",
+    "text": "`--view <ref>` on `aperas tree` drives unfolded-mode rendering keyed off that view's `unfolds` set; omitting it keeps the plain default (title-only, no expand/collapse simulation). `aperas unfold <ref> --view <ref>` adds *only* the one specified ref (a `TreeNode` xor a `Link`) to the view's `unfolds` set — never every child/link too.",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW4YG000",
+      "BlockNode:00CE1GW4YG004",
+      "BlockNode:00CE1GW4YG005",
+      "BlockNode:00CE1GW4YG006",
+      "BlockNode:00CE1GW4YG007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1GW4YG000:props:StringProp:00CE1GW61G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1GW4YG000:props:StringProp:00CE1GW61G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "A `TreeNode`'s own-line detail has three tiers",
+    "text": "A `TreeNode`'s own-line detail has three tiers:",
+    "parent": "BlockNode:00CE1GW4Y800G",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CE1GW4YG001",
+      "BlockNode:00CE1GW4YG002",
+      "BlockNode:00CE1GW4YG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG001",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG001",
+    "text": "**Genuinely unfolded** (in `unfolds`) — `{title, abstract}`, listing both structural children and its own links, each recursively at whichever tier applies.",
+    "parent": "BlockNode:00CE1GW4YG000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG002",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG002",
+    "text": "**Not itself unfolded, but its immediate parent is — or it's a direct child of `Root`** (which always counts, without needing its own `unfolds` entry) — `{title, abstract}` preview, listing nothing further by default, *except*: if something below it is unfolded, it additionally lists just the one child continuing toward that, pruning every other child.",
+    "parent": "BlockNode:00CE1GW4YG000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG003",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG003",
+    "text": "**Neither of the above** (reached only as a breadcrumb in someone else's chain) — `{title}` only, same passthrough-only-child behavior, minus the abstract.",
+    "parent": "BlockNode:00CE1GW4YG000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG004",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG004",
+    "text": "A `Link`'s rendering is layered on top of whichever tier its owner earns, and only ever applies when the owner is genuinely unfolded: **rule a** — the link is merely listed (owner unfolded, link itself not) — shows the target's `{title, abstract}` as a flat preview, never recursing. **Rule b** — the link itself is genuinely unfolded — shows its target fully, one level, recursing into the target's own children and links at whichever tier applies. Nothing here is stored — it's computed fresh at render time from the current `unfolds` set and the graph's structure.",
+    "parent": "BlockNode:00CE1GW4Y800G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG005",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG005",
+    "text": "`aperas fold <ref> --view <ref>` removes `<ref>`'s own `unfolds` entry, cascading to anything reached *from* `<ref>` (structural children, then its own links) that also has an explicit entry — a `Link` reaching into the folded subtree from somewhere else, unrelated, is untouched.",
+    "parent": "BlockNode:00CE1GW4Y800G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG006",
+    "@type": "BlockNode",
+    "title": "**Canonical position for a node reachable more than one way**",
+    "text": "**Canonical position for a node reachable more than one way**: a node's structural (`parent`-chain) position is its one true home, and wins — is always the canonical full expansion — whenever it appears anywhere in the rendered view for *any* reason (genuinely unfolded itself, its parent is, or it's merely a breadcrumb on the path to something unfolded beneath it), even at bare title-only tier. Any `Link` elsewhere pointing at the same node — even one itself in `unfolds` — collapses instead to a pointer back to the home, tagged `[*see <path>]`; the home itself is tagged `[*]`. Only if the home has no reason to appear anywhere in the render at all does a `Link` pointing at it get to render the target fully, directly at its own position — there being no competing position anywhere else in the view. If two or more links reach a homeless node with no ordering between them, it's a genuine, unprincipled tie (whichever the walk visits first), not a case needing a structural answer. This also makes link-following cycle-safe for free: a link back toward an ancestor (or anything else already canonical elsewhere) hits the \"already canonical — point back\" branch before it can recurse.",
+    "parent": "BlockNode:00CE1GW4Y800G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG007",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG007",
+    "text": "Depth in plain-text `aperas tree` output is marked with a repeated, non-whitespace glyph per level (`'│ '.repeat(depth)`, one `│` plus one space) rather than plain spaces — self-describing (count the marker before the first non-marker character) and immune to whitespace-collapsing, at the same 2-character-per-level width as the plain-space indent it replaces. No box-drawing corner glyphs (├─/└─) — every level renders the same marker regardless of sibling position.",
+    "parent": "BlockNode:00CE1GW4Y800G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG008",
+    "@type": "BlockNode",
+    "title": "## Viewcone Zoom",
+    "text": "A **viewcone** is purely structural: the entire structural subtree under an apex node, every descendant regardless of `unfolds` — the \"cone\" shape a containment tree traces out below any one of its nodes. `cone(Root)` is the whole graph, by construction, so zooming to `Root` degenerates to the ordinary flat render above — viewcone zoom is a strict generalization for a non-`Root` apex.",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW4YG009",
+      "BlockNode:00CE1GW4YG00A",
+      "BlockNode:00CE1GW4YG00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG009",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG009",
+    "text": "Inside one viewcone, the rendering/canonical-position rules above apply completely unchanged. The one new case: a link that is itself in `unfolds` (rule b) whose target falls *outside* the current cone triggers a **zoom** — the whole 2-pass render recurses again with the target as a new apex, producing a nested cone. A rule-b link whose target falls *inside* the current cone needs no recursion — it resolves via the same canonical-position rule as any in-cone case.",
+    "parent": "BlockNode:00CE1GW4YG008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG00A",
+    "@type": "BlockNode",
+    "title": "Canonical position across cones follows **containment**",
+    "text": "Canonical position across cones follows **containment**: within one cone, a node's own structural position wins over any link inside that same cone pointing at it (unchanged). Across cones, when a link inside a nested cone escapes to a node that already has a canonical position in one of that cone's *containers* (the cone(s) whose own escaping link led to this nested cone existing at all), the container's position wins, and the nested link becomes a pointer back to it. Only when two cones share no containment relation at all (two independent zooms, or two sibling nested cones) is it a genuine, unprincipled tie — resolved the same way as the flat single-apex tie-break above.",
+    "parent": "BlockNode:00CE1GW4YG008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG00B",
+    "@type": "BlockNode",
+    "title": "00CE1GW4YG00B",
+    "text": "A link pointing back up toward an ancestor of the current apex — an upward-pointing link — is handled by declining to recurse into it: before spawning a nested cone for an escaping target, a check walks the currently-active cone chain (every cone already open in this discovery, not only the root apex) to see whether the target is an ancestor of any of them; if so, the link renders as a flat, non-recursing reference instead of a full expansion. This keeps `aperas tree <apex>`'s contract exact — \"show me the tree from *this* apex, nothing above it\" — rather than silently promoting the view outward to accommodate a link the caller never asked to follow.",
+    "parent": "BlockNode:00CE1GW4YG008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG00C",
+    "@type": "BlockNode",
+    "title": "## Persistence",
+    "text": "`TreeView` is per-viewer UI state — genuinely ephemeral, churning on every expand/collapse — written to a gitignored `AperasKG/Apeiron/.state/TreeView.jsonld` on its own, independently-tunable flush interval, separate from the ordinary content-mirror cadence. `Profile` is stable identity and preferences that should survive a `git clone` and diff like any other tracked file (even though it's still \"per-viewer\" in the sense that each caller owns their own rows) — dehydrated to the ordinary tracked mirror (`Profile.jsonld`) alongside `BlockNode`/`ArtifactNode`/`FolderNode`, on the ordinary flush cadence. Whether a given repo actually commits `Profile.jsonld` is that repo's own `.gitignore` decision, not something the code enforces. Neither file is auto-staged by the `pre-commit` hook, which only reflects `aperas track`'s own rewrite of the three content-mirror files into the same commit as the `.md` change that triggered it — a `Profile.jsonld` change (from `aperas profile` or a direct edit) is a manual `git add`, like any other hand-edited settings file.",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW4YG00D",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW4YG00D:links:Link:00CE1HWJV0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW4YG00D:links:Link:00CE1HWJV0000:props:StringProp:00CE1HWJV0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "611"
+          }
+        ]
+      }
+    ],
+    "title": "## Bootstrap",
+    "text": "A bare CLI call with no `--view` resolves to a `TreeView` named `\"default\"`, auto-created (along with a `Profile` with `handle: \"default\"` to own it) on first miss, so a fresh install works with no setup step. This is the *only* place either class is special-cased — once bootstrapped, `\"default\"` is an ordinary row: listed, hand-editable, and removable exactly like any other. `aperas tree` deliberately does *not* fall back to it — omitting `--view` there keeps the plain no-view default instead; only `aperas unfold`/`aperas fold` use the bootstrap when `--view` is supplied with no name following it. (See [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638005) for a bare `aperas unfold <ref>` with *no* `--view` flag at all, which currently also falls into this bootstrap path — a known misdesign, not yet fixed.)",
+    "parent": "BlockNode:00CE1GW4Y8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW638001",
+    "@type": "BlockNode",
+    "title": "# TreeView — Issues",
+    "parent": "ArtifactNode:00CE1GW4B8000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW638002",
+      "BlockNode:00CE1GW638009",
+      "BlockNode:00CE1GW63800A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW638002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "parent": "BlockNode:00CE1GW638001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW638003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW638003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1GW638003:props:StringProp:00CE1GW7A8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1GW638003:props:StringProp:00CE1GW7A8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1GW638003",
+    "parent": "BlockNode:00CE1GW638002",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1GW638004",
+      "BlockNode:00CE1GW638005",
+      "BlockNode:00CE1GW638006",
+      "BlockNode:00CE1GW638007",
+      "BlockNode:00CE1GW638008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW638004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW638004:links:Link:00CE1J0N30000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1FFSR8006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638004:links:Link:00CE1J0N30000:props:StringProp:00CE1J0N30001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "549"
+          }
+        ]
+      }
+    ],
+    "title": "**Stale `TreeView.unfolds` references have no general cleanup**",
+    "text": "**Stale `TreeView.unfolds` references have no general cleanup**: `TreeView.unfold(ref)` appends with no existence check, and the only cleanup — a reactive strip-on-hard-delete — only fires at the exact moment a specific id is hard-deleted; nothing revisits an *existing* `unfolds` entry against what's currently live. Confirmed live: `.state/TreeView.jsonld`'s `default` view has named 10 `BlockNode` ids with no corresponding document at all, after unrelated reconciliation churn elsewhere reassigned/removed the blocks those ids used to name. See [Settled](../discussion/treeview.md#id/BlockNode:00CE1FFSR8006) for the chosen fix direction.",
+    "parent": "BlockNode:00CE1GW638003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW638005",
+    "@type": "BlockNode",
+    "title": "00CE1GW638005",
+    "text": "**A bare `aperas unfold <ref>` (no `--view` flag at all) mutates the `\"default\"` view instead of peeking**: should be read-only — resolve and print a preview, touching no `TreeView` state — matching `aperas tree`'s own no-view default. Today it falls into the same bootstrap-and-mutate path that `aperas unfold <ref> --view` (flag present, no name) is supposed to trigger. `aperas fold`'s own no-`--view` case isn't resolved by this — folding presupposes some view's state to collapse, so a peek-equivalent doesn't obviously apply.",
+    "parent": "BlockNode:00CE1GW638003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW638006",
+    "@type": "BlockNode",
+    "title": "**No raw single-node inspection command**",
+    "text": "**No raw single-node inspection command**: `aperas tree`/`aperas backlinks --text` only ever show a rendered preview (title + truncated, anchor-stripped abstract) — right for browsing, not for verifying a stored field is exactly what's about to be pushed back via `aperas update`/`aperas insert`, or for reading a field no command shows at all (`props`, `tombstonedAt`). `aperas project --dry-run` reconstructs real markdown but only at the whole-artifact level. Today the only way to see a node's exact stored state is a direct `BlockNode.jsonld`/`ArtifactNode.jsonld` read outside the CLI entirely. Originally tracked under packaging, relocated here since it's a node-inspection gap, not a packaging one — the same gap the `aperas` skill's own item 8 independently names.",
+    "parent": "BlockNode:00CE1GW638003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW638007",
+    "@type": "BlockNode",
+    "title": "**GFM task-list items round-trip broken**",
+    "text": "**GFM task-list items round-trip broken**: piping an ingested `- [ ] text` item stores the literal `[ ] ` marker inside the block's own `.text` *alongside* a separate `checked: false` prop, instead of stripping it — so `aperas project` re-emits `- [ ] ` as a prefix on top of the leftover `[ ] `, doubling to `- [ ] [ ] text`. Found while drafting `archive-migration`'s own Task Breakdown; parked in its discussion doc until a real home existed, now moved here.",
+    "parent": "BlockNode:00CE1GW638003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW638008",
+    "@type": "BlockNode",
+    "title": "00CE1GW638008",
+    "text": "**`List` isn't consumed by a preceding `Heading` the way a single paragraph already is**: a heading followed by exactly one paragraph folds that paragraph into the heading's own `.text` field, no separate child block — a list in that same position always becomes a separate child block instead, even when it's the heading's only content. Found and parked the same way as the item above, now moved here.",
+    "parent": "BlockNode:00CE1GW638003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW638009",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW638009:links:Link:00CE1J0TWR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638009:links:Link:00CE1J0TWR000:props:StringProp:00CE1J0TWR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
+    "title": "## Pending Tasks",
+    "text": "See [Task Breakdown](../planning/treeview.md#id/BlockNode:00CE1GW7CG003) for the full ordered list.",
+    "parent": "BlockNode:00CE1GW638001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW63800A",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "parent": "BlockNode:00CE1GW638001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW63800B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW63800B",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1GW63800B:props:StringProp:00CE1GW7AR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1GW63800B:props:StringProp:00CE1GW7AR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1GW63800B",
+    "parent": "BlockNode:00CE1GW63800A",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1GW63800C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW63800C",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW63800C:links:Link:00CE1J10M8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW8T8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW63800C:links:Link:00CE1J10M8000:props:StringProp:00CE1J10M8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "108"
+          }
+        ]
+      }
+    ],
+    "title": "**`Profile`/`kg:profile`, and the upward-pointing-link fix in viewcone zoom**",
+    "text": "**`Profile`/`kg:profile`, and the upward-pointing-link fix in viewcone zoom**: both fully implemented — see [History](../history/treeview.md#id/BlockNode:00CE1GW8T8003).",
+    "parent": "BlockNode:00CE1GW63800B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG001",
+    "@type": "BlockNode",
+    "title": "# TreeView — Planning",
+    "parent": "ArtifactNode:00CE1GW4B8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW7CG002",
+      "BlockNode:00CE1GW7CG003",
+      "BlockNode:00CE1GW7CG00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG002",
+    "@type": "BlockNode",
+    "title": "## Implementation Plan",
+    "text": "Fix the treeview-specific gaps and the two relocated ingest/parser gaps together, since they were bundled by direct instruction rather than filed separately. No particular cross-dependency between them — order by whichever's simplest to verify in isolation.",
+    "parent": "BlockNode:00CE1GW7CG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG003",
+    "@type": "BlockNode",
+    "title": "## Task Breakdown",
+    "parent": "BlockNode:00CE1GW7CG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW7CG004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1GW7CG004:props:StringProp:00CE1GW8QR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1GW7CG004:props:StringProp:00CE1GW8QR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1GW7CG004",
+    "parent": "BlockNode:00CE1GW7CG003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1GW7CG005",
+      "BlockNode:00CE1GW7CG006",
+      "BlockNode:00CE1GW7CG007",
+      "BlockNode:00CE1GW7CG008",
+      "BlockNode:00CE1GW7CG009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG005",
+    "@type": "BlockNode",
+    "title": "`TreeView.unfolds` staleness",
+    "text": "`TreeView.unfolds` staleness: build the audit/prune sweep (walk every `TreeView`'s `unfolds` list, on some cadence or on demand, stripping any entry that no longer resolves to a live node) — the fix that actually closes the gap. Add write-time validation in `TreeView.unfold(ref)` alongside it as a cheap complementary check, not a substitute. One-time manual cleanup needed regardless for the 10 already-stale ids in the live `.state/TreeView.jsonld`.",
+    "parent": "BlockNode:00CE1GW7CG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG006",
+    "@type": "BlockNode",
+    "title": "Bare `aperas unfold <ref>` (no `--view` at all)",
+    "text": "Bare `aperas unfold <ref>` (no `--view` at all): make it peek — resolve and print the preview, calling neither `view.unfold(id)` nor the default-view bootstrap. Reserve the bootstrap-and-mutate behavior for `--view` supplied with no name following it.",
+    "parent": "BlockNode:00CE1GW7CG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG007",
+    "@type": "BlockNode",
+    "title": "`aperas show <ref>`",
+    "text": "`aperas show <ref>`: resolve `<ref>` the normal way, then print its raw stored fields untransformed — full `text`, `props`, `tombstonedAt`, and `path`/`title`/`type` as actually recorded, no truncation, no anchor stripping, no rendering.",
+    "parent": "BlockNode:00CE1GW7CG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG008",
+    "@type": "BlockNode",
+    "title": "00CE1GW7CG008",
+    "text": "Fix the GFM task-list round-trip bug (parser/serializer, likely `astParser.ts`'s task-list handling).",
+    "parent": "BlockNode:00CE1GW7CG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG009",
+    "@type": "BlockNode",
+    "title": "00CE1GW7CG009",
+    "text": "Fix `List` not being consumed by a preceding `Heading` the way a single paragraph already is.",
+    "parent": "BlockNode:00CE1GW7CG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW7CG00A",
+    "@type": "BlockNode",
+    "title": "## Verification Plan",
+    "text": "Each fix verified the same way prior `apeironNgn` fixes in this corpus have been: a direct `BlockNode.jsonld`/`ArtifactNode.jsonld` read confirming the exact stored state, not just a command's own summary line, plus (where applicable) a round-trip check via `aperas project --dry-run` against real content exercising the fixed case.",
+    "parent": "BlockNode:00CE1GW7CG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8001",
+    "@type": "BlockNode",
+    "title": "# TreeView — History",
+    "parent": "ArtifactNode:00CE1GW4B8002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW8T8002",
+      "BlockNode:00CE1GW8T8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW8T8002:links:Link:00CE1J3G5G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW8T8002:links:Link:00CE1J3G5G000:props:StringProp:00CE1J3G5G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "759"
+          }
+        ]
+      }
+    ],
+    "title": "## Current Status",
+    "text": "The `Profile`/`TreeView` data model, three-tier rendering, canonical-position rule, viewcone zoom, and the `.state/` vs. tracked-mirror git split are all implemented and live-verified (against a synthetic graph exercising every scenario the design doc worked through by hand — not yet exercised against the real `AperasKG/Apeiron/` corpus, which has no live wikilinks yet to actually escape a viewcone with). `Profile`/`kg:profile` and the upward-pointing-link fix in viewcone zoom, both originally tracked as \"designed, not yet implemented,\" are confirmed fully built — see Milestones. Three real gaps remain open: stale `TreeView.unfolds` references, a bare `aperas unfold` wrongly mutating the default view, and no raw single-node inspection command — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
+    "parent": "BlockNode:00CE1GW8T8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8003",
+    "@type": "BlockNode",
+    "title": "## Milestones",
+    "parent": "BlockNode:00CE1GW8T8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1GW8T8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1GW8T8004:props:StringProp:00CE1GW9XG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1GW8T8004:props:StringProp:00CE1GW9XG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1GW8T8004",
+    "parent": "BlockNode:00CE1GW8T8003",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1GW8T8005",
+      "BlockNode:00CE1GW8T8006",
+      "BlockNode:00CE1GW8T8007",
+      "BlockNode:00CE1GW8T8008",
+      "BlockNode:00CE1GW8T8009",
+      "BlockNode:00CE1GW8T800A",
+      "BlockNode:00CE1GW8T800B",
+      "BlockNode:00CE1GW8T800C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8005",
+    "@type": "BlockNode",
+    "title": "00CE1GW8T8005",
+    "text": "`Profile`/`TreeView` data model, three-tier rendering (`aperas tree --view`, `aperas unfold`/`aperas fold`), and the canonical-position rule for a node reachable more than one way: implemented and verified against a synthetic graph.",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8006",
+    "@type": "BlockNode",
+    "title": "Checked live against the real mirror",
+    "text": "Checked live against the real mirror: `AperasKG/Apeiron/BlockNode.jsonld` had 1220 `\"unfolded\": false` entries and zero `true` (`ArtifactNode.jsonld`: 1, also `false`) — nothing had ever actually set the old single-flag field. Dropped from `BASE_NODE_SHAPE`/`BaseNode` outright, no migration or default-view seeding needed.",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8007",
+    "@type": "BlockNode",
+    "title": "Depth-legibility marker (`'│ '` per level, replacing plain-space indent)",
+    "text": "Depth-legibility marker (`'│ '` per level, replacing plain-space indent): implemented across every indent site (`renderTreeLines`, `renderViewLines`, `renderLinkLine`, the pruned-children marker).",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8008",
+    "@type": "BlockNode",
+    "title": "Viewcone zoom (`discoverCone`/`emitNode`/`emitLinkLine`/`renderTreeWithView`)",
+    "text": "Viewcone zoom (`discoverCone`/`emitNode`/`emitLinkLine`/`renderTreeWithView`): implemented, live-verified against a synthetic graph reproducing the worked example byte-for-byte.",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T8009",
+    "@type": "BlockNode",
+    "title": "`Profile`/`kg:profile` (`aperas profile create/list/remove/create-view/list-view/remove-view`)",
+    "text": "`Profile`/`kg:profile` (`aperas profile create/list/remove/create-view/list-view/remove-view`): confirmed fully implemented — `Profile`/`TreeView` classes and their shapes match the proposed schema field-for-field (`apeironNgn/node.ts`, `apeironNgn/shape.ts`), CLI wired in `kgProfile.ts`. The archived design doc's \"designed, not yet implemented\" status was stale by the time this was checked.",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T800A",
+    "@type": "BlockNode",
+    "title": "The upward-pointing-link fix in viewcone zoom",
+    "text": "The upward-pointing-link fix in viewcone zoom: confirmed fully implemented, in a more general form than originally proposed — `isInCone` is checked against every cone currently active in the discovery chain (`apeironNgn/node.ts`'s `discoverCone`), not only the query's initial root apex, closing the gap for a nested cone's own upward links too, not just the root cone's.",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T800B",
+    "@type": "BlockNode",
+    "title": "00CE1GW8T800B",
+    "text": "The canonical-position rule was loosened from an earlier, narrower version that required a node's home to separately have its own `unfolds` entry *and* a genuinely-unfolded parent — a real gap surfaced a case where a link targeting a pure breadcrumb node several levels above something genuinely unfolded would \"win\" and duplicate content the breadcrumb's own passthrough chain was already rendering underneath it.",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1GW8T800C",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW8T800C:links:Link:00CE1J3P48000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW8T800C:links:Link:00CE1J3P48000:props:StringProp:00CE1J3P48001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "302"
+          }
+        ]
+      }
+    ],
+    "title": "A misdesign was caught in the default-view bootstrap",
+    "text": "A misdesign was caught in the default-view bootstrap: a bare `aperas unfold <ref>` with no `--view` flag was originally intended as a read-only peek, but the bootstrap convenience added later made it fall back to auto-creating and mutating the `\"default\"` view instead — not yet corrected in code (see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638005)).",
+    "parent": "BlockNode:00CE1GW8T8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HNTYR001",
+    "@type": "BlockNode",
+    "title": "## Dashboard",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1HNTYR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1HNTYR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1HNTYR002:props:StringProp:00CE1HNW90000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1HNTYR002:props:StringProp:00CE1HNW90001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1HNTYR002",
+    "parent": "BlockNode:00CE1HNTYR001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1HNTYR003",
+      "BlockNode:00CE1HNTYR004",
+      "BlockNode:00CE1HNTYR005",
+      "BlockNode:00CE1HNTYR006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1HNTYR003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HNTYR003:links:Link:00CE1HNW9G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HNTYR003:links:Link:00CE1HNW9G000:props:StringProp:00CE1HNW9G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HNTYR003",
+    "text": "[Design](../design/treeview.md#id/BlockNode:00CE1GW4Y8001) — architecture once crystallized.",
+    "parent": "BlockNode:00CE1HNTYR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HNTYR004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HNTYR004:links:Link:00CE1HNW9G002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HNTYR004:links:Link:00CE1HNW9G002:props:StringProp:00CE1HNW9G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HNTYR004",
+    "text": "[Issues](../issues/treeview.md#id/BlockNode:00CE1GW638001) — gaps this reasoning surfaces.",
+    "parent": "BlockNode:00CE1HNTYR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HNTYR005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HNTYR005:links:Link:00CE1HNW9R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HNTYR005:links:Link:00CE1HNW9R000:props:StringProp:00CE1HNW9R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HNTYR005",
+    "text": "[Planning](../planning/treeview.md#id/BlockNode:00CE1GW7CG001) — task breakdown.",
+    "parent": "BlockNode:00CE1HNTYR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HNTYR006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HNTYR006:links:Link:00CE1HNW9R002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW8T8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HNTYR006:links:Link:00CE1HNW9R002:props:StringProp:00CE1HNW9R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HNTYR006",
+    "text": "[History](../history/treeview.md#id/BlockNode:00CE1GW8T8001) — status/milestones.",
+    "parent": "BlockNode:00CE1HNTYR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HQW18001",
+    "@type": "BlockNode",
+    "title": "## Dashboard",
+    "parent": "BlockNode:00CE1DDF4G001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CE1HQW18002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1HQW18002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CE1HQW18002:props:StringProp:00CE1HQXER000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CE1HQW18002:props:StringProp:00CE1HQXER001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CE1HQW18002",
+    "parent": "BlockNode:00CE1HQW18001",
+    "type": "list",
+    "children": [
+      "BlockNode:00CE1HQW18003",
+      "BlockNode:00CE1HQW18004",
+      "BlockNode:00CE1HQW18005",
+      "BlockNode:00CE1HQW18006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CE1HQW18003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HQW18003:links:Link:00CE1HQXF0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HQW18003:links:Link:00CE1HQXF0000:props:StringProp:00CE1HQXF0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HQW18003",
+    "text": "[Design](../design/treeview.md#id/BlockNode:00CE1GW4Y8001) — architecture once crystallized.",
+    "parent": "BlockNode:00CE1HQW18002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HQW18004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HQW18004:links:Link:00CE1HQXF0002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HQW18004:links:Link:00CE1HQXF0002:props:StringProp:00CE1HQXF8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HQW18004",
+    "text": "[Issues](../issues/treeview.md#id/BlockNode:00CE1GW638001) — gaps this reasoning surfaces.",
+    "parent": "BlockNode:00CE1HQW18002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HQW18005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HQW18005:links:Link:00CE1HQXF8001",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HQW18005:links:Link:00CE1HQXF8001:props:StringProp:00CE1HQXF8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HQW18005",
+    "text": "[Planning](../planning/treeview.md#id/BlockNode:00CE1GW7CG001) — task breakdown.",
+    "parent": "BlockNode:00CE1HQW18002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1HQW18006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1HQW18006:links:Link:00CE1HQXF8003",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW8T8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1HQW18006:links:Link:00CE1HQXF8003:props:StringProp:00CE1HQXFG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CE1HQW18006",
+    "text": "[History](../history/treeview.md#id/BlockNode:00CE1GW8T8001) — status/milestones.",
+    "parent": "BlockNode:00CE1HQW18002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1JMFQG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T08:21:49.126Z",
+    "title": "00CE1JMFQG001",
+    "type": "list",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1JMFQG002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-11T08:21:49.126Z",
+    "title": "00CE1JMFQG002",
+    "text": "2026-09-11 — Doc set created.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1JRAC0003",
+    "@type": "BlockNode",
+    "title": "00CE1JRAC0003",
+    "text": "2026-09-11 — Doc set created.",
+    "parent": "BlockNode:00CE01Y320004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CE1JRAC0004",
+    "@type": "BlockNode",
+    "title": "2026-09-11 — `Aperas-treeview-design.md` migrated",
+    "text": "2026-09-11 — `Aperas-treeview-design.md` migrated: split into `treeview`'s design/issues/planning/history/discussion, round-trip verified, cross-references upgraded to real wikilinks.",
+    "parent": "BlockNode:00CE01Y320004",
     "type": "listItem",
     "children": []
   }

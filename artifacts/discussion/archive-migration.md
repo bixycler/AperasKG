@@ -19,7 +19,7 @@
 ## Checkpoints <a name='id/BlockNode:00CE0HD0HG004' class='aperas-anchor aperas-id'></a>
 
 - Meta-task doc set (`archive-migration`) created, round-trip verified, cross-references upgraded to real wikilinks.
-- Two ingest/parser gaps found while drafting the Task Breakdown — a GFM task-list round-trip bug (checkbox items double on projection: piping `- [ ] text` stores the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` re-emits `- [ ] ` on top of it) and `List` not being consumed by a preceding `Heading` the way a single trailing paragraph already is. Neither has a real home yet — holding both here until `Aperas-apeironngn-design.md` is actually decomposed and a concern for the ingest/parser/reconcile engine exists to receive them. (Wrongly logged in Packaging — Issues at first; reverted.)
+- Two ingest/parser gaps found while drafting the Task Breakdown — a GFM task-list round-trip bug and `List` not being consumed by a preceding `Heading` — were parked here with no real home (wrongly logged in Packaging — Issues at first; reverted). Both have since moved to [TreeView — Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002), filed alongside that concern's own gaps and slated to be fixed together.
 
 ## Freeflow <a name='id/BlockNode:00CE0YFEN0001' class='aperas-anchor aperas-id'></a>
 

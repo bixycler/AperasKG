@@ -282,28 +282,28 @@
       "BlockNode:00CE01Y1Z8001"
     ],
     "path": "planning/archive-migration.md",
-    "fileHash": "7fc91424a9dc543a079281e6fd88314f455b2fa2ab20ef54c0e4127e4ebfe5b9",
+    "fileHash": "25db4395edfd29fdc0cdf137325286b6aa8f7171a7052fa681d07152ede5b40b",
     "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "7fc91424a9dc543a079281e6fd88314f455b2fa2ab20ef54c0e4127e4ebfe5b9",
-    "lastIngestedAt": "2026-09-11T07:25:30.320Z",
-    "projectedHash": "7fc91424a9dc543a079281e6fd88314f455b2fa2ab20ef54c0e4127e4ebfe5b9"
+    "ingestedHash": "25db4395edfd29fdc0cdf137325286b6aa8f7171a7052fa681d07152ede5b40b",
+    "lastIngestedAt": "2026-09-11T08:22:16.006Z",
+    "projectedHash": "25db4395edfd29fdc0cdf137325286b6aa8f7171a7052fa681d07152ede5b40b"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8G002",
     "@type": "ArtifactNode",
     "title": "archive-migration.md",
-    "text": "Meta-task kicked off 2026-09-11: this doc set created and tracked. No sub-task has started yet.",
+    "text": "Meta-task kicked off 2026-09-11: doc set created and tracked. First sub-task done: `Aperas-treeview-design.md` migrated to `treeview`'s concern-doc-set (see [Task Breakdown](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003)). Next up: `crud`.",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CE01Y320001"
     ],
     "path": "history/archive-migration.md",
-    "fileHash": "c46bc1bce36b7dadddd3f5bdd2b851191faa244b279d9d6767b7686fa1dbb081",
+    "fileHash": "dd6b920023c6a5b3b2888484186c96c284c10110bfd69ea99d8684dd5ab8d737",
     "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "c46bc1bce36b7dadddd3f5bdd2b851191faa244b279d9d6767b7686fa1dbb081",
-    "lastIngestedAt": "2026-09-11T06:48:33.530Z",
-    "projectedHash": "c46bc1bce36b7dadddd3f5bdd2b851191faa244b279d9d6767b7686fa1dbb081"
+    "ingestedHash": "dd6b920023c6a5b3b2888484186c96c284c10110bfd69ea99d8684dd5ab8d737",
+    "lastIngestedAt": "2026-09-11T08:22:16.811Z",
+    "projectedHash": "dd6b920023c6a5b3b2888484186c96c284c10110bfd69ea99d8684dd5ab8d737"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8R000",
@@ -316,10 +316,95 @@
       "BlockNode:00CE01Y42R001"
     ],
     "path": "discussion/archive-migration.md",
-    "fileHash": "ee546fc72fb4ee1ba27f1fed4a655a0d800084d11c596a546325ff7434e511d9",
+    "fileHash": "24117f968a37cb5a80d1087126b2581515887073652cef6a39da770ad2adbcca",
     "lastTrackedAt": "2026-09-11T06:35:09.603Z",
-    "ingestedHash": "ee546fc72fb4ee1ba27f1fed4a655a0d800084d11c596a546325ff7434e511d9",
-    "lastIngestedAt": "2026-09-11T07:39:05.577Z",
-    "projectedHash": "ee546fc72fb4ee1ba27f1fed4a655a0d800084d11c596a546325ff7434e511d9"
+    "ingestedHash": "24117f968a37cb5a80d1087126b2581515887073652cef6a39da770ad2adbcca",
+    "lastIngestedAt": "2026-09-11T08:22:15.149Z",
+    "projectedHash": "24117f968a37cb5a80d1087126b2581515887073652cef6a39da770ad2adbcca"
+  },
+  {
+    "@id": "ArtifactNode:00CE1DDEHG000",
+    "@type": "ArtifactNode",
+    "title": "treeview.md",
+    "text": "[Design](../design/treeview.md#id/BlockNode:00CE1GW4Y8001) — architecture once crystallized.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE1DDF4G001"
+    ],
+    "path": "discussion/treeview.md",
+    "fileHash": "dc023d16ec97dd890388e37765edf2795858c0ddf45eb4a63856eda8277ee008",
+    "lastTrackedAt": "2026-09-11T08:10:09.094Z",
+    "ingestedHash": "dc023d16ec97dd890388e37765edf2795858c0ddf45eb4a63856eda8277ee008",
+    "lastIngestedAt": "2026-09-11T08:20:34.302Z",
+    "projectedHash": "dc023d16ec97dd890388e37765edf2795858c0ddf45eb4a63856eda8277ee008"
+  },
+  {
+    "@id": "ArtifactNode:00CE1GW4B0000",
+    "@type": "ArtifactNode",
+    "title": "treeview.md",
+    "text": "**Discussion**: [Inventory and split rationale](../discussion/treeview.md#id/BlockNode:00CE1DDF58005) — how `Aperas-treeview-design.md` was divided across concerns.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE1GW4Y8001"
+    ],
+    "path": "design/treeview.md",
+    "fileHash": "345776d8dea95392aea9f589eb6358d3ee89710cef8fa52f1f1cf52905ef5ebb",
+    "lastTrackedAt": "2026-09-11T08:17:42.445Z",
+    "ingestedHash": "345776d8dea95392aea9f589eb6358d3ee89710cef8fa52f1f1cf52905ef5ebb",
+    "lastIngestedAt": "2026-09-11T08:20:31.404Z",
+    "projectedHash": "345776d8dea95392aea9f589eb6358d3ee89710cef8fa52f1f1cf52905ef5ebb"
+  },
+  {
+    "@id": "ArtifactNode:00CE1GW4B8000",
+    "@type": "ArtifactNode",
+    "title": "treeview.md",
+    "text": "**Stale `TreeView.unfolds` references have no general cleanup**: `TreeView.unfold(ref)` appends with no existence check, and the only cleanup — a reactive strip-on-hard-delete — only fires at the exact moment a specific id is hard-deleted; nothing revisits an *existing* `unfolds` entry against what's currently live. Confirmed live: `.state/TreeView.jsonld`'s `default` view has named 10 `BlockNode` ids with no corresponding document at all, after unrelated reconciliation churn elsewhere reassigned/removed the blocks those ids used to name. See [Settled](../discussion/treeview.md#id/BlockNode:00CE1FFSR8006) for the chosen fix direction.",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE1GW638001"
+    ],
+    "path": "issues/treeview.md",
+    "fileHash": "9bbe74670fc83184aa01af385f5ee669158957e2c19f00e240be1606abf0fe90",
+    "lastTrackedAt": "2026-09-11T08:17:42.445Z",
+    "ingestedHash": "9bbe74670fc83184aa01af385f5ee669158957e2c19f00e240be1606abf0fe90",
+    "lastIngestedAt": "2026-09-11T08:20:32.159Z",
+    "projectedHash": "9bbe74670fc83184aa01af385f5ee669158957e2c19f00e240be1606abf0fe90"
+  },
+  {
+    "@id": "ArtifactNode:00CE1GW4B8001",
+    "@type": "ArtifactNode",
+    "title": "treeview.md",
+    "text": "Fix the treeview-specific gaps and the two relocated ingest/parser gaps together, since they were bundled by direct instruction rather than filed separately. No particular cross-dependency between them — order by whichever's simplest to verify in isolation.",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE1GW7CG001"
+    ],
+    "path": "planning/treeview.md",
+    "fileHash": "50889df70ccd03af2208a6dd6aa37673e69f2ca8120a8398fbb6cd84a7f05f60",
+    "lastTrackedAt": "2026-09-11T08:17:42.445Z",
+    "ingestedHash": "50889df70ccd03af2208a6dd6aa37673e69f2ca8120a8398fbb6cd84a7f05f60",
+    "lastIngestedAt": "2026-09-11T08:20:32.874Z",
+    "projectedHash": "50889df70ccd03af2208a6dd6aa37673e69f2ca8120a8398fbb6cd84a7f05f60"
+  },
+  {
+    "@id": "ArtifactNode:00CE1GW4B8002",
+    "@type": "ArtifactNode",
+    "title": "treeview.md",
+    "text": "The `Profile`/`TreeView` data model, three-tier rendering, canonical-position rule, viewcone zoom, and the `.state/` vs. tracked-mirror git split are all implemented and live-verified (against a synthetic graph exercising every scenario the design doc worked through by hand — not yet exercised against the real `AperasKG/Apeiron/` corpus, which has no live wikilinks yet to actually escape a viewcone with). `Profile`/`kg:profile` and the upward-pointing-link fix in viewcone zoom, both originally tracked as \"designed, not yet implemented,\" are confirmed fully built — see Milestones. Three real gaps remain open: stale `TreeView.unfolds` references, a bare `aperas unfold` wrongly mutating the default view, and no raw single-node inspection command — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
+    "parent": "FolderNode:00CDBYV4BR002",
+    "type": "root",
+    "children": [
+      "BlockNode:00CE1GW8T8001"
+    ],
+    "path": "history/treeview.md",
+    "fileHash": "b6d64d5d50ca173b65649b2b1671dca12b0a078eb38dc2555e33167a6c4a130b",
+    "lastTrackedAt": "2026-09-11T08:17:42.446Z",
+    "ingestedHash": "b6d64d5d50ca173b65649b2b1671dca12b0a078eb38dc2555e33167a6c4a130b",
+    "lastIngestedAt": "2026-09-11T08:20:33.569Z",
+    "projectedHash": "b6d64d5d50ca173b65649b2b1671dca12b0a078eb38dc2555e33167a6c4a130b"
   }
 ]
