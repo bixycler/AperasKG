@@ -54,19 +54,20 @@
     "@id": "ArtifactNode:00CDBYV46R000",
     "@type": "ArtifactNode",
     "title": "linking.md",
-    "text": "Refactoring `documentation.md` surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.",
+    "text": "Refactoring [`documentation.md`](../design/documentation.md#id/BlockNode:00CDD68E80002) surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.",
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
     "children": [
       "BlockNode:00CDBZ76T8001",
-      "BlockNode:00CDCTB49R001"
+      "BlockNode:00CDCTB49R001",
+      "BlockNode:00CF1276D0001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "e919e7d9cc0b32a853a9fa87f19a8993972240c700ba141d0e24124ae21b876a",
+    "fileHash": "734eb60b1b9026d64ef90b4cffce171293eb76628b70ba7a071c1bf1f8d79b58",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "e919e7d9cc0b32a853a9fa87f19a8993972240c700ba141d0e24124ae21b876a",
-    "lastIngestedAt": "2026-09-11T12:41:29.658Z",
-    "projectedHash": "e919e7d9cc0b32a853a9fa87f19a8993972240c700ba141d0e24124ae21b876a"
+    "ingestedHash": "734eb60b1b9026d64ef90b4cffce171293eb76628b70ba7a071c1bf1f8d79b58",
+    "lastIngestedAt": "2026-09-12T21:03:11.356Z",
+    "projectedHash": "734eb60b1b9026d64ef90b4cffce171293eb76628b70ba7a071c1bf1f8d79b58"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
@@ -181,11 +182,11 @@
       "BlockNode:00CDG9DD4R001"
     ],
     "path": "discussion/packaging.md",
-    "fileHash": "ff30dd8b70ec5c9cb44a494394cf7a25caa7a5b18f65450af26cc5e0609f78ad",
+    "fileHash": "583c785a9ec0204bc134e7c82ee4dfc4ec27389b28eae6ca5fffdf91d7029b06",
     "lastTrackedAt": "2026-09-10T12:38:09.339Z",
-    "ingestedHash": "ff30dd8b70ec5c9cb44a494394cf7a25caa7a5b18f65450af26cc5e0609f78ad",
-    "lastIngestedAt": "2026-09-11T12:41:30.806Z",
-    "projectedHash": "ff30dd8b70ec5c9cb44a494394cf7a25caa7a5b18f65450af26cc5e0609f78ad"
+    "ingestedHash": "583c785a9ec0204bc134e7c82ee4dfc4ec27389b28eae6ca5fffdf91d7029b06",
+    "lastIngestedAt": "2026-09-12T21:01:48.142Z",
+    "projectedHash": "583c785a9ec0204bc134e7c82ee4dfc4ec27389b28eae6ca5fffdf91d7029b06"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",
@@ -275,18 +276,18 @@
     "@id": "ArtifactNode:00CE01XZ8G001",
     "@type": "ArtifactNode",
     "title": "archive-migration.md",
-    "text": "Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the `aperas`/`kg-doc-ingest` skills before starting the next sub-task.",
+    "text": "Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the [`aperas`](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00E)/`kg-doc-ingest` skills before starting the next sub-task.",
     "parent": "FolderNode:00CDBYV4BR004",
     "type": "root",
     "children": [
       "BlockNode:00CE01Y1Z8001"
     ],
     "path": "planning/archive-migration.md",
-    "fileHash": "25db4395edfd29fdc0cdf137325286b6aa8f7171a7052fa681d07152ede5b40b",
+    "fileHash": "0c5bd286f0352ff3b27703515c900ad080a97bd2ea46e39cd4c032e3dc727fb6",
     "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "25db4395edfd29fdc0cdf137325286b6aa8f7171a7052fa681d07152ede5b40b",
-    "lastIngestedAt": "2026-09-11T12:41:38.005Z",
-    "projectedHash": "25db4395edfd29fdc0cdf137325286b6aa8f7171a7052fa681d07152ede5b40b"
+    "ingestedHash": "0c5bd286f0352ff3b27703515c900ad080a97bd2ea46e39cd4c032e3dc727fb6",
+    "lastIngestedAt": "2026-09-12T20:00:48.599Z",
+    "projectedHash": "0c5bd286f0352ff3b27703515c900ad080a97bd2ea46e39cd4c032e3dc727fb6"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8G002",
@@ -299,11 +300,11 @@
       "BlockNode:00CE01Y320001"
     ],
     "path": "history/archive-migration.md",
-    "fileHash": "dd6b920023c6a5b3b2888484186c96c284c10110bfd69ea99d8684dd5ab8d737",
+    "fileHash": "3fd5df3e1e9d3e8670bdd5a9f0eabeea4d5872c2a100ae4a73d5c240396f02fa",
     "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "dd6b920023c6a5b3b2888484186c96c284c10110bfd69ea99d8684dd5ab8d737",
-    "lastIngestedAt": "2026-09-11T12:41:32.055Z",
-    "projectedHash": "dd6b920023c6a5b3b2888484186c96c284c10110bfd69ea99d8684dd5ab8d737"
+    "ingestedHash": "3fd5df3e1e9d3e8670bdd5a9f0eabeea4d5872c2a100ae4a73d5c240396f02fa",
+    "lastIngestedAt": "2026-09-12T20:02:19.612Z",
+    "projectedHash": "3fd5df3e1e9d3e8670bdd5a9f0eabeea4d5872c2a100ae4a73d5c240396f02fa"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8R000",
@@ -316,11 +317,11 @@
       "BlockNode:00CE01Y42R001"
     ],
     "path": "discussion/archive-migration.md",
-    "fileHash": "24117f968a37cb5a80d1087126b2581515887073652cef6a39da770ad2adbcca",
+    "fileHash": "86262711ad2d844ce096f9e518b2dabee01f4e491cff42b062dc9565da0abade",
     "lastTrackedAt": "2026-09-11T06:35:09.603Z",
-    "ingestedHash": "24117f968a37cb5a80d1087126b2581515887073652cef6a39da770ad2adbcca",
-    "lastIngestedAt": "2026-09-11T12:41:28.580Z",
-    "projectedHash": "24117f968a37cb5a80d1087126b2581515887073652cef6a39da770ad2adbcca"
+    "ingestedHash": "86262711ad2d844ce096f9e518b2dabee01f4e491cff42b062dc9565da0abade",
+    "lastIngestedAt": "2026-09-12T20:02:47.481Z",
+    "projectedHash": "86262711ad2d844ce096f9e518b2dabee01f4e491cff42b062dc9565da0abade"
   },
   {
     "@id": "ArtifactNode:00CE1DDEHG000",
@@ -333,11 +334,11 @@
       "BlockNode:00CE1DDF4G001"
     ],
     "path": "discussion/treeview.md",
-    "fileHash": "970f004f0494d863c73795855ad65bd3d07c43b63af4655d4d7065e715c2ad10",
+    "fileHash": "e4023f8bd9fc908b37e03a3dd2c5f00d6e060244bb9132215c116db48496d4bd",
     "lastTrackedAt": "2026-09-11T08:10:09.094Z",
-    "ingestedHash": "970f004f0494d863c73795855ad65bd3d07c43b63af4655d4d7065e715c2ad10",
-    "lastIngestedAt": "2026-09-11T16:47:56.376Z",
-    "projectedHash": "970f004f0494d863c73795855ad65bd3d07c43b63af4655d4d7065e715c2ad10"
+    "ingestedHash": "e4023f8bd9fc908b37e03a3dd2c5f00d6e060244bb9132215c116db48496d4bd",
+    "lastIngestedAt": "2026-09-12T21:00:16.410Z",
+    "projectedHash": "e4023f8bd9fc908b37e03a3dd2c5f00d6e060244bb9132215c116db48496d4bd"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B0000",
@@ -350,11 +351,11 @@
       "BlockNode:00CE1GW4Y8001"
     ],
     "path": "design/treeview.md",
-    "fileHash": "345776d8dea95392aea9f589eb6358d3ee89710cef8fa52f1f1cf52905ef5ebb",
+    "fileHash": "4acecb41be1c42bd51f36369f05277328657a131db6957d9d68181f72f7f88e3",
     "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "345776d8dea95392aea9f589eb6358d3ee89710cef8fa52f1f1cf52905ef5ebb",
-    "lastIngestedAt": "2026-09-11T12:41:28.014Z",
-    "projectedHash": "345776d8dea95392aea9f589eb6358d3ee89710cef8fa52f1f1cf52905ef5ebb"
+    "ingestedHash": "4acecb41be1c42bd51f36369f05277328657a131db6957d9d68181f72f7f88e3",
+    "lastIngestedAt": "2026-09-12T21:01:49.151Z",
+    "projectedHash": "4acecb41be1c42bd51f36369f05277328657a131db6957d9d68181f72f7f88e3"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8000",
@@ -367,11 +368,11 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "0dc9f6894bba8022fad860c8e6b800e2afd27cc492b2856c4b6993bc57b8a9a2",
+    "fileHash": "c5a53dd38f3a785b028448d8310fa0e96b5fcce518ce30bc9a9e4502a16fbdd3",
     "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "0dc9f6894bba8022fad860c8e6b800e2afd27cc492b2856c4b6993bc57b8a9a2",
-    "lastIngestedAt": "2026-09-11T16:47:57.317Z",
-    "projectedHash": "0dc9f6894bba8022fad860c8e6b800e2afd27cc492b2856c4b6993bc57b8a9a2"
+    "ingestedHash": "c5a53dd38f3a785b028448d8310fa0e96b5fcce518ce30bc9a9e4502a16fbdd3",
+    "lastIngestedAt": "2026-09-12T21:00:15.422Z",
+    "projectedHash": "c5a53dd38f3a785b028448d8310fa0e96b5fcce518ce30bc9a9e4502a16fbdd3"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -486,11 +487,11 @@
       "BlockNode:00CE32GXH0001"
     ],
     "path": "discussion/list-consumption.md",
-    "fileHash": "65bc72f61e8c08f1bbf07da7a224aab9ebebcbdac6bb9262345d79ceb8623697",
+    "fileHash": "48eb88e549a51377c15338716bd7b2f97ae40608d819adc19f225383b692418d",
     "lastTrackedAt": "2026-09-11T10:06:09.286Z",
-    "ingestedHash": "65bc72f61e8c08f1bbf07da7a224aab9ebebcbdac6bb9262345d79ceb8623697",
-    "lastIngestedAt": "2026-09-11T16:30:16.417Z",
-    "projectedHash": "65bc72f61e8c08f1bbf07da7a224aab9ebebcbdac6bb9262345d79ceb8623697"
+    "ingestedHash": "48eb88e549a51377c15338716bd7b2f97ae40608d819adc19f225383b692418d",
+    "lastIngestedAt": "2026-09-12T21:03:12.365Z",
+    "projectedHash": "48eb88e549a51377c15338716bd7b2f97ae40608d819adc19f225383b692418d"
   },
   {
     "@id": "ArtifactNode:00CE8XWYYG000",
@@ -503,11 +504,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "39ed3ac430477d52be872f9dde340bca74fd3b284b7f78e501eed06a5837a467",
+    "fileHash": "693334d609c52fbcf29f9a7c35f080ef34af3ce1c9afee82e77e4af6f3f90788",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "39ed3ac430477d52be872f9dde340bca74fd3b284b7f78e501eed06a5837a467",
-    "lastIngestedAt": "2026-09-12T00:34:38.207Z",
-    "projectedHash": "39ed3ac430477d52be872f9dde340bca74fd3b284b7f78e501eed06a5837a467"
+    "ingestedHash": "693334d609c52fbcf29f9a7c35f080ef34af3ce1c9afee82e77e4af6f3f90788",
+    "lastIngestedAt": "2026-09-12T21:03:48.541Z",
+    "projectedHash": "693334d609c52fbcf29f9a7c35f080ef34af3ce1c9afee82e77e4af6f3f90788"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -571,10 +572,10 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "efbb707267feffdf6a067c855b3a882b0ba7d8436f1afa349b43671815226649",
+    "fileHash": "6fc660f4c31daf950239fb732f884527abba6361e7a6e7d720f98976e435f376",
     "lastTrackedAt": "2026-09-11T18:22:57.657Z",
-    "ingestedHash": "efbb707267feffdf6a067c855b3a882b0ba7d8436f1afa349b43671815226649",
-    "lastIngestedAt": "2026-09-11T22:13:55.876Z",
-    "projectedHash": "efbb707267feffdf6a067c855b3a882b0ba7d8436f1afa349b43671815226649"
+    "ingestedHash": "6fc660f4c31daf950239fb732f884527abba6361e7a6e7d720f98976e435f376",
+    "lastIngestedAt": "2026-09-12T21:00:14.399Z",
+    "projectedHash": "6fc660f4c31daf950239fb732f884527abba6361e7a6e7d720f98976e435f376"
   }
 ]

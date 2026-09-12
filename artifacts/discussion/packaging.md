@@ -18,7 +18,7 @@ First attempt reused `trackAllArtifacts`'s own `matchLeftoverByAbstract` (the Ge
 
 ## Practice: stage checkpoints myself, leave commits to the user <a name='id/BlockNode:00CDEEJ8PR001' class='aperas-anchor aperas-id'></a>
 
-The rename incident above recovered cleanly only because `Apeiron/*.jsonld` happened to already be staged from an earlier point — `git restore` could reset the working tree to that known-good index state in one step. That shouldn't be luck: after each verified-stable step (a clean round-trip, a successful reconciliation with no unexpected removals), stage the change (`git add`) immediately, so the git index is always a running checkpoint. If a later step goes wrong, `git restore`/`git diff` against the index recovers it without guesswork.
+The rename incident above recovered cleanly only because `Apeiron/*.jsonld` happened to already be staged from an earlier point — `git restore` could reset the working tree to that known-good index state in one step. That shouldn't be luck: after each verified-stable step (a clean round-trip, a successful reconciliation with no unexpected removals), stage the change (`git add`) immediately, so the git index is always a running checkpoint. If a later step goes wrong, `git restore`/`git diff` against the index recovers it without guesswork. Independently restated as a general practice in [aperas-skill's own edit loop](../design/aperas-skill.md#id/BlockNode:00CEB8N5EG001) — same rule, same reasoning, arrived at twice.
 
 This is deliberately staging only, never committing: <a name='id/BlockNode:00CDEEJ8PR002' class='aperas-anchor aperas-id'></a> `git commit` stays a decision for the user to make explicitly, reviewing what accumulated. Staging is not that — it's a private safety net, the same role `git stash` or a snapshot would play, just reusing git's own index instead of a separate mechanism.
 
@@ -44,7 +44,7 @@ Every `kg:*` command today is its own `tsx`-run entrypoint (`web/src/lib/kgX.ts`
 
 ## Considered: one bin per verb <a name='id/BlockNode:00CDDVC33G007' class='aperas-anchor aperas-id'></a>
 
-Register each existing `kgX.ts` as its own `bin` entry (`aperas-ingest`, `aperas-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the single `aperas <verb>` entrypoint every illustrative example in the corpus already assumes (e.g. design/documentation.md's Workflows: `echo "..." | aperas update design/crud.md/Architecture`).
+Register each existing `kgX.ts` as its own `bin` entry (`aperas-ingest`, `aperas-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the single `aperas <verb>` entrypoint every illustrative example in the corpus already assumes (e.g. [design/documentation.md's Crystallization step](../design/documentation.md#id/BlockNode:00CDD68E8800B): `echo "..." | aperas update design/crud.md/Architecture`).
 
 ## Landing on: one dispatcher binary <a name='id/BlockNode:00CDDVC33G008' class='aperas-anchor aperas-id'></a>
 

@@ -2,7 +2,7 @@
 
 ## Implementation Plan <a name='id/BlockNode:00CE01Y1Z8002' class='aperas-anchor aperas-id'></a>
 
-Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the `aperas`/`kg-doc-ingest` skills before starting the next sub-task.
+Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the [`aperas`](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00E)/`kg-doc-ingest` skills before starting the next sub-task.
 
 ## Task Breakdown <a name='id/BlockNode:00CE01Y1Z8003' class='aperas-anchor aperas-id'></a>
 
