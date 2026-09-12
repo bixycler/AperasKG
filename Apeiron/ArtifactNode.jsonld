@@ -577,5 +577,117 @@
     "ingestedHash": "6fc660f4c31daf950239fb732f884527abba6361e7a6e7d720f98976e435f376",
     "lastIngestedAt": "2026-09-12T21:00:14.399Z",
     "projectedHash": "6fc660f4c31daf950239fb732f884527abba6361e7a6e7d720f98976e435f376"
+  },
+  {
+    "@id": "ArtifactNode:00CF1TZQV8000",
+    "@type": "ArtifactNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "holder": true,
+    "title": "cli.md",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "children": [],
+    "path": "issues/cli.md"
+  },
+  {
+    "@id": "ArtifactNode:00CF1WZ3S0000",
+    "@type": "ArtifactNode",
+    "title": "core.md",
+    "text": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**: found running `aperas-skill`'s own eval against [issues/treeview.md's Open Issues list](../issues/treeview.md#id/BlockNode:00CE1GW638002) — piping the heading line plus every visible item (skipping tombstoned ones, as any reasonable read would) zips the piped items against storage slots by raw position, silently reassigning live content onto wrong ids once a tombstoned sibling is interleaved. Contradicts what both the skill and the code's own doc comments claim (\"exact-key matching\"). Root cause not yet read off `reconcile.ts` directly — identified from reproduced symptom, confirmed only in a disposable eval sandbox, not the live corpus. Same defect family as the next two items below — one fix in `reconcile.ts` likely closes all three.",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CF1WZ4JG001"
+    ],
+    "path": "issues/core.md",
+    "fileHash": "9b4bab617643aaa7d241aa012c4560666debbd941bb85e324e34f9c3c060993f",
+    "lastTrackedAt": "2026-09-12T22:28:40.384Z",
+    "ingestedHash": "9b4bab617643aaa7d241aa012c4560666debbd941bb85e324e34f9c3c060993f",
+    "lastIngestedAt": "2026-09-12T22:31:06.770Z",
+    "projectedHash": "9b4bab617643aaa7d241aa012c4560666debbd941bb85e324e34f9c3c060993f"
+  },
+  {
+    "@id": "ArtifactNode:00CF1WZDHG000",
+    "@type": "ArtifactNode",
+    "title": "core.md",
+    "text": "**Issues**: [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) — the cross-cutting bugs with no single sub-part home, plus a rollup of each sub-part's own.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CF1WZE10001"
+    ],
+    "path": "discussion/core.md",
+    "fileHash": "539611de775e8cd1275b0b7788f02d243b8def2e4c9f23bcdd861262b03db159",
+    "lastTrackedAt": "2026-09-12T22:28:41.435Z",
+    "ingestedHash": "539611de775e8cd1275b0b7788f02d243b8def2e4c9f23bcdd861262b03db159",
+    "lastIngestedAt": "2026-09-12T22:32:28.375Z",
+    "projectedHash": "539611de775e8cd1275b0b7788f02d243b8def2e4c9f23bcdd861262b03db159"
+  },
+  {
+    "@id": "ArtifactNode:00CF23FACG000",
+    "@type": "ArtifactNode",
+    "title": "core.md",
+    "text": "Fix by shared root cause, not by filing order. Three of these [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) are explicitly \"flagged from reproduced symptom, not source\" — `reconcile.ts`'s actual matching logic hasn't been read yet — so investigation comes before any diff, not interleaved with it. Group A shares one file and plausibly one fix; item 6 shares its shape of fix (validate everything before writing anything) with `cli`'s own item 5, even though the two now live in separate concerns; the seventh item is a missing feature, not a bug, and is deferred alongside the (separately deferred) CRUD work rather than forced into this batch.",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CF23FB1G001"
+    ],
+    "path": "planning/core.md",
+    "fileHash": "d36bdab56252c9c1452258089120b99d4455a517c60051ec29c78890b4eac7e3",
+    "lastTrackedAt": "2026-09-12T22:28:42.464Z",
+    "ingestedHash": "d36bdab56252c9c1452258089120b99d4455a517c60051ec29c78890b4eac7e3",
+    "lastIngestedAt": "2026-09-12T22:29:04.676Z",
+    "projectedHash": "d36bdab56252c9c1452258089120b99d4455a517c60051ec29c78890b4eac7e3"
+  },
+  {
+    "@id": "ArtifactNode:00CF2AEA78000",
+    "@type": "ArtifactNode",
+    "title": "cli.md",
+    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery. The fix is entirely within `kgInsert.ts`'s own call ordering — no `core` change needed, which is why this stays in `cli` rather than moving with its siblings.",
+    "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
+    "children": [
+      "BlockNode:00CF2AEAX0001"
+    ],
+    "path": "issues/cli.md",
+    "fileHash": "58d9fdf92d834ae2e7ddae7b9636f86ca54172be59d2cb867af107e377b9e571",
+    "lastTrackedAt": "2026-09-12T22:30:31.454Z",
+    "ingestedHash": "58d9fdf92d834ae2e7ddae7b9636f86ca54172be59d2cb867af107e377b9e571",
+    "lastIngestedAt": "2026-09-12T22:32:07.680Z",
+    "projectedHash": "58d9fdf92d834ae2e7ddae7b9636f86ca54172be59d2cb867af107e377b9e571"
+  },
+  {
+    "@id": "ArtifactNode:00CF2AEKZG000",
+    "@type": "ArtifactNode",
+    "title": "cli.md",
+    "text": "**Issues**: [Open Issues](../issues/cli.md#id/BlockNode:00CF2AEAX0002) — what's genuinely CLI-dispatcher-specific, not engine-level.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [
+      "BlockNode:00CF2AEMER001"
+    ],
+    "path": "discussion/cli.md",
+    "fileHash": "74513ef67845fcbc8c1b150f85e9cca10369d995a928b02c61fce60df1146f47",
+    "lastTrackedAt": "2026-09-12T22:30:32.702Z",
+    "ingestedHash": "74513ef67845fcbc8c1b150f85e9cca10369d995a928b02c61fce60df1146f47",
+    "lastIngestedAt": "2026-09-12T22:32:08.619Z",
+    "projectedHash": "74513ef67845fcbc8c1b150f85e9cca10369d995a928b02c61fce60df1146f47"
+  },
+  {
+    "@id": "ArtifactNode:00CF2AEX6R000",
+    "@type": "ArtifactNode",
+    "title": "cli.md",
+    "text": "Fix the single open issue directly in `kgInsert.ts` — no `core` changes needed, unlike its former siblings that moved to `core`.",
+    "parent": "FolderNode:00CDBYV4BR004",
+    "type": "root",
+    "children": [
+      "BlockNode:00CF2AEXN8001"
+    ],
+    "path": "planning/cli.md",
+    "fileHash": "29b1e9ac8d20cc932b4a5dca75ae1cf383220f67f1ead7db5c8d98a12c59eb7b",
+    "lastTrackedAt": "2026-09-12T22:30:33.883Z",
+    "ingestedHash": "29b1e9ac8d20cc932b4a5dca75ae1cf383220f67f1ead7db5c8d98a12c59eb7b",
+    "lastIngestedAt": "2026-09-12T22:32:09.590Z",
+    "projectedHash": "29b1e9ac8d20cc932b4a5dca75ae1cf383220f67f1ead7db5c8d98a12c59eb7b"
   }
 ]

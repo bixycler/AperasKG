@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CEEJ5EH8001",
+    "title": "00CF2AEXHR001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CEEJ5EHG001",
+    "title": "00CF2AEXHR003",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CEEJ5EJ0003",
+    "title": "00CF2AEXK0001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -3032,7 +3032,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CEEJ5EHR001",
+    "title": "00CF2AEXJ0001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -3041,7 +3041,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CEEJ5EHR003",
+    "title": "00CF2AEXJ0003",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -3050,7 +3050,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CEEJ5EJ0001",
+    "title": "00CF2AEXJ8001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -16044,6 +16044,1348 @@
     "title": "00CF12B710001",
     "text": "**Three independent sightings of the same `reconcile.ts` identity-matching fragility, never tied together**: this doc's own [dead-container](../discussion/list-consumption.md#id/BlockNode:00CE5KSNVR002) and [tombstone-reuse](../discussion/list-consumption.md#id/BlockNode:00CE5KSNVR003) findings above, plus [packaging's `matchLeftoverByAbstract` position-sensitivity](../discussion/packaging.md#id/BlockNode:00CDEM7DVG002) (replaced by exact-key matching for renames, but never checked against `kg:update`'s own reconcile path), are three angles on one underlying defect family — `reconcile.ts`'s matching/lifecycle logic being unreliable around identity, not three unrelated bugs. None of the three write-ups reference either of the others. Worth one shared home once CRUD/reconciliation gets its own dedicated concern, per this doc's own note above.",
     "parent": "BlockNode:00CE5KSNVR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1TZQVG000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "holder": true,
+    "title": "# CLI — Issues",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1TZQVG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "## Open Issues",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V65YG002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V65YG002",
+    "text": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**: found running `aperas-skill`'s own eval against [issues/treeview.md's Open Issues list](../issues/treeview.md#id/BlockNode:00CE1GW638002) — piping the heading line plus every visible item (skipping tombstoned ones, as any reasonable read would) zips the piped items against storage slots by raw position, silently reassigning live content onto wrong ids once a tombstoned sibling is interleaved. Contradicts what both the skill and the code's own doc comments claim (\"exact-key matching\"). Root cause not yet read off `reconcile.ts` directly — identified from reproduced symptom, confirmed only in a disposable eval sandbox, not the live corpus. Same defect family as the next two items below — one fix in `reconcile.ts` likely closes all three.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V65YG003",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V65YG003",
+    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. Root cause not yet investigated in `reconcile.ts`.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V65YG004",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**",
+    "text": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**: works for reconciling siblings that share a rough common order, not for an unordered bag of whole-artifact identities scattered across concern folders — a match's recursive split can discard a whole quadrant of otherwise-valid candidates. Worked around for the rename path specifically (replaced by exact-key matching there), but the same algorithm is used elsewhere in `reconcile.ts` and may still carry the weakness on those other paths.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V65YG005",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "**A fully-dead container is never itself tombstoned**",
+    "text": "**A fully-dead container is never itself tombstoned**: `pruneUnreachableTombstones` only collects nodes that are themselves tombstoned and unreachable; nothing ever tombstones a container once its last live child is gone (children get tombstoned one at a time as they're resolved, but the now-vacuous wrapper is never itself marked dead). Confirmed live against `issues/packaging.md`'s own dead nested-list-wrapper chain. Minor/cosmetic relative to the three above, but the same tombstone-lifecycle gap.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V65YG006",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "**A single `kg:insert` call isn't transactional**",
+    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V65YR000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "**A multi-artifact `kg:ingest` isn't transactional either**",
+    "text": "**A multi-artifact `kg:ingest` isn't transactional either**: `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop per file with no try/catch, so a later file's failure leaves earlier files' writes already committed to the in-memory store with no rollback across the batch. Same shape as the single-`kg:insert` gap above, one layer up (a batch of artifacts vs. a batch of nodes within one call) — likely the same underlying fix (validate everything before writing anything) closes both.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJ8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "## Sub-Parts",
+    "text": "CLI's own known parts, and where each one's issues currently live:",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJ8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V9JJ8002",
+    "text": "**`crud`** — not yet migrated; archived at `archive/Aperas-crud-design.md`, whose own §6 (\"Bookkeeping gaps found while designing this\") already names several items overlapping this doc's Open Issues above. Planned as `archive-migration`'s next sub-task.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJ8003",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "**`treeview`** — 4 open",
+    "text": "**`treeview`** — 4 open: stale `TreeView.unfolds` references, a bare `aperas unfold <ref>` mutating the default view instead of peeking, no raw single-node inspection command, and `unfold` not marking tombstoned children. See [Open Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJ8004",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V9JJ8004",
+    "text": "**`linking`** — none formally filed, but one confirmed-live bug not yet promoted: `extractAnchorNames`/`stripInlineAnchors` treat a backtick-quoted example anchor as a real claimed name, with no code-span awareness. See [discussion/aperas-skill.md](../discussion/aperas-skill.md#id/BlockNode:00CECCBKNG001). Formal home is [issues/linking.md](../issues/linking.md#id/BlockNode:00CDBYV5A8002) — currently empty.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJG000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V9JJG000",
+    "text": "**`packaging`** — none open. See [Open Issues](../issues/packaging.md#id/BlockNode:00CDDVC8N0002).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "**`list-consumption`** — 1 open",
+    "text": "**`list-consumption`** — 1 open: inserting a list item always spawns a fresh run-leader. See [Open Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG000).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJG002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V9JJG002",
+    "text": "**`documentation`** — none; doc-authoring conventions only, not engine code.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1V9JJG003",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "00CF1V9JJG003",
+    "text": "**`archive-migration`** — 2 open, both process/decision items rather than code. See [Open Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1VB6J8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T21:59:17.749Z",
+    "title": "## Resolved",
+    "text": "None yet.",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG001",
+    "@type": "BlockNode",
+    "title": "# Core — Issues",
+    "parent": "ArtifactNode:00CF1WZ3S0000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZ4JG002",
+      "BlockNode:00CF1WZ4JG00A",
+      "BlockNode:00CF23SXQ8001",
+      "BlockNode:00CF1WZ4JG00J"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "parent": "BlockNode:00CF1WZ4JG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZ4JG003",
+      "BlockNode:00CF1WZ4JG004",
+      "BlockNode:00CF1WZ4JG005",
+      "BlockNode:00CF1WZ4JG006",
+      "BlockNode:00CF1WZ4JG007",
+      "BlockNode:00CF1WZ4JG008",
+      "BlockNode:00CF1WZ4JG009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG003:props:StringProp:00CF1WZ5Q8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF1WZ4JG003:props:StringProp:00CF1WZ5Q8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF1WZ4JG003",
+    "text": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**: found running `aperas-skill`'s own eval against [issues/treeview.md's Open Issues list](../issues/treeview.md#id/BlockNode:00CE1GW638002) — piping the heading line plus every visible item (skipping tombstoned ones, as any reasonable read would) zips the piped items against storage slots by raw position, silently reassigning live content onto wrong ids once a tombstoned sibling is interleaved. Contradicts what both the skill and the code's own doc comments claim (\"exact-key matching\"). Root cause not yet read off `reconcile.ts` directly — identified from reproduced symptom, confirmed only in a disposable eval sandbox, not the live corpus. Same defect family as the next two items below — one fix in `reconcile.ts` likely closes all three.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG004",
+    "@type": "BlockNode",
+    "title": "00CF1WZ4JG004",
+    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. Root cause not yet investigated in `reconcile.ts`.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG005",
+    "@type": "BlockNode",
+    "title": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**",
+    "text": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**: works for reconciling siblings that share a rough common order, not for an unordered bag of whole-artifact identities scattered across concern folders — a match's recursive split can discard a whole quadrant of otherwise-valid candidates. Worked around for the rename path specifically (replaced by exact-key matching there), but the same algorithm is used elsewhere in `reconcile.ts` and may still carry the weakness on those other paths.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG006",
+    "@type": "BlockNode",
+    "title": "**A fully-dead container is never itself tombstoned**",
+    "text": "**A fully-dead container is never itself tombstoned**: `pruneUnreachableTombstones` only collects nodes that are themselves tombstoned and unreachable; nothing ever tombstones a container once its last live child is gone (children get tombstoned one at a time as they're resolved, but the now-vacuous wrapper is never itself marked dead). Confirmed live against `issues/packaging.md`'s own dead nested-list-wrapper chain. Minor/cosmetic relative to the three above, but the same tombstone-lifecycle gap.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG007",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T22:30:45.329Z",
+    "title": "**A single `kg:insert` call isn't transactional**",
+    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG008",
+    "@type": "BlockNode",
+    "title": "**A multi-artifact `kg:ingest` isn't transactional either**",
+    "text": "**A multi-artifact `kg:ingest` isn't transactional either**: `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop per file with no try/catch, so a later file's failure leaves earlier files' writes already committed to the in-memory store with no rollback across the batch. Same shape as the single-`kg:insert` gap above, one layer up (a batch of artifacts vs. a batch of nodes within one call) — likely the same underlying fix (validate everything before writing anything) closes both.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG009",
+    "@type": "BlockNode",
+    "title": "00CF1WZ4JG009",
+    "text": "**Folder/Artifact-tier holders have no promotion channel at all, and nothing clears `.holder` once real content lands underneath**: found live creating this very doc. `aperas resolve --create-holder` scaffolds a placeholder `ArtifactNode`/`Block` chain, and filling real content into the *Block* children works fine — but `kg:insert`'s promote path is Block-tier only (\"kg:insert only positions Block-level nodes\"), so there is no verb that ever flips a Folder/Artifact's own `.holder` back off, even once every child underneath it is real. `aperas project` correctly refuses to render such a subtree (\"still has a placeholder (holder) node somewhere in its subtree\"), but nothing resolves that refusal short of a direct edit or removing and recreating the artifact disk-first. Matches `Aperas-crud-design.md` §4.1/§6 exactly. Until fixed, the graph-first \"sketch a structure\" path only actually works for adding a subtree *within* an already-real, already-projectable artifact — not for creating a brand-new artifact from nothing.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00A",
+    "@type": "BlockNode",
+    "title": "## Sub-Parts",
+    "text": "Core's own known parts, and where each one's issues currently live:",
+    "parent": "BlockNode:00CF1WZ4JG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZ4JG00B",
+      "BlockNode:00CF1WZ4JG00C",
+      "BlockNode:00CF1WZ4JG00D",
+      "BlockNode:00CF1WZ4JG00E",
+      "BlockNode:00CF1WZ4JG00F",
+      "BlockNode:00CF1WZ4JG00G",
+      "BlockNode:00CF1WZ4JG00H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00B",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG00B:props:StringProp:00CF1WZ5QR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF1WZ4JG00B:props:StringProp:00CF1WZ5QR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF1WZ4JG00B",
+    "text": "**`crud`** — not yet migrated; archived at `archive/Aperas-crud-design.md`, whose own §6 (\"Bookkeeping gaps found while designing this\") already names several items overlapping this doc's Open Issues above. Planned as `archive-migration`'s next sub-task.",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00C",
+    "@type": "BlockNode",
+    "title": "**`treeview`** — 4 open",
+    "text": "**`treeview`** — 4 open: stale `TreeView.unfolds` references, a bare `aperas unfold <ref>` mutating the default view instead of peeking, no raw single-node inspection command, and `unfold` not marking tombstoned children. See [Open Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00D",
+    "@type": "BlockNode",
+    "title": "00CF1WZ4JG00D",
+    "text": "**`linking`** — none formally filed, but one confirmed-live bug not yet promoted: `extractAnchorNames`/`stripInlineAnchors` treat a backtick-quoted example anchor as a real claimed name, with no code-span awareness. See [discussion/aperas-skill.md](../discussion/aperas-skill.md#id/BlockNode:00CECCBKNG001). Formal home is [issues/linking.md](../issues/linking.md#id/BlockNode:00CDBYV5A8002) — currently empty.",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00E",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T22:30:46.237Z",
+    "title": "00CF1WZ4JG00E",
+    "text": "**`packaging`** — none open. See [Open Issues](../issues/packaging.md#id/BlockNode:00CDDVC8N0002).",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00F",
+    "@type": "BlockNode",
+    "title": "**`list-consumption`** — 1 open",
+    "text": "**`list-consumption`** — 1 open: inserting a list item always spawns a fresh run-leader. See [Open Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG000).",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00G",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T22:26:07.721Z",
+    "title": "00CF1WZ4JG00G",
+    "text": "**`documentation`** — none; doc-authoring conventions only, not engine code.",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00H",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-12T22:26:08.623Z",
+    "title": "00CF1WZ4JG00H",
+    "text": "**`archive-migration`** — 2 open, both process/decision items rather than code. See [Open Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002).",
+    "parent": "BlockNode:00CF1WZ4JG00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZ4JG00J",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "text": "None yet.",
+    "parent": "BlockNode:00CF1WZ4JG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10001",
+    "@type": "BlockNode",
+    "title": "# Core — Discussion",
+    "parent": "ArtifactNode:00CF1WZDHG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZE10002",
+      "BlockNode:00CF1WZE10005",
+      "BlockNode:00CF1WZE18000",
+      "BlockNode:00CF1WZE18004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10002",
+    "@type": "BlockNode",
+    "title": "## Dashboard",
+    "parent": "BlockNode:00CF1WZE10001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZE10003",
+      "BlockNode:00CF1WZE10004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZE10003:links:Link:00CF28WD38000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZE10003:links:Link:00CF28WD38000:props:StringProp:00CF28WD3G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF1WZE10003:props:StringProp:00CF1WZF6G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF1WZE10003:props:StringProp:00CF1WZF6G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) — the cross-cutting bugs with no single sub-part home, plus a rollup of each sub-part's own.",
+    "parent": "BlockNode:00CF1WZE10002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZE10004:links:Link:00CF28WMQ0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF23FB1G003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZE10004:links:Link:00CF28WMQ0000:props:StringProp:00CF28WMQ0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "00CF1WZE10004",
+    "text": "**Planning**: [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) — the ordered fix plan for the Open Issues above. Design and History are still not written — deferred until the fixes actually settle the architecture.",
+    "parent": "BlockNode:00CF1WZE10002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10005",
+    "@type": "BlockNode",
+    "title": "## Open Questions",
+    "parent": "BlockNode:00CF1WZE10001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZE10006",
+      "BlockNode:00CF1WZE10007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF1WZE10006:props:StringProp:00CF1WZF6R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF1WZE10006:props:StringProp:00CF1WZF6R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF1WZE10006",
+    "text": "Should `crud` (and the other sub-parts) ever become literal path-nested under a `core/` prefix, or stay flat top-level concerns cross-linked from here? The current Document Topology has no concept of concern nesting at all — introducing one would itself be a new design decision, not yet made.",
+    "parent": "BlockNode:00CF1WZE10005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE10007",
+    "@type": "BlockNode",
+    "title": "00CF1WZE10007",
+    "text": "Once `crud` is migrated (per `archive-migration`'s own plan), does its issues doc absorb the reconcile/tombstone bug family wholesale from here, leaving `cli`'s own Open Issues holding only the insert/ingest transactionality items and the Sub-Parts rollup — or does `cli` keep hosting the cross-cutting content permanently, with `crud` holding only what's specific to reconciliation as a data model? Not decided.",
+    "parent": "BlockNode:00CF1WZE10005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18000",
+    "@type": "BlockNode",
+    "title": "## Settled",
+    "parent": "BlockNode:00CF1WZE10001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZE18001",
+      "BlockNode:00CF1WZE18002",
+      "BlockNode:00CF1WZE18003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF1WZE18001:props:StringProp:00CF1WZF6R002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF1WZE18001:props:StringProp:00CF1WZF6R003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Scope**",
+    "text": "**Scope**: `core` is the shared ApeironNgn engine — `treeview`, `linking`, `list-consumption`, and `crud` (once migrated) are its sub-parts. `cli` and a future `webapp` are thin wrappers over that same engine, each getting their own separate, much thinner concern rather than being folded in here. This concern was originally scoped and named `cli` before that distinction was drawn; see the rename note below.",
+    "parent": "BlockNode:00CF1WZE18000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18002",
+    "@type": "BlockNode",
+    "title": "00CF1WZE18002",
+    "text": "**The previous `cli.md` → `cli-packaging.md` → `packaging.md` rename is not evidence against this concern existing**: that doc was mis-scoped from the start — it was really packaging/distribution content wearing the \"cli\" name, not a case of \"cli\" being too broad a name to use. This time the scope is deliberate: the whole tool, not one facet of it. **Update**: this concern itself then turned out to be mis-scoped a second time — not because \"cli\" was too broad, but because the actual content (`reconcile.ts`, `node.ts`, `astParser.ts`, `apeironNgn/artifacts.ts`) is core engine code, not CLI-dispatcher code. Renamed to `core`; a genuinely thin `cli` was split back out separately. Two different failure modes wearing the same symptom (a rename), not the same mistake twice.",
+    "parent": "BlockNode:00CF1WZE18000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18003",
+    "@type": "BlockNode",
+    "title": "**Sequencing**",
+    "text": "**Sequencing**: `issues/core.md`, `discussion/core.md`, and `planning/core.md` (renamed from `cli.md`) hold the engine-level Open Issues and their fix plan; `design/core.md` and `history/core.md` stay deferred until the fixes actually settle the architecture and land. A separate, much thinner `cli` concern now holds only what's genuinely CLI-dispatcher-specific.",
+    "parent": "BlockNode:00CF1WZE18000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18004",
+    "@type": "BlockNode",
+    "title": "## Freeflow",
+    "parent": "BlockNode:00CF1WZE10001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF1WZE18005",
+      "BlockNode:00CF1WZE18006",
+      "BlockNode:00CF282PR0001",
+      "BlockNode:00CF2B9GGG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF1WZE18005:props:StringProp:00CF1WZF70000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF1WZE18005:props:StringProp:00CF1WZF70001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Where this concern's Open Issues came from**",
+    "text": "**Where this concern's Open Issues came from**: a whole-graph dense-linking pass surfaced the same underlying `reconcile.ts` defect family described independently in three separate places — `aperas-skill`'s own eval findings, `list-consumption`'s Checkpoints, and `packaging`'s discussion — plus two separate insert/ingest transactionality gaps (`aperas-skill`'s single-`kg:insert` finding, `linking`'s multi-artifact `kg:ingest` finding). None of the four originating write-ups referenced each other; compiling them here is what made the shared root cause visible in the first place.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF1WZE18006",
+    "@type": "BlockNode",
+    "title": "**Live incident while creating this very doc set**",
+    "text": "**Live incident while creating this very doc set**: attempted the graph-first \"sketch a structure\" path (`aperas resolve --create-holder`) to scaffold `issues/cli.md` from nothing. Filled real content into the placeholder's Block children successfully, but `aperas project` then refused (\"still has a placeholder (holder) node somewhere in its subtree\"), and `kg:insert`'s promote path rejected the `ArtifactNode` outright (\"kg:insert only positions Block-level nodes\"). No verb exists to clear `.holder` on a Folder/Artifact once real content lands underneath it — confirmed by direct inspection, matches `Aperas-crud-design.md` §4.1/§6 exactly. Recovered by tombstoning the stuck holder chain (`aperas remove`) and redoing both `cli.md` docs disk-first instead — the same path `archive-migration`'s own established practice already uses for a genuinely new concern-doc-set. Filed as this concern's own Open Issues entry, since it's now a live-reproduced instance rather than just an archived design note.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G001",
+    "@type": "BlockNode",
+    "title": "# Core — Planning",
+    "parent": "ArtifactNode:00CF23FACG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF23FB1G002",
+      "BlockNode:00CF23FB1G003",
+      "BlockNode:00CF23FB1G009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23FB1G002:links:Link:00CF29E3ZR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G002:links:Link:00CF29E3ZR000:props:StringProp:00CF29E400000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "62"
+          }
+        ]
+      }
+    ],
+    "title": "## Implementation Plan",
+    "text": "Fix by shared root cause, not by filing order. Three of these [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) are explicitly \"flagged from reproduced symptom, not source\" — `reconcile.ts`'s actual matching logic hasn't been read yet — so investigation comes before any diff, not interleaved with it. Group A shares one file and plausibly one fix; item 6 shares its shape of fix (validate everything before writing anything) with `cli`'s own item 5, even though the two now live in separate concerns; the seventh item is a missing feature, not a bug, and is deferred alongside the (separately deferred) CRUD work rather than forced into this batch.",
+    "parent": "BlockNode:00CF23FB1G001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G003",
+    "@type": "BlockNode",
+    "title": "## Task Breakdown",
+    "parent": "BlockNode:00CF23FB1G001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF23FB1G004",
+      "BlockNode:00CF23FB1G005",
+      "BlockNode:00CF23FB1G006",
+      "BlockNode:00CF23FB1G007",
+      "BlockNode:00CF23FB1G008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBH8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBH8000:props:StringProp:00CF29EBHG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "181"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG001",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG001:props:StringProp:00CF29EBHG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "238"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG003",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG003:props:StringProp:00CF29EBHG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "293"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHR000:props:StringProp:00CF29EBHR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "422"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF23FB1G004:props:StringProp:00CF23FCD0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G004:props:StringProp:00CF23FCD0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Investigate, read-only**",
+    "text": "**Investigate, read-only**: read `packages/core/src/reconcile.ts` in full, and the relevant parts of `packages/core/src/apeironNgn/node.ts`, to confirm the actual root cause behind [items 1](../issues/core.md#id/BlockNode:00CF1WZ4JG003), [2](../issues/core.md#id/BlockNode:00CF1WZ4JG004), and [4](../issues/core.md#id/BlockNode:00CF1WZ4JG006) — currently symptom-only — and check whether they genuinely share one fix with [item 3](../issues/core.md#id/BlockNode:00CF1WZ4JG005) or are subtly different. Report findings and a specific proposed diff before writing any code.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48000:props:StringProp:00CF29EK48001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "18"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48002:props:StringProp:00CF29EK48003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "75"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48004",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48004:props:StringProp:00CF29EK48005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "126"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK4G000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK4G000:props:StringProp:00CF29EK4G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "177"
+          }
+        ]
+      }
+    ],
+    "title": "00CF23FB1G005",
+    "text": "**Fix Group A** — [items 1](../issues/core.md#id/BlockNode:00CF1WZ4JG003), [2](../issues/core.md#id/BlockNode:00CF1WZ4JG004), [3](../issues/core.md#id/BlockNode:00CF1WZ4JG005), [4](../issues/core.md#id/BlockNode:00CF1WZ4JG006) — `reconcile.ts`'s identity-matching family. Verify against the reproducible scenarios already on record: the eval-sandbox repro for item 1 (push against `issues/treeview.md`'s Open Issues list with a tombstoned sibling interleaved), `list-consumption`'s repro for item 2.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23FB1G006:links:Link:00CF29ETCG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G006:links:Link:00CF29ETCG000:props:StringProp:00CF29ETCG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "17"
+          }
+        ]
+      }
+    ],
+    "title": "**Fix Group B** — [item 5](../issues/cli.md#id/BlockNode:00CF1WZ4JG007) (`kgInsert.ts`",
+    "text": "**Fix item 6** — [multi-artifact `kg:ingest` isn't transactional](../issues/core.md#id/BlockNode:00CF1WZ4JG008) (`apeironNgn/artifacts.ts`: validate every artifact in a batch before committing any of them). The matching single-`kg:insert` gap (`kgInsert.ts`) moved to `cli`'s own planning doc along with the issue itself — same shape of fix, different concern now.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23FB1G007:links:Link:00CF29F1JG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G007:links:Link:00CF29F1JG000:props:StringProp:00CF29F1JG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "18"
+          }
+        ]
+      }
+    ],
+    "title": "00CF23FB1G007",
+    "text": "**Defer item 7** ([Folder/Artifact holder-promotion gap](../issues/core.md#id/BlockNode:00CF1WZ4JG009)) — no design exists yet for what promotion should look like; revisit alongside the CRUD work once that's picked back up, not as part of this batch.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G008",
+    "@type": "BlockNode",
+    "title": "00CF23FB1G008",
+    "text": "Move each fixed item from `issues/core.md`'s Open Issues to Resolved as it lands, with the real root cause recorded — not just \"fixed.\"",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23FB1G009",
+    "@type": "BlockNode",
+    "title": "## Verification Plan",
+    "text": "Each Group A fix is checked against its own already-documented repro, not just a fresh test written for the occasion — item 1 against the exact `issues/treeview.md` list shape that exposed it, item 2 against `list-consumption`'s eval sandbox. Item 6's fix is checked by forcing the failure directly: fail a later file mid-batch `kg:ingest` and confirm earlier files' writes didn't commit (the matching single-`kg:insert` check now lives in `cli`'s own planning doc). A fix isn't done until its Open Issues entry can honestly move to Resolved with the actual mechanism named, matching this concern's own citation-direction discipline against guessing.",
+    "parent": "BlockNode:00CF23FB1G001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF23SXQ8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23SXQ8001:links:Link:00CF292TCR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF23FB1G003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23SXQ8001:links:Link:00CF292TCR000:props:StringProp:00CF292TCR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
+    "title": "## Pending Tasks",
+    "text": "See [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) for the ordered fix plan.",
+    "parent": "BlockNode:00CF1WZ4JG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF282PR0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF282PR0001:props:StringProp:00CF282R30000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF282PR0001:props:StringProp:00CF282R30001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Split planned: `cli` → `core` (rename) + a new, thin `cli`**",
+    "text": "**Split planned: `cli` → `core` (rename) + a new, thin `cli`**: realized while scoping this batch that `packages/` is `core`/`cli`/`web` — core is the shared ApeironNgn engine, cli is a thin dispatcher over it, and web will eventually be another thin wrapper over the same core. Almost everything filed under this concern so far (items 1-4, 6, 7; the `treeview`/`linking`/`list-consumption`/`crud` Sub-Parts) is core engine content, not CLI-dispatcher content — only item 5 (`kg:insert`'s own call-ordering) and `packaging` are genuinely cli-specific. Plan: retitle and reword this doc set's own content while still at the `cli.md` paths, `git mv` all three to `core.md`, `aperas ingest --track` scoped to confirm identity survives, then move (not copy) item 5 into a freshly-created thin `cli.md`/`discussion/cli.md`/`planning/cli.md` — `packaging` stays where it already lives, just re-indexed under the new thin `cli`'s own Sub-Parts. `documentation` and `archive-migration` are meta/process concerns about the graph itself, not part of the core/cli/webapp product split, and aren't reassigned to either. Executing next.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0001",
+    "@type": "BlockNode",
+    "title": "# CLI — Issues",
+    "parent": "ArtifactNode:00CF2AEA78000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEAX0002",
+      "BlockNode:00CF2AEAX0004",
+      "BlockNode:00CF2AEAX0006",
+      "BlockNode:00CF2AEAX0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "parent": "BlockNode:00CF2AEAX0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEAX0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF2AEAX0003:props:StringProp:00CF2AEC10000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2AEAX0003:props:StringProp:00CF2AEC10001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**A single `kg:insert` call isn't transactional**",
+    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery. The fix is entirely within `kgInsert.ts`'s own call ordering — no `core` change needed, which is why this stays in `cli` rather than moving with its siblings.",
+    "parent": "BlockNode:00CF2AEAX0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0004",
+    "@type": "BlockNode",
+    "title": "## Sub-Parts",
+    "text": "CLI's own known parts, and where each one's issues currently live:",
+    "parent": "BlockNode:00CF2AEAX0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEAX0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2AEAX0005:links:Link:00CF2AEC18000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVC8N0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2AEAX0005:links:Link:00CF2AEC18000:props:StringProp:00CF2AEC1G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "33"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2AEAX0005:props:StringProp:00CF2AEC10002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2AEAX0005:props:StringProp:00CF2AEC10003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF2AEAX0005",
+    "text": "**`packaging`** — none open. See [Open Issues](../issues/packaging.md#id/BlockNode:00CDDVC8N0002).",
+    "parent": "BlockNode:00CF2AEAX0004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2AEAX0006:links:Link:00CF2B2KKR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEXN8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2AEAX0006:links:Link:00CF2B2KKR000:props:StringProp:00CF2B2KKR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
+    "title": "## Pending Tasks",
+    "text": "See [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) for the fix plan.",
+    "parent": "BlockNode:00CF2AEAX0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEAX0007",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "text": "None yet.",
+    "parent": "BlockNode:00CF2AEAX0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER001",
+    "@type": "BlockNode",
+    "title": "# CLI — Discussion",
+    "parent": "ArtifactNode:00CF2AEKZG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEMER002",
+      "BlockNode:00CF2AEMER006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER002",
+    "@type": "BlockNode",
+    "title": "## Dashboard",
+    "parent": "BlockNode:00CF2AEMER001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEMER003",
+      "BlockNode:00CF2AEMER004",
+      "BlockNode:00CF2AEMER005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2AEMER003:links:Link:00CF2B2310000",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEAX0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2AEMER003:links:Link:00CF2B2310000:props:StringProp:00CF2B2310001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2AEMER003:props:StringProp:00CF2AENHG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2AEMER003:props:StringProp:00CF2AENHR000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [Open Issues](../issues/cli.md#id/BlockNode:00CF2AEAX0002) — what's genuinely CLI-dispatcher-specific, not engine-level.",
+    "parent": "BlockNode:00CF2AEMER002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2AEMER004:links:Link:00CF2B2AKG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEXN8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2AEMER004:links:Link:00CF2B2AKG000:props:StringProp:00CF2B2AKR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "**Planning**",
+    "text": "**Planning**: [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) — the fix plan for the one open issue above.",
+    "parent": "BlockNode:00CF2AEMER002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER005",
+    "@type": "BlockNode",
+    "title": "00CF2AEMER005",
+    "text": "Design and History are not written yet — this concern is thin enough that they may never need to be much more than a stub.",
+    "parent": "BlockNode:00CF2AEMER002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER006",
+    "@type": "BlockNode",
+    "title": "## Settled",
+    "parent": "BlockNode:00CF2AEMER001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEMER007",
+      "BlockNode:00CF2AEMF0000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEMER007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2AEMER007:links:Link:00CF2AENJ0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZE18001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2AEMER007:links:Link:00CF2AENJ0000:props:StringProp:00CF2AENJ0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "87"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2AEMER007:props:StringProp:00CF2AENHR001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2AEMER007:props:StringProp:00CF2AENHR002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Scope**",
+    "text": "**Scope**: `cli` is the thin dispatcher/verb layer over the shared `core` engine — see [discussion/core.md](../discussion/core.md#id/BlockNode:00CF1WZE18001) for the engine itself and its sub-parts (`treeview`, `linking`, `list-consumption`, and `crud` once migrated). `cli`'s own sub-part is `packaging` (build/distribution/dispatcher). A future `webapp` concern is expected to be the third thin wrapper over that same `core`.",
+    "parent": "BlockNode:00CF2AEMER006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEMF0000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2AEMF0000:links:Link:00CF2AENJ0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF282PR0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2AEMF0000:links:Link:00CF2AENJ0002:props:StringProp:00CF2AENJ0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "360"
+          }
+        ]
+      }
+    ],
+    "title": "**Split history**",
+    "text": "**Split history**: this concern was originally created broader — covering the whole reconcile/tombstone bug family plus `treeview`/`linking`/`list-consumption`/`crud` as sub-parts — then split once it became clear that content was actually `core` engine code (`reconcile.ts`, `node.ts`, `astParser.ts`, `apeironNgn/artifacts.ts`), not CLI-dispatcher code. See [discussion/core.md's Freeflow](../discussion/core.md#id/BlockNode:00CF282PR0001) for the incident and the split plan. Only genuinely dispatcher-layer content (the single-`kg:insert` transactionality gap, and `packaging`) stayed here.",
+    "parent": "BlockNode:00CF2AEMER006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8001",
+    "@type": "BlockNode",
+    "title": "# CLI — Planning",
+    "parent": "ArtifactNode:00CF2AEX6R000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEXN8002",
+      "BlockNode:00CF2AEXN8003",
+      "BlockNode:00CF2AEXN8008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8002",
+    "@type": "BlockNode",
+    "title": "## Implementation Plan",
+    "text": "Fix the single open issue directly in `kgInsert.ts` — no `core` changes needed, unlike its former siblings that moved to `core`.",
+    "parent": "BlockNode:00CF2AEXN8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8003",
+    "@type": "BlockNode",
+    "title": "## Task Breakdown",
+    "parent": "BlockNode:00CF2AEXN8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF2AEXN8004",
+      "BlockNode:00CF2AEXN8005",
+      "BlockNode:00CF2AEXN8006",
+      "BlockNode:00CF2AEXN8007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF2AEXN8004:props:StringProp:00CF2AEYSG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CF2AEXN8004:props:StringProp:00CF2AEYSG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF2AEXN8004",
+    "text": "Read `kgInsert.ts`'s create-mode flow to confirm the exact current call order (parse → collision-check → hydrate → resolve links → resolve anchor).",
+    "parent": "BlockNode:00CF2AEXN8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8005",
+    "@type": "BlockNode",
+    "title": "Reorder",
+    "text": "Reorder: resolve/validate the `--after`/`--before` anchor before calling `hydrateFromParsed`, alongside the existing `rejectSlugPathCollisions` check, so a bad anchor is rejected before anything is written.",
+    "parent": "BlockNode:00CF2AEXN8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8006",
+    "@type": "BlockNode",
+    "title": "Verify",
+    "text": "Verify: force an anchor-resolution failure mid-`kg:insert` and confirm no orphan node survives — check a raw `BlockNode.jsonld` read, not just the CLI's own reported failure.",
+    "parent": "BlockNode:00CF2AEXN8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8007",
+    "@type": "BlockNode",
+    "title": "00CF2AEXN8007",
+    "text": "Move the Open Issues entry to Resolved once confirmed, with the actual mechanism named.",
+    "parent": "BlockNode:00CF2AEXN8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2AEXN8008",
+    "@type": "BlockNode",
+    "title": "## Verification Plan",
+    "text": "Reject an anchor mid-`kg:insert` deliberately and confirm zero orphan nodes appear in a raw store read afterward, not just that the command reports failure — matching how `issues/core.md`'s own batch-`kg:ingest` fix (item 6) is checked.",
+    "parent": "BlockNode:00CF2AEXN8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2B9GGG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2B9GGG001:links:Link:00CF2B9HTR002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2B9GGG001:links:Link:00CF2B9HTR002:props:StringProp:00CF2B9HTR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "399"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2B9GGG001:props:StringProp:00CF2B9HTR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2B9GGG001:props:StringProp:00CF2B9HTR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`aperas resolve`'s title-ambiguity check doesn't filter tombstoned candidates either**",
+    "text": "**`aperas resolve`'s title-ambiguity check doesn't filter tombstoned candidates either**: found live while resolving the new thin `cli.md` docs — `resolve issues/cli.md` failed with \"'cli.md' is ambiguous among: ArtifactNode:00CF2AEA78000 (\"cli.md\"), ArtifactNode:00CF1TZQV8000 (\"cli.md\")\", even though the second id was a tombstoned holder chain removed earlier in this same session. Same shape as [the dead-container gap](../issues/core.md#id/BlockNode:00CF1WZ4JG006) and the other tombstone-blind-spot findings in this batch — another site that treats a tombstoned node as if it still competes for a name. Not filed as its own Open Issue yet; parked here since it's minor and workaroundable (full-id lookup instead of bare-path resolve).",
+    "parent": "BlockNode:00CF1WZE18004",
     "type": "listItem",
     "children": []
   }
