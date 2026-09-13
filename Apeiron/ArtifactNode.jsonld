@@ -643,18 +643,18 @@
     "@id": "ArtifactNode:00CF2AEA78000",
     "@type": "ArtifactNode",
     "title": "cli.md",
-    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery. The fix is entirely within `kgInsert.ts`'s own call ordering — no `core` change needed, which is why this stays in `cli` rather than moving with its siblings.",
+    "text": "None currently — see Resolved below.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CF2AEAX0001"
     ],
     "path": "issues/cli.md",
-    "fileHash": "58d9fdf92d834ae2e7ddae7b9636f86ca54172be59d2cb867af107e377b9e571",
+    "fileHash": "16c0b60771b51976f586702a1705c9addf4da6289a64e6f66cdabbb9ae0a749e",
     "lastTrackedAt": "2026-09-12T22:30:31.454Z",
-    "ingestedHash": "58d9fdf92d834ae2e7ddae7b9636f86ca54172be59d2cb867af107e377b9e571",
-    "lastIngestedAt": "2026-09-12T22:32:07.680Z",
-    "projectedHash": "58d9fdf92d834ae2e7ddae7b9636f86ca54172be59d2cb867af107e377b9e571"
+    "ingestedHash": "16c0b60771b51976f586702a1705c9addf4da6289a64e6f66cdabbb9ae0a749e",
+    "lastIngestedAt": "2026-09-13T06:11:32.755Z",
+    "projectedHash": "16c0b60771b51976f586702a1705c9addf4da6289a64e6f66cdabbb9ae0a749e"
   },
   {
     "@id": "ArtifactNode:00CF2AEKZG000",
@@ -667,11 +667,11 @@
       "BlockNode:00CF2AEMER001"
     ],
     "path": "discussion/cli.md",
-    "fileHash": "74513ef67845fcbc8c1b150f85e9cca10369d995a928b02c61fce60df1146f47",
+    "fileHash": "7d9564cbf74dc5838708a66bc4672be47d8e8f8f654b2cf1e24a233d79e80035",
     "lastTrackedAt": "2026-09-12T22:30:32.702Z",
-    "ingestedHash": "74513ef67845fcbc8c1b150f85e9cca10369d995a928b02c61fce60df1146f47",
-    "lastIngestedAt": "2026-09-12T22:32:08.619Z",
-    "projectedHash": "74513ef67845fcbc8c1b150f85e9cca10369d995a928b02c61fce60df1146f47"
+    "ingestedHash": "7d9564cbf74dc5838708a66bc4672be47d8e8f8f654b2cf1e24a233d79e80035",
+    "lastIngestedAt": "2026-09-13T06:11:06.594Z",
+    "projectedHash": "7d9564cbf74dc5838708a66bc4672be47d8e8f8f654b2cf1e24a233d79e80035"
   },
   {
     "@id": "ArtifactNode:00CF2AEX6R000",

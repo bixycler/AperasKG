@@ -16963,11 +16963,10 @@
     "@id": "BlockNode:00CF2AEAX0002",
     "@type": "BlockNode",
     "title": "## Open Issues",
+    "text": "None currently — see Resolved below.",
     "parent": "BlockNode:00CF2AEAX0001",
     "type": "heading",
-    "children": [
-      "BlockNode:00CF2AEAX0003"
-    ]
+    "children": []
   },
   {
     "@id": "BlockNode:00CF2AEAX0003",
@@ -16987,8 +16986,8 @@
       }
     ],
     "title": "**A single `kg:insert` call isn't transactional**",
-    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery. The fix is entirely within `kgInsert.ts`'s own call ordering — no `core` change needed, which is why this stays in `cli` rather than moving with its siblings.",
-    "parent": "BlockNode:00CF2AEAX0002",
+    "text": "**A single `kg:insert` call isn't transactional**: fixed by resolving/validating the `--after`/`--before` anchor right after `rejectSlugPathCollisions`, before any of the piped markdown's top-level nodes are hydrated via `hydrateFromParsed` — a bad anchor is now rejected before anything is written, instead of after. Verified by forcing an anchor-resolution failure mid-`kg:insert` (a nonexistent anchor id) and confirming, via a raw `BlockNode.jsonld` read after an explicit flush, that no orphan node appears — the on-disk store's hash was unchanged from immediately before the attempt. A follow-up insert with a valid anchor still succeeds, confirming the happy path is unaffected.",
+    "parent": "BlockNode:00CF2AEAX0007",
     "type": "listItem",
     "children": []
   },
@@ -17045,24 +17044,8 @@
   {
     "@id": "BlockNode:00CF2AEAX0006",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF2AEAX0006:links:Link:00CF2B2KKR000",
-        "@type": "Link",
-        "target": "BlockNode:00CF2AEXN8003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF2AEAX0006:links:Link:00CF2B2KKR000:props:StringProp:00CF2B2KKR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "4"
-          }
-        ]
-      }
-    ],
     "title": "## Pending Tasks",
-    "text": "See [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) for the fix plan.",
+    "text": "None — Task Breakdown is complete.",
     "parent": "BlockNode:00CF2AEAX0001",
     "type": "heading",
     "children": []
@@ -17071,10 +17054,12 @@
     "@id": "BlockNode:00CF2AEAX0007",
     "@type": "BlockNode",
     "title": "## Resolved",
-    "text": "None yet.",
     "parent": "BlockNode:00CF2AEAX0001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CF2AEAX0003",
+      "BlockNode:00CF8W6XA0001"
+    ]
   },
   {
     "@id": "BlockNode:00CF2AEMER001",
@@ -17158,7 +17143,7 @@
       }
     ],
     "title": "**Planning**",
-    "text": "**Planning**: [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) — the fix plan for the one open issue above.",
+    "text": "**Planning**: [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) — the fix plan for the single-`kg:insert` transactionality gap, now resolved.",
     "parent": "BlockNode:00CF2AEMER002",
     "type": "listItem",
     "children": []
@@ -20510,6 +20495,16 @@
     "text": "--- name: aperas description: Aperas is this project's external memory — a knowledge graph, worked through the `aperas` CLI, holding what has been decided, tried, found and planned, so that neither the person nor the agent has to carry it in their head. Read this at the start of any session in this project, whatever the task looks like, and before reading or changing anything. First check memory for a standing decision on whether Aperas manages the session; if none is recorded, ask with AskUserQuestion using exactly these choices — Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions' or 'never' as a durable memory, so a session-scoped answer is asked again next session while a durable one is never asked again. Once granted, it governs the work — orient in the graph before acting, change it through the CLI rather than by editing files, and put back what the work turns up. For getting existing documents into the graph the first time, `kg-doc-ingest` covers that; read this one first. ---",
     "parent": "BlockNode:00CF80MKFR000",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF8W6XA0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T06:08:55.405Z",
+    "title": "00CF8W6XA0001",
+    "text": "(anchor placeholder)",
+    "parent": "BlockNode:00CF2AEAX0007",
+    "type": "listItem",
     "children": []
   }
 ]

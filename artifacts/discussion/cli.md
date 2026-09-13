@@ -3,7 +3,7 @@
 ## Dashboard <a name='id/BlockNode:00CF2AEMER002' class='aperas-anchor aperas-id'></a>
 
 - **Issues**: <a name='id/BlockNode:00CF2AEMER003' class='aperas-anchor aperas-id'></a> [Open Issues](../issues/cli.md#id/BlockNode:00CF2AEAX0002) — what's genuinely CLI-dispatcher-specific, not engine-level.
-- **Planning**: <a name='id/BlockNode:00CF2AEMER004' class='aperas-anchor aperas-id'></a> [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) — the fix plan for the one open issue above.
+- **Planning**: <a name='id/BlockNode:00CF2AEMER004' class='aperas-anchor aperas-id'></a> [Task Breakdown](../planning/cli.md#id/BlockNode:00CF2AEXN8003) — the fix plan for the single-`kg:insert` transactionality gap, now resolved.
 - Design and History are not written yet — this concern is thin enough that they may never need to be much more than a stub.
 
 ## Settled <a name='id/BlockNode:00CF2AEMER006' class='aperas-anchor aperas-id'></a>
