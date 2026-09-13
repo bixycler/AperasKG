@@ -12174,6 +12174,7 @@
       "BlockNode:00CF46W4Q8001",
       "BlockNode:00CF4D9XT0001",
       "BlockNode:00CF4QNWZR001",
+      "BlockNode:00CF5ZE1S0001",
       "BlockNode:00CF4QNX0000B"
     ]
   },
@@ -12213,7 +12214,8 @@
       "BlockNode:00CF10ATY8000",
       "BlockNode:00CF2MR0M8001",
       "BlockNode:00CF4N80W0001",
-      "BlockNode:00CF5H3V20001"
+      "BlockNode:00CF5H3V20001",
+      "BlockNode:00CF5NDXG8001"
     ]
   },
   {
@@ -13469,7 +13471,8 @@
       "BlockNode:00CEFF85V8001",
       "BlockNode:00CF2NPBKR001",
       "BlockNode:00CF4763DR001",
-      "BlockNode:00CF4RAGDR001"
+      "BlockNode:00CF4RAGDR001",
+      "BlockNode:00CF5ZS9QR001"
     ]
   },
   {
@@ -18620,7 +18623,8 @@
       "BlockNode:00CF4D9XT0005",
       "BlockNode:00CF4D9XT0006",
       "BlockNode:00CF4MBFQG001",
-      "BlockNode:00CF4R3C78001"
+      "BlockNode:00CF4R3C78001",
+      "BlockNode:00CF5ZK3ZG001"
     ]
   },
   {
@@ -19054,7 +19058,8 @@
       "BlockNode:00CF4QNX00007",
       "BlockNode:00CF5GK5BR001",
       "BlockNode:00CF5GK5BR002",
-      "BlockNode:00CF5GV8FR001"
+      "BlockNode:00CF5GV8FR001",
+      "BlockNode:00CF5N94NR001"
     ]
   },
   {
@@ -19078,7 +19083,24 @@
   {
     "@id": "BlockNode:00CF4QNWZR004",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4QNWZR004:links:Link:00CF5MTA0R000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4QNWZR004:links:Link:00CF5MTA0R000:props:StringProp:00CF5MTA0R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
     "title": "### Discipline — edit loop step 5, rewritten",
+    "text": "Supersedes: [v1's step 5](#id/BlockNode:00CF46W4QR003)",
     "parent": "BlockNode:00CF4QNWZR001",
     "type": "heading",
     "children": [
@@ -19121,11 +19143,29 @@
   {
     "@id": "BlockNode:00CF4QNX00001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4QNX00001:links:Link:00CF5MTW3G000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR00F",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4QNX00001:links:Link:00CF5MTW3G000:props:StringProp:00CF5MTW3R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
     "title": "### Discipline — Promotion links at the origin, closing sentence regrounded",
-    "text": "This is the topology half of crystallization, stated at Philosophy above: a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing.",
+    "text": "Supersedes: [v1's closing sentence](#id/BlockNode:00CF46W4QR00F)",
     "parent": "BlockNode:00CF4QNWZR001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CF5MTTSG002"
+    ]
   },
   {
     "@id": "BlockNode:00CF4QNX00002",
@@ -19564,7 +19604,9 @@
     "children": [
       "BlockNode:00CF595QQR002",
       "BlockNode:00CF595QQR003",
-      "BlockNode:00CF595QQR004"
+      "BlockNode:00CF595QQR004",
+      "BlockNode:00CF5N6B88001",
+      "BlockNode:00CF5N6B88002"
     ]
   },
   {
@@ -19606,8 +19648,24 @@
   {
     "@id": "BlockNode:00CF5GK5BR002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CF5MTK6G000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR00C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CF5MTK6G000:props:StringProp:00CF5MTK6R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
     "title": "### Discipline — Citation direction, exception generalized",
-    "text": "Caught by `scripts/skill_drift.py` on its first real run: this rule change landed before the rest of v1.1 and was never recorded in this delta at all — precisely the failure the check exists for, found mechanically rather than by a reader noticing.",
+    "text": "Supersedes: [v1's \"one sanctioned exception\" paragraph](#id/BlockNode:00CF46W4QR00C)",
     "parent": "BlockNode:00CF4QNWZR001",
     "type": "heading",
     "children": [
@@ -19739,6 +19797,425 @@
     "text": "**It remains a heuristic over normalized text**: a reworded sentence inside an otherwise-matching paragraph slips past, and commentary written *inside* a delta entry reads as dropped because it is legitimately not in the file. Sits at the *skill script* stage of the tooling path — staged and shared, not yet a first-class verb.",
     "parent": "BlockNode:00CF5H3V20001",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5MTTSG002",
+    "@type": "BlockNode",
+    "title": "00CF5MTTSG002",
+    "text": "This is the topology half of crystallization, stated at Philosophy above: a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing.",
+    "parent": "BlockNode:00CF4QNX00001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5N6B88001",
+    "@type": "BlockNode",
+    "title": "00CF5N6B88001",
+    "text": "A delta entry that *replaces* rather than adds carries a **`Supersedes:`** line naming the snapshot item it retires, as an ordinary wikilink. Without it, an item a minor version deliberately rewrote is indistinguishable from one silently dropped — which is the single judgement the whole arrangement exists to support, so leaving it to a reader's memory defeats the purpose. The marker is bookkeeping rather than skill text, and is excluded from the verbatim comparison on both sides.",
+    "parent": "BlockNode:00CF595QQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5N6B88002",
+    "@type": "BlockNode",
+    "title": "00CF5N6B88002",
+    "text": "Drift between the file and this record is then mechanically checkable, which is the point: `scripts/skill_drift.py` reports text written into the file but never recorded, and recorded items absent from the file with no entry claiming to supersede them. Both defects had previously been caught only by a reader noticing, three times in one session for the first and once across a major version for the second.",
+    "parent": "BlockNode:00CF595QQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5N94NR001",
+    "@type": "BlockNode",
+    "title": "### Mechanics — Supersedes marker, added to the drift-check section",
+    "text": "A delta entry that replaces rather than adds carries a `Supersedes: [title](#id/BlockNode:...)` line naming the item it retires, which is what lets the check tell a deliberate rewrite from a silent loss.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5NDXG8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF5NDXG8001:props:StringProp:00CF5NDZ4G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5NDXG8001:props:StringProp:00CF5NDZ4G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF5NDXG8001",
+    "text": "**`Supersedes:` folded into the delta format — the check can now tell a rewrite from a loss**: the gap the drift check exposed in its own mechanism, closed by the cheapest thing that could work: a delta entry replacing rather than adding carries a `Supersedes: [title](#id/BlockNode:...)` line naming the item it retires. An ordinary wikilink, parsed by convention, no engine change and no new predicate — the marker is bookkeeping rather than skill text, so it is stripped from the verbatim comparison on both sides, which also stops it reading as dropped content itself. Applied to v1.1's three rewrites (edit-loop step 5, the citation-direction exception, the promotion-links closing sentence); the check now reports zero unaccounted drops and attributes all three to the entries that replaced them.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CF5NDXG8002",
+      "BlockNode:00CF5NDXGG000",
+      "BlockNode:00CF5NDXGG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5NDXG8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF5NDXG8002:props:StringProp:00CF5NDZ4G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5NDXG8002:props:StringProp:00CF5NDZ4G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**What it cost to leave the convention out**",
+    "text": "**What it cost to leave the convention out**: before the marker, the three legitimately-rewritten items were indistinguishable from silently-lost ones, so every run ended in \"needs a human read\" — which is the judgement the arrangement exists to make, handed straight back to the reader it was supposed to relieve. A check whose output requires the same attention as not having it is not much of a check.",
+    "parent": "BlockNode:00CF5NDXG8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5NDXGG000",
+    "@type": "BlockNode",
+    "title": "**A verbatim record has to stay verbatim**",
+    "text": "**A verbatim record has to stay verbatim**: commentary written *inside* a delta entry (\"caught by the drift check on its first run\") read as dropped content, correctly, because it is not in the file. Fixed by convention rather than by code — a delta entry holds the replacement text and its marker, nothing else; narrative belongs in Freeflow or the thread. The earlier root-intro exclusion was the same lesson arriving one level up.",
+    "parent": "BlockNode:00CF5NDXG8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5NDXGG001",
+    "@type": "BlockNode",
+    "title": "**Loop closed on itself again**",
+    "text": "**Loop closed on itself again**: documenting the marker in the skill's own Mechanics required recording that documentation as a delta entry, which the check then verified. Three rounds of this now — edit, record, verify — and it is starting to feel less like discipline and more like the shape the work has.",
+    "parent": "BlockNode:00CF5NDXG8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5ZE1S0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4Q8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG000:props:StringProp:00CF5ZE3GG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG002",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNWZR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG002:props:StringProp:00CF5ZE3GG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "71"
+          }
+        ]
+      }
+    ],
+    "title": "## v1.2 additions — delta on the v1 snapshot",
+    "text": "Threaded onto [the v1 snapshot](#id/BlockNode:00CF46W4Q8001) alongside [the v1.1 delta](#id/BlockNode:00CF4QNWZR001). Recorded because `scripts/skill_drift.py` reported all three the moment they were written, which is the first time the recording step was prompted by the tooling rather than by a reader noticing.",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF5ZE1S0002",
+      "BlockNode:00CF5ZE1S0003",
+      "BlockNode:00CF5ZE1S0004",
+      "BlockNode:00CF6AJYP0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5ZE1S0002",
+    "@type": "BlockNode",
+    "title": "### Philosophy — nobody working this graph will remember",
+    "text": "**Nobody working this graph will remember.** [current] Not the human across weeks, not the agent across a context window. So the graph is not only where things are kept — it is what *notices*: the structural gaps and the emergent alignments between nodes, neither of which anyone will spot by holding the corpus in their head. A record that has to be consulted to be useful protects nothing, because being asked is the part that fails: the moment you would know to check is the moment you have already forgotten. What earns its place is what interrupts unbidden — a check reporting an omission, a backlink appearing where none was expected, a query coming back zero. Storage is the easy half and the projections already do it; recall is the half that costs something to build and the half that works.",
+    "parent": "BlockNode:00CF5ZE1S0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5ZE1S0003",
+    "@type": "BlockNode",
+    "title": "### Philosophy — a look-it-up rule is only half a discipline",
+    "text": "This is why a rule of the form \"look it up instead of trusting your memory\" is only half a discipline here. It can tell you what the graph says; it can never tell you the graph is *missing* something, because doing the work and recording the work are two separate acts and only the second one is visible from inside. Catching an omission takes a comparison against the world outside the graph. Confirmed live, three times in one session: each unrecorded edit was invisible from every side that could be consulted, and was caught by a reader noticing or by a check diffing the file against the record — never by looking something up.",
+    "parent": "BlockNode:00CF5ZE1S0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5ZE1S0004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF5ZE1S0004:links:Link:00CF5ZE3GR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5GK5BR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZE1S0004:links:Link:00CF5ZE3GR000:props:StringProp:00CF5ZE3GR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v1.2",
+    "text": "Supersedes: [v1.1's status line](#id/BlockNode:00CF5GK5BR001)",
+    "parent": "BlockNode:00CF5ZE1S0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF5ZE1S0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5ZE1S0005",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v1.2** — v1 restructured a flat, incident-ordered list of eighteen items into four levels, abstract to concrete; the arrangement was the defect. v1.1 repaired the vertical thread between those levels: crystallization stated at Philosophy and Orientation rather than only as a Discipline rule, and dense linking realized below Orientation rather than only asserted there. v1.2 grounds the recall machinery — snapshot, delta, drift check — in the Philosophy statement that makes it non-optional. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CF5ZE1S0004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5ZK3ZG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5GV8FR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG000:props:StringProp:00CF5ZK5QG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "82"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG002",
+        "@type": "Link",
+        "target": "BlockNode:00CF5N94NR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG002:props:StringProp:00CF5ZK5QG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "133"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG004",
+        "@type": "Link",
+        "target": "BlockNode:00CF5ZE1S0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG004:props:StringProp:00CF5ZK5QG005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "345"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF5ZK3ZG001:props:StringProp:00CF5ZK5Q8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5ZK3ZG001:props:StringProp:00CF5ZK5Q8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF5ZK3ZG001",
+    "text": "**Grounding the recall machinery — the three zeroes the forward audit returned**: [the drift check](#id/BlockNode:00CF5GV8FR001) and [the `Supersedes` marker](#id/BlockNode:00CF5N94NR001) were Mechanics items with no principle above them, which is why they read as handy utilities rather than as something the skill requires. They now realize **[nobody working this graph will remember](#id/BlockNode:00CF5ZE1S0002)** — a record that must be consulted to be useful protects nothing, so what the philosophy demands is machinery that interrupts rather than machinery that waits to be asked. Both are instances of exactly that: one reports an omission unbidden, the other lets the report distinguish a deliberate rewrite from a silent loss.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CF5ZK3ZG002",
+      "BlockNode:00CF5ZK3ZG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5ZK3ZG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF5ZK3ZG002:links:Link:00CF5ZK5QR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5ZE1S0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZK3ZG002:links:Link:00CF5ZK5QR000:props:StringProp:00CF5ZK5QR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "20"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF5ZK3ZG002:props:StringProp:00CF5ZK5Q8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5ZK3ZG002:props:StringProp:00CF5ZK5Q8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF5ZK3ZG002",
+    "text": "**Its companion** — [a look-it-up rule is only half a discipline](#id/BlockNode:00CF5ZE1S0003) — grounds why the read-side instruction was declined rather than added. Doing the work and recording the work are two separate acts here, and only a comparison against the world outside the graph can see the second one missing. That principle is what the drift check implements.",
+    "parent": "BlockNode:00CF5ZK3ZG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5ZK3ZG003",
+    "@type": "BlockNode",
+    "title": "00CF5ZK3ZG003",
+    "text": "**Both zeroes were found forward**, from the realizer's empty grounding, where \"keep an active view\" was found backward from the principle's empty backlinks. Two directions, two defect shapes, one walk — and the second one was only available because a one-directional query had already been caught being one-directional.",
+    "parent": "BlockNode:00CF5ZK3ZG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5ZS9QR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF5ZS9QR001:links:Link:00CF5ZSBCR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF4D9XT0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZS9QR001:links:Link:00CF5ZSBCR000:props:StringProp:00CF5ZSBCR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "322"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF5ZS9QR001:links:Link:00CF5ZSBCR002",
+        "@type": "Link",
+        "target": "BlockNode:00CF5ZE1S0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5ZS9QR001:links:Link:00CF5ZSBCR002:props:StringProp:00CF5ZSBCR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "775"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF5ZS9QR001:props:StringProp:00CF5ZSBCG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5ZS9QR001:props:StringProp:00CF5ZSBCG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF5ZS9QR001",
+    "text": "**v1.2 — the recall machinery got the principle that makes it non-optional, and the tooling prompted its own recording for the first time**: snapshot, delta, drift check and the `Supersedes` marker had all been built without anything above them explaining why they are required rather than convenient — a forward audit of [the thread](../discussion/aperas-skill.md#id/BlockNode:00CF4D9XT0001) returned zero grounding for each. Closed by a Philosophy statement that *nobody working this graph will remember, so the graph must be what notices*, with its companion explaining why a look-it-up rule is only half a discipline: doing the work and recording it are separate acts, and only a comparison against the world outside the graph can see the second one missing. Recorded as [the v1.2 delta](../discussion/aperas-skill.md#id/BlockNode:00CF5ZE1S0001). Notable for how the recording happened: `scripts/skill_drift.py` reported all three additions the moment they were written, so for the first time the record was prompted by the tooling rather than by a reader noticing an omission — which is the principle demonstrating itself within minutes of being stated.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF6AJYP0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF6AJYP0001:links:Link:00CF6AK0ER000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5GV8FR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF6AJYP0001:links:Link:00CF6AK0ER000:props:StringProp:00CF6AK0ER001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Mechanics — drift-check accuracy caveat, corrected",
+    "text": "Supersedes: [the v1.1 drift-check section's caveat](#id/BlockNode:00CF5GV8FR001)",
+    "parent": "BlockNode:00CF5ZE1S0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF6ANYX8002",
+      "BlockNode:00CF6AJYP0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF6AJYP0002",
+    "@type": "BlockNode",
+    "title": "00CF6AJYP0002",
+    "text": "The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.",
+    "parent": "BlockNode:00CF6AJYP0001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF6ANYX8002",
+    "@type": "BlockNode",
+    "title": "00CF6ANYX8002",
+    "text": "Run it after editing this file, before considering the edit done. *Added* is the check that matters most — an edit made and not recorded is invisible from the file's own side, which is how three separate additions in one session went unrecorded until a reader noticed. *Dropped* catches the opposite: v1 silently lost one of v0 item 18's three triggers, and nothing flagged it. The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.",
+    "parent": "BlockNode:00CF6AJYP0001",
+    "type": "paragraph",
     "children": []
   }
 ]

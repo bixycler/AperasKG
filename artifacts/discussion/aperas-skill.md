@@ -125,6 +125,12 @@
   - **A real gap in the mechanism this validates**: <a name='id/BlockNode:00CF5H3V20004' class='aperas-anchor aperas-id'></a> the delta format records *additions*, not *supersessions*. When a minor version rewrites an existing item the delta stores the new text and nothing marks which snapshot item it replaced, so those items show under *dropped* and need a human read to distinguish "deliberately superseded" from "silently lost" — which is the exact distinction the check exists to make. A `supersedes` pointer in the delta entry would close it. Worth noting the shape: the same missing-predicate problem as everywhere else in this corpus, arriving now in the versioning format rather than in the link model.
   - **It remains a heuristic over normalized text**: <a name='id/BlockNode:00CF5H3V20005' class='aperas-anchor aperas-id'></a> a reworded sentence inside an otherwise-matching paragraph slips past, and commentary written *inside* a delta entry reads as dropped because it is legitimately not in the file. Sits at the *skill script* stage of the tooling path — staged and shared, not yet a first-class verb.
 
+- **`Supersedes:` folded into the delta format — the check can now tell a rewrite from a loss**: the gap the drift check exposed in its own mechanism, closed by the cheapest thing that could work: a delta entry replacing rather than adding carries a `Supersedes: [title](#id/BlockNode:...)` line naming the item it retires. An ordinary wikilink, parsed by convention, no engine change and no new predicate — the marker is bookkeeping rather than skill text, so it is stripped from the verbatim comparison on both sides, which also stops it reading as dropped content itself. Applied to v1.1's three rewrites (edit-loop step 5, the citation-direction exception, the promotion-links closing sentence); the check now reports zero unaccounted drops and attributes all three to the entries that replaced them.
+  
+  - **What it cost to leave the convention out**: <a name='id/BlockNode:00CF5NDXG8002' class='aperas-anchor aperas-id'></a> before the marker, the three legitimately-rewritten items were indistinguishable from silently-lost ones, so every run ended in "needs a human read" — which is the judgement the arrangement exists to make, handed straight back to the reader it was supposed to relieve. A check whose output requires the same attention as not having it is not much of a check.
+  - **A verbatim record has to stay verbatim**: <a name='id/BlockNode:00CF5NDXGG000' class='aperas-anchor aperas-id'></a> commentary written *inside* a delta entry ("caught by the drift check on its first run") read as dropped content, correctly, because it is not in the file. Fixed by convention rather than by code — a delta entry holds the replacement text and its marker, nothing else; narrative belongs in Freeflow or the thread. The earlier root-intro exclusion was the same lesson arriving one level up.
+  - **Loop closed on itself again**: <a name='id/BlockNode:00CF5NDXGG001' class='aperas-anchor aperas-id'></a> documenting the marker in the skill's own Mechanics required recording that documentation as a delta entry, which the check then verified. Three rounds of this now — edit, record, verify — and it is starting to feel less like discipline and more like the shape the work has.
+
 ## v0 SKILL.md (verbatim, 2026-09-12) <a name='id/BlockNode:00CE95MVP8001' class='aperas-anchor aperas-id'></a>
 
 Dumped verbatim from `.claude/skills/aperas/SKILL.md` (mirrored at `skills/aperas/SKILL.md`) for easy citing and discussion while reshaping it. Frontmatter and top-matter are kept as one code block; the two numbered lists and the Reference section below are split into individually addressable items, matching the source's own structure — so a rewrite discussion can cite e.g. "item 14" as its own linkable block instead of a line number in a file that's about to move. Retitled from "Current" once v1 landed — it is the prior version now, kept for comparison, not the live one.
@@ -459,6 +465,11 @@ Each of v1's Philosophy and Orientation principles was walked deliberately, in o
   - **The maturation principle** ([Philosophy](#id/BlockNode:00CF4QNWZR002), [Orientation](#id/BlockNode:00CF4QNWZR003)) is the node whose absence the forward-side query detected. Now that it exists on-level, [Promotion links at the origin](#id/BlockNode:00CF46W4QR00D) grounds upward inside the skill rather than sideways into the design doc — [recorded as its own delta](#id/BlockNode:00CF4QNX00001). The off-level grounding that made the gap detectable is itself what got repaired.
   - Worth noting what this cost: <a name='id/BlockNode:00CF4R3C78005' class='aperas-anchor aperas-id'></a> seven additions, four thread entries, all hand-written, and the graph proposed none of it. Re-threading is per-minor-version recurring work, which is the standing argument for an edge being a first-class thing rather than prose that happens to contain links.
 
+- **Grounding the recall machinery — the three zeroes the forward audit returned**: [the drift check](#id/BlockNode:00CF5GV8FR001) and [the `Supersedes` marker](#id/BlockNode:00CF5N94NR001) were Mechanics items with no principle above them, which is why they read as handy utilities rather than as something the skill requires. They now realize **[nobody working this graph will remember](#id/BlockNode:00CF5ZE1S0002)** — a record that must be consulted to be useful protects nothing, so what the philosophy demands is machinery that interrupts rather than machinery that waits to be asked. Both are instances of exactly that: one reports an omission unbidden, the other lets the report distinguish a deliberate rewrite from a silent loss.
+  
+  - **Its companion** — [a look-it-up rule is only half a discipline](#id/BlockNode:00CF5ZE1S0003) — grounds why the read-side instruction was declined rather than added. Doing the work and recording the work are two separate acts here, and only a comparison against the world outside the graph can see the second one missing. That principle is what the drift check implements.
+  - **Both zeroes were found forward**, from the realizer's empty grounding, where "keep an active view" was found backward from the principle's empty backlinks. Two directions, two defect shapes, one walk — and the second one was only available because a one-directional query had already been caught being one-directional.
+
 ## v1.1 additions — delta on the v1 snapshot <a name='id/BlockNode:00CF4QNWZR001' class='aperas-anchor aperas-id'></a>
 
 Threaded onto [the v1 snapshot](#id/BlockNode:00CF46W4Q8001) rather than snapshotted afresh: a snapshot is taken at a major version, and minor versions are recorded as deltas against it, so the base stays stable and what changed stays legible without duplicating the whole document each time. Each addition below is verbatim and individually addressable, which is what lets [the vertical thread](#id/BlockNode:00CF4D9XT0001) extend across the two.
@@ -473,10 +484,14 @@ Threaded onto [the v1 snapshot](#id/BlockNode:00CF46W4Q8001) rather than snapsho
 
 ### Discipline — edit loop step 5, rewritten <a name='id/BlockNode:00CF4QNWZR004' class='aperas-anchor aperas-id'></a>
 
+Supersedes: [v1's step 5](#id/BlockNode:00CF46W4QR003)
+
 5. **Deep write — follow what the change made stale, and link what was never linked.** Check backlinks and forward links; update what now disagrees — and add the citation where the change has just made a relationship real. Closing an issue that a design or a fix resolves means linking the two to each other before moving on, in both directions, not only the one that happened to get written first. This is the per-edit instance of dense linking, and the only moment it is cheap: you are already standing where the missing link is visible.
 6. **Project, then stage.** `aperas project <path> --flush`, then `git add` immediately.
 
 ### Discipline — Promotion links at the origin, closing sentence regrounded <a name='id/BlockNode:00CF4QNX00001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v1's closing sentence](#id/BlockNode:00CF46W4QR00F)
 
 This is the topology half of crystallization, stated at Philosophy above: a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing.
 
@@ -513,7 +528,7 @@ Status: **v1.1** — v1 restructured a flat, incident-ordered list of eighteen i
 
 ### Discipline — Citation direction, exception generalized <a name='id/BlockNode:00CF5GK5BR002' class='aperas-anchor aperas-id'></a>
 
-Caught by `scripts/skill_drift.py` on its first real run: this rule change landed before the rest of v1.1 and was never recorded in this delta at all — precisely the failure the check exists for, found mechanically rather than by a reader noticing.
+Supersedes: [v1's "one sanctioned exception" paragraph](#id/BlockNode:00CF46W4QR00C)
 
 The sanctioned exception is a **normative, singular** pointer — one whose target is the block's whole referent rather than one of many possible mentions. A design doc's own `# Context` section is the familiar instance (one link per facet, a fixed set), but it is the *property* that is sanctioned, not that location: a history milestone announcing one snapshot, or a design block naming *the* canonical exemplar, qualify the same way.
 
@@ -530,3 +545,33 @@ scripts/skill_drift.py --dropped    # recorded, no longer in the file
 ```
 
 Run it after editing this file, before considering the edit done. *Added* is the check that matters most — an edit made and not recorded is invisible from the file's own side, which is how three separate additions in one session went unrecorded until a reader noticed. *Dropped* catches the opposite: v1 silently lost one of v0 item 18's three triggers, and nothing flagged it. Both are heuristics over normalized text, so a reworded sentence inside an otherwise-matching paragraph can still slip past.
+
+### Mechanics — Supersedes marker, added to the drift-check section <a name='id/BlockNode:00CF5N94NR001' class='aperas-anchor aperas-id'></a>
+
+A delta entry that replaces rather than adds carries a `Supersedes: [title](#id/BlockNode:...)` line naming the item it retires, which is what lets the check tell a deliberate rewrite from a silent loss.
+
+## v1.2 additions — delta on the v1 snapshot <a name='id/BlockNode:00CF5ZE1S0001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v1 snapshot](#id/BlockNode:00CF46W4Q8001) alongside [the v1.1 delta](#id/BlockNode:00CF4QNWZR001). Recorded because `scripts/skill_drift.py` reported all three the moment they were written, which is the first time the recording step was prompted by the tooling rather than by a reader noticing.
+
+### Philosophy — nobody working this graph will remember <a name='id/BlockNode:00CF5ZE1S0002' class='aperas-anchor aperas-id'></a>
+
+**Nobody working this graph will remember.** [current] Not the human across weeks, not the agent across a context window. So the graph is not only where things are kept — it is what *notices*: the structural gaps and the emergent alignments between nodes, neither of which anyone will spot by holding the corpus in their head. A record that has to be consulted to be useful protects nothing, because being asked is the part that fails: the moment you would know to check is the moment you have already forgotten. What earns its place is what interrupts unbidden — a check reporting an omission, a backlink appearing where none was expected, a query coming back zero. Storage is the easy half and the projections already do it; recall is the half that costs something to build and the half that works.
+
+### Philosophy — a look-it-up rule is only half a discipline <a name='id/BlockNode:00CF5ZE1S0003' class='aperas-anchor aperas-id'></a>
+
+This is why a rule of the form "look it up instead of trusting your memory" is only half a discipline here. It can tell you what the graph says; it can never tell you the graph is *missing* something, because doing the work and recording the work are two separate acts and only the second one is visible from inside. Catching an omission takes a comparison against the world outside the graph. Confirmed live, three times in one session: each unrecorded edit was invisible from every side that could be consulted, and was caught by a reader noticing or by a check diffing the file against the record — never by looking something up.
+
+### Top matter — Status bumped to v1.2 <a name='id/BlockNode:00CF5ZE1S0004' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v1.1's status line](#id/BlockNode:00CF5GK5BR001)
+
+Status: <a name='id/BlockNode:00CF5ZE1S0005' class='aperas-anchor aperas-id'></a> **v1.2** — v1 restructured a flat, incident-ordered list of eighteen items into four levels, abstract to concrete; the arrangement was the defect. v1.1 repaired the vertical thread between those levels: crystallization stated at Philosophy and Orientation rather than only as a Discipline rule, and dense linking realized below Orientation rather than only asserted there. v1.2 grounds the recall machinery — snapshot, delta, drift check — in the Philosophy statement that makes it non-optional. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Mechanics — drift-check accuracy caveat, corrected <a name='id/BlockNode:00CF6AJYP0001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [the v1.1 drift-check section's caveat](#id/BlockNode:00CF5GV8FR001)
+
+Run it after editing this file, before considering the edit done. *Added* is the check that matters most — an edit made and not recorded is invisible from the file's own side, which is how three separate additions in one session went unrecorded until a reader noticed. *Dropped* catches the opposite: v1 silently lost one of v0 item 18's three triggers, and nothing flagged it. The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.
+
+The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.

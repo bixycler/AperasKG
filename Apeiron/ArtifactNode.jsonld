@@ -504,11 +504,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "841f0ce61082488858d6d611420eed0372454dde03f7da5faf4dc3f0468ec6ba",
+    "fileHash": "a3a52a03c5a33ecb33129d7d960ddff2a129626ee239e0320da207389968e063",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "841f0ce61082488858d6d611420eed0372454dde03f7da5faf4dc3f0468ec6ba",
-    "lastIngestedAt": "2026-09-13T02:14:50.421Z",
-    "projectedHash": "841f0ce61082488858d6d611420eed0372454dde03f7da5faf4dc3f0468ec6ba"
+    "ingestedHash": "a3a52a03c5a33ecb33129d7d960ddff2a129626ee239e0320da207389968e063",
+    "lastIngestedAt": "2026-09-13T03:10:46.567Z",
+    "projectedHash": "a3a52a03c5a33ecb33129d7d960ddff2a129626ee239e0320da207389968e063"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -555,11 +555,11 @@
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "68f71cdc35706425f5ac48db33bba577cb0e5108f381ce619d11b6d685f4dbc9",
+    "fileHash": "de3c270469a2bfae0f60b3ebd55c3e1839cfa9508160a37dd11dc82957da4aad",
     "lastTrackedAt": "2026-09-11T18:22:18.239Z",
-    "ingestedHash": "68f71cdc35706425f5ac48db33bba577cb0e5108f381ce619d11b6d685f4dbc9",
-    "lastIngestedAt": "2026-09-13T01:20:41.839Z",
-    "projectedHash": "68f71cdc35706425f5ac48db33bba577cb0e5108f381ce619d11b6d685f4dbc9"
+    "ingestedHash": "de3c270469a2bfae0f60b3ebd55c3e1839cfa9508160a37dd11dc82957da4aad",
+    "lastIngestedAt": "2026-09-13T02:46:54.363Z",
+    "projectedHash": "de3c270469a2bfae0f60b3ebd55c3e1839cfa9508160a37dd11dc82957da4aad"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -572,11 +572,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "f7612ec573747b64cf4a5702eff0af325fda1a6f2333d619f33d7a5af5d33a83",
+    "fileHash": "492655bb7115b7f2445a0f413ca671e60ac98ebffa0afc67b7633a0f554a6a69",
     "lastTrackedAt": "2026-09-11T18:22:57.657Z",
-    "ingestedHash": "f7612ec573747b64cf4a5702eff0af325fda1a6f2333d619f33d7a5af5d33a83",
-    "lastIngestedAt": "2026-09-13T01:57:29.450Z",
-    "projectedHash": "f7612ec573747b64cf4a5702eff0af325fda1a6f2333d619f33d7a5af5d33a83"
+    "ingestedHash": "492655bb7115b7f2445a0f413ca671e60ac98ebffa0afc67b7633a0f554a6a69",
+    "lastIngestedAt": "2026-09-13T02:24:16.929Z",
+    "projectedHash": "492655bb7115b7f2445a0f413ca671e60ac98ebffa0afc67b7633a0f554a6a69"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
