@@ -131,6 +131,59 @@
   - **A verbatim record has to stay verbatim**: <a name='id/BlockNode:00CF5NDXGG000' class='aperas-anchor aperas-id'></a> commentary written *inside* a delta entry ("caught by the drift check on its first run") read as dropped content, correctly, because it is not in the file. Fixed by convention rather than by code — a delta entry holds the replacement text and its marker, nothing else; narrative belongs in Freeflow or the thread. The earlier root-intro exclusion was the same lesson arriving one level up.
   - **Loop closed on itself again**: <a name='id/BlockNode:00CF5NDXGG001' class='aperas-anchor aperas-id'></a> documenting the marker in the skill's own Mechanics required recording that documentation as a delta entry, which the check then verified. Three rounds of this now — edit, record, verify — and it is starting to feel less like discipline and more like the shape the work has.
 
+- **The skill's own auto-invocation trigger is graph-edit-shaped, not code-shaped — confirmed live across two separate sessions**: each one investigated `reconcile.ts`/`node.ts` directly via plain file reads, with no `aperas` traversal and no skill invocation at all, until an explicit user reminder broke it. The skill's frontmatter `description` — the only signal the host's auto-invocation heuristic sees before the body ever loads — lists trigger conditions that are all graph-*editing*-shaped (editing/inserting/removing/renaming a node, a wikilink, a `kg:`/`aperas` mention). Nothing in it names "about to read or edit this repo's source code, which a concern doc already carries issues/design/planning about" — exactly the domain the edit loop's own step 1 ("orient before touching anything") was written for. A task framed as "investigate a bug in `reconcile.ts`" never matches the description, so the skill never loads, so its own advice is never read: not a memory failure inside the skill, a failure to be invoked at all.
+  
+  - **Same shape as the write-side gap, one step earlier**: <a name='id/BlockNode:00CF6R1KP8001' class='aperas-anchor aperas-id'></a> [Philosophy's "a look-it-up rule is only half a discipline"](#id/BlockNode:00CF5ZE1S0003) diagnosed why a *stated* instruction doesn't self-execute on the write side. This is the identical failure on the read side, one level further out — before a rule can be half a discipline, something has to load the rule in the first place, and nothing here does that mechanically.
+  - **Two candidate fixes, not mutually exclusive, neither built yet**: <a name='id/BlockNode:00CF6R1KP8002' class='aperas-anchor aperas-id'></a> broaden the description to name source-code investigation/editing explicitly (cheap, but soft — the same shape of fix a stated-condition list already is, just a longer list); or a mechanical trigger outside the skill file entirely — a hook firing on a Read/Edit/Grep touching `monorepo/**`, unbidden, the same category of fix `skill_drift.py` already is for the write side. Which to build is not yet decided.
+
+- **A mechanical read-side gate was built, tested, and broke three separate ways — none of them a config typo**: to close the trigger gap just above, a `PreToolUse` hook (`skills/aperas/scripts/aperas_gate.py`) was registered in a personal `.claude/settings.local.json` — deliberately never shared, since a hard gate baked into the project would be the "destroys the whole meaning of skill" mistake the entry above warns against. It denied `Read`/`Edit`/`Grep` under `monorepo/packages/**` and `AperasKG/**` until the session had run a real `aperas` command, tracked by a session-scoped marker file. Two rounds of live testing found three independent bugs, each confirmed rather than guessed at.
+  
+  - **Bug 1 — the Bash trigger matched the project's own name**: <a name='id/BlockNode:00CF6R1KP8003' class='aperas-anchor aperas-id'></a> `Bash(*aperas*)` was meant to open the gate on a real `aperas` invocation, but the repository itself is named `Aperas`, so any `find`/`ls`/`grep` command that merely touches a path under it also matches. Confirmed by the marker file's own mtime landing 3–4 seconds after a session's very first `find` call — long before any `Read` of graph content, let alone a real orientation. Fixed by anchoring to the actual invocation shape, `Bash(npm run aperas -- *)`.
+  - **Bug 2 — the gated path was never the path actually used**: <a name='id/BlockNode:00CF6R1KP8004' class='aperas-anchor aperas-id'></a> `AperasKG` is a symlink whose real target, `/home/will/source/AperasKG`, sits *outside* the project root as a sibling, not nested under it. A relative `if` pattern resolves against `<cwd>/AperasKG/**`, but every real `Read` call resolved through the symlink and used the target path directly — a different absolute path that pattern can never match. The rule was dead the day it was written; confirmed by running the identical `Read` through both path forms under `--debug hooks` and watching one skip and the other fire. Fixed with an absolute-anchored `//`-pattern naming the real location, kept alongside the harmless, still-inert relative one.
+  - **Bug 3 — a stale decoy sat at an ungated path**: <a name='id/BlockNode:00CF6R1KP8005' class='aperas-anchor aperas-id'></a> `skills/aperas-workspace/kg-clone/` — a disposable, gitignored eval-sandbox clone of the whole graph, reproducible via `graph-sandbox.sh` — held copies of the same filenames at a path neither rule covered, so an agent exploring with `find`/`ls` could wander in and read from there with none of the gate's discipline attached. It was not even current: it predated this session's own `cli.md`/`core.md` split. Removed outright.
+  - **What actually found these — not reasoning about VS Code, a real headless run with hook tracing**: <a name='id/BlockNode:00CF6R1KP8006' class='aperas-anchor aperas-id'></a> `claude -p "<prompt>" --debug hooks --debug-file <path>` runs one real session and logs every hook match, skip, and the exact JSON decision returned. Guessing at Bug 2 by reasoning about the VS Code extension's process lifecycle produced a plausible but wrong diagnosis (a stale-process theory, "restart VS Code" — which changed nothing); the debug trace found the actual cause in one run.
+  - **The example that was tested, kept here since the file itself doesn't survive**: <a name='id/BlockNode:00CF6R1KP8007' class='aperas-anchor aperas-id'></a> `.claude/settings.local.json` is personal and gitignored by design, so this is its only durable record.
+    
+    ```json
+    {
+      "hooks": {
+        "PreToolUse": [
+          {
+            "matcher": "Read",
+            "hooks": [
+              { "type": "command", "if": "Read(monorepo/packages/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" },
+              { "type": "command", "if": "Read(AperasKG/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" },
+              { "type": "command", "if": "Read(//home/will/source/AperasKG/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" }
+            ]
+          },
+          {
+            "matcher": "Edit",
+            "hooks": [
+              { "type": "command", "if": "Edit(monorepo/packages/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" },
+              { "type": "command", "if": "Edit(AperasKG/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" },
+              { "type": "command", "if": "Edit(//home/will/source/AperasKG/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" }
+            ]
+          },
+          {
+            "matcher": "Grep",
+            "hooks": [
+              { "type": "command", "if": "Grep(monorepo/packages/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" },
+              { "type": "command", "if": "Grep(AperasKG/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" },
+              { "type": "command", "if": "Grep(//home/will/source/AperasKG/**)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py" }
+            ]
+          },
+          {
+            "matcher": "Bash",
+            "hooks": [
+              { "type": "command", "if": "Bash(npm run aperas -- *)", "command": "python3 ${CLAUDE_PROJECT_DIR}/skills/aperas/scripts/aperas_gate.py --mark" }
+            ]
+          }
+        ]
+      }
+    }
+    ```
+  - **Why this was retired rather than kept running**: <a name='id/BlockNode:00CF80TVJR005' class='aperas-anchor aperas-id'></a> <a name='id/BlockNode:00CF6R1KP8008' class='aperas-anchor aperas-id'></a> three bugs surfaced across two rounds of testing, on a mechanism that is inherently personal, machine-specific (its own fix hardcodes an absolute path), and invisible to anyone who didn't set it up themselves. [Promoted to a v1.3 delta](#id/BlockNode:00CF80MKFG001): the next attempt trades a hard mechanical gate for a soft, one-time consent question the skill asks itself, with the answer remembered durably instead of mechanically enforced.
+
 ## v0 SKILL.md (verbatim, 2026-09-12) <a name='id/BlockNode:00CE95MVP8001' class='aperas-anchor aperas-id'></a>
 
 Dumped verbatim from `.claude/skills/aperas/SKILL.md` (mirrored at `skills/aperas/SKILL.md`) for easy citing and discussion while reshaping it. Frontmatter and top-matter are kept as one code block; the two numbered lists and the Reference section below are split into individually addressable items, matching the source's own structure — so a rewrite discussion can cite e.g. "item 14" as its own linkable block instead of a line number in a file that's about to move. Retitled from "Current" once v1 landed — it is the prior version now, kept for comparison, not the live one.
@@ -575,3 +628,19 @@ Supersedes: [the v1.1 drift-check section's caveat](#id/BlockNode:00CF5GV8FR001)
 Run it after editing this file, before considering the edit done. *Added* is the check that matters most — an edit made and not recorded is invisible from the file's own side, which is how three separate additions in one session went unrecorded until a reader noticed. *Dropped* catches the opposite: v1 silently lost one of v0 item 18's three triggers, and nothing flagged it. The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.
 
 The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.
+
+## v1.3 additions — delta on the v1 snapshot <a name='id/BlockNode:00CF80MKFG001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v1 snapshot](#id/BlockNode:00CF46W4Q8001) alongside [the v1.1](#id/BlockNode:00CF4QNWZR001) and [v1.2](#id/BlockNode:00CF5ZE1S0001) deltas. Retires the mechanical read-side gate — built, tested, and found fragile in three ways — in favor of a one-time consent question the skill asks itself, remembered rather than enforced.
+
+### Top matter — Frontmatter description: session consent clause added <a name='id/BlockNode:00CF80MKFR000' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [the v1 snapshot's frontmatter](#id/BlockNode:00CF46W4QG000)
+
+--- name: <a name='id/BlockNode:00CF8BZWM0002' class='aperas-anchor aperas-id'></a> aperas description: Aperas is this project's external memory — a knowledge graph, worked through the `aperas` CLI, holding what has been decided, tried, found and planned, so that neither the person nor the agent has to carry it in their head. Read this at the start of any session in this project, whatever the task looks like, and before reading or changing anything. First check memory for a standing decision on whether Aperas manages the session; if none is recorded, ask with AskUserQuestion using exactly these choices — Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions' or 'never' as a durable memory, so a session-scoped answer is asked again next session while a durable one is never asked again. Once granted, it governs the work — orient in the graph before acting, change it through the CLI rather than by editing files, and put back what the work turns up. For getting existing documents into the graph the first time, `kg-doc-ingest` covers that; read this one first. ---
+
+### Top matter — Status bumped to v1.3 <a name='id/BlockNode:00CF80MKFR001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v1.2's status line](#id/BlockNode:00CF5ZE1S0005)
+
+Status: <a name='id/BlockNode:00CF80MKFR002' class='aperas-anchor aperas-id'></a> **v1.3** — v1 restructured a flat, incident-ordered list of eighteen items into four levels, abstract to concrete; the arrangement was the defect. v1.1 repaired the vertical thread between those levels: crystallization stated at Philosophy and Orientation rather than only as a Discipline rule, and dense linking realized below Orientation rather than only asserted there. v1.2 grounds the recall machinery — snapshot, delta, drift check — in the Philosophy statement that makes it non-optional. v1.3 replaces a mechanical read-side gate, found fragile in three ways during testing, with a one-time consent question the skill asks and remembers instead of enforces, and rewrites the description in plain terms, scoped to the whole session rather than to graph edits alone. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.

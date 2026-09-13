@@ -9,5 +9,11 @@
     "@type": "Profile",
     "handle": "claude-sonnet",
     "name": "Claude Sonnet"
+  },
+  {
+    "@id": "Profile:00CF70FJY8000",
+    "@type": "Profile",
+    "handle": "will",
+    "name": "Will"
   }
 ]
