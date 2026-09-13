@@ -87,3 +87,13 @@ Crystallization matures a thought along two axes at once.
 On the **content** axis, prose moves from freeform discussion into normative design, issues, planning, or history.
 
 On the **topology** axis, a relationship that first existed *indirectly* — mediated by a discussion node that cites both ends and carries the judgment in its own text — becomes a *direct* citation between those ends once it proves load-bearing rather than incidental, and the mediating node's work is then done. Link density is the product of this lifecycle, which is why it reads as maturity from outside rather than as tidiness.
+
+### Versioning — snapshot, delta, thread <a name='id/BlockNode:00CF595QQR001' class='aperas-anchor aperas-id'></a>
+
+The skill file is a *generative* projection of this concern rather than a mechanical one: no command serializes design into SKILL.md, so the two can drift in a way an `aperas project` artifact cannot. Three devices keep the drift legible, and together they are the meta workflow's maintenance half.
+
+A **snapshot** is a verbatim copy of the skill file taken at a major version and split so every item is individually addressable. Copy, not projection: a projection holds only the current version, so what a restructure *drops* would survive nowhere but git archaeology. That loss is not hypothetical — v0's snapshot is the only reason a trigger v1 silently dropped was ever found. Successive snapshots make the skill's evolution the object of study rather than just its latest state.
+
+A **delta** records a minor version's additions verbatim against the standing snapshot, rather than re-snapshotting the whole document. The base stays stable, what changed stays legible, and each addition is addressable on the same terms as the snapshot's own items.
+
+A **thread** wires each Philosophy and Orientation principle to the items that realize it below, as mediating nodes — mediating because the snapshot must stay verbatim to stay comparable. The thread is what makes the level structure auditable instead of merely asserted: a principle with no realizer is a measurement, not an impression. Read backward, from a principle's backlinks, it detects a principle stated and never operationalized. Read forward, from a realizer's grounding, it detects the opposite defect — an item whose explanation sits outside the level structure, which is the observable form of a principle that was never stated at all. It cannot detect *under*-realization, since presence and sufficiency are not the same measurement and this graph is too coarse to count the difference; that judgment stays with the reader.

@@ -2992,8 +2992,24 @@
   {
     "@id": "BlockNode:00CDCTB49R001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCTB49R001:links:Link:00CF2GWM30000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCTB49R001:links:Link:00CF2GWM30000:props:StringProp:00CF2GWM30001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "944"
+          }
+        ]
+      }
+    ],
     "title": "## A multi-artifact kg:ingest isn't transactional",
-    "text": "Found live, not reasoned about in the abstract: ingesting `design/linking.md issues/linking.md history/linking.md discussion/linking.md planning/linking.md` in one `kg:ingest` call failed on the third path (`history/linking.md`'s duplicate-date collision), and the CLI reported the whole call as failed — but `design/linking.md` and `issues/linking.md`, processed earlier in the same loop, had already been fully ingested into the live in-memory `Store` by the time the failure surfaced. `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop over paths calling `ingestArtifact` per file with no `try`/`catch` around each iteration; nothing rolls back what an earlier iteration already committed when a later one throws. This is a lack of transaction semantics, not a one-off bug — the same shape of gap would apply to any batched multi-step write, `kg:insert`/`kg:update` sequences included, not just `kg:ingest`.",
+    "text": "Found live, not reasoned about in the abstract: ingesting `design/linking.md issues/linking.md history/linking.md discussion/linking.md planning/linking.md` in one `kg:ingest` call failed on the third path (`history/linking.md`'s duplicate-date collision), and the CLI reported the whole call as failed — but `design/linking.md` and `issues/linking.md`, processed earlier in the same loop, had already been fully ingested into the live in-memory `Store` by the time the failure surfaced. `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop over paths calling `ingestArtifact` per file with no `try`/`catch` around each iteration; nothing rolls back what an earlier iteration already committed when a later one throws. This is a lack of transaction semantics, not a one-off bug — the same shape of gap would apply to any batched multi-step write, `kg:insert`/`kg:update` sequences included, not just `kg:ingest`. Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG008).",
     "parent": "ArtifactNode:00CDBYV46R000",
     "type": "heading",
     "children": [
@@ -4586,8 +4602,24 @@
   {
     "@id": "BlockNode:00CDEM7DVG002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDEM7DVG002:links:Link:00CF2GVV30000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDEM7DVG002:links:Link:00CF2GVV30000:props:StringProp:00CF2GVV30001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "990"
+          }
+        ]
+      }
+    ],
     "title": "00CDF8B3T8006",
-    "text": "First attempt reused `trackAllArtifacts`'s own `matchLeftoverByAbstract` (the Gestalt/Ratcliff-Obershelp recursion `reconcile.ts` uses everywhere else) and only matched 2 of 5 batch-renamed files — not from ambiguity, but because that algorithm is position-sensitive: it works for reconciling siblings that share a rough common order across an edit, not for an unordered bag of whole-artifact identities scattered across concern folders. A match's recursive split can discard a whole quadrant of otherwise-valid candidates just because the corresponding range on the other side is empty. Replaced with `matchByExactKey`: same \"decline rather than guess\" principle (a key occurring more than once on either side stays unmatched), but no positional requirement — confirmed via debug trace, then verified live (4 of 5 correctly renamed, identity preserved).",
+    "text": "First attempt reused `trackAllArtifacts`'s own `matchLeftoverByAbstract` (the Gestalt/Ratcliff-Obershelp recursion `reconcile.ts` uses everywhere else) and only matched 2 of 5 batch-renamed files — not from ambiguity, but because that algorithm is position-sensitive: it works for reconciling siblings that share a rough common order across an edit, not for an unordered bag of whole-artifact identities scattered across concern folders. A match's recursive split can discard a whole quadrant of otherwise-valid candidates just because the corresponding range on the other side is empty. Replaced with `matchByExactKey`: same \"decline rather than guess\" principle (a key occurring more than once on either side stays unmatched), but no positional requirement — confirmed via debug trace, then verified live (4 of 5 correctly renamed, identity preserved). The underlying position-sensitivity is still live wherever `reconcile.ts` uses `matchLeftoverByAbstract` outside the rename path — see [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG005).",
     "parent": "BlockNode:00CDEM7DVG001",
     "type": "paragraph",
     "children": []
@@ -11929,6 +11961,22 @@
   {
     "@id": "BlockNode:00CE5KSNVR002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE5KSNVR002:links:Link:00CF2GW30R000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE5KSNVR002:links:Link:00CF2GW30R000:props:StringProp:00CF2GW30R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "522"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CE5KSNVR002:props:StringProp:00CE5KSQ90000",
@@ -11944,7 +11992,7 @@
       }
     ],
     "title": "**A fully-dead container is never automatically cleaned up**",
-    "text": "**A fully-dead container is never automatically cleaned up**: found while explaining why a service restart hadn't already collected `issues/packaging.md`'s dead nested-list-wrapper chain. Not a GC/reachability bug — `pruneUnreachableTombstones` only collects nodes that are *themselves* tombstoned and unreachable, and nothing ever tombstones a container once its last live child is gone (individual items get tombstoned one at a time as they're resolved; the now-vacuous wrapper is never itself marked dead). Parked here with no real home yet — belongs in a general crud/tombstone-lifecycle concern once one exists in the graph (`crud.md` is still archived, next on `archive-migration`'s own list).",
+    "text": "**A fully-dead container is never automatically cleaned up**: found while explaining why a service restart hadn't already collected `issues/packaging.md`'s dead nested-list-wrapper chain. Not a GC/reachability bug — `pruneUnreachableTombstones` only collects nodes that are *themselves* tombstoned and unreachable, and nothing ever tombstones a container once its last live child is gone (individual items get tombstoned one at a time as they're resolved; the now-vacuous wrapper is never itself marked dead). Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG006) — still belongs in a general crud/tombstone-lifecycle concern once one exists in the graph (`crud.md` is still archived, next on `archive-migration`'s own list).",
     "parent": "BlockNode:00CE5KSNVR001",
     "type": "listItem",
     "children": []
@@ -11952,8 +12000,24 @@
   {
     "@id": "BlockNode:00CE5KSNVR003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE5KSNVR003:links:Link:00CF2GVKS0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE5KSNVR003:links:Link:00CF2GVKS0000:props:StringProp:00CF2GVKS0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1124"
+          }
+        ]
+      }
+    ],
     "title": "00CE5KSNVR003",
-    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: while writing this doc set's own Resolved section, a new bullet's content landed on the id of an unrelated, already-tombstoned test-probe node from earlier live-testing — the reconciler apparently reused that dead slot (likely a positional fallback match, not a content match) but never cleared `tombstonedAt`, so the new content silently rendered as invisible until caught by noticing the Resolved section had one fewer visible item than pushed. Recovered by directly clearing `tombstonedAt` on the specific node once identified. Reproduced a second time, identical shape: pushing the same Resolved heading's full content plus one new item, right after tombstoning an unrelated single-item probe added moments earlier, landed the new item on that exact same tombstoned id again — strongly suggesting the fallback prefers reusing *any* available tombstoned child in the heading's own children array over minting a fresh id for a genuinely new, unmatched entry, regardless of content. Parked here with no real home yet — the root cause in `reconcile.ts`'s matching logic needs its own investigation whenever CRUD/reconciliation gets a dedicated pass.",
+    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: while writing this doc set's own Resolved section, a new bullet's content landed on the id of an unrelated, already-tombstoned test-probe node from earlier live-testing — the reconciler apparently reused that dead slot (likely a positional fallback match, not a content match) but never cleared `tombstonedAt`, so the new content silently rendered as invisible until caught by noticing the Resolved section had one fewer visible item than pushed. Recovered by directly clearing `tombstonedAt` on the specific node once identified. Reproduced a second time, identical shape: pushing the same Resolved heading's full content plus one new item, right after tombstoning an unrelated single-item probe added moments earlier, landed the new item on that exact same tombstoned id again — strongly suggesting the fallback prefers reusing *any* available tombstoned child in the heading's own children array over minting a fresh id for a genuinely new, unmatched entry, regardless of content. Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG004) — the root cause in `reconcile.ts`'s matching logic still needs its own investigation.",
     "parent": "BlockNode:00CE5KSNVR001",
     "type": "listItem",
     "children": []
@@ -12106,7 +12170,11 @@
       "BlockNode:00CEB07XC0001",
       "BlockNode:00CEA56A0G001",
       "BlockNode:00CE8XWZK0001",
-      "BlockNode:00CE95MVP8001"
+      "BlockNode:00CE95MVP8001",
+      "BlockNode:00CF46W4Q8001",
+      "BlockNode:00CF4D9XT0001",
+      "BlockNode:00CF4QNWZR001",
+      "BlockNode:00CF4QNX0000B"
     ]
   },
   {
@@ -12142,7 +12210,10 @@
       "BlockNode:00CEEJ3R60001",
       "BlockNode:00CEF7TB2G000",
       "BlockNode:00CF0GH9P8000",
-      "BlockNode:00CF10ATY8000"
+      "BlockNode:00CF10ATY8000",
+      "BlockNode:00CF2MR0M8001",
+      "BlockNode:00CF4N80W0001",
+      "BlockNode:00CF5H3V20001"
     ]
   },
   {
@@ -12348,8 +12419,8 @@
   {
     "@id": "BlockNode:00CE95MVP8001",
     "@type": "BlockNode",
-    "title": "## Current SKILL.md (verbatim, 2026-09-12)",
-    "text": "Dumped verbatim from `.claude/skills/aperas/SKILL.md` (mirrored at `skills/aperas/SKILL.md`) for easy citing and discussion while reshaping it. Frontmatter and top-matter are kept as one code block; the two numbered lists and the Reference section below are split into individually addressable items, matching the source's own structure — so a rewrite discussion can cite e.g. \"item 14\" as its own linkable block instead of a line number in a file that's about to move.",
+    "title": "## v0 SKILL.md (verbatim, 2026-09-12)",
+    "text": "Dumped verbatim from `.claude/skills/aperas/SKILL.md` (mirrored at `skills/aperas/SKILL.md`) for easy citing and discussion while reshaping it. Frontmatter and top-matter are kept as one code block; the two numbered lists and the Reference section below are split into individually addressable items, matching the source's own structure — so a rewrite discussion can cite e.g. \"item 14\" as its own linkable block instead of a line number in a file that's about to move. Retitled from \"Current\" once v1 landed — it is the prior version now, kept for comparison, not the live one.",
     "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
@@ -12731,6 +12802,20 @@
             "value": "117"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CE9B8YS0001:links:Link:00CF2GWBE8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEAX0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE9B8YS0001:links:Link:00CF2GWBE8000:props:StringProp:00CF2GWBE8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1794"
+          }
+        ]
       }
     ],
     "props": [
@@ -12748,7 +12833,7 @@
       }
     ],
     "title": "00CE9B8YS0001",
-    "text": "**A single `kg:insert` call isn't transactional either — first live confirmation of a predicted gap**: same shape as [`discussion/linking.md`'s own entry](../discussion/linking.md#id/BlockNode:00CDCTB49R001), status \"identified, not yet implemented\", which found it for a multi-*artifact* `kg:ingest` batch and predicted it would apply to `kg:insert`/`kg:update` too — this is the first live case inside a *single* `kg:insert` call. Root cause read off `kgInsert.ts`'s create mode: the call resolves the parent, parses the piped markdown into fresh nodes, checks name collisions, **writes every new node into the store via `hydrateFromParsed`**, resolves links, and only *then* resolves the anchor and calls `insertChild`. The anchor-parent rejection is therefore raised after the new nodes already exist, and nothing rolls them back — they stay live in memory, attached to nothing. The ordering isn't uniformly careless: `rejectSlugPathCollisions` is deliberately placed ahead of hydration with a comment saying it must be, so this is a missing second guard rather than a structural problem — resolving and validating the anchor beside the collision check, before any hydration, would close it. Live sequence that exposed it: attempt 1 passed the ArtifactNode as parent while the anchor was a grandchild, so it threw at `insertChild` and left orphans; attempt 2, with the parent corrected, was then rejected by the collision check for a name one of those orphans was holding (see the `extractAnchorNames` bug below for why that name existed at all); `aperas reload -- --discard` dropped the unflushed in-memory state and attempt 3 succeeded. Proof the orphans never reached disk: the id named in attempt 2's error, `BlockNode:00CE959VHG008`, appears nowhere in `BlockNode.jsonld`.",
+    "text": "**A single `kg:insert` call isn't transactional either — first live confirmation of a predicted gap**: same shape as [`discussion/linking.md`'s own entry](../discussion/linking.md#id/BlockNode:00CDCTB49R001), status \"identified, not yet implemented\", which found it for a multi-*artifact* `kg:ingest` batch and predicted it would apply to `kg:insert`/`kg:update` too — this is the first live case inside a *single* `kg:insert` call. Root cause read off `kgInsert.ts`'s create mode: the call resolves the parent, parses the piped markdown into fresh nodes, checks name collisions, **writes every new node into the store via `hydrateFromParsed`**, resolves links, and only *then* resolves the anchor and calls `insertChild`. The anchor-parent rejection is therefore raised after the new nodes already exist, and nothing rolls them back — they stay live in memory, attached to nothing. The ordering isn't uniformly careless: `rejectSlugPathCollisions` is deliberately placed ahead of hydration with a comment saying it must be, so this is a missing second guard rather than a structural problem — resolving and validating the anchor beside the collision check, before any hydration, would close it. Live sequence that exposed it: attempt 1 passed the ArtifactNode as parent while the anchor was a grandchild, so it threw at `insertChild` and left orphans; attempt 2, with the parent corrected, was then rejected by the collision check for a name one of those orphans was holding (see the `extractAnchorNames` bug below for why that name existed at all); `aperas reload -- --discard` dropped the unflushed in-memory state and attempt 3 succeeded. Proof the orphans never reached disk: the id named in attempt 2's error, `BlockNode:00CE959VHG008`, appears nowhere in `BlockNode.jsonld`. Promoted to [issues/cli.md's Open Issues](../issues/cli.md#id/BlockNode:00CF2AEAX0003) — this specific call-ordering fix stayed in `cli` rather than moving to `core` with its siblings.",
     "parent": "BlockNode:00CE8XWZK0001",
     "type": "listItem",
     "children": []
@@ -12996,16 +13081,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5KW4G002:links:Link:00CECG3FRG000:props:StringProp:00CECG3FRR000",
+            "@id": "BlockNode:00CEA5KW4G002:links:Link:00CECG3FRG000:props:StringProp:00CF2NGV0G000",
             "@type": "StringProp",
             "key": "position",
-            "value": "124"
+            "value": "201"
           }
         ]
       }
     ],
     "title": "## Open Issues",
-    "text": "None — all six are resolved by the v1 restructure, see Resolved below. New gaps found while working the graph are parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "text": "None — the v1 restructure resolved six, and the promotion-links gap found while working the graph is resolved too; all seven are in Resolved below. New gaps found while working the graph are parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "BlockNode:00CEA5KW4G001",
     "type": "heading",
     "children": []
@@ -13138,7 +13223,8 @@
       "BlockNode:00CEA5KW4G005",
       "BlockNode:00CEA5KW4G006",
       "BlockNode:00CEA5KW4G007",
-      "BlockNode:00CEA5KW4G008"
+      "BlockNode:00CEA5KW4G008",
+      "BlockNode:00CF2MWE68000"
     ]
   },
   {
@@ -13380,7 +13466,10 @@
       "BlockNode:00CEA5MHD8007",
       "BlockNode:00CEA5MHD8008",
       "BlockNode:00CEDP10P8001",
-      "BlockNode:00CEFF85V8001"
+      "BlockNode:00CEFF85V8001",
+      "BlockNode:00CF2NPBKR001",
+      "BlockNode:00CF4763DR001",
+      "BlockNode:00CF4RAGDR001"
     ]
   },
   {
@@ -13409,8 +13498,24 @@
   {
     "@id": "BlockNode:00CEA5MHD8006",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CEA5MHD8006:links:Link:00CF49M7F0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE95MVP8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEA5MHD8006:links:Link:00CF49M7F0000:props:StringProp:00CF49M7F0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "72"
+          }
+        ]
+      }
+    ],
     "title": "00CEA5MHD8006",
-    "text": "Its full text was dumped verbatim into this concern's discussion doc, split so that every item is an individually addressable block, making the rewrite discussable by citation rather than by line number.",
+    "text": "Its full text was dumped verbatim into this concern's discussion doc as [v0 SKILL.md (verbatim, 2026-09-12)](../discussion/aperas-skill.md#id/BlockNode:00CE95MVP8001), split so that every item is an individually addressable block, making the rewrite discussable by citation rather than by line number.",
     "parent": "BlockNode:00CEA5MHD8004",
     "type": "listItem",
     "children": []
@@ -13427,8 +13532,24 @@
   {
     "@id": "BlockNode:00CEA5MHD8008",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CEA5MHD8008:links:Link:00CF4A6KPG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE9FTDAR004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEA5MHD8008:links:Link:00CF4A6KPG000:props:StringProp:00CF4A6KPR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "166"
+          }
+        ]
+      }
+    ],
     "title": "00CEA5MHD8008",
-    "text": "A gap between documented practice and normative design was found and closed in the same pass: the Freeflow-as-unbounded-tree rule existed only in the skill, never in `design/documentation.md`'s own Scratchpad section, which still showed a heading-based example. Folded back into the design doc.",
+    "text": "A gap between documented practice and normative design was found and closed in the same pass: the Freeflow-as-unbounded-tree rule existed only in the skill, never in [`design/documentation.md`'s own Scratchpad section](../design/documentation.md#id/BlockNode:00CE9FTDAR004), which still showed a heading-based example. Folded back into the design doc.",
     "parent": "BlockNode:00CEA5MHD8004",
     "type": "listItem",
     "children": []
@@ -13733,7 +13854,8 @@
       "BlockNode:00CEB8N5EG001",
       "BlockNode:00CEA5Y5JG00E",
       "BlockNode:00CEA5Y5JG00G",
-      "BlockNode:00CEA5Y5JG00J"
+      "BlockNode:00CEA5Y5JG00J",
+      "BlockNode:00CF595QQR001"
     ]
   },
   {
@@ -14513,6 +14635,36 @@
   {
     "@id": "BlockNode:00CEDP10P8001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CEDP10P8001:links:Link:00CF4A73XR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEDP10P8001:links:Link:00CF4A73XR000:props:StringProp:00CF4A73Y8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "591"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CEDP10P8001:links:Link:00CF4A73Y8001",
+        "@type": "Link",
+        "target": "BlockNode:00CE8T6W7G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEDP10P8001:links:Link:00CF4A73Y8001:props:StringProp:00CF4A73YG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "668"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CEDP10P8001:props:StringProp:00CEDP120G000",
@@ -14528,7 +14680,7 @@
       }
     ],
     "title": "The first tooling staging step was taken",
-    "text": "The first tooling staging step was taken: `scripts/show_node.py` bundles the raw-node reader that had been hand-rewritten roughly eight times in a single session, covering the five uses that actually recurred — full record with `props`/`tombstonedAt`, exact stored text for round-tripping an edit, children with tombstones marked, full-text search standing in for the absent `aperas search`, and owning-artifact lookup. The skill's instruction to write \"a small one-liner\" is gone, replaced by a pointer. It is explicitly a staging area rather than a fix: the tracked gaps it stands in for (`aperas show <ref>`, and `unfold`'s missing tombstone marker) remain open.",
+    "text": "The first tooling staging step was taken: `scripts/show_node.py` bundles the raw-node reader that had been hand-rewritten roughly eight times in a single session, covering the five uses that actually recurred — full record with `props`/`tombstonedAt`, exact stored text for round-tripping an edit, children with tombstones marked, full-text search standing in for the absent `aperas search`, and owning-artifact lookup. The skill's instruction to write \"a small one-liner\" is gone, replaced by a pointer. It is explicitly a staging area rather than a fix: the tracked gaps it stands in for ([`aperas show <ref>`](../issues/treeview.md#id/BlockNode:00CE1GW638006), and [`unfold`'s missing tombstone marker](../issues/treeview.md#id/BlockNode:00CE8T6W7G001)) remain open.",
     "parent": "BlockNode:00CEA5MHD8004",
     "type": "listItem",
     "children": []
@@ -14782,6 +14934,20 @@
             "value": "327"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CF2GVB5G000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CF2GVB5G000:props:StringProp:00CF2GVB5G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1522"
+          }
+        ]
       }
     ],
     "props": [
@@ -14799,7 +14965,7 @@
       }
     ],
     "title": "00CEF7TB2G000",
-    "text": "**A parent-heading complete-list-push reconciles children by array position — tombstones included — not by content, silently corrupting identity downstream of any interleaved tombstoned sibling**: found live running this concern's own eval set — the `complete-list-push` prompt ([above](#id/BlockNode:00CEDVTB68004)) — against [`issues/treeview.md`'s `## Open Issues` list](../issues/treeview.md#id/BlockNode:00CE1GW638002), whose stored children order is `[004(live), 5QD6W8001(tombstoned), 005(live), 006(live), 007(live), 8T6W7G001(live), 638003(tombstoned)]`. Piping the heading line plus the 5 *visible* items (any reasonable read omits the tombstoned one) plus one new bullet — exactly the technique this doc's own SKILL.md prescribes as safe, on the strength of \"exact-key matching reuses every unchanged item's id\" — instead zipped the 6 piped items against storage slots by raw position, tombstones counted: item 2's real content landed on the still-tombstoned `5QD6W8001` (now invisibly holding live-looking text, un-revived), and items 3 through 6 each ended up carrying the *next* item's content under the *previous* item's id, with the new bullet's content landing on the old last item's id instead of a fresh one. Only the first item survived untouched, by coincidence — nothing tombstoned precedes it. The reconcile summary line reported a clean `6 matched, 0 changed, 0 added, 1 removed`, giving no hint that anything but an append had happened; only a direct per-child id/text diff caught it.",
+    "text": "**A parent-heading complete-list-push reconciles children by array position — tombstones included — not by content, silently corrupting identity downstream of any interleaved tombstoned sibling**: found live running this concern's own eval set — the `complete-list-push` prompt ([above](#id/BlockNode:00CEDVTB68004)) — against [`issues/treeview.md`'s `## Open Issues` list](../issues/treeview.md#id/BlockNode:00CE1GW638002), whose stored children order is `[004(live), 5QD6W8001(tombstoned), 005(live), 006(live), 007(live), 8T6W7G001(live), 638003(tombstoned)]`. Piping the heading line plus the 5 *visible* items (any reasonable read omits the tombstoned one) plus one new bullet — exactly the technique this doc's own SKILL.md prescribes as safe, on the strength of \"exact-key matching reuses every unchanged item's id\" — instead zipped the 6 piped items against storage slots by raw position, tombstones counted: item 2's real content landed on the still-tombstoned `5QD6W8001` (now invisibly holding live-looking text, un-revived), and items 3 through 6 each ended up carrying the *next* item's content under the *previous* item's id, with the new bullet's content landing on the old last item's id instead of a fresh one. Only the first item survived untouched, by coincidence — nothing tombstoned precedes it. The reconcile summary line reported a clean `6 matched, 0 changed, 0 added, 1 removed`, giving no hint that anything but an append had happened; only a direct per-child id/text diff caught it. Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG003).",
     "parent": "BlockNode:00CE8XWZK0001",
     "type": "listItem",
     "children": [
@@ -14811,36 +14977,6 @@
   {
     "@id": "BlockNode:00CEF7TB2G001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CEF7TCJR000",
-        "@type": "Link",
-        "target": "BlockNode:00CE95MVPG00B",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CEF7TCJR000:props:StringProp:00CEF7TCJR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "20"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CEF7TCJR002",
-        "@type": "Link",
-        "target": "BlockNode:00CEEJ3R60001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CEF7TCJR002:props:StringProp:00CEF7TCJR003",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "444"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CEF7TB2G001:props:StringProp:00CEF7TCJ0002",
@@ -16048,158 +16184,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CF1TZQVG000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "holder": true,
-    "title": "# CLI — Issues",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1TZQVG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "## Open Issues",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V65YG002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V65YG002",
-    "text": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**: found running `aperas-skill`'s own eval against [issues/treeview.md's Open Issues list](../issues/treeview.md#id/BlockNode:00CE1GW638002) — piping the heading line plus every visible item (skipping tombstoned ones, as any reasonable read would) zips the piped items against storage slots by raw position, silently reassigning live content onto wrong ids once a tombstoned sibling is interleaved. Contradicts what both the skill and the code's own doc comments claim (\"exact-key matching\"). Root cause not yet read off `reconcile.ts` directly — identified from reproduced symptom, confirmed only in a disposable eval sandbox, not the live corpus. Same defect family as the next two items below — one fix in `reconcile.ts` likely closes all three.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V65YG003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V65YG003",
-    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. Root cause not yet investigated in `reconcile.ts`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V65YG004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**",
-    "text": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**: works for reconciling siblings that share a rough common order, not for an unordered bag of whole-artifact identities scattered across concern folders — a match's recursive split can discard a whole quadrant of otherwise-valid candidates. Worked around for the rename path specifically (replaced by exact-key matching there), but the same algorithm is used elsewhere in `reconcile.ts` and may still carry the weakness on those other paths.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V65YG005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "**A fully-dead container is never itself tombstoned**",
-    "text": "**A fully-dead container is never itself tombstoned**: `pruneUnreachableTombstones` only collects nodes that are themselves tombstoned and unreachable; nothing ever tombstones a container once its last live child is gone (children get tombstoned one at a time as they're resolved, but the now-vacuous wrapper is never itself marked dead). Confirmed live against `issues/packaging.md`'s own dead nested-list-wrapper chain. Minor/cosmetic relative to the three above, but the same tombstone-lifecycle gap.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V65YG006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "**A single `kg:insert` call isn't transactional**",
-    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V65YR000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "**A multi-artifact `kg:ingest` isn't transactional either**",
-    "text": "**A multi-artifact `kg:ingest` isn't transactional either**: `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop per file with no try/catch, so a later file's failure leaves earlier files' writes already committed to the in-memory store with no rollback across the batch. Same shape as the single-`kg:insert` gap above, one layer up (a batch of artifacts vs. a batch of nodes within one call) — likely the same underlying fix (validate everything before writing anything) closes both.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJ8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "## Sub-Parts",
-    "text": "CLI's own known parts, and where each one's issues currently live:",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJ8002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V9JJ8002",
-    "text": "**`crud`** — not yet migrated; archived at `archive/Aperas-crud-design.md`, whose own §6 (\"Bookkeeping gaps found while designing this\") already names several items overlapping this doc's Open Issues above. Planned as `archive-migration`'s next sub-task.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJ8003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "**`treeview`** — 4 open",
-    "text": "**`treeview`** — 4 open: stale `TreeView.unfolds` references, a bare `aperas unfold <ref>` mutating the default view instead of peeking, no raw single-node inspection command, and `unfold` not marking tombstoned children. See [Open Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJ8004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V9JJ8004",
-    "text": "**`linking`** — none formally filed, but one confirmed-live bug not yet promoted: `extractAnchorNames`/`stripInlineAnchors` treat a backtick-quoted example anchor as a real claimed name, with no code-span awareness. See [discussion/aperas-skill.md](../discussion/aperas-skill.md#id/BlockNode:00CECCBKNG001). Formal home is [issues/linking.md](../issues/linking.md#id/BlockNode:00CDBYV5A8002) — currently empty.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJG000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V9JJG000",
-    "text": "**`packaging`** — none open. See [Open Issues](../issues/packaging.md#id/BlockNode:00CDDVC8N0002).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "**`list-consumption`** — 1 open",
-    "text": "**`list-consumption`** — 1 open: inserting a list item always spawns a fresh run-leader. See [Open Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG000).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJG002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V9JJG002",
-    "text": "**`documentation`** — none; doc-authoring conventions only, not engine code.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1V9JJG003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "00CF1V9JJG003",
-    "text": "**`archive-migration`** — 2 open, both process/decision items rather than code. See [Open Issues](../issues/archive-migration.md#id/BlockNode:00CE01Y0T0002).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1VB6J8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T21:59:17.749Z",
-    "title": "## Resolved",
-    "text": "None yet.",
-    "type": "heading",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CF1WZ4JG001",
     "@type": "BlockNode",
     "title": "# Core — Issues",
@@ -17386,6 +17370,2374 @@
     "title": "**`aperas resolve`'s title-ambiguity check doesn't filter tombstoned candidates either**",
     "text": "**`aperas resolve`'s title-ambiguity check doesn't filter tombstoned candidates either**: found live while resolving the new thin `cli.md` docs — `resolve issues/cli.md` failed with \"'cli.md' is ambiguous among: ArtifactNode:00CF2AEA78000 (\"cli.md\"), ArtifactNode:00CF1TZQV8000 (\"cli.md\")\", even though the second id was a tombstoned holder chain removed earlier in this same session. Same shape as [the dead-container gap](../issues/core.md#id/BlockNode:00CF1WZ4JG006) and the other tombstone-blind-spot findings in this batch — another site that treats a tombstoned node as if it still competes for a name. Not filed as its own Open Issue yet; parked here since it's minor and workaroundable (full-id lookup instead of bare-path resolve).",
     "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2MR0M8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2MR0M8001:links:Link:00CF2N0ABG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF2MWE68000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2MR0M8001:links:Link:00CF2N0ABG000:props:StringProp:00CF2N0ABG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "895"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2MR0M8001:props:StringProp:00CF2MR20G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2MR0M8001:props:StringProp:00CF2MR20G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF2MR0M8001",
+    "text": "**Promotion out of `discussion` left every origin unlinked — and the skill had no instruction that would have caught it**: filing a new concern's Open Issues from findings already recorded across four different discussion docs produced seven issue entries that read as if they had appeared from nowhere. Each one paraphrased a confirmed finding (`discussion/aperas-skill.md`'s positional-reconcile and single-`kg:insert` entries, `discussion/list-consumption.md`'s tombstone-reuse and dead-container entries, `discussion/packaging.md`'s `matchLeftoverByAbstract` entry, `discussion/linking.md`'s multi-artifact `kg:ingest` entry) while naming its source only as backticked prose, never as a link. Invisible from the new doc's own side — nothing about it looked incomplete — and `aperas backlinks` on each new item returned nothing. Caught by direct user callout, not by self-review. Promoted to [issues/aperas-skill.md's Open Issues](../issues/aperas-skill.md#id/BlockNode:00CF2MWE68000) — added by way of this entry, which is the step the issue is about.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CF2MR0M8002",
+      "BlockNode:00CF2MR0M8003",
+      "BlockNode:00CF2MR0M8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF2MR0M8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF2MR0M8002:props:StringProp:00CF2MR20G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2MR0M8002:props:StringProp:00CF2MR20G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Why the direction isn't the obvious one**",
+    "text": "**Why the direction isn't the obvious one**: an `issues` block cannot cite a `discussion` block — that is a down-citation, which Citation direction forbids. So the link can only be added at the *origin*, pointing up: the discussion entry gains \"promoted to `issues/<concern>.md`\" with a real wikilink, and the backlink surfaces the provenance from the issue's side for free. Fixed that way for all seven.",
+    "parent": "BlockNode:00CF2MR0M8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2MR0M8003",
+    "@type": "BlockNode",
+    "title": "00CF2MR0M8003",
+    "text": "**Three separate things in SKILL.md each almost covered this, and none did**: Citation direction states the constraint (no down-citations) and its one sanctioned exception, then stops — it never states the obligation that follows, that promotion has to add the link at the origin. *Discussion is where meta-info is born* argues the opposite caution, against promoting prematurely (\"most things never need promoting at all\"), which primes hesitation before filing rather than care once filing is legitimate. *Dense linking is the precondition* states the principle in the abstract but attaches it to no concrete trigger.",
+    "parent": "BlockNode:00CF2MR0M8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2MR0M8004",
+    "@type": "BlockNode",
+    "title": "00CF2MR0M8004",
+    "text": "**The concept that explains it was never in SKILL.md at all**: [Crystallization — content and topology](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00J) describes exactly this — a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing, and \"link density is the product of this lifecycle\" — but it lives only in this concern's design doc. The v1 restructure never carried it into the operational skill file, so the one passage that would have named the missing step was in a document the working agent doesn't read while working.",
+    "parent": "BlockNode:00CF2MR0M8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2MWE68000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2MWE68000:links:Link:00CF2MWFH0002",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2MWE68000:links:Link:00CF2MWFH0002:props:StringProp:00CF2MWFH0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "721"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2MWE68000:props:StringProp:00CF2MWFH0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2MWE68000:props:StringProp:00CF2MWFH0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF2MWE68000",
+    "text": "**The skill states the citation-direction constraint but never the obligation that follows from it**: because an `issues` block may not cite a `discussion` block, a finding promoted up out of discussion can only be linked from its origin — the discussion entry has to gain the forward link at the moment of promotion. Nothing in the skill says so. Citation direction states what is forbidden and stops; *Discussion is where meta-info is born* argues the opposite caution, against promoting prematurely, which primes hesitation before filing rather than care once filing is legitimate; *Dense linking is the precondition* states the principle with no trigger attached to it. The passage that would name the missing step — [Crystallization — content and topology](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00J), whose topology axis is exactly this lifecycle — exists only in the design doc and was never carried into the operational skill file by the v1 restructure. Confirmed live: seven issues filed into a new concern from findings recorded across four discussion docs, every origin left unlinked, invisible from the new doc's own side and caught only by direct user callout. **Resolved**: the skill gained a `### Promotion links at the origin` section under Discipline, directly after Citation direction — stating that the link is added at the origin pointing up, that it happens at the moment of promotion rather than as a later tidying pass, and naming crystallization's topology axis with a pointer to the design doc rather than importing it wholesale.",
+    "parent": "BlockNode:00CEA5KW4G00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF2NPBKR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2NPBKR001:links:Link:00CF4A6VT8000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2NPBKR001:links:Link:00CF4A6VT8000:props:StringProp:00CF4A6VT8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "541"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF2NPBKR001:props:StringProp:00CF2NPD08000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF2NPBKR001:props:StringProp:00CF2NPD08001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF2NPBKR001",
+    "text": "**The first gap found in v1 itself was closed — a missing corollary, not a missing item**: filing a new concern's Open Issues from findings already recorded across four discussion docs left every origin unlinked, because the skill stated Citation direction's constraint (no down-citations) without the obligation that follows from it — that promotion adds the link at the origin, pointing up. Three separate passages each almost covered it and none did, and the one that names the mechanism, Crystallization's topology axis, existed only in [`design/aperas-skill.md`](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00J) and had never been carried into the operational file. Closed by a new `### Promotion links at the origin` section under Discipline, sited directly after Citation direction so the constraint and its corollary are read together. Notable as the first item to enter v1 by the skill's own stated path rather than by restructuring what was already there: incident, captured raw in Freeflow, confirmed by reading both documents, promoted to the level that explains it.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4Q8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF46W4Q8001:links:Link:00CF46W64G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE95MVP8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF46W4Q8001:links:Link:00CF46W64G000:props:StringProp:00CF46W64G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "126"
+          }
+        ]
+      }
+    ],
+    "title": "## v1 SKILL.md (verbatim, 2026-09-13)",
+    "text": "Dumped verbatim from `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`), the same way [v0](#id/BlockNode:00CE95MVP8001) was — a copy rather than a live projection, deliberately, so successive versions sit side by side and what a restructure *drops* stays findable. That is not hypothetical: v0's presence here is the only reason item 18's third trigger was found missing from v1. Frontmatter and top-matter are kept as one code block; section headings are demoted one level so every item below stays individually addressable.",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG000",
+      "BlockNode:00CF46W4QG001",
+      "BlockNode:00CF46W4QG00B",
+      "BlockNode:00CF46W4QG00K",
+      "BlockNode:00CF46W4QG012",
+      "BlockNode:00CF46W4QR00M",
+      "BlockNode:00CF46W4QR01J"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG000",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG000",
+    "text": "```\n---\nname: aperas\ndescription: Working directly with the Apeiron knowledge graph via the `aperas` CLI — the graph is the source and the `.md` files under `artifacts/` are projections of it, so every change goes through the CLI rather than a file edit. Covers traversal-first reading (deep read/deep write/dense linking), the edit loop, citation direction, staging, wikilink and anchor syntax, renaming, and the current tool gaps. Use this whenever work touches the AperasKG graph in any way — editing/updating/inserting/removing/renaming a node, adding a wikilink, or any mention of `aperas`/`kg:` commands in this project — even if the user doesn't name the skill. Read this before `kg-doc-ingest`, which covers getting existing text *into* the graph.\n---\n\n# aperas\n\nStatus: **v1** — restructured from a flat, incident-ordered list of eighteen items into four levels, abstract to concrete. Content is unchanged except where marked superseded; the arrangement was the defect. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.\n\n> **Aperas-repo insiders**: `aperas` isn't published yet. Every command below (`aperas <verb> ...`) actually runs today as `npm run aperas -- <verb> ...` from `Aperas/monorepo/`. **Delete this note once `aperas` ships as a real installed binary** (see `AperasKG/artifacts/issues/packaging.md`'s Pending Tasks — the `bin` build).\n```",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG001",
+    "@type": "BlockNode",
+    "title": "### How to read this",
+    "text": "Four levels, each following from the one above:",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG002",
+      "BlockNode:00CF46W4QG003",
+      "BlockNode:00CF46W4QG004",
+      "BlockNode:00CF46W4QG005",
+      "BlockNode:00CF46W4QG006",
+      "BlockNode:00CF46W4QG007",
+      "BlockNode:00CF46W4QG008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF46W4QG002:props:StringProp:00CF46W5Z8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CF46W4QG002:props:StringProp:00CF46W5Z8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF46W4QG002",
+    "text": "**Philosophy** — what the graph *is*. Everything else is a consequence.",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG003",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG003",
+    "text": "**Orientation** — what reading and writing *mean* here.",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG004",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG004",
+    "text": "**Discipline** — how to behave once oriented.",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG005",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG005",
+    "text": "**Mechanics** — how to type it.",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG006",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG006",
+    "text": "Read top-down. Stopping after Orientation should already leave you acting correctly in the ordinary case; starting at Mechanics gives you a list of gotchas with nothing to hang them on. An item sits at the level that explains *why* it is true, not the level where it was first noticed.",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG007",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG007",
+    "text": "Each item is marked **[current]**, **[superseded]** (the cause has since been removed — kept so the old advice isn't re-derived), or **[unverified]** (described, not yet confirmed live).",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG008",
+    "@type": "BlockNode",
+    "title": "#### Scope",
+    "text": "This skill owns *working the graph*. `kg-doc-ingest` owns *getting existing text into it* — tracking, ingesting, round-trip verification. Anything that is a fact about this project rather than about the tooling belongs in a concern doc under `AperasKG/artifacts/`, which this skill only points at.",
+    "parent": "BlockNode:00CF46W4QG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG009",
+      "BlockNode:00CF46W4QG00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG009",
+    "@type": "BlockNode",
+    "title": "Note the boundary is by subject, not by timing",
+    "text": "Note the boundary is by subject, not by timing: a genuinely new document needs no disk authoring at all (see *Sketching a structure*, Mechanics). What is ruled out is authoring a *finished* document on disk and reconciling it back in.",
+    "parent": "BlockNode:00CF46W4QG008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00A",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00A",
+    "text": "---",
+    "parent": "BlockNode:00CF46W4QG008",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00B",
+    "@type": "BlockNode",
+    "title": "### 1. Philosophy",
+    "text": "**The Apeiron is the source; the `.md` files under `artifacts/` are shadows it casts.** [current]",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG00C",
+      "BlockNode:00CF46W4QG00D",
+      "BlockNode:00CF46W4QG00E",
+      "BlockNode:00CF46W4QG00F",
+      "BlockNode:00CF46W4QG00G",
+      "BlockNode:00CF46W4QG00H",
+      "BlockNode:00CF46W4QG00J"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00C",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00C",
+    "text": "A projection can be regenerated from the graph at any time. It is never the place a change is made. Editing a projection to change the graph is mistaking the shadow for the thing casting it — and it can appear to work, because the file looks right afterwards, while the source is untouched or gets reconciled back into a shape nobody chose.",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00D",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00D",
+    "text": "The graph's substance is nodes *and the links between them*. A node's meaning is not carried by its own text alone; it is constituted by what it links to, what links back, and where it sits among its siblings and its thread.",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00E",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00E",
+    "text": "Every rule below is downstream of this. \"Graph-first, always\" is its first consequence, not an independent instruction.",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00F",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00F",
+    "text": "**Worked example — the same task, both ways.** Asked whether two docs cross-referenced each other, one session reached for `grep` over the projected `.md` files plus a raw `BlockNode.jsonld` read. It took several steps, produced an answer, and still had to be redone — because the question was about link structure, which exists in the source and only *appears* in the shadow. Redone properly it was one command:",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00G",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00G",
+    "text": "```bash\naperas backlinks BlockNode:00CE1GW638007 --text\n# → \"No backlinks found.\"\n```",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00H",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00H",
+    "text": "That is the whole answer, from the source, in one call. Searching projections for structure that only exists in the graph is the same category error as editing them — one level down.",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00J",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00J",
+    "text": "---",
+    "parent": "BlockNode:00CF46W4QG00B",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00K",
+    "@type": "BlockNode",
+    "title": "### 2. Orientation",
+    "text": "**Traversal is the primary mode of work, not a check appended to it.** [current] Reading means following links; writing means placing them.",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG00M",
+      "BlockNode:00CF46W4QG00N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00M",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00M",
+    "text": "`archive/Aperas-design.md`'s Multi-Agent Projection Pattern names these as the architecture's own capabilities. They are crystallized practice rather than theory — but the practice predates this system, coming from years of real knowledge-graph work in Logseq and carried in as design instead of being rediscovered here. That this system has barely exercised them yet is a fact about its infancy, not their standing.",
+    "parent": "BlockNode:00CF46W4QG00K",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00N",
+    "@type": "BlockNode",
+    "title": "#### Deep read runs in two directions",
+    "text": "They answer different questions, and the tool surface already carves them apart:",
+    "parent": "BlockNode:00CF46W4QG00K",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG00P",
+      "BlockNode:00CF46W4QG00Q",
+      "BlockNode:00CF46W4QG00R",
+      "BlockNode:00CF46W4QG00S",
+      "BlockNode:00CF46W4QG00T",
+      "BlockNode:00CF46W4QG00V",
+      "BlockNode:00CF46W4QG00W",
+      "BlockNode:00CF46W4QG00X",
+      "BlockNode:00CF46W4QG00Y",
+      "BlockNode:00CF46W4QG00Z",
+      "BlockNode:00CF46W4QG010",
+      "BlockNode:00CF46W4QG011"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00P",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF46W4QG00P:props:StringProp:00CF46W600000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF46W4QG00P:props:StringProp:00CF46W600001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF46W4QG00P",
+    "text": "**Forward and downward — deeper *content*.** A block's children and its outgoing links: what it is made of and what it refers to. This is what an ordinary read wants, and it is why `aperas unfold <ref>` previews children *and* forward links together — both are content, in the same sense.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00Q",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00Q",
+    "text": "**Backward — deeper *context*.** Who depends on this block, who cites it, what surrounds it. `aperas backlinks <id> --text` stands alone as a command because it is the other axis. Reach for it when the decision is harder than reading: editing, or an investigation whose scope has widened.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00R",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00R",
+    "text": "**Deep write is inherently backward.** [current] What a change breaks is only answerable from the citing side. Updating a block means checking its backlinks and forward links and updating what the change has made stale — not leaving them to rot.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00S",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00S",
+    "text": "**Dense linking is the precondition for both.** [current] Everything related gets linked, directly (A references B) or indirectly (a discussion node that talks about both). A sparsely linked graph gives deep read nothing to descend into and deep write nothing to follow. Linking is constitutive here, not tidiness.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00T",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00T",
+    "text": "**Keep an active view, and keep it current.** [current] Set one up once:",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00V",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00V",
+    "text": "```bash\naperas profile create <handle> --name \"<Display Name>\"\naperas profile create-view <name> --profile <handle>\n```",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00W",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00W",
+    "text": "Then `aperas unfold <path> --view <name> --flush` whatever you are working on *as* you start it, `aperas tree --view <name>` to render that lens, `aperas fold` to collapse a subtree again, and plain `aperas tree --depth <n>` (no `--view`) for a skeletal title-only map of the whole corpus.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00X",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00X",
+    "text": "A view created early and never touched again still answers `aperas tree --view <name>`, showing whatever was unfolded during a previous task, with nothing warning you it is stale — worse than no view, because it looks current without being current.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00Y",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00Y",
+    "text": "**Worked example — a traversal, start to finish.**",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG00Z",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG00Z",
+    "text": "```bash\naperas unfold BlockNode:00CE0HD0HG007 --view my-view --flush\n# → the block's own text, plus each forward link previewed:\n#   │ ...Link... [[wikilink]] → BlockNode:00CE1GW638002  ## Open Issues  [+6]\naperas unfold BlockNode:00CE1GW638002 --view my-view --flush\n# → that heading's children, one of which is the block actually being looked for\n```",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG010",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG010",
+    "text": "Two commands, each one hop. The content axis, followed until it arrives.",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG011",
+    "@type": "BlockNode",
+    "title": "00CF46W4QG011",
+    "text": "---",
+    "parent": "BlockNode:00CF46W4QG00N",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG012",
+    "@type": "BlockNode",
+    "title": "### 3. Discipline",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG013",
+      "BlockNode:00CF46W4QR005",
+      "BlockNode:00CF46W4QR007",
+      "BlockNode:00CF46W4QR009",
+      "BlockNode:00CF46W4QR00B",
+      "BlockNode:00CF46W4QR00D",
+      "BlockNode:00CF46W4QR00G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG013",
+    "@type": "BlockNode",
+    "title": "#### The edit loop",
+    "text": "The shape of nearly every real task:",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QG014",
+      "BlockNode:00CF46W4QR000",
+      "BlockNode:00CF46W4QR001",
+      "BlockNode:00CF46W4QR002",
+      "BlockNode:00CF46W4QR003",
+      "BlockNode:00CF46W4QR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QG014",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF46W4QG014:props:StringProp:00CF46W60G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CF46W4QG014:props:StringProp:00CF46W60G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF46W4QG014",
+    "text": "**Orient before touching anything — content first, context when the decision is hard.** Start with `aperas unfold <ref>` for children and forward links. Escalate to `aperas backlinks <id> --text` for context. Editing always qualifies, because step 5 cannot work without it.",
+    "parent": "BlockNode:00CF46W4QG013",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR000",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR000",
+    "text": "**Locate the smallest block that actually changed.** [current] Not the artifact, not the enclosing heading: the leaf whose content is wrong. `aperas update`/`aperas insert` work at any level, and targeting something larger means hand-reconstructing every unchanged sibling exactly — where one transcription slip silently tombstones that block and mints a fresh id in its place. **Never reconstruct by copying from an already-*projected* file**: it has anchor tags spliced in that are a projection artifact, not content, and piping them back bakes them into the block's stored text as prose.",
+    "parent": "BlockNode:00CF46W4QG013",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR001",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR001",
+    "text": "**Edit graph-first.** [current] Pipe replacement content to `aperas update <id>`; `aperas insert` for genuinely new content; a stdin-less `insert` to *move* a node rather than recreate it. Never a direct edit of the file on disk followed by re-ingesting — that is `kg-doc-ingest`'s disk-first direction, correct only for text not yet in the graph. (Caught live by direct user callout: doing this once for a wikilink fix, then having to redo it through `aperas update` to actually fix the workflow.)",
+    "parent": "BlockNode:00CF46W4QG013",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR002",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR002",
+    "text": "**Verify by traversal, not by the summary line.** [current] A reconcile count reports what the command *believes* it did. Proof is a backlink that actually resolves, or `aperas project <path> --dry-run` where the content is actually visible. A push can silently match new content onto an already-tombstoned node's id without reviving it, so it stays invisible while the summary reports it as added — caught live when a Resolved section rendered one fewer bullet than was pushed.",
+    "parent": "BlockNode:00CF46W4QG013",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR003",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR003",
+    "text": "**Deep write — follow what the change made stale.** Check backlinks and forward links; update what now disagrees.",
+    "parent": "BlockNode:00CF46W4QG013",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR004",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR004",
+    "text": "**Project, then stage.** `aperas project <path> --flush`, then `git add` immediately.",
+    "parent": "BlockNode:00CF46W4QG013",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR005",
+    "@type": "BlockNode",
+    "title": "#### Stage each verified step",
+    "text": "[current] After a step lands clean, `git add` it — in both the code repo and `AperasKG/`. The index becomes a running checkpoint: if a later step goes wrong, `git restore`/`git diff` against it recovers cleanly. **Staging only, never committing** — `git commit` stays the user's call. Pass `--flush` on the mutating call you are about to stage, not just at the end of a sequence; the service's own flush timer can otherwise land *after* a `git add`, leaving the index holding stale content.",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR006",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR006",
+    "text": "This is not bookkeeping. Recovering a live incident that tombstoned real content was only possible because the prior step had actually been staged.",
+    "parent": "BlockNode:00CF46W4QR005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR007",
+    "@type": "BlockNode",
+    "title": "#### Write discussion before executing, not after",
+    "text": "[current] Once a plan is settled — even just agreed in chat, even a \"yes, do it\" — write it into the relevant `discussion` doc *before* starting, for any nontrivial multi-step change. The conversation a plan lives in can be compacted or cut off at any point, and a plan that only ever existed as chat turns is gone the moment that happens, with no way to resume or hand it off from what is on disk. Caught live once: a 3-way workspace split authorized in chat with nothing written down.",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR008",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR008",
+    "text": "Treat the discussion doc as a scratchpad, not something to write only once resolved. Freeflow raw investigation notes into it as you go — inventory findings, open questions, a \"not yet decided\" list. That is what protects the work if context is lost mid-*investigation*, not just mid-plan.",
+    "parent": "BlockNode:00CF46W4QR007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR009",
+    "@type": "BlockNode",
+    "title": "#### Move a node; don't remove and recreate it",
+    "text": "[current] `aperas insert <node-id> --after/--before <anchor>` with **no stdin piped** repositions that exact node — the anchor's current parent becomes its new parent, cross-parent moves included. It preserves the id, every backlink to it, and its place in history.",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00A",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00A",
+    "text": "Reach for remove+insert only when the wording is changing enough that it is genuinely not the same item any more — and even then, a move followed by a separate `--text-only` edit keeps the id while changing only what actually changed. Caught live getting this backwards: promoting two findings into a new section via `remove` + `insert` left two needlessly tombstoned orphans behind, for a relocation a plain move would have handled with zero churn.",
+    "parent": "BlockNode:00CF46W4QR009",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00B",
+    "@type": "BlockNode",
+    "title": "#### Citation direction",
+    "text": "[current] The concerns form an abstraction gradient — `design` most abstract, `discussion` least, `issues`/`planning`/`history` between. A citation may point **up** the gradient or **sideways** freely. It may not point **down**: a design block does not reference a discussion block, for the same reason a node carries a parent pointer rather than a list of children.",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00C",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00C",
+    "text": "The one sanctioned exception is a designated index — a design doc's own `# Context` section, which exists precisely to index its concern's other facets, one link each. That is a single structurally-privileged reference, not citations scattered through the body.",
+    "parent": "BlockNode:00CF46W4QR00B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00D",
+    "@type": "BlockNode",
+    "title": "#### Promotion links at the origin",
+    "text": "[current] The rule above has a corollary that has to be acted on in the same breath as a promotion. When a finding crystallizes *up* out of `discussion` into `issues`/`design`/`planning`/`history`, the new entry cannot cite the discussion entry it came from — that is a down-citation. So the link is added at the **origin** instead: the discussion entry gains \"promoted to `issues/<concern>.md`\" with a real wikilink, pointing up. The provenance then surfaces from the new entry's side for free, as a backlink.",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00E",
+      "BlockNode:00CF46W4QR00F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00E",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00E",
+    "text": "Do it at the moment of promotion, not as a later tidying pass. A formal doc whose entries paraphrase confirmed findings without linking them reads as complete from its own side — nothing about it looks unfinished — while `aperas backlinks` on every one of its entries returns nothing, and the provenance survives only in the head of whoever filed it. Caught live: seven issues compiled into a new concern doc from findings recorded across four different discussion docs, every origin left unlinked, noticed only by direct user callout.",
+    "parent": "BlockNode:00CF46W4QR00D",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00F",
+    "@type": "BlockNode",
+    "title": "This is the topology half of crystallization (`design/aperas-skill.md`)",
+    "text": "This is the topology half of crystallization (`design/aperas-skill.md`): a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing. Link density is the product of that lifecycle, which is why `discussion` is where it gets paid for.",
+    "parent": "BlockNode:00CF46W4QR00D",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00G",
+    "@type": "BlockNode",
+    "title": "#### Discussion is where meta-info is born",
+    "text": "[current] Not a sink for what didn't fit elsewhere. `discussion` is the Apeiron-equivalent concern: unbound, schema-free, where every comment, assertion and reasoning trace originates before anything is decided about where — or whether — it belongs elsewhere. `design`/`issues`/`planning`/`history` are Peras: typed projections that specific *kinds* of content get promoted into, once a dedicated home for that kind has actually been designed. Most things never need promoting at all.",
+    "parent": "BlockNode:00CF46W4QG012",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00H",
+      "BlockNode:00CF46W4QR00J",
+      "BlockNode:00CF46W4QR00K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00H",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00H",
+    "text": "So something surfacing mid-task that isn't what the task is about — an engine bug found while migrating docs, say — starts in *this* task's discussion doc and stays there for as long as no dedicated home exists, possibly indefinitely. The test is not \"is there an existing doc this could plausibly belong to\" but \"has a dedicated home for this actually been designed yet\". Confirmed wrong live: two parser bugs were filed straight into `issues/packaging.md` on the assumption a finding needs an immediate formal home — wrong twice over, since packaging wasn't even the right eventual concern, and since reaching for promotion skipped the point of having a discussion sink at all.",
+    "parent": "BlockNode:00CF46W4QR00G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00J",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00J",
+    "text": "See `design/documentation.md` for the concern taxonomy and the Freeflow document shape (an unbounded *list*, not a growing set of headings).",
+    "parent": "BlockNode:00CF46W4QR00G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00K",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00K",
+    "text": "---",
+    "parent": "BlockNode:00CF46W4QR00G",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00M",
+    "@type": "BlockNode",
+    "title": "### 4. Mechanics",
+    "text": "This section describes the usage of the `aperas` CLI. For detailed syntax, see `aperas --help` and `aperas <verb> --help`.",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00N",
+      "BlockNode:00CF46W4QR00P",
+      "BlockNode:00CF46W4QR00R",
+      "BlockNode:00CF46W4QR00S",
+      "BlockNode:00CF46W4QR00T",
+      "BlockNode:00CF46W4QR00W",
+      "BlockNode:00CF46W4QR00X",
+      "BlockNode:00CF46W4QR013",
+      "BlockNode:00CF46W4QR016",
+      "BlockNode:00CF46W4QR017",
+      "BlockNode:00CF46W4QR019",
+      "BlockNode:00CF46W4QR01F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00N",
+    "@type": "BlockNode",
+    "title": "#### Paths",
+    "text": "[current] Paths passed to `aperas project`/`ingest`/etc. resolve relative to the graph's `artifacts` root defined in `aperas.config.json`, e.g., `discussion/foo.md` relative to `AperasKG/artifacts/`, **not** the repo-relative `AperasKG/artifacts/discussion/foo.md` that `git status` and `find` print. The repo-relative form fails with \"No ingested ArtifactNode or FolderNode found\".",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00P",
+    "@type": "BlockNode",
+    "title": "#### Wikilink syntax",
+    "text": "[current] The resolver only recognizes a URL that is `[[code]]`, starts with `aperas://tree/` or `aperas://id/`, or contains a bare `#fragment`/`path#fragment`. A plain `../folder/file.md/Slug` reference (no `#`) renders fine as prose but is **not** a graph `Link` — `aperas backlinks` on it comes back empty. Use `[title](../folder/file.md#id/BlockNode:<ID>)`.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00Q"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00Q",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00Q",
+    "text": "Verify with `aperas backlinks BlockNode:<ID> --text` against the specific target block, not the whole-document path. Do not trust a command's own reported link-resolution count; a real backlink appearing is the proof. A link written without a `#fragment` silently creates nothing at all, and the ingest summary will not mention it.",
+    "parent": "BlockNode:00CF46W4QR00P",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00R",
+    "@type": "BlockNode",
+    "title": "#### Anchor placement — the bold-colon rule",
+    "text": "[current] A list item's lead-in colon must sit *outside* any bold span: `**Term**:`, never `**Term:**`. A bold-wrapped colon is rejected by the lead-in detector, so anchor insertion falls through to the next plain-text colon it finds — which can splice an anchor into the middle of unrelated text, such as a link's own title.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00S",
+    "@type": "BlockNode",
+    "title": "#### Sketching a structure",
+    "text": "[current] A new heading or subtree can be built directly in the graph, with no disk authoring: create a placeholder node with `aperas resolve --create-holder <path> --titles <title> [<title>...]`, then *fill* the real content in with `aperas update` and `aperas insert`. This is why a genuinely new document never requires the disk-first path.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00T",
+    "@type": "BlockNode",
+    "title": "#### `--after`/`--before` anchors",
+    "text": "[current] The anchor must be a **direct child** of `<path>`, not a descendant. `aperas insert <path> --after <anchor>` fails with \"anchor is not a child of X\" otherwise. A heading's own text and its nested list are two different levels. Check the real structure first — `aperas tree --depth <n>`, or `scripts/show_node.py --children <ref>` — rather than guessing.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00V",
+    "@type": "BlockNode",
+    "title": "Be aware this failure is not clean",
+    "text": "Be aware this failure is not clean: the new nodes are hydrated into the store *before* the anchor is validated, so a rejected insert leaves live orphans in memory that can collide with your retry. `aperas reload -- --discard` clears them.",
+    "parent": "BlockNode:00CF46W4QR00T",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00W",
+    "@type": "BlockNode",
+    "title": "#### Updating a heading — `--text-only`",
+    "text": "[current] A heading-target `update` **without** `--text-only` reconciles children too, even from an empty body: piping just `## Pending Tasks` with no body reconciles 0 piped children against N existing ones as *all removed*, tombstoning real content. `--text-only` overwrites just `.text`/`.title` and skips reconciliation entirely — that is what makes a retitle safe.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00X",
+    "@type": "BlockNode",
+    "title": "#### Adding an item to an existing list",
+    "text": "[current] Target the list's **parent heading** — `aperas update <heading-id>` — and pipe the heading line plus the *complete* corrected list, every existing item verbatim plus the new one. Exact-key matching reuses every unchanged item's id (`N matched`, only the new one `added`).",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR00Y",
+      "BlockNode:00CF46W4QR00Z",
+      "BlockNode:00CF46W4QR010",
+      "BlockNode:00CF46W4QR011",
+      "BlockNode:00CF46W4QR012"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00Y",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00Y",
+    "text": "**This only works if the piped content is genuinely complete.** Piping the heading plus *only* the new item reconciles the existing ones away as removed. Hit live on a 4-link Dashboard expecting a one-line addition: the actual summary was `0 matched, 0 added, 5 removed`.",
+    "parent": "BlockNode:00CF46W4QR00X",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR00Z",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR00Z",
+    "text": "For an **ordered** list this is the only safe route, because a freshly inserted item becomes its own run-leader and can restart the numbering rather than continuing it.",
+    "parent": "BlockNode:00CF46W4QR00X",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR010",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR010",
+    "text": "For an unordered list, `aperas insert <parent> --after <existing-item>` piping a bare `- item` line is safe. [superseded — was previously unsafe] It used to create a nested list-in-list; the list-consumption migration removed every live `list`-typed node, so there is no longer a list node to mistakenly target. The old create-and-promote recovery dance — `aperas insert <item-id> --after <existing-direct-child-of-the-list>` to promote the real item out, then `aperas remove` the emptied wrapper — is therefore only needed for pre-existing warts, not new work.",
+    "parent": "BlockNode:00CF46W4QR00X",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR011",
+    "@type": "BlockNode",
+    "title": "Two input rules still apply",
+    "text": "Two input rules still apply: pipe the bare content, **never** the ordinal marker (a leading `3.` alone makes the parser read it as a fresh list), and **never** plain text with no bullet marker (it parses as a `paragraph`, breaking a contiguous run in two).",
+    "parent": "BlockNode:00CF46W4QR00X",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR012",
+    "@type": "BlockNode",
+    "title": "Known cosmetic consequence",
+    "text": "Known cosmetic consequence: a freshly inserted item carries its own explicit `orderedList`/`startIndex`, marking it a run-leader and rendering a spurious blank line before it. Not corruption — see `issues/list-consumption.md`.",
+    "parent": "BlockNode:00CF46W4QR00X",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR013",
+    "@type": "BlockNode",
+    "title": "#### Renaming",
+    "text": "[current] **One artifact**: `git mv old.md new.md`, then `aperas ingest <new-path> --track --flush` scoped to that concern set — not a full path-less sweep, which walks the entire `artifacts/` tree including `archive/` and can hit collisions in never-swept legacy content. Rename detection matches by exact abstract-text equality against tracked ArtifactNodes whose recorded path vanished. Don't trust the \"N renamed\" summary; confirm the ids actually survived at the new path.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR014",
+      "BlockNode:00CF46W4QR015"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR014",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR014",
+    "text": "A file rename touches no content. If the H1 needs retitling too, that is a separate `aperas update` on the H1 with `--text-only`.",
+    "parent": "BlockNode:00CF46W4QR013",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR015",
+    "@type": "BlockNode",
+    "title": "**A set of cross-referencing docs**",
+    "text": "**A set of cross-referencing docs**: do every content fix first — H1 retitles, cross-reference paths — *while the files are still at their old names*, verify, then `git mv` each. That way every call in the content-fixing phase resolves against paths that still exist, and the rename becomes a purely mechanical last step.",
+    "parent": "BlockNode:00CF46W4QR013",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR016",
+    "@type": "BlockNode",
+    "title": "#### Shell quoting",
+    "text": "[current] A piped `echo \"...\"` silently drops nested double quotes — that is bash, not `aperas`. Bash closes the outer string at the first inner `\"` and reopens after it, dropping both marks with no error from anything. Caught live: `not merely \"wherever convenient\"` had silently become `not merely wherever convenient`. Write content containing double quotes to a file first and `cat` it in.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR017",
+    "@type": "BlockNode",
+    "title": "#### Service state",
+    "text": "[current] `aperas service restart` flushes and reloads from the on-disk mirror — the clean way to confirm what you think landed actually did. `aperas reload -- --discard` throws away in-memory state and re-reads disk, which is the recovery when a failed call has left orphans behind.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR018"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR018",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR018",
+    "text": "If the service has died, an unflushed mutation is gone. Flushing per step (above) is what makes this survivable.",
+    "parent": "BlockNode:00CF46W4QR017",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR019",
+    "@type": "BlockNode",
+    "title": "#### Inspecting raw node state",
+    "text": "[current] `aperas tree`/`backlinks --text`/`unfold` all show a *rendered preview* — title plus truncated, anchor-stripped abstract. For a field they never show (`props`, `tombstonedAt`) or for a block's exact stored text, use the bundled reader rather than writing another one:",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR01A",
+      "BlockNode:00CF46W4QR01B",
+      "BlockNode:00CF46W4QR01C",
+      "BlockNode:00CF46W4QR01D",
+      "BlockNode:00CF46W4QR01E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01A",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR01A",
+    "text": "```bash\nscripts/show_node.py <ref>                 # full record: props, tombstonedAt, parent, children, links\nscripts/show_node.py --text <ref>          # exact stored text, undecorated\nscripts/show_node.py --children <ref>      # direct children, tombstoned ones marked\nscripts/show_node.py --grep PATTERN [-i]   # full-text search — there is no `aperas search`\nscripts/show_node.py --artifact <ref>      # which artifact a block lives in\n```",
+    "parent": "BlockNode:00CF46W4QR019",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01B",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR01B",
+    "text": "Refs take a bare snowflake or a full id. It is read-only, and it locates `AperasKG/Apeiron/` itself.",
+    "parent": "BlockNode:00CF46W4QR019",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01C",
+    "@type": "BlockNode",
+    "title": "`--text` is the one that matters before an edit",
+    "text": "`--text` is the one that matters before an edit: redirect it to a file, change only what needs changing, and `cat` that back into `aperas update`. That keeps the untouched part of a block byte-identical instead of retyped from a preview — which is what step 2 of the edit loop warns about, since a transcription slip silently tombstones the block and mints a new id.",
+    "parent": "BlockNode:00CF46W4QR019",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01D",
+    "@type": "BlockNode",
+    "title": "This is a staging area, not the fix",
+    "text": "This is a staging area, not the fix: the real gap is tracked in `issues/treeview.md` (\"No raw single-node inspection command\"), whose proposed resolution is an `aperas show <ref>` verb. `--children` marking tombstones is likewise standing in for `unfold`'s missing marker.",
+    "parent": "BlockNode:00CF46W4QR019",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01E",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR01E",
+    "text": "Specifically, **`unfold` does not mark tombstoned children** while `tree --view` appends `(tombstoned)`, so a tombstoned leftover can read as live data under `unfold`. Tracked in `issues/treeview.md`.",
+    "parent": "BlockNode:00CF46W4QR019",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01F",
+    "@type": "BlockNode",
+    "title": "#### Full-text search — grep the raw store directly",
+    "text": "[current] `show_node.py --grep` works, but a plain `grep -n -C3 '<pattern>' AperasKG/Apeiron/BlockNode.jsonld` is faster and shows more: one command, the complete untruncated `text` (the script's own preview caps at 90 chars), and it also works over `ArtifactNode.jsonld` for an artifact's own title/abstract — which `--grep` never scans, since it only iterates blocks. This is not the shadow-grepping mistake the Philosophy example warns about: `Apeiron/*.jsonld` is the on-disk mirror of the graph itself, not the rendered `artifacts/*.md` projection, so grepping it is reading the source, not the shadow.",
+    "parent": "BlockNode:00CF46W4QR00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR01G",
+      "BlockNode:00CF46W4QR01H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01G",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR01G",
+    "text": "A hit is a candidate id, not proof of anything. Confirmed live: a node's field order is `@id, @type, [props], [tombstonedAt], title, text, parent, type, children`, and `props` is variable-length — so `tombstonedAt`'s distance from a `text` match shifts per node, and no fixed `-C<n>` window can be trusted to surface it. Treat every match as an id to hand to `aperas` (`unfold`/`tree`/`backlinks --text`) for the actual live/tombstoned status, parent, and links: grep finds the nodes, `aperas` deals with them.",
+    "parent": "BlockNode:00CF46W4QR01F",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01H",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR01H",
+    "text": "---",
+    "parent": "BlockNode:00CF46W4QR01F",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01J",
+    "@type": "BlockNode",
+    "title": "### Reference",
+    "parent": "BlockNode:00CF46W4Q8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF46W4QR01K",
+      "BlockNode:00CF46W4QR01M",
+      "BlockNode:00CF46W4QR01N",
+      "BlockNode:00CF46W4QR01P",
+      "BlockNode:00CF46W4QR01Q"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01K",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF46W4QR01K:props:StringProp:00CF46W63R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF46W4QR01K:props:StringProp:00CF46W63R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF46W4QR01K",
+    "text": "`AperasKG/artifacts/design/linking.md` — canonical spec for addressing, anchors and wikilink syntax. Read it when a link isn't resolving and the reason isn't obvious.",
+    "parent": "BlockNode:00CF46W4QR01J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01M",
+    "@type": "BlockNode",
+    "title": "00CF46W4QR01M",
+    "text": "`AperasKG/artifacts/design/documentation.md` — the concern taxonomy and the Freeflow document shape.",
+    "parent": "BlockNode:00CF46W4QR01J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01N",
+    "@type": "BlockNode",
+    "title": "`AperasKG/artifacts/design/aperas-skill.md` — this skill's own design",
+    "text": "`AperasKG/artifacts/design/aperas-skill.md` — this skill's own design: the four levels, citation direction, and how items enter (incident → freeflow → confirmed → promoted to the level that explains it).",
+    "parent": "BlockNode:00CF46W4QR01J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01P",
+    "@type": "BlockNode",
+    "title": "`archive/Aperas-design.md` — the founding philosophy",
+    "text": "`archive/Aperas-design.md` — the founding philosophy: Apeiron/Aperas/Peras, deep read and deep write, Meta-Aperas.",
+    "parent": "BlockNode:00CF46W4QR01J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF46W4QR01Q",
+    "@type": "BlockNode",
+    "title": "#### Open tool gaps",
+    "text": "Tracked in the graph rather than accumulating here: raw single-node inspection and `unfold`'s missing tombstone marker (`issues/treeview.md`); non-transactional writes leaving in-memory orphans, and `extractAnchorNames` treating a quoted example anchor as a real name claim (`discussion/aperas-skill.md`).",
+    "parent": "BlockNode:00CF46W4QR01J",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4763DR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4763DR001:links:Link:00CF4764TG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4Q8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4763DR001:links:Link:00CF4764TG000:props:StringProp:00CF4764TG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "74"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF4763DR001:props:StringProp:00CF4764T8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4763DR001:props:StringProp:00CF4764T8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF4763DR001",
+    "text": "**v1 was snapshotted into the graph, by copy rather than by projection**: [v1 SKILL.md (verbatim, 2026-09-13)](../discussion/aperas-skill.md#id/BlockNode:00CF46W4Q8001) now sits beside v0's dump, split so every item is individually addressable. Copy, not a live projection, was the deliberate choice: a projection holds only the current version, so what a restructure *drops* would survive nowhere but git archaeology — and that loss is not hypothetical, since v0's presence in the graph is the only reason item 18's third trigger was found missing from v1. Successive snapshots make the skill's evolution the object of study rather than just its latest state. This milestone's link points *down* the gradient, which the citation-direction rule permits for a pointer that is the block's whole referent rather than one of many possible mentions.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4D9XT0001",
+    "@type": "BlockNode",
+    "title": "## Vertical thread (v1) — which principles are realized below",
+    "text": "Each of v1's Philosophy and Orientation principles was walked deliberately, in order, and matched against every Discipline and Mechanics item that operationalizes it. An entry below records a principle that has at least one realizer. A principle with **no entry, and therefore no backlinks, is unrealized** — that absence is a measurement, not an oversight, since the whole set was walked. The edges live here as mediating nodes rather than in the snapshot itself, because the snapshot has to stay verbatim to remain comparable across versions.",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF4D9XT0002",
+      "BlockNode:00CF4D9XT0003",
+      "BlockNode:00CF4D9XT0004",
+      "BlockNode:00CF4D9XT0005",
+      "BlockNode:00CF4D9XT0006",
+      "BlockNode:00CF4MBFQG001",
+      "BlockNode:00CF4R3C78001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4D9XT0002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR000:props:StringProp:00CF4D9ZCR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR002",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR002:props:StringProp:00CF4D9ZCR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "110"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR004",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR00B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR004:props:StringProp:00CF4D9ZCR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "240"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF4D9XT0002:props:StringProp:00CF4D9ZC8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0002:props:StringProp:00CF4D9ZC8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF4D9XT0002",
+    "text": "**[The graph's substance is nodes *and* the links between them](#id/BlockNode:00CF46W4QG00D)** is realized by [Move a node; don't remove and recreate it](#id/BlockNode:00CF46W4QR009) — preserving the id is what preserves the links — and by [Citation direction](#id/BlockNode:00CF46W4QR00B), whose parent-pointer reasoning is the same principle applied to which way a reference may run.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4D9XT0003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0000:props:StringProp:00CF4D9ZD0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG013",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0002:props:StringProp:00CF4D9ZD0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "105"
+          }
+        ]
+      }
+    ],
+    "title": "00CF4D9XT0003",
+    "text": "**[The Apeiron is the source; the `.md` files are shadows](#id/BlockNode:00CF46W4QG00B)** is realized by [the edit loop](#id/BlockNode:00CF46W4QG013), whose step 3 (edit graph-first) and step 6 (project, then stage) are the principle turned into an order of operations.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4D9XT0004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0004",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00P",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0004:props:StringProp:00CF4D9ZD0005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0006",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00Q",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0006:props:StringProp:00CF4D9ZD0007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "79"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0008",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG013",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0008:props:StringProp:00CF4D9ZD0009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "159"
+          }
+        ]
+      }
+    ],
+    "title": "00CF4D9XT0004",
+    "text": "**[Forward and downward — deeper content](#id/BlockNode:00CF46W4QG00P)** and **[backward — deeper context](#id/BlockNode:00CF46W4QG00Q)** are both realized by [the edit loop](#id/BlockNode:00CF46W4QG013)'s step 1, which splits orienting into exactly those two moves and says when to escalate from one to the other.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4D9XT0005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00R",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8000:props:StringProp:00CF4D9ZD8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8002",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG013",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8002:props:StringProp:00CF4D9ZD8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "84"
+          }
+        ]
+      }
+    ],
+    "title": "00CF4D9XT0005",
+    "text": "**[Deep write is inherently backward](#id/BlockNode:00CF46W4QG00R)** is realized by [the edit loop](#id/BlockNode:00CF46W4QG013)'s step 5, follow what the change made stale.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4D9XT0006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8004",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8004:props:StringProp:00CF4D9ZD8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8006",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR00D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8006:props:StringProp:00CF4D9ZD8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "111"
+          }
+        ]
+      }
+    ],
+    "title": "00CF4D9XT0006",
+    "text": "**[Dense linking is the precondition for both](#id/BlockNode:00CF46W4QG00S)** is realized by exactly one item, [Promotion links at the origin](#id/BlockNode:00CF46W4QR00D), and only for the single case of a finding crystallizing up out of discussion. Note what that means: a principle asserted as the precondition for *both* deep read and deep write has one narrow realizer, added 2026-09-13 — before that edit it had none at all. This is the gap that prompted the experiment, surfacing as thinness rather than absence only because it was partially patched a day earlier.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4MBFQG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR00D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8000:props:StringProp:00CF4MBHA8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "72"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8002",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8002:props:StringProp:00CF4MBHA8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "227"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF4MBFQG001:props:StringProp:00CF4MBHA0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4MBFQG001:props:StringProp:00CF4MBHA0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Grounding that exits the level structure — the forward-side signal**",
+    "text": "**Grounding that exits the level structure — the forward-side signal**: [Promotion links at the origin](#id/BlockNode:00CF46W4QR00D) names its own explanation as crystallization's topology axis, but the only statement of it is [in the design doc](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00J), not at any Philosophy or Orientation level of the skill itself. A Discipline item grounded outside the level structure is the detectable form of a *missing* principle: querying backlinks can never surface it, since a principle with no node has no empty result to return, but the realizer's forward link points somewhere and that somewhere is measurable. Read from this side, the gap is \"an item whose explanation is off-level,\" which is exactly the defect — a reader meeting the rule never meets what makes it true.",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4N80W0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4N80W0001:links:Link:00CF4N82AG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF4D9XT0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4N80W0001:links:Link:00CF4N82AG000:props:StringProp:00CF4N82AG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "267"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF4N80W0001:props:StringProp:00CF4N82A8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4N80W0001:props:StringProp:00CF4N82A8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF4N80W0001",
+    "text": "**Experiment: can the graph find a structural defect that a human found by reading?** Partly, and the failures were the informative part. v1's items were snapshotted as nodes, then every Philosophy/Orientation principle was walked and wired to its realizers below as [mediating nodes](#id/BlockNode:00CF4D9XT0001) — mediating rather than direct because the snapshot has to stay verbatim to stay comparable. Then each principle was queried for incoming edges. Predictions were stated before wiring, which is what makes this a test rather than a demonstration.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CF4N80W0002",
+      "BlockNode:00CF4N80W0003",
+      "BlockNode:00CF4N80W0004",
+      "BlockNode:00CF4N80W0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4N80W0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF4N80W0002:props:StringProp:00CF4N82A8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4N80W0002:props:StringProp:00CF4N82A8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Found a gap neither reader had seen**",
+    "text": "**Found a gap neither reader had seen**: \"Keep an active view, and keep it current\" came back with zero realizers — stated at Orientation and operationalized nowhere below, no practice for refreshing a view and no mechanics for detecting staleness, while `issues/treeview.md` carries a live tooling gap (unfolds never pruned against what is live) that no practice covered. Closed by a new Discipline section, *A view is per-task, not per-session*.",
+    "parent": "BlockNode:00CF4N80W0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4N80W0003",
+    "@type": "BlockNode",
+    "title": "00CF4N80W0003",
+    "text": "**Missed the gap it was built to find, then found it from the other direction**: crystallization-stated-nowhere-above was first called structurally undetectable, on the reasoning that a principle with no node has no empty result to return. Wrong — that was the *query* being one-directional, not the method. Forward links are stored on every node; they simply have no verb, so `backlinks` got reached for and its asymmetry was inherited silently. From the forward side the signal is an item whose grounding *exits the level structure*, which is exactly what the promotion-links item did by naming its explanation in the design doc. A textbook case of the affordance argument biting the person making it.",
+    "parent": "BlockNode:00CF4N80W0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4N80W0004",
+    "@type": "BlockNode",
+    "title": "**Cannot express underrealization at all**",
+    "text": "**Cannot express underrealization at all**: dense linking came back realized, because one narrow realizer had been added the day before; a principle billed as the precondition for both deep read and deep write is topologically indistinguishable from a fully realized one. Sufficiency would need a far finer graph — per-word rather than per-item — at which point counting links means something. The coarse graph aids semantic comprehension rather than replacing it: it routes attention, it does not adjudicate.",
+    "parent": "BlockNode:00CF4N80W0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4N80W0005",
+    "@type": "BlockNode",
+    "title": "00CF4N80W0005",
+    "text": "**Every non-zero came back as exactly 1**, since one mediating node cites each principle. Edge count encodes presence, not cardinality — the deferred typed-predicate question arriving from a third direction.",
+    "parent": "BlockNode:00CF4N80W0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNWZR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4Q8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0000:props:StringProp:00CF4QNYH0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF4D9XT0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0002:props:StringProp:00CF4QNYH0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "374"
+          }
+        ]
+      }
+    ],
+    "title": "## v1.1 additions — delta on the v1 snapshot",
+    "text": "Threaded onto [the v1 snapshot](#id/BlockNode:00CF46W4Q8001) rather than snapshotted afresh: a snapshot is taken at a major version, and minor versions are recorded as deltas against it, so the base stays stable and what changed stays legible without duplicating the whole document each time. Each addition below is verbatim and individually addressable, which is what lets [the vertical thread](#id/BlockNode:00CF4D9XT0001) extend across the two.",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF4QNWZR002",
+      "BlockNode:00CF4QNWZR003",
+      "BlockNode:00CF4QNWZR004",
+      "BlockNode:00CF4QNX00001",
+      "BlockNode:00CF4QNX00002",
+      "BlockNode:00CF4QNX00005",
+      "BlockNode:00CF4QNX00007",
+      "BlockNode:00CF5GK5BR001",
+      "BlockNode:00CF5GK5BR002",
+      "BlockNode:00CF5GV8FR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4QNWZR002",
+    "@type": "BlockNode",
+    "title": "### Philosophy — the maturation principle",
+    "text": "**That substance matures; it does not merely accumulate.** [current] Both axes run the same direction — Apeiron toward Peras, unbounded toward bounded. On the **content** axis, prose hardens from formless discussion into typed design, issues, planning, history. On the **topology** axis, a relationship first exists *indirectly*, mediated by a discussion node that cites both ends and carries the judgment in its own text; once it proves load-bearing it crystallizes into a *direct* citation, and the mediating node's job is done. Link density is the residue of that lifecycle, which is why it reads as maturity from outside rather than as tidiness — and why `discussion` is where the cost of it gets paid.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNWZR003",
+    "@type": "BlockNode",
+    "title": "### Orientation — link maturity",
+    "text": "**A link is placed at the maturity the relationship has earned.** [current] Writing means placing links, but not all of them direct and not all at once. A relationship that still needs judgment to state goes into a mediating discussion node citing both ends; one that has proven load-bearing becomes a direct citation between them. Reaching for a direct link too early asserts a dependency nobody has tested; leaving one mediated forever makes every traversal pay for the hop.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNWZR004",
+    "@type": "BlockNode",
+    "title": "### Discipline — edit loop step 5, rewritten",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF4QNWZR005",
+      "BlockNode:00CF4QNX00000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4QNWZR005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF4QNWZR005:props:StringProp:00CF4QNYG8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CF4QNWZR005:props:StringProp:00CF4QNYG8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "5"
+      }
+    ],
+    "title": "00CF4QNWZR005",
+    "text": "**Deep write — follow what the change made stale, and link what was never linked.** Check backlinks and forward links; update what now disagrees — and add the citation where the change has just made a relationship real. Closing an issue that a design or a fix resolves means linking the two to each other before moving on, in both directions, not only the one that happened to get written first. This is the per-edit instance of dense linking, and the only moment it is cheap: you are already standing where the missing link is visible.",
+    "parent": "BlockNode:00CF4QNWZR004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00000",
+    "@type": "BlockNode",
+    "title": "00CF4QNX00000",
+    "text": "**Project, then stage.** `aperas project <path> --flush`, then `git add` immediately.",
+    "parent": "BlockNode:00CF4QNWZR004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00001",
+    "@type": "BlockNode",
+    "title": "### Discipline — Promotion links at the origin, closing sentence regrounded",
+    "text": "This is the topology half of crystallization, stated at Philosophy above: a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00002",
+    "@type": "BlockNode",
+    "title": "### Discipline — The dense-linking pass",
+    "text": "[current] Occasionally, and deliberately, work the relationships instead of the content. Bring distant nodes into one view, then take each pair in turn and ask whether a real, nameable dependency exists. If one does and a plain citation carries it, link directly, respecting direction. If stating it takes judgment, write a mediating discussion node that cites both ends and holds the reasoning in its own text.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF4QNX00003",
+      "BlockNode:00CF4QNX00004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00003",
+    "@type": "BlockNode",
+    "title": "The counterweight matters as much as the practice",
+    "text": "The counterweight matters as much as the practice: **do not manufacture links.** Two docs sharing a corpus, or sharing vocabulary, is not a dependency. The test is whether you can say in one sentence what one owes the other. A pass that adds twenty weak links has made the graph harder to traverse, not denser — deep read now descends into noise.",
+    "parent": "BlockNode:00CF4QNX00002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00004",
+    "@type": "BlockNode",
+    "title": "00CF4QNX00004",
+    "text": "Run it when a concern set has grown without anyone standing back from it, when two concerns keep coming up together, or when one finding turns out to have been recorded in several places independently. That last case is itself the evidence: the relationship existed and nothing captured it.",
+    "parent": "BlockNode:00CF4QNX00002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00005",
+    "@type": "BlockNode",
+    "title": "### Discipline — A view is per-task, not per-session",
+    "text": "[current] Orientation's rule is that a view left pointing at last session's work is worse than no view. The practice that follows: re-unfold as the task's scope moves, and treat any view you did not open yourself as unknown until checked. `aperas tree --view <name>` renders whatever was unfolded whenever, with nothing marking age, so an inherited view looks identical to one built for the question actually in front of you.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF4QNX00006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00006",
+    "@type": "BlockNode",
+    "title": "00CF4QNX00006",
+    "text": "Cheapest discipline is a named view per task rather than one long-lived default — creating one is a single call, and a view scoped to the task documents its own contents. The cleanup gap underneath this is real and tracked: nothing prunes a view's `unfolds` against what is still live (`issues/treeview.md`), so stale refs accumulate silently in any view kept across tasks.",
+    "parent": "BlockNode:00CF4QNX00005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00007",
+    "@type": "BlockNode",
+    "title": "### Mechanics — Comparing distant docs: the view as a lens",
+    "text": "[current] `--view` is not a bookmark list; it is the mechanism for putting nodes that sit far apart in the tree next to each other. Unfold every doc being compared into one view, then render it once:",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF4QNX00008",
+      "BlockNode:00CF4QNX00009",
+      "BlockNode:00CF4QNX0000A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00008",
+    "@type": "BlockNode",
+    "title": "00CF4QNX00008",
+    "text": "```bash\nfor f in issues/a.md discussion/b.md design/c.md; do\n  aperas unfold \"$f\" --view <name> --flush\ndone\naperas tree --view <name>\n```",
+    "parent": "BlockNode:00CF4QNX00007",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX00009",
+    "@type": "BlockNode",
+    "title": "00CF4QNX00009",
+    "text": "Run `aperas backlinks <id> --text` on a target before adding a link to it — working across several docs at once makes it easy to add a citation that already exists. And note that a link resolves by its `id/` fragment: the leading relative path is for the human reader, so a stale path still resolves correctly while misleading anyone who reads it. Observed live renaming a concern — every fragment kept working, every path string had to be fixed by hand.",
+    "parent": "BlockNode:00CF4QNX00007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX0000A",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T01:19:50.218Z",
+    "title": "00CF4QNX0000A",
+    "text": "---",
+    "parent": "BlockNode:00CF4QNX00007",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX0000B",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T01:19:49.112Z",
+    "title": "## Reference",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX0000C",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T01:19:49.112Z",
+    "title": "00CF4QNX0000C",
+    "text": "`AperasKG/artifacts/design/linking.md` — canonical spec for addressing, anchors and wikilink syntax. Read it when a link isn't resolving and the reason isn't obvious.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX0000D",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T01:19:49.112Z",
+    "title": "00CF4QNX0000D",
+    "text": "`AperasKG/artifacts/design/documentation.md` — the concern taxonomy and the Freeflow document shape.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX0000E",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T01:19:49.112Z",
+    "title": "`AperasKG/artifacts/design/aperas-skill.md` — this skill's own design",
+    "text": "`AperasKG/artifacts/design/aperas-skill.md` — this skill's own design: the four levels, citation direction, and how items enter (incident → freeflow → confirmed → promoted to the level that explains it).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4QNX0000F",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-13T01:19:49.112Z",
+    "title": "`archive/Aperas-design.md` — the founding philosophy",
+    "text": "`archive/Aperas-design.md` — the founding philosophy: Apeiron/Aperas/Peras, deep read and deep write, Meta-Aperas.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4R3C78001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF4R3C78001:props:StringProp:00CF4R3DRG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78001:props:StringProp:00CF4R3DRG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF4R3C78001",
+    "text": "**Threading v1.1's additions onto the v1 base** — the same walk, re-run across the delta, which is what the snapshot-plus-delta shape is for. Two zeroes closed, one new principle grounded:",
+    "parent": "BlockNode:00CF4D9XT0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CF4R3C78002",
+      "BlockNode:00CF4R3C78003",
+      "BlockNode:00CF4R3C78004",
+      "BlockNode:00CF4R3C78005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF4R3C78002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00T",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR000:props:StringProp:00CF4R3DRR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR002",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNX00005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR002:props:StringProp:00CF4R3DRR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "121"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR004",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNX00007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR004:props:StringProp:00CF4R3DRR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "211"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF4R3C78002:props:StringProp:00CF4R3DRG002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78002:props:StringProp:00CF4R3DRG003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF4R3C78002",
+    "text": "**[Keep an active view, and keep it current](#id/BlockNode:00CF46W4QG00T)** — the experiment's zero — is now realized by [A view is per-task, not per-session](#id/BlockNode:00CF4QNX00005), with the mechanics in [Comparing distant docs](#id/BlockNode:00CF4QNX00007). The finding closed in the version immediately after the query that produced it.",
+    "parent": "BlockNode:00CF4R3C78001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4R3C78003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QG00S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0000:props:StringProp:00CF4R3DS0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNWZR004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0002:props:StringProp:00CF4R3DS0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "137"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0004",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNX00002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0004:props:StringProp:00CF4R3DS0005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "253"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0006",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNX00007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0006:props:StringProp:00CF4R3DS0007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "348"
+          }
+        ]
+      }
+    ],
+    "title": "00CF4R3C78003",
+    "text": "**[Dense linking is the precondition for both](#id/BlockNode:00CF46W4QG00S)** gains three realizers beyond the single narrow one it had: [edit loop step 5 rewritten](#id/BlockNode:00CF4QNWZR004), which restores the trigger v1 dropped from v0's item 18; [the dense-linking pass](#id/BlockNode:00CF4QNX00002) for the deliberate wide-radius case; and [Comparing distant docs](#id/BlockNode:00CF4QNX00007) for the commands. Presence was never the issue here — thinness was, and thinness is what changed.",
+    "parent": "BlockNode:00CF4R3C78001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4R3C78004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS0008",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNWZR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS0008:props:StringProp:00CF4R3DS8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "30"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8001",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNWZR003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8001:props:StringProp:00CF4R3DS8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "73"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8003",
+        "@type": "Link",
+        "target": "BlockNode:00CF46W4QR00D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8003:props:StringProp:00CF4R3DS8004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "205"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8005",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNX00001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8005:props:StringProp:00CF4R3DS8006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "341"
+          }
+        ]
+      }
+    ],
+    "title": "00CF4R3C78004",
+    "text": "**The maturation principle** ([Philosophy](#id/BlockNode:00CF4QNWZR002), [Orientation](#id/BlockNode:00CF4QNWZR003)) is the node whose absence the forward-side query detected. Now that it exists on-level, [Promotion links at the origin](#id/BlockNode:00CF46W4QR00D) grounds upward inside the skill rather than sideways into the design doc — [recorded as its own delta](#id/BlockNode:00CF4QNX00001). The off-level grounding that made the gap detectable is itself what got repaired.",
+    "parent": "BlockNode:00CF4R3C78001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4R3C78005",
+    "@type": "BlockNode",
+    "title": "Worth noting what this cost",
+    "text": "Worth noting what this cost: seven additions, four thread entries, all hand-written, and the graph proposed none of it. Re-threading is per-minor-version recurring work, which is the standing argument for an edge being a first-class thing rather than prose that happens to contain links.",
+    "parent": "BlockNode:00CF4R3C78001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF4RAGDR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF4RAGDR001:links:Link:00CF4RAHZ8002",
+        "@type": "Link",
+        "target": "BlockNode:00CF4QNWZR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4RAGDR001:links:Link:00CF4RAHZ8002:props:StringProp:00CF4RAHZ8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "469"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF4RAGDR001:links:Link:00CF4RAHZG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF4D9XT0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF4RAGDR001:links:Link:00CF4RAHZG000:props:StringProp:00CF4RAHZG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "727"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CF4RAGDR001:props:StringProp:00CF4RAHZ8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF4RAGDR001:props:StringProp:00CF4RAHZ8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF4RAGDR001",
+    "text": "**v1.1 — the vertical thread between levels was repaired, and a structural audit found one of the gaps itself**: crystallization is now stated at Philosophy and Orientation rather than existing only as a Discipline rule grounded off-level in the design doc, and dense linking is realized below Orientation rather than only asserted there — including the restoration of a concrete trigger v1 had silently dropped from v0's item 18. Seven additions, recorded verbatim as [a delta on the v1 snapshot](../discussion/aperas-skill.md#id/BlockNode:00CF4QNWZR001) rather than as a fresh snapshot, since a snapshot is taken at a major version and minor versions thread onto it. One addition was not found by reading at all: an audit of [the vertical thread](../discussion/aperas-skill.md#id/BlockNode:00CF4D9XT0001) queried every principle for realizers below it and returned zero for \"keep an active view,\" a gap nobody had named, now closed by its own Discipline section. The same audit missed the crystallization gap from the backward direction and caught it from the forward one — the realizer's grounding link pointed outside the level structure — which is recorded as the sharper lesson: the query inherited the tooling's asymmetry, since `backlinks` is a verb and forward traversal is not.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF595QQR001",
+    "@type": "BlockNode",
+    "title": "### Versioning — snapshot, delta, thread",
+    "text": "The skill file is a *generative* projection of this concern rather than a mechanical one: no command serializes design into SKILL.md, so the two can drift in a way an `aperas project` artifact cannot. Three devices keep the drift legible, and together they are the meta workflow's maintenance half.",
+    "parent": "BlockNode:00CEA5Y5JG00D",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF595QQR002",
+      "BlockNode:00CF595QQR003",
+      "BlockNode:00CF595QQR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF595QQR002",
+    "@type": "BlockNode",
+    "title": "00CF595QQR002",
+    "text": "A **snapshot** is a verbatim copy of the skill file taken at a major version and split so every item is individually addressable. Copy, not projection: a projection holds only the current version, so what a restructure *drops* would survive nowhere but git archaeology. That loss is not hypothetical — v0's snapshot is the only reason a trigger v1 silently dropped was ever found. Successive snapshots make the skill's evolution the object of study rather than just its latest state.",
+    "parent": "BlockNode:00CF595QQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF595QQR003",
+    "@type": "BlockNode",
+    "title": "00CF595QQR003",
+    "text": "A **delta** records a minor version's additions verbatim against the standing snapshot, rather than re-snapshotting the whole document. The base stays stable, what changed stays legible, and each addition is addressable on the same terms as the snapshot's own items.",
+    "parent": "BlockNode:00CF595QQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF595QQR004",
+    "@type": "BlockNode",
+    "title": "00CF595QQR004",
+    "text": "A **thread** wires each Philosophy and Orientation principle to the items that realize it below, as mediating nodes — mediating because the snapshot must stay verbatim to stay comparable. The thread is what makes the level structure auditable instead of merely asserted: a principle with no realizer is a measurement, not an impression. Read backward, from a principle's backlinks, it detects a principle stated and never operationalized. Read forward, from a realizer's grounding, it detects the opposite defect — an item whose explanation sits outside the level structure, which is the observable form of a principle that was never stated at all. It cannot detect *under*-realization, since presence and sufficiency are not the same measurement and this graph is too coarse to count the difference; that judgment stays with the reader.",
+    "parent": "BlockNode:00CF595QQR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5GK5BR001",
+    "@type": "BlockNode",
+    "title": "### Top matter — Status bumped to v1.1",
+    "text": "Status: **v1.1** — v1 restructured a flat, incident-ordered list of eighteen items into four levels, abstract to concrete; the arrangement was the defect. v1.1 repairs the vertical thread between those levels: crystallization stated at Philosophy and Orientation rather than only as a Discipline rule, and dense linking realized below Orientation rather than only asserted there. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5GK5BR002",
+    "@type": "BlockNode",
+    "title": "### Discipline — Citation direction, exception generalized",
+    "text": "Caught by `scripts/skill_drift.py` on its first real run: this rule change landed before the rest of v1.1 and was never recorded in this delta at all — precisely the failure the check exists for, found mechanically rather than by a reader noticing.",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF5GK5BR003",
+      "BlockNode:00CF5GK5BR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5GK5BR003",
+    "@type": "BlockNode",
+    "title": "00CF5GK5BR003",
+    "text": "The sanctioned exception is a **normative, singular** pointer — one whose target is the block's whole referent rather than one of many possible mentions. A design doc's own `# Context` section is the familiar instance (one link per facet, a fixed set), but it is the *property* that is sanctioned, not that location: a history milestone announcing one snapshot, or a design block naming *the* canonical exemplar, qualify the same way.",
+    "parent": "BlockNode:00CF5GK5BR002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5GK5BR004",
+    "@type": "BlockNode",
+    "title": "00CF5GK5BR004",
+    "text": "The test is whether removing the link leaves the block **incomplete**. A milestone whose content is \"this snapshot was taken\" no longer says what it exists to say once its pointer is gone; \"here is a discussion that also touched on this\" loses only enrichment, and stays forbidden. What the rule is actually against is a *list of children* — unbounded, discretionary, accumulating — so cardinality is the real criterion and direction is only its usual symptom. [current] Generalized after a milestone needed exactly such a pointer and the rule, stated as \"designated index,\" named an instance where it meant a property.",
+    "parent": "BlockNode:00CF5GK5BR002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5GV8FR001",
+    "@type": "BlockNode",
+    "title": "### Mechanics — Checking the skill against its own record",
+    "text": "[current] `SKILL.md` is a *generative* projection of its concern — authored from design rather than serialized by a command — so unlike an `aperas project` artifact it can drift from its source with nothing detecting it. `scripts/skill_drift.py` compares the file against the graph's record of it (the latest snapshot plus the deltas above it):",
+    "parent": "BlockNode:00CF4QNWZR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CF5GV8FR002",
+      "BlockNode:00CF5GV8FR003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5GV8FR002",
+    "@type": "BlockNode",
+    "title": "00CF5GV8FR002",
+    "text": "```bash\nscripts/skill_drift.py              # both directions\nscripts/skill_drift.py --added      # written into the file, never recorded\nscripts/skill_drift.py --dropped    # recorded, no longer in the file\n```",
+    "parent": "BlockNode:00CF5GV8FR001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5GV8FR003",
+    "@type": "BlockNode",
+    "title": "00CF5GV8FR003",
+    "text": "Run it after editing this file, before considering the edit done. *Added* is the check that matters most — an edit made and not recorded is invisible from the file's own side, which is how three separate additions in one session went unrecorded until a reader noticed. *Dropped* catches the opposite: v1 silently lost one of v0 item 18's three triggers, and nothing flagged it. Both are heuristics over normalized text, so a reworded sentence inside an otherwise-matching paragraph can still slip past.",
+    "parent": "BlockNode:00CF5GV8FR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5H3V20001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF5H3V20001:props:StringProp:00CF5H3WM8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5H3V20001:props:StringProp:00CF5H3WM8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CF5H3V20001",
+    "text": "**`scripts/skill_drift.py` — drift detection for a generative projection, and it caught an omission on its first real run**: three times in one session an edit was made to `SKILL.md` and never recorded in the graph, each caught only by a reader noticing. Every fix attempted was another prose rule, which is the wrong instrument for a failure of remembering. This is the mechanical version: compare the file against the graph's record of it — the latest snapshot plus the deltas above it — in both directions. *Added* finds text written into the file that was never recorded; *dropped* finds recorded items no longer in the file, which is how v1 silently lost one of v0 item 18's three triggers.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CF5H3V20002",
+      "BlockNode:00CF5H3V20003",
+      "BlockNode:00CF5H3V20004",
+      "BlockNode:00CF5H3V20005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CF5H3V20002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CF5H3V20002:props:StringProp:00CF5H3WM8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CF5H3V20002:props:StringProp:00CF5H3WM8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**First real run found a genuine omission**",
+    "text": "**First real run found a genuine omission**: the citation-direction generalization — two paragraphs of substantive rule change — had landed before the rest of v1.1 and was recorded in no delta at all, along with the `Status` bump itself. Both were found mechanically, of exactly the class that had needed a human three times running. Now recorded.",
+    "parent": "BlockNode:00CF5H3V20001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5H3V20003",
+    "@type": "BlockNode",
+    "title": "**Calibration was not free, and the rounds are informative**",
+    "text": "**Calibration was not free, and the rounds are informative**: the baseline had to be narrowed to the *latest* snapshot (comparing against v0 reports v1's entire restructure as drops, since a major version is supposed to differ); the subtree walk had to run in reading order, since a stack-based walk scrambles it and breaks any fingerprint spanning a node boundary; list markers had to be normalized away, because the parser lifts them into props so the graph stores `**Philosophy** — …` where the file has `1. **Philosophy** — …`; fences had to be stripped on both sides rather than one; and the granularity had to drop from section to paragraph, since a section-opening fingerprint only catches whole new sections and misses an addition made *inside* an existing one — which was four of this version's seven additions.",
+    "parent": "BlockNode:00CF5H3V20001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5H3V20004",
+    "@type": "BlockNode",
+    "title": "**A real gap in the mechanism this validates**",
+    "text": "**A real gap in the mechanism this validates**: the delta format records *additions*, not *supersessions*. When a minor version rewrites an existing item the delta stores the new text and nothing marks which snapshot item it replaced, so those items show under *dropped* and need a human read to distinguish \"deliberately superseded\" from \"silently lost\" — which is the exact distinction the check exists to make. A `supersedes` pointer in the delta entry would close it. Worth noting the shape: the same missing-predicate problem as everywhere else in this corpus, arriving now in the versioning format rather than in the link model.",
+    "parent": "BlockNode:00CF5H3V20001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CF5H3V20005",
+    "@type": "BlockNode",
+    "title": "**It remains a heuristic over normalized text**",
+    "text": "**It remains a heuristic over normalized text**: a reworded sentence inside an otherwise-matching paragraph slips past, and commentary written *inside* a delta entry reads as dropped because it is legitimately not in the file. Sits at the *skill script* stage of the tooling path — staged and shared, not yet a first-class verb.",
+    "parent": "BlockNode:00CF5H3V20001",
     "type": "listItem",
     "children": []
   }
