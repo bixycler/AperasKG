@@ -15,5 +15,12 @@
     "@type": "Profile",
     "handle": "will",
     "name": "Will"
+  },
+  {
+    "@id": "Profile:00CF9CTF1G000",
+    "@type": "Profile",
+    "handle": "claude-opus",
+    "name": "Claude Opus",
+    "kind": "agent"
   }
 ]

@@ -504,28 +504,28 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "0282c8dcd00eebfee689d9ce862e73b4e1f849879ac62b6c24a199b9764ca814",
+    "fileHash": "b1c52898b56729243f3e939b599160089dce1183c1ee5fd10e1900f5afcfb816",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "0282c8dcd00eebfee689d9ce862e73b4e1f849879ac62b6c24a199b9764ca814",
-    "lastIngestedAt": "2026-09-13T05:33:31.734Z",
-    "projectedHash": "0282c8dcd00eebfee689d9ce862e73b4e1f849879ac62b6c24a199b9764ca814"
+    "ingestedHash": "b1c52898b56729243f3e939b599160089dce1183c1ee5fd10e1900f5afcfb816",
+    "lastIngestedAt": "2026-09-14T21:03:40.398Z",
+    "projectedHash": "b1c52898b56729243f3e939b599160089dce1183c1ee5fd10e1900f5afcfb816"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
     "@type": "ArtifactNode",
     "title": "aperas-skill.md",
-    "text": "None — the v1 restructure resolved six, and the promotion-links gap found while working the graph is resolved too; all seven are in Resolved below. New gaps found while working the graph are parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "text": "None — v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CEA5KW4G001"
     ],
     "path": "issues/aperas-skill.md",
-    "fileHash": "fc681bf754200a4973f099e71ff385aee13505ab917f5b45fea62bc2757c6eb0",
+    "fileHash": "3f6cda8d128f843eb7feb6e6ec8336b88f99ec4aee7644820a3986ea3c68b0a3",
     "lastTrackedAt": "2026-09-11T18:22:15.487Z",
-    "ingestedHash": "fc681bf754200a4973f099e71ff385aee13505ab917f5b45fea62bc2757c6eb0",
-    "lastIngestedAt": "2026-09-12T22:55:14.098Z",
-    "projectedHash": "fc681bf754200a4973f099e71ff385aee13505ab917f5b45fea62bc2757c6eb0"
+    "ingestedHash": "3f6cda8d128f843eb7feb6e6ec8336b88f99ec4aee7644820a3986ea3c68b0a3",
+    "lastIngestedAt": "2026-09-14T20:57:00.902Z",
+    "projectedHash": "3f6cda8d128f843eb7feb6e6ec8336b88f99ec4aee7644820a3986ea3c68b0a3"
   },
   {
     "@id": "ArtifactNode:00CEA5M69R000",
@@ -538,28 +538,28 @@
       "BlockNode:00CEA5M6S8001"
     ],
     "path": "planning/aperas-skill.md",
-    "fileHash": "be47255c6d36f6755af352ef99da45db631aa38d96e8cc3011bce89c3aaa9879",
+    "fileHash": "11f5cca0188d9a9fd1352cdcbd712130eaede68327b31dcfdfbe7371bde3fe25",
     "lastTrackedAt": "2026-09-11T18:22:16.871Z",
-    "ingestedHash": "be47255c6d36f6755af352ef99da45db631aa38d96e8cc3011bce89c3aaa9879",
-    "lastIngestedAt": "2026-09-11T22:13:56.854Z",
-    "projectedHash": "be47255c6d36f6755af352ef99da45db631aa38d96e8cc3011bce89c3aaa9879"
+    "ingestedHash": "11f5cca0188d9a9fd1352cdcbd712130eaede68327b31dcfdfbe7371bde3fe25",
+    "lastIngestedAt": "2026-09-14T20:57:02.090Z",
+    "projectedHash": "11f5cca0188d9a9fd1352cdcbd712130eaede68327b31dcfdfbe7371bde3fe25"
   },
   {
     "@id": "ArtifactNode:00CEA5MGZR000",
     "@type": "ArtifactNode",
     "title": "aperas-skill.md",
-    "text": "The restructure has landed. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is now v1: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, each item marked `[current]`, `[superseded]` or `[unverified]`, with a scope statement and a worked example at each of the first three levels.",
+    "text": "The restructure has landed and has been revised four times since. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is v1.4: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, each item marked `[current]`, `[superseded]` or `[unverified]`, with a scope statement and a worked example at each of the first three levels. v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, and v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them, adding the evidence-based-documentation statement the founding design had always implied. Open Issues is empty for the first time; what remains is [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A), still unmeasured.",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "de3c270469a2bfae0f60b3ebd55c3e1839cfa9508160a37dd11dc82957da4aad",
+    "fileHash": "d595ad1f244eaf43bda1ac10dc93082ef2d7db95e2e522e2c8ec104fdf18a45a",
     "lastTrackedAt": "2026-09-11T18:22:18.239Z",
-    "ingestedHash": "de3c270469a2bfae0f60b3ebd55c3e1839cfa9508160a37dd11dc82957da4aad",
-    "lastIngestedAt": "2026-09-13T02:46:54.363Z",
-    "projectedHash": "de3c270469a2bfae0f60b3ebd55c3e1839cfa9508160a37dd11dc82957da4aad"
+    "ingestedHash": "d595ad1f244eaf43bda1ac10dc93082ef2d7db95e2e522e2c8ec104fdf18a45a",
+    "lastIngestedAt": "2026-09-14T20:57:03.129Z",
+    "projectedHash": "d595ad1f244eaf43bda1ac10dc93082ef2d7db95e2e522e2c8ec104fdf18a45a"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -599,11 +599,11 @@
       "BlockNode:00CF1WZ4JG001"
     ],
     "path": "issues/core.md",
-    "fileHash": "9b4bab617643aaa7d241aa012c4560666debbd941bb85e324e34f9c3c060993f",
+    "fileHash": "13e9ee2b9b02e117d32f164e5a102390671919584e0ffc113e5ad4a57cae5ffa",
     "lastTrackedAt": "2026-09-12T22:28:40.384Z",
-    "ingestedHash": "9b4bab617643aaa7d241aa012c4560666debbd941bb85e324e34f9c3c060993f",
-    "lastIngestedAt": "2026-09-12T22:31:06.770Z",
-    "projectedHash": "9b4bab617643aaa7d241aa012c4560666debbd941bb85e324e34f9c3c060993f"
+    "ingestedHash": "13e9ee2b9b02e117d32f164e5a102390671919584e0ffc113e5ad4a57cae5ffa",
+    "lastIngestedAt": "2026-09-13T08:25:22.477Z",
+    "projectedHash": "13e9ee2b9b02e117d32f164e5a102390671919584e0ffc113e5ad4a57cae5ffa"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
