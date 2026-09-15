@@ -4917,14 +4917,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CDGV1RKG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-15T09:21:34.400Z",
-    "title": "00CDGV1RKG001",
-    "type": "list",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CDGV1RKG002",
     "@type": "BlockNode",
     "links": [
@@ -7583,14 +7575,6 @@
     ]
   },
   {
-    "@id": "BlockNode:00CE01Y1Z8004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-15T09:17:03.599Z",
-    "title": "00CE07YNJ8002",
-    "type": "list",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CE01Y1Z800D",
     "@type": "BlockNode",
     "title": "## Verification Plan",
@@ -9566,14 +9550,6 @@
       "BlockNode:00CGM6MJER001",
       "BlockNode:00CGM6MJF0000"
     ]
-  },
-  {
-    "@id": "BlockNode:00CE1GW7CG004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-15T09:22:18.284Z",
-    "title": "00CE1GW7CG004",
-    "type": "list",
-    "children": []
   },
   {
     "@id": "BlockNode:00CE1GW7CG005",
@@ -16398,6 +16374,7 @@
       "BlockNode:00CF1WZ4JG005",
       "BlockNode:00CF1WZ4JG006",
       "BlockNode:00CGM54FX0001",
+      "BlockNode:00CGR1BM9G001",
       "BlockNode:00CGM4YD4G001"
     ]
   },
@@ -16613,7 +16590,9 @@
       "BlockNode:00CGMKBCZR001",
       "BlockNode:00CGMKBR80001",
       "BlockNode:00CGMKC32R001",
-      "BlockNode:00CGMKCD20001"
+      "BlockNode:00CGMKCD20001",
+      "BlockNode:00CGQDBM58000",
+      "BlockNode:00CGR1F620001"
     ]
   },
   {
@@ -25307,33 +25286,9 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CGMJAD8G001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-15T09:06:45.716Z",
-    "title": "00CGMJAD8G001",
-    "text": "item A, no link",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CGMJAD8G002",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CGMJAD8G002:links:Link:00CGMJD2HR000",
-        "@type": "Link",
-        "target": "BlockNode:00CGMJAD8G001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CGMJAD8G002:links:Link:00CGMJD2HR000:props:StringProp:00CGMJD2HR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "44"
-          }
-        ]
-      }
-    ],
+    "tombstonedAt": "2026-09-15T12:46:55.858Z",
     "title": "00CGMJCZVG001",
     "text": "resolved with a same-artifact fragment link [see above](#id/BlockNode:00CGMJAD8G001)",
     "parent": "BlockNode:00CF1WZE18004",
@@ -25373,36 +25328,7 @@
   {
     "@id": "BlockNode:00CGMKBCZR001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CGMKBCZR001:links:Link:00CGMKGVK8000",
-        "@type": "Link",
-        "target": "BlockNode:00CEDP10P8001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CGMKBCZR001:links:Link:00CGMKGVK8000:props:StringProp:00CGMKGVK8001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "19"
-          }
-        ]
-      }
-    ],
-    "props": [
-      {
-        "@id": "BlockNode:00CGMKBCZR001:props:StringProp:00CGMKBFTR000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CGMKBCZR001:props:StringProp:00CGMKBFV0000",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
+    "tombstonedAt": "2026-09-15T12:46:59.796Z",
     "title": "00CGMKGRGG001",
     "text": "resolved with link [ref](../history/aperas-skill.md#id/BlockNode:00CEDP10P8001)",
     "parent": "BlockNode:00CF1WZE18004",
@@ -25412,36 +25338,7 @@
   {
     "@id": "BlockNode:00CGMKBR80001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CGMKBR80001:links:Link:00CGMKHAER000",
-        "@type": "Link",
-        "target": "BlockNode:00CEDP10P8001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CGMKBR80001:links:Link:00CGMKHAER000:props:StringProp:00CGMKHAF0000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "19"
-          }
-        ]
-      }
-    ],
-    "props": [
-      {
-        "@id": "BlockNode:00CGMKBR80001:props:StringProp:00CGMKBTZ8000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CGMKBR80001:props:StringProp:00CGMKBTZ8001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
+    "tombstonedAt": "2026-09-15T12:47:00.584Z",
     "title": "00CGMKH7S0001",
     "text": "resolved with link [ref](../history/aperas-skill.md#id/BlockNode:00CEDP10P8001)",
     "parent": "BlockNode:00CF1WZE18004",
@@ -25451,36 +25348,7 @@
   {
     "@id": "BlockNode:00CGMKC32R001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CGMKC32R001:links:Link:00CGMKHMG8000",
-        "@type": "Link",
-        "target": "BlockNode:00CEDP10P8001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CGMKC32R001:links:Link:00CGMKHMG8000:props:StringProp:00CGMKHMG8001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "19"
-          }
-        ]
-      }
-    ],
-    "props": [
-      {
-        "@id": "BlockNode:00CGMKC32R001:props:StringProp:00CGMKC5RG000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CGMKC32R001:props:StringProp:00CGMKC5RG001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
+    "tombstonedAt": "2026-09-15T12:47:01.357Z",
     "title": "00CGMKHHQ8001",
     "text": "resolved with link [ref](../history/aperas-skill.md#id/BlockNode:00CEDP10P8001)",
     "parent": "BlockNode:00CF1WZE18004",
@@ -25490,36 +25358,7 @@
   {
     "@id": "BlockNode:00CGMKCD20001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CGMKCD20001:links:Link:00CGMKJ8AG000",
-        "@type": "Link",
-        "target": "BlockNode:00CEDP10P8001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CGMKCD20001:links:Link:00CGMKJ8AG000:props:StringProp:00CGMKJ8AG001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "19"
-          }
-        ]
-      }
-    ],
-    "props": [
-      {
-        "@id": "BlockNode:00CGMKCD20001:props:StringProp:00CGMKCSDR000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CGMKCD20001:props:StringProp:00CGMKCSE0000",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
+    "tombstonedAt": "2026-09-15T12:47:02.412Z",
     "title": "00CGMKHW6R001",
     "text": "resolved with link [ref](../history/aperas-skill.md#id/BlockNode:00CEDP10P8001)",
     "parent": "BlockNode:00CF1WZE18004",
@@ -26263,15 +26102,6 @@
     ]
   },
   {
-    "@id": "BlockNode:00CGN8W9MG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-15T09:55:25.222Z",
-    "title": "00CGN8W9MG001",
-    "text": "`aperas tree`/`backlinks --text`/`unfold` all show a *rendered preview* — title plus truncated, anchor-stripped abstract. For a field they never show (`props`, `tombstonedAt`) or for a block's exact stored text, `aperas show <ref>` goes through the live service, so — unlike a raw-file reader — it always reflects the current in-memory state, not the last flush. `--text` is the one that matters before an edit: redirect it to a file, change only what needs changing, and `cat` that back into `aperas update`, keeping the untouched part of a block byte-identical instead of retyped from a preview. `scripts/show_node.py` still covers what `aperas show` doesn't — `--grep PATTERN` (full-text search) and `--artifact <ref>` (which artifact a block lives in) — and still reads the on-disk mirror, pre-flush state, unlike the live service.",
-    "type": "paragraph",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CGN8W9MG002",
     "@type": "BlockNode",
     "title": "### Mechanics — bare `unfold` is a peek, `--view <name>` still mutates",
@@ -26458,6 +26288,63 @@
     "text": "`scripts/show_node.py` still covers what `aperas show` doesn't — `--grep PATTERN` (full-text search; there is still no `aperas search`) and `--artifact <ref>` (which artifact a block lives in). It reads the **on-disk mirror**, so after an unflushed mutation it reports pre-flush state while `aperas show`/`unfold`/`tree` report the live service's. Flush first, or ask the CLI, when checking something you just changed. Caught live once, before `aperas show` existed: a move and a tombstone were both invisible to the script, producing a confident and wrong conclusion that the move had gone backwards.",
     "parent": "BlockNode:00CGN8W9MG000",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGQDBM58000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-15T13:12:25.772Z",
+    "title": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGR1BM9G001",
+    "@type": "BlockNode",
+    "title": "**ApeironNgn service restart and flush --clobber silently dropped GC, lacked startup GC, and hid GC metrics**",
+    "text": "**ApeironNgn service restart and flush --clobber silently dropped GC, lacked startup GC, and hid GC metrics**: `flush --clobber` performed mark-and-sweep tombstone GC (`pruneUnreachableTombstones`) and RDF deduplication without reporting what changed, while prior service restarts left disk garbage because `shutdown()`'s guarded `flushIfDirty()` refused and dropped GC/flushes whenever disk diverged externally. Service startup also omitted GC. **Resolved**: (1) added tombstone GC companion passes on boot (`rehydrateStore`), logging cleaned items to `stderr`, (2) upgraded `shutdown()` in `service.ts` to log explicit `stderr` warnings when guarded flushes fail due to disk divergence, and (3) updated `clobberFlush()` and `kgFlush.ts` to return and format exact GC metrics on flush (e.g. `[ApeironNgn kg:flush] Flushed (clobbered — 5 unreachable tombstone(s) pruned)`).",
+    "parent": "BlockNode:00CF1WZ4JG00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGR1F620001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGR1F620001:links:Link:00CGR1F62R000",
+        "@type": "Link",
+        "target": "BlockNode:00CGR1BM9G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGR1F620001:links:Link:00CGR1F62R000:props:StringProp:00CGR1F62R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1084"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGR1F620001:props:StringProp:00CGR1F62G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGR1F620001:props:StringProp:00CGR1F62G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**",
+    "text": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**: investigated `reload --discard` and `flush --clobber` interaction. Single-state round-trip holds for both disk state (disk -> memory -> disk) and memory quads (memory -> disk -> memory) in steady state. Mismatches observed on `flush --clobber` were traced to two automatic mechanisms: mark-and-sweep tombstone GC (`pruneUnreachableTombstones`) and RDF subject deduplication. Discovered that prior service restarts left garbage on disk because `shutdown()` used guarded `flushIfDirty()`, which silently refused and dropped GC/flushes whenever disk diverged externally (e.g. via git operations), while service startup did not run GC. Design decisions: (1) execute startup GC immediately upon rehydrating the store, (2) upgrade shutdown logging when guarded flushes are refused due to disk divergence, and (3) return GC metrics (`prunedTombstones`, `tombstonedContainers`, `prunedUnfolds`) in `flush` service responses to display explicit summary notifications in `aperas flush` — [promoted to issues/core.md](../issues/core.md#id/BlockNode:00CGR1BM9G001).",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
     "children": []
   }
 ]
