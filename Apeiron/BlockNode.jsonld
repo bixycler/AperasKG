@@ -753,6 +753,7 @@
       "BlockNode:00CGFE4SV0002",
       "BlockNode:00CGGHVBF8001",
       "BlockNode:00CGGG6N5G001",
+      "BlockNode:00CGM5V098001",
       "BlockNode:00CDBYV5A800B"
     ]
   },
@@ -3618,36 +3619,6 @@
   {
     "@id": "BlockNode:00CDD68FE0006",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60000",
-        "@type": "Link",
-        "target": "BlockNode:00CDD68E80002",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60000:props:StringProp:00CDDBQA60001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "491"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60002",
-        "@type": "Link",
-        "target": "BlockNode:00CDD68E8000H",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDD68FE0006:links:Link:00CDDBQA60002:props:StringProp:00CDDBQA60003",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "560"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CDD68FE0006:props:StringProp:00CE59ACWG000",
@@ -8874,8 +8845,24 @@
   {
     "@id": "BlockNode:00CE1FFSR8006",
     "@type": "BlockNode",
-    "title": "00CE1FFSR8006",
-    "text": "**Stale `TreeView.unfolds` references: an audit/prune sweep (option 2), not just write-time validation (option 1)**: write-time validation only catches a ref that was already dead *at unfold time* — the actually-observed failure mode is a ref going stale *afterward*, through an unrelated edit or GC pass. Only a sweep that revisits existing `unfolds` entries on some cadence closes that; write-time validation is worth adding too, but as a cheap complementary check, not a substitute.",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1FFSR8006:links:Link:00CGM0RSP0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1FFSR8006:links:Link:00CGM0RSP0000:props:StringProp:00CGM0RSP0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1239"
+          }
+        ]
+      }
+    ],
+    "title": "**Stale `TreeView.unfolds` references: an audit/prune sweep (option 2), not just write-time validation (option 1)**",
+    "text": "**Stale `TreeView.unfolds` references: an audit/prune sweep (option 2), not just write-time validation (option 1)**: write-time validation only catches a ref that was already dead *at unfold time* — the actually-observed failure mode is a ref going stale *afterward*, through an unrelated edit or GC pass. Only a sweep that revisits existing `unfolds` entries on some cadence closes that; write-time validation is worth adding too, but as a cheap complementary check, not a substitute. **Both built**: `TreeView.unfold(ref)` now checks `nodeExists` before appending (silent no-op on a ref with zero quads, matching `unfold`'s own idempotent-no-op-on-repeat posture); `pruneStaleUnfolds` (`node.ts`) walks every `TreeView`'s `unfolds` set and strips any entry with no quads at all, run at the same three explicit-sweep call sites `pruneUnreachableTombstones` already uses (`kg:reload`, `kg:flush --clobber`, service shutdown). A tombstoned-but-present target is deliberately left alone by both — legitimate, revealed via `--tombstoned` — only a fully-gone id counts as stale. Verified live in `verify.ts` (a never-existed ref refused at write time; an injected already-stale entry swept while a genuinely live sibling entry survived) — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638004).",
     "parent": "BlockNode:00CE1DDF58000",
     "type": "listItem",
     "children": []
@@ -9347,59 +9334,14 @@
     "@id": "BlockNode:00CE1GW638002",
     "@type": "BlockNode",
     "title": "## Open Issues",
+    "text": "None.",
     "parent": "BlockNode:00CE1GW638001",
     "type": "heading",
-    "children": [
-      "BlockNode:00CE1GW638004",
-      "BlockNode:00CE5QD6W8001",
-      "BlockNode:00CE1GW638005",
-      "BlockNode:00CE1GW638006",
-      "BlockNode:00CE8T6W7G001",
-      "BlockNode:00CE1GW638003"
-    ]
-  },
-  {
-    "@id": "BlockNode:00CE1GW638003",
-    "@type": "BlockNode",
-    "props": [
-      {
-        "@id": "BlockNode:00CE1GW638003:props:StringProp:00CE1GW7A8000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CE1GW638003:props:StringProp:00CE1GW7A8001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
-    "tombstonedAt": "2026-09-11T12:40:48.598Z",
-    "title": "00CE1GW638003",
-    "parent": "BlockNode:00CE1GW638002",
-    "type": "list",
     "children": []
   },
   {
     "@id": "BlockNode:00CE1GW638004",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE1GW638004:links:Link:00CE1J0N30000",
-        "@type": "Link",
-        "target": "BlockNode:00CE1FFSR8006",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638004:links:Link:00CE1J0N30000:props:StringProp:00CE1J0N30001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "549"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CE1GW638004:props:StringProp:00CE59A5KR002",
@@ -9415,92 +9357,32 @@
       }
     ],
     "title": "**Stale `TreeView.unfolds` references have no general cleanup**",
-    "text": "**Stale `TreeView.unfolds` references have no general cleanup**: `TreeView.unfold(ref)` appends with no existence check, and the only cleanup — a reactive strip-on-hard-delete — only fires at the exact moment a specific id is hard-deleted; nothing revisits an *existing* `unfolds` entry against what's currently live. Confirmed live: `.state/TreeView.jsonld`'s `default` view has named 10 `BlockNode` ids with no corresponding document at all, after unrelated reconciliation churn elsewhere reassigned/removed the blocks those ids used to name. See [Settled](../discussion/treeview.md#id/BlockNode:00CE1FFSR8006) for the chosen fix direction.",
-    "parent": "BlockNode:00CE1GW638002",
+    "text": "**Stale `TreeView.unfolds` references have no general cleanup**: `TreeView.unfold(ref)` appended with no existence check, and the only cleanup — a reactive strip-on-hard-delete — only fired at the exact moment a specific id was hard-deleted; nothing revisited an *existing* `unfolds` entry against what's currently live. Confirmed live: `.state/TreeView.jsonld`'s `default` view had named 10 `BlockNode` ids with no corresponding document at all, after unrelated reconciliation churn elsewhere reassigned/removed the blocks those ids used to name. See [Settled](../discussion/treeview.md#id/BlockNode:00CE1FFSR8006) for the chosen fix direction. **Resolved**: `TreeView.unfold(ref)` now refuses (silent no-op) a ref with zero quads at write time, and a new `pruneStaleUnfolds` sweep runs at the same explicit-sweep points as `pruneUnreachableTombstones` to catch a ref going stale later. The corpus's own `default` view was already clean of stale ids by the time the sweep landed (0 pruned on a real run) — see [Settled](../discussion/treeview.md#id/BlockNode:00CE1FFSR8006) for the mechanism and its `verify.ts` coverage.",
+    "parent": "BlockNode:00CE1GW63800A",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CE1GW638005",
     "@type": "BlockNode",
-    "title": "00CE1GW638005",
-    "text": "**A bare `aperas unfold <ref>` (no `--view` flag at all) mutates the `\"default\"` view instead of peeking**: should be read-only — resolve and print a preview, touching no `TreeView` state — matching `aperas tree`'s own no-view default. Today it falls into the same bootstrap-and-mutate path that `aperas unfold <ref> --view` (flag present, no name) is supposed to trigger. `aperas fold`'s own no-`--view` case isn't resolved by this — folding presupposes some view's state to collapse, so a peek-equivalent doesn't obviously apply.",
-    "parent": "BlockNode:00CE1GW638002",
+    "title": "**A bare `aperas unfold <ref>` (no `--view` flag at all) mutates the `\"default\"` view instead of peeking**",
+    "text": "**A bare `aperas unfold <ref>` (no `--view` flag at all) mutates the `\"default\"` view instead of peeking**: should be read-only — resolve and print a preview, touching no `TreeView` state — matching `aperas tree`'s own no-view default. It fell into the same bootstrap-and-mutate path that `aperas unfold <ref> --view` (flag present, no name) is supposed to trigger. `aperas fold`'s own no-`--view` case isn't resolved by this — folding presupposes some view's state to collapse, so a peek-equivalent doesn't obviously apply. **Resolved**: `kgUnfold.ts` now distinguishes the `--view` flag's outright absence (peek — `runUnfold` given `view: null`, no `resolveTreeView`/`ensureDefaultView` call at all) from the flag present with no name following it (unchanged bootstrap-and-mutate default-view behavior). Verified live: a bare `aperas unfold` on an already-unfolded ref left the default view's `unfolds` count unchanged (43 -> 43), while `--view default` on a fresh ref still grew it (43 -> 44).",
+    "parent": "BlockNode:00CE1GW63800A",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CE1GW638006",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE1GW638006:links:Link:00CF10KBB8000",
-        "@type": "Link",
-        "target": "BlockNode:00CEDP10P8001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638006:links:Link:00CF10KBB8000:props:StringProp:00CF10KBB8001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "725"
-          }
-        ]
-      }
-    ],
     "title": "**No raw single-node inspection command**",
-    "text": "**No raw single-node inspection command**: `aperas tree`/`aperas backlinks --text` only ever show a rendered preview (title + truncated, anchor-stripped abstract) — right for browsing, not for verifying a stored field is exactly what's about to be pushed back via `aperas update`/`aperas insert`, or for reading a field no command shows at all (`props`, `tombstonedAt`). `aperas project --dry-run` reconstructs real markdown but only at the whole-artifact level. Today the only way to see a node's exact stored state is a direct `BlockNode.jsonld`/`ArtifactNode.jsonld` read outside the CLI entirely. Originally tracked under packaging, relocated here since it's a node-inspection gap, not a packaging one — the same gap the [`aperas` skill's own item 8](../history/aperas-skill.md#id/BlockNode:00CEDP10P8001) independently names — that gap's skill-script stage; `aperas show <ref>` below is the still-open toolset-update stage of the same lifecycle.",
-    "parent": "BlockNode:00CE1GW638002",
+    "text": "**No raw single-node inspection command**: `aperas tree`/`aperas backlinks --text` only ever show a rendered preview (title + truncated, anchor-stripped abstract) — right for browsing, not for verifying a stored field is exactly what's about to be pushed back via `aperas update`/`aperas insert`, or for reading a field no command shows at all (`props`, `tombstonedAt`). `aperas project --dry-run` reconstructs real markdown but only at the whole-artifact level. Before this, the only way to see a node's exact stored state was a direct `BlockNode.jsonld`/`ArtifactNode.jsonld` read outside the CLI entirely. Originally tracked under packaging, relocated here since it's a node-inspection gap, not a packaging one — the same gap the [`aperas` skill's own item 8](../history/aperas-skill.md#id/BlockNode:00CEDP10P8001) independently names — that gap's skill-script stage; `scripts/show_node.py` staged the gap, `aperas show <ref>` below was the still-open toolset-update stage of the same lifecycle. **Resolved**: `aperas show <ref>` (`kgShow.ts`) resolves the normal deep-path way, then prints the node's exact stored fields via `dehydrate.ts`'s own `serializeDoc` — the identical per-kind shape walk that writes the on-disk mirror, reused rather than re-implemented, so \"what `show` prints\" can't drift from \"what's actually on disk.\" `--text` prints only the raw `text` field, undecorated, meant to be redirected to a file and piped back into `kg:update` for a byte-identical round-trip.",
+    "parent": "BlockNode:00CE1GW63800A",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CE1GW638007",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE1GW638007:links:Link:00CE60NST8000",
-        "@type": "Link",
-        "target": "BlockNode:00CE0HD0HG007",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638007:links:Link:00CE60NST8000:props:StringProp:00CE60NST8001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "66"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CE1GW638007:links:Link:00CE8J8580000",
-        "@type": "Link",
-        "target": "BlockNode:00CE8J339R001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638007:links:Link:00CE8J8580000:props:StringProp:00CE8J8588000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "944"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CE1GW638007:links:Link:00CGJHQ33G000",
-        "@type": "Link",
-        "target": "BlockNode:00CGJHDK68001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638007:links:Link:00CGJHQ33G000:props:StringProp:00CGJHQ33G001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "1264"
-          }
-        ]
-      }
-    ],
     "title": "**GFM task-list items round-trip broken**",
     "text": "**GFM task-list items round-trip broken**: originally found here: [archive-migration discussion](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG007) — `- [ ] text` reportedly stored the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` would re-emit `- [ ] ` on top of the leftover `[ ] `, doubling to `- [ ] [ ] text`. Re-tested live during the list-consumption migration (both a direct `parseMarkdownTree`/`serializeBlock` round trip and a real `aperas insert` against the live corpus): does not reproduce, renders correctly. `git log` shows the checkbox-handling code in `astParser.ts` has never changed since it was first written. No corroborating evidence anywhere in the graph that this was ever actually observed broken in a real projected artifact — awaiting a decision on whether to close as not-reproducible or keep open pending further investigation. See [list-consumption discussion](../discussion/list-consumption.md#id/BlockNode:00CE8J339R001) for the re-test note. **Correction: it does reproduce, narrower than either re-test tried.** Confirmed live on this session's own discussion plan checkboxes, then isolated and traced to the exact upstream line — full account in [discussion/treeview.md](../discussion/treeview.md#id/BlockNode:00CGJHDK68001). The real trigger is narrower than \"bold\" and broader than either re-test tried: `mdast-util-gfm-task-list-item`'s `exitParagraphWithTaskListItem` only trims the checkbox's mandatory leftover space, and re-bases the paragraph's own position past it, when the paragraph's first inline child is a `text` node — `- [x] Plain: rest.` qualifies, `- [x] **Bold**:`/`*Italic*:`/`` `code`: ``/`[link](url):` do not, since CommonMark's inline tokenizer never materializes a lone leading space with nothing before an inline span as its own text node. `astParser.ts` has no checkbox-marker-stripping logic of its own — it only reads `node.checked` into a prop — so it faithfully trusts the un-rebased position for `rawSlice`, including the leftover marker as literal text. Both earlier re-tests happened to use plain-text task items, which is exactly why neither one reproduced it. **Resolved**: the real fix lives upstream (`mdast-util-gfm-task-list-item`), out of reach here, so `astParser.ts` compensates defensively — a listItem already known to be a checkbox (`node.checked` boolean) has a leading `/^\\[[ xX]\\]\\s*/` stripped from both its extracted `text` and `title` after the fact, regardless of what leaked or why. Verified live end-to-end: a bold-lead checkbox item pushed through the real service now stores clean text with `checked` set correctly, and projects to a single, correct `- [x]` marker — confirmed by re-checking this session's own six plan checkboxes, which had actually rendered doubled (`[ ] [x]`) before this fix and render correctly now.",
     "parent": "BlockNode:00CE1GW63800A",
@@ -9510,50 +9392,6 @@
   {
     "@id": "BlockNode:00CE1GW638008",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE1GW638008:links:Link:00CE5QVW68000",
-        "@type": "Link",
-        "target": "BlockNode:00CE32GQM8001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638008:links:Link:00CE5QVW68000:props:StringProp:00CE5QVW68001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "102"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CE1GW638008:links:Link:00CE5QVW68002",
-        "@type": "Link",
-        "target": "BlockNode:00CE32GW3G002",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638008:links:Link:00CE5QVW68002:props:StringProp:00CE5QVW68003",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "589"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CE1GW638008:links:Link:00CE60J7R0000",
-        "@type": "Link",
-        "target": "BlockNode:00CE0HD0HG007",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638008:links:Link:00CE60J7R0000:props:StringProp:00CE60J7R0001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "682"
-          }
-        ]
-      }
-    ],
     "title": "00CE1GW638008",
     "text": "**`List` isn't consumed by a preceding `Heading` the way a single paragraph already is**: resolved by [list-consumption](../design/list-consumption.md#id/BlockNode:00CE32GQM8001) — a heading whose only content is a list (no leading paragraph to consume) now dissolves the list's items as the heading's own flat children (case 3 of the unified law) instead of leaving them wrapped in a separate `list`-typed node. Not literally merged into `.text` the way a lone paragraph is (a list can't collapse into a scalar string), but no longer floats as a separate, opaque child block either — see [History](../history/list-consumption.md#id/BlockNode:00CE32GW3G002). Originally found here: [archive-migration discussion](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG007).",
     "parent": "BlockNode:00CE1GW63800A",
@@ -9563,22 +9401,6 @@
   {
     "@id": "BlockNode:00CE1GW638009",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE1GW638009:links:Link:00CE1J0TWR000",
-        "@type": "Link",
-        "target": "BlockNode:00CE1GW7CG003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW638009:links:Link:00CE1J0TWR000:props:StringProp:00CE1J0TWR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "4"
-          }
-        ]
-      }
-    ],
     "title": "## Pending Tasks",
     "text": "See [Task Breakdown](../planning/treeview.md#id/BlockNode:00CE1GW7CG003) for the full ordered list.",
     "parent": "BlockNode:00CE1GW638001",
@@ -9595,6 +9417,10 @@
       "BlockNode:00CE1GW63800C",
       "BlockNode:00CE1GW638008",
       "BlockNode:00CE1GW638007",
+      "BlockNode:00CE1GW638004",
+      "BlockNode:00CE1GW638005",
+      "BlockNode:00CE1GW638006",
+      "BlockNode:00CE8T6W7G001",
       "BlockNode:00CE1GW63800B"
     ]
   },
@@ -9624,22 +9450,6 @@
   {
     "@id": "BlockNode:00CE1GW63800C",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE1GW63800C:links:Link:00CE1J10M8000",
-        "@type": "Link",
-        "target": "BlockNode:00CE1GW8T8003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE1GW63800C:links:Link:00CE1J10M8000:props:StringProp:00CE1J10M8001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "108"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CE1GW63800C:props:StringProp:00CE59A5KR000",
@@ -9693,6 +9503,8 @@
       "BlockNode:00CE1GW7CG007",
       "BlockNode:00CE1GW7CG008",
       "BlockNode:00CE1GW7CG009",
+      "BlockNode:00CGM6MJER001",
+      "BlockNode:00CGM6MJF0000",
       "BlockNode:00CE1GW7CG004"
     ]
   },
@@ -9722,6 +9534,22 @@
   {
     "@id": "BlockNode:00CE1GW7CG005",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW7CG005:links:Link:00CGM66QP0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW7CG005:links:Link:00CGM66QP0000:props:StringProp:00CGM66QP8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "430"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CE1GW7CG005:props:StringProp:00CE59A4ZR000",
@@ -9737,7 +9565,7 @@
       }
     ],
     "title": "`TreeView.unfolds` staleness",
-    "text": "`TreeView.unfolds` staleness: build the audit/prune sweep (walk every `TreeView`'s `unfolds` list, on some cadence or on demand, stripping any entry that no longer resolves to a live node) — the fix that actually closes the gap. Add write-time validation in `TreeView.unfold(ref)` alongside it as a cheap complementary check, not a substitute. One-time manual cleanup needed regardless for the 10 already-stale ids in the live `.state/TreeView.jsonld`.",
+    "text": "`TreeView.unfolds` staleness: Done. `pruneStaleUnfolds` (`node.ts`) sweeps every `TreeView`'s `unfolds` list at the same explicit-sweep points as `pruneUnreachableTombstones`, stripping any entry with no quads at all; `TreeView.unfold(ref)` refuses (no-op) a nonexistent ref at write time too. The corpus's live `.state/TreeView.jsonld` was already clean of stale ids by the time the sweep landed — no manual cleanup needed — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638004).",
     "parent": "BlockNode:00CE1GW7CG003",
     "type": "listItem",
     "children": []
@@ -9745,8 +9573,24 @@
   {
     "@id": "BlockNode:00CE1GW7CG006",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW7CG006:links:Link:00CGM6A04G000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW7CG006:links:Link:00CGM6A04G000:props:StringProp:00CGM6A04G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "417"
+          }
+        ]
+      }
+    ],
     "title": "Bare `aperas unfold <ref>` (no `--view` at all)",
-    "text": "Bare `aperas unfold <ref>` (no `--view` at all): make it peek — resolve and print the preview, calling neither `view.unfold(id)` nor the default-view bootstrap. Reserve the bootstrap-and-mutate behavior for `--view` supplied with no name following it.",
+    "text": "Bare `aperas unfold <ref>` (no `--view` at all): Done. `kgUnfold.ts` distinguishes the flag's outright absence (peek — no `view.unfold(id)`, no default-view bootstrap) from `--view` present with no name following it (unchanged bootstrap-and-mutate default). Verified live: a bare unfold on an already-unfolded ref left the default view's `unfolds` count unchanged, `--view default` on a fresh ref still grew it — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638005).",
     "parent": "BlockNode:00CE1GW7CG003",
     "type": "listItem",
     "children": []
@@ -9754,8 +9598,24 @@
   {
     "@id": "BlockNode:00CE1GW7CG007",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW7CG007:links:Link:00CGM6ACV8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW7CG007:links:Link:00CGM6ACV8000:props:StringProp:00CGM6ACV8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "350"
+          }
+        ]
+      }
+    ],
     "title": "`aperas show <ref>`",
-    "text": "`aperas show <ref>`: resolve `<ref>` the normal way, then print its raw stored fields untransformed — full `text`, `props`, `tombstonedAt`, and `path`/`title`/`type` as actually recorded, no truncation, no anchor stripping, no rendering.",
+    "text": "`aperas show <ref>`: Done. `kgShow.ts` resolves the normal deep-path way, then prints the node's exact stored fields via `dehydrate.ts`'s own exported `serializeDoc` — the identical per-kind shape walk that writes the on-disk mirror. `--text` prints only the raw `text` field, undecorated, for a byte-identical round-trip back into `kg:update` — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638006).",
     "parent": "BlockNode:00CE1GW7CG003",
     "type": "listItem",
     "children": []
@@ -9763,8 +9623,24 @@
   {
     "@id": "BlockNode:00CE1GW7CG008",
     "@type": "BlockNode",
-    "title": "00CE1GW7CG008",
-    "text": "Fix the GFM task-list round-trip bug (parser/serializer, likely `astParser.ts`'s task-list handling).",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW7CG008:links:Link:00CGM6CZHR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW7CG008:links:Link:00CGM6CZHR000:props:StringProp:00CGM6CZHR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "113"
+          }
+        ]
+      }
+    ],
+    "title": "00CGM6CQ3G001",
+    "text": "Fix the GFM task-list round-trip bug (parser/serializer, likely `astParser.ts`'s task-list handling). Done — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638007) (Resolved).",
     "parent": "BlockNode:00CE1GW7CG003",
     "type": "listItem",
     "children": []
@@ -9772,8 +9648,24 @@
   {
     "@id": "BlockNode:00CE1GW7CG009",
     "@type": "BlockNode",
-    "title": "00CE1GW7CG009",
-    "text": "Fix `List` not being consumed by a preceding `Heading` the way a single paragraph already is.",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW7CG009:links:Link:00CGM6DJ7R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW7CG009:links:Link:00CGM6DJ7R000:props:StringProp:00CGM6DJ80000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "105"
+          }
+        ]
+      }
+    ],
+    "title": "00CGM6DFM8001",
+    "text": "Fix `List` not being consumed by a preceding `Heading` the way a single paragraph already is. Done — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638008) (Resolved).",
     "parent": "BlockNode:00CE1GW7CG003",
     "type": "listItem",
     "children": []
@@ -10715,11 +10607,10 @@
     "@id": "BlockNode:00CE32GRZG000",
     "@type": "BlockNode",
     "title": "## Open Issues",
+    "text": "None.",
     "parent": "BlockNode:00CE32GRZ8001",
     "type": "heading",
-    "children": [
-      "BlockNode:00CE32GRZG002"
-    ]
+    "children": []
   },
   {
     "@id": "BlockNode:00CE32GRZG002",
@@ -10732,10 +10623,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE32GRZG002:links:Link:00CE6C4NB0000:props:StringProp:00CE6C4NB8000",
+            "@id": "BlockNode:00CE32GRZG002:links:Link:00CE6C4NB0000:props:StringProp:00CGKX9ZEG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "1471"
+            "value": "1090"
           }
         ]
       }
@@ -10755,8 +10646,8 @@
       }
     ],
     "title": "**Inserting a list item always spawns a fresh run-leader**",
-    "text": "**Inserting a list item always spawns a fresh run-leader**: <a name='id/BlockNode:00CE32GRZG002' class='aperas-anchor aperas-id'></a> live-tested while writing this doc's own Resolved section — `aperas insert` piping a single new bullet always parses that content as its own orphaned one-item list, so the new item gets its own explicit `orderedList`/`startIndex` from the normalization rule (see Design). That marks it as a run-leader relative to whatever precedes it, even when the preceding item is an ordinary continuation of the very same list with the identical value — the render-time boundary rule (a next item's own explicit prop starts a new run) then treats it as a *second* run, rendering a spurious blank line before it. Not data corruption (bullet type and numbering both stay correct), but a real regression versus the old anchor-owns-it model, where a freshly inserted item carried no prop of its own and silently joined whatever run it landed in. No fix designed yet — needs its own decision (e.g. `aperas insert` clearing a freshly-parsed single item's own `orderedList`/`startIndex` when landing among existing plain `listItem` siblings, so it only carries the prop when it's genuinely starting something new). Confirmed live twice more since: pushing an existing list's *full* corrected content (rather than a bare `--after` insert) avoids it, since the new item then joins the same parsed run as a continuation instead of its own orphaned list — see [Freeflow](../discussion/list-consumption.md#id/BlockNode:00CE5EHVXR008) for the narrative.",
-    "parent": "BlockNode:00CE32GRZG000",
+    "text": "**Inserting a list item always spawns a fresh run-leader**: `aperas insert` piping a single new bullet always parsed that content as its own orphaned one-item list, so the new item got its own explicit `orderedList`/`startIndex` from the normalization rule (see Design) — marking it a run-leader relative to whatever precedes it, even when the preceding item was an ordinary continuation of the very same list with the identical value. The render-time boundary rule (a next item's own explicit prop starts a new run) then treated it as a *second* run, rendering a spurious blank line before it. Not data corruption (bullet type and numbering both stayed correct), but a real regression versus the old anchor-owns-it model, where a freshly inserted item carried no prop of its own and silently joined whatever run it landed in. **Resolved**: `kgInsert.ts` now clears a freshly-parsed lone `listItem`'s own `orderedList`/`startIndex` when the sibling it lands next to is a plain (no-props-of-its-own) `listItem` — see [Freeflow](../discussion/list-consumption.md#id/BlockNode:00CE5EHVXR008) for the full mechanism and its deliberate scope limit.",
+    "parent": "BlockNode:00CE32GRZG007",
     "type": "listItem",
     "children": []
   },
@@ -10798,6 +10689,7 @@
       "BlockNode:00CE5D1A10005",
       "BlockNode:00CE5D1A10006",
       "BlockNode:00CE5D1A10007",
+      "BlockNode:00CE32GRZG002",
       "BlockNode:00CE66Z7VR001"
     ]
   },
@@ -10878,10 +10770,24 @@
             "value": "428"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CE32GTR8003:links:Link:00CGKXAM6R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE32GRZG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE32GTR8003:links:Link:00CGKXAM6R000:props:StringProp:00CGKXAM6R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "917"
+          }
+        ]
       }
     ],
     "title": "## Task Breakdown",
-    "text": "All done. `astParser.ts` normalizes props onto the run's own first item and splices orphaned lists flat; `project.ts` reads props per-run-leader and detects boundaries by type-or-own-explicit-props; both synthetic multi-run cases (separated, zero-separator) are covered in `verify.ts`; the real corpus (48 legacy anchors, 59 live `list` nodes) is migrated, verified byte-identical except one approved, understood exception (see [Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG007)); `verify.ts`'s old hard-asserted tests are rewritten; the two `insert`-into-a-list-target gotchas are reassessed — one moot (no live `list` node left to mistakenly target), one reclassified as a general, unrelated parser-input caveat, not a list-consumption bug.",
+    "text": "All done. `astParser.ts` normalizes props onto the run's own first item and splices orphaned lists flat; `project.ts` reads props per-run-leader and detects boundaries by type-or-own-explicit-props; both synthetic multi-run cases (separated, zero-separator) are covered in `verify.ts`; the real corpus (48 legacy anchors, 59 live `list` nodes) is migrated, verified byte-identical except one approved, understood exception (see [Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG007)); `verify.ts`'s old hard-asserted tests are rewritten; the two `insert`-into-a-list-target gotchas are reassessed — one moot (no live `list` node left to mistakenly target), one reclassified as a general, unrelated parser-input caveat, not a list-consumption bug. A separate post-migration regression found afterward — `aperas insert` always minting a fresh run-leader prop on a lone piped bullet — is now also fixed (see [Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG002)).",
     "parent": "BlockNode:00CE32GTR8001",
     "type": "heading",
     "children": []
@@ -11791,7 +11697,7 @@
       }
     ],
     "title": "**Inserting a list item always spawns a fresh run-leader**",
-    "text": "**Inserting a list item always spawns a fresh run-leader**: <a name='id/BlockNode:00CE5EHVXR008' class='aperas-anchor aperas-id'></a> see [Open Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG002) — live-tested while writing this same Resolved section. A freshly `aperas insert`-ed bullet always parses as its own orphaned one-item list, so it gets its own explicit `orderedList`/`startIndex` per the normalization rule — marking it a run-leader relative to whatever precedes it, even an ordinary continuation of the identical list. Renders with a spurious blank line before it; not corruption (bullet type and numbering stay correct), but a real regression from the old anchor-owns-it model, where a freshly inserted item carried no prop of its own. No fix designed yet. Confirmed live twice more since: pushing a list's full corrected content instead of a bare `--after` insert avoids it, since the new item joins the same parsed run as a continuation rather than becoming its own orphaned list.",
+    "text": "**Inserting a list item always spawns a fresh run-leader**: see [Open Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG002) — live-tested while writing this same Resolved section. A freshly `aperas insert`-ed bullet always parses as its own orphaned one-item list, so it gets its own explicit `orderedList`/`startIndex` per the normalization rule — marking it a run-leader relative to whatever precedes it, even an ordinary continuation of the identical list. Renders with a spurious blank line before it; not corruption (bullet type and numbering stay correct), but a real regression from the old anchor-owns-it model, where a freshly inserted item carried no prop of its own. Confirmed live twice more since: pushing a list's full corrected content instead of a bare `--after` insert avoids it, since the new item joins the same parsed run as a continuation rather than becoming its own orphaned list. **Resolved**: `kg:insert` (`kgInsert.ts`) now looks at the sibling landing immediately before the new item — for a bare `--after`, that sibling itself; for `--before`/append, whatever's already adjacent — and if it's a plain `listItem` carrying no `orderedList`/`startIndex` of its own (an ordinary continuation), strips the freshly-parsed item's own copy of those props before writing, so it silently joins that run instead of starting a spurious new one. Scoped deliberately to that one confirmed-live shape — landing right before an existing run's own leader is a different case (the new item would need to *take over* the leader role, not just avoid claiming one) and isn't handled.",
     "parent": "BlockNode:00CE32GXH000D",
     "type": "listItem",
     "children": []
@@ -11873,16 +11779,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CE5QD6W8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-11T13:11:43.421Z",
-    "title": "00CE5QD6W8001",
-    "text": "a scratch checkbox probe",
-    "parent": "BlockNode:00CE1GW638002",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CE66Z7VR001",
     "@type": "BlockNode",
     "tombstonedAt": "2026-09-11T13:47:11.137Z",
@@ -11942,10 +11838,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE8T49MR001:links:Link:00CE8TBFMR000:props:StringProp:00CE8TBFMR001",
+            "@id": "BlockNode:00CE8T49MR001:links:Link:00CE8TBFMR000:props:StringProp:00CGM0XNPR000",
             "@type": "StringProp",
             "key": "position",
-            "value": "960"
+            "value": "1601"
           }
         ]
       }
@@ -11965,7 +11861,7 @@
       }
     ],
     "title": "**`aperas unfold`'s raw preview omits the tombstone tag `aperas tree --view` shows**",
-    "text": "**`aperas unfold`'s raw preview omits the tombstone tag `aperas tree --view` shows**: found live while investigating a cross-linking question in `list-consumption` — `aperas unfold BlockNode:00CE1GW638002 --view <name>` printed two children (00CE5QD6W8001, 00CE1GW638003) with no marker distinguishing them from live siblings, read as stray/anomalous at first. Re-running `aperas tree BlockNode:00CE1GW638002 --view <name>` on the identical, already-unfolded subtree appended a plain `(tombstoned)` suffix to those same two lines — confirming both commands know the node is tombstoned, but only `tree` surfaces it. **Proposed fix — don't just add the tag to `unfold`; hide tombstoned nodes from default output entirely, in both commands**, revealed only via an explicit `--tombstoned` flag. A tombstoned node is dead data retained solely for id-stability; showing it unmarked in a raw exploratory listing invites exactly the misreading that happened here. See [Issues](../issues/treeview.md#id/BlockNode:00CE8T6W7G001) for the tracked gap.",
+    "text": "**`aperas unfold`'s raw preview omits the tombstone tag `aperas tree --view` shows**: found live while investigating a cross-linking question in `list-consumption` — `aperas unfold BlockNode:00CE1GW638002 --view <name>` printed two children (00CE5QD6W8001, 00CE1GW638003) with no marker distinguishing them from live siblings, read as stray/anomalous at first. Re-running `aperas tree BlockNode:00CE1GW638002 --view <name>` on the identical, already-unfolded subtree appended a plain `(tombstoned)` suffix to those same two lines — confirming both commands know the node is tombstoned, but only `tree` surfaces it. **Proposed fix — don't just add the tag to `unfold`; hide tombstoned nodes from default output entirely, in both commands**, revealed only via an explicit `--tombstoned` flag. A tombstoned node is dead data retained solely for id-stability; showing it unmarked in a raw exploratory listing invites exactly the misreading that happened here. **Built exactly as proposed**: `TreeOptions.showTombstoned` (default `false`) now gates both renderers `kg:tree` uses (the plain no-`--view` recursion and the view-based `emitNode`/`emitLinkLine`) and `kg:unfold`'s own separate preview path — a tombstoned node is skipped entirely (not just its line; nothing recurses into it) unless `--tombstoned` is passed, in which case it's shown tagged `(tombstoned)`, same wording as before. `kg:unfold` additionally refuses to unfold a tombstoned node *directly* without the flag (a clear error, not silent emptiness), since that command's whole purpose is revealing the one thing it was pointed at. See [Issues](../issues/treeview.md#id/BlockNode:00CE8T6W7G001) for the tracked gap.",
     "parent": "BlockNode:00CE1DDF58003",
     "type": "listItem",
     "children": []
@@ -11973,22 +11869,6 @@
   {
     "@id": "BlockNode:00CE8T6W7G001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CE8T6W7G001:links:Link:00CE8T6X80001",
-        "@type": "Link",
-        "target": "BlockNode:00CE8T49MR001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CE8T6W7G001:links:Link:00CE8T6X80001:props:StringProp:00CE8T6X80002",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "321"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CE8T6W7G001:props:StringProp:00CE8T6X7R000",
@@ -12003,9 +11883,9 @@
         "value": "1"
       }
     ],
-    "title": "00CE8T6W7G001",
-    "text": "**`aperas unfold` doesn't mark tombstoned children; both `unfold` and `tree` should hide them by default**: `aperas tree --view <name>` appends a `(tombstoned)` suffix to a tombstoned node's line; `aperas unfold` shows the identical node with no marker at all, indistinguishable from a live sibling — confirmed live, see [Discussion](../discussion/treeview.md#id/BlockNode:00CE8T49MR001). Proposed direction: don't just bring `unfold` in line with `tree`'s tag — suppress tombstoned nodes from both commands' default output, and add a `--tombstoned` flag to opt into seeing them. No fix designed yet.",
-    "parent": "BlockNode:00CE1GW638002",
+    "title": "**`aperas unfold` doesn't mark tombstoned children; both `unfold` and `tree` should hide them by default**",
+    "text": "**`aperas unfold` doesn't mark tombstoned children; both `unfold` and `tree` should hide them by default**: `aperas tree --view <name>` appends a `(tombstoned)` suffix to a tombstoned node's line; `aperas unfold` showed the identical node with no marker at all, indistinguishable from a live sibling — confirmed live, see [Discussion](../discussion/treeview.md#id/BlockNode:00CE8T49MR001). Proposed direction: don't just bring `unfold` in line with `tree`'s tag — suppress tombstoned nodes from both commands' default output, and add a `--tombstoned` flag to opt into seeing them. **Resolved exactly as proposed**: `TreeOptions.showTombstoned` (default `false`) gates every renderer — `kg:tree`'s plain and view-based paths, and `kg:unfold`'s own separate preview path — hiding a tombstoned node and its subtree entirely by default, tagged `(tombstoned)` only with `--tombstoned`. `kg:unfold` additionally refuses to unfold a tombstoned node directly without the flag, rather than returning something misleadingly empty. Verified live and in `verify.ts`. See [Discussion](../discussion/treeview.md#id/BlockNode:00CE8T49MR001).",
+    "parent": "BlockNode:00CE1GW63800A",
     "type": "listItem",
     "children": []
   },
@@ -16233,47 +16113,14 @@
     "@id": "BlockNode:00CF1WZ4JG002",
     "@type": "BlockNode",
     "title": "## Open Issues",
+    "text": "None.",
     "parent": "BlockNode:00CF1WZ4JG001",
     "type": "heading",
-    "children": [
-      "BlockNode:00CF1WZ4JG005",
-      "BlockNode:00CF1WZ4JG006",
-      "BlockNode:00CF1WZ4JG007"
-    ]
+    "children": []
   },
   {
     "@id": "BlockNode:00CF1WZ4JG003",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0000",
-        "@type": "Link",
-        "target": "BlockNode:00CE1GW638002",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0000:props:StringProp:00CGH4W5W0001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "159"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0002",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG004",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0002:props:StringProp:00CGH4W5W0003",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "2363"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CF1WZ4JG003:props:StringProp:00CF1WZ5Q8000",
@@ -16297,22 +16144,6 @@
   {
     "@id": "BlockNode:00CF1WZ4JG004",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF1WZ4JG004:links:Link:00CGH4W5W8000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF1WZ4JG004:links:Link:00CGH4W5W8000:props:StringProp:00CGH4W5W8001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "978"
-          }
-        ]
-      }
-    ],
     "title": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**",
     "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. **Resolved**: root cause was every old-side matching pool (Stage A's leaves and heading buckets, Stage B's containers) including tombstoned candidates with no exclusion at all — a live new node's content could bind to a dead id purely because its stripped text happened to match. Fixed by excluding every tombstoned old child from every matching pool in `diffChildren`: a dead slot is never reused, new content always gets a fresh id instead. Verified live: a new item with text identical to an already-tombstoned sibling's now lands on a brand-new id, not the dead one. Same fix as [item 1 above](#id/BlockNode:00CF1WZ4JG003).",
     "parent": "BlockNode:00CF1WZ4JG00J",
@@ -16323,8 +16154,8 @@
     "@id": "BlockNode:00CF1WZ4JG005",
     "@type": "BlockNode",
     "title": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**",
-    "text": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**: works for reconciling siblings that share a rough common order, not for an unordered bag of whole-artifact identities scattered across concern folders — a match's recursive split can discard a whole quadrant of otherwise-valid candidates. Worked around for the rename path specifically (replaced by exact-key matching there), but the same algorithm is used elsewhere in `reconcile.ts` and may still carry the weakness on those other paths.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "text": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**: works for reconciling siblings that share a rough common order, not for an unordered bag of whole-artifact identities scattered across concern folders — a match's recursive split can discard a whole quadrant of otherwise-valid candidates. Worked around for the rename path specifically (replaced by exact-key matching there), but the same algorithm was used elsewhere in `reconcile.ts` and still carried the weakness on those other paths. **Resolved**: confirmed narrower in scope than first filed — `matchLeftoverByAbstract` is used only by `trackAllArtifacts`/`trackArtifactsScoped` (`artifacts.ts`) and folder rename detection (`folders.ts`), never reached by list-item matching (that path already went through the separately-fixed `matchKeyed`+`leafKey`, [item 1 above](#id/BlockNode:00CF1WZ4JG003)). `trackArtifactsScoped` already had its own order-independent workaround (`matchByExactKey`), duplicating the real fix rather than sharing it. Rewrote `matchLeftoverByAbstract` itself to exact-key matching with no positional requirement at all, and pointed both remaining call sites (whole-corpus artifact/folder rename detection) at it, retiring the now-redundant local copy. Verified with the exact reproduction this issue was filed from — a scrambled 4-item removed/added pair in fully reversed order — matching all 4 correctly where the old recursive algorithm stranded 2 of them in an already-discarded quadrant.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
@@ -16332,18 +16163,8 @@
     "@id": "BlockNode:00CF1WZ4JG006",
     "@type": "BlockNode",
     "title": "**A fully-dead container is never itself tombstoned**",
-    "text": "**A fully-dead container is never itself tombstoned**: `pruneUnreachableTombstones` only collects nodes that are themselves tombstoned and unreachable; nothing ever tombstones a container once its last live child is gone (children get tombstoned one at a time as they're resolved, but the now-vacuous wrapper is never itself marked dead). Confirmed live against `issues/packaging.md`'s own dead nested-list-wrapper chain. Minor/cosmetic relative to the three above, but the same tombstone-lifecycle gap.",
-    "parent": "BlockNode:00CF1WZ4JG002",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CF1WZ4JG007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-12T22:30:45.329Z",
-    "title": "**A single `kg:insert` call isn't transactional**",
-    "text": "**A single `kg:insert` call isn't transactional**: `kgInsert.ts`'s create mode resolves the parent, parses piped markdown into fresh nodes, checks name collisions, writes every new node into the store via `hydrateFromParsed`, resolves links, and only *then* resolves the `--after`/`--before` anchor — so an anchor-resolution failure leaves the newly-hydrated nodes live in memory, attached to nothing, with no rollback. `rejectSlugPathCollisions` is deliberately ordered ahead of hydration; this is a missing second guard (resolve/validate the anchor beside that same check, before any hydration), not a structural problem. `aperas reload -- --discard` is the only current recovery.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "text": "**A fully-dead container is never itself tombstoned**: `pruneUnreachableTombstones` only collected nodes that were themselves tombstoned and unreachable; nothing ever tombstoned a container once its last live child was gone (children get tombstoned one at a time as they're resolved, but the now-vacuous wrapper was never itself marked dead). Confirmed live against `issues/packaging.md`'s own dead nested-list-wrapper chain. **Resolved**: added `tombstoneVacuousContainers`, a companion sweep run right before `pruneUnreachableTombstones` at all three of its own explicit-sweep call sites (`kg:reload`, `kg:flush --clobber`, service shutdown) — marks `tombstonedAt` on a `list` node with no live children, or a `listItem` carrying no `.text` of its own and no live children (a pure structural wrapper), repeating to a fixed point since tombstoning an inner wrapper can vacate its own parent in turn. Verified live: an `outer wrapper item` `listItem` (no text of its own) holding one nested item, with the nested item removed via `aperas remove`, correctly gained its own `tombstonedAt` on the next reload sweep.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
@@ -16473,7 +16294,11 @@
       "BlockNode:00CF1WZ4JG004",
       "BlockNode:00CF1WZ4JG008",
       "BlockNode:00CF1WZ4JG009",
-      "BlockNode:00CFATMWY0001"
+      "BlockNode:00CFATMWY0001",
+      "BlockNode:00CF1WZ4JG005",
+      "BlockNode:00CF1WZ4JG006",
+      "BlockNode:00CGM54FX0001",
+      "BlockNode:00CGM4YD4G001"
     ]
   },
   {
@@ -16673,6 +16498,7 @@
       "BlockNode:00CF2B9GGG001",
       "BlockNode:00CGGNFG50001",
       "BlockNode:00CGGTQ620001",
+      "BlockNode:00CGM6XXAR001",
       "BlockNode:00CGJJVGDR001"
     ]
   },
@@ -24906,8 +24732,8 @@
   {
     "@id": "BlockNode:00CGK3AH60001",
     "@type": "BlockNode",
-    "title": "### Batch 2 — planned next: the two reconcile items Batch 1 found don't share its fix",
-    "text": "Neither is blocked; each needs its own investigation before a diff, the same discipline Batch 1 followed for items 1 and 2.",
+    "title": "### Batch 2 — done: the two reconcile items Batch 1 found didn't share its fix",
+    "text": "Both investigated and fixed the same session Batch 1 landed in.",
     "parent": "BlockNode:00CF23FB1G003",
     "type": "heading",
     "children": [
@@ -24920,16 +24746,16 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGK3AH60002:links:Link:00CGK3AM4G000",
+        "@id": "BlockNode:00CGK3AH60002:links:Link:00CGKXH4T8000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG005",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGK3AH60002:links:Link:00CGK3AM4G000:props:StringProp:00CGK3AM4G001",
+            "@id": "BlockNode:00CGK3AH60002:links:Link:00CGKXH4T8000:props:StringProp:00CGKXH4T8001",
             "@type": "StringProp",
             "key": "position",
-            "value": "123"
+            "value": "834"
           }
         ]
       }
@@ -24948,8 +24774,8 @@
         "value": "1"
       }
     ],
-    "title": "00CGK3AH60002",
-    "text": "Investigate whether `matchLeftoverByAbstract`'s recursive-split weakness actually manifests today, not just in principle — [issue](../issues/core.md#id/BlockNode:00CF1WZ4JG005). Confirmed narrower in scope than first filed: it's used only by `artifacts.ts`/`folders.ts` for artifact/folder rename detection, never reached by list-item matching (that path already goes through the Batch-1-fixed `matchKeyed`+`leafKey`). Read both call sites, try to reproduce a scattered-candidate collision the way the rename path's own fix was motivated, then decide: extend exact-key matching further, or accept the residual risk given how narrow the surface actually is.",
+    "title": "Investigated and fixed. Confirmed narrower in scope than first filed",
+    "text": "Investigated and fixed. Confirmed narrower in scope than first filed: `matchLeftoverByAbstract` is used only by `artifacts.ts`/`folders.ts` for artifact/folder rename detection, never reached by list-item matching (that path already goes through the Batch-1-fixed `matchKeyed`+`leafKey`). Both remaining call sites (`trackAllArtifacts`, folder rename detection) reproduced the position-sensitivity live — a scrambled 4-item removed/added pair, order-reversed, matched only correctly once the algorithm itself was replaced. Fixed by rewriting `matchLeftoverByAbstract` itself to exact-key matching with no positional requirement at all — the same shape `trackArtifactsScoped`'s own `matchByExactKey` already used for the scoped-rename path, now consolidated into the one shared function instead of two near-duplicate implementations — [issue](../issues/core.md#id/BlockNode:00CF1WZ4JG005).",
     "parent": "BlockNode:00CGK3AH60001",
     "type": "listItem",
     "children": []
@@ -24959,23 +24785,318 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGK3AH68000:links:Link:00CGK3AM4R000",
+        "@id": "BlockNode:00CGK3AH68000:links:Link:00CGKXKYN8000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGK3AH68000:links:Link:00CGK3AM4R000:props:StringProp:00CGK3AM4R001",
+            "@id": "BlockNode:00CGK3AH68000:links:Link:00CGKXKYN8000:props:StringProp:00CGKXKYNG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "169"
+            "value": "931"
           }
         ]
       }
     ],
-    "title": "00CGK3AH68000",
-    "text": "Add the missing half of `pruneUnreachableTombstones` — a container whose last live child just died is never itself tombstoned, so a fully-dead wrapper lingers forever — [issue](../issues/core.md#id/BlockNode:00CF1WZ4JG006). Verify against `issues/packaging.md`'s own dead nested-list-wrapper chain, the reproducible case already on record.",
+    "title": "00CGKXKVW8001",
+    "text": "Investigated and fixed. Verified against `issues/packaging.md`'s own dead nested-list-wrapper chain by direct reproduction: a childless-of-its-own `listItem` wrapping a nested one-item list, with the nested item removed via `aperas remove` — the wrapper stayed `!tombstonedAt` indefinitely, since `pruneUnreachableTombstones`'s mark phase walks structurally reachable nodes regardless of tombstone status (it never needed to prune it) and nothing else ever revisited a live container's own liveness once its children changed. Fixed with a new companion sweep, `tombstoneVacuousContainers`, run at the same three explicit-sweep call sites as `pruneUnreachableTombstones` (`reloadStore`, `clobberFlush`, shutdown): marks `tombstonedAt` on a `list` node with no live children, or a `listItem` with no text of its own and no live children, repeating to a fixed point so tombstoning an inner wrapper can vacate its own parent in turn — [issue](../issues/core.md#id/BlockNode:00CF1WZ4JG006).",
     "parent": "BlockNode:00CGK3AH60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM4YD4G001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-15T08:34:02.896Z",
+    "title": "**`aperas update` re-derives an `ArtifactNode` target's own title from pushed text, corrupting its file-basename identity and breaking its own path resolution**",
+    "text": "**`aperas update` re-derives an `ArtifactNode` target's own title from pushed text, corrupting its file-basename identity and breaking its own path resolution**: found while updating this doc's own leading-summary text (every concern doc's `ArtifactNode.text` carries a short current-status headline as a graph-side-only field, never projected into the actual `.md` file) — `issues/core.md`'s `ArtifactNode` itself had its `title` silently overwritten with a re-derived lead-in term from whatever text was last pushed to it, instead of staying `\"core.md\"` (the file basename `trackFromDisk` sets once at track time). Confirmed by direct inspection: the corruption already existed in the last committed state, predating this session's own work. Broke `aperas unfold issues/core.md`/every other bare-path resolution of that artifact outright — `findChild`'s slug match is title-based, uniformly for every tree-positioned kind, so a wrong title makes the artifact unreachable by its own path even though its `path` field and structural position were both still correct. **Root cause**: `kgUpdate.ts`'s non-heading title re-derivation (`if (target.type !== 'heading') { title = firstChild.title; }`, added by an earlier fix in this same session for the equivalent, correct bug on ordinary blocks — see [item 1](#id/BlockNode:00CF1WZ4JG003)) never excluded `ArtifactNode` targets, even though an `ArtifactNode`'s title is never a function of its own text the way a block's lead-in is. **Resolved**: the condition now also checks `kind !== 'ArtifactNode'`, leaving `title` `undefined` (and so `target.title` unchanged) whenever the update target is an artifact root. `issues/core.md`'s own title was manually corrected back to `\"core.md\"`; two other artifacts found with the same stale-but-otherwise-harmless symptom (`issues/treeview.md`'s own leading summary describing an issue already resolved) were refreshed to `\"None.\"` while confirming the title fix held. Verified live: re-pushing `issues/documentation.md`'s own \"None.\" text through the fixed code left its title untouched.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM54FX0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM54FX0001:links:Link:00CGM54JV0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM54FX0001:links:Link:00CGM54JV0000:props:StringProp:00CGM54JV0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1298"
+          }
+        ]
+      }
+    ],
+    "title": "**`aperas update` re-derives an `ArtifactNode` target's own title from pushed text, corrupting its file-basename identity and breaking its own path resolution**",
+    "text": "**`aperas update` re-derives an `ArtifactNode` target's own title from pushed text, corrupting its file-basename identity and breaking its own path resolution**: found while updating this doc's own leading-summary text (every concern doc's `ArtifactNode.text` carries a short current-status headline as a graph-side-only field, never projected into the actual `.md` file) — `issues/core.md`'s `ArtifactNode` itself had its `title` silently overwritten with a re-derived lead-in term from whatever text was last pushed to it, instead of staying `\"core.md\"` (the file basename `trackFromDisk` sets once at track time). Confirmed by direct inspection: the corruption already existed in the last committed state, predating this session's own work. Broke `aperas unfold issues/core.md`/every other bare-path resolution of that artifact outright — `findChild`'s slug match is title-based, uniformly for every tree-positioned kind, so a wrong title makes the artifact unreachable by its own path even though its `path` field and structural position were both still correct. **Root cause**: `kgUpdate.ts`'s non-heading title re-derivation (`if (target.type !== 'heading') { title = firstChild.title; }`, added by an earlier fix in this same session for the equivalent, correct bug on ordinary blocks — see [item 1](#id/BlockNode:00CF1WZ4JG003)) never excluded `ArtifactNode` targets, even though an `ArtifactNode`'s title is never a function of its own text the way a block's lead-in is. **Resolved**: the condition now also checks `kind !== 'ArtifactNode'`, leaving `title` `undefined` (and so `target.title` unchanged) whenever the update target is an artifact root. `issues/core.md`'s own title was manually corrected back to `\"core.md\"`; two other artifacts found with the same stale-but-otherwise-harmless symptom (`issues/treeview.md`'s own leading summary describing an issue already resolved) were refreshed to `\"None.\"` while confirming the title fix held. Verified live: re-pushing `issues/documentation.md`'s own \"None.\" text through the fixed code left its title untouched.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM5V098001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR000",
+        "@type": "Link",
+        "target": "BlockNode:00CGFE4SV0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR000:props:StringProp:00CGM5V3QR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "206"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR002",
+        "@type": "Link",
+        "target": "BlockNode:00CGM54FX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR002:props:StringProp:00CGM5V3QR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "562"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGM5V098001:props:StringProp:00CGM5V3QG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGM5V098001:props:StringProp:00CGM5V3QG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CGM5V098001",
+    "text": "**A second casualty of the non-heading title re-derivation fix above: `issues/linking.md`'s own `ArtifactNode` title was corrupted to a bare block-id string, breaking its own path resolution** — the fix in [the item above](#id/BlockNode:00CGFE4SV0002) never excluded `ArtifactNode` targets, so a push to this artifact's own leading-summary text (found while auditing every `ArtifactNode.title` corpus-wide for a basename mismatch) silently overwrote its title. Full root cause, the `kgUpdate.ts` fix, and a second sibling case (`issues/core.md`) are recorded in [issues/core.md's Resolved section](../issues/core.md#id/BlockNode:00CGM54FX0001); manually corrected back to `\"linking.md\"` here, its own `.text` summary was already accurate.",
+    "parent": "BlockNode:00CDBYV5A800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM6GQ9G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM6GQ9G001:links:Link:00CGM6GSZ0002",
+        "@type": "Link",
+        "target": "BlockNode:00CE8T6W7G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6GQ9G001:links:Link:00CGM6GSZ0002:props:StringProp:00CGM6GSZ0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "256"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGM6GQ9G001:props:StringProp:00CGM6GSZ0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGM6GQ9G001:props:StringProp:00CGM6GSZ0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Hide tombstoned nodes from `kg:tree`/`kg:unfold` by default, tagged `(tombstoned)` only via `--tombstoned`",
+    "text": "Hide tombstoned nodes from `kg:tree`/`kg:unfold` by default, tagged `(tombstoned)` only via `--tombstoned`: Done. `TreeOptions.showTombstoned` gates every renderer. Not originally in this Task Breakdown — added once `kg:unfold`'s own tombstone-marker gap ([Issues](../issues/treeview.md#id/BlockNode:00CE8T6W7G001)) was reviewed and found to have a proposed direction but no tracked plan item.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM6GQ9G002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM6GQ9G002:links:Link:00CGM6GSZ0004",
+        "@type": "Link",
+        "target": "BlockNode:00CGM54FX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6GQ9G002:links:Link:00CGM6GSZ0004:props:StringProp:00CGM6GSZ8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "235"
+          }
+        ]
+      }
+    ],
+    "title": "Fix `aperas update` re-deriving an `ArtifactNode` target's own title from pushed text",
+    "text": "Fix `aperas update` re-deriving an `ArtifactNode` target's own title from pushed text: Done — found auditing this batch's own leading-summary-text edits, corrupting `issues/core.md`'s and `issues/linking.md`'s own path resolution. See [Issues](../issues/core.md#id/BlockNode:00CGM54FX0001) for the full account; not originally scoped to this plan, but the same tombstone/title-integrity family as the rest of it.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM6MJER001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM6MJER001:links:Link:00CGM6MNK0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE8T6W7G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6MJER001:links:Link:00CGM6MNK0000:props:StringProp:00CGM6MNK0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "256"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGM6MJER001:props:StringProp:00CGM6MNJR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGM6MJER001:props:StringProp:00CGM6MNJR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Hide tombstoned nodes from `kg:tree`/`kg:unfold` by default, tagged `(tombstoned)` only via `--tombstoned`",
+    "text": "Hide tombstoned nodes from `kg:tree`/`kg:unfold` by default, tagged `(tombstoned)` only via `--tombstoned`: Done. `TreeOptions.showTombstoned` gates every renderer. Not originally in this Task Breakdown — added once `kg:unfold`'s own tombstone-marker gap ([Issues](../issues/treeview.md#id/BlockNode:00CE8T6W7G001)) was reviewed and found to have a proposed direction but no tracked plan item.",
+    "parent": "BlockNode:00CE1GW7CG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM6MJF0000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM6MJF0000:links:Link:00CGM6MNK0002",
+        "@type": "Link",
+        "target": "BlockNode:00CGM54FX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6MJF0000:links:Link:00CGM6MNK0002:props:StringProp:00CGM6MNK0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "235"
+          }
+        ]
+      }
+    ],
+    "title": "Fix `aperas update` re-deriving an `ArtifactNode` target's own title from pushed text",
+    "text": "Fix `aperas update` re-deriving an `ArtifactNode` target's own title from pushed text: Done — found auditing this batch's own leading-summary-text edits, corrupting `issues/core.md`'s and `issues/linking.md`'s own path resolution. See [Issues](../issues/core.md#id/BlockNode:00CGM54FX0001) for the full account; not originally scoped to this plan, but the same tombstone/title-integrity family as the rest of it.",
+    "parent": "BlockNode:00CE1GW7CG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGM6XXAR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0G8001",
+        "@type": "Link",
+        "target": "BlockNode:00CGK3AH60001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0G8001:props:StringProp:00CGM6Y0G8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "244"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0G8003",
+        "@type": "Link",
+        "target": "BlockNode:00CE32GRZG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0G8003:props:StringProp:00CGM6Y0G8004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "430"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0G8005",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0G8005:props:StringProp:00CGM6Y0G8006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "674"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0GG000",
+        "@type": "Link",
+        "target": "BlockNode:00CGM54FX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGM6XXAR001:links:Link:00CGM6Y0GG000:props:StringProp:00CGM6Y0GG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1432"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGM6XXAR001:props:StringProp:00CGM6Y0G0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGM6XXAR001:props:StringProp:00CGM6Y0G8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Tier 4/5 fix plan — approved to implement now**",
+    "text": "**Tier 4/5 fix plan — approved to implement now**: every genuine code-level item in Tiers 4-5 investigated and fixed. `matchLeftoverByAbstract`'s position-sensitivity and the dead-container-never-tombstoned gap (Tier 4) were already tracked as [planning/core.md's Batch 2](../planning/core.md#id/BlockNode:00CGK3AH60001), now done. Insert always spawning a fresh run-leader (Tier 4) had no plan anywhere — designed and fixed, see [issues/list-consumption.md](../issues/list-consumption.md#id/BlockNode:00CE32GRZG002). The four `treeview` Tier 5 items (unfolds staleness, bare-unfold mutation, no raw inspection command, unfold's missing tombstone marker) are all done — see [planning/treeview.md's Task Breakdown](../planning/treeview.md#id/BlockNode:00CE1GW7CG003), which also picked up two items that were never actually tracked there before (the tombstone-hide-by-default direction, and `aperas show`, both scoped and built in this same batch). The two `archive-migration` Tier 5 items are process/decision notes with nothing to implement, left as-is. Two unplanned findings surfaced while doing this bookkeeping, not part of the original Tier 4/5 scope: `issues/core.md`'s and `issues/linking.md`'s own `ArtifactNode` titles had been silently corrupted by `aperas update`'s non-heading title re-derivation (added earlier this session) never excluding artifact-root targets — root-caused, fixed, and both instances repaired; see [issues/core.md](../issues/core.md#id/BlockNode:00CGM54FX0001). A pre-existing, unrelated `verify.ts` failure (Slice 1's own anchor-emission check, \"re-projecting an already-anchored list item to not duplicate its id-anchor\") was also found still failing on a clean checkout with none of this batch's changes applied — not investigated further, flagged here rather than left silent.",
+    "parent": "BlockNode:00CF1WZE18004",
     "type": "listItem",
     "children": []
   }

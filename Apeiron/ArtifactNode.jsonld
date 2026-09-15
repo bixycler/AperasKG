@@ -19,7 +19,7 @@
   {
     "@id": "ArtifactNode:00CDBYV468000",
     "@type": "ArtifactNode",
-    "title": "00CGH49X5R001",
+    "title": "linking.md",
     "text": "None currently — both resolved below, plus the graph-wide link-resolution sweep.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
@@ -27,11 +27,11 @@
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "dd4634f9016ea787f2fa22a30a80a73a9b0c97d94c739f306bcb7f2ae3d8544a",
+    "fileHash": "c54cc64ad7a31612a07742b529371b29551cc5126553e388eab959270b90ece3",
     "lastTrackedAt": "2026-09-10T07:14:29.305Z",
-    "ingestedHash": "dd4634f9016ea787f2fa22a30a80a73a9b0c97d94c739f306bcb7f2ae3d8544a",
-    "lastIngestedAt": "2026-09-15T05:03:08.710Z",
-    "projectedHash": "dd4634f9016ea787f2fa22a30a80a73a9b0c97d94c739f306bcb7f2ae3d8544a"
+    "ingestedHash": "c54cc64ad7a31612a07742b529371b29551cc5126553e388eab959270b90ece3",
+    "lastIngestedAt": "2026-09-15T08:38:29.819Z",
+    "projectedHash": "c54cc64ad7a31612a07742b529371b29551cc5126553e388eab959270b90ece3"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
@@ -336,11 +336,11 @@
       "BlockNode:00CE1DDF4G001"
     ],
     "path": "discussion/treeview.md",
-    "fileHash": "54982074dbbd470c8bc8947797b883d6bde7d60585ea0a1cb2dc62ecda318f07",
+    "fileHash": "23280f14b4cee6e877f91ebbefc3cf2a600404f739383568f9aa74782c8ed1d0",
     "lastTrackedAt": "2026-09-11T08:10:09.094Z",
-    "ingestedHash": "54982074dbbd470c8bc8947797b883d6bde7d60585ea0a1cb2dc62ecda318f07",
-    "lastIngestedAt": "2026-09-15T06:48:19.355Z",
-    "projectedHash": "54982074dbbd470c8bc8947797b883d6bde7d60585ea0a1cb2dc62ecda318f07"
+    "ingestedHash": "23280f14b4cee6e877f91ebbefc3cf2a600404f739383568f9aa74782c8ed1d0",
+    "lastIngestedAt": "2026-09-15T08:38:23.940Z",
+    "projectedHash": "23280f14b4cee6e877f91ebbefc3cf2a600404f739383568f9aa74782c8ed1d0"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B0000",
@@ -363,18 +363,18 @@
     "@id": "ArtifactNode:00CE1GW4B8000",
     "@type": "ArtifactNode",
     "title": "treeview.md",
-    "text": "**Stale `TreeView.unfolds` references have no general cleanup**: `TreeView.unfold(ref)` appends with no existence check, and the only cleanup — a reactive strip-on-hard-delete — only fires at the exact moment a specific id is hard-deleted; nothing revisits an *existing* `unfolds` entry against what's currently live. Confirmed live: `.state/TreeView.jsonld`'s `default` view has named 10 `BlockNode` ids with no corresponding document at all, after unrelated reconciliation churn elsewhere reassigned/removed the blocks those ids used to name. See [Settled](../discussion/treeview.md#id/BlockNode:00CE1FFSR8006) for the chosen fix direction.",
+    "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "2323723258cd2584798b6f5afcc136bd8e60e7ab13fefd62147b5ecf1852e4d4",
+    "fileHash": "02a7d175922cceef28355280a91580369f0d78f2c905b783847824b83bc73c3b",
     "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "2323723258cd2584798b6f5afcc136bd8e60e7ab13fefd62147b5ecf1852e4d4",
-    "lastIngestedAt": "2026-09-15T06:48:20.452Z",
-    "projectedHash": "2323723258cd2584798b6f5afcc136bd8e60e7ab13fefd62147b5ecf1852e4d4"
+    "ingestedHash": "02a7d175922cceef28355280a91580369f0d78f2c905b783847824b83bc73c3b",
+    "lastIngestedAt": "2026-09-15T08:38:24.870Z",
+    "projectedHash": "02a7d175922cceef28355280a91580369f0d78f2c905b783847824b83bc73c3b"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -387,11 +387,11 @@
       "BlockNode:00CE1GW7CG001"
     ],
     "path": "planning/treeview.md",
-    "fileHash": "50889df70ccd03af2208a6dd6aa37673e69f2ca8120a8398fbb6cd84a7f05f60",
+    "fileHash": "4ae88464d73ff1701af8f261733d3caa47512735433d8c2e9d700399e67e5fab",
     "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "50889df70ccd03af2208a6dd6aa37673e69f2ca8120a8398fbb6cd84a7f05f60",
-    "lastIngestedAt": "2026-09-11T12:41:40.192Z",
-    "projectedHash": "50889df70ccd03af2208a6dd6aa37673e69f2ca8120a8398fbb6cd84a7f05f60"
+    "ingestedHash": "4ae88464d73ff1701af8f261733d3caa47512735433d8c2e9d700399e67e5fab",
+    "lastIngestedAt": "2026-09-15T08:38:25.804Z",
+    "projectedHash": "4ae88464d73ff1701af8f261733d3caa47512735433d8c2e9d700399e67e5fab"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8002",
@@ -431,18 +431,18 @@
     "@id": "ArtifactNode:00CE32GQ0R001",
     "@type": "ArtifactNode",
     "title": "list-consumption.md",
-    "text": "**Inserting a list item always spawns a fresh run-leader**: <a name='id/BlockNode:00CE32GRZG002' class='aperas-anchor aperas-id'></a> live-tested while writing this doc's own Resolved section — `aperas insert` piping a single new bullet always parses that content as its own orphaned one-item list, so the new item gets its own explicit `orderedList`/`startIndex` from the normalization rule (see Design). That marks it as a run-leader relative to whatever precedes it, even when the preceding item is an ordinary continuation of the very same list with the identical value — the render-time boundary rule (a next item's own explicit prop starts a new run) then treats it as a *second* run, rendering a spurious blank line before it. Not data corruption (bullet type and numbering both stay correct), but a real regression versus the old anchor-owns-it model, where a freshly inserted item carried no prop of its own and silently joined whatever run it landed in. No fix designed yet — needs its own decision (e.g. `aperas insert` clearing a freshly-parsed single item's own `orderedList`/`startIndex` when landing among existing plain `listItem` siblings, so it only carries the prop when it's genuinely starting something new). Confirmed live twice more since: pushing an existing list's *full* corrected content (rather than a bare `--after` insert) avoids it, since the new item then joins the same parsed run as a continuation instead of its own orphaned list — see [Freeflow](../discussion/list-consumption.md#id/BlockNode:00CE5EHVXR008) for the narrative.",
+    "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CE32GRZ8001"
     ],
     "path": "issues/list-consumption.md",
-    "fileHash": "3553fae0e71efcc618e3992d437acfe4487cc684300517318deb622cb0e29838",
+    "fileHash": "2df9cac7bc2ea10fb3148c7e85d5e79f7fd09f9330c6a20a7ccba2c85e570495",
     "lastTrackedAt": "2026-09-11T10:06:09.284Z",
-    "ingestedHash": "3553fae0e71efcc618e3992d437acfe4487cc684300517318deb622cb0e29838",
-    "lastIngestedAt": "2026-09-11T13:57:11.478Z",
-    "projectedHash": "3553fae0e71efcc618e3992d437acfe4487cc684300517318deb622cb0e29838"
+    "ingestedHash": "2df9cac7bc2ea10fb3148c7e85d5e79f7fd09f9330c6a20a7ccba2c85e570495",
+    "lastIngestedAt": "2026-09-15T08:38:27.922Z",
+    "projectedHash": "2df9cac7bc2ea10fb3148c7e85d5e79f7fd09f9330c6a20a7ccba2c85e570495"
   },
   {
     "@id": "ArtifactNode:00CE32GQ10000",
@@ -455,11 +455,11 @@
       "BlockNode:00CE32GTR8001"
     ],
     "path": "planning/list-consumption.md",
-    "fileHash": "b551854a22748cf6a0446fb4ceecdfff4f701a4c35c969fe17f936b20a553590",
+    "fileHash": "416778b0510af37a3408c40305720cd2335c68d78c03d542d2c7d8ca341f410a",
     "lastTrackedAt": "2026-09-11T10:06:09.285Z",
-    "ingestedHash": "b551854a22748cf6a0446fb4ceecdfff4f701a4c35c969fe17f936b20a553590",
-    "lastIngestedAt": "2026-09-11T12:52:38.200Z",
-    "projectedHash": "b551854a22748cf6a0446fb4ceecdfff4f701a4c35c969fe17f936b20a553590"
+    "ingestedHash": "416778b0510af37a3408c40305720cd2335c68d78c03d542d2c7d8ca341f410a",
+    "lastIngestedAt": "2026-09-15T08:38:28.857Z",
+    "projectedHash": "416778b0510af37a3408c40305720cd2335c68d78c03d542d2c7d8ca341f410a"
   },
   {
     "@id": "ArtifactNode:00CE32GQ18000",
@@ -489,11 +489,11 @@
       "BlockNode:00CE32GXH0001"
     ],
     "path": "discussion/list-consumption.md",
-    "fileHash": "1a71c68fd7ceb1afc048da5e960ba0e6e8df962b93ffeae309fd1eda01ba9810",
+    "fileHash": "15823f6356deff078ea41e2e8ebb9c92981194bd700102eb57b449dc1ab4ad4d",
     "lastTrackedAt": "2026-09-11T10:06:09.286Z",
-    "ingestedHash": "1a71c68fd7ceb1afc048da5e960ba0e6e8df962b93ffeae309fd1eda01ba9810",
-    "lastIngestedAt": "2026-09-12T22:45:05.648Z",
-    "projectedHash": "1a71c68fd7ceb1afc048da5e960ba0e6e8df962b93ffeae309fd1eda01ba9810"
+    "ingestedHash": "15823f6356deff078ea41e2e8ebb9c92981194bd700102eb57b449dc1ab4ad4d",
+    "lastIngestedAt": "2026-09-15T08:38:26.999Z",
+    "projectedHash": "15823f6356deff078ea41e2e8ebb9c92981194bd700102eb57b449dc1ab4ad4d"
   },
   {
     "@id": "ArtifactNode:00CE8XWYYG000",
@@ -593,19 +593,19 @@
   {
     "@id": "ArtifactNode:00CF1WZ3S0000",
     "@type": "ArtifactNode",
-    "title": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**",
-    "text": "**`matchLeftoverByAbstract` (Gestalt/Ratcliff-Obershelp recursion) is position-sensitive**: works for reconciling siblings that share a rough common order, not for an unordered bag of whole-artifact identities scattered across concern folders — a match's recursive split can discard a whole quadrant of otherwise-valid candidates. Worked around for the rename path specifically (replaced by exact-key matching there), but the same algorithm is used elsewhere in `reconcile.ts` and may still carry the weakness on those other paths.",
+    "title": "core.md",
+    "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CF1WZ4JG001"
     ],
     "path": "issues/core.md",
-    "fileHash": "67e95af7f0f2f7e92d0df8a487b00cf640b233eb6f1ca3b0406ce5f8e379e58c",
+    "fileHash": "e3dfabd53d0c690eb85a9f82c716ec250b952733327607c8c8e26540c2f882a7",
     "lastTrackedAt": "2026-09-12T22:28:40.384Z",
-    "ingestedHash": "67e95af7f0f2f7e92d0df8a487b00cf640b233eb6f1ca3b0406ce5f8e379e58c",
-    "lastIngestedAt": "2026-09-15T05:04:44.391Z",
-    "projectedHash": "67e95af7f0f2f7e92d0df8a487b00cf640b233eb6f1ca3b0406ce5f8e379e58c"
+    "ingestedHash": "e3dfabd53d0c690eb85a9f82c716ec250b952733327607c8c8e26540c2f882a7",
+    "lastIngestedAt": "2026-09-15T08:38:21.847Z",
+    "projectedHash": "e3dfabd53d0c690eb85a9f82c716ec250b952733327607c8c8e26540c2f882a7"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -618,11 +618,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "80c80860882af001e8297b0f1a58b942fc48f78ebd819e6ffdb907c9c094dce8",
+    "fileHash": "377a56b55d2cd82ab4b224fa81bd869fdf6412176dfb862ec21b86483b9a6c8b",
     "lastTrackedAt": "2026-09-12T22:28:41.435Z",
-    "ingestedHash": "80c80860882af001e8297b0f1a58b942fc48f78ebd819e6ffdb907c9c094dce8",
-    "lastIngestedAt": "2026-09-15T07:21:45.823Z",
-    "projectedHash": "80c80860882af001e8297b0f1a58b942fc48f78ebd819e6ffdb907c9c094dce8"
+    "ingestedHash": "377a56b55d2cd82ab4b224fa81bd869fdf6412176dfb862ec21b86483b9a6c8b",
+    "lastIngestedAt": "2026-09-15T08:38:20.769Z",
+    "projectedHash": "377a56b55d2cd82ab4b224fa81bd869fdf6412176dfb862ec21b86483b9a6c8b"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -635,11 +635,11 @@
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "0af98b8055a7bf5627b091a24610668b04ca795e4899fa675af663cbcde1ecbb",
+    "fileHash": "7df8bfa4957b8f3cde6db37ca298f66a9577b42a1acd423978ab64ed56bde518",
     "lastTrackedAt": "2026-09-12T22:28:42.464Z",
-    "ingestedHash": "0af98b8055a7bf5627b091a24610668b04ca795e4899fa675af663cbcde1ecbb",
-    "lastIngestedAt": "2026-09-15T07:21:44.750Z",
-    "projectedHash": "0af98b8055a7bf5627b091a24610668b04ca795e4899fa675af663cbcde1ecbb"
+    "ingestedHash": "7df8bfa4957b8f3cde6db37ca298f66a9577b42a1acd423978ab64ed56bde518",
+    "lastIngestedAt": "2026-09-15T08:38:22.791Z",
+    "projectedHash": "7df8bfa4957b8f3cde6db37ca298f66a9577b42a1acd423978ab64ed56bde518"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
