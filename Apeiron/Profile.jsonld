@@ -7,20 +7,15 @@
   {
     "@id": "Profile:00CDD5NTXG000",
     "@type": "Profile",
-    "handle": "claude-sonnet",
-    "name": "Claude Sonnet"
+    "handle": "claude",
+    "name": "Claude Code",
+    "kind": "agent"
   },
   {
-    "@id": "Profile:00CF70FJY8000",
+    "@id": "Profile:00CGQ7DYN8000",
     "@type": "Profile",
-    "handle": "will",
-    "name": "Will"
-  },
-  {
-    "@id": "Profile:00CF9CTF1G000",
-    "@type": "Profile",
-    "handle": "claude-opus",
-    "name": "Claude Opus",
+    "handle": "antigravity",
+    "name": "Antigravity",
     "kind": "agent"
   }
 ]

@@ -1131,3 +1131,72 @@ Run `aperas backlinks <id> --text` on a target before adding a link to it — wo
 #### Open tool gaps <a name='id/BlockNode:00CGF613WG018' class='aperas-anchor aperas-id'></a>
 
 Tracked in the graph rather than accumulating here: raw single-node inspection and `unfold`'s missing tombstone marker (`issues/treeview.md`); non-transactional writes leaving in-memory orphans, and `extractAnchorNames` treating a quoted example anchor as a real name claim (`discussion/aperas-skill.md`).
+
+## v2.1 additions — delta on the v2 snapshot <a name='id/BlockNode:00CGMY04AG001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001), one changed unit plus the status bump. Reasoning: this is exactly the kind of gap Philosophy already names — a claim that reads as complete from its own side while its provenance is silently gone — but the loop's own verification step never named it as a live risk against links specifically, only against tombstoned-id reuse. Two confirmed live incidents in the same session (see [discussion/linking.md](../discussion/linking.md#id/BlockNode:00CGMX88R0001)) made it clear the omission wasn't hypothetical.
+
+### Discipline — verify by traversal now names links as its sharpest instance <a name='id/BlockNode:00CGMY04AG002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own "Verify by traversal" item](#id/BlockNode:00CGF613W8006)
+
+**Verify by traversal, not by the summary line.** A reconcile count reports what the command *believes* it did. Proof is a backlink that actually resolves, or `aperas project <path> --dry-run` where the content is actually visible. A push can silently match new content onto an already-tombstoned node's id without reviving it, so it stays invisible while the summary reports it as added — caught live when a Resolved section rendered one fewer bullet than was pushed. Links are the sharpest instance of this, not a special case: a write whose text carries a real citation can report `"N resolved"` and still leave `.links` empty afterward, with nothing else — not the summary, not a plain preview, not the projected file — showing any sign of it. Confirmed live twice in one session, by two unrelated mechanisms: a graph-wide staleness sweep found 9 nodes whose links had silently never resolved at all, and a separate incident later the same session watched four freshly-`"resolved"` links vanish from nodes that had just been moved and re-texted. Treat a link-bearing write as unverified until `aperas show <id>` (or `aperas backlinks <id> --text` from the other end) actually shows the `Link`, the same way step 6 already treats a plain content write as unverified until traversal confirms it. See `issues/linking.md` for the open, still-uninvestigated half of this.
+
+### Top matter — Status bumped to v2.1 <a name='id/BlockNode:00CGMZAPCR001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own status line](#id/BlockNode:00CGF613VR002)
+
+Status: <a name='id/BlockNode:00CGMZAPCR002' class='aperas-anchor aperas-id'></a> **v2.1** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+## v2.2 additions — delta on the v2 snapshot <a name='id/BlockNode:00CGN8W9M8001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001), same day as v2.1: the toolset changes v2.1 itself landed (`aperas show`, tombstone hiding, bare-`unfold` peek, `pruneStaleUnfolds`, the run-leader fix) were never folded back into the file's own Mechanics section until now, leaving it describing tools by their pre-fix state right next to a Discipline item written in the post-fix one.
+
+### Top matter — Status bumped to v2.2 <a name='id/BlockNode:00CGN8W9M8002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.1's own status heading](#id/BlockNode:00CGMZAPCR001) and [its status line](#id/BlockNode:00CGMZAPCR002)
+
+Status: <a name='id/BlockNode:00CGN8W9M8003' class='aperas-anchor aperas-id'></a> **v2.2** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Mechanics — inspecting raw node state now leads with `aperas show` <a name='id/BlockNode:00CGN8W9MG000' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own raw-node-state section](#id/BlockNode:00CGF613WG00K), [its refs line](#id/BlockNode:00CGF613WG00M), [its on-disk-mirror caveat](#id/BlockNode:00CGF613WG00N), [its staging-area framing](#id/BlockNode:00CGF613WG00V)
+
+`aperas tree`/`backlinks --text`/`unfold` all show a *rendered preview* — title plus truncated, anchor-stripped abstract. For a field they never show (`props`, `tombstonedAt`) or for a block's exact stored text, `aperas show <ref>` goes through the live service, so — unlike a raw-file reader — it always reflects the current in-memory state, not the last flush:
+
+```bash
+aperas show <ref>            # full record, exactly as stored: props, tombstonedAt, parent, children, links, title, text
+aperas show <ref> --text     # exact stored text only, undecorated
+```
+
+`--text` is the one that matters before an edit: <a name='id/BlockNode:00CGNAAC40001' class='aperas-anchor aperas-id'></a> redirect it to a file, change only what needs changing, and `cat` that back into `aperas update`. That keeps the untouched part of a block byte-identical instead of retyped from a preview — which is what step 2 of the edit loop warns about, since a transcription slip silently tombstones the block and mints a new id.
+
+`scripts/show_node.py` still covers what `aperas show` doesn't — `--grep PATTERN` (full-text search; there is still no `aperas search`) and `--artifact <ref>` (which artifact a block lives in). It reads the **on-disk mirror**, so after an unflushed mutation it reports pre-flush state while `aperas show`/`unfold`/`tree` report the live service's. Flush first, or ask the CLI, when checking something you just changed. Caught live once, before `aperas show` existed: a move and a tombstone were both invisible to the script, producing a confident and wrong conclusion that the move had gone backwards.
+
+### Mechanics — bare `unfold` is a peek, `--view <name>` still mutates <a name='id/BlockNode:00CGN8W9MG002' class='aperas-anchor aperas-id'></a>
+
+A bare `aperas unfold <ref>` (no `--view` flag at all) is a read-only peek: it resolves and previews `<ref>` without touching any `TreeView` state, matching `aperas tree`'s own no-`--view` default. `--view <name>` (a name actually given) still bootstraps that view — minting the `"default"` one and its owning `Profile` on first use — and adds `<ref>` to its `unfolds` set, which is what a later `aperas tree --view <name>` actually renders. `--view` supplied with no name following it behaves the same bootstrap-and-mutate way as naming `"default"` explicitly; only the flag's outright absence peeks.
+
+### Discipline/Mechanics — tombstoned nodes hidden by default, not just tagged <a name='id/BlockNode:00CGN8W9MG003' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own "unfold doesn't mark tombstoned children" gap note](#id/BlockNode:00CGF613WG00W)
+
+`aperas tree` and `aperas unfold` both hide a tombstoned node — and its whole subtree, since there is nothing live left under it to reveal — from their default output, tagging it `(tombstoned)` only once `--tombstoned` is passed. `aperas unfold` additionally refuses to unfold a tombstoned node directly without the flag, with a clear error, rather than returning something that looks like an empty success. A node reached only through a still-live `Link` elsewhere is exactly as hidden as one reached structurally — the flag controls visibility, not the traversal path that found it.
+
+### Mechanics — the view-cleanup gap is closed <a name='id/BlockNode:00CGN8W9MG005' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own "nothing prunes a view's unfolds" line](#id/BlockNode:00CGF613W8016)
+
+Cheapest discipline is a named view per task rather than one long-lived default — creating one is a single call, and a view scoped to the task documents its own contents. `unfold` now refuses a ref with no quads at all at write time, and an explicit sweep (`aperas reload`, service shutdown) strips any `unfolds` entry that's gone stale since — but a tombstoned-yet-present target is left alone by both, since it's a legitimate, revealable-via-`--tombstoned` entry, not a stale one.
+
+### Mechanics — the run-leader cosmetic issue is fixed for the common case <a name='id/BlockNode:00CGN8W9MG007' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own "known cosmetic consequence" note](#id/BlockNode:00CGF613WG00B)
+
+Fixed for the common case: <a name='id/BlockNode:00CGN8W9MG008' class='aperas-anchor aperas-id'></a> `aperas insert` now clears a freshly-parsed lone item's own `orderedList`/`startIndex` when it lands next to a plain continuation item (no run-leader props of its own), so it silently joins that run instead of starting a spurious new one. Landing right before or after an item that *is* itself a run-leader still carries its own props and renders a spurious blank line — not corruption, a narrower remaining case — see `issues/list-consumption.md`.
+
+### Reference — open tool gaps, refreshed <a name='id/BlockNode:00CGN8W9MG009' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own open-tool-gaps line](#id/BlockNode:00CGF613WG018)
+
+Tracked in the graph rather than accumulating here: <a name='id/BlockNode:00CGN8W9MG00A' class='aperas-anchor aperas-id'></a> links silently failing to persist or resolve, confirmed twice in one session by unrelated mechanisms, with nothing detecting either automatically (`issues/linking.md`); `aperas resolve`'s title-ambiguity check not filtering tombstoned candidates, so a dead holder can still make a live path read as ambiguous (`discussion/core.md`'s Freeflow); a pre-existing, unreproduced `verify.ts` failure in the id-anchor emission idempotency check for list items/paragraphs (`planning/linking.md`'s Task Breakdown).

@@ -6,10 +6,10 @@ Fix the single open issue directly in `kgInsert.ts` — no `core` changes needed
 
 ## Task Breakdown <a name='id/BlockNode:00CF2AEXN8003' class='aperas-anchor aperas-id'></a>
 
-1. Read `kgInsert.ts`'s create-mode flow to confirm the exact current call order (parse → collision-check → hydrate → resolve links → resolve anchor).
-2. Reorder: <a name='id/BlockNode:00CF2AEXN8005' class='aperas-anchor aperas-id'></a> resolve/validate the `--after`/`--before` anchor before calling `hydrateFromParsed`, alongside the existing `rejectSlugPathCollisions` check, so a bad anchor is rejected before anything is written.
-3. Verify: <a name='id/BlockNode:00CF2AEXN8006' class='aperas-anchor aperas-id'></a> force an anchor-resolution failure mid-`kg:insert` and confirm no orphan node survives — check a raw `BlockNode.jsonld` read, not just the CLI's own reported failure.
-4. Move the Open Issues entry to Resolved once confirmed, with the actual mechanism named.
+- [x] Read `kgInsert.ts`'s create-mode flow to confirm the exact current call order (parse → collision-check → hydrate → resolve links → resolve anchor).
+- [x] Reorder: <a name='id/BlockNode:00CF2AEXN8005' class='aperas-anchor aperas-id'></a> resolve/validate the `--after`/`--before` anchor before calling `hydrateFromParsed`, alongside the existing `rejectSlugPathCollisions` check, so a bad anchor is rejected before anything is written.
+- [x] Verify: <a name='id/BlockNode:00CF2AEXN8006' class='aperas-anchor aperas-id'></a> force an anchor-resolution failure mid-`kg:insert` and confirm no orphan node survives — check a raw `BlockNode.jsonld` read, not just the CLI's own reported failure.
+- [x] Move the Open Issues entry to Resolved once confirmed, with the actual mechanism named.
 
 ## Verification Plan <a name='id/BlockNode:00CF2AEXN8008' class='aperas-anchor aperas-id'></a>
 
