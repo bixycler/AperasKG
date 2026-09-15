@@ -60,14 +60,15 @@
     "children": [
       "BlockNode:00CDBZ76T8001",
       "BlockNode:00CDCTB49R001",
-      "BlockNode:00CF1276D0001"
+      "BlockNode:00CF1276D0001",
+      "BlockNode:00CGF83D4G001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "4d678ae2bcf21cd444dd29e2ec67fa05339e9577d973119dd68dec355a8f4ed6",
+    "fileHash": "acb74a9a574cc601a21a7f23a5490812126c20dc129972c7a88010789658925c",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "4d678ae2bcf21cd444dd29e2ec67fa05339e9577d973119dd68dec355a8f4ed6",
-    "lastIngestedAt": "2026-09-12T22:45:07.719Z",
-    "projectedHash": "4d678ae2bcf21cd444dd29e2ec67fa05339e9577d973119dd68dec355a8f4ed6"
+    "ingestedHash": "acb74a9a574cc601a21a7f23a5490812126c20dc129972c7a88010789658925c",
+    "lastIngestedAt": "2026-09-15T02:51:21.169Z",
+    "projectedHash": "acb74a9a574cc601a21a7f23a5490812126c20dc129972c7a88010789658925c"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
@@ -504,28 +505,28 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "b1c52898b56729243f3e939b599160089dce1183c1ee5fd10e1900f5afcfb816",
+    "fileHash": "f2fd6931f218b86298385f4fafdad2a82b9784462841ab46ae2ed00e01f9777f",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "b1c52898b56729243f3e939b599160089dce1183c1ee5fd10e1900f5afcfb816",
-    "lastIngestedAt": "2026-09-14T21:03:40.398Z",
-    "projectedHash": "b1c52898b56729243f3e939b599160089dce1183c1ee5fd10e1900f5afcfb816"
+    "ingestedHash": "f2fd6931f218b86298385f4fafdad2a82b9784462841ab46ae2ed00e01f9777f",
+    "lastIngestedAt": "2026-09-15T02:51:46.161Z",
+    "projectedHash": "f2fd6931f218b86298385f4fafdad2a82b9784462841ab46ae2ed00e01f9777f"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
     "@type": "ArtifactNode",
     "title": "aperas-skill.md",
-    "text": "None — v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "text": "None — v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CEA5KW4G001"
     ],
     "path": "issues/aperas-skill.md",
-    "fileHash": "3f6cda8d128f843eb7feb6e6ec8336b88f99ec4aee7644820a3986ea3c68b0a3",
+    "fileHash": "c53d9b46ab20ab3d5bf1188ed75feeff80d75262d363594899cd634d47a52b46",
     "lastTrackedAt": "2026-09-11T18:22:15.487Z",
-    "ingestedHash": "3f6cda8d128f843eb7feb6e6ec8336b88f99ec4aee7644820a3986ea3c68b0a3",
-    "lastIngestedAt": "2026-09-14T20:57:00.902Z",
-    "projectedHash": "3f6cda8d128f843eb7feb6e6ec8336b88f99ec4aee7644820a3986ea3c68b0a3"
+    "ingestedHash": "c53d9b46ab20ab3d5bf1188ed75feeff80d75262d363594899cd634d47a52b46",
+    "lastIngestedAt": "2026-09-15T02:51:20.144Z",
+    "projectedHash": "c53d9b46ab20ab3d5bf1188ed75feeff80d75262d363594899cd634d47a52b46"
   },
   {
     "@id": "ArtifactNode:00CEA5M69R000",
@@ -548,18 +549,18 @@
     "@id": "ArtifactNode:00CEA5MGZR000",
     "@type": "ArtifactNode",
     "title": "aperas-skill.md",
-    "text": "The restructure has landed and has been revised four times since. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is v1.4: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, each item marked `[current]`, `[superseded]` or `[unverified]`, with a scope statement and a worked example at each of the first three levels. v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, and v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them, adding the evidence-based-documentation statement the founding design had always implied. Open Issues is empty for the first time; what remains is [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A), still unmeasured.",
+    "text": "The restructure has landed and has been revised five times since. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is v2: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with a scope statement and a worked example at each of the first three levels, and only current, verified items in the file at all. v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them, and v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph. Open Issues is empty; what remains is [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A), still unmeasured.",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "d595ad1f244eaf43bda1ac10dc93082ef2d7db95e2e522e2c8ec104fdf18a45a",
+    "fileHash": "2ddd54f2377ae54c2e1decd92aeb2093d2a01cf288c4963b84c7af37d527a49a",
     "lastTrackedAt": "2026-09-11T18:22:18.239Z",
-    "ingestedHash": "d595ad1f244eaf43bda1ac10dc93082ef2d7db95e2e522e2c8ec104fdf18a45a",
-    "lastIngestedAt": "2026-09-14T20:57:03.129Z",
-    "projectedHash": "d595ad1f244eaf43bda1ac10dc93082ef2d7db95e2e522e2c8ec104fdf18a45a"
+    "ingestedHash": "2ddd54f2377ae54c2e1decd92aeb2093d2a01cf288c4963b84c7af37d527a49a",
+    "lastIngestedAt": "2026-09-15T02:51:19.157Z",
+    "projectedHash": "2ddd54f2377ae54c2e1decd92aeb2093d2a01cf288c4963b84c7af37d527a49a"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -572,11 +573,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "492655bb7115b7f2445a0f413ca671e60ac98ebffa0afc67b7633a0f554a6a69",
+    "fileHash": "14b719aa264d278134fd7bf238265c58486d10928075a50af4540bffbad1156d",
     "lastTrackedAt": "2026-09-11T18:22:57.657Z",
-    "ingestedHash": "492655bb7115b7f2445a0f413ca671e60ac98ebffa0afc67b7633a0f554a6a69",
-    "lastIngestedAt": "2026-09-13T02:24:16.929Z",
-    "projectedHash": "492655bb7115b7f2445a0f413ca671e60ac98ebffa0afc67b7633a0f554a6a69"
+    "ingestedHash": "14b719aa264d278134fd7bf238265c58486d10928075a50af4540bffbad1156d",
+    "lastIngestedAt": "2026-09-15T02:51:18.158Z",
+    "projectedHash": "14b719aa264d278134fd7bf238265c58486d10928075a50af4540bffbad1156d"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
