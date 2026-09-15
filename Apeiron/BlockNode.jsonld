@@ -633,7 +633,7 @@
     "@id": "BlockNode:00CDBYV5A8002",
     "@type": "BlockNode",
     "title": "## Open Issues",
-    "text": "None open currently.",
+    "text": "None currently — both resolved below, plus the graph-wide link-resolution sweep.",
     "parent": "BlockNode:00CDBYV5A8001",
     "type": "heading",
     "children": []
@@ -679,22 +679,6 @@
   {
     "@id": "BlockNode:00CDBYV5A8005",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A8005:links:Link:00CDBZ7AJ0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBZ77F0001",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A8005:links:Link:00CDBZ7AJ0000:props:StringProp:00CDBZ7AJ0001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "129"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CDBYV5A8005:props:StringProp:00CE59ADQG000",
@@ -718,22 +702,6 @@
   {
     "@id": "BlockNode:00CDBYV5A8006",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A8006:links:Link:00CDBZ7AJG000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBZ77F000X",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A8006:links:Link:00CDBZ7AJG000:props:StringProp:00CDBZ7AJG001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "147"
-          }
-        ]
-      }
-    ],
     "title": "00CDC0RCCG006",
     "text": "Second implementation slice — collision rejection at ingestion, the cleanup pass, and folding Slice 1's verification into `verify.ts` — tracked in [Planning](../planning/linking.md#id/BlockNode:00CDBZ77F000X), not duplicated here.",
     "parent": "BlockNode:00CDBYV5A8003",
@@ -761,22 +729,6 @@
   {
     "@id": "BlockNode:00CDBYV5A8009",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A8009:links:Link:00CDBZ7AJR000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBZ7698003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A8009:links:Link:00CDBZ7AJR000:props:StringProp:00CDBZ7AJR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "26"
-          }
-        ]
-      }
-    ],
     "title": "00CDC0RCCG009",
     "text": "`kg:title`'s removal (see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)) left several *other* concerns' own docs stale, deliberately not corrected as part of this one: `Aperas-crud-design.md` §9 still claims `kg:update` never touches a target's `type`/`title` (no longer true for a heading target), §11 still lists `kg:title` as implemented; `Aperas-interactive-summarization-design.md` still describes it as half of a still-bundled feature; `Aperas-apeironngn-design.md` and `Aperas-dev-status.md` both still reference it as live. None of these are `linking`'s own concern to fix.",
     "parent": "BlockNode:00CDBYV5A8003",
@@ -798,6 +750,9 @@
       "BlockNode:00CDBYV5A800H",
       "BlockNode:00CDBYV5A800J",
       "BlockNode:00CDBYV5A800K",
+      "BlockNode:00CGFE4SV0002",
+      "BlockNode:00CGGHVBF8001",
+      "BlockNode:00CGGG6N5G001",
       "BlockNode:00CDBYV5A800B"
     ]
   },
@@ -827,36 +782,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800C",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800C:links:Link:00CDBYV5JG000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4T8002",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800C:links:Link:00CDBYV5JG000:props:StringProp:00CDBZYR08000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "604"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CDBYV5A800C:links:Link:00CDBYV5JG002",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4TG000",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800C:links:Link:00CDBYV5JG002:props:StringProp:00CDBZYR1R000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "893"
-          }
-        ]
-      }
-    ],
     "props": [
       {
         "@id": "BlockNode:00CDBYV5A800C:props:StringProp:00CE59ADP0000",
@@ -880,22 +805,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800D",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800D:links:Link:00CDBYV5K0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4T8007",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800D:links:Link:00CDBYV5K0000:props:StringProp:00CDBZYR2R000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "334"
-          }
-        ]
-      }
-    ],
     "title": "**`[[deep-path]]` coexistence**",
     "text": "**`[[deep-path]]` coexistence**: <a name='id/BlockNode:00CDBYV5A800D' class='aperas-anchor aperas-id'></a> not needed, at least for now — `aperas://` scheme URLs (in-app) and `#fragment`s (compatible/pre-ingestion), including an `id/<ID>` fragment form, already make an internal reference unambiguous without a `[[...]]` wrapper. See [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -905,22 +814,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800E",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800E:links:Link:00CDBYV5K8000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4T8002",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800E:links:Link:00CDBYV5K8000:props:StringProp:00CDBZYR4G000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "301"
-          }
-        ]
-      }
-    ],
     "title": "**\"No automated rename repair\"**",
     "text": "**\"No automated rename repair\"**: <a name='id/BlockNode:00CDBYV5A800E' class='aperas-anchor aperas-id'></a> misdiagnosed — a rename adds an anchor rather than replacing one, so an old reference doesn't break at rename time; there's nothing to repair, only a later cleanup once it's actually safe. See [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -930,22 +823,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800F",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800F:links:Link:00CDBYV5KR000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4T8007",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800F:links:Link:00CDBYV5KR000:props:StringProp:00CDBZYR60000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "507"
-          }
-        ]
-      }
-    ],
     "title": "**\"Duplicate-slug collisions\"**",
     "text": "**\"Duplicate-slug collisions\"**: <a name='id/BlockNode:00CDBYV5A800F' class='aperas-anchor aperas-id'></a> misdiagnosed — a collision only happens when two blocks share an identical *full* slug-path (same heading text at the exact same tree position), a genuine authoring error, correctly a hard reject, not a case needing disambiguation logic. Reusing the same heading title at different tree positions is ordinary and never collides, since the full path includes the distinguishing ancestor segments. See [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -955,22 +832,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800G",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800G:links:Link:00CDBYV5M0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4T8007",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800G:links:Link:00CDBYV5M0000:props:StringProp:00CDBYV5M0001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "525"
-          }
-        ]
-      }
-    ],
     "title": "00CDC0RCCR006",
     "text": "**Every `<block-slug-path>` written so far omitted its own H1 segment.** `toPath()` (`apeironNgn/node.ts:455-471`) walks every `BlockNode` ancestor — the H1 heading included — contributing a slug segment for each, stopping only at the owning `ArtifactNode`/`FolderNode`. Every anchor and cross-reference in this concern's own docs had been computed without that leading segment (traced back to the very first `test-slugifed-path.md` validation, which never included its own H1 either) and has been corrected corpus-wide. See [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -980,36 +841,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800H",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800H:links:Link:00CDBYV5MR000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4TG007",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800H:links:Link:00CDBYV5MR000:props:StringProp:00CDBZYRAR000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "817"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CDBYV5A800H:links:Link:00CDBZ7AP0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBZ76TR008",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800H:links:Link:00CDBZ7AP0000:props:StringProp:00CDBZYR9G000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "644"
-          }
-        ]
-      }
-    ],
     "title": "**Cross-artifact link staleness on ingestion**",
     "text": "**Cross-artifact link staleness on ingestion**: <a name='id/BlockNode:00CDBYV5A800H' class='aperas-anchor aperas-id'></a> resolved — an artifact whose own text doesn't change is never re-ingested on its own, so a link it couldn't resolve stayed stale even after its target came into existence elsewhere in the corpus, with no way to fix it short of hand-editing `ingestedHash` to force a re-ingest. `kg:ingest` now stashes every code a block fails to resolve on its own referring artifact, and retries every stashed code against the current graph after its main work is done, force-reingesting (without discarding reconciliation identity — see [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR008) for the `hadContent`/`bypassUnchangedCheck` distinction) any artifact where at least one now resolves. See [Workflows](../design/linking.md#id/BlockNode:00CDBYV4TG007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -1019,36 +850,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800J",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800J:links:Link:00CDBYV5N8000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4TG000",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800J:links:Link:00CDBYV5N8000:props:StringProp:00CDBYV5NG000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "546"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CDBYV5A800J:links:Link:00CDBZ7AQ0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBZ76TR00E",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800J:links:Link:00CDBZ7AQ0000:props:StringProp:00CDBZYRD0000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "624"
-          }
-        ]
-      }
-    ],
     "title": "00CDC0RCCR008",
     "text": "**A lead-in colon followed only by nested list children got no title**: resolved — `findLeadInColonOffset`'s space-after-colon check read the next character from the colon's own mdast text node, which simply ends at the colon when nothing inline follows it on the same line (e.g. `- **Heading**:` before a nested list), and treated that the same as a genuinely ambiguous no-space case. Fixed by accepting \"nothing left in this text run\" the same as \"a space follows\" — the inline-code and bold/italic exclusions run first and are unaffected. See [Lead-In Term Detection](../design/linking.md#id/BlockNode:00CDBYV4TG000) and [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR00E).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -1058,36 +859,6 @@
   {
     "@id": "BlockNode:00CDBYV5A800K",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CDBYV5A800K:links:Link:00CDBYV5P0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBYV4TG005",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800K:links:Link:00CDBYV5P0000:props:StringProp:00CDBZYRFG000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "354"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CDBYV5A800K:links:Link:00CDBZ7AR0000",
-        "@type": "Link",
-        "target": "BlockNode:00CDBZ77F000X",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CDBYV5A800K:links:Link:00CDBZ7AR0000:props:StringProp:00CDBZYRH0000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "503"
-          }
-        ]
-      }
-    ],
     "title": "**Collision check only covered a block's current slug-path**",
     "text": "**Collision check only covered a block's current slug-path**: <a name='id/BlockNode:00CDBYV5A800K' class='aperas-anchor aperas-id'></a> resolved — Slice 2's collision check (`apeironNgn/node.ts`'s `rejectSlugPathCollisions`) checks every anchor `name` still embedded in a block's `treeAnchor` prop or raw text too, not just its current `toPath()`, since [Anchor-Matching Requirement for Resolution](../design/linking.md#id/BlockNode:00CDBYV4TG005) already treats either as a live resolvable target. See [Planning](../planning/linking.md#id/BlockNode:00CDBZ77F000X).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -2942,6 +2713,22 @@
   {
     "@id": "BlockNode:00CDCMWPC8001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCMWPC8001:links:Link:00CGGFMV8R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCMWPC8001:links:Link:00CGGFMV8R000:props:StringProp:00CGGFMV8R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDCMWPC8001:props:StringProp:00CE599HQG000",
@@ -2965,6 +2752,22 @@
   {
     "@id": "BlockNode:00CDCMWPC8002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCMWPC8002:links:Link:00CGGFN3S0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCMWPC8002:links:Link:00CGGFN3S0000:props:StringProp:00CGGFN3S0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "186"
+          }
+        ]
+      }
+    ],
     "title": "00CDCMWPC8002",
     "text": "A collision is the new block's computed slug-path matching another live block's current `toPath()`, *or* any anchor `name` still embedded in that block's `treeAnchor` prop or raw text — [Anchor-Matching Requirement for Resolution](../design/linking.md#id/BlockNode:00CDBYV4TG005) already treats either as a live resolvable target today, so both are real collisions, not just the current title. `astParser.ts`'s `extractAnchorNames` is the new find-all counterpart to `TRAILING_HEADING_ANCHOR_RE` this needed, for the list-item/paragraph case (headings already had a way via `treeAnchor`).",
     "parent": "BlockNode:00CDBZ77F0010",
@@ -2974,6 +2777,22 @@
   {
     "@id": "BlockNode:00CDCMWPC8003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCMWPC8003:links:Link:00CGGFNBNR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ76TR00C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCMWPC8003:links:Link:00CGGFNBNR000:props:StringProp:00CGGFNBP0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "108"
+          }
+        ]
+      }
+    ],
     "title": "On collision",
     "text": "On collision: throws, rejecting the whole write (no partial write), naming both colliding blocks/paths. See [A bare snowflake isn't a full node id](../discussion/linking.md#id/BlockNode:00CDBZ76TR00C) for a real bug this surfaced while landing it.",
     "parent": "BlockNode:00CDBZ77F0010",
@@ -6418,6 +6237,22 @@
   {
     "@id": "BlockNode:00CDWQ0V88003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDWQ0V88003:links:Link:00CGGFNKH0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDWP69B8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDWQ0V88003:links:Link:00CGGFNKH0000:props:StringProp:00CGGFNKH0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "277"
+          }
+        ]
+      }
+    ],
     "title": "`aperas` builds to a real `bin`",
     "text": "`aperas` builds to a real `bin`: `packages/cli/build.mjs` (`esbuild`, `oxigraph` external) produces a self-contained `packages/cli/dist/` (bundle + minimal `package.json` with a `bin` entry). Verified running standalone via plain `node`, no `tsx`, against the real graph — see [discussion](../discussion/packaging.md#id/BlockNode:00CDWP69B8001).",
     "parent": "BlockNode:00CDDVC8N0007",
@@ -8847,6 +8682,7 @@
       "BlockNode:00CE1VPWWR002",
       "BlockNode:00CE315NGG002",
       "BlockNode:00CE8T49MR001",
+      "BlockNode:00CGJHDK68001",
       "BlockNode:00CE1DDF58004"
     ]
   },
@@ -9518,7 +9354,6 @@
       "BlockNode:00CE5QD6W8001",
       "BlockNode:00CE1GW638005",
       "BlockNode:00CE1GW638006",
-      "BlockNode:00CE1GW638007",
       "BlockNode:00CE8T6W7G001",
       "BlockNode:00CE1GW638003"
     ]
@@ -9650,11 +9485,25 @@
             "value": "944"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CE1GW638007:links:Link:00CGJHQ33G000",
+        "@type": "Link",
+        "target": "BlockNode:00CGJHDK68001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638007:links:Link:00CGJHQ33G000:props:StringProp:00CGJHQ33G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1264"
+          }
+        ]
       }
     ],
     "title": "**GFM task-list items round-trip broken**",
-    "text": "**GFM task-list items round-trip broken**: originally found here: [archive-migration discussion](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG007) — `- [ ] text` reportedly stored the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` would re-emit `- [ ] ` on top of the leftover `[ ] `, doubling to `- [ ] [ ] text`. Re-tested live during the list-consumption migration (both a direct `parseMarkdownTree`/`serializeBlock` round trip and a real `aperas insert` against the live corpus): does not reproduce, renders correctly. `git log` shows the checkbox-handling code in `astParser.ts` has never changed since it was first written. No corroborating evidence anywhere in the graph that this was ever actually observed broken in a real projected artifact — awaiting a decision on whether to close as not-reproducible or keep open pending further investigation. See [list-consumption discussion](../discussion/list-consumption.md#id/BlockNode:00CE8J339R001) for the re-test note.",
-    "parent": "BlockNode:00CE1GW638002",
+    "text": "**GFM task-list items round-trip broken**: originally found here: [archive-migration discussion](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG007) — `- [ ] text` reportedly stored the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` would re-emit `- [ ] ` on top of the leftover `[ ] `, doubling to `- [ ] [ ] text`. Re-tested live during the list-consumption migration (both a direct `parseMarkdownTree`/`serializeBlock` round trip and a real `aperas insert` against the live corpus): does not reproduce, renders correctly. `git log` shows the checkbox-handling code in `astParser.ts` has never changed since it was first written. No corroborating evidence anywhere in the graph that this was ever actually observed broken in a real projected artifact — awaiting a decision on whether to close as not-reproducible or keep open pending further investigation. See [list-consumption discussion](../discussion/list-consumption.md#id/BlockNode:00CE8J339R001) for the re-test note. **Correction: it does reproduce, narrower than either re-test tried.** Confirmed live on this session's own discussion plan checkboxes, then isolated and traced to the exact upstream line — full account in [discussion/treeview.md](../discussion/treeview.md#id/BlockNode:00CGJHDK68001). The real trigger is narrower than \"bold\" and broader than either re-test tried: `mdast-util-gfm-task-list-item`'s `exitParagraphWithTaskListItem` only trims the checkbox's mandatory leftover space, and re-bases the paragraph's own position past it, when the paragraph's first inline child is a `text` node — `- [x] Plain: rest.` qualifies, `- [x] **Bold**:`/`*Italic*:`/`` `code`: ``/`[link](url):` do not, since CommonMark's inline tokenizer never materializes a lone leading space with nothing before an inline span as its own text node. `astParser.ts` has no checkbox-marker-stripping logic of its own — it only reads `node.checked` into a prop — so it faithfully trusts the un-rebased position for `rawSlice`, including the leftover marker as literal text. Both earlier re-tests happened to use plain-text task items, which is exactly why neither one reproduced it. **Resolved**: the real fix lives upstream (`mdast-util-gfm-task-list-item`), out of reach here, so `astParser.ts` compensates defensively — a listItem already known to be a checkbox (`node.checked` boolean) has a leading `/^\\[[ xX]\\]\\s*/` stripped from both its extracted `text` and `title` after the fact, regardless of what leaked or why. Verified live end-to-end: a bold-lead checkbox item pushed through the real service now stores clean text with `checked` set correctly, and projects to a single, correct `- [x]` marker — confirmed by re-checking this session's own six plan checkboxes, which had actually rendered doubled (`[ ] [x]`) before this fix and render correctly now.",
+    "parent": "BlockNode:00CE1GW63800A",
     "type": "listItem",
     "children": []
   },
@@ -9745,6 +9594,7 @@
     "children": [
       "BlockNode:00CE1GW63800C",
       "BlockNode:00CE1GW638008",
+      "BlockNode:00CE1GW638007",
       "BlockNode:00CE1GW63800B"
     ]
   },
@@ -13520,6 +13370,22 @@
   {
     "@id": "BlockNode:00CEA5MHD8003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CEA5MHD8003:links:Link:00CGGFP470000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5M6S8005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEA5MHD8003:links:Link:00CGGFP470000:props:StringProp:00CGGFP470001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "521"
+          }
+        ]
+      }
+    ],
     "title": "00CEA5MHD8003",
     "text": "All eighteen original items survived, relevelled rather than rewritten — item 18's graph-substance principle promoted to Orientation where it explains the rest, items 1/2/11/12/17 and half of 14 gathered into Discipline around an explicit edit loop, and the syntax and command-level items collected into Mechanics. Item 14's other half (the Freeflow document shape) left the skill entirely for `design/documentation.md`, and item 8's tool gap became a pointer to its tracked issue instead of inline prose. Remaining from [Task Breakdown](../planning/aperas-skill.md#id/BlockNode:00CEA5M6S8005): step 5's example harvest is partially done — the contrast pair, the traversal transcript and the edit loop are in, the Mechanics command-plus-failure-text examples are not yet systematic.",
     "parent": "BlockNode:00CEA5MHD8002",
@@ -14406,6 +14272,22 @@
   {
     "@id": "BlockNode:00CECCBKNG001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CECCBKNG001:links:Link:00CGGHZSB8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGGHVBF8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CECCBKNG001:links:Link:00CGGHZSB8000:props:StringProp:00CGGHZSB8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1445"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CECCBKNG001:props:StringProp:00CECCBMX8000",
@@ -14421,7 +14303,7 @@
       }
     ],
     "title": "00CECCBKNG001",
-    "text": "**`extractAnchorNames` treats a quoted example anchor as a real one — it has no idea what a code span is**: `astParser.ts`'s `extractAnchorNames(text)` is a bare regex (`ANCHOR_NAME_RE`) run over a block's raw text, with no AST and no markdown awareness, so an anchor tag appearing *inside backticks as an illustration* is indistinguishable from one the projector actually spliced in. `parsedBlockNames`/`liveBlockNames` then register that illustration as a name the block genuinely answers to, and `rejectSlugPathCollisions` enforces it. Found live: dumping the skill's own item 2 — which quotes a complete anchor tag (an `a` element whose `name` is an `id/BlockNode:` address and whose class is `aperas-anchor aperas-id`) precisely to warn readers off pasting projected files back in — made that block claim the quoted address as one of its own names. It still does: `BlockNode:00CE95MVP8008` holds it today. Only one claimant exists, so nothing collides yet, but any second document quoting the same example is rejected — and `design/linking.md`, the canonical spec for anchor syntax, is exactly the kind of document that must quote it. This is the source/shadow confusion reproduced inside the parser: text *depicting* an anchor taken for the anchor itself. Not a judgement call — a code span is literal display text by definition, so an anchor inside one is never a real claim; the regex needs to skip backtick-delimited spans.",
+    "text": "**`extractAnchorNames` treats a quoted example anchor as a real one — it has no idea what a code span is**: `astParser.ts`'s `extractAnchorNames(text)` is a bare regex (`ANCHOR_NAME_RE`) run over a block's raw text, with no AST and no markdown awareness, so an anchor tag appearing *inside backticks as an illustration* is indistinguishable from one the projector actually spliced in. `parsedBlockNames`/`liveBlockNames` then register that illustration as a name the block genuinely answers to, and `rejectSlugPathCollisions` enforces it. Found live: dumping the skill's own item 2 — which quotes a complete anchor tag (an `a` element whose `name` is an `id/BlockNode:` address and whose class is `aperas-anchor aperas-id`) precisely to warn readers off pasting projected files back in — made that block claim the quoted address as one of its own names. It still does: `BlockNode:00CE95MVP8008` holds it today. Only one claimant exists, so nothing collides yet, but any second document quoting the same example is rejected — and `design/linking.md`, the canonical spec for anchor syntax, is exactly the kind of document that must quote it. This is the source/shadow confusion reproduced inside the parser: text *depicting* an anchor taken for the anchor itself. Not a judgement call — a code span is literal display text by definition, so an anchor inside one is never a real claim; the regex needs to skip backtick-delimited spans. Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CGGHVBF8001).",
     "parent": "BlockNode:00CE8XWZK0001",
     "type": "listItem",
     "children": [
@@ -15098,6 +14980,36 @@
   {
     "@id": "BlockNode:00CEF7TB2G001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE95MVPG00B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0000:props:StringProp:00CGGFPBY0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "20"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0002",
+        "@type": "Link",
+        "target": "BlockNode:00CEEJ3R60001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0002:props:StringProp:00CGGFPBY0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "444"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CEF7TB2G001:props:StringProp:00CEF7TCJ0002",
@@ -16324,19 +16236,44 @@
     "parent": "BlockNode:00CF1WZ4JG001",
     "type": "heading",
     "children": [
-      "BlockNode:00CF1WZ4JG003",
-      "BlockNode:00CF1WZ4JG004",
       "BlockNode:00CF1WZ4JG005",
       "BlockNode:00CF1WZ4JG006",
-      "BlockNode:00CF1WZ4JG007",
-      "BlockNode:00CF1WZ4JG008",
-      "BlockNode:00CF1WZ4JG009",
-      "BlockNode:00CFATMWY0001"
+      "BlockNode:00CF1WZ4JG007"
     ]
   },
   {
     "@id": "BlockNode:00CF1WZ4JG003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0000:props:StringProp:00CGH4W5W0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "159"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGH4W5W0002:props:StringProp:00CGH4W5W0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2363"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CF1WZ4JG003:props:StringProp:00CF1WZ5Q8000",
@@ -16351,18 +16288,34 @@
         "value": "1"
       }
     ],
-    "title": "00CF1WZ4JG003",
-    "text": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**: found running `aperas-skill`'s own eval against [issues/treeview.md's Open Issues list](../issues/treeview.md#id/BlockNode:00CE1GW638002) — piping the heading line plus every visible item (skipping tombstoned ones, as any reasonable read would) zips the piped items against storage slots by raw position, silently reassigning live content onto wrong ids once a tombstoned sibling is interleaved. Contradicts what both the skill and the code's own doc comments claim (\"exact-key matching\"). Root cause not yet read off `reconcile.ts` directly — identified from reproduced symptom, confirmed only in a disposable eval sandbox, not the live corpus. Same defect family as the next two items below — one fix in `reconcile.ts` likely closes all three.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "title": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**",
+    "text": "**A parent-heading list-push reconciles children by array position, tombstones included, not by content/key**: found running `aperas-skill`'s own eval against [issues/treeview.md's Open Issues list](../issues/treeview.md#id/BlockNode:00CE1GW638002) — piping the heading line plus every visible item (skipping tombstoned ones, as any reasonable read would) zips the piped items against storage slots by raw position, silently reassigning live content onto wrong ids once a tombstoned sibling is interleaved. Contradicts what both the skill and the code's own doc comments claim (\"exact-key matching\"). Root cause not yet read off `reconcile.ts` directly — identified from reproduced symptom, confirmed only in a disposable eval sandbox, not the live corpus. Same defect family as the next two items below — one fix in `reconcile.ts` likely closes all three. Root cause now read directly: leaf matching (`diffChildren`'s `matchKeyed`) runs `gestaltMatchingBlocks` — the same recursive longest-exact-run algorithm as `matchLeftoverByAbstract` (item 3 below), just keyed on exact string equality rather than similarity — over the *piped* array against the *live (non-tombstoned) child* array. It is genuinely exact-key matching, not raw positional zipping; the recursion's own left/right split around each matched run is what a skipped tombstoned sibling can throw off when duplicate or near-duplicate keys sit on either side of the gap. That root-cause note was wrong, corrected here rather than left standing next to the fix that contradicts it: `listItem` is a `CONTAINER_TYPE`, not a `LEAF_TYPE`, so it never reaches `matchKeyed`/Stage A at all. The real mechanism is Stage B's per-type container alignment, which zipped old/new by raw array position with zero content comparison — confirmed by direct reproduction (a 4-item list missing its already-tombstoned 2nd item: item 3's content landed on item 2's dead id, item 4's content landed on item 3's id, item 4's own id was tombstoned). **Resolved**: Stage B now keys `listItem` buckets through `matchKeyed`+`leafKey`, the same machinery Stage A's leaves already use, instead of a positional zip — verified against the reproduction above (each item now lands on its own real id) and against an ordinary reordering/insert-in-the-middle case (also previously mismatched, not only the tombstone case). Same fix as [item 2 below](#id/BlockNode:00CF1WZ4JG004).",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CF1WZ4JG004",
     "@type": "BlockNode",
-    "title": "00CF1WZ4JG004",
-    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. Root cause not yet investigated in `reconcile.ts`.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG004:links:Link:00CGH4W5W8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG004:links:Link:00CGH4W5W8000:props:StringProp:00CGH4W5W8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "978"
+          }
+        ]
+      }
+    ],
+    "title": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**",
+    "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. **Resolved**: root cause was every old-side matching pool (Stage A's leaves and heading buckets, Stage B's containers) including tombstoned candidates with no exclusion at all — a live new node's content could bind to a dead id purely because its stripped text happened to match. Fixed by excluding every tombstoned old child from every matching pool in `diffChildren`: a dead slot is never reused, new content always gets a fresh id instead. Verified live: a new item with text identical to an already-tombstoned sibling's now lands on a brand-new id, not the dead one. Same fix as [item 1 above](#id/BlockNode:00CF1WZ4JG003).",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
@@ -16398,17 +16351,17 @@
     "@id": "BlockNode:00CF1WZ4JG008",
     "@type": "BlockNode",
     "title": "**A multi-artifact `kg:ingest` isn't transactional either**",
-    "text": "**A multi-artifact `kg:ingest` isn't transactional either**: `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop per file with no try/catch, so a later file's failure leaves earlier files' writes already committed to the in-memory store with no rollback across the batch. Same shape as the single-`kg:insert` gap above, one layer up (a batch of artifacts vs. a batch of nodes within one call) — likely the same underlying fix (validate everything before writing anything) closes both.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "text": "**A multi-artifact `kg:ingest` isn't transactional either**: `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop per file with no try/catch, so a later file's failure leaves earlier files' writes already committed to the in-memory store with no rollback across the batch. Same shape as the single-`kg:insert` gap above, one layer up (a batch of artifacts vs. a batch of nodes within one call). **Resolved**, but not with that fix: true all-or-nothing would need a store-wide snapshot/rollback primitive that doesn't exist here, a bigger undertaking than this item's scope. Chosen instead: isolate per file, matching the pattern this module already uses for `untracked` — `ingestOne` wraps each `ingestArtifact` call in try/catch, collecting `{path, error}` failures and continuing, so one bad file no longer silently aborts every file after it in the same batch. `retryDanglingRefs` (called at the end of every `kg:ingest` run, unconditionally) had the identical unguarded loop and got the same fix, though it was never named by this issue. Verified live: a batch of two files, one with a genuine full-slug-path collision, ingested the valid file and reported the broken one as a failure rather than throwing and aborting before the folder-tree rebuild.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CF1WZ4JG009",
     "@type": "BlockNode",
-    "title": "00CF1WZ4JG009",
-    "text": "**Folder/Artifact-tier holders have no promotion channel at all, and nothing clears `.holder` once real content lands underneath**: found live creating this very doc. `aperas resolve --create-holder` scaffolds a placeholder `ArtifactNode`/`Block` chain, and filling real content into the *Block* children works fine — but `kg:insert`'s promote path is Block-tier only (\"kg:insert only positions Block-level nodes\"), so there is no verb that ever flips a Folder/Artifact's own `.holder` back off, even once every child underneath it is real. `aperas project` correctly refuses to render such a subtree (\"still has a placeholder (holder) node somewhere in its subtree\"), but nothing resolves that refusal short of a direct edit or removing and recreating the artifact disk-first. Matches `Aperas-crud-design.md` §4.1/§6 exactly. Until fixed, the graph-first \"sketch a structure\" path only actually works for adding a subtree *within* an already-real, already-projectable artifact — not for creating a brand-new artifact from nothing.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "title": "**Folder/Artifact-tier holders have no promotion channel at all, and nothing clears `.holder` once real content lands underneath**",
+    "text": "**Folder/Artifact-tier holders have no promotion channel at all, and nothing clears `.holder` once real content lands underneath**: found live creating this very doc. `aperas resolve --create-holder` scaffolds a placeholder `ArtifactNode`/`Block` chain, and filling real content into the *Block* children works fine — but `kg:insert`'s promote path is Block-tier only (\"kg:insert only positions Block-level nodes\"), so there is no verb that ever flips a Folder/Artifact's own `.holder` back off, even once every child underneath it is real. `aperas project` correctly refuses to render such a subtree (\"still has a placeholder (holder) node somewhere in its subtree\"), but nothing resolves that refusal short of a direct edit or removing and recreating the artifact disk-first. Matches `Aperas-crud-design.md` §4.1/§6 exactly.. **Resolved, narrower than filed**: read directly, `ArtifactNode extends BlockNode` and already passes `kg:update`'s own type check — piping any content through `kg:update` on a holder `ArtifactNode` already cleared `.holder` before this fix, no code change needed there. The real gap was `FolderNode` alone: `kg:insert`'s move/promote mode was hard-restricted to `BlockNode`, and `kg:update` explicitly excludes `FolderNode` from its own target-kind check, so nothing graph-first ever reached `FolderNode.hydrateFromParsed`'s existing (and already-correct) `this.holder = undefined`. Fixed by extending `kg:insert`'s anchor-*less* bare-promote branch to also accept a `FolderNode` target — a `FolderNode` + `--after`/`--before` combination is rejected outright with a clear message, since a folder's position comes from its own path, never list order, so repositioning was never the missing piece. Verified live on a scratch holder chain (`resolve --create-holder`): the folder's `.holder` cleared on a bare promote, and the anchor combination was correctly rejected.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
@@ -16465,7 +16418,7 @@
     "@id": "BlockNode:00CF1WZ4JG00D",
     "@type": "BlockNode",
     "title": "00CF1WZ4JG00D",
-    "text": "**`linking`** — none formally filed, but one confirmed-live bug not yet promoted: `extractAnchorNames`/`stripInlineAnchors` treat a backtick-quoted example anchor as a real claimed name, with no code-span awareness. See [discussion/aperas-skill.md](../discussion/aperas-skill.md#id/BlockNode:00CECCBKNG001). Formal home is [issues/linking.md](../issues/linking.md#id/BlockNode:00CDBYV5A8002) — currently empty.",
+    "text": "**`linking`** — 2 open, both filed: `extractAnchorNames` treats a backtick-quoted example anchor as a real claimed name, and `aperas update` never re-derives a non-heading block's title. See [Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002).",
     "parent": "BlockNode:00CF1WZ4JG00A",
     "type": "listItem",
     "children": []
@@ -16513,10 +16466,15 @@
     "@id": "BlockNode:00CF1WZ4JG00J",
     "@type": "BlockNode",
     "title": "## Resolved",
-    "text": "None yet.",
     "parent": "BlockNode:00CF1WZ4JG001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CF1WZ4JG003",
+      "BlockNode:00CF1WZ4JG004",
+      "BlockNode:00CF1WZ4JG008",
+      "BlockNode:00CF1WZ4JG009",
+      "BlockNode:00CFATMWY0001"
+    ]
   },
   {
     "@id": "BlockNode:00CF1WZE10001",
@@ -16712,7 +16670,10 @@
       "BlockNode:00CF1WZE18005",
       "BlockNode:00CF1WZE18006",
       "BlockNode:00CF282PR0001",
-      "BlockNode:00CF2B9GGG001"
+      "BlockNode:00CF2B9GGG001",
+      "BlockNode:00CGGNFG50001",
+      "BlockNode:00CGGTQ620001",
+      "BlockNode:00CGJJVGDR001"
     ]
   },
   {
@@ -16770,16 +16731,30 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF23FB1G002:links:Link:00CF29E3ZR000:props:StringProp:00CF29E400000",
+            "@id": "BlockNode:00CF23FB1G002:links:Link:00CF29E3ZR000:props:StringProp:00CGK3HGTG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "62"
+            "value": "164"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF23FB1G002:links:Link:00CGK3HGTG001",
+        "@type": "Link",
+        "target": "BlockNode:00CF23FB1G003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23FB1G002:links:Link:00CGK3HGTG001:props:StringProp:00CGK3HGTG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "277"
           }
         ]
       }
     ],
     "title": "## Implementation Plan",
-    "text": "Fix by shared root cause, not by filing order. Three of these [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) are explicitly \"flagged from reproduced symptom, not source\" — `reconcile.ts`'s actual matching logic hasn't been read yet — so investigation comes before any diff, not interleaved with it. Group A shares one file and plausibly one fix; item 6 shares its shape of fix (validate everything before writing anything) with `cli`'s own item 5, even though the two now live in separate concerns; the seventh item is a missing feature, not a bug, and is deferred alongside the (separately deferred) CRUD work rather than forced into this batch.",
+    "text": "Batched, not fixed by the original filing order below — that plan was sketched before `reconcile.ts` was actually read, and wasn't followed as written once it was. [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) are grouped by which batch actually closes them, per [Task Breakdown](#id/BlockNode:00CF23FB1G003).",
     "parent": "BlockNode:00CF23FB1G001",
     "type": "heading",
     "children": []
@@ -16795,86 +16770,18 @@
       "BlockNode:00CF23FB1G005",
       "BlockNode:00CF23FB1G006",
       "BlockNode:00CF23FB1G007",
-      "BlockNode:00CF23FB1G008"
+      "BlockNode:00CF23FB1G008",
+      "BlockNode:00CGJWKA0G001",
+      "BlockNode:00CGK2C16G001",
+      "BlockNode:00CGK3AH60001"
     ]
   },
   {
     "@id": "BlockNode:00CF23FB1G004",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBH8000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBH8000:props:StringProp:00CF29EBHG000",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "181"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG001",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG004",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG001:props:StringProp:00CF29EBHG002",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "238"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG003",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG006",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHG003:props:StringProp:00CF29EBHG004",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "293"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHR000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG005",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G004:links:Link:00CF29EBHR000:props:StringProp:00CF29EBHR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "422"
-          }
-        ]
-      }
-    ],
-    "props": [
-      {
-        "@id": "BlockNode:00CF23FB1G004:props:StringProp:00CF23FCD0000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "true"
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G004:props:StringProp:00CF23FCD0001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
-    "title": "**Investigate, read-only**",
-    "text": "**Investigate, read-only**: read `packages/core/src/reconcile.ts` in full, and the relevant parts of `packages/core/src/apeironNgn/node.ts`, to confirm the actual root cause behind [items 1](../issues/core.md#id/BlockNode:00CF1WZ4JG003), [2](../issues/core.md#id/BlockNode:00CF1WZ4JG004), and [4](../issues/core.md#id/BlockNode:00CF1WZ4JG006) — currently symptom-only — and check whether they genuinely share one fix with [item 3](../issues/core.md#id/BlockNode:00CF1WZ4JG005) or are subtly different. Report findings and a specific proposed diff before writing any code.",
+    "tombstonedAt": "2026-09-15T07:19:45.584Z",
+    "title": "**Investigate, read-only — done**",
+    "text": "**Investigate, read-only — done**: read `packages/core/src/reconcile.ts` in full. Root cause for [items 1](../issues/core.md#id/BlockNode:00CF1WZ4JG003) and [2](../issues/core.md#id/BlockNode:00CF1WZ4JG004) is Stage B's per-type container alignment (`diffChildren`), which zips `listItem` siblings by raw array position with zero content comparison — not Stage A's `matchKeyed` as first suspected, since `listItem` is a `CONTAINER_TYPE`, never reaching Stage A at all. [Item 3](../issues/core.md#id/BlockNode:00CF1WZ4JG005) and [item 4](../issues/core.md#id/BlockNode:00CF1WZ4JG006) do **not** share this fix: item 3 is `matchLeftoverByAbstract`, used only for artifact/folder rename detection, never for list-item matching; item 4 is `pruneUnreachableTombstones` never marking a fully-dead container itself dead, an unrelated GC gap. Both left open.",
     "parent": "BlockNode:00CF23FB1G003",
     "type": "listItem",
     "children": []
@@ -16882,66 +16789,9 @@
   {
     "@id": "BlockNode:00CF23FB1G005",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48000:props:StringProp:00CF29EK48001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "18"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48002",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG004",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48002:props:StringProp:00CF29EK48003",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "75"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48004",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG005",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK48004:props:StringProp:00CF29EK48005",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "126"
-          }
-        ]
-      },
-      {
-        "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK4G000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG006",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G005:links:Link:00CF29EK4G000:props:StringProp:00CF29EK4G001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "177"
-          }
-        ]
-      }
-    ],
-    "title": "00CF23FB1G005",
-    "text": "**Fix Group A** — [items 1](../issues/core.md#id/BlockNode:00CF1WZ4JG003), [2](../issues/core.md#id/BlockNode:00CF1WZ4JG004), [3](../issues/core.md#id/BlockNode:00CF1WZ4JG005), [4](../issues/core.md#id/BlockNode:00CF1WZ4JG006) — `reconcile.ts`'s identity-matching family. Verify against the reproducible scenarios already on record: the eval-sandbox repro for item 1 (push against `issues/treeview.md`'s Open Issues list with a tombstoned sibling interleaved), `list-consumption`'s repro for item 2.",
+    "tombstonedAt": "2026-09-15T07:19:47.063Z",
+    "title": "**Fix Group A — done for items 1 and 2, items 3 and 4 correctly out of scope**",
+    "text": "**Fix Group A — done for items 1 and 2, items 3 and 4 correctly out of scope**: [items 1](../issues/core.md#id/BlockNode:00CF1WZ4JG003) and [2](../issues/core.md#id/BlockNode:00CF1WZ4JG004) fixed together — Stage B's `listItem` buckets now key-matched through the same `matchKeyed`+`leafKey` machinery Stage A already uses for leaves, plus every tombstoned old candidate excluded from every matching pool (Stage A and B both), so live content can never bind to a dead id. Verified against the exact reproducible scenarios already on record, and against a fresh direct reproduction (a 4-item list, item 2 tombstoned-but-present, piped without it) plus an ordinary reorder/insert-in-the-middle case that turned out to be silently broken the same way. [Item 3](../issues/core.md#id/BlockNode:00CF1WZ4JG005) and [item 4](../issues/core.md#id/BlockNode:00CF1WZ4JG006) remain open — see the corrected finding above.",
     "parent": "BlockNode:00CF23FB1G003",
     "type": "listItem",
     "children": []
@@ -16949,24 +16799,9 @@
   {
     "@id": "BlockNode:00CF23FB1G006",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF23FB1G006:links:Link:00CF29ETCG000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG008",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G006:links:Link:00CF29ETCG000:props:StringProp:00CF29ETCG001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "17"
-          }
-        ]
-      }
-    ],
-    "title": "**Fix Group B** — [item 5](../issues/cli.md#id/BlockNode:00CF1WZ4JG007) (`kgInsert.ts`",
-    "text": "**Fix item 6** — [multi-artifact `kg:ingest` isn't transactional](../issues/core.md#id/BlockNode:00CF1WZ4JG008) (`apeironNgn/artifacts.ts`: validate every artifact in a batch before committing any of them). The matching single-`kg:insert` gap (`kgInsert.ts`) moved to `cli`'s own planning doc along with the issue itself — same shape of fix, different concern now.",
+    "tombstonedAt": "2026-09-15T07:19:48.397Z",
+    "title": "**Fix item 6 — done**",
+    "text": "**Fix item 6 — done**: [multi-artifact `kg:ingest` isn't transactional](../issues/core.md#id/BlockNode:00CF1WZ4JG008), fixed by isolating each file's ingest in its own try/catch (`ingestOne`) rather than the validate-everything-first approach originally proposed — a true all-or-nothing batch would need a store-wide snapshot/rollback primitive that doesn't exist here, a bigger undertaking than this item's scope, so failures are isolated and reported per file instead, matching the pattern this module already used for `untracked`. `retryDanglingRefs`, called at the end of every `kg:ingest` run, had the identical unguarded loop and got the same fix, though it was never named by the issue. Verified live: a batch with one file failing on a genuine full-slug-path collision still ingested the other file and reported the failure rather than aborting before the folder-tree rebuild.",
     "parent": "BlockNode:00CF23FB1G003",
     "type": "listItem",
     "children": []
@@ -16974,24 +16809,9 @@
   {
     "@id": "BlockNode:00CF23FB1G007",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF23FB1G007:links:Link:00CF29F1JG000",
-        "@type": "Link",
-        "target": "BlockNode:00CF1WZ4JG009",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23FB1G007:links:Link:00CF29F1JG000:props:StringProp:00CF29F1JG001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "18"
-          }
-        ]
-      }
-    ],
-    "title": "00CF23FB1G007",
-    "text": "**Defer item 7** ([Folder/Artifact holder-promotion gap](../issues/core.md#id/BlockNode:00CF1WZ4JG009)) — no design exists yet for what promotion should look like; revisit alongside the CRUD work once that's picked back up, not as part of this batch.",
+    "tombstonedAt": "2026-09-15T07:19:49.457Z",
+    "title": "**Item 7 was not deferred — the \"no design exists\" premise didn't survive reading the actual restriction**",
+    "text": "**Item 7 was not deferred — the \"no design exists\" premise didn't survive reading the actual restriction**: [the Folder/Artifact holder-promotion gap](../issues/core.md#id/BlockNode:00CF1WZ4JG009) turned out narrower than filed. `ArtifactNode extends BlockNode` and already passes `kg:update`'s own type check — piping any content through `kg:update` on a holder `ArtifactNode` already cleared `.holder`, no design or code change needed there. The real, narrower gap was `FolderNode` alone, and the fix was mechanical, not a design question: extend `kg:insert`'s already-existing anchor-*less* bare-promote branch (the same one a `BlockNode` holder already uses) to also accept a `FolderNode` target, rejecting a `FolderNode` + `--after`/`--before` combination outright since a folder's position comes from its own path, never list order. No new promotion design was needed because the promotion mechanism (`hydrateFromParsed`'s existing `this.holder = undefined`) already existed and was already correct — the only thing missing was a caller that could reach it graph-first. Verified live on a scratch holder chain (`resolve --create-holder`).",
     "parent": "BlockNode:00CF23FB1G003",
     "type": "listItem",
     "children": []
@@ -16999,8 +16819,9 @@
   {
     "@id": "BlockNode:00CF23FB1G008",
     "@type": "BlockNode",
-    "title": "00CF23FB1G008",
-    "text": "Move each fixed item from `issues/core.md`'s Open Issues to Resolved as it lands, with the real root cause recorded — not just \"fixed.\"",
+    "tombstonedAt": "2026-09-15T07:19:50.525Z",
+    "title": "00CGJWJY88001",
+    "text": "Move each fixed item from `issues/core.md`'s Open Issues to Resolved as it lands, with the real root cause recorded — not just \"fixed.\" **Done** for every item actually fixed in this pass (items 1, 2, 6, 7, and the unplanned props-only item below); items 3 and 4 correctly stayed in Open Issues, since neither was touched.",
     "parent": "BlockNode:00CF23FB1G003",
     "type": "listItem",
     "children": []
@@ -17009,7 +16830,7 @@
     "@id": "BlockNode:00CF23FB1G009",
     "@type": "BlockNode",
     "title": "## Verification Plan",
-    "text": "Each Group A fix is checked against its own already-documented repro, not just a fresh test written for the occasion — item 1 against the exact `issues/treeview.md` list shape that exposed it, item 2 against `list-consumption`'s eval sandbox. Item 6's fix is checked by forcing the failure directly: fail a later file mid-batch `kg:ingest` and confirm earlier files' writes didn't commit (the matching single-`kg:insert` check now lives in `cli`'s own planning doc). A fix isn't done until its Open Issues entry can honestly move to Resolved with the actual mechanism named, matching this concern's own citation-direction discipline against guessing.",
+    "text": "A fix isn't done until its Open Issues entry can honestly move to Resolved with the actual mechanism named, matching this concern's own citation-direction discipline against guessing. Batch 1 verified live against direct reproductions built for each mechanism (a tombstone-interleaved list push, a same-batch multi-file ingest failure, a scratch holder-promotion chain), every scratch test run against the real service and cleaned up immediately after — twice, a mistake mid-verification was itself caught and recovered via the staged `git` checkpoint before continuing. Batch 2 gets the same bar once it's investigated: a reproduction on record before any diff, not a fresh test written to fit whatever the fix turns out to be.",
     "parent": "BlockNode:00CF23FB1G001",
     "type": "heading",
     "children": []
@@ -17017,22 +16838,6 @@
   {
     "@id": "BlockNode:00CF23SXQ8001",
     "@type": "BlockNode",
-    "links": [
-      {
-        "@id": "BlockNode:00CF23SXQ8001:links:Link:00CF292TCR000",
-        "@type": "Link",
-        "target": "BlockNode:00CF23FB1G003",
-        "predicate": "[[wikilink]]",
-        "props": [
-          {
-            "@id": "BlockNode:00CF23SXQ8001:links:Link:00CF292TCR000:props:StringProp:00CF292TCR001",
-            "@type": "StringProp",
-            "key": "position",
-            "value": "4"
-          }
-        ]
-      }
-    ],
     "title": "## Pending Tasks",
     "text": "See [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) for the ordered fix plan.",
     "parent": "BlockNode:00CF1WZ4JG001",
@@ -17558,6 +17363,22 @@
   {
     "@id": "BlockNode:00CF2MR0M8004",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF2MR0M8004:links:Link:00CGGFPKP0000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF2MR0M8004:links:Link:00CGGFPKP0000:props:StringProp:00CGGFPKP0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "63"
+          }
+        ]
+      }
+    ],
     "title": "00CF2MR0M8004",
     "text": "**The concept that explains it was never in SKILL.md at all**: [Crystallization — content and topology](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00J) describes exactly this — a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing, and \"link density is the product of this lifecycle\" — but it lives only in this concern's design doc. The v1 restructure never carried it into the operational skill file, so the one passage that would have named the missing step was in a document the working agent doesn't read while working.",
     "parent": "BlockNode:00CF2MR0M8001",
@@ -20331,6 +20152,22 @@
   {
     "@id": "BlockNode:00CF6R1KP8001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF6R1KP8001:links:Link:00CGGFPWY0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5ZE1S0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF6R1KP8001:links:Link:00CGGFPWY0000:props:StringProp:00CGGFPWY0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "56"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CF6R1KP8001:props:StringProp:00CF6R1NKR002",
@@ -20815,6 +20652,36 @@
   {
     "@id": "BlockNode:00CF9MGW8R002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4KR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5ZK3ZG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4KR000:props:StringProp:00CGGFQ4KR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "107"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4M0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5ZE1S0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4M0000:props:StringProp:00CGGFQ4M0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "169"
+          }
+        ]
+      }
+    ],
     "title": "00CF9MGW8R002",
     "text": "**The declined read-side instruction doesn't cover this, and shouldn't be re-litigated as though it did**: [the read-side decline](#id/BlockNode:00CF5ZK3ZG002) rests on [a look-it-up rule being only half a discipline](#id/BlockNode:00CF5ZE1S0003) — a rule saying \"look it up rather than trust memory\" can report what the graph holds but never that it is missing something. That argument is about *memory vs. lookup*. This failure is about *shadow vs. source on the read path*: everything was looked up, in the projections. Different axis, so the decline stands on its own terms and simply doesn't reach it. Likewise the retired gate's three bugs were all hook-config faults — a `Bash` pattern matching the repository's own name, a symlink resolving outside the gated root, a stale sandbox clone — and its stated retirement reason was that the vehicle is personal and machine-specific, which argues against that enforcement mechanism, not against a read-side rule living in the skill's own text.",
     "parent": "BlockNode:00CF9M8BC8001",
@@ -21252,23 +21119,9 @@
   {
     "@id": "BlockNode:00CFATMWY0001",
     "@type": "BlockNode",
-    "props": [
-      {
-        "@id": "BlockNode:00CFATMWY0001:props:StringProp:00CFATMYM0000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CFATMWY0001:props:StringProp:00CFATMYM0001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
-    "title": "00CFATMWY0001",
-    "text": "**A props-only change reports as `0 changed`, so a write that really happened is invisible in the summary**: `reconcileTree`'s summary categories (matched/moved/changed/added/removed) are computed over text, so a push whose only effect is on a node's `props` — a list item's `checked`, or a run's `orderedList`/`startIndex` — comes back as `N matched, 0 changed` while a real write has occurred. Confirmed live pushing GFM checkboxes onto `planning/aperas-skill.md`'s Task Breakdown: every one of the 17 items gained a fresh `checked` StringProp and the summary reported `17 matched, 0 moved, 0 changed, 0 added, 0 removed`. Not data loss — the write lands and projects back correctly — but the summary cannot be used to confirm it, and reading it as \"nothing was written\" is the natural mistake. Same family as the skill's own \"verify by traversal, not by the summary line\", surfacing in a category the line does not cover at all.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "title": "**A props-only change reports as `0 changed`, so a write that really happened is invisible in the summary**",
+    "text": "**A props-only change reports as `0 changed`, so a write that really happened is invisible in the summary**: `reconcileTree`'s summary categories (matched/moved/changed/added/removed) are computed over text, so a push whose only effect is on a node's `props` — a list item's `checked`, or a run's `orderedList`/`startIndex` — comes back as `N matched, 0 changed` while a real write has occurred. Confirmed live pushing GFM checkboxes onto `planning/aperas-skill.md`'s Task Breakdown: every one of the 17 items gained a fresh `checked` StringProp and the summary reported `17 matched, 0 moved, 0 changed, 0 added, 0 removed`. Not data loss — the write lands and projects back correctly — but the summary cannot be used to confirm it, and reading it as \"nothing was written\" is the natural mistake. Same family as the skill's own \"verify by traversal, not by the summary line\", surfacing in a category the line does not cover at all. **Resolved**: `headingChanged` generalized into `pairChanged` — the existing heading text/title check, plus an order-independent `props` key/value comparison applied to *any* matched pair, not only headings. Verified live: pushing GFM checkboxes onto a scratch list now reports `0 matched, 2 changed`, and re-pushing the identical (now-checked) content afterward correctly reports `2 matched, 0 changed` — no false positives.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   },
@@ -22473,15 +22326,6 @@
     "text": "The document's own past stays out: prior wordings, a section's retired name, tool behaviour that has since changed, and version history all belong in `discussion/aperas-skill.md`. This is distinct from [the originating incident above](#id/BlockNode:00CEA5Y5JG00B), which is provenance rather than history — it explains why a rule that is true now is true, and so travels with the rule. The test is whether a sentence still reads to someone with no memory of the version that preceded it, and a correction appended to text left unfixed always fails it. That is why the repair is to rewrite the item until it is complete on its own, never to leave it standing and add a paragraph explaining what the earlier one got wrong.",
     "parent": "BlockNode:00CEA5Y5JG00A",
     "type": "paragraph",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CGF5A8XR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-15T02:45:25.797Z",
-    "title": "00CGF5A8XR001",
-    "text": "**v2 plan — retire the status tags, give the read side equal standing, and take the document's own history out of `SKILL.md`**: a read of v1.4 found four defects with one root cause. (1) The `[current]`/`[superseded]`/`[unverified]` tags are obsolete — this doc's snapshot-plus-delta thread already carries per-item status, and across four versions nothing has ever been marked `[unverified]`, so the vocabulary costs every reader and buys nothing. The replacement rule is narrower and needs no vocabulary at all: **only current, verified items appear in `SKILL.md`**, with superseded material and unverified hypotheses living here in the graph instead. That supersedes [Topology's status-at-the-item paragraph](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00C), which asked the file to carry all three states where it stands. (2) Philosophy's shadow paragraph leans entirely to the write side — a projection is never where a change is made — and leaves the read side to a corrective paragraph four items further down. Reading and searching the shadow are the same category error as editing it and belong in the same sentence, which then lets the corrective paragraph be absorbed rather than kept. (3) Orientation's deep-read section names forward/downward and backward but misses the cheapest direction there is: **upward**. Ancestors are context, and climbing a level or two is what an agent actually wants at the moment it reaches for the whole artifact instead; for a node at `discussion/a.md/h1/freeflow/a/aa/aaa`, unfolding `discussion/a.md/h1/freeflow/a` is usually already enough, and you can stop as soon as the block's meaning stops changing. The same section governs deep write as well as deep read, so its title should say both. (4) Five items narrate the document's own past rather than stating the rule: the loop's opening disclaimer about its former name, the provenance bullet explaining which half used to be missing, the citation-direction note on how the rule was generalized, the list-matching precondition recalling how the section used to be worded, and the provenance rule explaining what a promotion-scoped version of itself would fail to reach. The root cause is a context failure in the writing, and it is the same skill the document teaches for reading: in a plan those phrases have context, because the surrounding discussion supplies it, whereas in `SKILL.md` the only context is the block itself and the blocks above it, where they read as scars from a conversation the reader never saw. The fix in each case is to rewrite the original so it is complete, never to leave it standing and append a correction — the tell being whether the sentence still makes sense to someone with no memory of the version that preceded it. Provenance is explicitly not history and stays: a recorded incident is evidence for a rule that is true now, which [Topology](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00B) requires travel with the rule it explains. Because the tag strip touches nearly every item, the change is recorded as a fresh **v2 snapshot** rather than as a delta on v1, which also resets `scripts/skill_drift.py`'s baseline in one step instead of asking it to normalize a retired vocabulary away. Both rules were promoted into Topology: the tag retirement rewrote [the status paragraph](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00C) in place, and the history rule landed as [a new paragraph beside it](../design/aperas-skill.md#id/BlockNode:00CGF54B5G001).",
-    "type": "listItem",
     "children": []
   },
   {
@@ -24128,15 +23972,32 @@
             "value": "11"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CGF83D4G001:links:Link:00CGFED88G000",
+        "@type": "Link",
+        "target": "BlockNode:00CGFE4SV0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGF83D4G001:links:Link:00CGFED88G000:props:StringProp:00CGFED88G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "621"
+          }
+        ]
       }
     ],
     "title": "## `aperas update` never re-derives a non-heading block's title",
-    "text": "Found live [while rewriting Topology for the skill's v2](../discussion/aperas-skill.md#id/BlockNode:00CGF35FNG001): `aperas update` replaced a paragraph's `.text` correctly and left `.title` frozen at the value ingest had derived, so the node went on rendering under a title stating the very rule its new text had just retired. Re-running the update with a deliberately short lead-in term, well inside `extractLeadInTitle`'s heuristics, changed nothing; an `insert` of a sibling paragraph minutes later derived its title from the lead-in correctly, so the defect is in `update`'s path rather than in parsing.",
+    "text": "Found live [while rewriting Topology for the skill's v2](../discussion/aperas-skill.md#id/BlockNode:00CGF35FNG001): `aperas update` replaced a paragraph's `.text` correctly and left `.title` frozen at the value ingest had derived, so the node went on rendering under a title stating the very rule its new text had just retired. Re-running the update with a deliberately short lead-in term, well inside `extractLeadInTitle`'s heuristics, changed nothing; an `insert` of a sibling paragraph minutes later derived its title from the lead-in correctly, so the defect is in `update`'s path rather than in parsing. Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CGFE4SV0002).",
     "parent": "ArtifactNode:00CDBYV46R000",
     "type": "heading",
     "children": [
       "BlockNode:00CGF83D4G002",
-      "BlockNode:00CGF83D4G003"
+      "BlockNode:00CGF83D4G003",
+      "BlockNode:00CGGA9J68000",
+      "BlockNode:00CGGA9J68001",
+      "BlockNode:00CGGA9J68002"
     ]
   },
   {
@@ -24158,7 +24019,7 @@
         ]
       }
     ],
-    "title": "00CGF83D4G002",
+    "title": "00CGFED5DR002",
     "text": "[The `kg:title` removal](../history/linking.md#id/BlockNode:00CDBZ769800B) left the lead-in term as the one and only title mechanism for every block type, and gave `kg:update` a compensating path for heading targets only — a heading being the one block type whose title is projected back to disk. That reasoning holds for the projection: the paragraph's rendered markdown is correct and the stale title is invisible on disk. It does not hold for the graph, where `tree`, `unfold` and `backlinks --text` all display the title and nothing marks it stale, so the block reads as saying one thing in preview and another in full.",
     "parent": "BlockNode:00CGF83D4G001",
     "type": "paragraph",
@@ -24167,10 +24028,955 @@
   {
     "@id": "BlockNode:00CGF83D4G003",
     "@type": "BlockNode",
-    "title": "00CGF83D4G003",
+    "title": "00CGFED5DR003",
     "text": "`reconcile.ts`'s `carryForwardFields` carries a title forward only when the block's text matches exactly, which should have left a changed paragraph with no title rather than the old one — so this is likely `update`'s own field handling, not the reconcile rule. The summary line reports `0 changed` and says nothing about the title either way, which is the usual silent shape. Not yet traced to the specific call, and there is no CLI route to repair an already-stale title short of tombstoning the block.",
     "parent": "BlockNode:00CGF83D4G001",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGFE4SV0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGFE4SV0002:props:StringProp:00CGFE4WVR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGFE4SV0002:props:StringProp:00CGFE4WVR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`aperas update` never re-derives a non-heading block's title**",
+    "text": "**`aperas update` never re-derives a non-heading block's title**: replacing a paragraph's `.text` leaves `.title` frozen at whatever ingest originally derived from the lead-in term, even when the new text no longer has that lead-in at all — so the block goes on previewing under a title for content it no longer holds. Root cause confirmed directly in `kgUpdate.ts`: `runUpdate`'s local `title` variable is assigned only in the heading-target/heading-input branch — for a paragraph/listItem target it stays `undefined` for the entire function, so the old title is carried forward unconditionally, every time, not merely left stale by a parsing quirk. Also confirmed worse than a stale-title problem: verifying it by re-pushing a node's own `--text` output (assumed complete) tombstoned that node's 4 real children, since `--text` never shows children and a non-`--text-only` update reconciles the piped (empty) overflow against what's really there. Recovered via the staged `git` checkpoint; see [discussion/linking.md](../discussion/linking.md#id/BlockNode:00CGGA9J68000) for the full incident. Invisible in the rendered projection, since only a heading's title is ever written back to disk (`kg:title`'s removal made the lead-in term the one and only title mechanism, with `update` compensating for heading targets only) — but `tree`, `unfold` and `backlinks --text` all display the stale title in the graph itself, with the summary line's `0 changed` giving no hint either way. No CLI route yet to repair an already-stale title short of tombstoning the block. Found live while rewriting `design/aperas-skill.md`'s Topology paragraph for the `aperas` skill's v2; full account in [discussion/linking.md](../discussion/linking.md#id/BlockNode:00CGF83D4G001). **Resolved**: `runUpdate`'s paragraph branch now reads `title = firstChild.title` too (already computed by the parser for every paragraph, nothing new to derive), skipped only when `target` itself is a heading (where `firstChild` is the adopted leading paragraph, a different piece of text from the heading's own title). Decoupled from `props`, which must stay untouched for a non-heading re-title — a new `retitling` flag (true only for an actual heading retitle) now gates the two prop-replacement sites that used to key off `title !== undefined` alone. Verified live: a scratch paragraph's title updates on content change and a scratch listItem's `orderedList`/`startIndex`/`checked` props survive a title-changing update untouched; a real heading retitle still replaces its own props (tree-anchor) as before.",
+    "parent": "BlockNode:00CDBYV5A800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGG78FP8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGG78FP8001:links:Link:00CGG78JQG002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1276D0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGG78FP8001:links:Link:00CGG78JQG002:props:StringProp:00CGG78JQG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1760"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGG78FP8001:links:Link:00CGG78JQG004",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV5A8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGG78FP8001:links:Link:00CGG78JQG004:props:StringProp:00CGG78JQG005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2286"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGG78FP8001:props:StringProp:00CGG78JQG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGG78FP8001:props:StringProp:00CGG78JQG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CGG78FP8001",
+    "text": "**Two approved engine fixes, plus a graph-repair sweep, following the v2 skill review**: (1) `astParser.ts` never stripped an inline `aperas-anchor` tag before storing a paragraph/listItem's `text` — `stripInlineAnchors` only ran at *comparison* sites (`reconcile.ts`'s `leafKey`, rename matching), never at the one place `block.text = text` is actually set. Copying an already-projected file's content back through `update`/`insert` therefore baked the anchor into stored text permanently, even though `hasIdAnchor`'s idempotency check kept the *rendered* output looking unchanged. Fix: wrap that single assignment in `stripInlineAnchors`, symmetric to how a heading already strips its own trailing anchor structurally at parse time. This retires `SKILL.md`'s \"never copy from an already-projected file\" caution as a fact about the engine rather than a rule to remember. (2) `findLeadInColonOffset` applies `MAX_LEAD_IN_WORDS`/`MAX_LEAD_IN_CHARS_JA` to the *entire* span before the accepted colon, bold text included — so a legitimate `**Bold Term**:` lead-in longer than the cap silently fails and the block's title falls back to its own raw id. Confirmed on real nodes from this session: `BlockNode:00CG9MDJF0001` (20-word bold lead-in) and `BlockNode:00CF1WZ4JG003` (13 words), both showing their bare id as title in every `tree`/`unfold`/`backlinks` preview. Fix: when the text immediately preceding the candidate colon is *entirely* inside a single bold/strong span (nothing else before it), accept it unconditionally — no length cap; the cap continues to gate only the plain, non-bold colon heuristic, where a colon reached after a long run of ordinary prose is genuinely ambiguous. (3) Sweeping for the same pre-fix \"wikilink never resolved\" staleness [an old `discussion/linking.md` entry names](../discussion/linking.md#id/BlockNode:00CF1276D0001) — `resolveBlockLinks` used to run only from `kg:ingest`, not `kg:update`/`kg:insert` — found 20 live nodes graph-wide still carrying a resolvable `](...#...)` link with empty `.links`, all predating that fix. Confirmed the remedy is just re-touching each one (`aperas update <id>` piping its own unchanged text back) under the now-fixed code; done for `issues/core.md`'s Sub-Parts list (3 nodes, including the one that had left [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002) without an incoming link). The other 17 (mostly `discussion/aperas-skill.md`'s own frozen verbatim snapshots, plus a few in `linking`/`documentation`/`packaging`) are left for a separate pass — touching a snapshot's links doesn't touch its text, but it's a broader sweep than this task asked for.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGG7BN40001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGG7BN40001:links:Link:00CGG7BQZ8001",
+        "@type": "Link",
+        "target": "BlockNode:00CF1276D0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGG7BN40001:links:Link:00CGG7BQZ8001:props:StringProp:00CGG7BQZ8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1760"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGG7BN40001:links:Link:00CGG7BQZ8003",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV5A8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGG7BN40001:links:Link:00CGG7BQZ8003:props:StringProp:00CGG7BQZ8004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2286"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGG7BN40001:props:StringProp:00CGG7BQZ0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGG7BN40001:props:StringProp:00CGG7BQZ8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CGG7BN40001",
+    "text": "**Two approved engine fixes, plus a graph-repair sweep, following the v2 skill review**: (1) `astParser.ts` never stripped an inline `aperas-anchor` tag before storing a paragraph/listItem's `text` — `stripInlineAnchors` only ran at *comparison* sites (`reconcile.ts`'s `leafKey`, rename matching), never at the one place `block.text = text` is actually set. Copying an already-projected file's content back through `update`/`insert` therefore baked the anchor into stored text permanently, even though `hasIdAnchor`'s idempotency check kept the *rendered* output looking unchanged. Fix: wrap that single assignment in `stripInlineAnchors`, symmetric to how a heading already strips its own trailing anchor structurally at parse time. This retires `SKILL.md`'s \"never copy from an already-projected file\" caution as a fact about the engine rather than a rule to remember. (2) `findLeadInColonOffset` applies `MAX_LEAD_IN_WORDS`/`MAX_LEAD_IN_CHARS_JA` to the *entire* span before the accepted colon, bold text included — so a legitimate `**Bold Term**:` lead-in longer than the cap silently fails and the block's title falls back to its own raw id. Confirmed on real nodes from this session: `BlockNode:00CG9MDJF0001` (20-word bold lead-in) and `BlockNode:00CF1WZ4JG003` (13 words), both showing their bare id as title in every `tree`/`unfold`/`backlinks` preview. Fix: when the text immediately preceding the candidate colon is *entirely* inside a single bold/strong span (nothing else before it), accept it unconditionally — no length cap; the cap continues to gate only the plain, non-bold colon heuristic, where a colon reached after a long run of ordinary prose is genuinely ambiguous. (3) Sweeping for the same pre-fix \"wikilink never resolved\" staleness [an old `discussion/linking.md` entry names](../discussion/linking.md#id/BlockNode:00CF1276D0001) — `resolveBlockLinks` used to run only from `kg:ingest`, not `kg:update`/`kg:insert` — found 20 live nodes graph-wide still carrying a resolvable `](...#...)` link with empty `.links`, all predating that fix. Confirmed the remedy is just re-touching each one (`aperas update <id>` piping its own unchanged text back) under the now-fixed code; done for `issues/core.md`'s Sub-Parts list (3 nodes, including the one that had left [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002) without an incoming link). The other 17 (mostly `discussion/aperas-skill.md`'s own frozen verbatim snapshots, plus a few in `linking`/`documentation`/`packaging`) are left for a separate pass — touching a snapshot's links doesn't touch its text, but it's a broader sweep than this task asked for.",
+    "parent": "ArtifactNode:00CDBYV46R000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGA9J68000",
+    "@type": "BlockNode",
+    "title": "**Root cause confirmed, and it is worse than stale titles**",
+    "text": "**Root cause confirmed, and it is worse than stale titles**: `runUpdate` (`kgUpdate.ts`) only ever assigns its local `title` variable inside the `target.type === 'heading' && firstChild?.type === 'heading'` branch — for any other target (a plain paragraph/listItem), `title` stays `undefined` for the whole function, so `newShape.title = title ?? target.title` carries the *old* title forward unconditionally. It is not that the freshly-parsed title is wrong or discarded after computation — it is never read at all for a non-heading target, regardless of this session's lead-in-cap fix or anything else in `astParser.ts`.",
+    "parent": "BlockNode:00CGF83D4G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGA9J68001",
+    "@type": "BlockNode",
+    "title": "**Caught live, the expensive way**",
+    "text": "**Caught live, the expensive way**: verifying that fix by re-pushing `aperas update <id>` with the node's own `--text` output (assumed to be \"the complete content,\" since `--text` is documented as the exact stored value) tombstoned 4 real nested children on `BlockNode:00CG9MDJF0001` — `--text` shows only a node's own leading text, never its children, and a non-`--text-only` `update` reconciles the piped input's (empty) overflow against the target's *real* existing children. `0 matched, 0 added, 4 removed`, not caught by the summary line alone, only by then noticing the title still hadn't updated and rechecking. Recovered via `git restore` on the staged `AperasKG/Apeiron/*.jsonld` mirror (pre-accident, from this session's own prior stage) plus `aperas reload -- --discard`; all 4 original ids verified live afterward, no data lost.",
+    "parent": "BlockNode:00CGF83D4G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGA9J68002",
+    "@type": "BlockNode",
+    "title": "00CGGA9J68002",
+    "text": "This is the same shape as *Preserve identity*'s already-documented parent-heading case — an `update` reconciling children as a side effect of an operation that reads as \"just fixing the text\" — except the operator here isn't even a heading, and the tell (children present at all) is invisible from `--text` output alone. `--children` needs checking before `update` on *any* target, not only a heading.",
+    "parent": "BlockNode:00CGF83D4G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGG6N5G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGG6N5G001:props:StringProp:00CGGG6R4R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGGG6N5G001:props:StringProp:00CGGG6R4R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Graph-wide sweep for the pre-fix \"wikilink never resolved\" residue — 9 real cases found and fixed, not the 20 first estimated**",
+    "text": "**Graph-wide sweep for the pre-fix \"wikilink never resolved\" residue — 9 real cases found and fixed, not the 20 first estimated**: `resolveBlockLinks` used to run only from `kg:ingest`, never `kg:update`/`kg:insest` ([this doc's own account above](#id/BlockNode:00CF1276D0001)) — already fixed in the current code, but every node last touched before that fix kept a permanently-empty `.links` regardless of what its text actually cited. A first pass (any stored `text` containing `](...#...)`with an empty `.links`) found 20 candidates graph-wide; most turned out to be false positives once checked by hand — a fenced code-block example in `design/documentation.md` with placeholder ids (`00C0000000001`, all zeros), and half a dozen copies of `SKILL.md`'s own wikilink-syntax documentation quoting the pattern with a literal `<ID>`/`...` placeholder inside backticks, none of them real citations at all. Re-run comparing each node's *actual* `#id/BlockNode:...` fragments (code fences and inline-code spans excluded from the count) against its resolved `.links` targets found exactly 9 genuine cases, spread across `planning/linking.md`, `issues/packaging.md`, `history/aperas-skill.md` and `discussion/aperas-skill.md` — all resolvable (every target confirmed live, none tombstoned or missing). Fixed by re-touching each with `aperas update <id> --text-only` (piping the node's own unchanged text) — chosen over a plain `update` specifically because a plain reconcile risks tombstoning real children on a node whose full shape isn't known up front (the near-miss recorded just above this entry); `--text-only` never reconciles children at all, so it was safe regardless. Confirmed by re-running the same precise sweep afterward: zero remaining. A companion check for the opposite failure — a resolved `Link` whose *target* is now dead or missing — also came back empty, so this concern's link integrity is otherwise clean as of this pass.",
+    "parent": "BlockNode:00CDBYV5A800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGHVBF8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGHVBF8001:props:StringProp:00CGGHVEEG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGGHVBF8001:props:StringProp:00CGGHVEEG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`extractAnchorNames` treats a quoted example anchor as a real claimed name — no code-span awareness**",
+    "text": "**`extractAnchorNames` treats a quoted example anchor as a real claimed name — no code-span awareness**: `astParser.ts`'s `extractAnchorNames(text)` is a bare regex over a block's raw text, with no AST/markdown awareness, so an anchor tag written *inside backticks as an illustration* is indistinguishable from one the projector actually spliced in. `rejectSlugPathCollisions` then enforces the illustration as a real claimed name. Confirmed live: the `aperas` skill's own item 2 (SKILL.md) quotes a complete anchor tag to warn readers off pasting projected files back in, and that quoting alone made the block claim the address as its own — `BlockNode:00CE95MVP8008` holds it today. Only one claimant exists so far, so nothing has collided yet, but `design/linking.md` (the canonical anchor-syntax spec) is exactly the kind of document that must quote the same example, and would collide the moment it does. Not a judgement call: a code span is literal display text by definition, so an anchor inside one is never a real claim — the regex needs to skip backtick-delimited spans, mirroring how `findLeadInColonOffset` already excludes `inlineCode`. Full account in [discussion/aperas-skill.md](../discussion/aperas-skill.md#id/BlockNode:00CECCBKNG001). **Resolved**, and widened while fixing it: a shared `anchorMatchesOutsideCode` helper now filters out any `ANCHOR_NAME_RE` match sitting inside a backtick span before either function sees it. Found designing the fix, not by this issue: `stripInlineAnchors` — this session's own new storage-time call included — had the identical gap in the opposite direction, and would *strip* a legitimately-quoted anchor example as if it were real projection markup, corrupting genuine prose. Both functions fixed from the one shared helper. Verified in isolation: a real anchor is still extracted/stripped, a quoted example is preserved untouched in both directions, and a mixed case (one real, one quoted) resolves each correctly.",
+    "parent": "BlockNode:00CDBYV5A800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGNFG50001:props:StringProp:00CGGNFK6R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50001:props:StringProp:00CGGNFK6R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Every live Open Issue reviewed and ranked by how much it hinders graph *edit* specifically — a fix-order recommendation, not yet a decision**",
+    "text": "**Every live Open Issue reviewed and ranked by how much it hinders graph *edit* specifically — a fix-order recommendation, not yet a decision**: covers `issues/{core,linking,treeview,list-consumption,archive-migration}.md` (`cli`/`packaging`/`documentation`/`aperas-skill` are all empty). The criterion: does it silently corrupt or lose content on an ordinary write, does it undermine trust in what the write-verification tooling reports, or does it block a legitimate write outright — ranked above anything read-side, cosmetic, or process-only, regardless of how it's currently ordered in its own doc.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CGGNFG50002",
+      "BlockNode:00CGGNFG50003",
+      "BlockNode:00CGGNFG50004",
+      "BlockNode:00CGGNFG50005",
+      "BlockNode:00CGGNFG50006",
+      "BlockNode:00CGGNFG50007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G000",
+        "@type": "Link",
+        "target": "BlockNode:00CGFE4SV0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G000:props:StringProp:00CGGNFK7G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "69"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G002:props:StringProp:00CGGNFK7G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "329"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G004",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G004:props:StringProp:00CGGNFK7G005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "490"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G006",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50002:links:Link:00CGGNFK7G006:props:StringProp:00CGGNFK7G007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "852"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50002:links:Link:00CGJMKKSR000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50002:links:Link:00CGJMKKSR000:props:StringProp:00CGJMKKSR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1053"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGGNFG50002:props:StringProp:00CGGNFK70000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50002:props:StringProp:00CGGNFK70001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Tier 1 — silent corruption on ordinary writes, highest priority**",
+    "text": "**Tier 1 — silent corruption on ordinary writes, highest priority**: [`aperas update` never re-derives a non-heading title, and can tombstone real children as a side effect](../issues/linking.md#id/BlockNode:00CGFE4SV0002) — proven live this session, not hypothetical, and hits the single most common write (`update` on a leaf). [A parent-heading list-push reassigns live content onto the wrong id once a tombstoned sibling is interleaved](../issues/core.md#id/BlockNode:00CF1WZ4JG003) and [`update`'s reconciliation can silently match fresh content onto an already-tombstoned id without reviving it](../issues/core.md#id/BlockNode:00CF1WZ4JG004) — both live in the same matching machinery (`diffChildren`'s `matchKeyed`/`gestaltMatchingBlocks`), and the first item's own text already notes \"one fix in `reconcile.ts` likely closes\" both of these plus [item 3](../issues/core.md#id/BlockNode:00CF1WZ4JG005) — meaning a single fix here has 3x leverage, the highest of anything reviewed. **Misplaced on first pass, moved up here after direct diagnosis**: [the GFM task-list marker leak](../issues/treeview.md#id/BlockNode:00CE1GW638007) was filed in Tier 5 as \"likely non-reproducible\" — it reproduces every time a checkbox's content doesn't start with plain text (bold, italic, code, or a link lead-in all qualify), and it silently bakes the leftover marker into stored `.text` as literal prose on an ordinary `update`/`insert`, exactly the same failure shape as the rest of this tier: a write that looks clean and corrupts content nobody asked it to touch. Confirmed live on this session's own plan checkboxes before being caught.",
+    "parent": "BlockNode:00CGGNFG50001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGNFG50003:links:Link:00CGGNFK7R000",
+        "@type": "Link",
+        "target": "BlockNode:00CFATMWY0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50003:links:Link:00CGGNFK7R000:props:StringProp:00CGGNFK7R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "80"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50003:links:Link:00CGGNFK7R002",
+        "@type": "Link",
+        "target": "BlockNode:00CGGHVBF8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50003:links:Link:00CGGNFK7R002:props:StringProp:00CGGNFK7R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "301"
+          }
+        ]
+      }
+    ],
+    "title": "**Tier 2 — hides Tier-1-style problems, or blocks legitimate writes outright**",
+    "text": "**Tier 2 — hides Tier-1-style problems, or blocks legitimate writes outright**: [a props-only change reports as `0 changed`](../issues/core.md#id/BlockNode:00CFATMWY0001) — cheap to fix, and fixing it makes every other write's verification trustworthy, which every other item on this list depends on. [`extractAnchorNames` treats a backtick-quoted example anchor as a real claimed name](../issues/linking.md#id/BlockNode:00CGGHVBF8001) — the opposite failure mode from the rest of this tier: a false collision that *blocks* a legitimate `insert`/`resolve` rather than corrupting data, but still a direct edit-path stoppage.",
+    "parent": "BlockNode:00CGGNFG50001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGNFG50004:links:Link:00CGGNFK7R004",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50004:links:Link:00CGGNFK7R004:props:StringProp:00CGGNFK7R005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "86"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50004:links:Link:00CGGNFK80000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50004:links:Link:00CGGNFK80000:props:StringProp:00CGGNFK80001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "364"
+          }
+        ]
+      }
+    ],
+    "title": "**Tier 3 — blocks a whole class of write entirely, but narrower or larger in scope**",
+    "text": "**Tier 3 — blocks a whole class of write entirely, but narrower or larger in scope**: [Folder/Artifact-tier holders have no promotion channel](../issues/core.md#id/BlockNode:00CF1WZ4JG009) — makes the graph-first \"create a new artifact from nothing\" path fully unusable above Block-tier; architecturally significant but a real feature to build, not a small patch. [A multi-artifact `kg:ingest` isn't transactional](../issues/core.md#id/BlockNode:00CF1WZ4JG008) — same \"partial write, no rollback\" shape as Tier 1's item 2, one layer up, but scoped to bulk ingest rather than everyday single-node edits.",
+    "parent": "BlockNode:00CGGNFG50001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGNFG50005:links:Link:00CGGNFK80002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50005:links:Link:00CGGNFK80002:props:StringProp:00CGGNFK80003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "42"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50005:links:Link:00CGGNFK80004",
+        "@type": "Link",
+        "target": "BlockNode:00CE32GRZG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50005:links:Link:00CGGNFK80004:props:StringProp:00CGGNFK80005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "195"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50005:links:Link:00CGGNFK88000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50005:links:Link:00CGGNFK88000:props:StringProp:00CGGNFK88001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "372"
+          }
+        ]
+      }
+    ],
+    "title": "**Tier 4 — real but scoped or cosmetic**",
+    "text": "**Tier 4 — real but scoped or cosmetic**: [`matchLeftoverByAbstract` is position-sensitive](../issues/core.md#id/BlockNode:00CF1WZ4JG005) mainly hits rename detection, a less frequent operation. [Inserting a list item always spawns a fresh run-leader](../issues/list-consumption.md#id/BlockNode:00CE32GRZG002) is a rendering artifact (spurious blank line), not data loss. [A fully-dead container is never itself tombstoned](../issues/core.md#id/BlockNode:00CF1WZ4JG006) is pure GC hygiene.",
+    "parent": "BlockNode:00CGGNFG50001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK88002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK88002:props:StringProp:00CGGNFK88003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "86"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK88004",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK88004:props:StringProp:00CGGNFK88005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "160"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK88006",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK88006:props:StringProp:00CGGNFK8G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "255"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK8G001",
+        "@type": "Link",
+        "target": "BlockNode:00CE8T6W7G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGNFG50006:links:Link:00CGGNFK8G001:props:StringProp:00CGGNFK8G002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "346"
+          }
+        ]
+      }
+    ],
+    "title": "**Tier 5 — not a graph-edit concern**",
+    "text": "**Tier 5 — not a graph-edit concern**: every open `treeview` item is read/view-state ([stale `unfolds` refs](../issues/treeview.md#id/BlockNode:00CE1GW638004), [a bare `unfold` mutating the default view](../issues/treeview.md#id/BlockNode:00CE1GW638005), [no raw single-node inspection command](../issues/treeview.md#id/BlockNode:00CE1GW638006), [`unfold` not marking tombstoned children](../issues/treeview.md#id/BlockNode:00CE8T6W7G001)); both open `archive-migration` items are process/decision, not code.",
+    "parent": "BlockNode:00CGGNFG50001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGNFG50007",
+    "@type": "BlockNode",
+    "title": "Recommended order following straight from this",
+    "text": "Recommended order following straight from this: the shared reconcile-matching fix first (Tier 1's three-for-one), then the title/children `update` fix (Tier 1, proven danger, well-scoped), then the `0 changed` reporting fix (Tier 2, cheap, raises trust in verifying everything after it), then `extractAnchorNames`'s code-span exclusion (Tier 2, contained, same shape as this session's own `findLeadInColonOffset` fix), then the two transactionality/holder-promotion items (Tier 3, larger efforts) — Tier 4/5 only once those are clear.",
+    "parent": "BlockNode:00CGGNFG50001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ620001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ620001:links:Link:00CGGTQ93R000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ620001:links:Link:00CGGTQ93R000:props:StringProp:00CGGTQ93R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "167"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGTQ620001:links:Link:00CGJX07VR000",
+        "@type": "Link",
+        "target": "BlockNode:00CF23FB1G003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ620001:links:Link:00CGJX07VR000:props:StringProp:00CGK3VGG8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1023"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ620001:props:StringProp:00CGGTQ930000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGGTQ620001:props:StringProp:00CGGTQ930001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Tier 1/2/3 fix plan — six issues, approved to implement now**",
+    "text": "**Tier 1/2/3 fix plan — six issues, approved to implement now**: investigated all six down to the exact mechanism before writing this. One finding changes the record: [issues/core.md#1's root-cause note](../issues/core.md#id/BlockNode:00CF1WZ4JG003), added earlier this session, was **wrong** — it blamed `diffChildren`'s `matchKeyed`/`gestaltMatchingBlocks` (Stage A, leaf-only), but `listItem` is a `CONTAINER_TYPE`, not a `LEAF_TYPE`, so it never goes through Stage A at all. The real mechanism is Stage B's per-type container alignment, which zips old/new by raw array position with **zero content comparison** — confirmed by direct reproduction (a 4-item list, item 2 tombstoned-but-present, piped without it: item 3's content lands on item 2's dead id, item 4's content lands on item 3's id, item 4's real id gets tombstoned — a full one-slot cascade). That note was corrected as part of item 2, moved with the rest of this checklist below. The seven items themselves, and their execution order, moved wholesale into [planning/core.md's Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) as its own Batch 1 — that doc already tracked this exact reconcile-fix effort, sketched before `reconcile.ts` was actually read and never followed as written, so the old sketch was retired (tombstoned, kept for history) rather than reconciled line-by-line against what actually happened. This entry keeps only the investigation reasoning that led here.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ620002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ620002:props:StringProp:00CGGTQ930003",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGGTQ620002:props:StringProp:00CGGTQ930004",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      },
+      {
+        "@id": "BlockNode:00CGGTQ620002:props:StringProp:00CGJKPWV0000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "00CGJKPSD0002",
+    "text": "**1. `aperas update` never re-derives a non-heading title, and can tombstone children** ([issues/linking.md](../issues/linking.md#id/BlockNode:00CGFE4SV0002)): `runUpdate`'s local `title` only gets assigned in the heading-target/heading-input branch. Fix: in the `firstChild?.type === 'paragraph'` branch, also read `title = firstChild.title` (already computed by the parser for every paragraph via `extractLeadInTitle` — nothing new to compute, just wire it through) and thread it into `newShape.title`/`--text-only`'s title assignment the same way the heading branch already does.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ620003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ620003:props:StringProp:00CGJKPX78000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "**2. Stage B's container alignment is positional, not content-keyed — the real cause of [core.md #1](../issues/core.md#id/BlockNode:00CF1WZ4JG003) and [#2](../issues/core.md#id/BlockNode:00CF1WZ4JG004)**",
+    "text": "**2. Stage B's container alignment is positional, not content-keyed — the real cause of [core.md #1](../issues/core.md#id/BlockNode:00CF1WZ4JG003) and [#2](../issues/core.md#id/BlockNode:00CF1WZ4JG004)**: fix by keying `listItem`-typed buckets through the same `matchKeyed`+`leafKey` machinery Stage A already uses for leaves, instead of a plain `Math.min(old.length, new.length)` zip — reproduced above, a real diff not a hypothetical. Alongside it: exclude every tombstoned old candidate from every matching pool (Stage A's `oldLeafIdx`/heading buckets *and* Stage B's container buckets) — today nothing stops live new content being matched onto an already-dead id without reviving it (core.md #2's exact complaint), and it turns out Stage A has the identical exposure for headings/paragraphs, not only Stage B for list items. A dead slot should never be reused; new content lands on a fresh id instead. Corrects the wrong root-cause note above once landed.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ620004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ620004:props:StringProp:00CGJKPXSR000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "**3. A props-only change reports as `0 changed`** ([issues/core.md](../issues/core.md#id/BlockNode:00CFATMWY0001))",
+    "text": "**3. A props-only change reports as `0 changed`** ([issues/core.md](../issues/core.md#id/BlockNode:00CFATMWY0001)): `headingChanged` only compares heading `text`/`title`, never `props`, and never runs for non-heading matched pairs at all (their key *is* their text, so a changed leaf can't reach \"matched\"). Fix: generalize into a `pairChanged` check — `headingChanged`'s existing test, plus a props comparison (key/value map, order-independent) — applied at both call sites, for every matched pair regardless of type. Makes the summary line trustworthy for exactly the case (`checked`, `orderedList`/`startIndex`) this session already had to work around by verifying through traversal instead.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ628000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ628000:props:StringProp:00CGJKPY30000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "00CGJKPSD0005",
+    "text": "**4. `extractAnchorNames` treats a quoted example anchor as a real claimed name** ([issues/linking.md](../issues/linking.md#id/BlockNode:00CGGHVBF8001)): fix by stripping backtick-delimited inline-code spans before running `ANCHOR_NAME_RE`, mirroring `findLeadInColonOffset`'s existing `inlineCode` exclusion (regex-based here, not AST, since every call site only ever has raw stored text). **Found while designing this fix, not yet filed as its own issue**: `stripInlineAnchors` — this session's own new storage-time call included — has the identical gap in the opposite direction: it would *strip* a legitimately backtick-quoted anchor example as if it were real projection markup, corrupting genuine prose the moment such a node is next touched (confirmed live on [`BlockNode:00CE95MVP8008`](../discussion/aperas-skill.md#id/BlockNode:00CE95MVP8008), which quotes exactly this pattern today). Both functions share `ANCHOR_NAME_RE`; fixing both from one shared \"matches outside code spans\" helper closes this before it bites, rather than after.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ628001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ628001:props:StringProp:00CGJKPYCR000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "**5. Multi-artifact `kg:ingest` isn't transactional** ([issues/core.md](../issues/core.md#id/BlockNode:00CF1WZ4JG008))",
+    "text": "**5. Multi-artifact `kg:ingest` isn't transactional** ([issues/core.md](../issues/core.md#id/BlockNode:00CF1WZ4JG008)): `ingestArtifacts`/`ingestAllArtifacts` loop per file with no try/catch, so one file's failure mid-batch leaves earlier files' writes already committed with no rollback, and later files never attempted. True all-or-nothing would need a store-wide snapshot/rollback primitive that doesn't exist here — a bigger undertaking than this item's scope. Chosen design instead: isolate per file, matching the pattern `ingestAllArtifacts` already uses for `untracked` — wrap each `ingestArtifact` call in try/catch, collect `{path, error}` for failures, keep going, return successes *and* failures both, so a bad file no longer silently aborts every file after it in the same batch, and the caller gets an accurate report instead of a mid-loop throw. Flagging this design choice explicitly since a true-rollback alternative existed and wasn't picked.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ628002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGGTQ628002:props:StringProp:00CGJKPYS8000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "**6. Folder-tier holders have no promotion channel** ([issues/core.md](../issues/core.md#id/BlockNode:00CF1WZ4JG009), narrowed)",
+    "text": "**6. Folder-tier holders have no promotion channel** ([issues/core.md](../issues/core.md#id/BlockNode:00CF1WZ4JG009), narrowed): the issue names \"Folder/Artifact\" together, but `ArtifactNode extends BlockNode` and already passes `kg:update`'s own type check — piping any content through `kg:update` on a holder `ArtifactNode` already clears `.holder` today, confirmed by reading `kgUpdate.ts` directly. The real, narrower gap is `FolderNode` alone: `kg:insert`'s move/promote mode is hard-restricted to `BlockNode`, and `kg:update` explicitly excludes `FolderNode` from its own target-kind check, so nothing graph-first ever reaches `FolderNode.hydrateFromParsed`'s existing (and already-correct) `this.holder = undefined`. Fix: extend `kg:insert`'s anchor-*less* bare-promote branch to also accept a `FolderNode` target (reject a `FolderNode` + `--after`/`--before` combination outright, with a clear message — a folder's position comes from its path, not list order, so repositioning was never the missing piece).",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGGTQ628003",
+    "@type": "BlockNode",
+    "title": "Order",
+    "text": "Order: 2 first (highest leverage, 3-for-1 plus corrects the standing wrong note), then 1 (proven danger), then 3 (cheap, and every fix after it becomes easier to verify), then 4 (contained, same shape as this session's `findLeadInColonOffset` fix), then 5 and 6 (larger, independent). Each verified by an isolated script against the live source before any live-graph write, given this session's own near-miss on item 1's very bug class.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGJHDK68001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGJHDK68001:links:Link:00CGJHDPYG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGJHDK68001:links:Link:00CGJHDPYG000:props:StringProp:00CGJHDPYR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "145"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGJHDK68001:props:StringProp:00CGJHDPY8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGJHDK68001:props:StringProp:00CGJHDPY8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**GFM task-list marker leak traced to its exact upstream mechanism — and it's about the first inline node's type, not about bold specifically**",
+    "text": "**GFM task-list marker leak traced to its exact upstream mechanism — and it's about the first inline node's type, not about bold specifically**: [the round-trip issue](../issues/treeview.md#id/BlockNode:00CE1GW638007) was closed as \"does not reproduce\" twice, both times using plain-text task items. Confirmed live pushing GFM checkboxes onto this session's own discussion plan (six bold-lead-in items, e.g. `- [x] **1. Title**: rest`): every one came back with the marker baked into `.text` as literal prose (`[x] **1. Title**: rest`), the `checked` prop notwithstanding. Reproduced in isolation via `parseMarkdownTree`, then traced past `astParser.ts` entirely — it has no marker-stripping logic of its own, only `setProp('checked', ...)` off mdast's own `node.checked` — into `node_modules/mdast-util-gfm-task-list-item/lib/index.js`'s `exitParagraphWithTaskListItem`.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CGJHDK68002",
+      "BlockNode:00CGJHDK6G000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CGJHDK68002",
+    "@type": "BlockNode",
+    "title": "00CGJHDK68002",
+    "text": "The tokenizer for `[x] `/`[ ] ` consumes only the bracketed part as its own token; the one mandatory space after it is left as ordinary paragraph content. `exitParagraphWithTaskListItem` exists specifically to trim that leftover character and re-base the paragraph's own `position.start` past it — but only here: `const head = node.children[0]; if (head && head.type === 'text') { head.value = head.value.slice(1); ...; node.position.start = Object.assign({}, head.position.start) }`. When the paragraph's first inline child genuinely is a `text` node, that leading space survives inline tokenization as the first character of `head.value`, the slice works, and the position moves forward with it — which is what `astParser.ts`'s `rawSlice` then trusts. When the first child is `strong`, `emphasis`, `inlineCode`, or `link` instead, CommonMark's inline tokenizer never materializes a lone leading space with nothing else before an inline span as its own text node at all — it's absorbed into inter-token whitespace and disappears from the tree. So `head.type === 'text'` is false, the whole trim-and-rebase block never runs, and the paragraph's `position.start` is left pointing at the space right after `- `, one character before where real content starts. `rawSlice` then faithfully includes the leftover `[x] `/`[ ] ` as literal source text, because from the position's own point of view, that is where the paragraph begins.",
+    "parent": "BlockNode:00CGJHDK68001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGJHDK6G000",
+    "@type": "BlockNode",
+    "title": "00CGJHDK6G000",
+    "text": "Verified live across every non-text leading inline type, not only bold — `*italic*`, `` `code` ``, and `[link](url)` all leak identically; only a plain-text-first item is ever cleaned. The real trigger condition is \"does this task item's content start with plain text,\" narrower than \"bold\" and broader than the original report implied.",
+    "parent": "BlockNode:00CGJHDK68001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGJJSGQ8000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGJJSGQ8000:props:StringProp:00CGJJSMG0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGJJSGQ8000:props:StringProp:00CGJJSMG0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CGJJSGQ8000",
+    "text": "Scratch bare item",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGJJVGDR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-15T06:45:01.113Z",
+    "title": "00CGJJXVG8001",
+    "text": "lead text",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGJRZKJR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CGJRZKJR001:props:StringProp:00CGJRZQ28000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CGJRZKJR001:props:StringProp:00CGJRZQ28001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGJRZKJR001:props:StringProp:00CGJRZQ2G000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CGJRZKJR001",
+    "text": "**7. GFM task-list items leak their marker into stored text — found investigating this plan's own doubled checkboxes** ([issues/treeview.md](../issues/treeview.md#id/BlockNode:00CE1GW638007), moved up from a misdiagnosed Tier 5): `mdast-util-gfm-task-list-item` only trims the checkbox's leftover space (and re-bases the paragraph's position past it) when the item's content starts with a plain `text` node — bold, italic, inline code, and link lead-ins all leave the marker in, since CommonMark's inline tokenizer never materializes that lone leading space as its own text node. Fix: `astParser.ts` defensively strips a leading `[ ]`/`[x]` from both `.text` and `.title` for any listItem already known to be a checkbox. Verified end-to-end, then applied to fix this very plan's own six checkboxes, which had rendered doubled (`[ ] [x]`) before it.",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGJWKA0G001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-15T07:19:51.492Z",
+    "title": "**Fix — a props-only change reports as `0 changed`, found outside this plan's original scope**",
+    "text": "**Fix — a props-only change reports as `0 changed`, found outside this plan's original scope**: [issues/core.md](../issues/core.md#id/BlockNode:00CFATMWY0001) — `headingChanged` compared only heading `text`/`title`, never `props`, and never ran for non-heading matched pairs at all. Generalized into a `pairChanged` check applied to every matched pair regardless of type. Surfaced during the same `reconcile.ts` investigation as items 1/2 above, sharing the exact reporting machinery, so fixed in the same pass rather than filed separately and deferred.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGK2C16G001",
+    "@type": "BlockNode",
+    "title": "### Batch 1 — done: reconcile identity/reporting family, plus two out-of-scope finds fixed alongside",
+    "text": "Executed directly, not as originally sketched below — that plan predates the actual investigation and was never followed as written. `diffChildren`'s real mechanism (Stage B's positional container zip, not Stage A's `matchKeyed`) only came out once `reconcile.ts` was actually read, which is also what showed items 3 and 4 don't share this fix at all and belong in the next batch instead. Two items outside this doc's original scope (the props-only-`0-changed` report, and a `FolderNode` holder-promotion gap that turned out to need no design work) surfaced during the same pass and were fixed alongside rather than filed and deferred.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CGK2MWXR001",
+      "BlockNode:00CGGTQ620002",
+      "BlockNode:00CGGTQ620003",
+      "BlockNode:00CGGTQ620004",
+      "BlockNode:00CGGTQ628000",
+      "BlockNode:00CGGTQ628001",
+      "BlockNode:00CGGTQ628002",
+      "BlockNode:00CGJRZKJR001",
+      "BlockNode:00CGGTQ628003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CGK2MWXR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-15T07:19:30.982Z",
+    "title": "00CGK2MWXR001",
+    "text": "placeholder",
+    "parent": "BlockNode:00CGK2C16G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGK3AH60001",
+    "@type": "BlockNode",
+    "title": "### Batch 2 — planned next: the two reconcile items Batch 1 found don't share its fix",
+    "text": "Neither is blocked; each needs its own investigation before a diff, the same discipline Batch 1 followed for items 1 and 2.",
+    "parent": "BlockNode:00CF23FB1G003",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CGK3AH60002",
+      "BlockNode:00CGK3AH68000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CGK3AH60002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGK3AH60002:links:Link:00CGK3AM4G000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGK3AH60002:links:Link:00CGK3AM4G000:props:StringProp:00CGK3AM4G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "123"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CGK3AH60002:props:StringProp:00CGK3AM48000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CGK3AH60002:props:StringProp:00CGK3AM48001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CGK3AH60002",
+    "text": "Investigate whether `matchLeftoverByAbstract`'s recursive-split weakness actually manifests today, not just in principle — [issue](../issues/core.md#id/BlockNode:00CF1WZ4JG005). Confirmed narrower in scope than first filed: it's used only by `artifacts.ts`/`folders.ts` for artifact/folder rename detection, never reached by list-item matching (that path already goes through the Batch-1-fixed `matchKeyed`+`leafKey`). Read both call sites, try to reproduce a scattered-candidate collision the way the rename path's own fix was motivated, then decide: extend exact-key matching further, or accept the residual risk given how narrow the surface actually is.",
+    "parent": "BlockNode:00CGK3AH60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGK3AH68000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGK3AH68000:links:Link:00CGK3AM4R000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGK3AH68000:links:Link:00CGK3AM4R000:props:StringProp:00CGK3AM4R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "169"
+          }
+        ]
+      }
+    ],
+    "title": "00CGK3AH68000",
+    "text": "Add the missing half of `pruneUnreachableTombstones` — a container whose last live child just died is never itself tombstoned, so a fully-dead wrapper lingers forever — [issue](../issues/core.md#id/BlockNode:00CF1WZ4JG006). Verify against `issues/packaging.md`'s own dead nested-list-wrapper chain, the reproducible case already on record.",
+    "parent": "BlockNode:00CGK3AH60001",
+    "type": "listItem",
     "children": []
   }
 ]
