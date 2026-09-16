@@ -2,7 +2,7 @@
   {
     "@id": "BlockNode:00CDBYV4A0001",
     "@type": "BlockNode",
-    "title": "00CF2AEXHR001",
+    "title": "00CH4T5E3G001",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode`\ncontent in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both\ndocumentation and a live corpus the substrate ingests itself.",
     "parent": "FolderNode:00CDBYV47G000",
     "type": "paragraph",
@@ -11,7 +11,7 @@
   {
     "@id": "BlockNode:00CDBYV4B0001",
     "@type": "BlockNode",
-    "title": "00CF2AEXHR003",
+    "title": "00CH4T5E40001",
     "text": "Superseded design docs, kept for history rather than deleted. `Aperas-design.md` is the original\ntop-level roadmap this project worked from before the ApeironNgn migration; `tdb-era/` holds the\nolder TerminusDB-backed designs that migration replaced.",
     "parent": "FolderNode:00CDBYV4A8000",
     "type": "paragraph",
@@ -20,7 +20,7 @@
   {
     "@id": "BlockNode:00CDBYV4BG001",
     "@type": "BlockNode",
-    "title": "00CF2AEXK0001",
+    "title": "00CH4T5E58001",
     "text": "Design docs from when Aperas was built on TerminusDB, before the ApeironNgn migration\n(`Aperas-apeironngn-design.md`) replaced that storage engine outright. Kept for the history behind\ndecisions still in force today, not as current guidance — none of these describe the live system.",
     "parent": "FolderNode:00CDBYV4B0007",
     "type": "paragraph",
@@ -681,6 +681,22 @@
   {
     "@id": "BlockNode:00CDBYV5A8005",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A8005:links:Link:00CGRWA77G000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ77F0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A8005:links:Link:00CGRWA77G000:props:StringProp:00CGRWA77G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "129"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDBYV5A8005:props:StringProp:00CE59ADQG000",
@@ -704,6 +720,22 @@
   {
     "@id": "BlockNode:00CDBYV5A8006",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A8006:links:Link:00CGRWA77R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ77F000X",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A8006:links:Link:00CGRWA77R000:props:StringProp:00CGRWA77R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "147"
+          }
+        ]
+      }
+    ],
     "title": "00CDC0RCCG006",
     "text": "Second implementation slice — collision rejection at ingestion, the cleanup pass, and folding Slice 1's verification into `verify.ts` — tracked in [Planning](../planning/linking.md#id/BlockNode:00CDBZ77F000X), not duplicated here.",
     "parent": "BlockNode:00CDBYV5A8003",
@@ -731,6 +763,22 @@
   {
     "@id": "BlockNode:00CDBYV5A8009",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A8009:links:Link:00CGRWA77R002",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ7698003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A8009:links:Link:00CGRWA77R002:props:StringProp:00CGRWA77R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "26"
+          }
+        ]
+      }
+    ],
     "title": "00CDC0RCCG009",
     "text": "`kg:title`'s removal (see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)) left several *other* concerns' own docs stale, deliberately not corrected as part of this one: `Aperas-crud-design.md` §9 still claims `kg:update` never touches a target's `type`/`title` (no longer true for a heading target), §11 still lists `kg:title` as implemented; `Aperas-interactive-summarization-design.md` still describes it as half of a still-bundled feature; `Aperas-apeironngn-design.md` and `Aperas-dev-status.md` both still reference it as live. None of these are `linking`'s own concern to fix.",
     "parent": "BlockNode:00CDBYV5A8003",
@@ -756,6 +804,7 @@
       "BlockNode:00CGGHVBF8001",
       "BlockNode:00CGGG6N5G001",
       "BlockNode:00CGM5V098001",
+      "BlockNode:00CGN6GJVG000",
       "BlockNode:00CDBYV5A800B"
     ]
   },
@@ -785,6 +834,36 @@
   {
     "@id": "BlockNode:00CDBYV5A800C",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800C:links:Link:00CGRWA79G000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800C:links:Link:00CGRWA79G000:props:StringProp:00CGRWA79G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "604"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDBYV5A800C:links:Link:00CGRWA79G002",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800C:links:Link:00CGRWA79G002:props:StringProp:00CGRWA79G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "893"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDBYV5A800C:props:StringProp:00CE59ADP0000",
@@ -808,6 +887,22 @@
   {
     "@id": "BlockNode:00CDBYV5A800D",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800D:links:Link:00CGRWA79R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800D:links:Link:00CGRWA79R000:props:StringProp:00CGRWA79R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "334"
+          }
+        ]
+      }
+    ],
     "title": "**`[[deep-path]]` coexistence**",
     "text": "**`[[deep-path]]` coexistence**: <a name='id/BlockNode:00CDBYV5A800D' class='aperas-anchor aperas-id'></a> not needed, at least for now — `aperas://` scheme URLs (in-app) and `#fragment`s (compatible/pre-ingestion), including an `id/<ID>` fragment form, already make an internal reference unambiguous without a `[[...]]` wrapper. See [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -817,6 +912,22 @@
   {
     "@id": "BlockNode:00CDBYV5A800E",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800E:links:Link:00CGRWA7B0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800E:links:Link:00CGRWA7B0000:props:StringProp:00CGRWA7B0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "301"
+          }
+        ]
+      }
+    ],
     "title": "**\"No automated rename repair\"**",
     "text": "**\"No automated rename repair\"**: <a name='id/BlockNode:00CDBYV5A800E' class='aperas-anchor aperas-id'></a> misdiagnosed — a rename adds an anchor rather than replacing one, so an old reference doesn't break at rename time; there's nothing to repair, only a later cleanup once it's actually safe. See [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -826,6 +937,22 @@
   {
     "@id": "BlockNode:00CDBYV5A800F",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800F:links:Link:00CGRWA7B0002",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800F:links:Link:00CGRWA7B0002:props:StringProp:00CGRWA7B8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "507"
+          }
+        ]
+      }
+    ],
     "title": "**\"Duplicate-slug collisions\"**",
     "text": "**\"Duplicate-slug collisions\"**: <a name='id/BlockNode:00CDBYV5A800F' class='aperas-anchor aperas-id'></a> misdiagnosed — a collision only happens when two blocks share an identical *full* slug-path (same heading text at the exact same tree position), a genuine authoring error, correctly a hard reject, not a case needing disambiguation logic. Reusing the same heading title at different tree positions is ordinary and never collides, since the full path includes the distinguishing ancestor segments. See [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -835,6 +962,22 @@
   {
     "@id": "BlockNode:00CDBYV5A800G",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800G:links:Link:00CGRWA7B8001",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800G:links:Link:00CGRWA7B8001:props:StringProp:00CGRWA7C0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "525"
+          }
+        ]
+      }
+    ],
     "title": "00CDC0RCCR006",
     "text": "**Every `<block-slug-path>` written so far omitted its own H1 segment.** `toPath()` (`apeironNgn/node.ts:455-471`) walks every `BlockNode` ancestor — the H1 heading included — contributing a slug segment for each, stopping only at the owning `ArtifactNode`/`FolderNode`. Every anchor and cross-reference in this concern's own docs had been computed without that leading segment (traced back to the very first `test-slugifed-path.md` validation, which never included its own H1 either) and has been corrected corpus-wide. See [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -844,6 +987,36 @@
   {
     "@id": "BlockNode:00CDBYV5A800H",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800H:links:Link:00CGRWAG8R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ76TR008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800H:links:Link:00CGRWAG8R000:props:StringProp:00CGRWAG8R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "644"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDBYV5A800H:links:Link:00CGRWAG90000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800H:links:Link:00CGRWAG90000:props:StringProp:00CGRWAG90001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "817"
+          }
+        ]
+      }
+    ],
     "title": "**Cross-artifact link staleness on ingestion**",
     "text": "**Cross-artifact link staleness on ingestion**: <a name='id/BlockNode:00CDBYV5A800H' class='aperas-anchor aperas-id'></a> resolved — an artifact whose own text doesn't change is never re-ingested on its own, so a link it couldn't resolve stayed stale even after its target came into existence elsewhere in the corpus, with no way to fix it short of hand-editing `ingestedHash` to force a re-ingest. `kg:ingest` now stashes every code a block fails to resolve on its own referring artifact, and retries every stashed code against the current graph after its main work is done, force-reingesting (without discarding reconciliation identity — see [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR008) for the `hadContent`/`bypassUnchangedCheck` distinction) any artifact where at least one now resolves. See [Workflows](../design/linking.md#id/BlockNode:00CDBYV4TG007).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -853,6 +1026,36 @@
   {
     "@id": "BlockNode:00CDBYV5A800J",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800J:links:Link:00CGRWAG90002",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800J:links:Link:00CGRWAG90002:props:StringProp:00CGRWAG90003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "546"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDBYV5A800J:links:Link:00CGRWAH00000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ76TR00E",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800J:links:Link:00CGRWAH00000:props:StringProp:00CGRWAH00001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "624"
+          }
+        ]
+      }
+    ],
     "title": "00CDC0RCCR008",
     "text": "**A lead-in colon followed only by nested list children got no title**: resolved — `findLeadInColonOffset`'s space-after-colon check read the next character from the colon's own mdast text node, which simply ends at the colon when nothing inline follows it on the same line (e.g. `- **Heading**:` before a nested list), and treated that the same as a genuinely ambiguous no-space case. Fixed by accepting \"nothing left in this text run\" the same as \"a space follows\" — the inline-code and bold/italic exclusions run first and are unaffected. See [Lead-In Term Detection](../design/linking.md#id/BlockNode:00CDBYV4TG000) and [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR00E).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -862,6 +1065,36 @@
   {
     "@id": "BlockNode:00CDBYV5A800K",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV5A800K:links:Link:00CGRWAH08000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800K:links:Link:00CGRWAH08000:props:StringProp:00CGRWAH08001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "354"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDBYV5A800K:links:Link:00CGRWAH18000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ77F000X",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV5A800K:links:Link:00CGRWAH18000:props:StringProp:00CGRWAH18001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "503"
+          }
+        ]
+      }
+    ],
     "title": "**Collision check only covered a block's current slug-path**",
     "text": "**Collision check only covered a block's current slug-path**: <a name='id/BlockNode:00CDBYV5A800K' class='aperas-anchor aperas-id'></a> resolved — Slice 2's collision check (`apeironNgn/node.ts`'s `rejectSlugPathCollisions`) checks every anchor `name` still embedded in a block's `treeAnchor` prop or raw text too, not just its current `toPath()`, since [Anchor-Matching Requirement for Resolution](../design/linking.md#id/BlockNode:00CDBYV4TG005) already treats either as a live resolvable target. See [Planning](../planning/linking.md#id/BlockNode:00CDBZ77F000X).",
     "parent": "BlockNode:00CDBYV5A800A",
@@ -946,7 +1179,9 @@
       "BlockNode:00CDBZ769800C",
       "BlockNode:00CDBZ769G000",
       "BlockNode:00CDBZ769G001",
-      "BlockNode:00CDBZ7698004"
+      "BlockNode:00CH47P6K8001",
+      "BlockNode:00CDBZ7698004",
+      "BlockNode:00CH4JM6H0001"
     ]
   },
   {
@@ -1509,13 +1744,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDBZ77F0004:links:Link:00CDBZ77ZG000",
+        "@id": "BlockNode:00CDBZ77F0004:links:Link:00CGRWP2K0000",
         "@type": "Link",
         "target": "BlockNode:00CDBYV4TG000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDBZ77F0004:links:Link:00CDBZ77ZG000:props:StringProp:00CGMT32XG000",
+            "@id": "BlockNode:00CDBZ77F0004:links:Link:00CGRWP2K0000:props:StringProp:00CGRWP2K0001",
             "@type": "StringProp",
             "key": "position",
             "value": "226"
@@ -1523,13 +1758,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CDBZ77F0004:links:Link:00CDBZ77ZG002",
+        "@id": "BlockNode:00CDBZ77F0004:links:Link:00CGRWP2KR000",
         "@type": "Link",
         "target": "BlockNode:00CDBZ76TR000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDBZ77F0004:links:Link:00CDBZ77ZG002:props:StringProp:00CGMT3398000",
+            "@id": "BlockNode:00CDBZ77F0004:links:Link:00CGRWP2KR000:props:StringProp:00CGRWP2KR001",
             "@type": "StringProp",
             "key": "position",
             "value": "325"
@@ -1626,6 +1861,22 @@
   {
     "@id": "BlockNode:00CDBZ77F000A",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBZ77F000A:links:Link:00CGRWRSH0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ7698003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBZ77F000A:links:Link:00CGRWRSH0000:props:StringProp:00CGRWRSH8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "68"
+          }
+        ]
+      }
+    ],
     "title": "00CDC0RFD800F",
     "text": "Superseded `kg:title` entirely rather than coexisting with it — see [History](../history/linking.md#id/BlockNode:00CDBZ7698003).",
     "parent": "BlockNode:00CDBZ77F0004",
@@ -1720,6 +1971,22 @@
   {
     "@id": "BlockNode:00CDBZ77F000J",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBZ77F000J:links:Link:00CGRWRSH8001",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ76TG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBZ77F000J:links:Link:00CGRWRSH8001:props:StringProp:00CGRWRSH8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "583"
+          }
+        ]
+      }
+    ],
     "title": "**Resolution gate, required for disambiguation**",
     "text": "**Resolution gate, required for disambiguation**: <a name='id/BlockNode:00CDBZ77F000J' class='aperas-anchor aperas-id'></a> a `#fragment` link has no `[[...]]`-style wrapper to mark intent, so it's syntactically identical to an ordinary, unrelated same-page anchor link. After the existing name-token/id walk finds a *candidate* target, only accept it if that candidate also carries a `class=\"aperas-anchor\"` tag whose `name` equals the fragment — the heading's stashed anchor prop (Task 3), or a literal scan of a list item's/paragraph's own `text` (no prop is kept for these). See [Distinguishing a wikilink from an ordinary anchor link](../discussion/linking.md#id/BlockNode:00CDBZ76TG006) for why a syntactic heuristic (e.g. requiring a leading dash) isn't enough on its own — it only covers heading-derived slugs, not list-item ones.",
     "parent": "BlockNode:00CDBZ77F000B",
@@ -1810,6 +2077,22 @@
   {
     "@id": "BlockNode:00CDBZ77F000R",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBZ77F000R:links:Link:00CGRWRSMG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ76TG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBZ77F000R:links:Link:00CGRWRSMG000:props:StringProp:00CGRWRSMG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
     "title": "00CDC0RFD800X",
     "text": "See [Verifying anchor placement against the real parser](../discussion/linking.md#id/BlockNode:00CDBZ76TG004) for why this placement, not a preceding line.",
     "parent": "BlockNode:00CDBZ77F000M",
@@ -1911,6 +2194,22 @@
   {
     "@id": "BlockNode:00CDBZ77F000Z",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBZ77F000Z:links:Link:00CGRWRSMR000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ7698003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBZ77F000Z:links:Link:00CGRWRSMR000:props:StringProp:00CGRWRSMR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "578"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDBZ77F000Z:props:StringProp:00CE599JQR000",
@@ -2604,13 +2903,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDC0DC38005:links:Link:00CDC0DDBG000",
+        "@id": "BlockNode:00CDC0DC38005:links:Link:00CGRWMMKG000",
         "@type": "Link",
         "target": "BlockNode:00CDBZ76TG003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDC0DC38005:links:Link:00CDC0DDBG000:props:StringProp:00CDC0DDBG001",
+            "@id": "BlockNode:00CDC0DC38005:links:Link:00CGRWMMKG000:props:StringProp:00CGRWMMKG001",
             "@type": "StringProp",
             "key": "position",
             "value": "186"
@@ -2629,13 +2928,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CDC0DC3G008:links:Link:00CDC0DDMR000",
+        "@id": "BlockNode:00CDC0DC3G008:links:Link:00CGRWS3X8000",
         "@type": "Link",
         "target": "BlockNode:00CDBYV5A8003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDC0DC3G008:links:Link:00CDC0DDMR000:props:StringProp:00CDC0DDMR001",
+            "@id": "BlockNode:00CDC0DC3G008:links:Link:00CGRWS3X8000:props:StringProp:00CGRWS3X8001",
             "@type": "StringProp",
             "key": "position",
             "value": "146"
@@ -2652,6 +2951,22 @@
   {
     "@id": "BlockNode:00CDCMWPC8001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCMWPC8001:links:Link:00CGRWRSP0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCMWPC8001:links:Link:00CGRWRSP0000:props:StringProp:00CGRWRSP0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDCMWPC8001:props:StringProp:00CE599HQG000",
@@ -2675,6 +2990,22 @@
   {
     "@id": "BlockNode:00CDCMWPC8002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCMWPC8002:links:Link:00CGRWRSP8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4TG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCMWPC8002:links:Link:00CGRWRSP8000:props:StringProp:00CGRWRSP8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "186"
+          }
+        ]
+      }
+    ],
     "title": "00CDCMWPC8002",
     "text": "A collision is the new block's computed slug-path matching another live block's current `toPath()`, *or* any anchor `name` still embedded in that block's `treeAnchor` prop or raw text — [Anchor-Matching Requirement for Resolution](../design/linking.md#id/BlockNode:00CDBYV4TG005) already treats either as a live resolvable target today, so both are real collisions, not just the current title. `astParser.ts`'s `extractAnchorNames` is the new find-all counterpart to `TRAILING_HEADING_ANCHOR_RE` this needed, for the list-item/paragraph case (headings already had a way via `treeAnchor`).",
     "parent": "BlockNode:00CDBZ77F0010",
@@ -2684,6 +3015,22 @@
   {
     "@id": "BlockNode:00CDCMWPC8003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDCMWPC8003:links:Link:00CGRWRSR0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBZ76TR00C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDCMWPC8003:links:Link:00CGRWRSR0000:props:StringProp:00CGRWRSR8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "108"
+          }
+        ]
+      }
+    ],
     "title": "On collision",
     "text": "On collision: throws, rejecting the whole write (no partial write), naming both colliding blocks/paths. See [A bare snowflake isn't a full node id](../discussion/linking.md#id/BlockNode:00CDBZ76TR00C) for a real bug this surfaced while landing it.",
     "parent": "BlockNode:00CDBZ77F0010",
@@ -2758,7 +3105,7 @@
   {
     "@id": "BlockNode:00CDD68DZG001",
     "@type": "BlockNode",
-    "title": "00CF2AEXJ0001",
+    "title": "00CH4T5E48001",
     "text": "Working reports separate from the design docs one level up — currently just `bugs/`, filed while\ninvestigating unexpected behavior in the live system.",
     "parent": "FolderNode:00CDD68DZ8000",
     "type": "paragraph",
@@ -2767,7 +3114,7 @@
   {
     "@id": "BlockNode:00CDD68E00001",
     "@type": "BlockNode",
-    "title": "00CF2AEXJ0003",
+    "title": "00CH4T5E4G001",
     "text": "Open bug reports. Each is filed once a real, reproduced defect is found in the live ApeironNgn\nsubstrate; once fixed and verified, its report moves to `resolved/` rather than being deleted, so\nthe investigation stays around as a record. No open reports at the moment.",
     "parent": "FolderNode:00CDD68DZR000",
     "type": "paragraph",
@@ -2776,7 +3123,7 @@
   {
     "@id": "BlockNode:00CDD68E08001",
     "@type": "BlockNode",
-    "title": "00CF2AEXJ8001",
+    "title": "00CH4T5E50001",
     "text": "Closed bug reports, moved here from `bugs/` once the underlying defect was fixed and the fix was\nverified live — kept as a record of what broke and why, not left in the open-bugs folder above.",
     "parent": "FolderNode:00CDBYV4CG002",
     "type": "paragraph",
@@ -3509,6 +3856,36 @@
   {
     "@id": "BlockNode:00CDD68FE0006",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDD68FE0006:links:Link:00CGRWM6K8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68E80002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDD68FE0006:links:Link:00CGRWM6K8000:props:StringProp:00CGRWM6KG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "491"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CDD68FE0006:links:Link:00CGRWM6KG001",
+        "@type": "Link",
+        "target": "BlockNode:00CDD68E8000H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDD68FE0006:links:Link:00CGRWM6KG001:props:StringProp:00CGRWM6KR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "560"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDD68FE0006:props:StringProp:00CE59ACWG000",
@@ -9350,19 +9727,19 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE1GW638004:links:Link:00CGMEQD20000",
+        "@id": "BlockNode:00CE1GW638004:links:Link:00CGRWGSRG000",
         "@type": "Link",
         "target": "BlockNode:00CE1FFSR8006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE1GW638004:links:Link:00CGMEQD20000:props:StringProp:00CGMEQD20001",
+            "@id": "BlockNode:00CE1GW638004:links:Link:00CGRWGSRG000:props:StringProp:00CGRWGSRG001",
             "@type": "StringProp",
             "key": "position",
             "value": "552"
           },
           {
-            "@id": "BlockNode:00CE1GW638004:links:Link:00CGMEQD20000:props:StringProp:00CGMEQD20002",
+            "@id": "BlockNode:00CE1GW638004:links:Link:00CGRWGSRG000:props:StringProp:00CGRWGSRG002",
             "@type": "StringProp",
             "key": "position",
             "value": "1011"
@@ -9404,13 +9781,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE1GW638006:links:Link:00CGMDG5XR000",
+        "@id": "BlockNode:00CE1GW638006:links:Link:00CGRWJ5XG000",
         "@type": "Link",
         "target": "BlockNode:00CEDP10P8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE1GW638006:links:Link:00CGMDG5XR000:props:StringProp:00CGMDG5XR001",
+            "@id": "BlockNode:00CE1GW638006:links:Link:00CGRWJ5XG000:props:StringProp:00CGRWJ5XG001",
             "@type": "StringProp",
             "key": "position",
             "value": "733"
@@ -9427,6 +9804,50 @@
   {
     "@id": "BlockNode:00CE1GW638007",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW638007:links:Link:00CGRWGS50000",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638007:links:Link:00CGRWGS50000:props:StringProp:00CGRWGS50001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "66"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE1GW638007:links:Link:00CGRWGS58000",
+        "@type": "Link",
+        "target": "BlockNode:00CE8J339R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638007:links:Link:00CGRWGS58000:props:StringProp:00CGRWGS58001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "944"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE1GW638007:links:Link:00CGRWGS58002",
+        "@type": "Link",
+        "target": "BlockNode:00CGJHDK68001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638007:links:Link:00CGRWGS58002:props:StringProp:00CGRWGS58003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1264"
+          }
+        ]
+      }
+    ],
     "title": "**GFM task-list items round-trip broken**",
     "text": "**GFM task-list items round-trip broken**: originally found here: [archive-migration discussion](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG007) — `- [ ] text` reportedly stored the literal `[ ] ` marker inside the block's own `.text` alongside a separate `checked: false` prop, so `aperas project` would re-emit `- [ ] ` on top of the leftover `[ ] `, doubling to `- [ ] [ ] text`. Re-tested live during the list-consumption migration (both a direct `parseMarkdownTree`/`serializeBlock` round trip and a real `aperas insert` against the live corpus): does not reproduce, renders correctly. `git log` shows the checkbox-handling code in `astParser.ts` has never changed since it was first written. No corroborating evidence anywhere in the graph that this was ever actually observed broken in a real projected artifact — awaiting a decision on whether to close as not-reproducible or keep open pending further investigation. See [list-consumption discussion](../discussion/list-consumption.md#id/BlockNode:00CE8J339R001) for the re-test note. **Correction: it does reproduce, narrower than either re-test tried.** Confirmed live on this session's own discussion plan checkboxes, then isolated and traced to the exact upstream line — full account in [discussion/treeview.md](../discussion/treeview.md#id/BlockNode:00CGJHDK68001). The real trigger is narrower than \"bold\" and broader than either re-test tried: `mdast-util-gfm-task-list-item`'s `exitParagraphWithTaskListItem` only trims the checkbox's mandatory leftover space, and re-bases the paragraph's own position past it, when the paragraph's first inline child is a `text` node — `- [x] Plain: rest.` qualifies, `- [x] **Bold**:`/`*Italic*:`/`` `code`: ``/`[link](url):` do not, since CommonMark's inline tokenizer never materializes a lone leading space with nothing before an inline span as its own text node. `astParser.ts` has no checkbox-marker-stripping logic of its own — it only reads `node.checked` into a prop — so it faithfully trusts the un-rebased position for `rawSlice`, including the leftover marker as literal text. Both earlier re-tests happened to use plain-text task items, which is exactly why neither one reproduced it. **Resolved**: the real fix lives upstream (`mdast-util-gfm-task-list-item`), out of reach here, so `astParser.ts` compensates defensively — a listItem already known to be a checkbox (`node.checked` boolean) has a leading `/^\\[[ xX]\\]\\s*/` stripped from both its extracted `text` and `title` after the fact, regardless of what leaked or why. Verified live end-to-end: a bold-lead checkbox item pushed through the real service now stores clean text with `checked` set correctly, and projects to a single, correct `- [x]` marker — confirmed by re-checking this session's own six plan checkboxes, which had actually rendered doubled (`[ ] [x]`) before this fix and render correctly now.",
     "parent": "BlockNode:00CE1GW63800A",
@@ -9436,6 +9857,50 @@
   {
     "@id": "BlockNode:00CE1GW638008",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW638008:links:Link:00CGRWGM78000",
+        "@type": "Link",
+        "target": "BlockNode:00CE32GQM8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638008:links:Link:00CGRWGM78000:props:StringProp:00CGRWGM7G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "102"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE1GW638008:links:Link:00CGRWGM7G001",
+        "@type": "Link",
+        "target": "BlockNode:00CE32GW3G002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638008:links:Link:00CGRWGM7G001:props:StringProp:00CGRWGM8R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "589"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE1GW638008:links:Link:00CGRWGM8R001",
+        "@type": "Link",
+        "target": "BlockNode:00CE0HD0HG007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638008:links:Link:00CGRWGM8R001:props:StringProp:00CGRWGM8R002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "682"
+          }
+        ]
+      }
+    ],
     "title": "00CE1GW638008",
     "text": "**`List` isn't consumed by a preceding `Heading` the way a single paragraph already is**: resolved by [list-consumption](../design/list-consumption.md#id/BlockNode:00CE32GQM8001) — a heading whose only content is a list (no leading paragraph to consume) now dissolves the list's items as the heading's own flat children (case 3 of the unified law) instead of leaving them wrapped in a separate `list`-typed node. Not literally merged into `.text` the way a lone paragraph is (a list can't collapse into a scalar string), but no longer floats as a separate, opaque child block either — see [History](../history/list-consumption.md#id/BlockNode:00CE32GW3G002). Originally found here: [archive-migration discussion](../discussion/archive-migration.md#id/BlockNode:00CE0HD0HG007).",
     "parent": "BlockNode:00CE1GW63800A",
@@ -9445,6 +9910,22 @@
   {
     "@id": "BlockNode:00CE1GW638009",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW638009:links:Link:00CGRWGM3R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW7CG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW638009:links:Link:00CGRWGM3R000:props:StringProp:00CGRWGM58000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
     "title": "## Pending Tasks",
     "text": "See [Task Breakdown](../planning/treeview.md#id/BlockNode:00CE1GW7CG003) for the full ordered list.",
     "parent": "BlockNode:00CE1GW638001",
@@ -9494,6 +9975,22 @@
   {
     "@id": "BlockNode:00CE1GW63800C",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE1GW63800C:links:Link:00CGRWGM58001",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW8T8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE1GW63800C:links:Link:00CGRWGM58001:props:StringProp:00CGRWGM58002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "108"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CE1GW63800C:props:StringProp:00CE59A5KR000",
@@ -11907,19 +12404,19 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE8T6W7G001:links:Link:00CGMESPNG000",
+        "@id": "BlockNode:00CE8T6W7G001:links:Link:00CGRWJXMG000",
         "@type": "Link",
         "target": "BlockNode:00CE8T49MR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE8T6W7G001:links:Link:00CGMESPNG000:props:StringProp:00CGMESPNG001",
+            "@id": "BlockNode:00CE8T6W7G001:links:Link:00CGRWJXMG000:props:StringProp:00CGRWJXMR000",
             "@type": "StringProp",
             "key": "position",
             "value": "322"
           },
           {
-            "@id": "BlockNode:00CE8T6W7G001:links:Link:00CGMESPNG000:props:StringProp:00CGMESPNG002",
+            "@id": "BlockNode:00CE8T6W7G001:links:Link:00CGRWJXMG000:props:StringProp:00CGRWJXMR001",
             "@type": "StringProp",
             "key": "position",
             "value": "1059"
@@ -12083,13 +12580,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE8XWZK0005:links:Link:00CE8XX0M8000",
+        "@id": "BlockNode:00CE8XWZK0005:links:Link:00CGRSJ53G000",
         "@type": "Link",
         "target": "BlockNode:00CE8T49MR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE8XWZK0005:links:Link:00CE8XX0M8000:props:StringProp:00CE8XX0M8001",
+            "@id": "BlockNode:00CE8XWZK0005:links:Link:00CGRSJ53G000:props:StringProp:00CGRSJ53G001",
             "@type": "StringProp",
             "key": "position",
             "value": "250"
@@ -12097,13 +12594,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CE8XWZK0005:links:Link:00CE8XX0M8002",
+        "@id": "BlockNode:00CE8XWZK0005:links:Link:00CGRSJ53R000",
         "@type": "Link",
         "target": "BlockNode:00CE8T6W7G001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE8XWZK0005:links:Link:00CE8XX0M8002:props:StringProp:00CE8XX0M8003",
+            "@id": "BlockNode:00CE8XWZK0005:links:Link:00CGRSJ53R000:props:StringProp:00CGRSJ53R001",
             "@type": "StringProp",
             "key": "position",
             "value": "321"
@@ -12150,13 +12647,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE8XWZK0009:links:Link:00CEC1DMD0000",
+        "@id": "BlockNode:00CE8XWZK0009:links:Link:00CGRSHZ58000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE8XWZK0009:links:Link:00CEC1DMD0000:props:StringProp:00CEC1DMD8000",
+            "@id": "BlockNode:00CE8XWZK0009:links:Link:00CGRSHZ58000:props:StringProp:00CGRSHZ58001",
             "@type": "StringProp",
             "key": "position",
             "value": "91"
@@ -12189,13 +12686,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE8XWZK000A:links:Link:00CEC1DX50000",
+        "@id": "BlockNode:00CE8XWZK000A:links:Link:00CGRSJ0W8000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG00A",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE8XWZK000A:links:Link:00CEC1DX50000:props:StringProp:00CEC1DX50001",
+            "@id": "BlockNode:00CE8XWZK000A:links:Link:00CGRSJ0W8000:props:StringProp:00CGRSJ0W8001",
             "@type": "StringProp",
             "key": "position",
             "value": "96"
@@ -12592,13 +13089,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE9B8YS0001:links:Link:00CE9B8ZW8002",
+        "@id": "BlockNode:00CE9B8YS0001:links:Link:00CGRSJ99R000",
         "@type": "Link",
         "target": "BlockNode:00CDCTB49R001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE9B8YS0001:links:Link:00CE9B8ZW8002:props:StringProp:00CECC1RM0000",
+            "@id": "BlockNode:00CE9B8YS0001:links:Link:00CGRSJ99R000:props:StringProp:00CGRSJ99R001",
             "@type": "StringProp",
             "key": "position",
             "value": "117"
@@ -12606,13 +13103,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CE9B8YS0001:links:Link:00CF2GWBE8000",
+        "@id": "BlockNode:00CE9B8YS0001:links:Link:00CGRSJ9A0000",
         "@type": "Link",
         "target": "BlockNode:00CF2AEAX0003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE9B8YS0001:links:Link:00CF2GWBE8000:props:StringProp:00CF2GWBE8001",
+            "@id": "BlockNode:00CE9B8YS0001:links:Link:00CGRSJ9A0000:props:StringProp:00CGRSJ9A0001",
             "@type": "StringProp",
             "key": "position",
             "value": "1794"
@@ -12654,13 +13151,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE9G1RFG001:links:Link:00CE9G1SB0002",
+        "@id": "BlockNode:00CE9G1RFG001:links:Link:00CGRSJFWG000",
         "@type": "Link",
         "target": "BlockNode:00CE95MVPG007",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE9G1RFG001:links:Link:00CE9G1SB0002:props:StringProp:00CE9G1SB0003",
+            "@id": "BlockNode:00CE9G1RFG001:links:Link:00CGRSJFWG000:props:StringProp:00CGRSJFWG001",
             "@type": "StringProp",
             "key": "position",
             "value": "453"
@@ -12668,13 +13165,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CE9G1RFG001:links:Link:00CE9G1SB0004",
+        "@id": "BlockNode:00CE9G1RFG001:links:Link:00CGRSJFWG002",
         "@type": "Link",
         "target": "BlockNode:00CE9FTDAR004",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE9G1RFG001:links:Link:00CE9G1SB0004:props:StringProp:00CE9PXZ6G000",
+            "@id": "BlockNode:00CE9G1RFG001:links:Link:00CGRSJFWG002:props:StringProp:00CGRSJFWG003",
             "@type": "StringProp",
             "key": "position",
             "value": "554"
@@ -12707,13 +13204,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CE9SMP3R001:links:Link:00CE9SMQE0000",
+        "@id": "BlockNode:00CE9SMP3R001:links:Link:00CGRSJTNG000",
         "@type": "Link",
         "target": "BlockNode:00CE9G1RFG001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CE9SMP3R001:links:Link:00CE9SMQE0000:props:StringProp:00CE9SMQE0001",
+            "@id": "BlockNode:00CE9SMP3R001:links:Link:00CGRSJTNG000:props:StringProp:00CGRSJTNR000",
             "@type": "StringProp",
             "key": "position",
             "value": "527"
@@ -13834,13 +14331,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEA68QVG002:links:Link:00CEA68S28002",
+        "@id": "BlockNode:00CEA68QVG002:links:Link:00CGRSHV5G000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA68QVG002:links:Link:00CEA68S28002:props:StringProp:00CEA68S28003",
+            "@id": "BlockNode:00CEA68QVG002:links:Link:00CGRSHV5G000:props:StringProp:00CGRSHV5R000",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -13873,13 +14370,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEA68QVG003:links:Link:00CEA68S2G000",
+        "@id": "BlockNode:00CEA68QVG003:links:Link:00CGRSHVW0000",
         "@type": "Link",
         "target": "BlockNode:00CEA5KW4G002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA68QVG003:links:Link:00CEA68S2G000:props:StringProp:00CEA68S2G001",
+            "@id": "BlockNode:00CEA68QVG003:links:Link:00CGRSHVW0000:props:StringProp:00CGRSHVW0001",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -13898,13 +14395,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEA68QVG004:links:Link:00CEA68S2G002",
+        "@id": "BlockNode:00CEA68QVG004:links:Link:00CGRSHWR8000",
         "@type": "Link",
         "target": "BlockNode:00CEA5M6S8005",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA68QVG004:links:Link:00CEA68S2G002:props:StringProp:00CEA68S2G003",
+            "@id": "BlockNode:00CEA68QVG004:links:Link:00CGRSHWR8000:props:StringProp:00CGRSHWR8001",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -13923,13 +14420,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEA68QVG005:links:Link:00CEA68S2G004",
+        "@id": "BlockNode:00CEA68QVG005:links:Link:00CGRSHXM8000",
         "@type": "Link",
         "target": "BlockNode:00CEA5MHD8002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA68QVG005:links:Link:00CEA68S2G004:props:StringProp:00CEA68S2G005",
+            "@id": "BlockNode:00CEA68QVG005:links:Link:00CGRSHXM8000:props:StringProp:00CGRSHXM8001",
             "@type": "StringProp",
             "key": "position",
             "value": "0"
@@ -14214,13 +14711,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CECCBKNG001:links:Link:00CGGHZSB8000",
+        "@id": "BlockNode:00CECCBKNG001:links:Link:00CGRSJY30000",
         "@type": "Link",
         "target": "BlockNode:00CGGHVBF8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CECCBKNG001:links:Link:00CGGHZSB8000:props:StringProp:00CGGHZSB8001",
+            "@id": "BlockNode:00CECCBKNG001:links:Link:00CGRSJY30000:props:StringProp:00CGRSJY30001",
             "@type": "StringProp",
             "key": "position",
             "value": "1445"
@@ -14381,13 +14878,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEDEX35R002:links:Link:00CEDEX4AG000",
+        "@id": "BlockNode:00CEDEX35R002:links:Link:00CGRSJ2Q0000",
         "@type": "Link",
         "target": "BlockNode:00CE1GW638006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEDEX35R002:links:Link:00CEDEX4AG000:props:StringProp:00CEDEX4AG001",
+            "@id": "BlockNode:00CEDEX35R002:links:Link:00CGRSJ2Q0000:props:StringProp:00CGRSJ2Q0001",
             "@type": "StringProp",
             "key": "position",
             "value": "1217"
@@ -14851,13 +15348,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CEF7TCJG000",
+        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CGRSM26R000",
         "@type": "Link",
         "target": "BlockNode:00CEDVTB68004",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CEF7TCJG000:props:StringProp:00CEF7TCJG001",
+            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CGRSM26R000:props:StringProp:00CGRSM270000",
             "@type": "StringProp",
             "key": "position",
             "value": "279"
@@ -14865,13 +15362,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CEF7TCJG002",
+        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CGRSM270001",
         "@type": "Link",
         "target": "BlockNode:00CE1GW638002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CEF7TCJG002:props:StringProp:00CEF7TCJG003",
+            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CGRSM270001:props:StringProp:00CGRSM270002",
             "@type": "StringProp",
             "key": "position",
             "value": "327"
@@ -14879,13 +15376,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CF2GVB5G000",
+        "@id": "BlockNode:00CEF7TB2G000:links:Link:00CGRSM270003",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CF2GVB5G000:props:StringProp:00CF2GVB5G001",
+            "@id": "BlockNode:00CEF7TB2G000:links:Link:00CGRSM270003:props:StringProp:00CGRSM270004",
             "@type": "StringProp",
             "key": "position",
             "value": "1522"
@@ -14922,13 +15419,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0000",
+        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGRSMQY0000",
         "@type": "Link",
         "target": "BlockNode:00CE95MVPG00B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0000:props:StringProp:00CGGFPBY0001",
+            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGRSMQY0000:props:StringProp:00CGRSMQY0001",
             "@type": "StringProp",
             "key": "position",
             "value": "20"
@@ -14936,13 +15433,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0002",
+        "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGRSMQY0002",
         "@type": "Link",
         "target": "BlockNode:00CEEJ3R60001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGGFPBY0002:props:StringProp:00CGGFPBY0003",
+            "@id": "BlockNode:00CEF7TB2G001:links:Link:00CGRSMQY0002:props:StringProp:00CGRSMQY0003",
             "@type": "StringProp",
             "key": "position",
             "value": "444"
@@ -15046,13 +15543,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEFFYR9G001:links:Link:00CEFFYT3R000",
+        "@id": "BlockNode:00CEFFYR9G001:links:Link:00CGRSK370000",
         "@type": "Link",
         "target": "BlockNode:00CEFF85V8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9G001:links:Link:00CEFFYT3R000:props:StringProp:00CEFFYT40000",
+            "@id": "BlockNode:00CEFFYR9G001:links:Link:00CGRSK370000:props:StringProp:00CGRSK370001",
             "@type": "StringProp",
             "key": "position",
             "value": "375"
@@ -15113,13 +15610,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEFFYR9G003:links:Link:00CEFFYT40001",
+        "@id": "BlockNode:00CEFFYR9G003:links:Link:00CGRSK760000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC8N0006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9G003:links:Link:00CEFFYT40001:props:StringProp:00CEFFYT40002",
+            "@id": "BlockNode:00CEFFYR9G003:links:Link:00CGRSK760000:props:StringProp:00CGRSK760001",
             "@type": "StringProp",
             "key": "position",
             "value": "77"
@@ -15127,13 +15624,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEFFYR9G003:links:Link:00CEFFYT40003",
+        "@id": "BlockNode:00CEFFYR9G003:links:Link:00CGRSK760002",
         "@type": "Link",
         "target": "BlockNode:00CDD68E80007",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9G003:links:Link:00CEFFYT40003:props:StringProp:00CEFFYT40004",
+            "@id": "BlockNode:00CEFFYR9G003:links:Link:00CGRSK760002:props:StringProp:00CGRSK760003",
             "@type": "StringProp",
             "key": "position",
             "value": "397"
@@ -15152,13 +15649,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT40005",
+        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18000",
         "@type": "Link",
         "target": "BlockNode:00CE8XWZK0000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT40005:props:StringProp:00CEFFYT40006",
+            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18000:props:StringProp:00CGRSKF18001",
             "@type": "StringProp",
             "key": "position",
             "value": "112"
@@ -15166,13 +15663,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT40007",
+        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18002",
         "@type": "Link",
         "target": "BlockNode:00CE1HQW18001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT40007:props:StringProp:00CEFFYT48000",
+            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18002:props:StringProp:00CGRSKF18003",
             "@type": "StringProp",
             "key": "position",
             "value": "172"
@@ -15180,13 +15677,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT48001",
+        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18004",
         "@type": "Link",
         "target": "BlockNode:00CE1GW638002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT48001:props:StringProp:00CEFFYT48002",
+            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18004:props:StringProp:00CGRSKF18005",
             "@type": "StringProp",
             "key": "position",
             "value": "364"
@@ -15194,13 +15691,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT48003",
+        "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18006",
         "@type": "Link",
         "target": "BlockNode:00CEF7TB2G000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CEFFYT48003:props:StringProp:00CEFFYT48004",
+            "@id": "BlockNode:00CEFFYR9R000:links:Link:00CGRSKF18006:props:StringProp:00CGRSKF18007",
             "@type": "StringProp",
             "key": "position",
             "value": "582"
@@ -15485,13 +15982,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF0GH9P8000:links:Link:00CF0GHB10000",
+        "@id": "BlockNode:00CF0GH9P8000:links:Link:00CGRSN0TR000",
         "@type": "Link",
         "target": "BlockNode:00CEA56A0G003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF0GH9P8000:links:Link:00CF0GHB10000:props:StringProp:00CF0GHB10001",
+            "@id": "BlockNode:00CF0GH9P8000:links:Link:00CGRSN0TR000:props:StringProp:00CGRSN0V0000",
             "@type": "StringProp",
             "key": "position",
             "value": "381"
@@ -15604,13 +16101,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8001:links:Link:00CF10AW6G000",
+        "@id": "BlockNode:00CF10ATY8001:links:Link:00CGRSN748000",
         "@type": "Link",
         "target": "BlockNode:00CE1GW638006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8001:links:Link:00CF10AW6G000:props:StringProp:00CF10AW6G001",
+            "@id": "BlockNode:00CF10ATY8001:links:Link:00CGRSN748000:props:StringProp:00CGRSN748001",
             "@type": "StringProp",
             "key": "position",
             "value": "70"
@@ -15618,13 +16115,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8001:links:Link:00CF10AW6G002",
+        "@id": "BlockNode:00CF10ATY8001:links:Link:00CGRSN748002",
         "@type": "Link",
         "target": "BlockNode:00CE1DDF5800B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8001:links:Link:00CF10AW6G002:props:StringProp:00CF10AW6R000",
+            "@id": "BlockNode:00CF10ATY8001:links:Link:00CGRSN748002:props:StringProp:00CGRSN748003",
             "@type": "StringProp",
             "key": "position",
             "value": "145"
@@ -15632,13 +16129,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8001:links:Link:00CF10AW6R001",
+        "@id": "BlockNode:00CF10ATY8001:links:Link:00CGRSN748004",
         "@type": "Link",
         "target": "BlockNode:00CEDP10P8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8001:links:Link:00CF10AW6R001:props:StringProp:00CF10AW6R002",
+            "@id": "BlockNode:00CF10ATY8001:links:Link:00CGRSN748004:props:StringProp:00CGRSN748005",
             "@type": "StringProp",
             "key": "position",
             "value": "338"
@@ -15671,13 +16168,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8002:links:Link:00CF10AW6R003",
+        "@id": "BlockNode:00CF10ATY8002:links:Link:00CGRSNTG8000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG00G",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8002:links:Link:00CF10AW6R003:props:StringProp:00CF10AW6R004",
+            "@id": "BlockNode:00CF10ATY8002:links:Link:00CGRSNTG8000:props:StringProp:00CGRSNTGG000",
             "@type": "StringProp",
             "key": "position",
             "value": "77"
@@ -15685,13 +16182,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8002:links:Link:00CF10AW6R005",
+        "@id": "BlockNode:00CF10ATY8002:links:Link:00CGRSNTGG001",
         "@type": "Link",
         "target": "BlockNode:00CDD68E8000K",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8002:links:Link:00CF10AW6R005:props:StringProp:00CF10AW70000",
+            "@id": "BlockNode:00CF10ATY8002:links:Link:00CGRSNTGG001:props:StringProp:00CGRSNTGG002",
             "@type": "StringProp",
             "key": "position",
             "value": "179"
@@ -15710,13 +16207,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8003:links:Link:00CF10AW70001",
+        "@id": "BlockNode:00CF10ATY8003:links:Link:00CGRSP92G000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG008",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8003:links:Link:00CF10AW70001:props:StringProp:00CF10AW70002",
+            "@id": "BlockNode:00CF10ATY8003:links:Link:00CGRSP92G000:props:StringProp:00CGRSP92G001",
             "@type": "StringProp",
             "key": "position",
             "value": "62"
@@ -15724,13 +16221,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8003:links:Link:00CF10AW70003",
+        "@id": "BlockNode:00CF10ATY8003:links:Link:00CGRSP92G002",
         "@type": "Link",
         "target": "BlockNode:00CDBYV4T8002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8003:links:Link:00CF10AW70003:props:StringProp:00CF10AW78000",
+            "@id": "BlockNode:00CF10ATY8003:links:Link:00CGRSP92G002:props:StringProp:00CGRSP92G003",
             "@type": "StringProp",
             "key": "position",
             "value": "161"
@@ -15749,13 +16246,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8004:links:Link:00CF10AW7G000",
+        "@id": "BlockNode:00CF10ATY8004:links:Link:00CGRSPQ5R000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG007",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8004:links:Link:00CF10AW7G000:props:StringProp:00CF10AW7G001",
+            "@id": "BlockNode:00CF10ATY8004:links:Link:00CGRSPQ5R000:props:StringProp:00CGRSPQ5R001",
             "@type": "StringProp",
             "key": "position",
             "value": "68"
@@ -15763,13 +16260,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8004:links:Link:00CF10AW7G002",
+        "@id": "BlockNode:00CF10ATY8004:links:Link:00CGRSPQ5R002",
         "@type": "Link",
         "target": "BlockNode:00CDC0D59000B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8004:links:Link:00CF10AW7G002:props:StringProp:00CF10AW7G003",
+            "@id": "BlockNode:00CF10ATY8004:links:Link:00CGRSPQ5R002:props:StringProp:00CGRSPQ5R003",
             "@type": "StringProp",
             "key": "position",
             "value": "167"
@@ -15788,13 +16285,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8005:links:Link:00CF10AW7G004",
+        "@id": "BlockNode:00CF10ATY8005:links:Link:00CGRSQ5R0000",
         "@type": "Link",
         "target": "BlockNode:00CDBZ76T8002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8005:links:Link:00CF10AW7G004:props:StringProp:00CF10AW7R000",
+            "@id": "BlockNode:00CF10ATY8005:links:Link:00CGRSQ5R0000:props:StringProp:00CGRSQ5R0001",
             "@type": "StringProp",
             "key": "position",
             "value": "70"
@@ -15802,13 +16299,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8005:links:Link:00CF10AW7R001",
+        "@id": "BlockNode:00CF10ATY8005:links:Link:00CGRSQ5R0002",
         "@type": "Link",
         "target": "BlockNode:00CDD68E80002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8005:links:Link:00CF10AW7R001:props:StringProp:00CF10AW7R002",
+            "@id": "BlockNode:00CF10ATY8005:links:Link:00CGRSQ5R0002:props:StringProp:00CGRSQ5R0003",
             "@type": "StringProp",
             "key": "position",
             "value": "162"
@@ -15827,13 +16324,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8006:links:Link:00CF10AW7R003",
+        "@id": "BlockNode:00CF10ATY8006:links:Link:00CGRSQKA8000",
         "@type": "Link",
         "target": "BlockNode:00CDDVC33G007",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8006:links:Link:00CF10AW7R003:props:StringProp:00CF10AW7R004",
+            "@id": "BlockNode:00CF10ATY8006:links:Link:00CGRSQKA8000:props:StringProp:00CGRSQKA8001",
             "@type": "StringProp",
             "key": "position",
             "value": "81"
@@ -15841,13 +16338,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8006:links:Link:00CF10AW80000",
+        "@id": "BlockNode:00CF10ATY8006:links:Link:00CGRSQKA8002",
         "@type": "Link",
         "target": "BlockNode:00CDD68E8800B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8006:links:Link:00CF10AW80000:props:StringProp:00CF10AW80001",
+            "@id": "BlockNode:00CF10ATY8006:links:Link:00CGRSQKA8002:props:StringProp:00CGRSQKA8003",
             "@type": "StringProp",
             "key": "position",
             "value": "185"
@@ -15866,13 +16363,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8007:links:Link:00CF10AW80002",
+        "@id": "BlockNode:00CF10ATY8007:links:Link:00CGRSR368000",
         "@type": "Link",
         "target": "BlockNode:00CE1GW4Y8008",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8007:links:Link:00CF10AW80002:props:StringProp:00CF10AW80003",
+            "@id": "BlockNode:00CF10ATY8007:links:Link:00CGRSR368000:props:StringProp:00CGRSR368001",
             "@type": "StringProp",
             "key": "position",
             "value": "84"
@@ -15880,13 +16377,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8007:links:Link:00CF10AW80004",
+        "@id": "BlockNode:00CF10ATY8007:links:Link:00CGRSR368002",
         "@type": "Link",
         "target": "BlockNode:00CDBYV4T8002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8007:links:Link:00CF10AW80004:props:StringProp:00CF10AW80005",
+            "@id": "BlockNode:00CF10ATY8007:links:Link:00CGRSR368002:props:StringProp:00CGRSR368003",
             "@type": "StringProp",
             "key": "position",
             "value": "172"
@@ -15905,13 +16402,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8008:links:Link:00CF10AW80006",
+        "@id": "BlockNode:00CF10ATY8008:links:Link:00CGRSRK0R000",
         "@type": "Link",
         "target": "BlockNode:00CDEEJ8PR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8008:links:Link:00CF10AW80006:props:StringProp:00CF10AW88000",
+            "@id": "BlockNode:00CF10ATY8008:links:Link:00CGRSRK0R000:props:StringProp:00CGRSRK10000",
             "@type": "StringProp",
             "key": "position",
             "value": "91"
@@ -15919,13 +16416,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY8008:links:Link:00CF10AW88001",
+        "@id": "BlockNode:00CF10ATY8008:links:Link:00CGRSRK10001",
         "@type": "Link",
         "target": "BlockNode:00CEB8N5EG001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8008:links:Link:00CF10AW88001:props:StringProp:00CF10AW88002",
+            "@id": "BlockNode:00CF10ATY8008:links:Link:00CGRSRK10001:props:StringProp:00CGRSRK10002",
             "@type": "StringProp",
             "key": "position",
             "value": "190"
@@ -15944,13 +16441,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY8009:links:Link:00CF10AW88003",
+        "@id": "BlockNode:00CF10ATY8009:links:Link:00CGRSS290000",
         "@type": "Link",
         "target": "BlockNode:00CDG18FP0003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY8009:links:Link:00CF10AW88003:props:StringProp:00CF10AW88004",
+            "@id": "BlockNode:00CF10ATY8009:links:Link:00CGRSS290000:props:StringProp:00CGRSS290001",
             "@type": "StringProp",
             "key": "position",
             "value": "103"
@@ -15969,13 +16466,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF10ATY800A:links:Link:00CF10AW88005",
+        "@id": "BlockNode:00CF10ATY800A:links:Link:00CGRSSC38000",
         "@type": "Link",
         "target": "BlockNode:00CE5KSNVR002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY800A:links:Link:00CF10AW88005:props:StringProp:00CF10AW8G000",
+            "@id": "BlockNode:00CF10ATY800A:links:Link:00CGRSSC38000:props:StringProp:00CGRSSC38001",
             "@type": "StringProp",
             "key": "position",
             "value": "88"
@@ -15983,13 +16480,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF10ATY800A:links:Link:00CF10AW8G001",
+        "@id": "BlockNode:00CF10ATY800A:links:Link:00CGRSSC38002",
         "@type": "Link",
         "target": "BlockNode:00CE5KSNVR003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF10ATY800A:links:Link:00CF10AW8G001:props:StringProp:00CF10AW8G002",
+            "@id": "BlockNode:00CF10ATY800A:links:Link:00CGRSSC38002:props:StringProp:00CGRSSC38003",
             "@type": "StringProp",
             "key": "position",
             "value": "167"
@@ -16181,6 +16678,36 @@
   {
     "@id": "BlockNode:00CF1WZ4JG003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGRWEDY8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGRWEDY8000:props:StringProp:00CGRWEK7G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "159"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGRWEK7G001",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG003:links:Link:00CGRWEK7G001:props:StringProp:00CGRWEK7G002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2363"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CF1WZ4JG003:props:StringProp:00CF1WZ5Q8000",
@@ -16204,6 +16731,22 @@
   {
     "@id": "BlockNode:00CF1WZ4JG004",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG004:links:Link:00CGRWEK7R000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG004:links:Link:00CGRWEK7R000:props:StringProp:00CGRWEK7R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "978"
+          }
+        ]
+      }
+    ],
     "title": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**",
     "text": "**`aperas update`'s reconciliation can silently match fresh content onto an already-tombstoned node's id without reviving it**: reproduced twice in `list-consumption`'s eval sandbox — a new bullet's content lands on a stale, already-tombstoned id instead of a fresh one, and `tombstonedAt` is never cleared, so the content stays invisible even though the summary line reports a clean match/add. **Resolved**: root cause was every old-side matching pool (Stage A's leaves and heading buckets, Stage B's containers) including tombstoned candidates with no exclusion at all — a live new node's content could bind to a dead id purely because its stripped text happened to match. Fixed by excluding every tombstoned old child from every matching pool in `diffChildren`: a dead slot is never reused, new content always gets a fresh id instead. Verified live: a new item with text identical to an already-tombstoned sibling's now lands on a brand-new id, not the dead one. Same fix as [item 1 above](#id/BlockNode:00CF1WZ4JG003).",
     "parent": "BlockNode:00CF1WZ4JG00J",
@@ -16215,13 +16758,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF1WZ4JG005:links:Link:00CGMJ3XEG000",
+        "@id": "BlockNode:00CF1WZ4JG005:links:Link:00CGRWEKXR000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF1WZ4JG005:links:Link:00CGMJ3XEG000:props:StringProp:00CGMJ3XEG001",
+            "@id": "BlockNode:00CF1WZ4JG005:links:Link:00CGRWEKXR000:props:StringProp:00CGRWEKXR001",
             "@type": "StringProp",
             "key": "position",
             "value": "851"
@@ -16305,6 +16848,22 @@
   {
     "@id": "BlockNode:00CF1WZ4JG00C",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG00C:links:Link:00CGRWEDA8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG00C:links:Link:00CGRWEDA8000:props:StringProp:00CGRWEDA8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "226"
+          }
+        ]
+      }
+    ],
     "title": "**`treeview`** — 4 open",
     "text": "**`treeview`** — 4 open: stale `TreeView.unfolds` references, a bare `aperas unfold <ref>` mutating the default view instead of peeking, no raw single-node inspection command, and `unfold` not marking tombstoned children. See [Open Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
     "parent": "BlockNode:00CF1WZ4JG00A",
@@ -16314,6 +16873,22 @@
   {
     "@id": "BlockNode:00CF1WZ4JG00D",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG00D:links:Link:00CGRWEDA8002",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV5A8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG00D:links:Link:00CGRWEDA8002:props:StringProp:00CGRWEDAG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "191"
+          }
+        ]
+      }
+    ],
     "title": "00CF1WZ4JG00D",
     "text": "**`linking`** — 2 open, both filed: `extractAnchorNames` treats a backtick-quoted example anchor as a real claimed name, and `aperas update` never re-derives a non-heading block's title. See [Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002).",
     "parent": "BlockNode:00CF1WZ4JG00A",
@@ -16333,6 +16908,22 @@
   {
     "@id": "BlockNode:00CF1WZ4JG00F",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF1WZ4JG00F:links:Link:00CGRWEDDG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE32GRZG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF1WZ4JG00F:links:Link:00CGRWEDDG000:props:StringProp:00CGRWEDDG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "93"
+          }
+        ]
+      }
+    ],
     "title": "**`list-consumption`** — 1 open",
     "text": "**`list-consumption`** — 1 open: inserting a list item always spawns a fresh run-leader. See [Open Issues](../issues/list-consumption.md#id/BlockNode:00CE32GRZG000).",
     "parent": "BlockNode:00CF1WZ4JG00A",
@@ -16644,13 +17235,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF23FB1G002:links:Link:00CF29E3ZR000",
+        "@id": "BlockNode:00CF23FB1G002:links:Link:00CGRW2YVG000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF23FB1G002:links:Link:00CF29E3ZR000:props:StringProp:00CGK3HGTG000",
+            "@id": "BlockNode:00CF23FB1G002:links:Link:00CGRW2YVG000:props:StringProp:00CGRW2YVG001",
             "@type": "StringProp",
             "key": "position",
             "value": "164"
@@ -16658,13 +17249,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF23FB1G002:links:Link:00CGK3HGTG001",
+        "@id": "BlockNode:00CF23FB1G002:links:Link:00CGRW2YW8000",
         "@type": "Link",
         "target": "BlockNode:00CF23FB1G003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF23FB1G002:links:Link:00CGK3HGTG001:props:StringProp:00CGK3HGTG002",
+            "@id": "BlockNode:00CF23FB1G002:links:Link:00CGRW2YW8000:props:StringProp:00CGRW2YW8001",
             "@type": "StringProp",
             "key": "position",
             "value": "277"
@@ -16757,6 +17348,22 @@
   {
     "@id": "BlockNode:00CF23SXQ8001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CF23SXQ8001:links:Link:00CGRWEDW0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF23FB1G003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF23SXQ8001:links:Link:00CGRWEDW0000:props:StringProp:00CGRWEDXG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "4"
+          }
+        ]
+      }
+    ],
     "title": "## Pending Tasks",
     "text": "See [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) for the ordered fix plan.",
     "parent": "BlockNode:00CF1WZ4JG001",
@@ -17239,13 +17846,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF2MR0M8001:links:Link:00CF2N0ABG000",
+        "@id": "BlockNode:00CF2MR0M8001:links:Link:00CGRSSXZR000",
         "@type": "Link",
         "target": "BlockNode:00CF2MWE68000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF2MR0M8001:links:Link:00CF2N0ABG000:props:StringProp:00CF2N0ABG001",
+            "@id": "BlockNode:00CF2MR0M8001:links:Link:00CGRSSXZR000:props:StringProp:00CGRSSXZR001",
             "@type": "StringProp",
             "key": "position",
             "value": "895"
@@ -17314,13 +17921,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF2MR0M8004:links:Link:00CGGFPKP0000",
+        "@id": "BlockNode:00CF2MR0M8004:links:Link:00CGRST858000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG00J",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF2MR0M8004:links:Link:00CGGFPKP0000:props:StringProp:00CGGFPKP0001",
+            "@id": "BlockNode:00CF2MR0M8004:links:Link:00CGRST858000:props:StringProp:00CGRST858001",
             "@type": "StringProp",
             "key": "position",
             "value": "63"
@@ -17417,13 +18024,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF46W4Q8001:links:Link:00CF46W64G000",
+        "@id": "BlockNode:00CF46W4Q8001:links:Link:00CGRT4MW0000",
         "@type": "Link",
         "target": "BlockNode:00CE95MVP8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF46W4Q8001:links:Link:00CF46W64G000:props:StringProp:00CF46W64G001",
+            "@id": "BlockNode:00CF46W4Q8001:links:Link:00CGRT4MW0000:props:StringProp:00CGRT4MW0001",
             "@type": "StringProp",
             "key": "position",
             "value": "126"
@@ -18506,13 +19113,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR000",
+        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CGRT5ATG000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00D",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR000:props:StringProp:00CF4D9ZCR001",
+            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CGRT5ATG000:props:StringProp:00CGRT5ATG001",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -18520,13 +19127,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR002",
+        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CGRT5ATG002",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR009",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR002:props:StringProp:00CF4D9ZCR003",
+            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CGRT5ATG002:props:StringProp:00CGRT5ATG003",
             "@type": "StringProp",
             "key": "position",
             "value": "110"
@@ -18534,13 +19141,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR004",
+        "@id": "BlockNode:00CF4D9XT0002:links:Link:00CGRT5ATG004",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CF4D9ZCR004:props:StringProp:00CF4D9ZCR005",
+            "@id": "BlockNode:00CF4D9XT0002:links:Link:00CGRT5ATG004:props:StringProp:00CGRT5ATG005",
             "@type": "StringProp",
             "key": "position",
             "value": "240"
@@ -18573,13 +19180,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0000",
+        "@id": "BlockNode:00CF4D9XT0003:links:Link:00CGRT7AB0000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0000:props:StringProp:00CF4D9ZD0001",
+            "@id": "BlockNode:00CF4D9XT0003:links:Link:00CGRT7AB0000:props:StringProp:00CGRT7AB8000",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -18587,13 +19194,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0002",
+        "@id": "BlockNode:00CF4D9XT0003:links:Link:00CGRT7AB8001",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG013",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0003:links:Link:00CF4D9ZD0002:props:StringProp:00CF4D9ZD0003",
+            "@id": "BlockNode:00CF4D9XT0003:links:Link:00CGRT7AB8001:props:StringProp:00CGRT7AB8002",
             "@type": "StringProp",
             "key": "position",
             "value": "105"
@@ -18612,13 +19219,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0004",
+        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CGRT8BS8000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00P",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0004:props:StringProp:00CF4D9ZD0005",
+            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CGRT8BS8000:props:StringProp:00CGRT8BS8001",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -18626,13 +19233,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0006",
+        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CGRT8BS8002",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00Q",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0006:props:StringProp:00CF4D9ZD0007",
+            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CGRT8BS8002:props:StringProp:00CGRT8BS8003",
             "@type": "StringProp",
             "key": "position",
             "value": "79"
@@ -18640,13 +19247,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0008",
+        "@id": "BlockNode:00CF4D9XT0004:links:Link:00CGRT8BS8004",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG013",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CF4D9ZD0008:props:StringProp:00CF4D9ZD0009",
+            "@id": "BlockNode:00CF4D9XT0004:links:Link:00CGRT8BS8004:props:StringProp:00CGRT8BSG000",
             "@type": "StringProp",
             "key": "position",
             "value": "159"
@@ -18665,13 +19272,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8000",
+        "@id": "BlockNode:00CF4D9XT0005:links:Link:00CGRTAPV8000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00R",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8000:props:StringProp:00CF4D9ZD8001",
+            "@id": "BlockNode:00CF4D9XT0005:links:Link:00CGRTAPV8000:props:StringProp:00CGRTAPV8001",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -18679,13 +19286,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8002",
+        "@id": "BlockNode:00CF4D9XT0005:links:Link:00CGRTAPV8002",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG013",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0005:links:Link:00CF4D9ZD8002:props:StringProp:00CF4D9ZD8003",
+            "@id": "BlockNode:00CF4D9XT0005:links:Link:00CGRTAPV8002:props:StringProp:00CGRTAPV8003",
             "@type": "StringProp",
             "key": "position",
             "value": "84"
@@ -18704,13 +19311,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8004",
+        "@id": "BlockNode:00CF4D9XT0006:links:Link:00CGRTC3SG000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00S",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8004:props:StringProp:00CF4D9ZD8005",
+            "@id": "BlockNode:00CF4D9XT0006:links:Link:00CGRTC3SG000:props:StringProp:00CGRTC3SG001",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -18718,13 +19325,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8006",
+        "@id": "BlockNode:00CF4D9XT0006:links:Link:00CGRTC3SG002",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00D",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4D9XT0006:links:Link:00CF4D9ZD8006:props:StringProp:00CF4D9ZD8007",
+            "@id": "BlockNode:00CF4D9XT0006:links:Link:00CGRTC3SG002:props:StringProp:00CGRTC3SG003",
             "@type": "StringProp",
             "key": "position",
             "value": "111"
@@ -18743,13 +19350,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8000",
+        "@id": "BlockNode:00CF4MBFQG001:links:Link:00CGRTDA80000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00D",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8000:props:StringProp:00CF4MBHA8001",
+            "@id": "BlockNode:00CF4MBFQG001:links:Link:00CGRTDA80000:props:StringProp:00CGRTDA80001",
             "@type": "StringProp",
             "key": "position",
             "value": "72"
@@ -18757,13 +19364,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8002",
+        "@id": "BlockNode:00CF4MBFQG001:links:Link:00CGRTDA88000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG00J",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4MBFQG001:links:Link:00CF4MBHA8002:props:StringProp:00CF4MBHA8003",
+            "@id": "BlockNode:00CF4MBFQG001:links:Link:00CGRTDA88000:props:StringProp:00CGRTDA88001",
             "@type": "StringProp",
             "key": "position",
             "value": "227"
@@ -18796,13 +19403,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4N80W0001:links:Link:00CF4N82AG000",
+        "@id": "BlockNode:00CF4N80W0001:links:Link:00CGRSTGC8000",
         "@type": "Link",
         "target": "BlockNode:00CF4D9XT0001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4N80W0001:links:Link:00CF4N82AG000:props:StringProp:00CF4N82AG001",
+            "@id": "BlockNode:00CF4N80W0001:links:Link:00CGRSTGC8000:props:StringProp:00CGRSTGC8001",
             "@type": "StringProp",
             "key": "position",
             "value": "267"
@@ -18890,13 +19497,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0000",
+        "@id": "BlockNode:00CF4QNWZR001:links:Link:00CGRTVFM8000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4Q8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0000:props:StringProp:00CF4QNYH0001",
+            "@id": "BlockNode:00CF4QNWZR001:links:Link:00CGRTVFM8000:props:StringProp:00CGRTVFM8001",
             "@type": "StringProp",
             "key": "position",
             "value": "14"
@@ -18904,13 +19511,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0002",
+        "@id": "BlockNode:00CF4QNWZR001:links:Link:00CGRTVFM8002",
         "@type": "Link",
         "target": "BlockNode:00CF4D9XT0001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4QNWZR001:links:Link:00CF4QNYH0002:props:StringProp:00CF4QNYH0003",
+            "@id": "BlockNode:00CF4QNWZR001:links:Link:00CGRTVFM8002:props:StringProp:00CGRTVFM8003",
             "@type": "StringProp",
             "key": "position",
             "value": "374"
@@ -18959,13 +19566,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4QNWZR004:links:Link:00CF5MTA0R000",
+        "@id": "BlockNode:00CF4QNWZR004:links:Link:00CGRTWWG0000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4QNWZR004:links:Link:00CF5MTA0R000:props:StringProp:00CF5MTA0R001",
+            "@id": "BlockNode:00CF4QNWZR004:links:Link:00CGRTWWG0000:props:StringProp:00CGRTWWG0001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -19019,13 +19626,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4QNX00001:links:Link:00CF5MTW3G000",
+        "@id": "BlockNode:00CF4QNX00001:links:Link:00CGRTXH80000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00F",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4QNX00001:links:Link:00CF5MTW3G000:props:StringProp:00CF5MTW3R000",
+            "@id": "BlockNode:00CF4QNX00001:links:Link:00CGRTXH80000:props:StringProp:00CGRTXH80001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -19174,13 +19781,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR000",
+        "@id": "BlockNode:00CF4R3C78002:links:Link:00CGRTF7T0000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00T",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR000:props:StringProp:00CF4R3DRR001",
+            "@id": "BlockNode:00CF4R3C78002:links:Link:00CGRTF7T0000:props:StringProp:00CGRTF7T0001",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -19188,13 +19795,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR002",
+        "@id": "BlockNode:00CF4R3C78002:links:Link:00CGRTF7T0002",
         "@type": "Link",
         "target": "BlockNode:00CF4QNX00005",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR002:props:StringProp:00CF4R3DRR003",
+            "@id": "BlockNode:00CF4R3C78002:links:Link:00CGRTF7T0002:props:StringProp:00CGRTF7T8000",
             "@type": "StringProp",
             "key": "position",
             "value": "121"
@@ -19202,13 +19809,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR004",
+        "@id": "BlockNode:00CF4R3C78002:links:Link:00CGRTF7T8001",
         "@type": "Link",
         "target": "BlockNode:00CF4QNX00007",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78002:links:Link:00CF4R3DRR004:props:StringProp:00CF4R3DRR005",
+            "@id": "BlockNode:00CF4R3C78002:links:Link:00CGRTF7T8001:props:StringProp:00CGRTF7T8002",
             "@type": "StringProp",
             "key": "position",
             "value": "211"
@@ -19241,13 +19848,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0000",
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVYR000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG00S",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0000:props:StringProp:00CF4R3DS0001",
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVYR000:props:StringProp:00CGRTHVYR001",
             "@type": "StringProp",
             "key": "position",
             "value": "2"
@@ -19255,13 +19862,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0002",
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVZ0000",
         "@type": "Link",
         "target": "BlockNode:00CF4QNWZR004",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0002:props:StringProp:00CF4R3DS0003",
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVZ0000:props:StringProp:00CGRTHVZ0001",
             "@type": "StringProp",
             "key": "position",
             "value": "137"
@@ -19269,13 +19876,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0004",
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVZ0002",
         "@type": "Link",
         "target": "BlockNode:00CF4QNX00002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0004:props:StringProp:00CF4R3DS0005",
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVZ0002:props:StringProp:00CGRTHVZ0003",
             "@type": "StringProp",
             "key": "position",
             "value": "253"
@@ -19283,13 +19890,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0006",
+        "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVZ0004",
         "@type": "Link",
         "target": "BlockNode:00CF4QNX00007",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78003:links:Link:00CF4R3DS0006:props:StringProp:00CF4R3DS0007",
+            "@id": "BlockNode:00CF4R3C78003:links:Link:00CGRTHVZ0004:props:StringProp:00CGRTHVZ0005",
             "@type": "StringProp",
             "key": "position",
             "value": "348"
@@ -19308,13 +19915,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS0008",
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0TR000",
         "@type": "Link",
         "target": "BlockNode:00CF4QNWZR002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS0008:props:StringProp:00CF4R3DS8000",
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0TR000:props:StringProp:00CGRTP0TR001",
             "@type": "StringProp",
             "key": "position",
             "value": "30"
@@ -19322,13 +19929,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8001",
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0TR002",
         "@type": "Link",
         "target": "BlockNode:00CF4QNWZR003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8001:props:StringProp:00CF4R3DS8002",
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0TR002:props:StringProp:00CGRTP0V0000",
             "@type": "StringProp",
             "key": "position",
             "value": "73"
@@ -19336,13 +19943,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8003",
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0V0001",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00D",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8003:props:StringProp:00CF4R3DS8004",
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0V0001:props:StringProp:00CGRTP0V0002",
             "@type": "StringProp",
             "key": "position",
             "value": "205"
@@ -19350,13 +19957,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8005",
+        "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0V0003",
         "@type": "Link",
         "target": "BlockNode:00CF4QNX00001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF4R3C78004:links:Link:00CF4R3DS8005:props:StringProp:00CF4R3DS8006",
+            "@id": "BlockNode:00CF4R3C78004:links:Link:00CGRTP0V0003:props:StringProp:00CGRTP0V0004",
             "@type": "StringProp",
             "key": "position",
             "value": "341"
@@ -19488,13 +20095,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CF5MTK6G000",
+        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CGRTYDMR000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00C",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CF5MTK6G000:props:StringProp:00CF5MTK6R000",
+            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CGRTYDMR000:props:StringProp:00CGRTYDN0000",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -19746,13 +20353,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG000",
+        "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CGRTZQ70000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4Q8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG000:props:StringProp:00CF5ZE3GG001",
+            "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CGRTZQ70000:props:StringProp:00CGRTZQ70001",
             "@type": "StringProp",
             "key": "position",
             "value": "14"
@@ -19760,13 +20367,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG002",
+        "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CGRTZQ70002",
         "@type": "Link",
         "target": "BlockNode:00CF4QNWZR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CF5ZE3GG002:props:StringProp:00CF5ZE3GG003",
+            "@id": "BlockNode:00CF5ZE1S0001:links:Link:00CGRTZQ70002:props:StringProp:00CGRTZQ70003",
             "@type": "StringProp",
             "key": "position",
             "value": "71"
@@ -19808,13 +20415,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF5ZE1S0004:links:Link:00CF5ZE3GR000",
+        "@id": "BlockNode:00CF5ZE1S0004:links:Link:00CGRV1CZG000",
         "@type": "Link",
         "target": "BlockNode:00CF5GK5BR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZE1S0004:links:Link:00CF5ZE3GR000:props:StringProp:00CF5ZE3GR001",
+            "@id": "BlockNode:00CF5ZE1S0004:links:Link:00CGRV1CZG000:props:StringProp:00CGRV1CZG001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -19844,13 +20451,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG000",
+        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CGRTRM50000",
         "@type": "Link",
         "target": "BlockNode:00CF5GV8FR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG000:props:StringProp:00CF5ZK5QG001",
+            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CGRTRM50000:props:StringProp:00CGRTRM50001",
             "@type": "StringProp",
             "key": "position",
             "value": "82"
@@ -19858,13 +20465,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG002",
+        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CGRTRM50002",
         "@type": "Link",
         "target": "BlockNode:00CF5N94NR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG002:props:StringProp:00CF5ZK5QG003",
+            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CGRTRM50002:props:StringProp:00CGRTRM50003",
             "@type": "StringProp",
             "key": "position",
             "value": "133"
@@ -19872,13 +20479,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG004",
+        "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CGRTRM58000",
         "@type": "Link",
         "target": "BlockNode:00CF5ZE1S0002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CF5ZK5QG004:props:StringProp:00CF5ZK5QG005",
+            "@id": "BlockNode:00CF5ZK3ZG001:links:Link:00CGRTRM58000:props:StringProp:00CGRTRM58001",
             "@type": "StringProp",
             "key": "position",
             "value": "345"
@@ -19914,13 +20521,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF5ZK3ZG002:links:Link:00CF5ZK5QR000",
+        "@id": "BlockNode:00CF5ZK3ZG002:links:Link:00CGRTTXD8000",
         "@type": "Link",
         "target": "BlockNode:00CF5ZE1S0003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5ZK3ZG002:links:Link:00CF5ZK5QR000:props:StringProp:00CF5ZK5QR001",
+            "@id": "BlockNode:00CF5ZK3ZG002:links:Link:00CGRTTXD8000:props:StringProp:00CGRTTXD8001",
             "@type": "StringProp",
             "key": "position",
             "value": "20"
@@ -20015,13 +20622,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF6AJYP0001:links:Link:00CF6AK0ER000",
+        "@id": "BlockNode:00CF6AJYP0001:links:Link:00CGRV24WR000",
         "@type": "Link",
         "target": "BlockNode:00CF5GV8FR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF6AJYP0001:links:Link:00CF6AK0ER000:props:StringProp:00CF6AK0ER001",
+            "@id": "BlockNode:00CF6AJYP0001:links:Link:00CGRV24WR000:props:StringProp:00CGRV24WR001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -20061,13 +20668,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF6R1KP8000:links:Link:00CFBAFZN8000",
+        "@id": "BlockNode:00CF6R1KP8000:links:Link:00CGRSTPMR000",
         "@type": "Link",
         "target": "BlockNode:00CEDFKN3000A",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF6R1KP8000:links:Link:00CFBAFZN8000:props:StringProp:00CFBAFZN8001",
+            "@id": "BlockNode:00CF6R1KP8000:links:Link:00CGRSTPMR000:props:StringProp:00CGRSTPMR001",
             "@type": "StringProp",
             "key": "position",
             "value": "1091"
@@ -20103,13 +20710,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF6R1KP8001:links:Link:00CGGFPWY0000",
+        "@id": "BlockNode:00CF6R1KP8001:links:Link:00CGRSTZER000",
         "@type": "Link",
         "target": "BlockNode:00CF5ZE1S0003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF6R1KP8001:links:Link:00CGGFPWY0000:props:StringProp:00CGGFPWY0001",
+            "@id": "BlockNode:00CF6R1KP8001:links:Link:00CGRSTZER000:props:StringProp:00CGRSTZER001",
             "@type": "StringProp",
             "key": "position",
             "value": "56"
@@ -20151,13 +20758,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF80MKFG001:links:Link:00CF80MN2G000",
+        "@id": "BlockNode:00CF80MKFG001:links:Link:00CGRV2YM8000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4Q8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF80MKFG001:links:Link:00CF80MN2G000:props:StringProp:00CF80MN2G001",
+            "@id": "BlockNode:00CF80MKFG001:links:Link:00CGRV2YM8000:props:StringProp:00CGRV2YMG000",
             "@type": "StringProp",
             "key": "position",
             "value": "14"
@@ -20165,13 +20772,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF80MKFG001:links:Link:00CF80MN2G002",
+        "@id": "BlockNode:00CF80MKFG001:links:Link:00CGRV2YMG001",
         "@type": "Link",
         "target": "BlockNode:00CF4QNWZR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF80MKFG001:links:Link:00CF80MN2G002:props:StringProp:00CF80MN2G003",
+            "@id": "BlockNode:00CF80MKFG001:links:Link:00CGRV2YMG001:props:StringProp:00CGRV2YMG002",
             "@type": "StringProp",
             "key": "position",
             "value": "71"
@@ -20179,13 +20786,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF80MKFG001:links:Link:00CF80MN2G004",
+        "@id": "BlockNode:00CF80MKFG001:links:Link:00CGRV2YMG003",
         "@type": "Link",
         "target": "BlockNode:00CF5ZE1S0001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF80MKFG001:links:Link:00CF80MN2G004:props:StringProp:00CF80MN2G005",
+            "@id": "BlockNode:00CF80MKFG001:links:Link:00CGRV2YMG003:props:StringProp:00CGRV2YMG004",
             "@type": "StringProp",
             "key": "position",
             "value": "115"
@@ -20208,13 +20815,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF80MKFR000:links:Link:00CF8BZWN0000",
+        "@id": "BlockNode:00CF80MKFR000:links:Link:00CGRV5E08000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF80MKFR000:links:Link:00CF8BZWN0000:props:StringProp:00CF8BZWN0001",
+            "@id": "BlockNode:00CF80MKFR000:links:Link:00CGRV5E08000:props:StringProp:00CGRV5E08001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -20235,13 +20842,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF80MKFR001:links:Link:00CF81WM5R000",
+        "@id": "BlockNode:00CF80MKFR001:links:Link:00CGRV7FW8000",
         "@type": "Link",
         "target": "BlockNode:00CF5ZE1S0005",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF80MKFR001:links:Link:00CF81WM5R000:props:StringProp:00CF81WM5R001",
+            "@id": "BlockNode:00CF80MKFR001:links:Link:00CGRV7FW8000:props:StringProp:00CGRV7FW8001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -20371,13 +20978,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF80TVJR005:links:Link:00CF80TX70000",
+        "@id": "BlockNode:00CF80TVJR005:links:Link:00CGRSVDJG000",
         "@type": "Link",
         "target": "BlockNode:00CF80MKFG001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF80TVJR005:links:Link:00CF80TX70000:props:StringProp:00CF80TX70001",
+            "@id": "BlockNode:00CF80TVJR005:links:Link:00CGRSVDJG000:props:StringProp:00CGRSVDJG001",
             "@type": "StringProp",
             "key": "position",
             "value": "335"
@@ -20415,13 +21022,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF9M8BC8000:links:Link:00CF9M8D0R000",
+        "@id": "BlockNode:00CF9M8BC8000:links:Link:00CGRSVPF0000",
         "@type": "Link",
         "target": "BlockNode:00CF6R1KP8000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9M8BC8000:links:Link:00CF9M8D0R000:props:StringProp:00CF9M8D0R001",
+            "@id": "BlockNode:00CF9M8BC8000:links:Link:00CGRSVPF0000:props:StringProp:00CGRSVPF0001",
             "@type": "StringProp",
             "key": "position",
             "value": "99"
@@ -20429,13 +21036,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF9M8BC8000:links:Link:00CFBAG81G000",
+        "@id": "BlockNode:00CF9M8BC8000:links:Link:00CGRSVPF8000",
         "@type": "Link",
         "target": "BlockNode:00CEDFKN3000A",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9M8BC8000:links:Link:00CFBAG81G000:props:StringProp:00CFBAG81G001",
+            "@id": "BlockNode:00CF9M8BC8000:links:Link:00CGRSVPF8000:props:StringProp:00CGRSVPF8001",
             "@type": "StringProp",
             "key": "position",
             "value": "1635"
@@ -20470,13 +21077,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CF9M8D10000",
+        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWG000",
         "@type": "Link",
         "target": "BlockNode:00CF6R1KP8000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CF9M8D10000:props:StringProp:00CF9M8D10001",
+            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWG000:props:StringProp:00CGRSWAWG001",
             "@type": "StringProp",
             "key": "position",
             "value": "656"
@@ -20484,13 +21091,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CFA867ER000",
+        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWG002",
         "@type": "Link",
         "target": "BlockNode:00CFA7PQ1R001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CFA867ER000:props:StringProp:00CFA867ER001",
+            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWG002:props:StringProp:00CGRSWAWR000",
             "@type": "StringProp",
             "key": "position",
             "value": "1208"
@@ -20498,13 +21105,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CFA867ER002",
+        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWR001",
         "@type": "Link",
         "target": "BlockNode:00CFA7PQ20000",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CFA867ER002:props:StringProp:00CFA867F0000",
+            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWR001:props:StringProp:00CGRSWAWR002",
             "@type": "StringProp",
             "key": "position",
             "value": "1293"
@@ -20512,13 +21119,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CFA867F0001",
+        "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWR003",
         "@type": "Link",
         "target": "BlockNode:00CFA7PQ20001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CFA867F0001:props:StringProp:00CFA867F0002",
+            "@id": "BlockNode:00CF9M8BC8001:links:Link:00CGRSWAWR003:props:StringProp:00CGRSWAWR004",
             "@type": "StringProp",
             "key": "position",
             "value": "1369"
@@ -20564,13 +21171,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF9MGW8R001:links:Link:00CFA86SH0000",
+        "@id": "BlockNode:00CF9MGW8R001:links:Link:00CGRSXKDR000",
         "@type": "Link",
         "target": "BlockNode:00CFA7PQ20003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9MGW8R001:links:Link:00CFA86SH0000:props:StringProp:00CFA86SH0001",
+            "@id": "BlockNode:00CF9MGW8R001:links:Link:00CGRSXKDR000:props:StringProp:00CGRSXKDR001",
             "@type": "StringProp",
             "key": "position",
             "value": "770"
@@ -20603,13 +21210,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4KR000",
+        "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGRSXWPR000",
         "@type": "Link",
         "target": "BlockNode:00CF5ZK3ZG002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4KR000:props:StringProp:00CGGFQ4KR001",
+            "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGRSXWPR000:props:StringProp:00CGRSXWPR001",
             "@type": "StringProp",
             "key": "position",
             "value": "107"
@@ -20617,13 +21224,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4M0000",
+        "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGRSXWPR002",
         "@type": "Link",
         "target": "BlockNode:00CF5ZE1S0003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGGFQ4M0000:props:StringProp:00CGGFQ4M0001",
+            "@id": "BlockNode:00CF9MGW8R002:links:Link:00CGRSXWPR002:props:StringProp:00CGRSXWQ0000",
             "@type": "StringProp",
             "key": "position",
             "value": "169"
@@ -20642,13 +21249,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF9MGW8R003:links:Link:00CFA86HYG000",
+        "@id": "BlockNode:00CF9MGW8R003:links:Link:00CGRSYQMR000",
         "@type": "Link",
         "target": "BlockNode:00CFA7PQ20002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9MGW8R003:links:Link:00CFA86HYG000:props:StringProp:00CFA86HYG001",
+            "@id": "BlockNode:00CF9MGW8R003:links:Link:00CGRSYQMR000:props:StringProp:00CGRSYQMR001",
             "@type": "StringProp",
             "key": "position",
             "value": "609"
@@ -20667,13 +21274,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF9SRRFG001:links:Link:00CF9SRTE8000",
+        "@id": "BlockNode:00CF9SRRFG001:links:Link:00CGRV6620000",
         "@type": "Link",
         "target": "BlockNode:00CF8BZWM0002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF9SRRFG001:links:Link:00CF9SRTE8000:props:StringProp:00CF9SRTE8001",
+            "@id": "BlockNode:00CF9SRRFG001:links:Link:00CGRV6620000:props:StringProp:00CGRV6620001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -21146,13 +21753,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CFB1A7GR001:links:Link:00CFB1MVHG000",
+        "@id": "BlockNode:00CFB1A7GR001:links:Link:00CGRSZ3C0000",
         "@type": "Link",
         "target": "BlockNode:00CFB1HX48001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CFB1A7GR001:links:Link:00CFB1MVHG000:props:StringProp:00CFB1MVHG001",
+            "@id": "BlockNode:00CFB1A7GR001:links:Link:00CGRSZ3C0000:props:StringProp:00CGRSZ3C8000",
             "@type": "StringProp",
             "key": "position",
             "value": "1120"
@@ -21160,13 +21767,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CFB1A7GR001:links:Link:00CFB1MVHG002",
+        "@id": "BlockNode:00CFB1A7GR001:links:Link:00CGRSZ3C8001",
         "@type": "Link",
         "target": "BlockNode:00CFB1HX48002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CFB1A7GR001:links:Link:00CFB1MVHG002:props:StringProp:00CFB1MVHG003",
+            "@id": "BlockNode:00CFB1A7GR001:links:Link:00CGRSZ3C8001:props:StringProp:00CGRSZ3C8002",
             "@type": "StringProp",
             "key": "position",
             "value": "1205"
@@ -21174,13 +21781,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CFB1A7GR001:links:Link:00CFB1MVHG004",
+        "@id": "BlockNode:00CFB1A7GR001:links:Link:00CGRSZ3C8003",
         "@type": "Link",
         "target": "BlockNode:00CFB1HX48003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CFB1A7GR001:links:Link:00CFB1MVHG004:props:StringProp:00CFB1MVHG005",
+            "@id": "BlockNode:00CFB1A7GR001:links:Link:00CGRSZ3C8003:props:StringProp:00CGRSZ3C8004",
             "@type": "StringProp",
             "key": "position",
             "value": "1307"
@@ -21380,13 +21987,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CG9MDJF0001:links:Link:00CG9MS5V8000",
+        "@id": "BlockNode:00CG9MDJF0001:links:Link:00CGRT06YG000",
         "@type": "Link",
         "target": "BlockNode:00CG9MPGVG001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CG9MDJF0001:links:Link:00CG9MS5V8000:props:StringProp:00CG9MS5V8001",
+            "@id": "BlockNode:00CG9MDJF0001:links:Link:00CGRT06YG000:props:StringProp:00CGRT06YG001",
             "@type": "StringProp",
             "key": "position",
             "value": "1013"
@@ -21568,13 +22175,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGA4ZN88002:links:Link:00CGA4ZQ5G000",
+        "@id": "BlockNode:00CGA4ZN88002:links:Link:00CGRV8D0R000",
         "@type": "Link",
         "target": "BlockNode:00CF80MKFR002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA4ZN88002:links:Link:00CGA4ZQ5G000:props:StringProp:00CGA4ZQ5G001",
+            "@id": "BlockNode:00CGA4ZN88002:links:Link:00CGRV8D0R000:props:StringProp:00CGRV8D0R001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -21675,13 +22282,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGA4ZN8800A:links:Link:00CGA4ZQ5G002",
+        "@id": "BlockNode:00CGA4ZN8800A:links:Link:00CGRVA2R8000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QG013",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA4ZN8800A:links:Link:00CGA4ZQ5G002:props:StringProp:00CGA4ZQ5G003",
+            "@id": "BlockNode:00CGA4ZN8800A:links:Link:00CGRVA2R8000:props:StringProp:00CGRVA2R8001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -21826,13 +22433,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGA4ZQ5R000",
+        "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGRVAYSR000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR009",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGA4ZQ5R000:props:StringProp:00CGA4ZQ5R001",
+            "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGRVAYSR000:props:StringProp:00CGRVAYSR001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -21840,13 +22447,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGA4ZQ5R002",
+        "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGRVAYSR002",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00A",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGA4ZQ5R002:props:StringProp:00CGA4ZQ5R003",
+            "@id": "BlockNode:00CGA4ZN8800P:links:Link:00CGRVAYSR002:props:StringProp:00CGRVAYSR003",
             "@type": "StringProp",
             "key": "position",
             "value": "61"
@@ -21951,13 +22558,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGA4ZQ5R004",
+        "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGRVD1DG000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00D",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGA4ZQ5R004:props:StringProp:00CGA4ZQ5R005",
+            "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGRVD1DG000:props:StringProp:00CGRVD1DG001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -21965,13 +22572,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGA4ZQ5R006",
+        "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGRVD1DR000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00E",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGA4ZQ5R006:props:StringProp:00CGA4ZQ5R007",
+            "@id": "BlockNode:00CGA4ZN8G007:links:Link:00CGRVD1DR000:props:StringProp:00CGRVD1DR001",
             "@type": "StringProp",
             "key": "position",
             "value": "71"
@@ -22078,13 +22685,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGA8YGW8001:links:Link:00CGA8YJEG000",
+        "@id": "BlockNode:00CGA8YGW8001:links:Link:00CGRV9D30000",
         "@type": "Link",
         "target": "BlockNode:00CGA4ZN88003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGA8YGW8001:links:Link:00CGA8YJEG000:props:StringProp:00CGA8YJEG001",
+            "@id": "BlockNode:00CGA8YGW8001:links:Link:00CGRV9D30000:props:StringProp:00CGRV9D30001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -22114,19 +22721,19 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FS9R000",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0H9R000",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG00C",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FS9R000:props:StringProp:00CGF7PDWR000",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0H9R000:props:StringProp:00CGRT0H9R001",
             "@type": "StringProp",
             "key": "position",
             "value": "670"
           },
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FS9R000:props:StringProp:00CGF7PDWR001",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0H9R000:props:StringProp:00CGRT0HAG000",
             "@type": "StringProp",
             "key": "position",
             "value": "3301"
@@ -22134,13 +22741,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FSA0002",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAG001",
         "@type": "Link",
         "target": "BlockNode:00CEA5Y5JG00B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FSA0002:props:StringProp:00CGF5FSA0003",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAG001:props:StringProp:00CGRT0HAG002",
             "@type": "StringProp",
             "key": "position",
             "value": "2870"
@@ -22148,13 +22755,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FSA0004",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAG003",
         "@type": "Link",
         "target": "BlockNode:00CGF54B5G001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF5FSA0004:props:StringProp:00CGF5FSA0005",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAG003:props:StringProp:00CGRT0HAR000",
             "@type": "StringProp",
             "key": "position",
             "value": "3419"
@@ -22162,13 +22769,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0000",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR001",
         "@type": "Link",
         "target": "BlockNode:00CGF7EZ4R001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0000:props:StringProp:00CGF7PDX0001",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR001:props:StringProp:00CGRT0HAR002",
             "@type": "StringProp",
             "key": "position",
             "value": "3548"
@@ -22176,13 +22783,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0002",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR003",
         "@type": "Link",
         "target": "BlockNode:00CGF7EZ4R002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0002:props:StringProp:00CGF7PDX0003",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR003:props:StringProp:00CGRT0HAR004",
             "@type": "StringProp",
             "key": "position",
             "value": "3627"
@@ -22190,13 +22797,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0004",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR005",
         "@type": "Link",
         "target": "BlockNode:00CGF7EZ4R003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0004:props:StringProp:00CGF7PDX0005",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR005:props:StringProp:00CGRT0HAR006",
             "@type": "StringProp",
             "key": "position",
             "value": "3711"
@@ -22204,13 +22811,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0006",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR007",
         "@type": "Link",
         "target": "BlockNode:00CGF7EZ4R004",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0006:props:StringProp:00CGF7PDX0007",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HAR007:props:StringProp:00CGRT0HBG000",
             "@type": "StringProp",
             "key": "position",
             "value": "3800"
@@ -22218,13 +22825,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0008",
+        "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HBG001",
         "@type": "Link",
         "target": "BlockNode:00CGF71QX8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGF7PDX0008:props:StringProp:00CGF7PDX0009",
+            "@id": "BlockNode:00CGF35FNG001:links:Link:00CGRT0HBG001:props:StringProp:00CGRT0HBG002",
             "@type": "StringProp",
             "key": "position",
             "value": "3907"
@@ -22282,13 +22889,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGF613VR001:links:Link:00CGF616P8000",
+        "@id": "BlockNode:00CGF613VR001:links:Link:00CGRVH1DG000",
         "@type": "Link",
         "target": "BlockNode:00CE95MVP8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF613VR001:links:Link:00CGF616P8000:props:StringProp:00CGF616P8001",
+            "@id": "BlockNode:00CGF613VR001:links:Link:00CGRVH1DG000:props:StringProp:00CGRVH1DG001",
             "@type": "StringProp",
             "key": "position",
             "value": "60"
@@ -22296,13 +22903,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGF613VR001:links:Link:00CGF616PG000",
+        "@id": "BlockNode:00CGF613VR001:links:Link:00CGRVH1DG002",
         "@type": "Link",
         "target": "BlockNode:00CF46W4Q8001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGF613VR001:links:Link:00CGF616PG000:props:StringProp:00CGF616PG001",
+            "@id": "BlockNode:00CGF613VR001:links:Link:00CGRVH1DG002:props:StringProp:00CGRVH1DG003",
             "@type": "StringProp",
             "key": "position",
             "value": "98"
@@ -23986,6 +24593,36 @@
   {
     "@id": "BlockNode:00CGFE4SV0002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGFE4SV0002:links:Link:00CGRWAH1R000",
+        "@type": "Link",
+        "target": "BlockNode:00CGGA9J68000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGFE4SV0002:links:Link:00CGRWAH1R000:props:StringProp:00CGRWAH20000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "996"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGFE4SV0002:links:Link:00CGRWAH20001",
+        "@type": "Link",
+        "target": "BlockNode:00CGF83D4G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGFE4SV0002:links:Link:00CGRWAH20001:props:StringProp:00CGRWAQTR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1681"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGFE4SV0002:props:StringProp:00CGFE4WVR000",
@@ -24141,6 +24778,22 @@
   {
     "@id": "BlockNode:00CGGG6N5G001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGG6N5G001:links:Link:00CGRWARR0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1276D0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGG6N5G001:links:Link:00CGRWARR0000:props:StringProp:00CGRWARR0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "217"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGG6N5G001:props:StringProp:00CGGG6R4R000",
@@ -24164,6 +24817,22 @@
   {
     "@id": "BlockNode:00CGGHVBF8001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGHVBF8001:links:Link:00CGRWARP8000",
+        "@type": "Link",
+        "target": "BlockNode:00CECCBKNG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGHVBF8001:links:Link:00CGRWARP8000:props:StringProp:00CGRWARP8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1165"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGHVBF8001:props:StringProp:00CGGHVEEG000",
@@ -24572,6 +25241,22 @@
   {
     "@id": "BlockNode:00CGGTQ620002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ620002:links:Link:00CGRW5T90000",
+        "@type": "Link",
+        "target": "BlockNode:00CGFE4SV0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ620002:links:Link:00CGRW5T90000:props:StringProp:00CGRW5T98000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "89"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGTQ620002:props:StringProp:00CGGTQ930003",
@@ -24601,6 +25286,36 @@
   {
     "@id": "BlockNode:00CGGTQ620003",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ620003:links:Link:00CGRW5T98001",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ620003:links:Link:00CGRW5T98001:props:StringProp:00CGRW5T98002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "88"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGTQ620003:links:Link:00CGRW5T98003",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ620003:links:Link:00CGRW5T98003:props:StringProp:00CGRW5T98004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "151"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGTQ620003:props:StringProp:00CGJKPX78000",
@@ -24618,6 +25333,22 @@
   {
     "@id": "BlockNode:00CGGTQ620004",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ620004:links:Link:00CGRW5TAG000",
+        "@type": "Link",
+        "target": "BlockNode:00CFATMWY0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ620004:links:Link:00CGRW5TAG000:props:StringProp:00CGRW5TAG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "51"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGTQ620004:props:StringProp:00CGJKPXSR000",
@@ -24635,6 +25366,36 @@
   {
     "@id": "BlockNode:00CGGTQ628000",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ628000:links:Link:00CGRW5TD8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGGHVBF8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ628000:links:Link:00CGRW5TD8000:props:StringProp:00CGRW5TD8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "83"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CGGTQ628000:links:Link:00CGRW5TDG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE95MVP8008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ628000:links:Link:00CGRW5TDG000:props:StringProp:00CGRW5TDG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "767"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGTQ628000:props:StringProp:00CGJKPY30000",
@@ -24652,6 +25413,22 @@
   {
     "@id": "BlockNode:00CGGTQ628001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ628001:links:Link:00CGRW5TE0000",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ628001:links:Link:00CGRW5TE0000:props:StringProp:00CGRW5TE0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "55"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGTQ628001:props:StringProp:00CGJKPYCR000",
@@ -24669,6 +25446,22 @@
   {
     "@id": "BlockNode:00CGGTQ628002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGGTQ628002:links:Link:00CGRW5TE0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZ4JG009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGGTQ628002:links:Link:00CGRW5TE0002:props:StringProp:00CGRW5TE8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "54"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGGTQ628002:props:StringProp:00CGJKPYS8000",
@@ -24787,6 +25580,22 @@
   {
     "@id": "BlockNode:00CGJRZKJR001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGJRZKJR001:links:Link:00CGRW5TE8001",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW638007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGJRZKJR001:links:Link:00CGRW5TE8001:props:StringProp:00CGRW5TE8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "120"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CGJRZKJR001:props:StringProp:00CGJRZQ28000",
@@ -24869,13 +25678,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGK3AH60002:links:Link:00CGKXH4T8000",
+        "@id": "BlockNode:00CGK3AH60002:links:Link:00CGRW5TEG000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG005",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGK3AH60002:links:Link:00CGKXH4T8000:props:StringProp:00CGMVKFTR000",
+            "@id": "BlockNode:00CGK3AH60002:links:Link:00CGRW5TEG000:props:StringProp:00CGRW5TEG001",
             "@type": "StringProp",
             "key": "position",
             "value": "838"
@@ -24908,13 +25717,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGK3AH68000:links:Link:00CGKXKYN8000",
+        "@id": "BlockNode:00CGK3AH68000:links:Link:00CGRW6Y7R000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG006",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGK3AH68000:links:Link:00CGKXKYN8000:props:StringProp:00CGMVKTRR000",
+            "@id": "BlockNode:00CGK3AH68000:links:Link:00CGRW6Y7R000:props:StringProp:00CGRW6Y7R001",
             "@type": "StringProp",
             "key": "position",
             "value": "935"
@@ -24943,13 +25752,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGM54FX0001:links:Link:00CGM54JV0000",
+        "@id": "BlockNode:00CGM54FX0001:links:Link:00CGRWFYMR000",
         "@type": "Link",
         "target": "BlockNode:00CF1WZ4JG003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGM54FX0001:links:Link:00CGM54JV0000:props:StringProp:00CGM54JV0001",
+            "@id": "BlockNode:00CGM54FX0001:links:Link:00CGRWFYMR000:props:StringProp:00CGRWFYMR001",
             "@type": "StringProp",
             "key": "position",
             "value": "1298"
@@ -24968,13 +25777,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR000",
+        "@id": "BlockNode:00CGM5V098001:links:Link:00CGRWARR8000",
         "@type": "Link",
         "target": "BlockNode:00CGFE4SV0002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR000:props:StringProp:00CGM5V3QR001",
+            "@id": "BlockNode:00CGM5V098001:links:Link:00CGRWARR8000:props:StringProp:00CGRWARR8001",
             "@type": "StringProp",
             "key": "position",
             "value": "206"
@@ -24982,13 +25791,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR002",
+        "@id": "BlockNode:00CGM5V098001:links:Link:00CGRWARRG000",
         "@type": "Link",
         "target": "BlockNode:00CGM54FX0001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGM5V098001:links:Link:00CGM5V3QR002:props:StringProp:00CGM5V3QR003",
+            "@id": "BlockNode:00CGM5V098001:links:Link:00CGRWARRG000:props:StringProp:00CGRWARRG001",
             "@type": "StringProp",
             "key": "position",
             "value": "562"
@@ -25552,8 +26361,7 @@
     "children": [
       "BlockNode:00CGN6GJV8001",
       "BlockNode:00CGN6GJV8002",
-      "BlockNode:00CGN6GJV8003",
-      "BlockNode:00CGN6GJVG000"
+      "BlockNode:00CGN6GJV8003"
     ]
   },
   {
@@ -25724,7 +26532,8 @@
     "children": [
       "BlockNode:00CGMX88R0002",
       "BlockNode:00CGMX88R0003",
-      "BlockNode:00CGMX88R0004"
+      "BlockNode:00CGMX88R0004",
+      "BlockNode:00CGRQKZQR001"
     ]
   },
   {
@@ -25768,20 +26577,22 @@
     "text": "Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CGMWQ6T0001) — filed as one open item covering both, since they share the same consequence (a claim's provenance silently gone with nothing to notice) even though their causes are unrelated and the second one's cause isn't known yet.",
     "parent": "BlockNode:00CGMX88R0001",
     "type": "paragraph",
-    "children": []
+    "children": [
+      "BlockNode:00CH4J9398001"
+    ]
   },
   {
     "@id": "BlockNode:00CGMY04AG001",
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGMY04AG001:links:Link:00CGMY07PR000",
+        "@id": "BlockNode:00CGMY04AG001:links:Link:00CGRVK7N0000",
         "@type": "Link",
         "target": "BlockNode:00CGF613VR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGMY04AG001:links:Link:00CGMY07PR000:props:StringProp:00CGMY07Q0000",
+            "@id": "BlockNode:00CGMY04AG001:links:Link:00CGRVK7N0000:props:StringProp:00CGRVK7N8000",
             "@type": "StringProp",
             "key": "position",
             "value": "14"
@@ -25789,13 +26600,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGMY04AG001:links:Link:00CGMZ6FBR000",
+        "@id": "BlockNode:00CGMY04AG001:links:Link:00CGRVK7N8001",
         "@type": "Link",
         "target": "BlockNode:00CGMX88R0001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGMY04AG001:links:Link:00CGMZ6FBR000:props:StringProp:00CGMZ6FBR001",
+            "@id": "BlockNode:00CGMY04AG001:links:Link:00CGRVK7N8001:props:StringProp:00CGRVK7N8002",
             "@type": "StringProp",
             "key": "position",
             "value": "443"
@@ -25815,6 +26626,22 @@
   {
     "@id": "BlockNode:00CGMY04AG002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CGMY04AG002:links:Link:00CGRVNM98000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613W8006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGMY04AG002:links:Link:00CGRVNM98000:props:StringProp:00CGRVNM9G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
     "title": "### Discipline — verify by traversal now names links as its sharpest instance",
     "text": "Supersedes: [v2's own \"Verify by traversal\" item](#id/BlockNode:00CGF613W8006)",
     "parent": "BlockNode:00CGMY04AG001",
@@ -25848,13 +26675,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGMZAPCR001:links:Link:00CGMZATG8000",
+        "@id": "BlockNode:00CGMZAPCR001:links:Link:00CGRVNM9G001",
         "@type": "Link",
         "target": "BlockNode:00CGF613VR002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGMZAPCR001:links:Link:00CGMZATG8000:props:StringProp:00CGMZATG8001",
+            "@id": "BlockNode:00CGMZAPCR001:links:Link:00CGRVNM9G001:props:StringProp:00CGRVNM9G002",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -25894,13 +26721,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN6GJV8002:links:Link:00CGN7B658000",
+        "@id": "BlockNode:00CGN6GJV8002:links:Link:00CGRW8RY0000",
         "@type": "Link",
         "target": "BlockNode:00CDBZ7698003",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN6GJV8002:links:Link:00CGN7B658000:props:StringProp:00CGN7B65G000",
+            "@id": "BlockNode:00CGN6GJV8002:links:Link:00CGRW8RY0000:props:StringProp:00CGRW8RY0001",
             "@type": "StringProp",
             "key": "position",
             "value": "342"
@@ -25940,9 +26767,25 @@
   {
     "@id": "BlockNode:00CGN6GJVG000",
     "@type": "BlockNode",
-    "title": "**Shared fix direction, not yet built**",
-    "text": "**Shared fix direction, not yet built**: a drift-style check (`skill_drift.py`'s own pattern: compare the graph's actual state against what it should be) that flags \"live node, text contains an internal-style link, `.links` has no matching resolved wikilink\" would catch both classes going forward without needing the root cause of either. Would need to run as its own explicit sweep (matching `pruneUnreachableTombstones`/`pruneStaleUnfolds`'s own cost model), not per-write.",
-    "parent": "BlockNode:00CGMWQ6T0001",
+    "links": [
+      {
+        "@id": "BlockNode:00CGN6GJVG000:links:Link:00CH4TRXB8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGMWQ6T0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CGN6GJVG000:links:Link:00CH4TRXB8000:props:StringProp:00CH4TRXB8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "451"
+          }
+        ]
+      }
+    ],
+    "title": "**Link Integrity Checking built (`aperas check-links`)**",
+    "text": "**Link Integrity Checking built (`aperas check-links`)**: resolved — the drift-style check has been built (`checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core`). It scans for live nodes where internal link codes exist in `node.text` but have no corresponding resolved `Link` in `.links`, and repairs them via the `--repair` flag. This catches both historical staleness and transient regressions without needing to know the root cause (see [Open Issues](#id/BlockNode:00CGMWQ6T0001)).",
+    "parent": "BlockNode:00CDBYV5A800A",
     "type": "listItem",
     "children": []
   },
@@ -25951,13 +26794,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9M8001:links:Link:00CGN8WCY0000",
+        "@id": "BlockNode:00CGN8W9M8001:links:Link:00CGRVPKJ8000",
         "@type": "Link",
         "target": "BlockNode:00CGF613VR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9M8001:links:Link:00CGN8WCY0000:props:StringProp:00CGN8WCY0001",
+            "@id": "BlockNode:00CGN8W9M8001:links:Link:00CGRVPKJ8000:props:StringProp:00CGRVPKJ8001",
             "@type": "StringProp",
             "key": "position",
             "value": "14"
@@ -25984,13 +26827,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGN8WCY0002",
+        "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGRVQKK0000",
         "@type": "Link",
         "target": "BlockNode:00CGMZAPCR001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGN8WCY0002:props:StringProp:00CGN8WCY0003",
+            "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGRVQKK0000:props:StringProp:00CGRVQKK0001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -25998,13 +26841,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGN9YKZ0000",
+        "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGRVQKK0002",
         "@type": "Link",
         "target": "BlockNode:00CGMZAPCR002",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGN9YKZ0000:props:StringProp:00CGN9YKZ0001",
+            "@id": "BlockNode:00CGN8W9M8002:links:Link:00CGRVQKK0002:props:StringProp:00CGRVQKK0003",
             "@type": "StringProp",
             "key": "position",
             "value": "73"
@@ -26034,13 +26877,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGN8WCY8000",
+        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG0000",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG00K",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGN8WCY8000:props:StringProp:00CGN8WCY8001",
+            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG0000:props:StringProp:00CGRVSBG8000",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -26048,13 +26891,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGNAAFA0000",
+        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG8001",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG00M",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGNAAFA0000:props:StringProp:00CGNAAFA0001",
+            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG8001:props:StringProp:00CGRVSBG8002",
             "@type": "StringProp",
             "key": "position",
             "value": "76"
@@ -26062,13 +26905,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGNAAFA0002",
+        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG8003",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG00N",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGNAAFA0002:props:StringProp:00CGNAAFA0003",
+            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG8003:props:StringProp:00CGRVSBG8004",
             "@type": "StringProp",
             "key": "position",
             "value": "122"
@@ -26076,13 +26919,13 @@
         ]
       },
       {
-        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGNAAFA0004",
+        "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG8005",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG00V",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGNAAFA0004:props:StringProp:00CGNAAFA0005",
+            "@id": "BlockNode:00CGN8W9MG000:links:Link:00CGRVSBG8005:props:StringProp:00CGRVSBG8006",
             "@type": "StringProp",
             "key": "position",
             "value": "180"
@@ -26115,13 +26958,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9MG003:links:Link:00CGN8WCY8002",
+        "@id": "BlockNode:00CGN8W9MG003:links:Link:00CGRVYAA8000",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG00W",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG003:links:Link:00CGN8WCY8002:props:StringProp:00CGN8WCY8003",
+            "@id": "BlockNode:00CGN8W9MG003:links:Link:00CGRVYAA8000:props:StringProp:00CGRVYAA8001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -26151,13 +26994,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9MG005:links:Link:00CGN8WCY8004",
+        "@id": "BlockNode:00CGN8W9MG005:links:Link:00CGRVZAWG000",
         "@type": "Link",
         "target": "BlockNode:00CGF613W8016",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG005:links:Link:00CGN8WCY8004:props:StringProp:00CGN8WCY8005",
+            "@id": "BlockNode:00CGN8W9MG005:links:Link:00CGRVZAWG000:props:StringProp:00CGRVZAWG001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -26187,13 +27030,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9MG007:links:Link:00CGN8WCYG000",
+        "@id": "BlockNode:00CGN8W9MG007:links:Link:00CGRW0ET8000",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG00B",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG007:links:Link:00CGN8WCYG000:props:StringProp:00CGN8WCYG001",
+            "@id": "BlockNode:00CGN8W9MG007:links:Link:00CGRW0ET8000:props:StringProp:00CGRW0ET8001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -26223,13 +27066,13 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGN8W9MG009:links:Link:00CGN8WCYG002",
+        "@id": "BlockNode:00CGN8W9MG009:links:Link:00CGRW1Y1G000",
         "@type": "Link",
         "target": "BlockNode:00CGF613WG018",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN8W9MG009:links:Link:00CGN8WCYG002:props:StringProp:00CGN8WCYG003",
+            "@id": "BlockNode:00CGN8W9MG009:links:Link:00CGRW1Y1G000:props:StringProp:00CGRW1Y1G001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -26344,6 +27187,121 @@
     "title": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**",
     "text": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**: investigated `reload --discard` and `flush --clobber` interaction. Single-state round-trip holds for both disk state (disk -> memory -> disk) and memory quads (memory -> disk -> memory) in steady state. Mismatches observed on `flush --clobber` were traced to two automatic mechanisms: mark-and-sweep tombstone GC (`pruneUnreachableTombstones`) and RDF subject deduplication. Discovered that prior service restarts left garbage on disk because `shutdown()` used guarded `flushIfDirty()`, which silently refused and dropped GC/flushes whenever disk diverged externally (e.g. via git operations), while service startup did not run GC. Design decisions: (1) execute startup GC immediately upon rehydrating the store, (2) upgrade shutdown logging when guarded flushes are refused due to disk divergence, and (3) return GC metrics (`prunedTombstones`, `tombstonedContainers`, `prunedUnfolds`) in `flush` service responses to display explicit summary notifications in `aperas flush` — [promoted to issues/core.md](../issues/core.md#id/BlockNode:00CGR1BM9G001).",
     "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CGRQKZQR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-16T03:41:22.024Z",
+    "title": "### Standing link integrity checking script (`checkLinkIntegrity` / `aperas check-links`)",
+    "text": "**Standing link integrity checking script (`checkLinkIntegrity` / `aperas check-links`)**: As specified in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000), building a drift-style check script `checkLinkIntegrity` (and CLI verb `aperas check-links`) compares live block text against `.links` in Oxigraph Store. Scans for live nodes where internal link codes (`[[code]]`, `aperas://...`, `#id/BlockNode:...`) exist in `node.text` but have no corresponding resolved `Link` in `.links`. Supports `--repair` flag to auto-re-resolve and flush missing links, catching both historical drift and transient regressions without needing to know the root cause. Executed live sweep on corpus (`aperas check-links --repair`), detecting 40 historical link integrity discrepancies across 7 artifacts, re-resolving them all, and verifiably restoring the graph to 0 discrepancies.",
+    "parent": "BlockNode:00CGMX88R0001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH47P6K8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-16T03:41:54.760Z",
+    "title": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**",
+    "parent": "BlockNode:00CDBZ7698003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH49K5HG000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-16T03:41:54.760Z",
+    "title": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**",
+    "text": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**: Landed `checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core` (`linkIntegrity.ts`) along with the CLI command `aperas check-links`, fulfilling the drift check specified in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000). Executing `aperas check-links --repair` on the active graph detected 40 historical link integrity discrepancies across 7 artifacts, re-resolved them all, and restored the graph to 0 discrepancies. Verified in `verify.ts` (step 19) via dropped-quad simulation. See [Discussion](../discussion/linking.md#id/BlockNode:00CGRQKZQR001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH4J9398001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CH4J9398001:links:Link:00CH4J96C8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGN6GJVG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH4J9398001:links:Link:00CH4J96C8000:props:StringProp:00CH4J96C8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "107"
+          }
+        ]
+      }
+    ],
+    "title": "**Standing link integrity checking script (`checkLinkIntegrity` / `aperas check-links`)**",
+    "text": "**Standing link integrity checking script (`checkLinkIntegrity` / `aperas check-links`)**: As specified in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000), building a drift-style check script `checkLinkIntegrity` (and CLI verb `aperas check-links`) compares live block text against `.links` in Oxigraph Store. Scans for live nodes where internal link codes (`[[code]]`, `aperas://...`, `#id/BlockNode:...`) exist in `node.text` but have no corresponding resolved `Link` in `.links`. Supports `--repair` flag to auto-re-resolve and flush missing links, catching both historical drift and transient regressions without needing to know the root cause. Executed live sweep on corpus (`aperas check-links --repair`), detecting 40 historical link integrity discrepancies across 7 artifacts, re-resolving them all, and verifiably restoring the graph to 0 discrepancies.",
+    "parent": "BlockNode:00CGMX88R0004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH4JM6H0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CH4JM6H0001:links:Link:00CH4JM9PG001",
+        "@type": "Link",
+        "target": "BlockNode:00CGN6GJVG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH4JM6H0001:links:Link:00CH4JM9PG001:props:StringProp:00CH4JM9PG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "264"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CH4JM6H0001:links:Link:00CH4JM9PR000",
+        "@type": "Link",
+        "target": "BlockNode:00CH4J9398001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH4JM6H0001:links:Link:00CH4JM9PR000:props:StringProp:00CH4JM9PR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "599"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CH4JM6H0001:props:StringProp:00CH4JM9P8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CH4JM6H0001:props:StringProp:00CH4JM9PG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**",
+    "text": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**: Landed `checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core` (`linkIntegrity.ts`) along with the CLI command `aperas check-links`, fulfilling the drift check specified in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000). Executing `aperas check-links --repair` on the active graph detected 40 historical link integrity discrepancies across 7 artifacts, re-resolving them all, and restored the graph to 0 discrepancies. Verified in `verify.ts` (step 19) via dropped-quad simulation. See [Discussion](../discussion/linking.md#id/BlockNode:00CH4J9398001).",
+    "parent": "BlockNode:00CDBZ7698003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH4SGKR8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-16T03:59:55.829Z",
+    "title": "**Link Integrity Checking built (`aperas check-links`)**",
+    "text": "**Link Integrity Checking built (`aperas check-links`)**: resolved — the drift-style check has been built (`checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core`). It scans for live nodes where internal link codes exist in `node.text` but have no corresponding resolved `Link` in `.links`, and repairs them via the `--repair` flag. This catches both historical staleness and transient regressions without needing to know the root cause (see [Open Issues](#id/BlockNode:00CGMWQ6T0001)).",
     "type": "listItem",
     "children": []
   }

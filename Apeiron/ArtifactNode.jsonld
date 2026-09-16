@@ -27,11 +27,11 @@
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "31f4d6b786f852935e7a5ed6b1c84bcd1bb06ec967f6f7f3dc8a7ae415a0ae85",
-    "lastTrackedAt": "2026-09-10T07:14:29.305Z",
-    "ingestedHash": "31f4d6b786f852935e7a5ed6b1c84bcd1bb06ec967f6f7f3dc8a7ae415a0ae85",
-    "lastIngestedAt": "2026-09-15T09:56:54.694Z",
-    "projectedHash": "31f4d6b786f852935e7a5ed6b1c84bcd1bb06ec967f6f7f3dc8a7ae415a0ae85"
+    "fileHash": "3781de360d79627e18b4b449b9fd58719030dc882a015cf8e57c6a4c41894493",
+    "lastTrackedAt": "2026-09-16T03:58:36.201Z",
+    "ingestedHash": "3781de360d79627e18b4b449b9fd58719030dc882a015cf8e57c6a4c41894493",
+    "lastIngestedAt": "2026-09-16T03:59:56.728Z",
+    "projectedHash": "3781de360d79627e18b4b449b9fd58719030dc882a015cf8e57c6a4c41894493"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
@@ -44,11 +44,11 @@
       "BlockNode:00CDBZ7698001"
     ],
     "path": "history/linking.md",
-    "fileHash": "795f4e91bb2dca21dc6ba323c5ce9b15617d9b3a0f122e014488d7a496cce0a3",
+    "fileHash": "97938ebe5c66e1afb1db9fd5e86045ef87c4e2e0a2af3f10e55e64d15a41bc21",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "795f4e91bb2dca21dc6ba323c5ce9b15617d9b3a0f122e014488d7a496cce0a3",
-    "lastIngestedAt": "2026-09-11T12:41:32.596Z",
-    "projectedHash": "795f4e91bb2dca21dc6ba323c5ce9b15617d9b3a0f122e014488d7a496cce0a3"
+    "ingestedHash": "97938ebe5c66e1afb1db9fd5e86045ef87c4e2e0a2af3f10e55e64d15a41bc21",
+    "lastIngestedAt": "2026-09-16T03:42:16.233Z",
+    "projectedHash": "97938ebe5c66e1afb1db9fd5e86045ef87c4e2e0a2af3f10e55e64d15a41bc21"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R000",
@@ -66,11 +66,11 @@
       "BlockNode:00CGMX88R0001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "225ff9a85bd1ee066d530c03c87e01283cf87f0be30ef0de35162d3b360e67cf",
+    "fileHash": "af22081d77ca05ce2d1af24b9cbf621a7e6bfca05f79f092f7ca4b84132f3aa4",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "225ff9a85bd1ee066d530c03c87e01283cf87f0be30ef0de35162d3b360e67cf",
-    "lastIngestedAt": "2026-09-15T09:31:43.157Z",
-    "projectedHash": "225ff9a85bd1ee066d530c03c87e01283cf87f0be30ef0de35162d3b360e67cf"
+    "ingestedHash": "af22081d77ca05ce2d1af24b9cbf621a7e6bfca05f79f092f7ca4b84132f3aa4",
+    "lastIngestedAt": "2026-09-16T03:42:15.665Z",
+    "projectedHash": "af22081d77ca05ce2d1af24b9cbf621a7e6bfca05f79f092f7ca4b84132f3aa4"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
