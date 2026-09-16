@@ -27210,15 +27210,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CH49K5HG000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-16T03:41:54.760Z",
-    "title": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**",
-    "text": "**2026-09-15: Standing link integrity checking & repair (`aperas check-links`)**: Landed `checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core` (`linkIntegrity.ts`) along with the CLI command `aperas check-links`, fulfilling the drift check specified in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000). Executing `aperas check-links --repair` on the active graph detected 40 historical link integrity discrepancies across 7 artifacts, re-resolved them all, and restored the graph to 0 discrepancies. Verified in `verify.ts` (step 19) via dropped-quad simulation. See [Discussion](../discussion/linking.md#id/BlockNode:00CGRQKZQR001).",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CH4J9398001",
     "@type": "BlockNode",
     "links": [
@@ -27297,11 +27288,306 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CH4SGKR8001",
+    "@id": "BlockNode:00CH5FJMDR001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-16T03:59:55.829Z",
-    "title": "**Link Integrity Checking built (`aperas check-links`)**",
-    "text": "**Link Integrity Checking built (`aperas check-links`)**: resolved — the drift-style check has been built (`checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core`). It scans for live nodes where internal link codes exist in `node.text` but have no corresponding resolved `Link` in `.links`, and repairs them via the `--repair` flag. This catches both historical staleness and transient regressions without needing to know the root cause (see [Open Issues](#id/BlockNode:00CGMWQ6T0001)).",
+    "links": [
+      {
+        "@id": "BlockNode:00CH5FJMDR001:links:Link:00CH5FJQV0000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJMDR001:links:Link:00CH5FJQV0000:props:StringProp:00CH5FJQV0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.3 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reordering and clarification of the Mechanics section for inserting and updating list items, to explicitly warn against a newly discovered failure mode where updating an existing list item by piping a bulleted string accidentally nests it (by replacing its children with a new list, rather than adopting a bare paragraph's text).",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CH5FJMDR002",
+      "BlockNode:00CH5FJME0000",
+      "BlockNode:00CH5FJME0001",
+      "BlockNode:00CH5FJME8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CH5FJMDR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CH5FJMDR002:links:Link:00CH5FJQV0002",
+        "@type": "Link",
+        "target": "BlockNode:00CGN8W9M8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJMDR002:links:Link:00CH5FJQV0002:props:StringProp:00CH5FJQV0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.3",
+    "text": "Supersedes: [v2.2's own status line](#id/BlockNode:00CGN8W9M8003)",
+    "parent": "BlockNode:00CH5FJMDR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CH5FJMDR003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CH5FJMDR003",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.3** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CH5FJMDR002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613WG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8000:props:StringProp:00CH5FJQV8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8002",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613WG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8002:props:StringProp:00CH5FJQV8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "98"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8004",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613WG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8004:props:StringProp:00CH5FJQV8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "147"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8006",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613WG009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQV8006:props:StringProp:00CH5FJQV8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "217"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQVG000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613WG00A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQVG000:props:StringProp:00CH5FJQVG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "280"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQVG002",
+        "@type": "Link",
+        "target": "BlockNode:00CGN8W9MG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CH5FJME0000:links:Link:00CH5FJQVG002:props:StringProp:00CH5FJQVG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "342"
+          }
+        ]
+      }
+    ],
+    "title": "### Mechanics — list manipulation section rewritten",
+    "text": "Supersedes: [v2's own \"Adding an item to an existing list\" heading](#id/BlockNode:00CGF613WG005), [its depth caveat](#id/BlockNode:00CGF613WG006), [its ordered-list safe-route paragraph](#id/BlockNode:00CGF613WG008), [its unordered list instruction](#id/BlockNode:00CGF613WG009), [its input-rules paragraph](#id/BlockNode:00CGF613WG00A), and [v2.2's run-leader fix](#id/BlockNode:00CGN8W9MG008).",
+    "parent": "BlockNode:00CH5FJMDR001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0001",
+    "@type": "BlockNode",
+    "title": "### Inserting an item into an existing list",
+    "text": "For an **unordered** list, the safest and cleanest route is to insert the new item directly as a sibling of an existing one: `aperas insert <parent> --after <existing-item>`.",
+    "parent": "BlockNode:00CH5FJMDR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CH5FJME0002",
+      "BlockNode:00CH5FJME0003",
+      "BlockNode:00CH5FJME0004",
+      "BlockNode:00CH5FJME0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CH5FJME0002:props:StringProp:00CH5FJQT8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0002:props:StringProp:00CH5FJQT8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The input rule**",
+    "text": "**The input rule**: Pipe the bare item text **with its bullet marker** (e.g. `- new item`).",
+    "parent": "BlockNode:00CH5FJME0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0003",
+    "@type": "BlockNode",
+    "title": "**Never pipe plain text** with no bullet",
+    "text": "**Never pipe plain text** with no bullet: it parses as a `paragraph`, which breaks a contiguous list run in two.",
+    "parent": "BlockNode:00CH5FJME0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0004",
+    "@type": "BlockNode",
+    "title": "00CH5FJME0004",
+    "text": "Should you meet an item nested inside a wrapper list, promote it out with `aperas insert <item-id> --after <existing-direct-child-of-the-list>` and `aperas remove` the emptied wrapper.",
+    "parent": "BlockNode:00CH5FJME0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0005",
+    "@type": "BlockNode",
+    "title": "00CH5FJME0005",
+    "text": "For an **ordered** list, direct insertion is riskier because a freshly inserted item becomes its own run-leader and can restart the numbering rather than continuing it. (Though a recent fix clears this for the common case of landing next to a plain continuation item, landing next to a run-leader still renders a spurious blank line). \nThe safer route for ordered lists is to target the list's **parent heading** (`aperas update <heading-id>`) and pipe the heading line plus the *complete* list (every existing item verbatim plus the new one).",
+    "parent": "BlockNode:00CH5FJME0001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CH5FJME0006",
+      "BlockNode:00CH5FJME8000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CH5FJME0006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CH5FJME0006:props:StringProp:00CH5FJQTG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CH5FJME0006:props:StringProp:00CH5FJQTG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CH5FJME0006",
+    "text": "Exact-key matching reuses every unchanged item's id, **but only while every item keeps its parent and depth**. A push that changes item depth (e.g. regrouping under sub-headings) recreates everything; use `aperas insert` (moves) for that instead.",
+    "parent": "BlockNode:00CH5FJME0005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME8000",
+    "@type": "BlockNode",
+    "title": "00CH5FJME8000",
+    "text": "**This only works if the piped content is genuinely complete.** Piping the heading plus *only* the new item reconciles the existing ones away as removed, tombstoning real content.",
+    "parent": "BlockNode:00CH5FJME0005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME8001",
+    "@type": "BlockNode",
+    "title": "### Updating an existing list item",
+    "text": "To update the text of an *existing* list item without changing its identity, use `aperas update <item-id>`.",
+    "parent": "BlockNode:00CH5FJMDR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CH5FJME8002",
+      "BlockNode:00CH5FJME8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CH5FJME8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CH5FJME8002:props:StringProp:00CH5FJQTR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CH5FJME8002:props:StringProp:00CH5FJQTR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The input rule**",
+    "text": "**The input rule**: Pipe the bare text **without any bullet marker** (e.g. `updated text`, never `- updated text`).",
+    "parent": "BlockNode:00CH5FJME8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CH5FJME8003",
+    "@type": "BlockNode",
+    "title": "**Explanation**",
+    "text": "**Explanation**: The target node is already a `listItem`. If you pipe a `- `, the parser sees a *new list*, and `update` will replace the existing item's children with this new list, resulting in a nested list rendering bug (`- - updated text`). By piping bare text, it parses as a paragraph, and `update` correctly adopts its text into the existing list item.",
+    "parent": "BlockNode:00CH5FJME8001",
     "type": "listItem",
     "children": []
   }

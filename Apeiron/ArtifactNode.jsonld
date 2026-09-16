@@ -504,14 +504,15 @@
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
     "children": [
-      "BlockNode:00CE8XWZJR001"
+      "BlockNode:00CE8XWZJR001",
+      "BlockNode:00CH5FJMDR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "aecc8caddab02ae1820586970bacfbce17d41153789f557f3d9bd5fa462e25cd",
+    "fileHash": "76ed45b52730c30655379f3d4729d0318da8c5f96dbb92e040807fdb89d7c6d2",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "aecc8caddab02ae1820586970bacfbce17d41153789f557f3d9bd5fa462e25cd",
-    "lastIngestedAt": "2026-09-15T09:56:53.633Z",
-    "projectedHash": "aecc8caddab02ae1820586970bacfbce17d41153789f557f3d9bd5fa462e25cd"
+    "ingestedHash": "76ed45b52730c30655379f3d4729d0318da8c5f96dbb92e040807fdb89d7c6d2",
+    "lastIngestedAt": "2026-09-16T04:45:32.898Z",
+    "projectedHash": "76ed45b52730c30655379f3d4729d0318da8c5f96dbb92e040807fdb89d7c6d2"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",

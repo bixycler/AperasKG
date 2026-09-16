@@ -1200,3 +1200,38 @@ Fixed for the common case: <a name='id/BlockNode:00CGN8W9MG008' class='aperas-an
 Supersedes: [v2's own open-tool-gaps line](#id/BlockNode:00CGF613WG018)
 
 Tracked in the graph rather than accumulating here: <a name='id/BlockNode:00CGN8W9MG00A' class='aperas-anchor aperas-id'></a> links silently failing to persist or resolve, confirmed twice in one session by unrelated mechanisms, with nothing detecting either automatically (`issues/linking.md`); `aperas resolve`'s title-ambiguity check not filtering tombstoned candidates, so a dead holder can still make a live path read as ambiguous (`discussion/core.md`'s Freeflow); a pre-existing, unreproduced `verify.ts` failure in the id-anchor emission idempotency check for list items/paragraphs (`planning/linking.md`'s Task Breakdown).
+
+## v2.3 additions — delta on the v2 snapshot <a name='id/BlockNode:00CH5FJMDR001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reordering and clarification of the Mechanics section for inserting and updating list items, to explicitly warn against a newly discovered failure mode where updating an existing list item by piping a bulleted string accidentally nests it (by replacing its children with a new list, rather than adopting a bare paragraph's text).
+
+### Top matter — Status bumped to v2.3 <a name='id/BlockNode:00CH5FJMDR002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.2's own status line](#id/BlockNode:00CGN8W9M8003)
+
+Status: <a name='id/BlockNode:00CH5FJMDR003' class='aperas-anchor aperas-id'></a> **v2.3** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Mechanics — list manipulation section rewritten <a name='id/BlockNode:00CH5FJME0000' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own "Adding an item to an existing list" heading](#id/BlockNode:00CGF613WG005), [its depth caveat](#id/BlockNode:00CGF613WG006), [its ordered-list safe-route paragraph](#id/BlockNode:00CGF613WG008), [its unordered list instruction](#id/BlockNode:00CGF613WG009), [its input-rules paragraph](#id/BlockNode:00CGF613WG00A), and [v2.2's run-leader fix](#id/BlockNode:00CGN8W9MG008).
+
+### Inserting an item into an existing list <a name='id/BlockNode:00CH5FJME0001' class='aperas-anchor aperas-id'></a>
+
+For an **unordered** list, the safest and cleanest route is to insert the new item directly as a sibling of an existing one: `aperas insert <parent> --after <existing-item>`.
+
+- **The input rule**: <a name='id/BlockNode:00CH5FJME0002' class='aperas-anchor aperas-id'></a> Pipe the bare item text **with its bullet marker** (e.g. `- new item`).
+- **Never pipe plain text** with no bullet: <a name='id/BlockNode:00CH5FJME0003' class='aperas-anchor aperas-id'></a> it parses as a `paragraph`, which breaks a contiguous list run in two.
+- Should you meet an item nested inside a wrapper list, promote it out with `aperas insert <item-id> --after <existing-direct-child-of-the-list>` and `aperas remove` the emptied wrapper.
+
+For an **ordered** list, direct insertion is riskier because a freshly inserted item becomes its own run-leader and can restart the numbering rather than continuing it. (Though a recent fix clears this for the common case of landing next to a plain continuation item, landing next to a run-leader still renders a spurious blank line). 
+The safer route for ordered lists is to target the list's **parent heading** (`aperas update <heading-id>`) and pipe the heading line plus the *complete* list (every existing item verbatim plus the new one).
+
+- Exact-key matching reuses every unchanged item's id, **but only while every item keeps its parent and depth**. A push that changes item depth (e.g. regrouping under sub-headings) recreates everything; use `aperas insert` (moves) for that instead.
+- **This only works if the piped content is genuinely complete.** Piping the heading plus *only* the new item reconciles the existing ones away as removed, tombstoning real content.
+
+### Updating an existing list item <a name='id/BlockNode:00CH5FJME8001' class='aperas-anchor aperas-id'></a>
+
+To update the text of an *existing* list item without changing its identity, use `aperas update <item-id>`.
+
+- **The input rule**: <a name='id/BlockNode:00CH5FJME8002' class='aperas-anchor aperas-id'></a> Pipe the bare text **without any bullet marker** (e.g. `updated text`, never `- updated text`).
+- **Explanation**: <a name='id/BlockNode:00CH5FJME8003' class='aperas-anchor aperas-id'></a> The target node is already a `listItem`. If you pipe a `- `, the parser sees a *new list*, and `update` will replace the existing item's children with this new list, resulting in a nested list rendering bug (`- - updated text`). By piping bare text, it parses as a paragraph, and `update` correctly adopts its text into the existing list item.
