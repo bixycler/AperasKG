@@ -1311,3 +1311,23 @@ Status: <a name='id/BlockNode:00CJ02MMER002' class='aperas-anchor aperas-id'></a
 The first line of any `aperas tree` render is a breadcrumb, `aperas://tree/<path>` — the walkable path of the node the command was actually pointed at (`.` if none given), directly reusable as a `<ref>` elsewhere with no separate `aperas path` call. It appears exactly once, at the top: every line under it is already relative to that node by construction (that is what a tree render is), so repeating the prefix on each one would say nothing new. Omitted, not shown broken, when the node's own path can't be walked.
 
 `--view` reuses the same idea at a second place it's actually needed: when a link escapes its owner's own viewcone into a nested one (Aperas-treeview-design.md §13 — the target is unfolded independently, and the link, not the target's own structural position, wins canonical placement), everything under that link is now relative to *it*, not to the render's original apex. That position gets its own one-time breadcrumb too, indented to match, for the same reason the apex gets one. An ordinary in-cone link (target already reachable from the apex the normal way) or a "this is superseded, see elsewhere" pointer line needs neither — nothing changes what "here" means at those positions.
+
+## v2.7 additions — delta on the v2 snapshot <a name='id/BlockNode:00CJ5207P8001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). A block's `type` — heading depth included — became changeable in place, closing the last case where *Preserve identity* had no identity-preserving route and `remove` + `insert` was the only option. Built and verified the same session it was designed (discussion/core.md's own working record).
+
+### Top matter — Status bumped to v2.7 <a name='id/BlockNode:00CJ5207P8002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.6's own status line](#id/BlockNode:00CJ02MMER002)
+
+Status: <a name='id/BlockNode:00CJ5207P8003' class='aperas-anchor aperas-id'></a> **v2.7** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Discipline — a type or heading-depth change no longer costs identity <a name='id/BlockNode:00CJ5207PG000' class='aperas-anchor aperas-id'></a>
+
+A **type or heading-depth change** used to be a fourth way into that destruction, and the least obvious: every ordinary write pins `type` to the target's existing one and refuses a depth change outright, so converting a heading into a list item had no route but `remove` + `insert`. `aperas retype <ref> --to <type>` now does it in place with identity intact (*Mechanics*). Nothing else here relaxes — it is one narrow migration channel, not a licence to restructure through ordinary edits.
+
+### Mechanics — `aperas retype`, changing a block's type without losing it <a name='id/BlockNode:00CJ5207PG001' class='aperas-anchor aperas-id'></a>
+
+`aperas retype <ref> --to <type>` converts a live block in place: `h1`..`h6` (a heading's depth is part of its type, so `h2` → `h3` is an ordinary retype), or `paragraph`/`listItem`/`code`/`blockquote`/`html`/`table`/`thematicBreak`. Id, `links`, children, parent and position all survive; type-specific props belonging to the type being left behind (a heading's `treeAnchor`, a `listItem`'s `orderedList`/`startIndex`/`checked`) are dropped rather than carried forward stale. Refactoring/migration only.
+
+Crossing the heading/non-heading boundary migrates the title too, because the two store it in different places — a heading's own field versus a lead-in term folded into `.text`. Heading → non-heading folds the heading's words into the text as a `**words**: <body>` lead-in and derives the new title from that; non-heading → heading cuts the existing lead-in back out into the heading line, leaving the rest as its body. The two directions round-trip exactly on that canonical shape. A depth-only change, or one between two non-heading types, never touches `.text` at all. Nothing to fold or cut — no lead-in, or one that is not a single fully-bold span — degrades to an id-fallback title with `.text` untouched, and says so rather than guessing.

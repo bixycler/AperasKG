@@ -17215,7 +17215,9 @@
       "BlockNode:00CGMKC32R001",
       "BlockNode:00CGMKCD20001",
       "BlockNode:00CGQDBM58000",
-      "BlockNode:00CGR1F620001"
+      "BlockNode:00CGR1F620001",
+      "BlockNode:00CJ4H44J8001",
+      "BlockNode:00CJ4X8VB0001"
     ]
   },
   {
@@ -29129,7 +29131,8 @@
       "BlockNode:00CF1276D0001",
       "BlockNode:00CGF83D4G001",
       "BlockNode:00CGG7BN40001",
-      "BlockNode:00CGMX88R0001"
+      "BlockNode:00CGMX88R0001",
+      "BlockNode:00CJ4H8ZJ0001"
     ]
   },
   {
@@ -29648,6 +29651,274 @@
     "text": "**Resolved**: root cause was a scope mismatch shared with `check-links --repair`'s own bug above — `kg:update --text-only`'s `collectOldWikilinksByBlock(target, ...)` recursed into `target`'s *existing* children by default, while its own `pendingLinks` covers only `target` itself plus the freshly piped `overflow`. `resolveBlockLinks`'s key-union then reprocessed every untouched existing child with zero pending codes, wiping its real `.links`. Fixed the same way: `collectOldWikilinksByBlock` gained a `recursive` flag, and `kg:update` now passes `recursive: false` specifically for `--text-only` (the reconcile branch stays recursive, correctly, since its `pendingLinks` already covers the whole subtree). `verify:slow` gained a dedicated step (20) with a parent-plus-real-child fixture, asserting the child's `Link` id survives a `--text-only` update to the parent untouched — confirmed to fail against the pre-fix code and pass against the fix. Verified live against the actual corpus too: re-running the exact `--text-only` update on [`BlockNode:00CGMWQ6T0001`](../issues/linking.md#id/BlockNode:00CGMWQ6T0001) that triggered this twice during (1)/(3)'s own write-up left both children's `Link` ids completely unchanged, with no integrity warning. Full account in [discussion/linking.md](../discussion/linking.md#id/BlockNode:00CJ2WQ1SR001).",
     "parent": "BlockNode:00CJ38Z8T0001",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4H44J8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ4H44J8001:props:StringProp:00CJ4H4718000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ4H44J8001:props:StringProp:00CJ4H4718001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`aperas retype` — an identity-preserving block type-conversion channel, for refactoring/migration only**",
+    "text": "**`aperas retype` — an identity-preserving block type-conversion channel, for refactoring/migration only**: agreed, built and verified 2026-09-17; the entries below are this design's own working record, in the order it actually went. Today a block's `type` is pinned everywhere a write could touch it: `kgUpdate.ts` builds both its `--text-only` and reconcile shapes with `type: target.type`, so a piped input's own type is never adopted; `reconcileTree` could not pair the two sides anyway, since containers match partitioned `byType` (a `listItem` and a `heading` land in different buckets and never meet) and leaves match on `leafKey`, which keys a heading on `.title` and a paragraph on `.text` — unequal by construction, in the cross-parent salvage stage too. `kg:update` separately refuses a heading depth change outright (`oldDepth !== newDepth` throws). Each guard is correct on its own: an ordinary edit must never silently restructure. Together they leave no in-place route at all, so the only way to change a block's type today is `remove` + `insert`, which tombstones the id and every citation pointing at it — precisely what *Preserve identity* exists to prevent.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CJ50DWW0001",
+      "BlockNode:00CJ4H44J8002",
+      "BlockNode:00CJ4H44J8003",
+      "BlockNode:00CJ4H44J8004",
+      "BlockNode:00CJ4XG0RG001",
+      "BlockNode:00CJ4H44J8005",
+      "BlockNode:00CJ4H44J8006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ4H44J8002",
+    "@type": "BlockNode",
+    "title": "The data model has no objection",
+    "text": "The data model has no objection: `reconcile.ts`'s `carryForwardFields` carries `blockId` and `links` onto the **new** node and pointedly does *not* carry `type`, so \"same identity, different type\" is already expressible. Only the CLI pin and the matcher stand in the way, which is what makes this a narrow addition rather than an architectural one.",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4H44J8003",
+    "@type": "BlockNode",
+    "title": "**Shape**",
+    "text": "**Shape**: `aperas retype <ref> --to <type>`, where `<type>` is `h1`..`h6` (heading, depth carried in the type itself) or any non-heading block type (`paragraph`, `listItem`, `code`, `blockquote`, …). Heading depth change is therefore the same operation as any other conversion (`h2` → `h3`), not a special case — one verb covers both pinned structural fields. Preserves id, `links`, children, parent and position; `.text` is never touched. Title is re-derived for the new type: an `h*` target rebuilds the heading line at the requested depth from the node's existing title words; a non-heading target re-derives via the ordinary lead-in-term rule.",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4H44J8004",
+    "@type": "BlockNode",
+    "title": "**Deliberately type-only, not a content channel**",
+    "text": "**Deliberately type-only, not a content channel**: changing a block's text stays `aperas update`'s job, run separately afterwards. The cost is a real one to design around — converting a heading away from `heading` re-derives its title from `.text`, which for a heading is its *body* (the consumed leading paragraph) and normally carries no lead-in term, so the title falls back to the raw block id and the heading's own words survive only in whatever the operator captured first. The verb must therefore report the outgoing title in its own result line, and warn when a conversion is about to leave a node titled by id fallback, so a migration can compose the follow-up `update --text-only` from it rather than recovering it from `git`.",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4H44J8005",
+    "@type": "BlockNode",
+    "title": "**Props**",
+    "text": "**Props**: a type-specific prop is meaningless on the new type (a heading's `treeAnchor`; a `listItem`'s `orderedList`/`startIndex`/`checked`), so a conversion drops the ones belonging to the old type rather than carrying stale state forward. Not a concern for the migration that motivated this — none of the 16 nodes involved carries an anchor prop — but it is the kind of leftover that turns into a rendering bug later.",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4H44J8006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ4H44J8006:links:Link:00CJ4H471G000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ37GPRR009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ4H44J8006:links:Link:00CJ4H471G000:props:StringProp:00CJ4H471G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "21"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ4H44J8006:links:Link:00CJ4H471G002",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV5A800C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ4H44J8006:links:Link:00CJ4H471G002:props:StringProp:00CJ4H471G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "487"
+          }
+        ]
+      }
+    ],
+    "title": "**Motivating case**",
+    "text": "**Motivating case**: [discussion/linking.md's Freeflow](../discussion/linking.md#id/BlockNode:00CJ37GPRR009) holds 16 `##` headings that were moved under a `## Freeflow` heading, which markdown cannot nest — re-parsed from its own projection that section has zero children and all 16 read as siblings. Converting them to lead-in-term `listItem`s is what makes the grouping structural rather than only intended, since list items nest by indentation with no H6 ceiling — the same argument [issues/linking.md's \"Heading-in-list\"](../issues/linking.md#id/BlockNode:00CDBYV5A800C) already settled for titles. All 43 real citations into those 16 use `#id/BlockNode:` fragments, so they survive the conversion untouched.",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4H8ZJ0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ4H8ZJ0001:links:Link:00CJ4H91T0002",
+        "@type": "Link",
+        "target": "BlockNode:00CJ4H44J8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ4H8ZJ0001:links:Link:00CJ4H91T0002:props:StringProp:00CJ4H91T0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1046"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ4H8ZJ0001:props:StringProp:00CJ4H91T0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ4H8ZJ0001:props:StringProp:00CJ4H91T0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CJ4H8ZJ0001",
+    "text": "**This doc's own Freeflow grouping does not round-trip, and that is what makes the heading→lead-in-term refactor structural rather than cosmetic.** The 16 entries below `## Freeflow` were moved under it as real children, but they are themselves `##` headings, and markdown nests headings by `#` count alone — so a `##` under a `##` is a sibling on re-read, not a child. Confirmed by parsing this file's own projection: `## Freeflow` comes back with **zero** children and all 16 entries re-parse as its siblings. A corpus-wide scan finds exactly these 16 and nothing else, so it is not a pre-existing pattern. Nothing is lost today (the graph is the source, and the `id/` anchors mean every id survives a re-read), but any actual re-ingest of this path would silently flatten the grouping back out. The fix is converting them to lead-in-term `listItem`s, which nest by indentation and so carry unbounded depth — verified live that a three-level nested list round-trips intact. Blocked on an identity-preserving type-conversion channel, planned in [discussion/core.md](../discussion/core.md#id/BlockNode:00CJ4H44J8001); `remove`+`insert` is the only route today and would tombstone 19 blocks carrying 34 incoming citations.",
+    "parent": "BlockNode:00CJ37GPRR009",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4X8VB0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T17:22:37.082Z",
+    "title": "00CJ4X8VB0001",
+    "text": "**Automatic title migration across the heading boundary — built, not left to a manual follow-up.** Reconsidered from the item below: a heading and a non-heading store their title in genuinely different places (a field vs. a lead-in folded into `.text`), so crossing that boundary now migrates the title *with* the type, in whichever direction applies, instead of leaving the operator to compose a follow-up `update`. Heading → non-heading folds the heading's own words into `.text` as a canonical `**words**: <body>` lead-in — the always-uncapped shape, since the whole span before the colon sits inside one bold node — then derives the new title from that text via the real parser, not a hand-built guess. Non-heading → heading does the exact inverse: cuts the existing lead-in back out using `findLeadInSpliceOffset` (`astParser.ts`), the identical colon `project.ts`'s own anchor splice already relies on, so the cut lands exactly where the title was actually derived from. Verified live on the corpus's hardest real case (`kg:update`/`kg:insert` never resolve wikilinks — a title with embedded backtick colons and an em-dash): converts to a `listItem` with both links intact, and converting back reproduces the original title and text byte-for-byte. A depth-only heading change (`h2` → `h3`) and a non-heading → non-heading retype still never touch `.text` at all — only actually crossing the boundary does. The one remaining gap is a lead-in that isn't a single, fully-bold span, or missing entirely: that degrades to the old id-fallback behavior, `.text` left alone, `untitled` reported — the same graceful failure the parser already uses everywhere else.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ4XG0RG001",
+    "@type": "BlockNode",
+    "title": "**Automatic title migration across the heading boundary, built in rather than left to a manual follow-up**",
+    "text": "**Automatic title migration across the heading boundary, built in rather than left to a manual follow-up**: reconsidered from the item above — a heading and a non-heading store their title in genuinely different places (a field vs. a lead-in folded into `.text`), so crossing that boundary now migrates the title *with* the type, in whichever direction applies. Heading → non-heading folds the heading's own words into `.text` as a canonical `**words**: <body>` lead-in — the always-uncapped shape, since the whole span before the colon sits inside one bold node — then derives the new title from that text via the real parser, not a hand-built guess. Non-heading → heading does the exact inverse: cuts the existing lead-in back out using `findLeadInSpliceOffset` (`astParser.ts`), the identical colon `project.ts`'s own anchor splice already relies on, so the cut lands exactly where the title was actually derived from. Verified live on the corpus's hardest real case (`kg:update`/`kg:insert` never resolve wikilinks — a title with embedded backtick colons and an em-dash): converts to a `listItem` with both links intact, and converting back reproduces the original title and text byte-for-byte. A depth-only heading change (`h2` → `h3`) and a non-heading → non-heading retype still never touch `.text` at all — only actually crossing the boundary does. The one remaining gap is a lead-in that isn't a single, fully-bold span, or missing entirely: that degrades to the old id-fallback behavior, `.text` left alone, `untitled` reported — the same graceful failure the parser already uses everywhere else.",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ50DWW0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T17:29:27.864Z",
+    "title": "00CJ50DWW0001",
+    "text": "placeholder-anchor-remove-me",
+    "parent": "BlockNode:00CJ4H44J8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5207P8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ5207P8001:links:Link:00CJ5209Q0000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ5207P8001:links:Link:00CJ5209Q0000:props:StringProp:00CJ5209Q8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.7 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). A block's `type` — heading depth included — became changeable in place, closing the last case where *Preserve identity* had no identity-preserving route and `remove` + `insert` was the only option. Built and verified the same session it was designed (discussion/core.md's own working record).",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ5207P8002",
+      "BlockNode:00CJ5207PG000",
+      "BlockNode:00CJ5207PG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ5207P8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ5207P8002:links:Link:00CJ5209Q8001",
+        "@type": "Link",
+        "target": "BlockNode:00CJ02MMER002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ5207P8002:links:Link:00CJ5209Q8001:props:StringProp:00CJ5209Q8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.7",
+    "text": "Supersedes: [v2.6's own status line](#id/BlockNode:00CJ02MMER002)",
+    "parent": "BlockNode:00CJ5207P8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ5207P8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ5207P8003",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.7** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CJ5207P8002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5207PG000",
+    "@type": "BlockNode",
+    "title": "### Discipline — a type or heading-depth change no longer costs identity",
+    "text": "A **type or heading-depth change** used to be a fourth way into that destruction, and the least obvious: every ordinary write pins `type` to the target's existing one and refuses a depth change outright, so converting a heading into a list item had no route but `remove` + `insert`. `aperas retype <ref> --to <type>` now does it in place with identity intact (*Mechanics*). Nothing else here relaxes — it is one narrow migration channel, not a licence to restructure through ordinary edits.",
+    "parent": "BlockNode:00CJ5207P8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5207PG001",
+    "@type": "BlockNode",
+    "title": "### Mechanics — `aperas retype`, changing a block's type without losing it",
+    "text": "`aperas retype <ref> --to <type>` converts a live block in place: `h1`..`h6` (a heading's depth is part of its type, so `h2` → `h3` is an ordinary retype), or `paragraph`/`listItem`/`code`/`blockquote`/`html`/`table`/`thematicBreak`. Id, `links`, children, parent and position all survive; type-specific props belonging to the type being left behind (a heading's `treeAnchor`, a `listItem`'s `orderedList`/`startIndex`/`checked`) are dropped rather than carried forward stale. Refactoring/migration only.",
+    "parent": "BlockNode:00CJ5207P8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ5207PG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ5207PG002",
+    "@type": "BlockNode",
+    "title": "00CJ5207PG002",
+    "text": "Crossing the heading/non-heading boundary migrates the title too, because the two store it in different places — a heading's own field versus a lead-in term folded into `.text`. Heading → non-heading folds the heading's words into the text as a `**words**: <body>` lead-in and derives the new title from that; non-heading → heading cuts the existing lead-in back out into the heading line, leaving the rest as its body. The two directions round-trip exactly on that canonical shape. A depth-only change, or one between two non-heading types, never touches `.text` at all. Nothing to fold or cut — no lead-in, or one that is not a single fully-bold span — degrades to an id-fallback title with `.text` untouched, and says so rather than guessing.",
+    "parent": "BlockNode:00CJ5207PG001",
+    "type": "paragraph",
     "children": []
   }
 ]

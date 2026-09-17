@@ -61,11 +61,11 @@
       "BlockNode:00CDBZ76T8001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "feb82c3c5ac6eff86cfa6d6fcc998093712e77225e6bdac40ed1ab6c023e3fb6",
+    "fileHash": "b81b6ca953e2cdf26ea236f49fc4f5255d9c982c5f25e5ab010e4580d50c6884",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "feb82c3c5ac6eff86cfa6d6fcc998093712e77225e6bdac40ed1ab6c023e3fb6",
-    "lastIngestedAt": "2026-09-17T15:59:22.447Z",
-    "projectedHash": "feb82c3c5ac6eff86cfa6d6fcc998093712e77225e6bdac40ed1ab6c023e3fb6"
+    "ingestedHash": "b81b6ca953e2cdf26ea236f49fc4f5255d9c982c5f25e5ab010e4580d50c6884",
+    "lastIngestedAt": "2026-09-17T16:56:18.880Z",
+    "projectedHash": "b81b6ca953e2cdf26ea236f49fc4f5255d9c982c5f25e5ab010e4580d50c6884"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
@@ -503,14 +503,15 @@
       "BlockNode:00CH5FJMDR001",
       "BlockNode:00CHXVEW98001",
       "BlockNode:00CHYJ6PR8001",
-      "BlockNode:00CJ02BTG0001"
+      "BlockNode:00CJ02BTG0001",
+      "BlockNode:00CJ5207P8001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "8d6d05c19955b7125e592648595fe353959d131dc350e13a9fa3172ba8e70fc8",
+    "fileHash": "bdf71fd5374711bf0d0fceaed8992aa526104d8817cd2b64065a2ccf23fe7342",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "8d6d05c19955b7125e592648595fe353959d131dc350e13a9fa3172ba8e70fc8",
-    "lastIngestedAt": "2026-09-17T11:45:10.122Z",
-    "projectedHash": "8d6d05c19955b7125e592648595fe353959d131dc350e13a9fa3172ba8e70fc8"
+    "ingestedHash": "bdf71fd5374711bf0d0fceaed8992aa526104d8817cd2b64065a2ccf23fe7342",
+    "lastIngestedAt": "2026-09-17T17:33:14.557Z",
+    "projectedHash": "bdf71fd5374711bf0d0fceaed8992aa526104d8817cd2b64065a2ccf23fe7342"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -618,11 +619,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "194ebc3783a66db594ae993dd7bbf2f75b14a87258b354b0dd7f5a916f899970",
+    "fileHash": "fd20b289031c9b4fd2e1ede8f260f82bb04d1e8e01626baf3cf6a76b1f62793c",
     "lastTrackedAt": "2026-09-12T22:28:41.435Z",
-    "ingestedHash": "194ebc3783a66db594ae993dd7bbf2f75b14a87258b354b0dd7f5a916f899970",
-    "lastIngestedAt": "2026-09-17T09:15:22.211Z",
-    "projectedHash": "194ebc3783a66db594ae993dd7bbf2f75b14a87258b354b0dd7f5a916f899970"
+    "ingestedHash": "fd20b289031c9b4fd2e1ede8f260f82bb04d1e8e01626baf3cf6a76b1f62793c",
+    "lastIngestedAt": "2026-09-17T17:29:42.893Z",
+    "projectedHash": "fd20b289031c9b4fd2e1ede8f260f82bb04d1e8e01626baf3cf6a76b1f62793c"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
