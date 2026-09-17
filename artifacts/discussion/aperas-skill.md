@@ -1235,3 +1235,47 @@ To update the text of an *existing* list item without changing its identity, use
 
 - **The input rule**: <a name='id/BlockNode:00CH5FJME8002' class='aperas-anchor aperas-id'></a> Pipe the bare text **without any bullet marker** (e.g. `updated text`, never `- updated text`).
 - **Explanation**: <a name='id/BlockNode:00CH5FJME8003' class='aperas-anchor aperas-id'></a> The target node is already a `listItem`. If you pipe a `- `, the parser sees a *new list*, and `update` will replace the existing item's children with this new list, resulting in a nested list rendering bug (`- - updated text`). By piping bare text, it parses as a paragraph, and `update` correctly adopts its text into the existing list item.
+
+## v2.4 additions — delta on the v2 snapshot <a name='id/BlockNode:00CHXVEW98001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). This round is a correctness/completeness pass, not new discipline: a user-requested review of the GC-persistence and link-integrity-check fixes found both incomplete on first landing, fixed for real here, plus the frontmatter reformat (`>-` block scalar) that had never been re-recorded since it landed.
+
+### Top matter — frontmatter reformatted, never re-recorded until now <a name='id/BlockNode:00CHXVP090001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2's own frontmatter block](#id/BlockNode:00CGF613VR002)
+
+```
+---
+name: aperas
+description: >-
+  Before anything else in this project — first turn, every session, whatever the task looks like,
+  including when it looks unrelated, trivial, read-only, or like one quick lookup — check memory
+  for a standing decision on whether Aperas manages this session. Do this without loading this
+  skill, and never ask permission to do it or offer it as an option; just do it. If a decision
+  is recorded, follow it. If none is, ask with AskUserQuestion using exactly these choices —
+  Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions'
+  or 'never' durably, so a session-scoped answer is asked again next session. Load this skill
+  only once the answer is yes; it then governs the work — orient in the graph before acting,
+  change it through the CLI rather than by editing files, put back what the work turns up.
+  Aperas is this project's external memory: a knowledge graph, worked through the `aperas` CLI,
+  holding what has been decided, tried, found and planned. For first-time ingest of existing
+  documents, `kg-doc-ingest` covers that; this one first.
+---
+
+```
+
+### Reference — open tool gaps, refreshed again <a name='id/BlockNode:00CHXVT8BR001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.2's own open-tool-gaps line](#id/BlockNode:00CGN8W9MG00A)
+
+Tracked in the graph rather than accumulating here: <a name='id/BlockNode:00CHXVWW68002' class='aperas-anchor aperas-id'></a> `aperas resolve`'s title-ambiguity check not filtering tombstoned candidates, so a dead holder can still make a live path read as ambiguous (`discussion/core.md`'s Freeflow). The link-integrity drift check this list used to name as missing is built and live (`aperas check-links`, see *Mechanics* — `issues/linking.md`); the `verify.ts` id-anchor emission idempotency failure this list used to name as unreproduced is also fixed and passing (`discussion/core.md`).
+
+### Mechanics — `aperas check-links` documented <a name='id/BlockNode:00CHXVYA0R001' class='aperas-anchor aperas-id'></a>
+
+Answers exactly the question dense linking depends on and nothing else routinely checks: does every internal-style reference a live block's text actually names (`[[code]]`, `aperas://...`, `path#fragment`) have a matching resolved `Link` in that block's own `.links`? `aperas check-links` reports discrepancies; `aperas check-links --repair` re-resolves and flushes them in the same call. It resolves each occurrence for real (the same dispatch `kg:update`/`kg:insert` themselves use, read-only here — never mints a placeholder as a side effect of a scan) rather than guessing from the text, so it correctly stays silent on a code that simply doesn't resolve yet (routine, or already tracked separately as a dangling reference) and only flags a code that resolves to a live target with nothing to show for it in `.links` — the exact, previously-invisible failure mode this tool exists for.
+
+### Top matter — Status bumped to v2.4 <a name='id/BlockNode:00CHXW4S30001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.3's own status line](#id/BlockNode:00CH5FJMDR003)
+
+Status: <a name='id/BlockNode:00CHXW6FY0002' class='aperas-anchor aperas-id'></a> **v2.4** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.

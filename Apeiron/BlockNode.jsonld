@@ -16966,6 +16966,7 @@
       "BlockNode:00CF1WZ4JG006",
       "BlockNode:00CGM54FX0001",
       "BlockNode:00CGR1BM9G001",
+      "BlockNode:00CHXSZ56R001",
       "BlockNode:00CGM4YD4G001"
     ]
   },
@@ -26578,7 +26579,8 @@
     "parent": "BlockNode:00CGMX88R0001",
     "type": "paragraph",
     "children": [
-      "BlockNode:00CH4J9398001"
+      "BlockNode:00CH4J9398001",
+      "BlockNode:00CHXTPK08001"
     ]
   },
   {
@@ -26775,16 +26777,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGN6GJVG000:links:Link:00CH4TRXB8000:props:StringProp:00CH4TRXB8001",
+            "@id": "BlockNode:00CGN6GJVG000:links:Link:00CH4TRXB8000:props:StringProp:00CHXTED0R000",
             "@type": "StringProp",
             "key": "position",
-            "value": "451"
+            "value": "505"
           }
         ]
       }
     ],
     "title": "**Link Integrity Checking built (`aperas check-links`)**",
-    "text": "**Link Integrity Checking built (`aperas check-links`)**: resolved — the drift-style check has been built (`checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core`). It scans for live nodes where internal link codes exist in `node.text` but have no corresponding resolved `Link` in `.links`, and repairs them via the `--repair` flag. This catches both historical staleness and transient regressions without needing to know the root cause (see [Open Issues](#id/BlockNode:00CGMWQ6T0001)).",
+    "text": "**Link Integrity Checking built (`aperas check-links`)**: resolved — the drift-style check has been built (`checkLinkIntegrity` and `repairLinkIntegrity` in `@aperas/core`), and its first landed version had a real gap, since fixed. It scans for live nodes where internal link codes exist in `node.text` but have no corresponding resolved `Link` in `.links`, and repairs them via the `--repair` flag, catching both historical staleness and transient regressions without needing to know the root cause (see [Open Issues](#id/BlockNode:00CGMWQ6T0001)). **Found on review, fixed**: the original match logic compared each text occurrence against `.links` by raw substring containment against the target's opaque id — reading as thorough (it correctly found and fixed 40 real historical discrepancies across 7 artifacts on its first live run) but actually sound only for codes that textually embed the id (`path#id/<ID>`, `aperas://id/<ID>`), which happens to be every code this corpus currently writes. It could not have verified `[[<deep-path>]]` addressing (`resolve.ts`'s deep-path grammar — a real, currently-live convention, \"used extensively\" in `Aperas-apeironngn-design.md`'s own self-references per `history/linking.md`) at all: a heading-path string shares no substring with the opaque id it resolves to, so a perfectly-resolved deep-path link would have been reported as missing. The one test meant to catch a genuine drop (deleting a `Link`'s `predicate` quad) also turned out to be vacuous — the match logic never reads `predicate`, and the scratch fixture already carried unrelated discrepancies of its own, so the assertion could never actually fail regardless of whether the deletion did anything (confirmed live: the count was identical before and after). **Actually fixed**: `checkLinkIntegrity` now resolves each occurrence for real via `resolveOneCode` (`artifacts.ts`, the same dispatch `resolveBlockLinks` itself uses, exported and called with `createHolder: false` so a scan can never mutate the graph as a side effect), and only reports a code that resolves to a live target with no matching entry in `.links` — an unresolved code is left alone, since that's routine (a bare `#fragment` anchor) or already `danglingRef`/`retryDanglingRefs`'s own separate concern. `verify.ts`'s step 19 replaced the vacuous predicate-quad deletion with a precise before/after discrepancy-count assertion against a real, freshly-resolved link.",
     "parent": "BlockNode:00CDBYV5A800A",
     "type": "listItem",
     "children": []
@@ -27145,8 +27147,8 @@
   {
     "@id": "BlockNode:00CGR1BM9G001",
     "@type": "BlockNode",
-    "title": "**ApeironNgn service restart and flush --clobber silently dropped GC, lacked startup GC, and hid GC metrics**",
-    "text": "**ApeironNgn service restart and flush --clobber silently dropped GC, lacked startup GC, and hid GC metrics**: `flush --clobber` performed mark-and-sweep tombstone GC (`pruneUnreachableTombstones`) and RDF deduplication without reporting what changed, while prior service restarts left disk garbage because `shutdown()`'s guarded `flushIfDirty()` refused and dropped GC/flushes whenever disk diverged externally. Service startup also omitted GC. **Resolved**: (1) added tombstone GC companion passes on boot (`rehydrateStore`), logging cleaned items to `stderr`, (2) upgraded `shutdown()` in `service.ts` to log explicit `stderr` warnings when guarded flushes fail due to disk divergence, and (3) updated `clobberFlush()` and `kgFlush.ts` to return and format exact GC metrics on flush (e.g. `[ApeironNgn kg:flush] Flushed (clobbered — 5 unreachable tombstone(s) pruned)`).",
+    "title": "**ApeironNgn service restart and `flush --clobber` silently dropped GC, startup skipped GC entirely, and every warning was unreachable regardless of wording**",
+    "text": "**ApeironNgn service restart and `flush --clobber` silently dropped GC, startup skipped GC entirely, and every warning was unreachable regardless of wording**: `flush --clobber` performed mark-and-sweep tombstone GC (`pruneUnreachableTombstones`) without reporting what changed, service startup never ran the sweep at all (`service.ts:112` calls bare `rehydrateStore()`, contradicting `reloadStore`'s own doc comment claiming startup was already a sweep boundary), and `shutdown()`'s guarded `flushIfDirty()` could silently drop a computed GC result whenever disk had diverged externally. **First pass** (this same session) added a startup GC call and clearer wording on the shutdown warnings — reviewed afterward and found both incomplete: the startup GC computed but never set `dirty`/`stateDirty` (declared *after* that block ran), so it was never actually persisted — confirmed live via `flush --clobber` finding real, hours-old backlog the first time any non-`--discard` sweep boundary was hit at all; and every message involved, old or reworded, went to `console.error`, which is unreachable in real operation since the service is spawned with `stdio: 'ignore'` unconditionally (`serviceClient.ts`, both the dev and built-bundle spawn paths) — wording clarity was irrelevant when nothing could ever see it. Separately, `kg:reload`'s own GC counts were never surfaced at all, only `flush --clobber`'s. **Actually resolved**: reordered `service.ts` so `dirty`/`stateDirty` exist before the boot sweep runs, and the sweep now flushes immediately when it finds anything (safe at cold boot — disk can't have diverged yet, this store was just read from it); added a durable `logService()` helper (`service.ts`) that appends to a `$XDG_RUNTIME_DIR`-based log file alongside `console.error`, used for the boot-GC line, the shutdown warnings, and the timed-flush error paths; `reloadStore()` now returns the same GC metrics `clobberFlush()` already did, and `kg:reload` prints them the same way `kg:flush` does. The unrelated \"RDF deduplication\" this entry previously described as part of the same fix was a mischaracterization of a distinct, real bug — see the entry below.",
     "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
@@ -27156,16 +27158,16 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CGR1F620001:links:Link:00CGR1F62R000",
+        "@id": "BlockNode:00CGR1F620001:links:Link:00CHXY9140000",
         "@type": "Link",
-        "target": "BlockNode:00CGR1BM9G001",
+        "target": "BlockNode:00CHXSZ56R001",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CGR1F620001:links:Link:00CGR1F62R000:props:StringProp:00CGR1F62R001",
+            "@id": "BlockNode:00CGR1F620001:links:Link:00CHXY9140000:props:StringProp:00CHXY9140001",
             "@type": "StringProp",
             "key": "position",
-            "value": "1084"
+            "value": "639"
           }
         ]
       }
@@ -27185,7 +27187,7 @@
       }
     ],
     "title": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**",
-    "text": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**: investigated `reload --discard` and `flush --clobber` interaction. Single-state round-trip holds for both disk state (disk -> memory -> disk) and memory quads (memory -> disk -> memory) in steady state. Mismatches observed on `flush --clobber` were traced to two automatic mechanisms: mark-and-sweep tombstone GC (`pruneUnreachableTombstones`) and RDF subject deduplication. Discovered that prior service restarts left garbage on disk because `shutdown()` used guarded `flushIfDirty()`, which silently refused and dropped GC/flushes whenever disk diverged externally (e.g. via git operations), while service startup did not run GC. Design decisions: (1) execute startup GC immediately upon rehydrating the store, (2) upgrade shutdown logging when guarded flushes are refused due to disk divergence, and (3) return GC metrics (`prunedTombstones`, `tombstonedContainers`, `prunedUnfolds`) in `flush` service responses to display explicit summary notifications in `aperas flush` — [promoted to issues/core.md](../issues/core.md#id/BlockNode:00CGR1BM9G001).",
+    "text": "**`flush --clobber` / `reload --discard` round-trip mechanics, startup GC, and shutdown logging design**: investigated `reload --discard` and `flush --clobber` interaction, live, at the user's own request after a `flush --clobber` unexpectedly removed a real backlog. Mismatches observed were traced to two *unrelated* mechanisms conflated at first: mark-and-sweep tombstone GC (`pruneUnreachableTombstones`, legitimate — the backlog really was dead) and a duplicate-`@id` collision in `Profile.jsonld` (a real, separate data bug, wrongly described here as \"RDF deduplication\" as if it were a working, intentional mechanism — corrected in [issues/core.md](../issues/core.md#id/BlockNode:00CHXSZ56R001), which now carries its own entry). Discovered that prior service restarts left GC garbage on disk because `shutdown()`'s guarded `flushIfDirty()` silently refused and dropped a computed GC result whenever disk had diverged externally, while service startup never ran the sweep at all. First design pass: (1) run the sweep at startup, (2) reword the shutdown warnings, (3) return GC metrics from `flush --clobber`. Reviewed afterward, on request, for correctness and completeness against the actual code rather than the summary of what was intended — found both (1) and (2) didn't actually work: (1) computed the sweep but never set `dirty`/`stateDirty` (declared *after* that block ran in the original patch), so nothing was ever flushed; (2) and every other service-side message, including (1)'s own new log line, went to `console.error`, which is unreachable in real operation since the service is always spawned with `stdio: 'ignore'` (`serviceClient.ts`). Actually fixed: reordered the startup sequence so the sweep can flush immediately when it finds something, and added a durable `logService()` helper (append to a `$XDG_RUNTIME_DIR`-based log file) used everywhere `console.error` alone used to be the only channel. Also closed a gap the first pass didn't touch at all: `kg:reload` never surfaced its own GC counts, only `kg:flush --clobber` did — `reloadStore()` now returns the same shape and `kg:reload` prints it the same way.",
     "parent": "BlockNode:00CF1WZE18004",
     "type": "listItem",
     "children": []
@@ -27589,6 +27591,206 @@
     "text": "**Explanation**: The target node is already a `listItem`. If you pipe a `- `, the parser sees a *new list*, and `update` will replace the existing item's children with this new list, resulting in a nested list rendering bug (`- - updated text`). By piping bare text, it parses as a paragraph, and `update` correctly adopts its text into the existing list item.",
     "parent": "BlockNode:00CH5FJME8001",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXSWEZG000",
+    "@type": "BlockNode",
+    "title": "00CHXSWEZG000",
+    "text": "**A hand-edit collapsed two distinct `Profile` documents onto one `@id`, and `rehydrateStore`/`dehydrateToJsonLd` had no way to notice** — `Apeiron/Profile.jsonld` carried two separate entries (`handle: \"claude\"` and `handle: \"antigravity\"`) both under `Profile:00CDD5NTXG000` (introduced in the same commit that renamed two other profiles into these two, `403527b`). `rehydrateStore`'s `encodeDoc` keys every quad by `@id`, so both documents' fields land on one subject; `dehydrateToJsonLd` can then only ever emit one JSON document per subject, so one of the two silently disappears on every subsequent flush/reload/clobber — confirmed live, reproduced by forcing a `flush --clobber` and watching the \"claude\" entry vanish while \"antigravity\" survived. Previously described in this same entry (before this correction) as \"RDF deduplication,\" as if it were a working, intentional mechanism — it never was; there was no duplicate-`@id` detection anywhere. The `Profile.jsonld` collision itself was already fixed in a later commit (`antigravity` now has its own distinct id) before this was root-caused. **Resolved**: `rehydrateStore`/`encodeDoc` (`store.ts`) now collect every `@id` seen more than once into a new `RehydrateResult.duplicateIds` array — surfaced, not auto-resolved (picking a winner would just be a second, quieter way to lose the same data) — and both the initial boot rehydrate and `kg:reload` log a durable warning naming every colliding id whenever the array is non-empty.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXSZ56R001",
+    "@type": "BlockNode",
+    "title": "00CHXSZ56R001",
+    "text": "**A hand-edit collapsed two distinct `Profile` documents onto one `@id`, and `rehydrateStore`/`dehydrateToJsonLd` had no way to notice** — `Apeiron/Profile.jsonld` carried two separate entries (`handle: \"claude\"` and `handle: \"antigravity\"`) both under `Profile:00CDD5NTXG000` (introduced in the same commit that renamed two other profiles into these two, `403527b`). `rehydrateStore`'s `encodeDoc` keys every quad by `@id`, so both documents' fields land on one subject; `dehydrateToJsonLd` can then only ever emit one JSON document per subject, so one of the two silently disappears on every subsequent flush/reload/clobber — confirmed live, reproduced by forcing a `flush --clobber` and watching the \"claude\" entry vanish while \"antigravity\" survived. Previously described in this same entry (before this correction) as \"RDF deduplication,\" as if it were a working, intentional mechanism — it never was; there was no duplicate-`@id` detection anywhere. The `Profile.jsonld` collision itself was already fixed in a later commit (`antigravity` now has its own distinct id) before this was root-caused. **Resolved**: `rehydrateStore`/`encodeDoc` (`store.ts`) now collect every `@id` seen more than once into a new `RehydrateResult.duplicateIds` array — surfaced, not auto-resolved (picking a winner would just be a second, quieter way to lose the same data) — and both the initial boot rehydrate and `kg:reload` log a durable warning naming every colliding id whenever the array is non-empty.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXTPK08001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHXTPK08001:links:Link:00CHXTPPQR000",
+        "@type": "Link",
+        "target": "BlockNode:00CGN6GJVG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHXTPK08001:links:Link:00CHXTPPQR000:props:StringProp:00CHXTPPRG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "492"
+          }
+        ]
+      }
+    ],
+    "title": "**Follow-up, on review**",
+    "text": "**Follow-up, on review**: the 40-discrepancy sweep above was real and its own match logic worked correctly for it, but only because every code in this corpus embeds the target's opaque id as a literal substring (`path#id/<ID>`, `aperas://id/<ID>`) — the check compared `code`/`target.id` by raw containment, which cannot verify `[[<deep-path>]]` addressing (`resolve.ts`'s deep-path grammar, a real, currently-live convention per `history/linking.md`, not covered by any of the 40). Fixed in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000) by resolving each occurrence for real instead of guessing from the string.",
+    "parent": "BlockNode:00CGMX88R0004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXVEW98001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHXVEW98001:links:Link:00CHXVHQMR000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHXVEW98001:links:Link:00CHXVHQMR000:props:StringProp:00CHXVHQMR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.4 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). This round is a correctness/completeness pass, not new discipline: a user-requested review of the GC-persistence and link-integrity-check fixes found both incomplete on first landing, fixed for real here, plus the frontmatter reformat (`>-` block scalar) that had never been re-recorded since it landed.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHXVP090001",
+      "BlockNode:00CHXVT8BR001",
+      "BlockNode:00CHXVYA0R001",
+      "BlockNode:00CHXW4S30001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHXVP090001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHXVP090001:links:Link:00CHXVRENG000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHXVP090001:links:Link:00CHXVRENG000:props:StringProp:00CHXVRENG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — frontmatter reformatted, never re-recorded until now",
+    "text": "Supersedes: [v2's own frontmatter block](#id/BlockNode:00CGF613VR002)",
+    "parent": "BlockNode:00CHXVEW98001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHXVRBT0002",
+      "BlockNode:00CHXVRBT0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHXVRBT0002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T09:13:03.887Z",
+    "title": "00CHXVRBT0002",
+    "text": "`0740b04` (\"Guard frontmatter of skills with `>-`\") reformatted the YAML `description` into a folded block scalar for parser safety, without ever re-recording the new shape here — `skill_drift.py` flagged it as \"ADDED but unrecorded\" ever since. Same words, new shape, quoted verbatim below:",
+    "parent": "BlockNode:00CHXVP090001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXVRBT0003",
+    "@type": "BlockNode",
+    "title": "00CHXVRBT0003",
+    "text": "```\n---\nname: aperas\ndescription: >-\n  Before anything else in this project — first turn, every session, whatever the task looks like,\n  including when it looks unrelated, trivial, read-only, or like one quick lookup — check memory\n  for a standing decision on whether Aperas manages this session. Do this without loading this\n  skill, and never ask permission to do it or offer it as an option; just do it. If a decision\n  is recorded, follow it. If none is, ask with AskUserQuestion using exactly these choices —\n  Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions'\n  or 'never' durably, so a session-scoped answer is asked again next session. Load this skill\n  only once the answer is yes; it then governs the work — orient in the graph before acting,\n  change it through the CLI rather than by editing files, put back what the work turns up.\n  Aperas is this project's external memory: a knowledge graph, worked through the `aperas` CLI,\n  holding what has been decided, tried, found and planned. For first-time ingest of existing\n  documents, `kg-doc-ingest` covers that; this one first.\n---\n\n```",
+    "parent": "BlockNode:00CHXVP090001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXVT8BR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHXVT8BR001:links:Link:00CHXX6MQR000",
+        "@type": "Link",
+        "target": "BlockNode:00CGN8W9MG00A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHXVT8BR001:links:Link:00CHXX6MQR000:props:StringProp:00CHXX6MQR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Reference — open tool gaps, refreshed again",
+    "text": "Supersedes: [v2.2's own open-tool-gaps line](#id/BlockNode:00CGN8W9MG00A)",
+    "parent": "BlockNode:00CHXVEW98001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHXVWW68002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHXVWW68002",
+    "@type": "BlockNode",
+    "title": "Tracked in the graph rather than accumulating here",
+    "text": "Tracked in the graph rather than accumulating here: `aperas resolve`'s title-ambiguity check not filtering tombstoned candidates, so a dead holder can still make a live path read as ambiguous (`discussion/core.md`'s Freeflow). The link-integrity drift check this list used to name as missing is built and live (`aperas check-links`, see *Mechanics* — `issues/linking.md`); the `verify.ts` id-anchor emission idempotency failure this list used to name as unreproduced is also fixed and passing (`discussion/core.md`).",
+    "parent": "BlockNode:00CHXVT8BR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXVYA0R001",
+    "@type": "BlockNode",
+    "title": "### Mechanics — `aperas check-links` documented",
+    "text": "Answers exactly the question dense linking depends on and nothing else routinely checks: does every internal-style reference a live block's text actually names (`[[code]]`, `aperas://...`, `path#fragment`) have a matching resolved `Link` in that block's own `.links`? `aperas check-links` reports discrepancies; `aperas check-links --repair` re-resolves and flushes them in the same call. It resolves each occurrence for real (the same dispatch `kg:update`/`kg:insert` themselves use, read-only here — never mints a placeholder as a side effect of a scan) rather than guessing from the text, so it correctly stays silent on a code that simply doesn't resolve yet (routine, or already tracked separately as a dangling reference) and only flags a code that resolves to a live target with nothing to show for it in `.links` — the exact, previously-invisible failure mode this tool exists for.",
+    "parent": "BlockNode:00CHXVEW98001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHXW4S30001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHXW4S30001:links:Link:00CHXX83E8000",
+        "@type": "Link",
+        "target": "BlockNode:00CH5FJMDR003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHXW4S30001:links:Link:00CHXX83E8000:props:StringProp:00CHXX83E8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.4",
+    "text": "Supersedes: [v2.3's own status line](#id/BlockNode:00CH5FJMDR003)",
+    "parent": "BlockNode:00CHXVEW98001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHXW6FY0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHXW6FY0002",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.4** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CHXW4S30001",
+    "type": "paragraph",
     "children": []
   }
 ]
