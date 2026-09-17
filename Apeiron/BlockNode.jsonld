@@ -28384,7 +28384,9 @@
       "BlockNode:00CJ2VBQR0002",
       "BlockNode:00CJ2VBQR0003",
       "BlockNode:00CJ2VBQR0004",
-      "BlockNode:00CJ2VBQR0005"
+      "BlockNode:00CJ2VBQR0005",
+      "BlockNode:00CJ7PNQ2R001",
+      "BlockNode:00CJ8E2GAR001"
     ]
   },
   {
@@ -30861,109 +30863,91 @@
     "parent": "BlockNode:00CJ6V6370001",
     "type": "heading",
     "children": [
-      "BlockNode:00CJ6V6370006",
-      "BlockNode:00CJ6V6370007",
-      "BlockNode:00CJ6V6370008",
-      "BlockNode:00CJ6V6370009",
-      "BlockNode:00CJ6V637000A",
-      "BlockNode:00CJ6V637000B",
-      "BlockNode:00CJ6V637000C",
-      "BlockNode:00CJ6V637000D",
-      "BlockNode:00CJ6V637000E"
+      "BlockNode:00CJ8FEVNR002",
+      "BlockNode:00CJ8FEVNR003",
+      "BlockNode:00CJ8FEVP0000",
+      "BlockNode:00CJ8FEVP0001",
+      "BlockNode:00CJ8FEVP0002"
     ]
   },
   {
     "@id": "BlockNode:00CJ6V6370006",
     "@type": "BlockNode",
-    "props": [
-      {
-        "@id": "BlockNode:00CJ6V6370006:props:StringProp:00CJ6V637R000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CJ6V6370006:props:StringProp:00CJ6V637R001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Extract `buildRenderTree` into `@aperas/core`**",
     "text": "**Extract `buildRenderTree` into `@aperas/core`**: promote `discoverCone`'s render plan into a returned tree of render items and redefine the text output as `toText(buildRenderTree(...))`. The existing verification suite is the guarantee — the text render must stay byte-identical. Carry it to a caller with a `format` discriminator on the existing `tree` service op.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V6370007",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Add the HTTP listener to the ApeironNgn service**",
     "text": "**Add the HTTP listener to the ApeironNgn service**: loopback-bound, serving an explicit op allowlist rather than the whole protocol, alongside the unchanged unix socket.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V6370008",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Generate and store the per-run auth token**",
     "text": "**Generate and store the per-run auth token**: `randomBytes(32)` at service start, written into the existing run directory beside the lock and socket at mode 0600, and exposed for the dev server to read. Independent of the listener, and worth landing first so the secret's lifecycle is solved and tested before anything consumes it.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V6370009",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Implement the auth checks**",
     "text": "**Implement the auth checks**: `X-Aperas-Token` required on every request with a restrictive preflight response, `timingSafeEqual` comparison, loopback `Host` check, `Origin` allowlist.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V637000A",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Build the tick channel**",
     "text": "**Build the tick channel**: a streaming NDJSON endpoint on the service side, and a `fetch()` + `ReadableStream` reader on the client with its own reconnect loop — refetch unconditionally on reconnect, pause while the tab is hidden, surface a 401 as a distinct \"service restarted\" state rather than a silent retry.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V637000B",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Port `FolderDiv` to a Solid component**",
     "text": "**Port `FolderDiv` to a Solid component**: its three slots map onto the three render tiers unchanged.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V637000C",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Render the two link sites**",
     "text": "**Render the two link sites**: the link's own text as the `cite-ref` anchor, and the endnote list after the children as `cite-note`, with click-through both ways and one back-reference per position.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V637000D",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Implement zoom**",
     "text": "**Implement zoom**: ctrl-click on the arrow handle sets a new apex; the breadcrumb above it zooms back out. UI-local state, not view state.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ6V637000E",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:31:48.358Z",
     "title": "**Implement the shallow write**",
     "text": "**Implement the shallow write**: a single `updateText(id, text)` on the host side that picks the correct per-type input form, so the UI never encodes the write-path's bullet-marker and `--text-only` rules. The service's per-artifact link sweep, and the known failure where a write reports links resolved but persists none, must both surface in the UI rather than being swallowed.",
-    "parent": "BlockNode:00CJ6V6370005",
     "type": "listItem",
     "children": []
   },
@@ -30973,7 +30957,12 @@
     "title": "## Resolved",
     "parent": "BlockNode:00CJ6V6370001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CJ840278001",
+      "BlockNode:00CJ8FJNKR001",
+      "BlockNode:00CJ8FJNKR002",
+      "BlockNode:00CJ8FJNKR003"
+    ]
   },
   {
     "@id": "BlockNode:00CJ6V6CH0001",
@@ -31062,12 +31051,6 @@
     "@type": "BlockNode",
     "props": [
       {
-        "@id": "BlockNode:00CJ6V6CH0007:props:StringProp:00CJ6V6CJ0000",
-        "@type": "StringProp",
-        "key": "checked",
-        "value": "false"
-      },
-      {
         "@id": "BlockNode:00CJ6V6CH0007:props:StringProp:00CJ6V6CJ0001",
         "@type": "StringProp",
         "key": "orderedList",
@@ -31078,6 +31061,12 @@
         "@type": "StringProp",
         "key": "startIndex",
         "value": "1"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6CH0007:props:StringProp:00CJ7DJ0JG000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
       }
     ],
     "title": "**Slice 1 — `buildRenderTree` in core**",
@@ -31142,10 +31131,10 @@
     "@type": "BlockNode",
     "props": [
       {
-        "@id": "BlockNode:00CJ6V6CH8003:props:StringProp:00CJ6V6CJ8000",
+        "@id": "BlockNode:00CJ6V6CH8003:props:StringProp:00CJ8F4RKG000",
         "@type": "StringProp",
         "key": "checked",
-        "value": "false"
+        "value": "true"
       }
     ],
     "title": "**Slice 5 — `FolderDiv` as a Solid component**",
@@ -31176,10 +31165,10 @@
     "@type": "BlockNode",
     "props": [
       {
-        "@id": "BlockNode:00CJ6V6CH8005:props:StringProp:00CJ6V6CJG000",
+        "@id": "BlockNode:00CJ6V6CH8005:props:StringProp:00CJ8F4RX0000",
         "@type": "StringProp",
         "key": "checked",
-        "value": "false"
+        "value": "true"
       }
     ],
     "title": "**Slice 7 — zoom**",
@@ -31303,7 +31292,7 @@
     "@id": "BlockNode:00CJ6V6N9R002",
     "@type": "BlockNode",
     "title": "## Current Status",
-    "text": "Design only — nothing is built. `packages/web` is an unmodified Vite + Solid scaffold: `App.tsx`, `index.tsx`, two CSS files. It declares `@aperas/core` as a dependency and imports it nowhere. The read and write semantics the UI will render are already specified and implemented in core and in the CLI; what does not exist yet is the structured render, the HTTP listener, and every part of the UI itself.",
+    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs.",
     "parent": "BlockNode:00CJ6V6N9R001",
     "type": "heading",
     "children": []
@@ -31316,7 +31305,10 @@
     "type": "heading",
     "children": [
       "BlockNode:00CJ6V6N9R004",
-      "BlockNode:00CJ6V6N9R005"
+      "BlockNode:00CJ6V6N9R005",
+      "BlockNode:00CJ83NV3G001",
+      "BlockNode:00CJ78H4DG001",
+      "BlockNode:00CJ78C5WR001"
     ]
   },
   {
@@ -31423,6 +31415,178 @@
     "title": "**History**",
     "text": "**History**: [current status and milestones](../history/webapp.md#id/BlockNode:00CJ6V6N9R001).",
     "parent": "BlockNode:00CJ2TCV40002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ78C5WR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T20:06:34.275Z",
+    "title": "**2026-09-18: Slice 1 landed — `buildRenderTree` in core**",
+    "text": "**2026-09-18: Slice 1 landed — `buildRenderTree` in core**: `discoverCone`'s render plan is now returned as a structured `RenderItem` tree (`buildRenderTree`, `@aperas/core`) instead of being flattened straight to strings; `renderTreeWithView` is now `toText(buildRenderTree(...))`, and the `tree` service op takes a `format` discriminator — `'render-tree'` returns the structured tree (requires `--view`; the structured render only exists for the view-based renderer), omitted or `'text'` keeps the string-lines shape. Verified byte-identical against the pre-refactor renderer on a real, richly-unfolded corpus view (preview/expanded/pointer link modes, tombstone tagging, fold counts all covered) alongside the existing `verify`/`verify:slow` suites, both still clean.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ78H4DG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T20:17:55.906Z",
+    "title": "**2026-09-18: Slice 1 landed — `buildRenderTree` in core**",
+    "text": "**2026-09-18: Slice 1 landed — `buildRenderTree` in core**: `discoverCone`'s render plan is now returned as a structured `RenderItem` tree (`buildRenderTree`, `@aperas/core`) instead of being flattened straight to strings; `renderTreeWithView` is now `toText(buildRenderTree(...))`, and the `tree` service op takes a `format` discriminator — `'render-tree'` returns the structured tree (requires `--view`; the structured render only exists for the view-based renderer), omitted or `'text'` keeps the string-lines shape. Verified byte-identical against the pre-refactor renderer on a real, richly-unfolded corpus view (preview/expanded/pointer link modes, tombstone tagging, fold counts all covered) alongside the existing `verify`/`verify:slow` suites, both still clean.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ7PNQ2R001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T20:38:07.357Z",
+    "title": "**Scratch write-path test — safe to remove**",
+    "text": "**Scratch write-path test — safe to remove**: edited via /api/update at 2026-09-18T03:37:49+07:00.",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ83NV3G001",
+    "@type": "BlockNode",
+    "title": "**2026-09-18: a real dev build, clicked through end to end**",
+    "text": "**2026-09-18: a real dev build, clicked through end to end**: `packages/web` renders the live corpus via a Solid `FolderDiv`, driven entirely by real graph state through a dev-only bridge to the ApeironNgn service (talking to it directly over its unix socket — the same `request`/`ensureServiceRunning` every `kg*.ts` entrypoint already uses — rather than shelling out a CLI subcommand per click, which the first version of this bridge did and which made fold/unfold feel like seconds-per-click; a `flush: true` inherited from that first version separately forced a full content-mirror dehydrate on every fold/unfold too, since `service.ts`'s own cases set the content-dirty flag unconditionally). Working end to end and confirmed against the live graph, not just the UI: fold/unfold writes to the real `TreeView.unfolds` set; ctrl-click zoom and breadcrumbs change apex; prose is rendered as real markdown with navigable inline links (resolved via the same `#id/<Kind>:<snowflake>` anchors design/linking.md already writes); a hover popover previews a link's target and can promote it into `unfolds`; the edit pencil is Slice 8's shallow write, piping straight to `aperas update --text-only` and verified round-tripping type/parent/children unchanged.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ840278001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ840278001:props:StringProp:00CJ84048R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ840278001:props:StringProp:00CJ84048R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Resolved: fold/unfold felt like seconds per click**",
+    "text": "**Resolved: fold/unfold felt like seconds per click**: the dev API bridge shelled out a fresh `tsx packages/cli/src/aperas.ts <verb>` subprocess per request — a full Node-plus-TypeScript-transpile startup on every click, on top of the service round trip that was already fast. Fixed by moving the bridge into its own long-lived process (`packages/web/devApiServer.ts`, spawned once by `vite.config.ts`) that talks to the ApeironNgn service directly over its unix socket, the same `request`/`ensureServiceRunning` every `kg*.ts` entrypoint already uses. A second, independent cause compounded it: `flush: true` on the `unfold`/`fold` service calls forced a full ~1600-node content-mirror dehydrate to disk on every click, because `service.ts`'s own 'unfold'/'fold' cases set the content-`dirty` flag unconditionally (a defensive catch-all for the rare case where resolving a bare `--view` mints a first-use `Profile`). `TreeView`'s own fold state is genuinely ephemeral UI state with its own independently-tunable flush cadence (design/webapp.md's Persistence) — it needs no per-click disk write at all. Fixed by dropping `flush` from the dev bridge's `unfold`/`fold` calls. Timed before/after: ~450ms per click down to ~10ms once both fixes landed — nothing here was ever a SolidJS cost.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8E2GAR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T21:30:19.791Z",
+    "title": "**Scratch write-path verification — safe to remove**",
+    "text": "**Scratch write-path verification — safe to remove**: edited via the UI's write path — café, 日本語, backticks `x = 1`, trailing spaces after this   , an em dash — and a curly \"quote\".",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FEVNR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ8FEVNR002:props:StringProp:00CJ8FEYMR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ8FEVNR002:props:StringProp:00CJ8FEYMR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Generate and store the per-run auth token**",
+    "text": "**Generate and store the per-run auth token**: independent of the listener, and worth landing first per planning/webapp.md's own ordering rationale.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FEVNR003",
+    "@type": "BlockNode",
+    "title": "**Add the HTTP listener to the ApeironNgn service**",
+    "text": "**Add the HTTP listener to the ApeironNgn service**: loopback bind, op allowlist, the four auth checks, restrictive CORS preflight — replacing the dev-only bridge (`packages/web/devApiServer.ts`) that talks to the service directly and has none of this.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FEVP0000",
+    "@type": "BlockNode",
+    "title": "**Build the tick channel**",
+    "text": "**Build the tick channel**: streaming NDJSON endpoint plus a `fetch()` + `ReadableStream` client, per the Settled transport decision.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FEVP0001",
+    "@type": "BlockNode",
+    "title": "**Finish \"the two link sites\" (Slice 6's remaining half)**",
+    "text": "**Finish \"the two link sites\" (Slice 6's remaining half)**: the link text (`cite-ref`) and the endnote row (`cite-note`) both render correctly and independently, and the hover popover can promote a link into `unfolds` — but the two sites aren't cross-linked: no numbered back-reference, no click-through from marker to endnote or back, and a target cited twice has no `^ a b`-style disambiguation between its two occurrences yet.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FEVP0002",
+    "@type": "BlockNode",
+    "title": "**Finish shallow write's link-sweep surfacing (Slice 8's remaining half)**",
+    "text": "**Finish shallow write's link-sweep surfacing (Slice 8's remaining half)**: the edit itself round-trips correctly (verified byte-identical through project + an independent re-parse), but a write whose links fail to persist — the known hazard `issues/linking.md` tracks — isn't surfaced in the UI at all; `/api/update` only ever returns `{ok:true}`.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FJNKR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ8FJNKR001:props:StringProp:00CJ8FJR9R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ8FJNKR001:props:StringProp:00CJ8FJR9R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Resolved: Slice 1 — `buildRenderTree` extracted into `@aperas/core`**",
+    "text": "**Resolved: Slice 1 — `buildRenderTree` extracted into `@aperas/core`**: verified against the existing suite plus a live before/after byte-diff on a real corpus view, and again exhaustively against the UI — every one of 36 rendered rows' fold counts matched `aperas tree --view`'s own `[+N]` tags in sequence, extracted straight from the live DOM.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FJNKR002",
+    "@type": "BlockNode",
+    "title": "**Resolved: Slice 5 — `FolderDiv` ported to Solid**",
+    "text": "**Resolved: Slice 5 — `FolderDiv` ported to Solid**: fold/unfold writes to the real `TreeView.unfolds` set and refetches; verified exhaustively against the CLI (see Slice 1's own entry, same check covers both).",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ8FJNKR003",
+    "@type": "BlockNode",
+    "title": "**Resolved: Slice 7 — zoom**",
+    "text": "**Resolved: Slice 7 — zoom**: ctrl-click and breadcrumbs both change apex via the same code path a deep-linked URL uses; confirmed live via the browser and via URL query-param navigation.",
+    "parent": "BlockNode:00CJ6V637000F",
     "type": "listItem",
     "children": []
   }

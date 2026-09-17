@@ -689,7 +689,7 @@
     "path": "discussion/webapp.md",
     "fileHash": "614911919493e253b68bb2ffbcb694b63ce241ad13bd5186672864e855d45c76",
     "ingestedHash": "614911919493e253b68bb2ffbcb694b63ce241ad13bd5186672864e855d45c76",
-    "lastIngestedAt": "2026-09-17T19:43:30.046Z",
+    "lastIngestedAt": "2026-09-17T21:30:21.088Z",
     "projectedHash": "614911919493e253b68bb2ffbcb694b63ce241ad13bd5186672864e855d45c76"
   },
   {
@@ -717,10 +717,10 @@
       "BlockNode:00CJ6V6370001"
     ],
     "path": "issues/webapp.md",
-    "fileHash": "3a550e56c417a14d6cab345ec6ca87cae376b4cec080e514c69eee707c99798c",
-    "ingestedHash": "3a550e56c417a14d6cab345ec6ca87cae376b4cec080e514c69eee707c99798c",
-    "lastIngestedAt": "2026-09-17T19:38:42.941Z",
-    "projectedHash": "3a550e56c417a14d6cab345ec6ca87cae376b4cec080e514c69eee707c99798c"
+    "fileHash": "e29b3851dd9a9aaea3d6403b8e58c7fdbcf9b8fa46d982bcfb932c6598deec3c",
+    "ingestedHash": "e29b3851dd9a9aaea3d6403b8e58c7fdbcf9b8fa46d982bcfb932c6598deec3c",
+    "lastIngestedAt": "2026-09-17T21:33:01.754Z",
+    "projectedHash": "e29b3851dd9a9aaea3d6403b8e58c7fdbcf9b8fa46d982bcfb932c6598deec3c"
   },
   {
     "@id": "ArtifactNode:00CJ6T19PG000",
@@ -732,24 +732,24 @@
       "BlockNode:00CJ6V6CH0001"
     ],
     "path": "planning/webapp.md",
-    "fileHash": "44bc6b3d7b3b9e35cac613893c311757083b403b4ba62f0ac802b5b52adcb748",
-    "ingestedHash": "44bc6b3d7b3b9e35cac613893c311757083b403b4ba62f0ac802b5b52adcb748",
-    "lastIngestedAt": "2026-09-17T19:52:51.687Z",
-    "projectedHash": "44bc6b3d7b3b9e35cac613893c311757083b403b4ba62f0ac802b5b52adcb748"
+    "fileHash": "4bc73732e932f4fa5dfdb439781f3cbc2a88f82764aa4dfeed75e4911f50cffa",
+    "ingestedHash": "4bc73732e932f4fa5dfdb439781f3cbc2a88f82764aa4dfeed75e4911f50cffa",
+    "lastIngestedAt": "2026-09-17T21:33:02.869Z",
+    "projectedHash": "4bc73732e932f4fa5dfdb439781f3cbc2a88f82764aa4dfeed75e4911f50cffa"
   },
   {
     "@id": "ArtifactNode:00CJ6T1G4G000",
     "@type": "ArtifactNode",
     "title": "webapp.md",
-    "text": "Design only — nothing is built. `packages/web` is an unmodified Vite + Solid scaffold: `App.tsx`, `index.tsx`, two CSS files. It declares `@aperas/core` as a dependency and imports it nowhere. The read and write semantics the UI will render are already specified and implemented in core and in the CLI; what does not exist yet is the structured render, the HTTP listener, and every part of the UI itself.",
+    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs.",
     "parent": "FolderNode:00CDBYV4BR002",
     "children": [
       "BlockNode:00CJ6V6N9R001"
     ],
     "path": "history/webapp.md",
-    "fileHash": "2cf585fcea4f9354bf1d4385be38aecc4925aa2574aa17eea525cd5c844de03b",
-    "ingestedHash": "2cf585fcea4f9354bf1d4385be38aecc4925aa2574aa17eea525cd5c844de03b",
-    "lastIngestedAt": "2026-09-17T19:38:45.311Z",
-    "projectedHash": "2cf585fcea4f9354bf1d4385be38aecc4925aa2574aa17eea525cd5c844de03b"
+    "fileHash": "4cb6d9ffcdaa2c13bca1863714e423ec5119ccd263dde5c1b23c003179a274a6",
+    "ingestedHash": "4cb6d9ffcdaa2c13bca1863714e423ec5119ccd263dde5c1b23c003179a274a6",
+    "lastIngestedAt": "2026-09-17T21:06:25.401Z",
+    "projectedHash": "4cb6d9ffcdaa2c13bca1863714e423ec5119ccd263dde5c1b23c003179a274a6"
   }
 ]
