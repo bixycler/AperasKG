@@ -637,7 +637,8 @@
     "parent": "BlockNode:00CDBYV5A8001",
     "type": "heading",
     "children": [
-      "BlockNode:00CGMWQ6T0001"
+      "BlockNode:00CGMWQ6T0001",
+      "BlockNode:00CHYM4Z1G001"
     ]
   },
   {
@@ -26580,7 +26581,8 @@
     "type": "paragraph",
     "children": [
       "BlockNode:00CH4J9398001",
-      "BlockNode:00CHXTPK08001"
+      "BlockNode:00CHXTPK08001",
+      "BlockNode:00CHYNCTRG001"
     ]
   },
   {
@@ -26752,7 +26754,7 @@
       }
     ],
     "title": "**(1) Historical staleness has no standing safeguard, only a one-time hand sweep**",
-    "text": "**(1) Historical staleness has no standing safeguard, only a one-time hand sweep**: `resolveBlockLinks` used to run only from `kg:ingest`, so any node last touched before that entry point existed (or before a later fix) carries a permanently-empty `.links` no matter what its text cites — a graph-wide sweep found and fixed 9 real cases (see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)), but the sweep was a one-time hand pass, not a standing safeguard. A fresh corpus-wide check today found the same symptom already back on nodes the sweep never touched (e.g. `planning/core.md`'s own Batch 1 item 1, `BlockNode:00CGGTQ620002` — untouched since the sweep, `.links` empty despite an unchanged real citation in its text). The sweep fixed a snapshot; nothing keeps re-checking it, so drift just accumulates again under a different name. Needs a repeatable sweep, not another one-time hand pass.",
+    "text": "**(1) Historical staleness has no standing safeguard, only a one-time hand sweep**: `resolveBlockLinks` used to run only from `kg:ingest`, so any node last touched before that entry point existed (or before a later fix) carries a permanently-empty `.links` no matter what its text cites — a graph-wide sweep found and fixed 9 real cases (see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)), but the sweep was a one-time hand pass, not a standing safeguard. A fresh corpus-wide check today found the same symptom already back on nodes the sweep never touched (e.g. `planning/core.md`'s own Batch 1 item 1, `BlockNode:00CGGTQ620002` — untouched since the sweep, `.links` empty despite an unchanged real citation in its text). The sweep fixed a snapshot; nothing keeps re-checking it, so drift just accumulates again under a different name. Needs a repeatable sweep, not another one-time hand pass. **Resolved**: the sweep is now standing, and two of its three triggers need nobody to remember them. The service re-checks the written artifact after every `update`/`insert`/`remove` and reports what that write resolved but failed to persist, on the write's own response; it re-checks the whole corpus at startup and on `reload`, carrying any finding on *every* later response until it clears (the same channel `contentConflict` uses, chosen because a lost link is invisible in every ordinary rendering and so has to arrive unasked-for). Only the end-of-batch corpus pass is left to discipline, because it alone catches damage that lands in a *different* artifact from the one edited — folded into the skill's *Stage each verified step* rather than given a step of its own. Verified live end to end: dropping one real link edge on disk and restarting produced the warning at startup, and that warning then surfaced on unrelated `tree` and `path` calls before `--repair` cleared it.",
     "parent": "BlockNode:00CGMWQ6T0001",
     "type": "listItem",
     "children": []
@@ -27790,6 +27792,185 @@
     "title": "Status",
     "text": "Status: **v2.4** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
     "parent": "BlockNode:00CHXW4S30001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHYJ6PR8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHYJ6PR8001:links:Link:00CHYJ94N8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHYJ6PR8001:links:Link:00CHYJ94N8000:props:StringProp:00CHYJ94N8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.5 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). v2.4 documented `aperas check-links` as a tool with no discipline attached to it, which left the check in exactly the position this skill's own Philosophy warns against — available, correct, and dependent on somebody remembering to ask. Resolved by moving two of the three checks out of discipline entirely and into the service, leaving only the one an agent genuinely has to run. Measured before designing: a corpus-wide sweep is ~0.6s of service-side work (1428 live blocks, 358 carrying link text), so \"too expensive to run often\" — the premise the first cut of this design rested on — was simply false.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHYJB998001",
+      "BlockNode:00CHYJEXVR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHYJB998001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHYJB998001:links:Link:00CHYJDEQ0000",
+        "@type": "Link",
+        "target": "BlockNode:00CHXW6FY0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHYJB998001:links:Link:00CHYJDEQ0000:props:StringProp:00CHYJDEQ0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.5",
+    "text": "Supersedes: [v2.4's own status line](#id/BlockNode:00CHXW6FY0002)",
+    "parent": "BlockNode:00CHYJ6PR8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHYJDBR8000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHYJDBR8000",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.5** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CHYJB998001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHYJEXVR001",
+    "@type": "BlockNode",
+    "title": "### Discipline — the end-of-batch sweep, and the two checks that need nothing from you",
+    "parent": "BlockNode:00CHYJ6PR8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CHYJHB5G002",
+      "BlockNode:00CHYJHB5G003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CHYJHB5G002",
+    "@type": "BlockNode",
+    "title": "00CHYJHB5G002",
+    "text": "**At the end of a batch — not after each step — run `aperas check-links` once before handing back.** The per-write check the service runs on its own only sweeps the artifact that was written; this is the pass that catches the damage that lands *elsewhere* — an edit in artifact A breaking a citation that lives in artifact B, which nothing scoped to A can see. It costs about 0.6s against the whole corpus, so the reason to run it once per batch rather than per edit is noise, not expense.",
+    "parent": "BlockNode:00CHYJEXVR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHYJHB5G003",
+    "@type": "BlockNode",
+    "title": "00CHYJHB5G003",
+    "text": "The other two link checks need nothing from you, and that is the point — the two recorded losses were both found by a human happening to look, never by a check that fired. The service now sweeps the written artifact after every `update`/`insert`/`remove` and reports anything that write resolved but failed to persist, right under the write's own `Links: N resolved…` line; and it sweeps the whole corpus at startup and on `reload`, carrying any finding on *every* later response until it clears. When either one speaks up, it is describing a link that already looks fine everywhere else — treat it as real and re-run the write (which has fixed it before) or `aperas check-links --repair`.",
+    "parent": "BlockNode:00CHYJEXVR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHYM4Z1G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CHYM4Z1G001:props:StringProp:00CHYM5398000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CHYM4Z1G001:props:StringProp:00CHYM5398001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`check-links --repair` re-mints every `Link` id in an affected artifact, not just the broken one**",
+    "text": "**`check-links --repair` re-mints every `Link` id in an affected artifact, not just the broken one**: found while verifying the standing sweep end to end — one deliberately-dropped link edge, repaired, produced a 63-insertion/37-deletion diff across `BlockNode.jsonld`, because `repairLinkIntegrity` re-runs `resolveBlockLinks` over *every* block carrying link text in the affected artifact, and that regenerates each `Link` subdocument (and its `position` `StringProp`) under a fresh id even where nothing was wrong. Targets and positions are preserved, so this is churn rather than data loss — but `Link` ids are addressable in their own right: a `TreeView.unfolds` entry can name one (`node.ts`'s `unfold(ref)` accepts a `Link` id), so a repair can silently orphan an unfolded link, which `pruneStaleUnfolds` then cleans up on the next sweep — the viewer's own fold state quietly lost to a repair that touched an unrelated block. Same identity-preservation principle the skill applies to blocks, one tier down. Not urgent (a repair is rare and explicit), but the fix is contained: re-resolve only the blocks actually named in the discrepancy report, rather than the whole artifact.",
+    "parent": "BlockNode:00CDBYV5A8002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHYN1NH8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHYN1NH8001:links:Link:00CHYN1S3G000",
+        "@type": "Link",
+        "target": "BlockNode:00CHYM4Z1G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHYN1NH8001:links:Link:00CHYN1S3G000:props:StringProp:00CHYN1S3R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "863"
+          }
+        ]
+      }
+    ],
+    "title": "00CHYN1NH8001",
+    "text": "**Built and verified live, same session.** The scoped post-write check and the corpus boundary check both landed as designed; the end-of-batch sweep is recorded in the skill (v2.5). Verified end to end rather than by reading the summary line: one real link edge dropped from `BlockNode.jsonld` on disk, service restarted → the startup sweep named the offending block, that warning then rode unrelated `tree` and `path` calls (proving the \"emerges unbidden\" property the design turned on), and `--repair` cleared it. Two things the build itself turned up, neither anticipated: the corpus sweep was first placed *before* `markReady`, where it eats into `waitForReady`'s 5s budget — moved after, and queued, since nothing needs it complete before the first request; and `--repair` re-mints every `Link` id in the artifact it touches rather than only the broken one, [filed separately](../issues/linking.md#id/BlockNode:00CHYM4Z1G001).",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CHYNCTRG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CHYNCTRG001:links:Link:00CHYNCZ1R000",
+        "@type": "Link",
+        "target": "BlockNode:00CGMX88R0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHYNCTRG001:links:Link:00CHYNCZ1R000:props:StringProp:00CHYNCZ1R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1500"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CHYNCTRG001:links:Link:00CHYNCZ1R002",
+        "@type": "Link",
+        "target": "BlockNode:00CHYM4Z1G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CHYNCTRG001:links:Link:00CHYNCZ1R002:props:StringProp:00CHYNCZ20000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2174"
+          }
+        ]
+      }
+    ],
+    "title": "**Three layers of link checking, only one of which anyone has to remember — agreed, built and verified live**",
+    "text": "**Three layers of link checking, only one of which anyone has to remember — agreed, built and verified live**: the check existed but nothing triggered it, which is the same failure this concern keeps hitting (\"being asked is the part that fails\"). Measured before designing, since the design turned on it: a full-corpus sweep is ~0.6s of service-side work (1428 live blocks, 358 carrying link text, CLI startup subtracted over three runs), so \"too heavy to run often\" — the premise the first cut rested on — was simply false. Built: **(1)** a scoped, service-side check after every `update`/`insert`/`remove`, sweeping only the written artifact and diffed against a sweep taken just before the write, so it reports only what *that* write broke, on that op's own response directly under its `Links: N resolved…` line — the exact line that lied in both recorded incidents, now self-verifying; `ingest` is excluded deliberately, having always run `resolveBlockLinks` correctly. **(2)** a corpus-wide check at startup and on `reload`, held in a `linkWarning` attached to *every* response the way `contentConflict` already is, so drift that landed while the service was down emerges on the very next command of any kind. **(3)** a corpus-wide sweep at end of batch, the one step left to discipline (skill v2.5, folded into *Stage each verified step*), because it alone catches an edit in artifact A breaking a citation that lives in artifact B. All three report and never repair: the known workaround for [the unreproduced regression](#id/BlockNode:00CGMX88R0003) is \"re-run the identical write and it sticks,\" and a silent auto-retry would erase the evidence it is still being hunted with. Verified end to end rather than from a summary line: one real link edge dropped on disk, service restarted → startup sweep named the block, the warning then rode unrelated `tree` and `path` calls, and `--repair` cleared it. Two things the build itself turned up: the corpus sweep was first placed *before* `markReady`, eating into `waitForReady`'s 5s budget (moved after it, and queued), and `--repair` re-mints every `Link` id in the artifact it touches rather than only the broken one, [filed separately](../issues/linking.md#id/BlockNode:00CHYM4Z1G001).",
+    "parent": "BlockNode:00CGMX88R0004",
     "type": "paragraph",
     "children": []
   }

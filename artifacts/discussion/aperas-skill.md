@@ -1279,3 +1279,19 @@ Answers exactly the question dense linking depends on and nothing else routinely
 Supersedes: [v2.3's own status line](#id/BlockNode:00CH5FJMDR003)
 
 Status: <a name='id/BlockNode:00CHXW6FY0002' class='aperas-anchor aperas-id'></a> **v2.4** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+## v2.5 additions — delta on the v2 snapshot <a name='id/BlockNode:00CHYJ6PR8001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). v2.4 documented `aperas check-links` as a tool with no discipline attached to it, which left the check in exactly the position this skill's own Philosophy warns against — available, correct, and dependent on somebody remembering to ask. Resolved by moving two of the three checks out of discipline entirely and into the service, leaving only the one an agent genuinely has to run. Measured before designing: a corpus-wide sweep is ~0.6s of service-side work (1428 live blocks, 358 carrying link text), so "too expensive to run often" — the premise the first cut of this design rested on — was simply false.
+
+### Top matter — Status bumped to v2.5 <a name='id/BlockNode:00CHYJB998001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.4's own status line](#id/BlockNode:00CHXW6FY0002)
+
+Status: <a name='id/BlockNode:00CHYJDBR8000' class='aperas-anchor aperas-id'></a> **v2.5** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Discipline — the end-of-batch sweep, and the two checks that need nothing from you <a name='id/BlockNode:00CHYJEXVR001' class='aperas-anchor aperas-id'></a>
+
+**At the end of a batch — not after each step — run `aperas check-links` once before handing back.** The per-write check the service runs on its own only sweeps the artifact that was written; this is the pass that catches the damage that lands *elsewhere* — an edit in artifact A breaking a citation that lives in artifact B, which nothing scoped to A can see. It costs about 0.6s against the whole corpus, so the reason to run it once per batch rather than per edit is noise, not expense.
+
+The other two link checks need nothing from you, and that is the point — the two recorded losses were both found by a human happening to look, never by a check that fired. The service now sweeps the written artifact after every `update`/`insert`/`remove` and reports anything that write resolved but failed to persist, right under the write's own `Links: N resolved…` line; and it sweeps the whole corpus at startup and on `reload`, carrying any finding on *every* later response until it clears. When either one speaks up, it is describing a link that already looks fine everywhere else — treat it as real and re-run the write (which has fixed it before) or `aperas check-links --repair`.
