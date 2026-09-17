@@ -61,11 +61,11 @@
       "BlockNode:00CDBZ76T8001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "b81b6ca953e2cdf26ea236f49fc4f5255d9c982c5f25e5ab010e4580d50c6884",
+    "fileHash": "2e973592be9b95ee4cc969f98d1688df61b5d5f62ec786314897539ceaeed9a9",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "b81b6ca953e2cdf26ea236f49fc4f5255d9c982c5f25e5ab010e4580d50c6884",
-    "lastIngestedAt": "2026-09-17T16:56:18.880Z",
-    "projectedHash": "b81b6ca953e2cdf26ea236f49fc4f5255d9c982c5f25e5ab010e4580d50c6884"
+    "ingestedHash": "2e973592be9b95ee4cc969f98d1688df61b5d5f62ec786314897539ceaeed9a9",
+    "lastIngestedAt": "2026-09-17T17:43:37.731Z",
+    "projectedHash": "2e973592be9b95ee4cc969f98d1688df61b5d5f62ec786314897539ceaeed9a9"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
@@ -156,35 +156,19 @@
     "@id": "ArtifactNode:00CDDTBQWG000",
     "@type": "ArtifactNode",
     "title": "packaging.md",
-    "text": "Added `stripInlineAnchors` (`astParser.ts`) and applied it everywhere a block's stored abstract/text gets compared against a fresh disk parse for exact equality: `extractAbstract` (before truncating, so a mid-window anchor can't survive as a mangled fragment either), `reconcile.ts`'s `leafKey` (block-level Gestalt matching), and the rename matchers' own key computation (`apeironNgn/artifacts.ts`). Verified against the two real cases that surfaced this (`design/cli.md`'s Discussion bullet, `discussion/cli.md`'s staging-practice paragraph): stripped text now round-trips exactly.",
+    "text": "[Design](../design/packaging.md#id/BlockNode:00CDDVBXH8001) — architecture decisions once crystallized.",
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
     "children": [
       "BlockNode:00CDDVC338001",
-      "BlockNode:00CDG18FP0001",
-      "BlockNode:00CDGAFQQR001",
-      "BlockNode:00CDGGTE6R001",
-      "BlockNode:00CDGN9FMR001",
-      "BlockNode:00CDGPBDKG001",
-      "BlockNode:00CDGPTZ7G000",
-      "BlockNode:00CDGS4BBG001",
-      "BlockNode:00CDH8S908001",
-      "BlockNode:00CDHFW4R8001",
-      "BlockNode:00CDHJGZV0001",
-      "BlockNode:00CDHSCK8R001",
-      "BlockNode:00CDWB1Y6R001",
-      "BlockNode:00CDWP69B8001",
-      "BlockNode:00CDWPCC3G001",
-      "BlockNode:00CDXFWK3R001",
-      "BlockNode:00CDZM30JG001",
       "BlockNode:00CDG9DD4R001"
     ],
     "path": "discussion/packaging.md",
-    "fileHash": "05fdc3577312dca042e1a6859237aa90a1567f0a6c7542f761f272050592cdd6",
+    "fileHash": "7152cf5f7a0bfa29b73e91c75a0d86ab00f9af26435e7fcf22f3b048ecf931a5",
     "lastTrackedAt": "2026-09-10T12:38:09.339Z",
-    "ingestedHash": "05fdc3577312dca042e1a6859237aa90a1567f0a6c7542f761f272050592cdd6",
-    "lastIngestedAt": "2026-09-12T22:45:06.707Z",
-    "projectedHash": "05fdc3577312dca042e1a6859237aa90a1567f0a6c7542f761f272050592cdd6"
+    "ingestedHash": "7152cf5f7a0bfa29b73e91c75a0d86ab00f9af26435e7fcf22f3b048ecf931a5",
+    "lastIngestedAt": "2026-09-17T18:08:24.094Z",
+    "projectedHash": "7152cf5f7a0bfa29b73e91c75a0d86ab00f9af26435e7fcf22f3b048ecf931a5"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",

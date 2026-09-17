@@ -1440,28 +1440,28 @@
         ]
       }
     ],
-    "title": "## Motivation: the syntax clash",
-    "text": "Refactoring [`documentation.md`](../design/documentation.md#id/BlockNode:00CDD68E80002) surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.",
+    "title": "**Motivation: the syntax clash**",
+    "text": "**Motivation: the syntax clash**: Refactoring [`documentation.md`](../design/documentation.md#id/BlockNode:00CDD68E80002) surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TG000",
     "@type": "BlockNode",
-    "title": "## Considered: Obsidian and Logseq's answers",
-    "text": "Both invent syntax that's never confused with a resolvable link: Obsidian's `[[Page]]`/`[[Page#^blockid]]`, Logseq's `((block-uuid))` (every block gets an id for free, since Logseq's document model is an outline). Both degrade gracefully in a plain renderer — inert bracketed text, not a link that looks clickable and 404s. Considered and set aside for now: a custom `apeiron://`-only bracket scheme would need new machinery Aperas didn't strictly need, since the trailing-address problem (not the bracket problem) turned out to be the real friction.",
+    "title": "**Considered: Obsidian and Logseq's answers**",
+    "text": "**Considered: Obsidian and Logseq's answers**: Both invent syntax that's never confused with a resolvable link: Obsidian's `[[Page]]`/`[[Page#^blockid]]`, Logseq's `((block-uuid))` (every block gets an id for free, since Logseq's document model is an outline). Both degrade gracefully in a plain renderer — inert bracketed text, not a link that looks clickable and 404s. Considered and set aside for now: a custom `apeiron://`-only bracket scheme would need new machinery Aperas didn't strictly need, since the trailing-address problem (not the bracket problem) turned out to be the real friction.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TG001",
     "@type": "BlockNode",
-    "title": "## The trade-off that doesn't go away",
-    "text": "Two orthogonal axes were in play — syntax (does the bracket/escaping shape confuse a renderer?) and target (is the address a stable id, or a readable path?). Node-ID addressing and a custom `aperas://` URI scheme both already existed in the engine (`vocab.ts`'s `NODE_BASE`, `snowflake.ts`), so neither needed inventing. What was missing was a *target* form usable before ingestion at all: a snowflake only exists after a node is created, so hand-authoring or refactoring docs pre-ingestion has no id to reference. Slugified paths fill that gap, at the cost of breaking silently if the heading text they're derived from changes — a real trade-off, not one that picking \"the right syntax\" dissolves.",
+    "title": "**The trade-off that doesn't go away**",
+    "text": "**The trade-off that doesn't go away**: Two orthogonal axes were in play — syntax (does the bracket/escaping shape confuse a renderer?) and target (is the address a stable id, or a readable path?). Node-ID addressing and a custom `aperas://` URI scheme both already existed in the engine (`vocab.ts`'s `NODE_BASE`, `snowflake.ts`), so neither needed inventing. What was missing was a *target* form usable before ingestion at all: a snowflake only exists after a node is created, so hand-authoring or refactoring docs pre-ingestion has no id to reference. Slugified paths fill that gap, at the cost of breaking silently if the heading text they're derived from changes — a real trade-off, not one that picking \"the right syntax\" dissolves.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": []
   },
   {
@@ -1483,28 +1483,28 @@
         ]
       }
     ],
-    "title": "## Landing on standard links + injected anchors",
-    "text": "The resolution that stuck: use plain `[title](target)` syntax throughout (no `[[...]]` wrapper needed, at least for now), splitting cross-file navigation (an ordinary relative path) from in-file addressing (a `#fragment` matched against an explicit `<a name=\"...\">` anchor built from `slugify()`'s own output, joined by `/` per heading level). This was prototyped and validated live in `test-slugifed-path.md` before being written up as the design (see [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007)). It also produced a cleaner mental model than \"two permanent addressing styles to pick between\": slug-path addressing is inherently the *manual, pre-ingestion* form, and ingestion adds a node-ID anchor alongside it rather than replacing it — so an existing reference never breaks, and rename-fragility isn't something needing repair tooling at all, just an eventual cleanup once every referrer has moved off the compatibility form.",
+    "title": "**Landing on standard links + injected anchors**",
+    "text": "**Landing on standard links + injected anchors**: The resolution that stuck: use plain `[title](target)` syntax throughout (no `[[...]]` wrapper needed, at least for now), splitting cross-file navigation (an ordinary relative path) from in-file addressing (a `#fragment` matched against an explicit `<a name=\"...\">` anchor built from `slugify()`'s own output, joined by `/` per heading level). This was prototyped and validated live in `test-slugifed-path.md` before being written up as the design (see [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007)). It also produced a cleaner mental model than \"two permanent addressing styles to pick between\": slug-path addressing is inherently the *manual, pre-ingestion* form, and ingestion adds a node-ID anchor alongside it rather than replacing it — so an existing reference never breaks, and rename-fragility isn't something needing repair tooling at all, just an eventual cleanup once every referrer has moved off the compatibility form.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TG003",
     "@type": "BlockNode",
-    "title": "## Dropping anchor recognition entirely",
-    "text": "Planning the implementation started from assuming a hand-written tree anchor needed to be *recognized and absorbed*: detected during parsing, stashed as a prop, tied to whichever block followed it, so it could round-trip and projection could add the id-anchor alongside it without duplicating anything. That design ran into a real wall for list items specifically: raw HTML sitting between two list items as its own sibling block terminates the CommonMark list, splitting one list into two. The fix turned out to be dropping the whole absorption mechanism, not working around the split: `astParser.ts` already treats a raw `<a>` tag as an ordinary opaque leaf, and `project.ts` already re-emits any opaque leaf's text verbatim — a hand-written anchor left completely untouched round-trips today, for free, with zero new parsing code, which is exactly what these four docs' own anchors had already been proving through every prior edit in this conversation without anyone writing recognition logic for them. The only thing that's genuinely new is the id-anchor, and that's synthesized fresh at projection time regardless of what was in the source — so there was never a real reason to parse the old one at all.",
+    "title": "**Dropping anchor recognition entirely**",
+    "text": "**Dropping anchor recognition entirely**: Planning the implementation started from assuming a hand-written tree anchor needed to be *recognized and absorbed*: detected during parsing, stashed as a prop, tied to whichever block followed it, so it could round-trip and projection could add the id-anchor alongside it without duplicating anything. That design ran into a real wall for list items specifically: raw HTML sitting between two list items as its own sibling block terminates the CommonMark list, splitting one list into two. The fix turned out to be dropping the whole absorption mechanism, not working around the split: `astParser.ts` already treats a raw `<a>` tag as an ordinary opaque leaf, and `project.ts` already re-emits any opaque leaf's text verbatim — a hand-written anchor left completely untouched round-trips today, for free, with zero new parsing code, which is exactly what these four docs' own anchors had already been proving through every prior edit in this conversation without anyone writing recognition logic for them. The only thing that's genuinely new is the id-anchor, and that's synthesized fresh at projection time regardless of what was in the source — so there was never a real reason to parse the old one at all.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TG004",
     "@type": "BlockNode",
-    "title": "## Verifying anchor placement against the real parser",
-    "text": "Dropping recognition didn't fully resolve where a *fresh* id-anchor should go, so this got checked directly against `astParser.ts`/`project.ts` rather than reasoned about in the abstract. First surprise: `<a>` isn't a CommonMark block-level HTML tag (only a fixed whitelist like `div`/`article`/`table` triggers block-level HTML — `a` isn't in it), so a standalone `<a name=...></a>` line doesn't parse as an opaque `html` node at all — it parses as an ordinary `paragraph` wrapping two inline `html` fragments. That's exactly the node type `astParser.ts`'s existing \"a heading consumes its immediately-following paragraph as its own `text`\" rule matches on, confirmed by actually ingesting one into a scratch artifact: it landed as the heading's `text`, which both projects *after* the title (reversing the intended order) and, when a heading already has real leading prose, would have displaced that prose into a separate child block instead of leaving it as the heading's `text`.",
+    "title": "**Verifying anchor placement against the real parser**",
+    "text": "**Verifying anchor placement against the real parser**: Dropping recognition didn't fully resolve where a *fresh* id-anchor should go, so this got checked directly against `astParser.ts`/`project.ts` rather than reasoned about in the abstract. First surprise: `<a>` isn't a CommonMark block-level HTML tag (only a fixed whitelist like `div`/`article`/`table` triggers block-level HTML — `a` isn't in it), so a standalone `<a name=...></a>` line doesn't parse as an opaque `html` node at all — it parses as an ordinary `paragraph` wrapping two inline `html` fragments. That's exactly the node type `astParser.ts`'s existing \"a heading consumes its immediately-following paragraph as its own `text`\" rule matches on, confirmed by actually ingesting one into a scratch artifact: it landed as the heading's `text`, which both projects *after* the title (reversing the intended order) and, when a heading already has real leading prose, would have displaced that prose into a separate child block instead of leaving it as the heading's `text`.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDBZ76TG005"
     ]
@@ -1512,19 +1512,19 @@
   {
     "@id": "BlockNode:00CDBZ76TG005",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R008",
+    "title": "00CDBZ76TG005",
     "text": "Appending the anchor to the *end of the heading's own line* instead — confirmed against a heading that also carries genuine leading prose — left `text` exactly as the real prose, completely unaffected; only `title` (which is the whole raw line for a heading) needed a trim of the trailing anchor markup before use. For a list item, the equivalent live check — anchor placed right after the lead-in colon, the placement from the author's own prior Logseq KG — confirmed it lands in `text` as inert literal content, doesn't confuse `collectLinkCodes` (which only matches real `link` mdast nodes, never inline HTML), and survives all the way through actual Oxigraph storage byte-for-byte, embedded quotes included, not just the pure parse/project tier.",
     "parent": "BlockNode:00CDBZ76TG004",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TG006",
     "@type": "BlockNode",
-    "title": "## Distinguishing a wikilink from an ordinary anchor link",
-    "text": "Dropping the `[[...]]` wrapper for the compatible/pre-ingestion syntax raised a question the bracket form used to answer for free: given a plain relative link with a `#fragment`, how do you tell \"this is meant as an internal reference\" apart from an ordinary, unrelated same-page anchor link (`[jump to top](#top)`)? A scheme prefix (`aperas://...`) is never ambiguous — nothing external uses it — but a bare `#fragment` is syntactically identical either way.",
+    "title": "**Distinguishing a wikilink from an ordinary anchor link**",
+    "text": "**Distinguishing a wikilink from an ordinary anchor link**: Dropping the `[[...]]` wrapper for the compatible/pre-ingestion syntax raised a question the bracket form used to answer for free: given a plain relative link with a `#fragment`, how do you tell \"this is meant as an internal reference\" apart from an ordinary, unrelated same-page anchor link (`[jump to top](#top)`)? A scheme prefix (`aperas://...`) is never ambiguous — nothing external uses it — but a bare `#fragment` is syntactically identical either way.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDC0DA68009",
       "BlockNode:00CDBZ76TG008"
@@ -1533,19 +1533,19 @@
   {
     "@id": "BlockNode:00CDBZ76TG008",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R00B",
+    "title": "00CDBZ76TG008",
     "text": "The better fix doesn't try to guess from the string's shape at all: after the existing name-token/id walk finds a *candidate* target, only accept it if that candidate actually carries a matching `class=\"aperas-anchor\"` tag. This uses a fact already sitting in the corpus (was this block deliberately marked as an addressable target?) instead of a heuristic about what the fragment text looks like, and it matches what the anchor was for in the first place — a deliberate, hand-written marker of intent, not an incidental one. An untagged `#top` is now correctly never mistaken for a link target, regardless of whether some other block's slug happens to also read \"top\".",
     "parent": "BlockNode:00CDBZ76TG006",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TR000",
     "@type": "BlockNode",
-    "title": "## Finding the real lead-in colon",
-    "text": "The first implementation scanned raw characters for the first `:` outside a hand-tracked `**bold**` state — reasonable against a test string, wrong against the actual corpus. Live ingestion of `design/linking.md` itself surfaced two failures at once: a colon inside inline code (`` `Kind:snowflake` ``, `` `aperas://tree/...` ``) got treated as the delimiter, splicing a fresh id-anchor into the *middle* of the code span on projection; and a colon in ordinary flowing prose (\"...not a second permanent form: it stays until...\") produced a title that was nearly the whole paragraph, because nothing distinguished a deliberate lead-in from an incidental one deep in a real sentence.",
+    "title": "**Finding the real lead-in colon**",
+    "text": "**Finding the real lead-in colon**: The first implementation scanned raw characters for the first `:` outside a hand-tracked `**bold**` state — reasonable against a test string, wrong against the actual corpus. Live ingestion of `design/linking.md` itself surfaced two failures at once: a colon inside inline code (`` `Kind:snowflake` ``, `` `aperas://tree/...` ``) got treated as the delimiter, splicing a fresh id-anchor into the *middle* of the code span on projection; and a colon in ordinary flowing prose (\"...not a second permanent form: it stays until...\") produced a title that was nearly the whole paragraph, because nothing distinguished a deliberate lead-in from an incidental one deep in a real sentence.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDC0DA6800C",
       "BlockNode:00CDBZ76TR002",
@@ -1557,37 +1557,37 @@
   {
     "@id": "BlockNode:00CDBZ76TR002",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R00E",
+    "title": "00CDBZ76TR002",
     "text": "The prose case took longer. The instinct was that a lead-in colon must be within the block's *first sentence* — real natural-language sentence-boundary detection, not more character-counting, since a period inside inline code (or an abbreviation) shouldn't end a sentence early. `mdast-util-to-nlcst` (feeding an mdast tree into an nlcst tree via a `parse-latin`/`parse-english` parser) does exactly this correctly — confirmed live, its `inlineCode` handling already treats code as an opaque `SourceNode`, never decomposed into words or punctuation. For Japanese, the equivalent parser (`parse-japanese`) turned out to be a single unmaintained 2015 release built on `kuromoji.js`, with an API that doesn't even match the `ParserConstructor` shape `mdast-util-to-nlcst` requires (that shape is `parse-latin`'s own; `parse-english`/`parse-dutch` are literal subclasses of it) — not worth building on, especially since Japanese doesn't need it: `。`/`！`/`？` are unambiguous sentence-enders there, without English's \"Mr.\"/\"e.g.\" ambiguity, so a direct terminator scan is correct for Japanese, not a corner cut.",
     "parent": "BlockNode:00CDBZ76TR000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TR003",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R00F",
+    "title": "00CDBZ76TR003",
     "text": "Sentence-boundary detection was then tested directly against the actual failing paragraph — and failed to fix it. \"The slug-path anchor is only ever a compatibility bridge, though, not a second permanent form: it stays until every referrer has itself been ingested...\" parses as one single, entirely valid English sentence; the colon partway through it is a real, grammatical use of a colon *within* one sentence, and no sentence-boundary check can tell that apart from a genuine lead-in term. Every real lead-in term in the corpus (`Discussion`, `Slugified-path addressing`, `Node-ID addressing`) is short — one to a few words — which sentence structure has nothing to do with. Length turned out to be the actual discriminator, so the `mdast-util-to-nlcst`/`parse-latin`/`vfile` dependency was added and then removed again once this became clear: a length cap (word count for a space-delimited script, character count for Japanese) plus the existing code/bold exclusion, no sentence parser needed.",
     "parent": "BlockNode:00CDBZ76TR000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TR004",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R00G",
+    "title": "00CDBZ76TR004",
     "text": "One more gap surfaced once ingestion was tested against real content again: an unwrapped technical string (a colon-bearing URL or `key:value` pair that just never got put in backticks) has no `inlineCode` node for the exclusion to catch, since it was never marked as code at all. Requiring a genuine lead-in colon to be followed by whitespace — true for essentially every real \"Term: rest\" lead-in, false for almost every such unwrapped technical string — catches most of what the structural exclusion can't, for space-delimited scripts (Japanese prose isn't space-delimited, so this check is skipped for `lang: ja`).",
     "parent": "BlockNode:00CDBZ76TR000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TR006",
     "@type": "BlockNode",
-    "title": "## Manual titles turned out to be the wrong fix",
-    "text": "Before lead-in-term extraction existed, a block with no real title had exactly one way to get one: `kg:title`, an interactive command that set `BlockNode.title` directly in the graph, decoupled from the block's own text. `reconcile.ts`'s `carryForwardFields` carried that title forward across re-ingestion, but only for a block matched by exact text equality — the moment the surrounding text changed at all, the block reconciled as removed-and-added rather than matched, and the manually-set title was silently lost, replaced by whatever the fresh parse guessed instead. This had always been true; it only became a visible problem once there was a real alternative to compare it against.",
+    "title": "**Manual titles turned out to be the wrong fix**",
+    "text": "**Manual titles turned out to be the wrong fix**: Before lead-in-term extraction existed, a block with no real title had exactly one way to get one: `kg:title`, an interactive command that set `BlockNode.title` directly in the graph, decoupled from the block's own text. `reconcile.ts`'s `carryForwardFields` carried that title forward across re-ingestion, but only for a block matched by exact text equality — the moment the surrounding text changed at all, the block reconciled as removed-and-added rather than matched, and the manually-set title was silently lost, replaced by whatever the fresh parse guessed instead. This had always been true; it only became a visible problem once there was a real alternative to compare it against.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDC0DA80003"
     ]
@@ -1595,10 +1595,10 @@
   {
     "@id": "BlockNode:00CDBZ76TR008",
     "@type": "BlockNode",
-    "title": "## Cross-artifact link staleness",
-    "text": "Found live, not reasoned about in the abstract: `design/linking.md` gained a new heading mid-session, and `discussion/linking.md` linked to it in the same edit — but the *referring* artifact's link only resolves against whatever the *target* artifact's graph state already is at the moment the referrer itself gets ingested. Ingest them in the wrong order (or ingest only one, expecting the other to already reflect a change it doesn't yet), and the reference resolves against stale or absent content — not because anything about the reference itself was wrong, but because ingestion order and per-artifact hash-based skipping have nothing to do with each other. `kg:ingest`'s own `ingestedHash === fileHash` check exists specifically to make re-ingesting an unchanged file a no-op — exactly the case that also means \"this artifact will never spontaneously notice a change somewhere else.\"",
+    "title": "**Cross-artifact link staleness**",
+    "text": "**Cross-artifact link staleness**: Found live, not reasoned about in the abstract: `design/linking.md` gained a new heading mid-session, and `discussion/linking.md` linked to it in the same edit — but the *referring* artifact's link only resolves against whatever the *target* artifact's graph state already is at the moment the referrer itself gets ingested. Ingest them in the wrong order (or ingest only one, expecting the other to already reflect a change it doesn't yet), and the reference resolves against stale or absent content — not because anything about the reference itself was wrong, but because ingestion order and per-artifact hash-based skipping have nothing to do with each other. `kg:ingest`'s own `ingestedHash === fileHash` check exists specifically to make re-ingesting an unchanged file a no-op — exactly the case that also means \"this artifact will never spontaneously notice a change somewhere else.\"",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDC0DA80005",
       "BlockNode:00CDBZ76TR00A",
@@ -1608,19 +1608,19 @@
   {
     "@id": "BlockNode:00CDBZ76TR00A",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R00P",
+    "title": "00CDBZ76TR00A",
     "text": "Getting the \"force\" part right took a second pass. The obvious lever — clear `ingestedHash` so the unchanged-check no longer matches — turned out to be reaching into the wrong field: `ingestFromDisk` (`node.ts`) also reads `this.ingestedHash !== undefined` to decide `hadContent`, i.e. whether to reconcile against the artifact's existing tree or fresh-mint every block as if it had never been ingested before. Clearing the hash to dodge one check would have tripped the other, discarding every real block's identity — every existing `Link` pointing into that artifact would have gone dangling for real, the opposite of the fix. `ingestFromDisk` gained its own explicit `bypassUnchangedCheck` parameter instead, orthogonal to `hadContent`, so a forced retry still reconciles normally — the only thing that changes is that the \"nothing to do\" short-circuit doesn't fire.",
     "parent": "BlockNode:00CDBZ76TR008",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDBZ76TR00C",
     "@type": "BlockNode",
-    "title": "## A bare snowflake isn't a full node id",
-    "text": "Landing the full-slug-path collision check (`apeironNgn/node.ts`'s `rejectSlugPathCollisions`) meant comparing a freshly-parsed block's own id against whatever a live scan of the store said already owned a given path — and every single reconciled (matched, unchanged) block came back as \"colliding with itself.\" `ParsedBlockNode.blockId` (`generateNodeId()`'s own return) is a bare snowflake, e.g. `00CD9FZQP0001`; `allIdsOfKind`'s ids, and every live node's own `.id`, are always the full `Kind:snowflake` form, e.g. `BlockNode:00CD9FZQP0001`. The self-exclusion check (`liveOwner !== node.blockId`) was comparing these two different formats directly — never equal, even for the exact same node — so `reconcileTree`'s own carried-forward id (real, correct, unchanged) always failed the comparison. Fixed by prefixing `node.blockId` with `BlockNode:` before comparing (every node this check walks is a `BlockNode` by construction). Caught immediately by `verify.ts`'s own pre-existing steps 1-12 failing the moment this landed — a good sign the new check was wired into a real ingestion path, not a sign anything about steps 1-12 themselves was wrong.",
+    "title": "**A bare snowflake isn't a full node id**",
+    "text": "**A bare snowflake isn't a full node id**: Landing the full-slug-path collision check (`apeironNgn/node.ts`'s `rejectSlugPathCollisions`) meant comparing a freshly-parsed block's own id against whatever a live scan of the store said already owned a given path — and every single reconciled (matched, unchanged) block came back as \"colliding with itself.\" `ParsedBlockNode.blockId` (`generateNodeId()`'s own return) is a bare snowflake, e.g. `00CD9FZQP0001`; `allIdsOfKind`'s ids, and every live node's own `.id`, are always the full `Kind:snowflake` form, e.g. `BlockNode:00CD9FZQP0001`. The self-exclusion check (`liveOwner !== node.blockId`) was comparing these two different formats directly — never equal, even for the exact same node — so `reconcileTree`'s own carried-forward id (real, correct, unchanged) always failed the comparison. Fixed by prefixing `node.blockId` with `BlockNode:` before comparing (every node this check walks is a `BlockNode` by construction). Caught immediately by `verify.ts`'s own pre-existing steps 1-12 failing the moment this landed — a good sign the new check was wired into a real ingestion path, not a sign anything about steps 1-12 themselves was wrong.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDBZ76TR00D"
     ]
@@ -1628,10 +1628,10 @@
   {
     "@id": "BlockNode:00CDBZ76TR00D",
     "@type": "BlockNode",
-    "title": "00CDC0RE5R00S",
+    "title": "00CDBZ76TR00D",
     "text": "A second, unrelated mistake surfaced writing the new `verify.ts` steps for this same landing: a bare `listItem` has no `serializeBlock` case of its own — `serializeListItem` (the function that actually applies the `- `/checkbox prefix and splices the id-anchor) is only ever invoked by the *parent*'s own `renderChildren`, when it detects a run of `listItem` children. Calling `.toMarkdown()` directly on a list item block hits `serializeBlock`'s generic container fallback instead, rendering only *its own* children (empty, for a leaf item) — silently returning `''`, not the list item's own line. The fix was in the test, not the production code: project the *parent* heading and check for the spliced anchor within that larger string.",
     "parent": "BlockNode:00CDBZ76TR00C",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -1653,10 +1653,10 @@
         ]
       }
     ],
-    "title": "## A colon at the very end of its own text node",
-    "text": "Live re-ingestion of this very concern's own draft plan (`planning/linking.md`'s Slice 2 write-up) surfaced a second refinement to the same [lead-in colon detection](#id/BlockNode:00CDBZ76TR000): `- **Heading**:` immediately followed only by nested list items — no inline \"rest of text\" on the same line — got no title at all, falling back to the raw block id. The space-after-colon check (added to catch an unwrapped technical string like a bare URL or `key:value` pair) was reading the wrong string: it looked at the next character within the current mdast *text node's own* `.value`, not the real document. `**Heading**:` parses as a `strong` node followed by a separate, one-character `text` node holding just `\":\"` — that text node's own value simply ends there; the real file's next character (a newline, before the nested list begins) was never captured in it to begin with. The check saw \"nothing left in this string\" and treated it exactly like a genuinely ambiguous no-space case, when nothing suspicious was actually adjacent to the colon at all — there was just nothing left to look at.",
+    "title": "**A colon at the very end of its own text node**",
+    "text": "**A colon at the very end of its own text node**: Live re-ingestion of this very concern's own draft plan (`planning/linking.md`'s Slice 2 write-up) surfaced a second refinement to the same [lead-in colon detection](#id/BlockNode:00CDBZ76TR000): `- **Heading**:` immediately followed only by nested list items — no inline \"rest of text\" on the same line — got no title at all, falling back to the raw block id. The space-after-colon check (added to catch an unwrapped technical string like a bare URL or `key:value` pair) was reading the wrong string: it looked at the next character within the current mdast *text node's own* `.value`, not the real document. `**Heading**:` parses as a `strong` node followed by a separate, one-character `text` node holding just `\":\"` — that text node's own value simply ends there; the real file's next character (a newline, before the nested list begins) was never captured in it to begin with. The check saw \"nothing left in this string\" and treated it exactly like a genuinely ambiguous no-space case, when nothing suspicious was actually adjacent to the colon at all — there was just nothing left to look at.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDC0DA8000B"
     ]
@@ -2819,7 +2819,7 @@
     "title": "The first instinct was a syntactic heuristic",
     "text": "The first instinct was a syntactic heuristic: <a name='id/BlockNode:00CDBZ76TG007' class='aperas-anchor aperas-id'></a> a heading-derived slug always starts with at least two literal dashes (`slugify` runs on the raw `\"## \"` line, so the `#` markers survive as dashes), which an ordinary anchor essentially never does. But that signal doesn't exist for a list-item-derived lead-in term — `slugify(\"Term\")` is just `\"term\"`, indistinguishable in shape from a plain anchor like `#installation`. Narrowing the pattern further (requiring a `/`, say) would have quietly dropped support for single-segment list-item slugs rather than actually resolving the ambiguity.",
     "parent": "BlockNode:00CDBZ76TG006",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -2828,7 +2828,7 @@
     "title": "The first fix was mechanical and uncontroversial",
     "text": "The first fix was mechanical and uncontroversial: <a name='id/BlockNode:00CDBZ76TR001' class='aperas-anchor aperas-id'></a> stop scanning raw characters and walk the block's actual parsed inline nodes instead, so `inlineCode` is structurally invisible (mirrors `collectLinkCodes`'s own inlineCode skip) and `strong`/`emphasis` are excluded by real node type rather than by counting `**` pairs.",
     "parent": "BlockNode:00CDBZ76TR000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -2850,10 +2850,10 @@
         ]
       }
     ],
-    "title": "00CDC0RE5R00H",
+    "title": "00CDC0DA80001",
     "text": "Best-effort throughout, not exact — see [Manual titles turned out to be the wrong fix](#id/BlockNode:00CDBZ76TR006) for why a wrongly-detected title is corrected by editing the lead-in term itself, not by a separate override.",
     "parent": "BlockNode:00CDBZ76TR000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -2875,10 +2875,10 @@
         ]
       }
     ],
-    "title": "00CDC0RE5R00K",
+    "title": "00CDC0DA80003",
     "text": "Once lead-in-term extraction existed as a deterministic, always-available function of a block's own text, `kg:title`'s fragility looked less like a feature with a rough edge and more like a whole mechanism worth dropping: an out-of-band override that only worked as long as you never touched the text around it wasn't actually more practical than editing the text itself. `kg:title` (and `carryForwardFields`'s title-carrying line) was removed outright — a title is now always a pure function of the current text, recomputed on every parse, for every block type. `kg:update` gained a compensating capability for the one block type that actually needed it: a heading's title is projected back to disk (no other block type's is), so `kg:update` now treats a piped leading heading line as the target's full new state, title included, instead of only ever touching `text`/`children` (see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)).",
     "parent": "BlockNode:00CDBZ76TR006",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -2887,7 +2887,7 @@
     "title": "The first fix considered was the blunt one",
     "text": "The first fix considered was the blunt one: <a name='id/BlockNode:00CDBZ76TR009' class='aperas-anchor aperas-id'></a> always re-ingest everything, dropping the hash check entirely. Rejected immediately — it throws away the entire reason the check exists (a large corpus re-parsed on every single `kg:ingest` call, most of it for nothing) to fix a problem that only actually affects a small, identifiable set of artifacts: the ones with an unresolved reference in the first place. A targeted retry needs to know which artifacts those are without re-scanning everything — so a dangling code, instead of being logged and forgotten (the pre-existing behavior), is stashed on its own referring artifact as a `danglingRef` prop, reusing the existing generic props mechanism rather than inventing new storage. After every `kg:ingest` run's main work is done, every artifact with at least one stashed code gets that code retried against the *current* graph; a match forces exactly that one artifact through link resolution again.",
     "parent": "BlockNode:00CDBZ76TR008",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -2896,7 +2896,7 @@
     "title": "One retry pass, not a loop to a fixed point",
     "text": "One retry pass, not a loop to a fixed point: <a name='id/BlockNode:00CDBZ76TR00B' class='aperas-anchor aperas-id'></a> artifact A's own retry unblocking artifact B, whose retry then unblocks artifact C, is possible in principle but not a real pattern this corpus (or a documentation corpus in general) produces — a single sweep after the main ingestion work catches every case actually seen, and a longer chain can be revisited if one ever shows up in practice.",
     "parent": "BlockNode:00CDBZ76TR008",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -2921,7 +2921,7 @@
     "title": "The fix",
     "text": "The fix: <a name='id/BlockNode:00CDBZ76TR00F' class='aperas-anchor aperas-id'></a> treat \"nothing left in this text run\" as satisfying the space-after-colon check, the same as an actual space. This doesn't touch the two guards that already run first and stay exactly as strict as before — a colon inside `inlineCode`/`code` is still never a candidate at all, and a colon inside `strong`/`emphasis` still never qualifies — only a colon that's already passed both of those is affected. Accepted as a known, deliberate side effect: a colon immediately followed by a *different* inline node with no space (`` note:**bold** ``) now also passes, since that colon's own text run ends the same way a genuinely-safe one does. Not treated as a real regression — matches the feature's existing best-effort, user-correctable philosophy ([Manual titles turned out to be the wrong fix](#id/BlockNode:00CDBZ76TR006)) rather than staying maximally strict at the cost of a real, common case — a lead-in immediately followed by nested children, the exact shape this concern's own docs use throughout — going untitled.",
     "parent": "BlockNode:00CDBZ76TR00E",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -3091,10 +3091,10 @@
         ]
       }
     ],
-    "title": "## A multi-artifact kg:ingest isn't transactional",
-    "text": "Found live, not reasoned about in the abstract: ingesting `design/linking.md issues/linking.md history/linking.md discussion/linking.md planning/linking.md` in one `kg:ingest` call failed on the third path (`history/linking.md`'s duplicate-date collision), and the CLI reported the whole call as failed — but `design/linking.md` and `issues/linking.md`, processed earlier in the same loop, had already been fully ingested into the live in-memory `Store` by the time the failure surfaced. `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop over paths calling `ingestArtifact` per file with no `try`/`catch` around each iteration; nothing rolls back what an earlier iteration already committed when a later one throws. This is a lack of transaction semantics, not a one-off bug — the same shape of gap would apply to any batched multi-step write, `kg:insert`/`kg:update` sequences included, not just `kg:ingest`. Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG008).",
+    "title": "**A multi-artifact kg:ingest isn't transactional**",
+    "text": "**A multi-artifact kg:ingest isn't transactional**: Found live, not reasoned about in the abstract: ingesting `design/linking.md issues/linking.md history/linking.md discussion/linking.md planning/linking.md` in one `kg:ingest` call failed on the third path (`history/linking.md`'s duplicate-date collision), and the CLI reported the whole call as failed — but `design/linking.md` and `issues/linking.md`, processed earlier in the same loop, had already been fully ingested into the live in-memory `Store` by the time the failure surfaced. `ingestArtifacts`/`ingestAllArtifacts` (`apeironNgn/artifacts.ts`) loop over paths calling `ingestArtifact` per file with no `try`/`catch` around each iteration; nothing rolls back what an earlier iteration already committed when a later one throws. This is a lack of transaction semantics, not a one-off bug — the same shape of gap would apply to any batched multi-step write, `kg:insert`/`kg:update` sequences included, not just `kg:ingest`. Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG008).",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDCTB4A0000",
       "BlockNode:00CDCTB4A0001",
@@ -3107,7 +3107,7 @@
     "title": "The failure was only discovered indirectly",
     "text": "The failure was only discovered indirectly: a *later*, corrected re-run reported \"Tracked 1, skipped 4 unchanged\" instead of \"Tracked 5\" — the only sign that two of the five files had already been silently, partially processed by the earlier failed attempt. The pending `--flush` for that failed call never ran, so none of that partial progress reached disk that time — but it existed in the service's memory regardless, invisible until a later command exposed it.",
     "parent": "BlockNode:00CDCTB49R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -3116,7 +3116,7 @@
     "title": "00CDCTB4A0001",
     "text": "The real risk, specifically for the graph-first editing direction (edit via `kg:insert`/`kg:update`, then `kg:project`): a scripted multi-step sequence that fails partway leaves the live graph ahead of disk in a way that's easy to miss, and a service restart before noticing would silently discard that in-memory-only progress with no error at all. Worth treating \"the command reported failure\" as \"go check what state things are actually in,\" not \"nothing happened.\"",
     "parent": "BlockNode:00CDCTB49R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -3125,7 +3125,7 @@
     "title": "00CDCTB4A0002",
     "text": "**Status: identified, not yet implemented.** No fix landed this pass — recorded here first, per the deliberate policy going forward to document a gap like this before touching code. A real fix would need `ingestArtifacts`/`ingestAllArtifacts` to either stop after the first failure and report exactly which paths already committed (least invasive), or gain real transactional semantics across a whole batch (bigger, would need every mutation this session has relied on — `hydrateFromParsed`, `applyTombstone`, `resolveBlockLinks` — to be stageable and revocable, not just applied directly).",
     "parent": "BlockNode:00CDCTB49R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4129,17 +4129,10 @@
     "parent": "ArtifactNode:00CDDTBQWG000",
     "type": "heading",
     "children": [
-      "BlockNode:00CDEZ1A68001",
-      "BlockNode:00CDEM7DVG001",
-      "BlockNode:00CDEEJ8PR001",
-      "BlockNode:00CDEB141G001",
       "BlockNode:00CDDVC33G000",
-      "BlockNode:00CDDVC33G006",
-      "BlockNode:00CDDVC33G007",
-      "BlockNode:00CDDVC33G008",
-      "BlockNode:00CDF8B3TG00A",
-      "BlockNode:00CDDVC33G009",
-      "BlockNode:00CDDVC33G00A"
+      "BlockNode:00CJ5ET5Z8001",
+      "BlockNode:00CJ5ET5Z8003",
+      "BlockNode:00CJ5ET5Z8005"
     ]
   },
   {
@@ -4296,10 +4289,10 @@
   {
     "@id": "BlockNode:00CDDVC33G006",
     "@type": "BlockNode",
-    "title": "## Motivation: dogfooding vs. shipping",
-    "text": "Every `kg:*` command today is its own `tsx`-run entrypoint (`web/src/lib/kgX.ts`) invoked as `npm run kg:X -- <args>` — that only works inside a source checkout of this repo, with `tsx` and every other devDependency installed. That's fine for us dogfooding the skills we write against this CLI, but the skills under `skills/` are meant for end users, who won't have this repo cloned. Before more skills lean on `kg:*` commands, the CLI itself needs to be something installable and runnable standalone.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Motivation: dogfooding vs. shipping**",
+    "text": "**Motivation: dogfooding vs. shipping**: Every `kg:*` command today is its own `tsx`-run entrypoint (`web/src/lib/kgX.ts`) invoked as `npm run kg:X -- <args>` — that only works inside a source checkout of this repo, with `tsx` and every other devDependency installed. That's fine for us dogfooding the skills we write against this CLI, but the skills under `skills/` are meant for end users, who won't have this repo cloned. Before more skills lean on `kg:*` commands, the CLI itself needs to be something installable and runnable standalone.",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4321,37 +4314,37 @@
         ]
       }
     ],
-    "title": "## Considered: one bin per verb",
-    "text": "Register each existing `kgX.ts` as its own `bin` entry (`aperas-ingest`, `aperas-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the single `aperas <verb>` entrypoint every illustrative example in the corpus already assumes (e.g. [design/documentation.md's Crystallization step](../design/documentation.md#id/BlockNode:00CDD68E8800B): `echo \"...\" | aperas update design/crud.md/Architecture`).",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Considered: one bin per verb**",
+    "text": "**Considered: one bin per verb**: Register each existing `kgX.ts` as its own `bin` entry (`aperas-ingest`, `aperas-tree`, ...). Minimal code change — every file already runs standalone. Rejected: pollutes the user's PATH with roughly twenty near-identically-named commands, and throws away the single `aperas <verb>` entrypoint every illustrative example in the corpus already assumes (e.g. [design/documentation.md's Crystallization step](../design/documentation.md#id/BlockNode:00CDD68E8800B): `echo \"...\" | aperas update design/crud.md/Architecture`).",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDDVC33G008",
     "@type": "BlockNode",
-    "title": "## Landing on: one dispatcher binary",
-    "text": "A single `aperas` executable that argv-dispatches to a subcommand (`aperas ingest ...`, `aperas tree ...`, ...). Low-risk refactor: every `kgX.ts` already separates a pure `run*` function (e.g. `runIngest`, `runProject`) from its own `main()`'s argv-parsing/help-printing glue — the dispatcher only needs to own argv routing and reuse the existing `run*`/`request()` calls and `kgHelp.ts` machinery, not rewrite any command's logic.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Landing on: one dispatcher binary**",
+    "text": "**Landing on: one dispatcher binary**: A single `aperas` executable that argv-dispatches to a subcommand (`aperas ingest ...`, `aperas tree ...`, ...). Low-risk refactor: every `kgX.ts` already separates a pure `run*` function (e.g. `runIngest`, `runProject`) from its own `main()`'s argv-parsing/help-printing glue — the dispatcher only needs to own argv routing and reuse the existing `run*`/`request()` calls and `kgHelp.ts` machinery, not rewrite any command's logic.",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDDVC33G009",
     "@type": "BlockNode",
-    "title": "## Open question: the runtime",
-    "text": "`tsx` (on-the-fly TypeScript execution) is a devDependency today, not something to ship a published CLI depending on. Needs a real build step (`esbuild`/`tsc`) compiling to plain JS, with `bin` pointing at the built entrypoint (a `#!/usr/bin/env node` shebang) — `npm run kg:X` during development can keep using `tsx` unchanged; only the published artifact needs to be compiled.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**the runtime**",
+    "text": "**the runtime**: `tsx` (on-the-fly TypeScript execution) is a devDependency today, not something to ship a published CLI depending on. Needs a real build step (`esbuild`/`tsc`) compiling to plain JS, with `bin` pointing at the built entrypoint (a `#!/usr/bin/env node` shebang) — `npm run kg:X` during development can keep using `tsx` unchanged; only the published artifact needs to be compiled.",
+    "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDDVC33G00A",
     "@type": "BlockNode",
-    "title": "## Open question: where's the graph?",
-    "text": "`getArtifactsDir()` resolves `AperasKG/artifacts` as a hardcoded sibling of `web/` — true for us, not for an end user with no such sibling folder. Packaging needs some answer for where an installed `aperas` binary finds (or creates) its own graph — cwd-relative discovery, an env var, a config file — that's still open, and probably the biggest remaining unknown, separate from the dispatcher/bundling mechanics above.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**where's the graph?**",
+    "text": "**where's the graph?**: `getArtifactsDir()` resolves `AperasKG/artifacts` as a hardcoded sibling of `web/` — true for us, not for an end user with no such sibling folder. Packaging needs some answer for where an installed `aperas` binary finds (or creates) its own graph — cwd-relative discovery, an env var, a config file — that's still open, and probably the biggest remaining unknown, separate from the dispatcher/bundling mechanics above.",
+    "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4582,10 +4575,10 @@
   {
     "@id": "BlockNode:00CDEB141G001",
     "@type": "BlockNode",
-    "title": "## Incident: artifact rename has no working path yet",
-    "text": "Tried to exercise a rename (`cli.md` -> `cli-packaging.md`) to see whether the system's rename detection preserves block identity or silently treats it as delete+create. Neither scoped nor full ingestion actually renames safely today:",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Incident: artifact rename has no working path yet**",
+    "text": "**Incident: artifact rename has no working path yet**: Tried to exercise a rename (`cli.md` -> `cli-packaging.md`) to see whether the system's rename detection preserves block identity or silently treats it as delete+create. Neither scoped nor full ingestion actually renames safely today:",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDEB141G002",
       "BlockNode:00CDEB141G003",
@@ -4627,10 +4620,10 @@
   {
     "@id": "BlockNode:00CDEB141G004",
     "@type": "BlockNode",
-    "title": "00CDF8B3TG000",
+    "title": "00CDEB141G004",
     "text": "Recovered by restoring `Apeiron/*.jsonld` from the git index (the last known-good staged state) and reverting the disk `mv`. No dedicated \"rename an artifact\" primitive exists yet — this needs a real design, not another ad hoc attempt.",
     "parent": "BlockNode:00CDEB141G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4652,10 +4645,10 @@
         ]
       }
     ],
-    "title": "## Practice: stage checkpoints myself, leave commits to the user",
-    "text": "The rename incident above recovered cleanly only because `Apeiron/*.jsonld` happened to already be staged from an earlier point — `git restore` could reset the working tree to that known-good index state in one step. That shouldn't be luck: after each verified-stable step (a clean round-trip, a successful reconciliation with no unexpected removals), stage the change (`git add`) immediately, so the git index is always a running checkpoint. If a later step goes wrong, `git restore`/`git diff` against the index recovers it without guesswork. Independently restated as a general practice in [aperas-skill's own edit loop](../design/aperas-skill.md#id/BlockNode:00CEB8N5EG001) — same rule, same reasoning, arrived at twice.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Practice: stage checkpoints myself, leave commits to the user**",
+    "text": "**Practice: stage checkpoints myself, leave commits to the user**: The rename incident above recovered cleanly only because `Apeiron/*.jsonld` happened to already be staged from an earlier point — `git restore` could reset the working tree to that known-good index state in one step. That shouldn't be luck: after each verified-stable step (a clean round-trip, a successful reconciliation with no unexpected removals), stage the change (`git add`) immediately, so the git index is always a running checkpoint. If a later step goes wrong, `git restore`/`git diff` against the index recovers it without guesswork. Independently restated as a general practice in [aperas-skill's own edit loop](../design/aperas-skill.md#id/BlockNode:00CEB8N5EG001) — same rule, same reasoning, arrived at twice.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDEEJ8PR002"
     ]
@@ -4666,16 +4659,16 @@
     "title": "This is deliberately staging only, never committing",
     "text": "This is deliberately staging only, never committing: `git commit` stays a decision for the user to make explicitly, reviewing what accumulated. Staging is not that — it's a private safety net, the same role `git stash` or a snapshot would play, just reusing git's own index instead of a separate mechanism.",
     "parent": "BlockNode:00CDEEJ8PR001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDEM7DVG001",
     "@type": "BlockNode",
-    "title": "## Resolved: scoped rename detection, without a full-corpus sweep",
-    "text": "Added `trackArtifactsScoped` (`apeironNgn/artifacts.ts`), wired into `kg:track`/`kg:ingest`'s explicit-`<path>...` branch. It detects a rename by pairing only the paths the caller actually gave against already-tracked ArtifactNodes whose recorded path no longer exists on disk — never a directory listing, so `archive/` (or anything else not yet migrated) can't enter either side, no matter how large it gets.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Resolved: scoped rename detection, without a full-corpus sweep**",
+    "text": "**Resolved: scoped rename detection, without a full-corpus sweep**: Added `trackArtifactsScoped` (`apeironNgn/artifacts.ts`), wired into `kg:track`/`kg:ingest`'s explicit-`<path>...` branch. It detects a rename by pairing only the paths the caller actually gave against already-tracked ArtifactNodes whose recorded path no longer exists on disk — never a directory listing, so `archive/` (or anything else not yet migrated) can't enter either side, no matter how large it gets.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDEM7DVG002",
       "BlockNode:00CDEM7DVR000"
@@ -4700,28 +4693,28 @@
         ]
       }
     ],
-    "title": "00CDF8B3T8006",
+    "title": "00CDEM7DVG002",
     "text": "First attempt reused `trackAllArtifacts`'s own `matchLeftoverByAbstract` (the Gestalt/Ratcliff-Obershelp recursion `reconcile.ts` uses everywhere else) and only matched 2 of 5 batch-renamed files — not from ambiguity, but because that algorithm is position-sensitive: it works for reconciling siblings that share a rough common order across an edit, not for an unordered bag of whole-artifact identities scattered across concern folders. A match's recursive split can discard a whole quadrant of otherwise-valid candidates just because the corresponding range on the other side is empty. Replaced with `matchByExactKey`: same \"decline rather than guess\" principle (a key occurring more than once on either side stays unmatched), but no positional requirement — confirmed via debug trace, then verified live (4 of 5 correctly renamed, identity preserved). The underlying position-sensitivity is still live wherever `reconcile.ts` uses `matchLeftoverByAbstract` outside the rename path — see [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG005).",
     "parent": "BlockNode:00CDEM7DVG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDEM7DVR000",
     "@type": "BlockNode",
-    "title": "00CDF8B3T8007",
+    "title": "00CDEM7DVR000",
     "text": "**Left open, a distinct bug:** the 5th case still doesn't match, and a separate block-level reconciliation surfaced the same shape of problem — an ArtifactNode's (or BlockNode's) cached abstract `.text` is snapshotted at ingestion time, before `kg:project` ever splices an inline `id/<ID>` anchor into a list-item/paragraph's rendered form. Once a block has been through even one project cycle, its stored text and its freshly-reparsed disk text differ by exactly that anchor — breaking any matcher that requires exact equality, ours included. Not attempted here; needs its own fix (re-deriving the stored abstract with anchors stripped, or comparing anchor-insensitively).",
     "parent": "BlockNode:00CDEM7DVG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDEZ1A68001",
     "@type": "BlockNode",
-    "title": "## Resolved: anchor-drift strip, and a real trackFromDisk bug underneath it",
-    "text": "Added `stripInlineAnchors` (`astParser.ts`) and applied it everywhere a block's stored abstract/text gets compared against a fresh disk parse for exact equality: `extractAbstract` (before truncating, so a mid-window anchor can't survive as a mangled fragment either), `reconcile.ts`'s `leafKey` (block-level Gestalt matching), and the rename matchers' own key computation (`apeironNgn/artifacts.ts`). Verified against the two real cases that surfaced this (`design/cli.md`'s Discussion bullet, `discussion/cli.md`'s staging-practice paragraph): stripped text now round-trips exactly.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Resolved: anchor-drift strip, and a real trackFromDisk bug underneath it**",
+    "text": "**Resolved: anchor-drift strip, and a real trackFromDisk bug underneath it**: Added `stripInlineAnchors` (`astParser.ts`) and applied it everywhere a block's stored abstract/text gets compared against a fresh disk parse for exact equality: `extractAbstract` (before truncating, so a mid-window anchor can't survive as a mangled fragment either), `reconcile.ts`'s `leafKey` (block-level Gestalt matching), and the rename matchers' own key computation (`apeironNgn/artifacts.ts`). Verified against the two real cases that surfaced this (`design/cli.md`'s Discussion bullet, `discussion/cli.md`'s staging-practice paragraph): stripped text now round-trips exactly.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDEZ1A68002",
       "BlockNode:00CDEZ1A68003"
@@ -4730,10 +4723,10 @@
   {
     "@id": "BlockNode:00CDEZ1A68002",
     "@type": "BlockNode",
-    "title": "00CDF8B3T8003",
+    "title": "00CDEZ1A68002",
     "text": "That got the batch rename to report \"5 renamed\" — but a direct check of the graph showed all 5 *still* duplicated. The real, deeper bug was in `ArtifactNode.trackFromDisk` (`node.ts`): its \"skip if unchanged\" guard compared `fileHash` alone, `this.path` never entered it. A pure rename is exactly the case where the hash *is* unchanged (nothing but the location moved) — so the guard's early return skipped the `this.path = artifactPath` write below it every time, on every rename, while still reporting `{ tracked: true }`-shaped success to its caller. `trackAllArtifacts`'s own rename path had carried this same bug the whole time; it just never surfaced because a real-world rename usually carries a content edit alongside it, which masked the hash match. Fixed: the guard now requires the path to match too, not just the hash — a rename (same hash, different path) now correctly falls through and updates `path`/`title`/`fileHash`/`lastTrackedAt`.",
     "parent": "BlockNode:00CDEZ1A68001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4742,7 +4735,7 @@
     "title": "All three fixes together, re-verified",
     "text": "All three fixes together, re-verified: batch-renaming the 5 `cli.md` docs to `cli-packaging.md` now reports \"5 renamed\" *and* the graph shows exactly 5 ArtifactNodes (no duplicates), each still carrying its original id and its original BlockNode children — confirmed via direct inspection, not just the summary line.",
     "parent": "BlockNode:00CDEZ1A68001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4775,19 +4768,19 @@
   {
     "@id": "BlockNode:00CDF8B3TG00A",
     "@type": "BlockNode",
-    "title": "## Naming: `aperas`, not `kg`",
-    "text": "`kg` is short and matches the existing `kg:*` script prefix, but it collides too easily with other tools people already have on their PATH (a common `kubectl` alias, among others) — a real risk once this is something end users install globally, not just an internal npm script name scoped to this repo. Settled on `aperas` instead: unambiguous, matches the project's own name, no realistic collision.",
-    "parent": "BlockNode:00CDDVC338001",
-    "type": "heading",
+    "title": "**Naming: `aperas`, not `kg`**",
+    "text": "**Naming: `aperas`, not `kg`**: `kg` is short and matches the existing `kg:*` script prefix, but it collides too easily with other tools people already have on their PATH (a common `kubectl` alias, among others) — a real risk once this is something end users install globally, not just an internal npm script name scoped to this repo. Settled on `aperas` instead: unambiguous, matches the project's own name, no realistic collision.",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDG18FP0001",
     "@type": "BlockNode",
-    "title": "## Resolved (partially): retitling a heading, and a deeper wikilink gap it exposed",
-    "text": "Renaming this doc set (`cli-packaging.md` -> `packaging.md`) needed each doc's own H1 retitled too (`# CLI Packaging — X` -> `# Packaging — X`). Pushed the whole corrected document through `kg:update` targeting the *ArtifactNode* (`design/packaging.md`), the same way the `kg -> aperas` content fix worked earlier — and it blew up all 7 blocks into fresh \"added\" ones (0 matched), tombstoning every original BlockNode id in the process.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved (partially): retitling a heading, and a deeper wikilink gap it exposed**",
+    "text": "**Resolved (partially): retitling a heading, and a deeper wikilink gap it exposed**: Renaming this doc set (`cli-packaging.md` -> `packaging.md`) needed each doc's own H1 retitled too (`# CLI Packaging — X` -> `# Packaging — X`). Pushed the whole corrected document through `kg:update` targeting the *ArtifactNode* (`design/packaging.md`), the same way the `kg -> aperas` content fix worked earlier — and it blew up all 7 blocks into fresh \"added\" ones (0 matched), tombstoning every original BlockNode id in the process.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDG18FP0002",
       "BlockNode:00CDG18FP0003",
@@ -4800,7 +4793,7 @@
     "title": "**Root cause:** `kg:update` *does* have a retitle-in-place feature (`kgUpdate.ts`",
     "text": "**Root cause:** `kg:update` *does* have a retitle-in-place feature (`kgUpdate.ts`: when the piped input's own first child is a heading of matching depth, it relabels `title`/`text` in place, no restructuring) — but it only fires when the *target itself* is that heading BlockNode. Targeting the ArtifactNode instead routes the whole document through the generic `reconcileTree`/Gestalt matcher, where a heading's match key is `title` alone (`reconcile.ts`'s `leafKey`) — no positional or depth-aware fallback. A title change is therefore an exact-key mismatch at the very top of the tree, and since nothing above it can anchor a match, the *entire* subtree reconciles as removed+added instead of \"one heading changed, rest unchanged.\" Artifact-level renames get a real \"same identity, new label\" primitive (`trackFromDisk`, after this session's earlier fix); heading-level retitling only gets one when addressed directly, not through a whole-document push.",
     "parent": "BlockNode:00CDG18FP0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4809,7 +4802,7 @@
     "title": "00CDG18FP0003",
     "text": "**A second, deeper gap this exposed:** neither `kg:update` nor `kg:insert` ever calls `resolveBlockLinks` — grepped every call site; it only ever runs from `ingestArtifact` (the `kg:ingest`/disk-first path). A block that's \"matched\" (untouched) keeps whatever links it already had, but anything reconciled as \"changed\" or \"added\" via `kg:update`/`kg:insert` gets *no* link resolution at all, silently. Confirmed directly: a fresh \"added\" list item's own BlockNode has no `links` field whatsoever. `documentation.md` and `linking.md` were unaffected (their wikilink-bearing blocks only ever went through \"matched\" `kg:update` passes, carrying forward resolution from an earlier real `kg:ingest`) — this doc set is the one place it actually broke, because the retitle accident forced every block through \"added\".",
     "parent": "BlockNode:00CDG18FP0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4818,7 +4811,7 @@
     "title": "00CDG18FP0004",
     "text": "Recovered by restoring `Apeiron/*.jsonld` from the git index and reprojecting from the graph (the disk `.md` files needed a `kg:project` to come back after a restore mishap deleted them outright — recoverable because the graph itself, not the working tree, was the actual source of truth here). Not yet fixed: the rename to `packaging.md` (still `cli-packaging.md` on disk) and the wikilink-resolution gap in `kg:update`/`kg:insert` — tracked, not resolved.",
     "parent": "BlockNode:00CDG18FP0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4834,10 +4827,10 @@
   {
     "@id": "BlockNode:00CDGAFQQR001",
     "@type": "BlockNode",
-    "title": "## Resolved: `kg:update`/`kg:insert` now resolve wikilinks",
-    "text": "Both commands now call `resolveBlockLinks` (`apeironNgn/artifacts.ts`) themselves, the same wrapper `ingestArtifact` already used — closing the gap the retitle incident above exposed.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved: `kg:update`/`kg:insert` now resolve wikilinks**",
+    "text": "**Resolved: `kg:update`/`kg:insert` now resolve wikilinks**: Both commands now call `resolveBlockLinks` (`apeironNgn/artifacts.ts`) themselves, the same wrapper `ingestArtifact` already used — closing the gap the retitle incident above exposed.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGAFQR0000",
       "BlockNode:00CDGAFQR0001",
@@ -4850,7 +4843,7 @@
     "title": "The pieces needed were already in `node.ts`, just private to `ingestFromDisk`",
     "text": "The pieces needed were already in `node.ts`, just private to `ingestFromDisk`: `collectLinkTargetsByBlock`/`collectOldWikilinksByBlock` snapshot a block's pre-mutation resolved link state, and `extractLinkCodes` (`artifacts.ts`) reads the `linkCodes` a fresh parse already stashes per node. Both are now exported, plus a new `findEnclosingArtifactId` (mirroring `artifactPathOfBlock`'s walk, but returning an id) so a command that starts from an arbitrary Block/ArtifactNode target — not `ingestArtifact`'s own already-known artifact id — can still find the right node for `resolveBlockLinks`'s `danglingRef` bookkeeping.",
     "parent": "BlockNode:00CDGAFQQR001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4859,7 +4852,7 @@
     "title": "`kg:update`",
     "text": "`kg:update`: the old-link snapshot is taken right after `oldShape` (before any mutation); whichever branch (`--text-only` or the default reconcile) builds the new tree also now extracts pending link codes from it *before* hydrating — same order `ingestFromDisk` uses, since `extractLinkCodes` strips the schema-unknown `linkCodes` field as it walks. `kg:insert`'s create mode does the same over its freshly-parsed `topLevel`, with empty old-state maps (nothing existed before).",
     "parent": "BlockNode:00CDGAFQQR001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4868,16 +4861,16 @@
     "title": "Verified two ways",
     "text": "Verified two ways: a throwaway `kg:insert`'d block with a `#id/...` link resolved immediately (`kg:backlinks` showed the new block as a real backlink, not just a reported count); and a no-op `kg:update` reconcile of an existing two-link block reused both `Link` ids rather than minting duplicates (`kg:backlinks` afterward showed the same two entries, unchanged).",
     "parent": "BlockNode:00CDGAFQQR001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDGGTE6R001",
     "@type": "BlockNode",
-    "title": "## Resolved: heading retitle-in-place, at the reconcile level too",
-    "text": "`kg:update`'s direct-heading-retitle feature only ever covered *targeting the heading itself*; a whole-document/whole-tree push (targeting the ArtifactNode, or a real `kg:ingest` re-parse of an edited file) still went through `reconcile.ts`'s generic `diffChildren`, where a heading's Stage A match key is `title` alone (`leafKey`) — an edited title was an exact-key miss with nothing to fall back on, so the entire subtree beneath a retitled heading reconciled as wholesale removed+added, exactly what happened above.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved: heading retitle-in-place, at the reconcile level too**",
+    "text": "**Resolved: heading retitle-in-place, at the reconcile level too**: `kg:update`'s direct-heading-retitle feature only ever covered *targeting the heading itself*; a whole-document/whole-tree push (targeting the ArtifactNode, or a real `kg:ingest` re-parse of an edited file) still went through `reconcile.ts`'s generic `diffChildren`, where a heading's Stage A match key is `title` alone (`leafKey`) — an edited title was an exact-key miss with nothing to fall back on, so the entire subtree beneath a retitled heading reconciled as wholesale removed+added, exactly what happened above.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGGTE6R002",
       "BlockNode:00CDGGTE6R003"
@@ -4889,7 +4882,7 @@
     "title": "Added a Stage A2 to `diffChildren`",
     "text": "Added a Stage A2 to `diffChildren`: headings still unmatched after Stage A's exact-title pass get a positional fallback — bucketed by depth (`astParser.ts`'s new `headingDepth`, reading the title's own leading `#` run, so a `##` can never fool-match a `#`), then paired in original relative order within each bucket. Same \"position is the anchor\" trade-off Stage B already accepts for `list`/`listItem` containers, just extended to headings once title itself is off the table as a key. A pair matched this way (or via Stage A's own text-only case) that differs in `title` and/or `text` is counted as `changed`, not folded into `matched` (`headingChanged`, generalized from the old `headingTextChanged`).",
     "parent": "BlockNode:00CDGGTE6R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4898,16 +4891,16 @@
     "title": "Verified on a throwaway test artifact",
     "text": "Verified on a throwaway test artifact: retitling its H1 through a whole-document `kg:update` (the same shape of push that caused the original incident) now reports \"2 matched, 1 changed, 0 added, 0 removed\" — the two section headings matched cleanly, the retitled H1 counted as changed, and disk projection confirmed all three BlockNode ids were preserved (no tombstones).",
     "parent": "BlockNode:00CDGGTE6R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDGN9FMR001",
     "@type": "BlockNode",
-    "title": "## Resolved: the `cli-packaging.md` → `packaging.md` rename itself",
-    "text": "Redone now that both blockers above are fixed. Sequence used, per doc: (1) retitle the H1 directly (`kg:update --text-only` targeting the heading BlockNode itself, not the ArtifactNode) — confirmed first that none of the five H1s carried their own `.text`/`.props`, so `--text-only`'s unconditional overwrite of those fields on a heading-target update was a no-op, not a loss; (2) fix each internal cross-reference bullet's own path text (`cli-packaging.md` → `packaging.md`) via `kg:update` targeting that specific leaf block directly, one at a time — not a whole-document push, so Stage A's ordinary exact-key matching (unaffected by the title/path edits happening elsewhere in the same document) is what reconciles each one, with nothing at stake beyond that one block's own identity; (3) `git mv` each file, then scoped `kg:ingest --track --flush`, one concern at a time.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved: the `cli-packaging.md` → `packaging.md` rename itself**",
+    "text": "**Resolved: the `cli-packaging.md` → `packaging.md` rename itself**: Redone now that both blockers above are fixed. Sequence used, per doc: (1) retitle the H1 directly (`kg:update --text-only` targeting the heading BlockNode itself, not the ArtifactNode) — confirmed first that none of the five H1s carried their own `.text`/`.props`, so `--text-only`'s unconditional overwrite of those fields on a heading-target update was a no-op, not a loss; (2) fix each internal cross-reference bullet's own path text (`cli-packaging.md` → `packaging.md`) via `kg:update` targeting that specific leaf block directly, one at a time — not a whole-document push, so Stage A's ordinary exact-key matching (unaffected by the title/path edits happening elsewhere in the same document) is what reconciles each one, with nothing at stake beyond that one block's own identity; (3) `git mv` each file, then scoped `kg:ingest --track --flush`, one concern at a time.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGN9FMR002"
     ]
@@ -4918,16 +4911,16 @@
     "title": "Verified past the summary line",
     "text": "Verified past the summary line: every renamed ArtifactNode still carries its original id (`00CDDTBJBG000`/`00CDDTBQWG000`/`00CDDTBYG0000`/`00CDDTC3S0000`/`00CDDTC8H0000`), none tombstoned, and no orphaned `cli-packaging.md`-pathed entry survives. A couple of the cross-reference bullets (the ones with no bold lead-in term, so no rendered id-anchor — e.g. the Dashboard list) had never actually had their `[[wikilink]]`s resolved at all before this pass, since they were authored before the `kg:update`/`kg:insert` link-resolution fix above existed; fixing their path text was incidentally also the first time they got resolved.",
     "parent": "BlockNode:00CDGN9FMR001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDGPBDKG001",
     "@type": "BlockNode",
-    "title": "## Freeflow: 3-way workspace split — inventory before deciding shape",
-    "text": "Starting the investigation the user asked for (\"do... the 3-way split refactor\") before moving any files, per the practice above (discussion first). Dumping raw findings here as I go rather than only writing a polished plan at the end — this doc is the scratchpad.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**3-way workspace split — inventory before deciding shape**",
+    "text": "**3-way workspace split — inventory before deciding shape**: Starting the investigation the user asked for (\"do... the 3-way split refactor\") before moving any files, per the practice above (discussion first). Dumping raw findings here as I go rather than only writing a polished plan at the end — this doc is the scratchpad.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGPBDKG002",
       "BlockNode:00CDGPBDKG003",
@@ -4943,7 +4936,7 @@
     "title": "**Current `web/src` inventory** (`find src -type f`)",
     "text": "**Current `web/src` inventory** (`find src -type f`): the entire engine + CLI lives under `src/lib/` — `apeironNgn/*.ts` (the graph engine: `node.ts`, `artifacts.ts`, `folders.ts`, `reconcile.ts`, `store.ts`, `service.ts`, `serviceClient.ts`, `shape.ts`, `vocab.ts`, `dehydrate.ts`, `tree.ts`, `resolve*.ts`, `codeVersion.ts`, `compareMigration.ts`), plus parsing/shared (`astParser.ts`, `reconcile.ts`, `props.ts`, `project.ts`, `snowflake.ts`, `leadingPart.ts`, `nodeRef.ts`, `lineReader.ts`, `folders.ts`, `artifacts.ts`, `verify.ts`), plus every `kgX.ts` CLI entrypoint (`kgIngest.ts`, `kgUpdate.ts`, `kgInsert.ts`, ... `kgService.ts`, `kgHelp.ts`) and `apeironNgnSmokeTest.ts`. Frontend is just `App.tsx`/`index.tsx`/`App.css`/`index.css`/`assets/*` at `src/` root.",
     "parent": "BlockNode:00CDGPBDKG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4952,7 +4945,7 @@
     "title": "00CDGPBDKG003",
     "text": "**Important finding: the \"frontend\" isn't actually a real UI yet.** Read `App.tsx` (106 lines) — it's the unmodified Vite+Solid scaffold template (hero image, framework logos, a counter button, links to Vite/Solid/GitHub/Discord docs). Nothing in it touches the graph, ApeironNgn, or any `kg:*` concept. So \"3-way split\" today is really \"extract engine + CLI out of a project that also happens to carry unused scaffolding,\" not \"separate two things that both have real content.\" Doesn't block the split, but changes the risk profile — there's no real `web` behavior to preserve/test, just a build target to keep working (or drop).",
     "parent": "BlockNode:00CDGPBDKG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4961,7 +4954,7 @@
     "title": "**`package.json` scripts**",
     "text": "**`package.json` scripts**: `dev`/`build`/`preview` (vite, frontend-only) + `verify` (`tsx src/lib/verify.ts`) + 19 `kg:*` entries, all `tsx src/lib/kgX.ts` — no `bin` field yet, no built/compiled output anywhere, everything runs from source via `tsx`.",
     "parent": "BlockNode:00CDGPBDKG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4970,7 +4963,7 @@
     "title": "**Dependencies** (already checked once this session, re-confirmed)",
     "text": "**Dependencies** (already checked once this session, re-confirmed): `oxigraph`, `@rdfjs/data-model`, `remark-parse`/`remark-gfm`/`remark-frontmatter`/`unified`/`unist-util-visit` are core/cli. `solid-js`/`lucide-solid`/`clsx` are web-only. Two more worth flagging: `terminusdb` and `rehype-stringify`/`remark-rehype` — grepped `src/` for both, **zero hits**. Likely dead deps left over from the pre-ApeironNgn TerminusDB era (`AperasKG/artifacts/archive/tdb-era/`) and some abandoned markdown->HTML rendering path. Candidates to drop entirely rather than assign to any package — need a decision, not just a mechanical move.",
     "parent": "BlockNode:00CDGPBDKG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -4979,16 +4972,16 @@
     "title": "**Build config**",
     "text": "**Build config**: one `tsconfig.app.json` covers ALL of `src` today (`jsx: preserve`, `jsxImportSource: solid-js`, `lib: [\"ES2023\", \"DOM\"]`) — meaning the engine/CLI code currently compiles under a config that also demands DOM types and a JSX pragma it never uses. A 3-way split needs at least 2 distinct tsconfigs (core/cli: node target, no DOM/JSX; web: current app config), maybe 3 if cli wants its own (e.g. to add a `bin`-oriented build step) separate from core's plain library build.",
     "parent": "BlockNode:00CDGPBDKG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDGPBDKG007",
     "@type": "BlockNode",
-    "title": "00CDGPBDKG007",
+    "title": "**Not yet decided / need to think through before moving anything**",
     "text": "**Not yet decided / need to think through before moving anything**:",
     "parent": "BlockNode:00CDGPBDKG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGPBDKG008",
       "BlockNode:00CDGPBDKG009",
@@ -5049,10 +5042,10 @@
   {
     "@id": "BlockNode:00CDGPTZ7G000",
     "@type": "BlockNode",
-    "title": "## Freeflow: 3-way split — proposed package boundaries",
-    "text": "Working through the open questions from the inventory above.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**3-way split — proposed package boundaries**",
+    "text": "**3-way split — proposed package boundaries**: Working through the open questions from the inventory above.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGPTZ7G001",
       "BlockNode:00CDGPTZ7G005",
@@ -5065,7 +5058,7 @@
     "title": "00CDGPTZ7G001",
     "text": "**core vs cli boundary, resolved:** the service/RPC layer (`apeironNgn/service.ts`, `serviceClient.ts`, `serviceLock.ts`, `serviceProtocol.ts`) is CLI-scoped, not core — its whole reason to exist is letting many short-lived `tsx kgX.ts` processes share one warm in-memory graph, which is a CLI-ergonomics problem specifically. A different future consumer (a web server embedding the engine in-process) would just hold its own `Store` via `core` directly, no service needed. So:",
     "parent": "BlockNode:00CDGPTZ7G000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGPTZ7G002",
       "BlockNode:00CDGPTZ7G003",
@@ -5119,7 +5112,7 @@
     "title": "00CDGPTZ7G005",
     "text": "**Dead-dependency cleanup, proposed as part of this same refactor** (not separately, since splitting `package.json` into 3 means deciding a home for every dep anyway, and these two have none): drop `terminusdb` and `rehype-stringify`/`remark-rehype` — confirmed zero `src/` references to any of the three, leftover from the pre-ApeironNgn TerminusDB era and an abandoned markdown-to-HTML path.",
     "parent": "BlockNode:00CDGPTZ7G000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5128,7 +5121,7 @@
     "title": "00CDGPTZ7G006",
     "text": "**Two real judgment calls, not mine to make silently — surfacing them in chat rather than deciding here:**",
     "parent": "BlockNode:00CDGPTZ7G000",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGPTZ7G007",
       "BlockNode:00CDGPTZ7G008"
@@ -5169,10 +5162,10 @@
   {
     "@id": "BlockNode:00CDGS4BBG001",
     "@type": "BlockNode",
-    "title": "## Freeflow: root-rename blast radius, actually measured",
-    "text": "Asked to calculate this rather than guess. Grepped every `.md`/`.json`/`.ts`/`.tsx`/`.yml`/`.yaml` in the repo (excluding `AperasKG/artifacts/archive/`) for `Aperas/web`, `../web`, or `/web/` path references — **exactly one hit**: `skills/kg-doc-ingest/SKILL.md` (its `.agents/skills`/`.claude/skills` copies are symlinks to the same file, so that's one edit, not three).",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**root-rename blast radius, actually measured**",
+    "text": "**root-rename blast radius, actually measured**: Asked to calculate this rather than guess. Grepped every `.md`/`.json`/`.ts`/`.tsx`/`.yml`/`.yaml` in the repo (excluding `AperasKG/artifacts/archive/`) for `Aperas/web`, `../web`, or `/web/` path references — **exactly one hit**: `skills/kg-doc-ingest/SKILL.md` (its `.agents/skills`/`.claude/skills` copies are symlinks to the same file, so that's one edit, not three).",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDGS4BBR000",
       "BlockNode:00CDGS4BBR001",
@@ -5185,7 +5178,7 @@
     "title": "00CDGS4BBR000",
     "text": "`getArtifactsDir()` (`artifacts.ts`) turned out *not* to be part of this blast radius at all — it never hardcodes the string `\"web\"`; it walks up a fixed number of `..` hops from its own file's location (`import.meta.url`) to the repo root, then descends into `AperasKG/artifacts` (itself a symlink to a sibling of the repo, resolved transparently by the OS either way). That hop count needs updating regardless of what the root directory is named, purely because the file is moving one level deeper (`web/src/lib/artifacts.ts` → `<root>/packages/core/src/artifacts.ts`) — the split causes this change, not the rename.",
     "parent": "BlockNode:00CDGS4BBG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5194,7 +5187,7 @@
     "title": "00CDGS4BBR001",
     "text": "No `.vscode/`, CI config, Dockerfile, or other doc anywhere references `web/` as a path. `web/package.json`'s own `\"name\": \"web\"` field is cosmetic (never published, root-of-workspace only) and can change independently of the directory name either way.",
     "parent": "BlockNode:00CDGS4BBG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5203,7 +5196,7 @@
     "title": "00CDGS4BBR002",
     "text": "So the actual added cost of renaming the root beyond what the split needs anyway: one text edit to the skill file's \"run from Aperas/web/\" instructions, plus a one-time habit adjustment in conversation — much smaller than initially estimated. Reporting this back rather than deciding unilaterally, since the recommendation changes given real numbers instead of a guess.",
     "parent": "BlockNode:00CDGS4BBG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5506,18 +5499,18 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CDH8S908001:links:Link:00CDH8S9Q8000:props:StringProp:00CDH8S9Q8001",
+            "@id": "BlockNode:00CDH8S908001:links:Link:00CDH8S9Q8000:props:StringProp:00CJ5HWP6R000",
             "@type": "StringProp",
             "key": "position",
-            "value": "75"
+            "value": "120"
           }
         ]
       }
     ],
-    "title": "## Freeflow: planning the `aperas` dispatcher itself",
-    "text": "The workspace split is done; the dispatcher it was meant to make room for ([Architecture](../design/packaging.md#id/BlockNode:00CDDVBXHG005)) still doesn't exist. Working out the concrete shape before writing any of it.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**planning the `aperas` dispatcher itself**",
+    "text": "**planning the `aperas` dispatcher itself**: The workspace split is done; the dispatcher it was meant to make room for ([Architecture](../design/packaging.md#id/BlockNode:00CDDVBXHG005)) still doesn't exist. Working out the concrete shape before writing any of it.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDH8S908002",
       "BlockNode:00CDH8S908003",
@@ -5533,7 +5526,7 @@
     "title": "**Verb → module**",
     "text": "**Verb → module**: a static table in the new `packages/cli/src/aperas.ts` (verb string -> the matching `kgX.ts` module), not filesystem auto-discovery — there are ~19 fixed commands, a static map is simpler and makes an unrecognized verb a clean, listable error rather than \"whatever happens to be on disk.\"",
     "parent": "BlockNode:00CDH8S908001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5542,7 +5535,7 @@
     "title": "00CDH8S908003",
     "text": "**The real gap: every `kgX.ts`'s `main()` is private.** Each file already separates a pure `run*` function from its own `main()` (argv-parsing, stdin, printing) — but `main()` itself is never exported, only invoked at the bottom of the file behind `if (process.argv[1]?.endsWith('kgX.ts')) main()...`. A dispatcher importing the module and expecting to call its `main()` needs that export added, in every one of the ~19 files. The self-invocation guard stays exactly as-is underneath that export — direct `tsx kgX.ts` (what the existing `kg:*` npm scripts still do) keeps working unchanged; the dispatcher is a second caller of the same exported function, not a replacement for the first.",
     "parent": "BlockNode:00CDH8S908001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5551,7 +5544,7 @@
     "title": "00CDH8S908004",
     "text": "**argv re-slicing.** `main()` reads `process.argv.slice(2)` directly (not a parameter) expecting its own args to start there. Invoked as `aperas <verb> <rest...>`, `process.argv` is `[node, aperas.ts, <verb>, ...rest]` — one extra element ahead of what any `main()` expects. The dispatcher has to splice the verb back out of `process.argv` itself before calling the target's `main()`, since nothing here can change what `main()` reads from.",
     "parent": "BlockNode:00CDH8S908001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5560,7 +5553,7 @@
     "title": "00CDH8S908005",
     "text": "**No verb / unrecognized verb / `--help`.** The static verb table doubles as the source for a top-level listing (verb + one-line description, authored once in `aperas.ts`, not scraped from each command's own `kgHelp.ts` output — that's only reachable by actually invoking a specific command's `--help`, not introspectable ahead of time without doing so). `aperas <verb> --help` forwards straight into that verb's own existing `main()`, which already implements it via `wantsHelp`/`printHelp` — nothing new needed there.",
     "parent": "BlockNode:00CDH8S908001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5613,7 +5606,7 @@
     "title": "00CDH8S90G000",
     "text": "**Entry point, deliberately punted on the bigger question.** A root `\"aperas\": \"tsx packages/cli/src/aperas.ts\"` script (`npm run aperas -- <verb> <args>`) is enough to make the dispatcher real and testable today, same mechanism every `kg:*` script already uses. This deliberately does *not* touch [the runtime question](#id/BlockNode:00CDDVC33G009) (a real compiled build + `bin` field + shebang, for an actual installable global command) or [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) — both stay open, tracked separately; the dispatcher mechanism itself doesn't depend on either being answered first ([Implementation Plan](../planning/packaging.md#id/BlockNode:00CDDVCDW8002) already says as much).",
     "parent": "BlockNode:00CDH8S908001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5622,7 +5615,7 @@
     "title": "**Verification**",
     "text": "**Verification**: spot-check a handful of verbs through `aperas <verb>` against their `kg:<verb>` equivalent (same output), and re-run the full `npm run verify` harness — it calls `run*` functions directly, so the dispatcher layer shouldn't be able to affect it either way; a regression there would mean something broke in a shared file, not the dispatcher itself.",
     "parent": "BlockNode:00CDH8S908001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5870,10 +5863,10 @@
   {
     "@id": "BlockNode:00CDHFW4R8001",
     "@type": "BlockNode",
-    "title": "## Freeflow: why the runtime question isn't just \"run tsc\"",
-    "text": "Asked to explain why this stays open rather than being a trivial build step. Recorded here since it bundles a few real sub-decisions, not one.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**why the runtime question isn't just \"run tsc\"**",
+    "text": "**why the runtime question isn't just \"run tsc\"**: Asked to explain why this stays open rather than being a trivial build step. Recorded here since it bundles a few real sub-decisions, not one.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDHFW4RG000",
       "BlockNode:00CDHFW4RG001",
@@ -5888,16 +5881,16 @@
     "title": "**The immediate problem**",
     "text": "**The immediate problem**: every `kgX.ts`/`aperas.ts` is executed via `tsx` — an on-the-fly TypeScript-to-JS transpiler, listed as a `devDependency`. That's fine for dogfooding (`npm run aperas -- tree` inside this checkout, `tsx` already installed as part of `npm install`), but a published package's `bin` entry has to be something Node can execute directly on an end user's machine, with nothing but the shebang line to go on (`#!/usr/bin/env node`) — raw `.ts` isn't that, on the range of Node versions a published package would need to support.",
     "parent": "BlockNode:00CDHFW4R8001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDHFW4RG001",
     "@type": "BlockNode",
-    "title": "00CDHFW4RG001",
+    "title": "**At least two genuinely different shapes this could take, not yet chosen between**",
     "text": "**At least two genuinely different shapes this could take, not yet chosen between**:",
     "parent": "BlockNode:00CDHFW4R8001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDHFW4RG002",
       "BlockNode:00CDHFW4RG003"
@@ -5941,7 +5934,7 @@
     "title": "**The concrete complication that makes \"just bundle it\" non-trivial**",
     "text": "**The concrete complication that makes \"just bundle it\" non-trivial**: `oxigraph` — the graph store this whole engine is built on — ships as a WASM binary (`node_bg.wasm`) plus a thin JS wrapper, not plain JS. A single-file bundle (esbuild et al.) can't just inline that the way it would inline ordinary TS/JS; it either needs to be left external (`--external:oxigraph`, meaning the published package still needs real `node_modules` dependency resolution, not a single self-contained script) or the wasm asset needs to be copied alongside the bundle output and referenced correctly. Either way, \"compile everything into one file\" isn't the free win it would be for a pure-JS/TS codebase.",
     "parent": "BlockNode:00CDHFW4R8001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5950,7 +5943,7 @@
     "title": "**One more thing a build step forces a decision on**",
     "text": "**One more thing a build step forces a decision on**: `packages/core`'s (and `cli`'s) own `exports` map today points straight at `.ts` source (`\"./*\": \"./src/*.ts\"`) — correct for the dev workspace, where every package is a sibling symlink and `tsx` handles the extension. A published package needs its own answer for what those exports point at instead (compiled `dist/*.js`, most likely) — and whether that's a *second*, publish-only exports shape layered on top of the dev one (conditional exports keyed by `\"import\"`/`\"development\"` or similar), or a wholesale switch, is itself an open call.",
     "parent": "BlockNode:00CDHFW4R8001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5959,7 +5952,7 @@
     "title": "00CDHFW4RG006",
     "text": "None of this is decided yet — flagged as open specifically because answering it means picking a compiler, a bundling strategy that accounts for `oxigraph`'s WASM binary, and how the workspace's own `exports` maps adapt for a built artifact, not just running one command.",
     "parent": "BlockNode:00CDHFW4R8001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -5967,17 +5960,17 @@
     "@type": "BlockNode",
     "title": "Settled",
     "text": "Settled: `esbuild` (not `tsc`) bundling `packages/core`+`packages/cli` into one output file, `oxigraph` marked `--external` (it's WASM-backed, can't be inlined, and staying external is normal for a published package). The dev workspace's own `exports` maps (pointing at `.ts` source) stay exactly as they are — a separate build step produces its own `dist/`+minimal package.json for publishing, rather than one config trying to serve both dev and published via conditional exports. Trade-off accepted: a second thing to maintain (a build config), in exchange for the already-verified dev loop never having to change for a publish pipeline that doesn't exist yet.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "paragraph",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CDHSCK8R001",
     "@type": "BlockNode",
-    "title": "## Settled: graph discovery via two separate config files, not env-var-only",
-    "text": "Started from a concrete pain point: `APERAS_MACHINE_NUMBER` (the snowflake id generator's machine-uniqueness input) is env-var-only today, left unset because there was nowhere better to put it, and warns on every single invocation as a result. That, plus a much bigger piece of context — the graph this all points at won't stay a single flat corpus. It's meant to grow into a tree: a corp graph, team graphs under it, member graphs under those, each mergeable up into its parent, the same shape a member's private notes eventually get merged into a team's, and a team's into the corp's. A bare \"walk up from cwd looking for an `AperasKG/` directory\" (the plain-search idea floated earlier) only ever finds *one* graph — it has no way to express \"this graph's parent is that one,\" so it doesn't fit this shape at all. A real config file does.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**graph discovery via two separate config files, not env-var-only**",
+    "text": "**graph discovery via two separate config files, not env-var-only**: Started from a concrete pain point: `APERAS_MACHINE_NUMBER` (the snowflake id generator's machine-uniqueness input) is env-var-only today, left unset because there was nowhere better to put it, and warns on every single invocation as a result. That, plus a much bigger piece of context — the graph this all points at won't stay a single flat corpus. It's meant to grow into a tree: a corp graph, team graphs under it, member graphs under those, each mergeable up into its parent, the same shape a member's private notes eventually get merged into a team's, and a team's into the corp's. A bare \"walk up from cwd looking for an `AperasKG/` directory\" (the plain-search idea floated earlier) only ever finds *one* graph — it has no way to express \"this graph's parent is that one,\" so it doesn't fit this shape at all. A real config file does.",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDHSCK90000",
       "BlockNode:00CDHSCK90003",
@@ -5990,7 +5983,7 @@
     "title": "00CDHSCK90000",
     "text": "**Two separate files, not one, because they're different *kinds* of setting with different lifecycles:**",
     "parent": "BlockNode:00CDHSCK8R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDHSCK90001",
       "BlockNode:00CDHSCK90002"
@@ -6034,7 +6027,7 @@
     "title": "00CDHSCK90003",
     "text": "Both replace the current `getArtifactsDir()`'s `__dirname`-relative hop-counting, which only ever made sense for \"the CLI's own source lives a fixed number of directories below the one graph it drives\" — never true for an installed CLI, and now also not expressive enough for a tree of graphs regardless of install-vs-source-checkout.",
     "parent": "BlockNode:00CDHSCK8R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -6043,7 +6036,7 @@
     "title": "Not yet decided (separate, later passes)",
     "text": "Not yet decided (separate, later passes): the actual merge mechanics (what \"member graph merges into team graph\" does at the node/id level), and how upward discovery behaves when *no* `aperas.config.json` is found at all (this repo's own dev setup should probably keep working via some fallback, likely the existing hardcoded-relative-path behavior, so the split docs/graph work already done doesn't need its own migration just to keep functioning).",
     "parent": "BlockNode:00CDHSCK8R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -6281,10 +6274,10 @@
   {
     "@id": "BlockNode:00CDWB1Y6R001",
     "@type": "BlockNode",
-    "title": "## Freeflow: a real gap — no raw single-node inspection command",
-    "text": "Noticed while investigating: reaching for a Python one-liner against `BlockNode.jsonld` directly, rather than any `kg:*`/`aperas` command, to check a node's exact `.text`/`.props`/`.tombstonedAt`/`.path`. Not because list/heading structure is opaque to `kg:tree` — it isn't, given enough `--depth` it shows every list/listItem id, falling back to the bare id as its own label when there's no title. The actual gap: `kg:tree`/`kg:backlinks --text` only ever show a *rendered preview* (title + truncated, anchor-stripped abstract) — the right thing for browsing, but not for verifying a stored field is exactly what's about to be pushed back, or reading a field `kg:tree` never shows at all (`props`, `tombstonedAt`). `kg:project --dry-run` reconstructs real markdown but only at the whole-artifact level, anchors included. No command exists for \"dump this one node's raw stored state, untransformed.\"",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**a real gap — no raw single-node inspection command**",
+    "text": "**a real gap — no raw single-node inspection command**: Noticed while investigating: reaching for a Python one-liner against `BlockNode.jsonld` directly, rather than any `kg:*`/`aperas` command, to check a node's exact `.text`/`.props`/`.tombstonedAt`/`.path`. Not because list/heading structure is opaque to `kg:tree` — it isn't, given enough `--depth` it shows every list/listItem id, falling back to the bare id as its own label when there's no title. The actual gap: `kg:tree`/`kg:backlinks --text` only ever show a *rendered preview* (title + truncated, anchor-stripped abstract) — the right thing for browsing, but not for verifying a stored field is exactly what's about to be pushed back, or reading a field `kg:tree` never shows at all (`props`, `tombstonedAt`). `kg:project --dry-run` reconstructs real markdown but only at the whole-artifact level, anchors included. No command exists for \"dump this one node's raw stored state, untransformed.\"",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": []
   },
   {
@@ -6408,10 +6401,10 @@
   {
     "@id": "BlockNode:00CDWP69B8001",
     "@type": "BlockNode",
-    "title": "## Resolved: identity.json + `aperas identity`, build-to-`bin`, and help-text rewrite",
-    "text": "Three of the planned items landed clean:",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved: identity.json + `aperas identity`, build-to-`bin`, and help-text rewrite**",
+    "text": "**Resolved: identity.json + `aperas identity`, build-to-`bin`, and help-text rewrite**: Three of the planned items landed clean:",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDWP69B8002",
       "BlockNode:00CDWP69B8003",
@@ -6466,7 +6459,7 @@
     "title": "00CDWP69B8005",
     "text": "**What the build verification actually exposed, and had to be fixed for it to work at all** (not scope creep — the build was correctly planned to be verified standalone, and it didn't work on the first real attempt):",
     "parent": "BlockNode:00CDWP69B8001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDWP69B8006",
       "BlockNode:00CDWP69B8007",
@@ -6517,10 +6510,10 @@
   {
     "@id": "BlockNode:00CDWPCC3G001",
     "@type": "BlockNode",
-    "title": "## Settled: no concurrency — one active graph at a time, explicit start/restart only",
-    "text": "Clarified a confusion in the write-up above: a service holding a graph that's stable for its whole lifetime *was* the intent all along — the actual bug was that any command could *silently* auto-spawn one, so whichever command happened to run first invisibly decided the binding for as long as that process lived. The fix isn't to thread cwd through every request (that would mean re-resolving, i.e. potentially re-binding, on every call — not stable, and not the intent); it's to make the one moment of binding explicit and human-driven instead of accidental.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**no concurrency — one active graph at a time, explicit start/restart only**",
+    "text": "**no concurrency — one active graph at a time, explicit start/restart only**: Clarified a confusion in the write-up above: a service holding a graph that's stable for its whole lifetime *was* the intent all along — the actual bug was that any command could *silently* auto-spawn one, so whichever command happened to run first invisibly decided the binding for as long as that process lived. The fix isn't to thread cwd through every request (that would mean re-resolving, i.e. potentially re-binding, on every call — not stable, and not the intent); it's to make the one moment of binding explicit and human-driven instead of accidental.",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDX5H5MG002",
       "BlockNode:00CDX5H5MG003",
@@ -6646,7 +6639,7 @@
     "title": "Deliberately no concurrency",
     "text": "Deliberately no concurrency: one active graph system-wide at a time, not one service per graph root. Working in two different graphs at once means explicitly restarting the service when switching, not two processes running side by side. Confirmed as the actual intent, not a limitation being settled for.",
     "parent": "BlockNode:00CDWPCC3G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -6732,10 +6725,10 @@
   {
     "@id": "BlockNode:00CDXFWK3R001",
     "@type": "BlockNode",
-    "title": "## Resolved: the explicit-start service redesign, shipped and verified",
-    "text": "`ensureServiceRunning()` no longer auto-spawns — it just pings, and throws `No ApeironNgn service running. Start one with: aperas service start` if nothing answers. `kgService.ts` gained `aperas service start` (binds a freshly-spawned service to the graph resolved from *this* invocation's own `process.cwd()`, or reports the existing binding if one's already running) alongside the existing `restart` (now also re-resolving and rebinding, not just restarting the process). `serviceLock.ts`'s `getRunDir()` dropped the dev-vs-built hop-counting entirely in favor of a fixed location: `$XDG_RUNTIME_DIR/aperas`, falling back to a uid-namespaced `tmpdir()` path when unset — exactly the kind of ephemeral, per-session state `XDG_RUNTIME_DIR` exists for, and the same pattern `identity.json` already established for `$XDG_CONFIG_HOME`.",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved: the explicit-start service redesign, shipped and verified**",
+    "text": "**Resolved: the explicit-start service redesign, shipped and verified**: `ensureServiceRunning()` no longer auto-spawns — it just pings, and throws `No ApeironNgn service running. Start one with: aperas service start` if nothing answers. `kgService.ts` gained `aperas service start` (binds a freshly-spawned service to the graph resolved from *this* invocation's own `process.cwd()`, or reports the existing binding if one's already running) alongside the existing `restart` (now also re-resolving and rebinding, not just restarting the process). `serviceLock.ts`'s `getRunDir()` dropped the dev-vs-built hop-counting entirely in favor of a fixed location: `$XDG_RUNTIME_DIR/aperas`, falling back to a uid-namespaced `tmpdir()` path when unset — exactly the kind of ephemeral, per-session state `XDG_RUNTIME_DIR` exists for, and the same pattern `identity.json` already established for `$XDG_CONFIG_HOME`.",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDXFWK3R002",
       "BlockNode:00CDXFWK40000",
@@ -6805,10 +6798,10 @@
         ]
       }
     ],
-    "title": "**A gap flagged, not fixed, in this pass**",
+    "title": "00CDXFWK40002",
     "text": "**A gap flagged, not fixed, in this pass** (corrected below — the original write-up here was itself imprecise about where the gap actually lives): `getApeironExportDir()` got its explicit `graphRoot` argument threaded through in this pass, but `getArtifactsDir()` didn't — every caller (`apeironNgn/artifacts.ts`/`folders.ts`/`node.ts`'s `trackAllArtifacts`/`trackArtifactsScoped`/`ingestFolderTree`/`ArtifactNode.trackFromDisk`, plus `kgProject.ts`'s own `runProject`) still calls it with no argument. Those calls execute **inside the service process itself** — `service.ts`'s `handle()` invokes `runTrack`/`runIngest`/`runProject` directly on each RPC request, not the short-lived CLI client — so the resolution that runs is the *service's own* `process.cwd()`, fixed by `spawnService()` to wherever the code is installed, never the graph root `aperas service start` actually resolved and bound. Harmless today only because this repo's one `aperas.config.json` sits where the service's own cwd never reaches by walking up, so it always falls through to the cwd-independent fallback either way — a coincidence of this repo's layout, not a property of the fix. See [Resolved](../discussion/packaging.md#id/BlockNode:00CDZM30JG001) below for the actual fix.",
     "parent": "BlockNode:00CDXFWK3R001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -7382,9 +7375,10 @@
   {
     "@id": "BlockNode:00CDZM30JG001",
     "@type": "BlockNode",
-    "title": "## Resolved: two-path graph config + env-var default resolution closes the artifacts-dir gap",
-    "parent": "ArtifactNode:00CDDTBQWG000",
-    "type": "heading",
+    "title": "**Resolved: two-path graph config + env-var default resolution closes the artifacts-dir gap**",
+    "text": "**Resolved: two-path graph config + env-var default resolution closes the artifacts-dir gap**:",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
     "children": [
       "BlockNode:00CDZM8GP8001",
       "BlockNode:00CDZM8GP8002",
@@ -7398,7 +7392,7 @@
     "title": "`aperas.config.json`'s `graph` field now accepts two shapes",
     "text": "`aperas.config.json`'s `graph` field now accepts two shapes: a plain string (shorthand — both `<root>/Apeiron` and `<root>/artifacts` co-located, exactly today's behavior, unchanged) or `{ \"apeiron\": \"<path>\", \"artifacts\": \"<path>\" }` (two independently-specifiable roots, for a graph whose data and markdown tree aren't co-located). `resolveGraphConfig()` resolves both forms into one `GraphConfig { apeironRoot, artifactsRoot, parent, configPath }`.",
     "parent": "BlockNode:00CDZM30JG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -7407,7 +7401,7 @@
     "title": "00CDZM8GP8002",
     "text": "`graphConfig.ts` gained `resolveEffectiveApeironRoot(startDir?)`/`resolveEffectiveArtifactsRoot(startDir?)`, replacing the single `resolveEffectiveGraphRoot()`. Each checks its own env var first (`APERAS_APEIRON_ROOT`/`APERAS_ARTIFACTS_ROOT`), then `aperas.config.json` discovery, then the fixed dev fallback. `getApeironExportDir()`/`getArtifactsDir()`'s own default parameters call these — unchanged call sites everywhere else, since the env-var check now lives inside the shared default resolution itself rather than being each caller's job.",
     "parent": "BlockNode:00CDZM30JG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -7416,7 +7410,7 @@
     "title": "00CDZM8GP8003",
     "text": "`aperas service start`/`restart` (`kgService.ts`) resolve both roots once, from that one invocation's own cwd — still the only place cwd is read — and `spawnService()` sets both env vars on the child. Every function that calls `getArtifactsDir()`/`getApeironExportDir()` with no argument (`runTrack`, `runIngest`, `runProject`, and the shared `apeironNgn/artifacts.ts`/`folders.ts`/`node.ts` helpers) now resolves correctly with **zero signature or call-site changes**, because they're all running inside the one process that already has both env vars set for its whole lifetime — the same guarantee the \"no concurrency, one bound graph per process\" design already committed to.",
     "parent": "BlockNode:00CDZM30JG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -7425,7 +7419,7 @@
     "title": "00CDZM8GP8004",
     "text": "This replaces the parameter-threading approach the gap note above originally assumed was necessary: threading an explicit root through `runTrack`/`runIngest`/`runProject` and every function they call would have meant touching upwards of a dozen call sites across `apeironNgn/artifacts.ts`, `folders.ts`, `node.ts`, plus every one of `verify.ts`'s direct calls into them. The env-var default achieves the same correctness for free, because the architecture already guarantees a service process is bound to exactly one graph for its entire life — parameter-threading would only earn its keep if a single process needed to serve different graphs per call, which this design deliberately never does.",
     "parent": "BlockNode:00CDZM30JG001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -16607,10 +16601,10 @@
         ]
       }
     ],
-    "title": "## `kg:update`/`kg:insert` never resolve wikilinks — a correctness bug in this concern's own mechanism, found and fixed elsewhere",
-    "text": "[Discussion — Packaging](../discussion/packaging.md#id/BlockNode:00CDG18FP0003) found and fixed a real defect in exactly this concern's [own resolution mechanism](../design/linking.md#id/BlockNode:00CDBYV4T8002): `resolveBlockLinks` only ever ran from `ingestArtifact` (the `kg:ingest`/disk-first path), so any block reconciled as \"changed\" or \"added\" via `kg:update`/`kg:insert` picked up no link resolution at all — silently, with no error. Neither this doc set's own issues nor history mention it; it was found while chasing a `packaging.md` retitle accident, not while working on linking directly. Worth knowing this concern's addressing/resolution design has a fix living in another concern's discussion doc, not its own.",
+    "title": "**`kg:update`/`kg:insert` never resolve wikilinks — a correctness bug in this concern's own mechanism, found and fixed elsewhere**",
+    "text": "**`kg:update`/`kg:insert` never resolve wikilinks — a correctness bug in this concern's own mechanism, found and fixed elsewhere**: [Discussion — Packaging](../discussion/packaging.md#id/BlockNode:00CDG18FP0003) found and fixed a real defect in exactly this concern's [own resolution mechanism](../design/linking.md#id/BlockNode:00CDBYV4T8002): `resolveBlockLinks` only ever ran from `ingestArtifact` (the `kg:ingest`/disk-first path), so any block reconciled as \"changed\" or \"added\" via `kg:update`/`kg:insert` picked up no link resolution at all — silently, with no error. Neither this doc set's own issues nor history mention it; it was found while chasing a `packaging.md` retitle accident, not while working on linking directly. Worth knowing this concern's addressing/resolution design has a fix living in another concern's discussion doc, not its own.",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": []
   },
   {
@@ -24592,10 +24586,10 @@
         ]
       }
     ],
-    "title": "## `aperas update` never re-derives a non-heading block's title",
-    "text": "Found live [while rewriting Topology for the skill's v2](../discussion/aperas-skill.md#id/BlockNode:00CGF35FNG001): `aperas update` replaced a paragraph's `.text` correctly and left `.title` frozen at the value ingest had derived, so the node went on rendering under a title stating the very rule its new text had just retired. Re-running the update with a deliberately short lead-in term, well inside `extractLeadInTitle`'s heuristics, changed nothing; an `insert` of a sibling paragraph minutes later derived its title from the lead-in correctly, so the defect is in `update`'s path rather than in parsing. Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CGFE4SV0002).",
+    "title": "**`aperas update` never re-derives a non-heading block's title**",
+    "text": "**`aperas update` never re-derives a non-heading block's title**: Found live [while rewriting Topology for the skill's v2](../discussion/aperas-skill.md#id/BlockNode:00CGF35FNG001): `aperas update` replaced a paragraph's `.text` correctly and left `.title` frozen at the value ingest had derived, so the node went on rendering under a title stating the very rule its new text had just retired. Re-running the update with a deliberately short lead-in term, well inside `extractLeadInTitle`'s heuristics, changed nothing; an `insert` of a sibling paragraph minutes later derived its title from the lead-in correctly, so the defect is in `update`'s path rather than in parsing. Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CGFE4SV0002).",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CGF83D4G002",
       "BlockNode:00CGF83D4G003",
@@ -24623,19 +24617,19 @@
         ]
       }
     ],
-    "title": "00CGFED5DR002",
+    "title": "00CGF83D4G002",
     "text": "[The `kg:title` removal](../history/linking.md#id/BlockNode:00CDBZ769800B) left the lead-in term as the one and only title mechanism for every block type, and gave `kg:update` a compensating path for heading targets only — a heading being the one block type whose title is projected back to disk. That reasoning holds for the projection: the paragraph's rendered markdown is correct and the stale title is invisible on disk. It does not hold for the graph, where `tree`, `unfold` and `backlinks --text` all display the title and nothing marks it stale, so the block reads as saying one thing in preview and another in full.",
     "parent": "BlockNode:00CGF83D4G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CGF83D4G003",
     "@type": "BlockNode",
-    "title": "00CGFED5DR003",
+    "title": "00CGF83D4G003",
     "text": "`reconcile.ts`'s `carryForwardFields` carries a title forward only when the block's text matches exactly, which should have left a changed paragraph with no title rather than the old one — so this is likely `update`'s own field handling, not the reconcile rule. The summary line reports `0 changed` and says nothing about the title either way, which is the usual silent shape. Not yet traced to the specific call, and there is no CLI route to repair an already-stale title short of tombstoning the block.",
     "parent": "BlockNode:00CGF83D4G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -24805,7 +24799,7 @@
     "title": "**Root cause confirmed, and it is worse than stale titles**",
     "text": "**Root cause confirmed, and it is worse than stale titles**: `runUpdate` (`kgUpdate.ts`) only ever assigns its local `title` variable inside the `target.type === 'heading' && firstChild?.type === 'heading'` branch — for any other target (a plain paragraph/listItem), `title` stays `undefined` for the whole function, so `newShape.title = title ?? target.title` carries the *old* title forward unconditionally. It is not that the freshly-parsed title is wrong or discarded after computation — it is never read at all for a non-heading target, regardless of this session's lead-in-cap fix or anything else in `astParser.ts`.",
     "parent": "BlockNode:00CGF83D4G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -24814,7 +24808,7 @@
     "title": "**Caught live, the expensive way**",
     "text": "**Caught live, the expensive way**: verifying that fix by re-pushing `aperas update <id>` with the node's own `--text` output (assumed to be \"the complete content,\" since `--text` is documented as the exact stored value) tombstoned 4 real nested children on `BlockNode:00CG9MDJF0001` — `--text` shows only a node's own leading text, never its children, and a non-`--text-only` `update` reconciles the piped input's (empty) overflow against the target's *real* existing children. `0 matched, 0 added, 4 removed`, not caught by the summary line alone, only by then noticing the title still hadn't updated and rechecking. Recovered via `git restore` on the staged `AperasKG/Apeiron/*.jsonld` mirror (pre-accident, from this session's own prior stage) plus `aperas reload -- --discard`; all 4 original ids verified live afterward, no data lost.",
     "parent": "BlockNode:00CGF83D4G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -24823,7 +24817,7 @@
     "title": "00CGGA9J68002",
     "text": "This is the same shape as *Preserve identity*'s already-documented parent-heading case — an `update` reconciling children as a side effect of an operation that reads as \"just fixing the text\" — except the operator here isn't even a heading, and the tell (children present at all) is invisible from `--text` output alone. `--children` needs checking before `update` on *any* target, not only a heading.",
     "parent": "BlockNode:00CGF83D4G001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -26586,10 +26580,10 @@
         ]
       }
     ],
-    "title": "## Links breaking twice this session, via unrelated mechanisms — the substrate itself is fragile in ways nothing detects",
-    "text": "Follows directly from [the earlier finding that `kg:update`/`kg:insert` never resolved wikilinks at all](../discussion/linking.md#id/BlockNode:00CF1276D0001) — that was fixed, and a graph-wide sweep found and fixed 9 real cases of the resulting staleness. Two things surfaced today, in the same session, that mean the fix wasn't the end of the story:",
+    "title": "**Links breaking twice this session, via unrelated mechanisms — the substrate itself is fragile in ways nothing detects**",
+    "text": "**Links breaking twice this session, via unrelated mechanisms — the substrate itself is fragile in ways nothing detects**: Follows directly from [the earlier finding that `kg:update`/`kg:insert` never resolved wikilinks at all](../discussion/linking.md#id/BlockNode:00CF1276D0001) — that was fixed, and a graph-wide sweep found and fixed 9 real cases of the resulting staleness. Two things surfaced today, in the same session, that mean the fix wasn't the end of the story:",
     "parent": "BlockNode:00CJ37GPRR009",
-    "type": "heading",
+    "type": "listItem",
     "children": [
       "BlockNode:00CGMX88R0002",
       "BlockNode:00CGMX88R0003",
@@ -26607,7 +26601,7 @@
     "title": "00CGMX88R0002",
     "text": "A fresh corpus-wide check (not the original sweep's own scope) found the identical symptom already back on nodes the original sweep never had reason to touch — `planning/core.md`'s own Batch 1 item 1 (`BlockNode:00CGGTQ620002`) has an empty `.links` despite an unchanged real citation in its text, and it was never part of the original 9. The sweep fixed a snapshot; nothing keeps re-checking it, so drift just accumulates again under a different name.",
     "parent": "BlockNode:00CGMX88R0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -26616,7 +26610,7 @@
     "title": "Separately and more concerning",
     "text": "Separately and more concerning: four nodes each had a link genuinely resolve during today's own work — `aperas update --text-only` reported \"N resolved\" for every one — and each still ended up with an empty `.links` afterward, caught only because a reader (not a check) asked to look at one directly. Reproducing it under controlled conditions failed every way tried: matching move-then-update sequences (single and 4-node batches), a sibling heading's plain reconcile in between, a full service restart, and the exact stop → manual JSON edit → start sequence used elsewhere in this same session for an unrelated fix. Re-running the same unchanged `update --text-only` a second time did resolve and this time persist correctly.",
     "parent": "BlockNode:00CGMX88R0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -26641,7 +26635,7 @@
     "title": "00CGMX88R0004",
     "text": "Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CGMWQ6T0001) — filed as one open item covering both, since they share the same consequence (a claim's provenance silently gone with nothing to notice) even though their causes are unrelated and the second one's cause isn't known yet.",
     "parent": "BlockNode:00CGMX88R0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": [
       "BlockNode:00CH4J9398001",
       "BlockNode:00CHXTPK08001",
@@ -27303,7 +27297,7 @@
     "title": "**Standing link integrity checking script (`checkLinkIntegrity` / `aperas check-links`)**",
     "text": "**Standing link integrity checking script (`checkLinkIntegrity` / `aperas check-links`)**: As specified in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000), building a drift-style check script `checkLinkIntegrity` (and CLI verb `aperas check-links`) compares live block text against `.links` in Oxigraph Store. Scans for live nodes where internal link codes (`[[code]]`, `aperas://...`, `#id/BlockNode:...`) exist in `node.text` but have no corresponding resolved `Link` in `.links`. Supports `--repair` flag to auto-re-resolve and flush missing links, catching both historical drift and transient regressions without needing to know the root cause. Executed live sweep on corpus (`aperas check-links --repair`), detecting 40 historical link integrity discrepancies across 7 artifacts, re-resolving them all, and verifiably restoring the graph to 0 discrepancies.",
     "parent": "BlockNode:00CGMX88R0004",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -27702,7 +27696,7 @@
     "title": "**Follow-up, on review**",
     "text": "**Follow-up, on review**: the 40-discrepancy sweep above was real and its own match logic worked correctly for it, but only because every code in this corpus embeds the target's opaque id as a literal substring (`path#id/<ID>`, `aperas://id/<ID>`) — the check compared `code`/`target.id` by raw containment, which cannot verify `[[<deep-path>]]` addressing (`resolve.ts`'s deep-path grammar, a real, currently-live convention per `history/linking.md`, not covered by any of the 40). Fixed in [issues/linking.md](../issues/linking.md#id/BlockNode:00CGN6GJVG000) by resolving each occurrence for real instead of guessing from the string.",
     "parent": "BlockNode:00CGMX88R0004",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -28042,7 +28036,7 @@
     "title": "**Three layers of link checking, only one of which anyone has to remember — agreed, built and verified live**",
     "text": "**Three layers of link checking, only one of which anyone has to remember — agreed, built and verified live**: the check existed but nothing triggered it, which is the same failure this concern keeps hitting (\"being asked is the part that fails\"). Measured before designing, since the design turned on it: a full-corpus sweep is ~0.6s of service-side work (1428 live blocks, 358 carrying link text, CLI startup subtracted over three runs), so \"too heavy to run often\" — the premise the first cut rested on — was simply false. Built: **(1)** a scoped, service-side check after every `update`/`insert`/`remove`, sweeping only the written artifact and diffed against a sweep taken just before the write, so it reports only what *that* write broke, on that op's own response directly under its `Links: N resolved…` line — the exact line that lied in both recorded incidents, now self-verifying; `ingest` is excluded deliberately, having always run `resolveBlockLinks` correctly. **(2)** a corpus-wide check at startup and on `reload`, held in a `linkWarning` attached to *every* response the way `contentConflict` already is, so drift that landed while the service was down emerges on the very next command of any kind. **(3)** a corpus-wide sweep at end of batch, the one step left to discipline (skill v2.5, folded into *Stage each verified step*), because it alone catches an edit in artifact A breaking a citation that lives in artifact B. All three report and never repair: the known workaround for [the unreproduced regression](#id/BlockNode:00CGMX88R0003) is \"re-run the identical write and it sticks,\" and a silent auto-retry would erase the evidence it is still being hunted with. Verified end to end rather than from a summary line: one real link edge dropped on disk, service restarted → startup sweep named the block, the warning then rode unrelated `tree` and `path` calls, and `--repair` cleared it. Two things the build itself turned up: the corpus sweep was first placed *before* `markReady`, eating into `waitForReady`'s 5s budget (moved after it, and queued), and `--repair` re-mints every `Link` id in the artifact it touches rather than only the broken one, [filed separately](../issues/linking.md#id/BlockNode:00CHYM4Z1G001).",
     "parent": "BlockNode:00CGMX88R0004",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -28860,10 +28854,10 @@
         ]
       }
     ],
-    "title": "00CJ3DY3K8001",
+    "title": "00CJ2WQ1SR001",
     "text": "**A third instance, 2026-09-17, with a new and much broader trigger.** Creating [discussion/webapp.md](../discussion/webapp.md#id/BlockNode:00CJ2TCV40001) ended with three `aperas update --text-only` calls whose only purpose was promoting the holder flags off the ArtifactNode, the H1 and the `## Dashboard` heading — writes that changed no text at all and touched no link-bearing block. `aperas check-links` immediately afterwards reported **8** discrepancies across the artifact, every one of them on list items several levels below the promoted headings, none of which was the target of any of the three writes. Each had reported its links resolved correctly when it was first inserted, and `aperas show` had confirmed the stored `Link` objects on three of them before the promotions ran. What makes this instance different from the two above is the blast radius: the damage was not confined to the node written, or even to its own subtree edited — a no-op text write at the top of a document dropped `.links` from unrelated descendants elsewhere in it. `check-links --repair` restored all 8 in one pass. Promoted to [issues/linking.md's Open Issues](../issues/linking.md#id/BlockNode:00CJ38Z8T0001).",
     "parent": "BlockNode:00CGMX88R0001",
-    "type": "paragraph",
+    "type": "listItem",
     "children": []
   },
   {
@@ -29919,6 +29913,184 @@
     "text": "Crossing the heading/non-heading boundary migrates the title too, because the two store it in different places — a heading's own field versus a lead-in term folded into `.text`. Heading → non-heading folds the heading's words into the text as a `**words**: <body>` lead-in and derives the new title from that; non-heading → heading cuts the existing lead-in back out into the heading line, leaving the rest as its body. The two directions round-trip exactly on that canonical shape. A depth-only change, or one between two non-heading types, never touches `.text` at all. Nothing to fold or cut — no lead-in, or one that is not a single fully-bold span — degrades to an id-fallback title with `.text` untouched, and says so rather than guessing.",
     "parent": "BlockNode:00CJ5207PG001",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5ET5Z8001",
+    "@type": "BlockNode",
+    "title": "## Open Questions",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ5ET5Z8002",
+      "BlockNode:00CDDVC33G009",
+      "BlockNode:00CDDVC33G00A",
+      "BlockNode:00CJ5FATY8001",
+      "BlockNode:00CJ5FATY8002",
+      "BlockNode:00CJ5FATY8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ5ET5Z8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T18:02:01.756Z",
+    "title": "00CJ5ET5Z8002",
+    "text": "placeholder-anchor-remove-me",
+    "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5ET5Z8003",
+    "@type": "BlockNode",
+    "title": "## Settled",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ5ET5Z8004",
+      "BlockNode:00CDDVC33G006",
+      "BlockNode:00CDDVC33G007",
+      "BlockNode:00CDDVC33G008",
+      "BlockNode:00CDF8B3TG00A",
+      "BlockNode:00CDHJGZV0001",
+      "BlockNode:00CDHSCK8R001",
+      "BlockNode:00CDWPCC3G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ5ET5Z8004",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T18:02:03.097Z",
+    "title": "00CJ5ET5Z8004",
+    "text": "placeholder-anchor-remove-me",
+    "parent": "BlockNode:00CJ5ET5Z8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5ET5Z8005",
+    "@type": "BlockNode",
+    "title": "## Freeflow",
+    "parent": "BlockNode:00CDDVC338001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ5ET5Z8006",
+      "BlockNode:00CDEZ1A68001",
+      "BlockNode:00CDEM7DVG001",
+      "BlockNode:00CDEEJ8PR001",
+      "BlockNode:00CDEB141G001",
+      "BlockNode:00CDG18FP0001",
+      "BlockNode:00CDGAFQQR001",
+      "BlockNode:00CDGGTE6R001",
+      "BlockNode:00CDGN9FMR001",
+      "BlockNode:00CDGPBDKG001",
+      "BlockNode:00CDGPTZ7G000",
+      "BlockNode:00CDGS4BBG001",
+      "BlockNode:00CDH8S908001",
+      "BlockNode:00CDHFW4R8001",
+      "BlockNode:00CDWB1Y6R001",
+      "BlockNode:00CDWP69B8001",
+      "BlockNode:00CDXFWK3R001",
+      "BlockNode:00CDZM30JG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ5ET5Z8006",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T18:02:04.295Z",
+    "title": "00CJ5ET5Z8006",
+    "text": "placeholder-anchor-remove-me",
+    "parent": "BlockNode:00CJ5ET5Z8005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5FATY8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ5FATY8001:links:Link:00CJ5FAXG8000",
+        "@type": "Link",
+        "target": "BlockNode:00CDEB141G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ5FATY8001:links:Link:00CJ5FAXG8000:props:StringProp:00CJ5FAXG8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "421"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ5FATY8001:props:StringProp:00CJ5FAXG0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ5FATY8001:props:StringProp:00CJ5FAXG0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**No safe, identity-preserving rename primitive exists for an ArtifactNode**",
+    "text": "**No safe, identity-preserving rename primitive exists for an ArtifactNode**: scoped `kg:ingest --track <paths>` doesn't rename at all — it just creates a fresh ArtifactNode and orphans the old one, live but detached from the tree; the only real Gestalt-match rename detection lives in the full, path-less corpus sweep, which has no `archive/` exclusion and aborts on the first pre-existing collision it finds there. See [Incident: artifact rename has no working path yet](#id/BlockNode:00CDEB141G001) below. The later `cli-packaging.md` → `packaging.md` rename that did succeed used a manual multi-step recipe (retitle each H1 directly, fix each cross-reference bullet one at a time, then `git mv` + scoped `--track`), not this primitive — so the underlying gap is still open even though a workaround exists.",
+    "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5FATY8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ5FATY8002:links:Link:00CJ5FAXG8002",
+        "@type": "Link",
+        "target": "BlockNode:00CDGPTZ7G000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ5FATY8002:links:Link:00CJ5FAXG8002:props:StringProp:00CJ5FAXG8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "176"
+          }
+        ]
+      }
+    ],
+    "title": "00CJ5FATY8002",
+    "text": "The Vite/Solid scaffold's eventual fate, and the workspace root's own directory name — both explicitly flagged as judgment calls, not the assistant's to make unilaterally. See [Freeflow: proposed package boundaries](#id/BlockNode:00CDGPTZ7G000) below.",
+    "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ5FATY8003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ5FATY8003:links:Link:00CJ5FAXG8004",
+        "@type": "Link",
+        "target": "BlockNode:00CDHSCK8R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ5FATY8003:links:Link:00CJ5FAXG8004:props:StringProp:00CJ5FAXG8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "197"
+          }
+        ]
+      }
+    ],
+    "title": "00CJ5FATY8003",
+    "text": "Graph-tree merge mechanics (what \"a member graph merges into its team graph\" actually does at the node/id level), and how upward `aperas.config.json` discovery behaves when none exists at all. See [Settled: graph discovery](#id/BlockNode:00CDHSCK8R001) below.",
+    "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
     "children": []
   }
 ]
