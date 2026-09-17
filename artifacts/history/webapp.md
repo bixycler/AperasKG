@@ -1,0 +1,10 @@
+# Webapp — History <a name='id/BlockNode:00CJ6V6N9R001' class='aperas-anchor aperas-id'></a>
+
+## Current Status <a name='id/BlockNode:00CJ6V6N9R002' class='aperas-anchor aperas-id'></a>
+
+Design only — nothing is built. `packages/web` is an unmodified Vite + Solid scaffold: `App.tsx`, `index.tsx`, two CSS files. It declares `@aperas/core` as a dependency and imports it nowhere. The read and write semantics the UI will render are already specified and implemented in core and in the CLI; what does not exist yet is the structured render, the HTTP listener, and every part of the UI itself.
+
+## Milestones <a name='id/BlockNode:00CJ6V6N9R003' class='aperas-anchor aperas-id'></a>
+
+- **2026-09-17: webapp design opened**: <a name='id/BlockNode:00CJ6V6N9R004' class='aperas-anchor aperas-id'></a> scope fixed to the UI-projection tier, a third thin wrapper over `@aperas/core` alongside `cli`. Settled that the webapp never owns fold state, that `FolderDiv`'s three slots are already the three render tiers, that the apex is UI-local rather than view state, and that the write boundary is deep read with shallow write for principled reasons rather than as a scope cut.
+- **2026-09-18: transport, auth and the render contract settled**: <a name='id/BlockNode:00CJ6V6N9R005' class='aperas-anchor aperas-id'></a> an HTTP listener inside the ApeironNgn service rather than a separate bridge or a Node-hosted shell, chosen because live notification can only honestly originate in the sole writer. Change notification is a bare tick with the UI refetching its apex, carried as NDJSON over a streaming `fetch()` response read with `ReadableStream` — `EventSource` rejected because it cannot set a request header, and its resumption machinery is worthless against an idempotent tick. Auth resolved to five controls with the op allowlist as the load-bearing one. The superscript link marker was dropped in favour of the link text itself, and the canonical-position verdict was committed to `@aperas/core` as `buildRenderTree`, so both link sites and the CLI read one shared computation.

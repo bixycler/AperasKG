@@ -1,0 +1,20 @@
+# Webapp — Issues <a name='id/BlockNode:00CJ6V6370001' class='aperas-anchor aperas-id'></a>
+
+## Open Issues <a name='id/BlockNode:00CJ6V6370002' class='aperas-anchor aperas-id'></a>
+
+- **Whether the tree renderer surfaces every position of a multi-position `Link`**: <a name='id/BlockNode:00CJ6V6370003' class='aperas-anchor aperas-id'></a> the graph carries one `position` prop per occurrence, and the endnote's `^ a b` back-references need one anchor per position. Whether `renderTreeWithView` emits such a link once or once per position is unchecked. A renderer question, not a model one, and it must be answered before the endnote can claim to be faithful.
+- **How a deep write is handed to the Agent**: <a name='id/BlockNode:00CJ6V6370004' class='aperas-anchor aperas-id'></a> composing an intent and handing it off — a copied prompt, an MCP endpoint, an embedded chat pane — is unexamined, and deliberately out of Phase 1. It is deferred rather than rejected, and nothing in Phase 1 should foreclose any of the three.
+
+## Pending Tasks <a name='id/BlockNode:00CJ6V6370005' class='aperas-anchor aperas-id'></a>
+
+- **Extract `buildRenderTree` into `@aperas/core`**: <a name='id/BlockNode:00CJ6V6370006' class='aperas-anchor aperas-id'></a> promote `discoverCone`'s render plan into a returned tree of render items and redefine the text output as `toText(buildRenderTree(...))`. The existing verification suite is the guarantee — the text render must stay byte-identical. Carry it to a caller with a `format` discriminator on the existing `tree` service op.
+- **Add the HTTP listener to the ApeironNgn service**: <a name='id/BlockNode:00CJ6V6370007' class='aperas-anchor aperas-id'></a> loopback-bound, serving an explicit op allowlist rather than the whole protocol, alongside the unchanged unix socket.
+- **Generate and store the per-run auth token**: <a name='id/BlockNode:00CJ6V6370008' class='aperas-anchor aperas-id'></a> `randomBytes(32)` at service start, written into the existing run directory beside the lock and socket at mode 0600, and exposed for the dev server to read. Independent of the listener, and worth landing first so the secret's lifecycle is solved and tested before anything consumes it.
+- **Implement the auth checks**: <a name='id/BlockNode:00CJ6V6370009' class='aperas-anchor aperas-id'></a> `X-Aperas-Token` required on every request with a restrictive preflight response, `timingSafeEqual` comparison, loopback `Host` check, `Origin` allowlist.
+- **Build the tick channel**: <a name='id/BlockNode:00CJ6V637000A' class='aperas-anchor aperas-id'></a> a streaming NDJSON endpoint on the service side, and a `fetch()` + `ReadableStream` reader on the client with its own reconnect loop — refetch unconditionally on reconnect, pause while the tab is hidden, surface a 401 as a distinct "service restarted" state rather than a silent retry.
+- **Port `FolderDiv` to a Solid component**: <a name='id/BlockNode:00CJ6V637000B' class='aperas-anchor aperas-id'></a> its three slots map onto the three render tiers unchanged.
+- **Render the two link sites**: <a name='id/BlockNode:00CJ6V637000C' class='aperas-anchor aperas-id'></a> the link's own text as the `cite-ref` anchor, and the endnote list after the children as `cite-note`, with click-through both ways and one back-reference per position.
+- **Implement zoom**: <a name='id/BlockNode:00CJ6V637000D' class='aperas-anchor aperas-id'></a> ctrl-click on the arrow handle sets a new apex; the breadcrumb above it zooms back out. UI-local state, not view state.
+- **Implement the shallow write**: <a name='id/BlockNode:00CJ6V637000E' class='aperas-anchor aperas-id'></a> a single `updateText(id, text)` on the host side that picks the correct per-type input form, so the UI never encodes the write-path's bullet-marker and `--text-only` rules. The service's per-artifact link sweep, and the known failure where a write reports links resolved but persists none, must both surface in the UI rather than being swallowed.
+
+## Resolved <a name='id/BlockNode:00CJ6V637000F' class='aperas-anchor aperas-id'></a>

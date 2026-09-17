@@ -118,7 +118,7 @@
       }
     ],
     "title": "**Discussion**",
-    "text": "**Discussion**: <a name='id/BlockNode:00CDBYV4T0004' class='aperas-anchor aperas-id'></a> [Why this syntax, and what we considered instead](../discussion/linking.md).",
+    "text": "**Discussion**: [Why this syntax, and what we considered instead](../discussion/linking.md).",
     "parent": "BlockNode:00CDBYV4T0002",
     "type": "listItem",
     "children": []
@@ -143,7 +143,7 @@
       }
     ],
     "title": "**Issues**",
-    "text": "**Issues**: <a name='id/BlockNode:00CDBYV4T0005' class='aperas-anchor aperas-id'></a> [No open design questions; pending implementation tasks](../issues/linking.md#id/BlockNode:00CDBYV5A8003).",
+    "text": "**Issues**: [No open design questions; pending implementation tasks](../issues/linking.md#id/BlockNode:00CDBYV5A8003).",
     "parent": "BlockNode:00CDBYV4T0002",
     "type": "listItem",
     "children": []
@@ -152,7 +152,7 @@
     "@id": "BlockNode:00CDBYV4T8000",
     "@type": "BlockNode",
     "title": "**Planning**",
-    "text": "**Planning**: <a name='id/BlockNode:00CDBYV4T8000' class='aperas-anchor aperas-id'></a> [First implementation slice](../planning/linking.md).",
+    "text": "**Planning**: [First implementation slice](../planning/linking.md).",
     "parent": "BlockNode:00CDBYV4T0002",
     "type": "listItem",
     "children": []
@@ -177,7 +177,7 @@
       }
     ],
     "title": "**History**",
-    "text": "**History**: <a name='id/BlockNode:00CDBYV4T8001' class='aperas-anchor aperas-id'></a> [Convention timeline](../history/linking.md#id/BlockNode:00CDBZ7698003).",
+    "text": "**History**: [Convention timeline](../history/linking.md#id/BlockNode:00CDBZ7698003).",
     "parent": "BlockNode:00CDBYV4T0002",
     "type": "listItem",
     "children": []
@@ -230,7 +230,7 @@
       }
     ],
     "title": "**Slugified-path addressing**",
-    "text": "**Slugified-path addressing**: <a name='id/BlockNode:00CDBYV4T8003' class='aperas-anchor aperas-id'></a> a path of `slugify()`-derived segments, computable directly from the raw markdown text itself. This is deliberately manual, and the only option before ingestion: a writer hand-injects it while authoring or refactoring a doc, before any node id exists to reference instead.",
+    "text": "**Slugified-path addressing**: a path of `slugify()`-derived segments, computable directly from the raw markdown text itself. This is deliberately manual, and the only option before ingestion: a writer hand-injects it while authoring or refactoring a doc, before any node id exists to reference instead.",
     "parent": "BlockNode:00CDBYV4T8002",
     "type": "listItem",
     "children": []
@@ -239,7 +239,7 @@
     "@id": "BlockNode:00CDBYV4T8004",
     "@type": "BlockNode",
     "title": "**Node-ID addressing**",
-    "text": "**Node-ID addressing**: <a name='id/BlockNode:00CDBYV4T8004' class='aperas-anchor aperas-id'></a> a stable, opaque identifier (a snowflake, minted once at node creation, never derived from or invalidated by content) that only exists *after* ingestion.",
+    "text": "**Node-ID addressing**: a stable, opaque identifier (a snowflake, minted once at node creation, never derived from or invalidated by content) that only exists *after* ingestion.",
     "parent": "BlockNode:00CDBYV4T8002",
     "type": "listItem",
     "children": []
@@ -316,7 +316,7 @@
       }
     ],
     "title": "`[title](aperas://tree/<block-slug-path>)`",
-    "text": "`[title](aperas://tree/<block-slug-path>)`: <a name='id/BlockNode:00CDBYV4T800A' class='aperas-anchor aperas-id'></a> slugified-path addressing.",
+    "text": "`[title](aperas://tree/<block-slug-path>)`: slugified-path addressing.",
     "parent": "BlockNode:00CDBYV4T8009",
     "type": "listItem",
     "children": []
@@ -325,7 +325,7 @@
     "@id": "BlockNode:00CDBYV4T800B",
     "@type": "BlockNode",
     "title": "`[title](aperas://id/<ID>)`",
-    "text": "`[title](aperas://id/<ID>)`: <a name='id/BlockNode:00CDBYV4T800B' class='aperas-anchor aperas-id'></a> node-ID addressing.",
+    "text": "`[title](aperas://id/<ID>)`: node-ID addressing.",
     "parent": "BlockNode:00CDBYV4T8009",
     "type": "listItem",
     "children": []
@@ -362,7 +362,7 @@
       }
     ],
     "title": "`[title](../folder/file#<block-slug-path>)`",
-    "text": "`[title](../folder/file#<block-slug-path>)`: <a name='id/BlockNode:00CDBYV4T800D' class='aperas-anchor aperas-id'></a> slugified-path addressing.",
+    "text": "`[title](../folder/file#<block-slug-path>)`: slugified-path addressing.",
     "parent": "BlockNode:00CDBYV4T800C",
     "type": "listItem",
     "children": []
@@ -387,7 +387,7 @@
       }
     ],
     "title": "`[title](../folder/file#id/<ID>)`",
-    "text": "`[title](../folder/file#id/<ID>)`: <a name='id/BlockNode:00CDBYV4T800E' class='aperas-anchor aperas-id'></a> node-ID addressing, the literal `id/` fragment prefix distinguishing it from a slug-path fragment; backed by a `name=\"id/<ID>\"` anchor, same mechanism as the slug-path form (see [Anchors](#id/BlockNode:00CDBYV4T800H)).",
+    "text": "`[title](../folder/file#id/<ID>)`: node-ID addressing, the literal `id/` fragment prefix distinguishing it from a slug-path fragment; backed by a `name=\"id/<ID>\"` anchor, same mechanism as the slug-path form (see [Anchors](#id/BlockNode:00CDBYV4T800H)).",
     "parent": "BlockNode:00CDBYV4T800C",
     "type": "listItem",
     "children": []
@@ -1215,7 +1215,8 @@
       "BlockNode:00CDBZ769G001",
       "BlockNode:00CH47P6K8001",
       "BlockNode:00CDBZ7698004",
-      "BlockNode:00CH4JM6H0001"
+      "BlockNode:00CH4JM6H0001",
+      "BlockNode:00CJ6G02D0001"
     ]
   },
   {
@@ -1259,7 +1260,7 @@
       }
     ],
     "title": "**TerminusDB era**",
-    "text": "**TerminusDB era**: <a name='id/BlockNode:00CDBZ7698005' class='aperas-anchor aperas-id'></a> `[title]([[code]])` convention designed and settled — `code` a snowflake/node-id, bare `[[...]]` reserved for a never-built UI auto-expansion, never for hand-typing or parsing on its own (`Aperas-deep-path-resolution-design.md`, `Aperas-markdown-fractal-mapping-design.md` §4, archived under `archive/tdb-era/` — backend superseded, convention carried forward unchanged).",
+    "text": "**TerminusDB era**: `[title]([[code]])` convention designed and settled — `code` a snowflake/node-id, bare `[[...]]` reserved for a never-built UI auto-expansion, never for hand-typing or parsing on its own (`Aperas-deep-path-resolution-design.md`, `Aperas-markdown-fractal-mapping-design.md` §4, archived under `archive/tdb-era/` — backend superseded, convention carried forward unchanged).",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": []
@@ -1268,7 +1269,7 @@
     "@id": "BlockNode:00CDBZ7698006",
     "@type": "BlockNode",
     "title": "**ApeironNgn era**",
-    "text": "**ApeironNgn era**: <a name='id/BlockNode:00CDBZ7698006' class='aperas-anchor aperas-id'></a> same convention re-implemented and live-verified (`astParser.ts`'s `collectLinkCodes`/`WIKILINK_PREDICATE`, `resolve.ts`'s deep-path grammar) — used extensively in `Aperas-apeironngn-design.md`'s own self-references, in the verbose full-heading-text form, e.g.:",
+    "text": "**ApeironNgn era**: same convention re-implemented and live-verified (`astParser.ts`'s `collectLinkCodes`/`WIKILINK_PREDICATE`, `resolve.ts`'s deep-path grammar) — used extensively in `Aperas-apeironngn-design.md`'s own self-references, in the verbose full-heading-text form, e.g.:",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": [
@@ -1288,7 +1289,7 @@
     "@id": "BlockNode:00CDBZ7698008",
     "@type": "BlockNode",
     "title": "**2026-09-08: slug-anchor convention prototyped**",
-    "text": "**2026-09-08: slug-anchor convention prototyped**: <a name='id/BlockNode:00CDBZ7698008' class='aperas-anchor aperas-id'></a> slug-anchor authoring convention (`slugify()`-derived, `/`-joined segment paths as explicit `<a name>` anchors, referenced via plain `#fragment` links) prototyped and validated live in `test-slugifed-path.md`, as a more compact, pre-ingestion-friendly alternative to hand-typing the full-heading-text `[[deep-path]]` form, e.g.:",
+    "text": "**2026-09-08: slug-anchor convention prototyped**: slug-anchor authoring convention (`slugify()`-derived, `/`-joined segment paths as explicit `<a name>` anchors, referenced via plain `#fragment` links) prototyped and validated live in `test-slugifed-path.md`, as a more compact, pre-ingestion-friendly alternative to hand-typing the full-heading-text `[[deep-path]]` form, e.g.:",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": [
@@ -1300,7 +1301,7 @@
     "@id": "BlockNode:00CDBZ769800B",
     "@type": "BlockNode",
     "title": "**2026-09-09: `kg:title` removal**",
-    "text": "**2026-09-09: `kg:title` removal**: <a name='id/BlockNode:00CDBZ769800B' class='aperas-anchor aperas-id'></a> Slice 1's lead-in-term extraction (`astParser.ts`'s `extractLeadInTitle`) made a pre-existing title mechanism, `kg:title` (an out-of-band, graph-only title override, decoupled from a block's own text), impractical by comparison: `reconcile.ts`'s `carryForwardFields` only ever carried a title forward when the block's *text* matched exactly, so a manually-set title was silently lost on the very next edit to that text — a real, if long-standing, fragility surfaced only once a real alternative (a title derived deterministically from the text itself) existed to compare it against. Removed `kg:title` outright (`kgTitle.ts`, its two service ops, `carryForwardFields`'s title line) in favor of the explicit lead-in term as the one and only title mechanism, for every block type. `kg:update` (`kgUpdate.ts`) gained a compensating capability: a heading target's title, being the one block type actually projected back to disk, is now itself editable by piping a leading heading line whose `#` depth matches the target's own (rejected otherwise) — mirroring exactly how a real document's heading is parsed (anchor-stripped, tree-anchor prop carried through). Fixed one adjacent, pre-existing bug found while wiring that path: `kg:update`'s default (non `--text-only`) reconcile branch never included `props` in its own reconcile shape at all, so any heading update through it — title-changing or not — silently dropped that heading's tree-anchor prop; it now defaults to preserving the target's existing props unless the new heading-rename path explicitly supplies a replacement.",
+    "text": "**2026-09-09: `kg:title` removal**: Slice 1's lead-in-term extraction (`astParser.ts`'s `extractLeadInTitle`) made a pre-existing title mechanism, `kg:title` (an out-of-band, graph-only title override, decoupled from a block's own text), impractical by comparison: `reconcile.ts`'s `carryForwardFields` only ever carried a title forward when the block's *text* matched exactly, so a manually-set title was silently lost on the very next edit to that text — a real, if long-standing, fragility surfaced only once a real alternative (a title derived deterministically from the text itself) existed to compare it against. Removed `kg:title` outright (`kgTitle.ts`, its two service ops, `carryForwardFields`'s title line) in favor of the explicit lead-in term as the one and only title mechanism, for every block type. `kg:update` (`kgUpdate.ts`) gained a compensating capability: a heading target's title, being the one block type actually projected back to disk, is now itself editable by piping a leading heading line whose `#` depth matches the target's own (rejected otherwise) — mirroring exactly how a real document's heading is parsed (anchor-stripped, tree-anchor prop carried through). Fixed one adjacent, pre-existing bug found while wiring that path: `kg:update`'s default (non `--text-only`) reconcile branch never included `props` in its own reconcile shape at all, so any heading update through it — title-changing or not — silently dropped that heading's tree-anchor prop; it now defaults to preserving the target's existing props unless the new heading-rename path explicitly supplies a replacement.",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": []
@@ -1325,7 +1326,7 @@
       }
     ],
     "title": "**2026-09-09: cross-artifact link staleness**",
-    "text": "**2026-09-09: cross-artifact link staleness**: <a name='id/BlockNode:00CDBZ769800C' class='aperas-anchor aperas-id'></a> Live editing of this very concern's own docs surfaced a second gap: `discussion/linking.md` linked to a heading just added to `design/linking.md` in the same pass, and that link resolved against whichever of the two artifacts' graph states happened to be current at ingestion time — an artifact whose own text never changes has nothing to trigger a fresh link-resolution pass, so a dangling reference stayed dangling even after its target came into existence, fixable only by manually corrupting `ingestedHash` to force a re-ingest. `resolveBlockLinks` (`apeironNgn/artifacts.ts`) now stashes every code a block fails to resolve — including a `#fragment` form that's merely routine-unresolved, not warned as dangling — as a `danglingRef` prop on its own referring `ArtifactNode`, rewritten wholesale on every ingestion. `kg:ingest` (`kgIngest.ts`'s `runIngest`) gained a closing sweep, `retryDanglingRefs`: after the requested artifacts and folder tree are settled, every stashed code across every live artifact is retried against the current graph, and any artifact with at least one now-resolvable code is force-reingested via a new `ingestFromDisk`/`ingestArtifact` parameter, `bypassUnchangedCheck` — added deliberately separate from just clearing `ingestedHash`, since that field is also how `ingestFromDisk` decides whether to reconcile against existing content or fresh-mint every block as brand new (see [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR008)).",
+    "text": "**2026-09-09: cross-artifact link staleness**: Live editing of this very concern's own docs surfaced a second gap: `discussion/linking.md` linked to a heading just added to `design/linking.md` in the same pass, and that link resolved against whichever of the two artifacts' graph states happened to be current at ingestion time — an artifact whose own text never changes has nothing to trigger a fresh link-resolution pass, so a dangling reference stayed dangling even after its target came into existence, fixable only by manually corrupting `ingestedHash` to force a re-ingest. `resolveBlockLinks` (`apeironNgn/artifacts.ts`) now stashes every code a block fails to resolve — including a `#fragment` form that's merely routine-unresolved, not warned as dangling — as a `danglingRef` prop on its own referring `ArtifactNode`, rewritten wholesale on every ingestion. `kg:ingest` (`kgIngest.ts`'s `runIngest`) gained a closing sweep, `retryDanglingRefs`: after the requested artifacts and folder tree are settled, every stashed code across every live artifact is retried against the current graph, and any artifact with at least one now-resolvable code is force-reingested via a new `ingestFromDisk`/`ingestArtifact` parameter, `bypassUnchangedCheck` — added deliberately separate from just clearing `ingestedHash`, since that field is also how `ingestFromDisk` decides whether to reconcile against existing content or fresh-mint every block as brand new (see [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR008)).",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": []
@@ -1364,7 +1365,7 @@
       }
     ],
     "title": "**2026-09-10: lead-in colon end-of-run fix**",
-    "text": "**2026-09-10: lead-in colon end-of-run fix**: <a name='id/BlockNode:00CDBZ769G000' class='aperas-anchor aperas-id'></a> Live re-ingestion of this concern's own Slice 2 draft (`planning/linking.md`) surfaced a bug in `findLeadInColonOffset`'s (`astParser.ts`) space-after-colon check: a lead-in colon that's the very last character of its own mdast text node (e.g. `- **Heading**:` immediately followed only by nested list children, no inline \"rest\" on the same line) always fell through as if genuinely ambiguous, because the check read the next character from that text node's own truncated `.value` rather than the real document — there was nothing left to find, not because anything suspicious followed. Fixed by treating \"nothing left in this text run\" the same as \"a space follows\"; the earlier guards (inline-code exclusion, bold/italic exclusion) run first and are unaffected. See [Design](../design/linking.md#id/BlockNode:00CDBYV4TG000) and [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR00E).",
+    "text": "**2026-09-10: lead-in colon end-of-run fix**: Live re-ingestion of this concern's own Slice 2 draft (`planning/linking.md`) surfaced a bug in `findLeadInColonOffset`'s (`astParser.ts`) space-after-colon check: a lead-in colon that's the very last character of its own mdast text node (e.g. `- **Heading**:` immediately followed only by nested list children, no inline \"rest\" on the same line) always fell through as if genuinely ambiguous, because the check read the next character from that text node's own truncated `.value` rather than the real document — there was nothing left to find, not because anything suspicious followed. Fixed by treating \"nothing left in this text run\" the same as \"a space follows\"; the earlier guards (inline-code exclusion, bold/italic exclusion) run first and are unaffected. See [Design](../design/linking.md#id/BlockNode:00CDBYV4TG000) and [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR00E).",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": []
@@ -1403,7 +1404,7 @@
       }
     ],
     "title": "**2026-09-10: Slice 2 landed**",
-    "text": "**2026-09-10: Slice 2 landed**: <a name='id/BlockNode:00CDBZ769G001' class='aperas-anchor aperas-id'></a> completing the toolset for working directly on Apeiron, corpus-wide rollout left as its own separate topic. `apeironNgn/node.ts`'s `rejectSlugPathCollisions` now rejects a document at ingestion time if any block's full slug-path — or an embedded anchor name still on it — is already claimed by a different block, live or within the same fresh parse; a writer-facing hard reject only, no lifecycle tracking (see [Design](../design/linking.md#id/BlockNode:00CDBYV4TG006)). The cleanup pass turned out to need no new removal API at all: an `aperas-tree` anchor is derived fresh from source text on every ingestion, so deleting the tag from the file and re-ingesting is the whole mechanism — confirmed live once the actual safety check was corrected to a full-text corpus search rather than `kg:backlinks` (which only sees already-tracked referrers). Slice 1's own scratch-ingest verification, left pending since it landed, is folded into `verify.ts` as steps 13-15 alongside Slice 2's own new coverage. See [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR00C) for a real id-format bug this surfaced while landing.",
+    "text": "**2026-09-10: Slice 2 landed**: completing the toolset for working directly on Apeiron, corpus-wide rollout left as its own separate topic. `apeironNgn/node.ts`'s `rejectSlugPathCollisions` now rejects a document at ingestion time if any block's full slug-path — or an embedded anchor name still on it — is already claimed by a different block, live or within the same fresh parse; a writer-facing hard reject only, no lifecycle tracking (see [Design](../design/linking.md#id/BlockNode:00CDBYV4TG006)). The cleanup pass turned out to need no new removal API at all: an `aperas-tree` anchor is derived fresh from source text on every ingestion, so deleting the tag from the file and re-ingesting is the whole mechanism — confirmed live once the actual safety check was corrected to a full-text corpus search rather than `kg:backlinks` (which only sees already-tracked referrers). Slice 1's own scratch-ingest verification, left pending since it landed, is folded into `verify.ts` as steps 13-15 alongside Slice 2's own new coverage. See [Discussion](../discussion/linking.md#id/BlockNode:00CDBZ76TR00C) for a real id-format bug this surfaced while landing.",
     "parent": "BlockNode:00CDBZ7698003",
     "type": "listItem",
     "children": []
@@ -1704,7 +1705,7 @@
       }
     ],
     "title": "**Slice 1** (landed)",
-    "text": "**Slice 1** (landed): <a name='id/BlockNode:00CDBZ77EG003' class='aperas-anchor aperas-id'></a> the mechanism itself — lead-in-term title extraction, recognizing `aperas://`/`#fragment` link forms, and id-anchor emission (both headings and list items).",
+    "text": "**Slice 1** (landed): the mechanism itself — lead-in-term title extraction, recognizing `aperas://`/`#fragment` link forms, and id-anchor emission (both headings and list items).",
     "parent": "BlockNode:00CDBZ77EG002",
     "type": "listItem",
     "children": []
@@ -1713,7 +1714,7 @@
     "@id": "BlockNode:00CDBZ77EG004",
     "@type": "BlockNode",
     "title": "**Slice 2** (landed)",
-    "text": "**Slice 2** (landed): <a name='id/BlockNode:00CDBZ77EG004' class='aperas-anchor aperas-id'></a> completes the toolset for working directly on Apeiron — collision rejection at ingestion, the cleanup pass, and folding Slice 1's own verification into `verify.ts`. Corpus-wide rollout of the convention (correcting non-compliant colon lead-ins, migrating old-style `[[deep-path]]` links) is a separate topic, not detailed here.",
+    "text": "**Slice 2** (landed): completes the toolset for working directly on Apeiron — collision rejection at ingestion, the cleanup pass, and folding Slice 1's own verification into `verify.ts`. Corpus-wide rollout of the convention (correcting non-compliant colon lead-ins, migrating old-style `[[deep-path]]` links) is a separate topic, not detailed here.",
     "parent": "BlockNode:00CDBZ77EG002",
     "type": "listItem",
     "children": []
@@ -1962,7 +1963,7 @@
     "@id": "BlockNode:00CDBZ77F000E",
     "@type": "BlockNode",
     "title": "A relative link with a `#fragment`",
-    "text": "A relative link with a `#fragment`: <a name='id/BlockNode:00CDBZ77F000E' class='aperas-anchor aperas-id'></a> an `id/<ID>` fragment reroutes to the direct-id tier, ignoring the file-path part; any other fragment flattens `#` to `/` and reuses the existing folder/file/heading deep-path grammar (sound — `slugify` is idempotent on an already-slugified segment) — but only once the leading file-path part (`../folder/file`, or empty for a same-document fragment) has been turned into a canonical artifact path first (next bullet); the grammar's own `..` isn't usable directly on it.",
+    "text": "A relative link with a `#fragment`: an `id/<ID>` fragment reroutes to the direct-id tier, ignoring the file-path part; any other fragment flattens `#` to `/` and reuses the existing folder/file/heading deep-path grammar (sound — `slugify` is idempotent on an already-slugified segment) — but only once the leading file-path part (`../folder/file`, or empty for a same-document fragment) has been turned into a canonical artifact path first (next bullet); the grammar's own `..` isn't usable directly on it.",
     "parent": "BlockNode:00CDBZ77F000B",
     "type": "listItem",
     "children": []
@@ -1989,7 +1990,7 @@
     "@id": "BlockNode:00CDBZ77F000H",
     "@type": "BlockNode",
     "title": "**Required companion fix**, `artifacts.ts`'s `resolveBlockLinks` (~line 221)",
-    "text": "**Required companion fix**, `artifacts.ts`'s `resolveBlockLinks` (~line 221): <a name='id/BlockNode:00CDBZ77F000H' class='aperas-anchor aperas-id'></a> its `titles: code.split('/').filter(...)` is a separate, non-resolution computation for `--create-holder`'s placeholder-naming, tail-aligned against the resolver's own name-token count (`resolveCreate.ts:113-116`). It isn't scheme-aware, so for an `aperas://tree/...` code it produces extra bogus entries (`\"aperas:\"`, `\"tree\"`) that survive the existing empty/`.`/`..` filter — pushing `titles.length` past `nameCount` and hitting `resolveCreate.ts:113-116`'s existing `titles.length > nameCount` throw for *every* `aperas://`-prefixed link, not just producing a wrong holder name. Needs to strip the `aperas://tree/` prefix (or use `[]` for `aperas://id/` codes, which have zero name-tokens) before this split.",
+    "text": "**Required companion fix**, `artifacts.ts`'s `resolveBlockLinks` (~line 221): its `titles: code.split('/').filter(...)` is a separate, non-resolution computation for `--create-holder`'s placeholder-naming, tail-aligned against the resolver's own name-token count (`resolveCreate.ts:113-116`). It isn't scheme-aware, so for an `aperas://tree/...` code it produces extra bogus entries (`\"aperas:\"`, `\"tree\"`) that survive the existing empty/`.`/`..` filter — pushing `titles.length` past `nameCount` and hitting `resolveCreate.ts:113-116`'s existing `titles.length > nameCount` throw for *every* `aperas://`-prefixed link, not just producing a wrong holder name. Needs to strip the `aperas://tree/` prefix (or use `[]` for `aperas://id/` codes, which have zero name-tokens) before this split.",
     "parent": "BlockNode:00CDBZ77F000B",
     "type": "listItem",
     "children": []
@@ -2014,7 +2015,7 @@
       }
     ],
     "title": "**Resolution gate, required for disambiguation**",
-    "text": "**Resolution gate, required for disambiguation**: <a name='id/BlockNode:00CDBZ77F000J' class='aperas-anchor aperas-id'></a> a `#fragment` link has no `[[...]]`-style wrapper to mark intent, so it's syntactically identical to an ordinary, unrelated same-page anchor link. After the existing name-token/id walk finds a *candidate* target, only accept it if that candidate also carries a `class=\"aperas-anchor\"` tag whose `name` equals the fragment — the heading's stashed anchor prop (Task 3), or a literal scan of a list item's/paragraph's own `text` (no prop is kept for these). See [Distinguishing a wikilink from an ordinary anchor link](../discussion/linking.md#id/BlockNode:00CDBZ76TG006) for why a syntactic heuristic (e.g. requiring a leading dash) isn't enough on its own — it only covers heading-derived slugs, not list-item ones.",
+    "text": "**Resolution gate, required for disambiguation**: a `#fragment` link has no `[[...]]`-style wrapper to mark intent, so it's syntactically identical to an ordinary, unrelated same-page anchor link. After the existing name-token/id walk finds a *candidate* target, only accept it if that candidate also carries a `class=\"aperas-anchor\"` tag whose `name` equals the fragment — the heading's stashed anchor prop (Task 3), or a literal scan of a list item's/paragraph's own `text` (no prop is kept for these). See [Distinguishing a wikilink from an ordinary anchor link](../discussion/linking.md#id/BlockNode:00CDBZ76TG006) for why a syntactic heuristic (e.g. requiring a leading dash) isn't enough on its own — it only covers heading-derived slugs, not list-item ones.",
     "parent": "BlockNode:00CDBZ77F000B",
     "type": "listItem",
     "children": []
@@ -2049,7 +2050,7 @@
       }
     ],
     "title": "**Heading**",
-    "text": "**Heading**: <a name='id/BlockNode:00CDBZ77F000M' class='aperas-anchor aperas-id'></a>",
+    "text": "**Heading**: ",
     "parent": "BlockNode:00CDBZ77F000K",
     "type": "listItem",
     "children": [
@@ -2095,7 +2096,7 @@
     "@id": "BlockNode:00CDBZ77F000Q",
     "@type": "BlockNode",
     "title": "In `project.ts`'s heading case (project.ts:113-119), re-append",
-    "text": "In `project.ts`'s heading case (project.ts:113-119), re-append: <a name='id/BlockNode:00CDBZ77F000Q' class='aperas-anchor aperas-id'></a> the stashed tree-anchor if present, and unconditionally an `<a name='id/<ID>' class='aperas-anchor aperas-id'>` for the block's own permanent id, both at line end.",
+    "text": "In `project.ts`'s heading case (project.ts:113-119), re-append: the stashed tree-anchor if present, and unconditionally an `<a name='id/<ID>' class='aperas-anchor aperas-id'>` for the block's own permanent id, both at line end.",
     "parent": "BlockNode:00CDBZ77F000M",
     "type": "listItem",
     "children": []
@@ -2129,7 +2130,7 @@
     "@id": "BlockNode:00CDBZ77F000S",
     "@type": "BlockNode",
     "title": "**List item / paragraph**",
-    "text": "**List item / paragraph**: <a name='id/BlockNode:00CDBZ77F000S' class='aperas-anchor aperas-id'></a>",
+    "text": "**List item / paragraph**: ",
     "parent": "BlockNode:00CDBZ77F000K",
     "type": "listItem",
     "children": [
@@ -2165,7 +2166,7 @@
     "@id": "BlockNode:00CDBZ77F000V",
     "@type": "BlockNode",
     "title": "In `project.ts` (`serializeListItem`, project.ts:157-167, and the paragraph case)",
-    "text": "In `project.ts` (`serializeListItem`, project.ts:157-167, and the paragraph case): <a name='id/BlockNode:00CDBZ77F000V' class='aperas-anchor aperas-id'></a> when a block's `text` doesn't already contain its own `id/<ID>` anchor, splice `<a name='id/<ID>' class='aperas-anchor aperas-id'></a> ` in right after the first `:`.",
+    "text": "In `project.ts` (`serializeListItem`, project.ts:157-167, and the paragraph case): when a block's `text` doesn't already contain its own `id/<ID>` anchor, splice `<a name='id/<ID>' class='aperas-anchor aperas-id'></a> ` in right after the first `:`.",
     "parent": "BlockNode:00CDBZ77F000S",
     "type": "listItem",
     "children": []
@@ -2251,7 +2252,7 @@
       }
     ],
     "title": "Covers",
-    "text": "Covers: <a name='id/BlockNode:00CDBZ77F000Z' class='aperas-anchor aperas-id'></a> a heading's tree-anchor+id-anchor round trip; a heading with genuine leading prose staying unaffected; a list item's id-anchor splice idempotency (via its *parent's* projection — a bare `listItem` has no `serializeBlock` case of its own, `serializeListItem` is only ever invoked by the parent's `renderChildren`); `aperas://id/<ID>`, `../file#id/<ID>`, and `[[Kind:snowflake]]` (written as a real link, `[title](<[[code]]>)` — a bare, unwrapped `[[code]]` was never itself a recognized link, see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)) all resolving identically; the anchor-matching gate correctly rejecting a title-only match with no anchor.",
+    "text": "Covers: a heading's tree-anchor+id-anchor round trip; a heading with genuine leading prose staying unaffected; a list item's id-anchor splice idempotency (via its *parent's* projection — a bare `listItem` has no `serializeBlock` case of its own, `serializeListItem` is only ever invoked by the parent's `renderChildren`); `aperas://id/<ID>`, `../file#id/<ID>`, and `[[Kind:snowflake]]` (written as a real link, `[title](<[[code]]>)` — a bare, unwrapped `[[code]]` was never itself a recognized link, see [History](../history/linking.md#id/BlockNode:00CDBZ7698003)) all resolving identically; the anchor-matching gate correctly rejecting a title-only match with no anchor.",
     "parent": "BlockNode:00CDBZ77F000Y",
     "type": "listItem",
     "children": []
@@ -2319,7 +2320,7 @@
     "@id": "BlockNode:00CDBZ77F8001",
     "@type": "BlockNode",
     "title": "Re-ingest afterward. Nothing else is needed",
-    "text": "Re-ingest afterward. Nothing else is needed: <a name='id/BlockNode:00CDBZ77F8001' class='aperas-anchor aperas-id'></a> a heading's `treeAnchor` prop (and a list item/paragraph's embedded anchor) is derived fresh from the current file text on every ingestion — `carryForwardFields` already rebuilds `props` from scratch each time — so once the anchor is gone from the text, it's gone from the graph too, confirmed live (`verify.ts` step 15) with no separate prop-removal step ever needed.",
+    "text": "Re-ingest afterward. Nothing else is needed: a heading's `treeAnchor` prop (and a list item/paragraph's embedded anchor) is derived fresh from the current file text on every ingestion — `carryForwardFields` already rebuilds `props` from scratch each time — so once the anchor is gone from the text, it's gone from the graph too, confirmed live (`verify.ts` step 15) with no separate prop-removal step ever needed.",
     "parent": "BlockNode:00CDBZ77F0014",
     "type": "listItem",
     "children": []
@@ -2369,7 +2370,7 @@
       }
     ],
     "title": "A heading with a hand-written tree-anchor at line-end",
-    "text": "A heading with a hand-written tree-anchor at line-end: <a name='id/BlockNode:00CDBZ77F8004' class='aperas-anchor aperas-id'></a> `title` is clean, the anchor survives in a prop, and projecting re-emits both anchors at line end in the right order.",
+    "text": "A heading with a hand-written tree-anchor at line-end: `title` is clean, the anchor survives in a prop, and projecting re-emits both anchors at line end in the right order.",
     "parent": "BlockNode:00CDBZ77F8003",
     "type": "listItem",
     "children": []
@@ -2378,7 +2379,7 @@
     "@id": "BlockNode:00CDBZ77F8005",
     "@type": "BlockNode",
     "title": "A heading with genuine leading prose *and* a tree-anchor",
-    "text": "A heading with genuine leading prose *and* a tree-anchor: <a name='id/BlockNode:00CDBZ77F8005' class='aperas-anchor aperas-id'></a> prose stays exactly as `text`, unaffected — this was the live-verified regression to guard against.",
+    "text": "A heading with genuine leading prose *and* a tree-anchor: prose stays exactly as `text`, unaffected — this was the live-verified regression to guard against.",
     "parent": "BlockNode:00CDBZ77F8003",
     "type": "listItem",
     "children": []
@@ -2387,7 +2388,7 @@
     "@id": "BlockNode:00CDBZ77F8006",
     "@type": "BlockNode",
     "title": "A list item with a colon and no anchor",
-    "text": "A list item with a colon and no anchor: <a name='id/BlockNode:00CDBZ77F8006' class='aperas-anchor aperas-id'></a> projecting adds the id-anchor once, right after the colon; re-projecting the same already-ingested content doesn't duplicate it.",
+    "text": "A list item with a colon and no anchor: projecting adds the id-anchor once, right after the colon; re-projecting the same already-ingested content doesn't duplicate it.",
     "parent": "BlockNode:00CDBZ77F8003",
     "type": "listItem",
     "children": []
@@ -2441,7 +2442,7 @@
       }
     ],
     "title": "**Task 1** (step 13)",
-    "text": "**Task 1** (step 13): <a name='id/BlockNode:00CDBZ77F800B' class='aperas-anchor aperas-id'></a> the Slice 1 checklist above, end to end.",
+    "text": "**Task 1** (step 13): the Slice 1 checklist above, end to end.",
     "parent": "BlockNode:00CDBZ77F800A",
     "type": "listItem",
     "children": []
@@ -2450,7 +2451,7 @@
     "@id": "BlockNode:00CDBZ77F800C",
     "@type": "BlockNode",
     "title": "**Task 2** (step 14)",
-    "text": "**Task 2** (step 14): <a name='id/BlockNode:00CDBZ77F800C' class='aperas-anchor aperas-id'></a> (a) two blocks with an identical fresh path in the same doc are rejected, (b) a new block colliding with another live block's current `toPath()` is rejected, (c) a new block colliding with another live block's still-embedded anchor name is also rejected, (d) no false positive when paths are genuinely distinct.",
+    "text": "**Task 2** (step 14): (a) two blocks with an identical fresh path in the same doc are rejected, (b) a new block colliding with another live block's current `toPath()` is rejected, (c) a new block colliding with another live block's still-embedded anchor name is also rejected, (d) no false positive when paths are genuinely distinct.",
     "parent": "BlockNode:00CDBZ77F800A",
     "type": "listItem",
     "children": []
@@ -2459,7 +2460,7 @@
     "@id": "BlockNode:00CDBZ77F800D",
     "@type": "BlockNode",
     "title": "**Task 3** (step 15)",
-    "text": "**Task 3** (step 15): <a name='id/BlockNode:00CDBZ77F800D' class='aperas-anchor aperas-id'></a> deleting an anchor tag from a block's source text and re-ingesting drops it from `treeAnchor`/the graph, with no other block affected; a full-text safety search catches an old-style reference living in a file that isn't tracked/ingested, a case `kg:backlinks` alone misses.",
+    "text": "**Task 3** (step 15): deleting an anchor tag from a block's source text and re-ingesting drops it from `treeAnchor`/the graph, with no other block affected; a full-text safety search catches an old-style reference living in a file that isn't tracked/ingested, a case `kg:backlinks` alone misses.",
     "parent": "BlockNode:00CDBZ77F800A",
     "type": "listItem",
     "children": []
@@ -2717,7 +2718,7 @@
       }
     ],
     "title": "**Length cap**",
-    "text": "**Length cap**: <a name='id/BlockNode:00CDBYV4TG002' class='aperas-anchor aperas-id'></a> the visible (non-code) text before the colon must be short — at most 10 words for a space-delimited script, or 20 characters for Japanese (no spaces to count words by). A lead-in term is always short in every real example; a colon only reachable after a long run of ordinary prose is a real English sentence's own internal colon, not a lead-in delimiter — confirmed live that sentence-boundary detection alone doesn't discriminate that case, only length does.",
+    "text": "**Length cap**: the visible (non-code) text before the colon must be short — at most 10 words for a space-delimited script, or 20 characters for Japanese (no spaces to count words by). A lead-in term is always short in every real example; a colon only reachable after a long run of ordinary prose is a real English sentence's own internal colon, not a lead-in delimiter — confirmed live that sentence-boundary detection alone doesn't discriminate that case, only length does.",
     "parent": "BlockNode:00CDC0D590013",
     "type": "listItem",
     "children": []
@@ -2726,7 +2727,7 @@
     "@id": "BlockNode:00CDC0D598001",
     "@type": "BlockNode",
     "title": "**Space after the colon** (space-delimited scripts only)",
-    "text": "**Space after the colon** (space-delimited scripts only): <a name='id/BlockNode:00CDBYV4TG003' class='aperas-anchor aperas-id'></a> a genuine lead-in always reads \"Term: rest\", space included, whereas a technical string that simply never got wrapped in backticks (a bare `aperas://tree/...` URL, a `key:value` pair) almost never has a space right after its own colon. This catches what the inline-code exclusion above can't: a colon that's real data, just not properly fenced as such. Nothing following the colon at all — its own inline content simply ends there, e.g. a lead-in immediately followed only by nested list children, no inline \"rest\" on the same line — counts the same as a space: there's no adjacent non-space character to be suspicious of.",
+    "text": "**Space after the colon** (space-delimited scripts only): a genuine lead-in always reads \"Term: rest\", space included, whereas a technical string that simply never got wrapped in backticks (a bare `aperas://tree/...` URL, a `key:value` pair) almost never has a space right after its own colon. This catches what the inline-code exclusion above can't: a colon that's real data, just not properly fenced as such. Nothing following the colon at all — its own inline content simply ends there, e.g. a lead-in immediately followed only by nested list children, no inline \"rest\" on the same line — counts the same as a space: there's no adjacent non-space character to be suspicious of.",
     "parent": "BlockNode:00CDC0D590013",
     "type": "listItem",
     "children": []
@@ -2735,7 +2736,7 @@
     "@id": "BlockNode:00CDC0D598006",
     "@type": "BlockNode",
     "title": "At ingestion",
-    "text": "At ingestion: <a name='id/BlockNode:00CDBYV4TG008' class='aperas-anchor aperas-id'></a> the target's node id is minted, in the graph only — nothing is written to disk yet. Projecting that block back to the file mirror is what adds an `<a name=\"id/<ID>\" class=\"aperas-anchor aperas-id\">` anchor alongside the block's existing slug-path anchor: appended at line end for a heading; spliced into `text` right after the lead-in colon for a list item or paragraph, leaving the rest of `text` untouched, and only if `text` doesn't already contain that block's own id-anchor (idempotent — re-projecting an already-anchored block doesn't duplicate it). Existing referring links keep resolving against the slug-path anchor unchanged; nothing needs to find or rewrite them. The anchor's `id` attribute itself is not written by this; it's left for the webapp's own future use.",
+    "text": "At ingestion: the target's node id is minted, in the graph only — nothing is written to disk yet. Projecting that block back to the file mirror is what adds an `<a name=\"id/<ID>\" class=\"aperas-anchor aperas-id\">` anchor alongside the block's existing slug-path anchor: appended at line end for a heading; spliced into `text` right after the lead-in colon for a list item or paragraph, leaving the rest of `text` untouched, and only if `text` doesn't already contain that block's own id-anchor (idempotent — re-projecting an already-anchored block doesn't duplicate it). Existing referring links keep resolving against the slug-path anchor unchanged; nothing needs to find or rewrite them. The anchor's `id` attribute itself is not written by this; it's left for the webapp's own future use.",
     "parent": "BlockNode:00CDBYV4TG007",
     "type": "paragraph",
     "children": []
@@ -2817,7 +2818,7 @@
     "@id": "BlockNode:00CDC0DA68009",
     "@type": "BlockNode",
     "title": "The first instinct was a syntactic heuristic",
-    "text": "The first instinct was a syntactic heuristic: <a name='id/BlockNode:00CDBZ76TG007' class='aperas-anchor aperas-id'></a> a heading-derived slug always starts with at least two literal dashes (`slugify` runs on the raw `\"## \"` line, so the `#` markers survive as dashes), which an ordinary anchor essentially never does. But that signal doesn't exist for a list-item-derived lead-in term — `slugify(\"Term\")` is just `\"term\"`, indistinguishable in shape from a plain anchor like `#installation`. Narrowing the pattern further (requiring a `/`, say) would have quietly dropped support for single-segment list-item slugs rather than actually resolving the ambiguity.",
+    "text": "The first instinct was a syntactic heuristic: a heading-derived slug always starts with at least two literal dashes (`slugify` runs on the raw `\"## \"` line, so the `#` markers survive as dashes), which an ordinary anchor essentially never does. But that signal doesn't exist for a list-item-derived lead-in term — `slugify(\"Term\")` is just `\"term\"`, indistinguishable in shape from a plain anchor like `#installation`. Narrowing the pattern further (requiring a `/`, say) would have quietly dropped support for single-segment list-item slugs rather than actually resolving the ambiguity.",
     "parent": "BlockNode:00CDBZ76TG006",
     "type": "listItem",
     "children": []
@@ -2826,7 +2827,7 @@
     "@id": "BlockNode:00CDC0DA6800C",
     "@type": "BlockNode",
     "title": "The first fix was mechanical and uncontroversial",
-    "text": "The first fix was mechanical and uncontroversial: <a name='id/BlockNode:00CDBZ76TR001' class='aperas-anchor aperas-id'></a> stop scanning raw characters and walk the block's actual parsed inline nodes instead, so `inlineCode` is structurally invisible (mirrors `collectLinkCodes`'s own inlineCode skip) and `strong`/`emphasis` are excluded by real node type rather than by counting `**` pairs.",
+    "text": "The first fix was mechanical and uncontroversial: stop scanning raw characters and walk the block's actual parsed inline nodes instead, so `inlineCode` is structurally invisible (mirrors `collectLinkCodes`'s own inlineCode skip) and `strong`/`emphasis` are excluded by real node type rather than by counting `**` pairs.",
     "parent": "BlockNode:00CDBZ76TR000",
     "type": "listItem",
     "children": []
@@ -2885,7 +2886,7 @@
     "@id": "BlockNode:00CDC0DA80005",
     "@type": "BlockNode",
     "title": "The first fix considered was the blunt one",
-    "text": "The first fix considered was the blunt one: <a name='id/BlockNode:00CDBZ76TR009' class='aperas-anchor aperas-id'></a> always re-ingest everything, dropping the hash check entirely. Rejected immediately — it throws away the entire reason the check exists (a large corpus re-parsed on every single `kg:ingest` call, most of it for nothing) to fix a problem that only actually affects a small, identifiable set of artifacts: the ones with an unresolved reference in the first place. A targeted retry needs to know which artifacts those are without re-scanning everything — so a dangling code, instead of being logged and forgotten (the pre-existing behavior), is stashed on its own referring artifact as a `danglingRef` prop, reusing the existing generic props mechanism rather than inventing new storage. After every `kg:ingest` run's main work is done, every artifact with at least one stashed code gets that code retried against the *current* graph; a match forces exactly that one artifact through link resolution again.",
+    "text": "The first fix considered was the blunt one: always re-ingest everything, dropping the hash check entirely. Rejected immediately — it throws away the entire reason the check exists (a large corpus re-parsed on every single `kg:ingest` call, most of it for nothing) to fix a problem that only actually affects a small, identifiable set of artifacts: the ones with an unresolved reference in the first place. A targeted retry needs to know which artifacts those are without re-scanning everything — so a dangling code, instead of being logged and forgotten (the pre-existing behavior), is stashed on its own referring artifact as a `danglingRef` prop, reusing the existing generic props mechanism rather than inventing new storage. After every `kg:ingest` run's main work is done, every artifact with at least one stashed code gets that code retried against the *current* graph; a match forces exactly that one artifact through link resolution again.",
     "parent": "BlockNode:00CDBZ76TR008",
     "type": "listItem",
     "children": []
@@ -2894,7 +2895,7 @@
     "@id": "BlockNode:00CDC0DA80007",
     "@type": "BlockNode",
     "title": "One retry pass, not a loop to a fixed point",
-    "text": "One retry pass, not a loop to a fixed point: <a name='id/BlockNode:00CDBZ76TR00B' class='aperas-anchor aperas-id'></a> artifact A's own retry unblocking artifact B, whose retry then unblocks artifact C, is possible in principle but not a real pattern this corpus (or a documentation corpus in general) produces — a single sweep after the main ingestion work catches every case actually seen, and a longer chain can be revisited if one ever shows up in practice.",
+    "text": "One retry pass, not a loop to a fixed point: artifact A's own retry unblocking artifact B, whose retry then unblocks artifact C, is possible in principle but not a real pattern this corpus (or a documentation corpus in general) produces — a single sweep after the main ingestion work catches every case actually seen, and a longer chain can be revisited if one ever shows up in practice.",
     "parent": "BlockNode:00CDBZ76TR008",
     "type": "listItem",
     "children": []
@@ -2919,7 +2920,7 @@
       }
     ],
     "title": "The fix",
-    "text": "The fix: <a name='id/BlockNode:00CDBZ76TR00F' class='aperas-anchor aperas-id'></a> treat \"nothing left in this text run\" as satisfying the space-after-colon check, the same as an actual space. This doesn't touch the two guards that already run first and stay exactly as strict as before — a colon inside `inlineCode`/`code` is still never a candidate at all, and a colon inside `strong`/`emphasis` still never qualifies — only a colon that's already passed both of those is affected. Accepted as a known, deliberate side effect: a colon immediately followed by a *different* inline node with no space (`` note:**bold** ``) now also passes, since that colon's own text run ends the same way a genuinely-safe one does. Not treated as a real regression — matches the feature's existing best-effort, user-correctable philosophy ([Manual titles turned out to be the wrong fix](#id/BlockNode:00CDBZ76TR006)) rather than staying maximally strict at the cost of a real, common case — a lead-in immediately followed by nested children, the exact shape this concern's own docs use throughout — going untitled.",
+    "text": "The fix: treat \"nothing left in this text run\" as satisfying the space-after-colon check, the same as an actual space. This doesn't touch the two guards that already run first and stay exactly as strict as before — a colon inside `inlineCode`/`code` is still never a candidate at all, and a colon inside `strong`/`emphasis` still never qualifies — only a colon that's already passed both of those is affected. Accepted as a known, deliberate side effect: a colon immediately followed by a *different* inline node with no space (`` note:**bold** ``) now also passes, since that colon's own text run ends the same way a genuinely-safe one does. Not treated as a real regression — matches the feature's existing best-effort, user-correctable philosophy ([Manual titles turned out to be the wrong fix](#id/BlockNode:00CDBZ76TR006)) rather than staying maximally strict at the cost of a real, common case — a lead-in immediately followed by nested children, the exact shape this concern's own docs use throughout — going untitled.",
     "parent": "BlockNode:00CDBZ76TR00E",
     "type": "listItem",
     "children": []
@@ -11124,7 +11125,7 @@
       }
     ],
     "title": "**Dissolution when orphaned** — nothing precedes the list at all",
-    "text": "**Dissolution when orphaned** — nothing precedes the list at all: <a name='id/BlockNode:00CE32GQMG000' class='aperas-anchor aperas-id'></a> not a separate node, not even a mergeable leading paragraph (a code block or blockquote sits directly above it, or the list is the first content with nothing before it). The list still dissolves: its items become flat children of the true structural parent, at the position the list itself occupied among its siblings. There is no case under this law where a bare, unaddressable `list` node is the correct outcome, and none remain live in the corpus — fully implemented and migrated, see [History](../history/list-consumption.md#id/BlockNode:00CE32GW3G002).",
+    "text": "**Dissolution when orphaned** — nothing precedes the list at all: not a separate node, not even a mergeable leading paragraph (a code block or blockquote sits directly above it, or the list is the first content with nothing before it). The list still dissolves: its items become flat children of the true structural parent, at the position the list itself occupied among its siblings. There is no case under this law where a bare, unaddressable `list` node is the correct outcome, and none remain live in the corpus — fully implemented and migrated, see [History](../history/list-consumption.md#id/BlockNode:00CE32GW3G002).",
     "parent": "BlockNode:00CE32GQM8008",
     "type": "listItem",
     "children": [
@@ -20962,8 +20963,8 @@
         "value": "1"
       }
     ],
-    "title": "00CF80TVJG002",
-    "text": "**Bug 1 — the Bash trigger matched the project's own name**: <a name='id/BlockNode:00CF6R1KP8003' class='aperas-anchor aperas-id'></a> `Bash(*aperas*)` was meant to open the gate on a real `aperas` invocation, but the repository itself is named `Aperas`, so any `find`/`ls`/`grep` command that merely touches a path under it also matches. Confirmed by the marker file's own mtime landing 3–4 seconds after a session's very first `find` call — long before any `Read` of graph content, let alone a real orientation. Fixed by anchoring to the actual invocation shape, `Bash(npm run aperas -- *)`.",
+    "title": "**Bug 1 — the Bash trigger matched the project's own name**",
+    "text": "**Bug 1 — the Bash trigger matched the project's own name**: `Bash(*aperas*)` was meant to open the gate on a real `aperas` invocation, but the repository itself is named `Aperas`, so any `find`/`ls`/`grep` command that merely touches a path under it also matches. Confirmed by the marker file's own mtime landing 3–4 seconds after a session's very first `find` call — long before any `Read` of graph content, let alone a real orientation. Fixed by anchoring to the actual invocation shape, `Bash(npm run aperas -- *)`.",
     "parent": "BlockNode:00CF80TVJG001",
     "type": "listItem",
     "children": []
@@ -20971,8 +20972,8 @@
   {
     "@id": "BlockNode:00CF80TVJR000",
     "@type": "BlockNode",
-    "title": "00CF80TVJR000",
-    "text": "**Bug 2 — the gated path was never the path actually used**: <a name='id/BlockNode:00CF6R1KP8004' class='aperas-anchor aperas-id'></a> `AperasKG` is a symlink whose real target, `/home/will/source/AperasKG`, sits *outside* the project root as a sibling, not nested under it. A relative `if` pattern resolves against `<cwd>/AperasKG/**`, but every real `Read` call resolved through the symlink and used the target path directly — a different absolute path that pattern can never match. The rule was dead the day it was written; confirmed by running the identical `Read` through both path forms under `--debug hooks` and watching one skip and the other fire. Fixed with an absolute-anchored `//`-pattern naming the real location, kept alongside the harmless, still-inert relative one.",
+    "title": "**Bug 2 — the gated path was never the path actually used**",
+    "text": "**Bug 2 — the gated path was never the path actually used**: `AperasKG` is a symlink whose real target, `/home/will/source/AperasKG`, sits *outside* the project root as a sibling, not nested under it. A relative `if` pattern resolves against `<cwd>/AperasKG/**`, but every real `Read` call resolved through the symlink and used the target path directly — a different absolute path that pattern can never match. The rule was dead the day it was written; confirmed by running the identical `Read` through both path forms under `--debug hooks` and watching one skip and the other fire. Fixed with an absolute-anchored `//`-pattern naming the real location, kept alongside the harmless, still-inert relative one.",
     "parent": "BlockNode:00CF80TVJG001",
     "type": "listItem",
     "children": []
@@ -20980,8 +20981,8 @@
   {
     "@id": "BlockNode:00CF80TVJR001",
     "@type": "BlockNode",
-    "title": "00CF80TVJR001",
-    "text": "**Bug 3 — a stale decoy sat at an ungated path**: <a name='id/BlockNode:00CF6R1KP8005' class='aperas-anchor aperas-id'></a> `skills/aperas-workspace/kg-clone/` — a disposable, gitignored eval-sandbox clone of the whole graph, reproducible via `graph-sandbox.sh` — held copies of the same filenames at a path neither rule covered, so an agent exploring with `find`/`ls` could wander in and read from there with none of the gate's discipline attached. It was not even current: it predated this session's own `cli.md`/`core.md` split. Removed outright.",
+    "title": "**Bug 3 — a stale decoy sat at an ungated path**",
+    "text": "**Bug 3 — a stale decoy sat at an ungated path**: `skills/aperas-workspace/kg-clone/` — a disposable, gitignored eval-sandbox clone of the whole graph, reproducible via `graph-sandbox.sh` — held copies of the same filenames at a path neither rule covered, so an agent exploring with `find`/`ls` could wander in and read from there with none of the gate's discipline attached. It was not even current: it predated this session's own `cli.md`/`core.md` split. Removed outright.",
     "parent": "BlockNode:00CF80TVJG001",
     "type": "listItem",
     "children": []
@@ -20989,8 +20990,8 @@
   {
     "@id": "BlockNode:00CF80TVJR002",
     "@type": "BlockNode",
-    "title": "00CF80TVJR002",
-    "text": "**What actually found these — not reasoning about VS Code, a real headless run with hook tracing**: <a name='id/BlockNode:00CF6R1KP8006' class='aperas-anchor aperas-id'></a> `claude -p \"<prompt>\" --debug hooks --debug-file <path>` runs one real session and logs every hook match, skip, and the exact JSON decision returned. Guessing at Bug 2 by reasoning about the VS Code extension's process lifecycle produced a plausible but wrong diagnosis (a stale-process theory, \"restart VS Code\" — which changed nothing); the debug trace found the actual cause in one run.",
+    "title": "**What actually found these — not reasoning about VS Code, a real headless run with hook tracing**",
+    "text": "**What actually found these — not reasoning about VS Code, a real headless run with hook tracing**: `claude -p \"<prompt>\" --debug hooks --debug-file <path>` runs one real session and logs every hook match, skip, and the exact JSON decision returned. Guessing at Bug 2 by reasoning about the VS Code extension's process lifecycle produced a plausible but wrong diagnosis (a stale-process theory, \"restart VS Code\" — which changed nothing); the debug trace found the actual cause in one run.",
     "parent": "BlockNode:00CF80TVJG001",
     "type": "listItem",
     "children": []
@@ -20998,8 +20999,8 @@
   {
     "@id": "BlockNode:00CF80TVJR003",
     "@type": "BlockNode",
-    "title": "00CF80TVJR003",
-    "text": "**The example that was tested, kept here since the file itself doesn't survive**: <a name='id/BlockNode:00CF6R1KP8007' class='aperas-anchor aperas-id'></a> `.claude/settings.local.json` is personal and gitignored by design, so this is its only durable record.",
+    "title": "**The example that was tested, kept here since the file itself doesn't survive**",
+    "text": "**The example that was tested, kept here since the file itself doesn't survive**: `.claude/settings.local.json` is personal and gitignored by design, so this is its only durable record.",
     "parent": "BlockNode:00CF80TVJG001",
     "type": "listItem",
     "children": [
@@ -21035,7 +21036,7 @@
       }
     ],
     "title": "**Why this was retired rather than kept running**",
-    "text": "**Why this was retired rather than kept running**: <a name='id/BlockNode:00CF6R1KP8008' class='aperas-anchor aperas-id'></a> three bugs surfaced across two rounds of testing, on a mechanism that is inherently personal, machine-specific (its own fix hardcodes an absolute path), and invisible to anyone who didn't set it up themselves. [Promoted to a v1.3 delta](#id/BlockNode:00CF80MKFG001): the next attempt trades a hard mechanical gate for a soft, one-time consent question the skill asks itself, with the answer remembered durably instead of mechanically enforced.",
+    "text": "**Why this was retired rather than kept running**: three bugs surfaced across two rounds of testing, on a mechanism that is inherently personal, machine-specific (its own fix hardcodes an absolute path), and invisible to anyone who didn't set it up themselves. [Promoted to a v1.3 delta](#id/BlockNode:00CF80MKFG001): the next attempt trades a hard mechanical gate for a soft, one-time consent question the skill asks itself, with the answer remembered durably instead of mechanically enforced.",
     "parent": "BlockNode:00CF80TVJG001",
     "type": "listItem",
     "children": []
@@ -28329,7 +28330,10 @@
       "BlockNode:00CJ2TVGBR001",
       "BlockNode:00CJ2TVGC0000",
       "BlockNode:00CJ2TVGC0001",
-      "BlockNode:00CJ2TVGC0002"
+      "BlockNode:00CJ2TVGC0002",
+      "BlockNode:00CJ6VK7PR001",
+      "BlockNode:00CJ6VKG8G001",
+      "BlockNode:00CJ6VKRS8001"
     ]
   },
   {
@@ -28339,11 +28343,7 @@
     "parent": "BlockNode:00CJ2TCV40001",
     "type": "heading",
     "children": [
-      "BlockNode:00CJ2V5K2G001",
-      "BlockNode:00CJ2V5K2R000",
-      "BlockNode:00CJ2V5K2R001",
-      "BlockNode:00CJ2V5K2R002",
-      "BlockNode:00CJ2V5K2R003"
+      "BlockNode:00CJ69H0T0001"
     ]
   },
   {
@@ -28362,7 +28362,15 @@
       "BlockNode:00CJ2V1YAR007",
       "BlockNode:00CJ2V1YAR008",
       "BlockNode:00CJ2V1YAR009",
-      "BlockNode:00CJ2V1YAR00A"
+      "BlockNode:00CJ2V1YAR00A",
+      "BlockNode:00CJ2V5K2G001",
+      "BlockNode:00CJ2V5K2R000",
+      "BlockNode:00CJ2V5K2R001",
+      "BlockNode:00CJ2V5K2R002",
+      "BlockNode:00CJ2V5K2R003",
+      "BlockNode:00CJ69EA7G001",
+      "BlockNode:00CJ69GNM0001",
+      "BlockNode:00CJ6SVHX8001"
     ]
   },
   {
@@ -28513,8 +28521,24 @@
   {
     "@id": "BlockNode:00CJ2TVGC0002",
     "@type": "BlockNode",
-    "title": "00CJ2TVGC0002",
-    "text": "Design, Issues, Planning and History are not written yet — nothing has been built.",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ2TVGC0002:links:Link:00CJ6VK09R000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6TGSX8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ2TVGC0002:links:Link:00CJ6VK09R000:props:StringProp:00CJ6VK09R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Design**",
+    "text": "**Design**: [the settled architecture, topology and workflows](../design/webapp.md#id/BlockNode:00CJ6TGSX8001) — normative current state, with the reasoning for each decision left here.",
     "parent": "BlockNode:00CJ2TCV40002",
     "type": "listItem",
     "children": []
@@ -28621,16 +28645,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CJ2V1YAR006:links:Link:00CJ2W4WBG001:props:StringProp:00CJ2W4WBG002",
+            "@id": "BlockNode:00CJ2V1YAR006:links:Link:00CJ2W4WBG001:props:StringProp:00CJ68ZGEG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "192"
+            "value": "170"
           }
         ]
       }
     ],
     "title": "**Links render at two sites sharing one identity**",
-    "text": "**Links render at two sites sharing one identity**: a superscript marker at the link text inside the block's own prose, and an endnote entry in the link list after the children — the position [`aperas tree --view`](../design/treeview.md#id/BlockNode:00CE1GW4YG004) already puts it in. Wikipedia's scheme exactly: `cite-ref-<linkId>` and `cite-note-<linkId>`, with click-through from marker to endnote and a back-caret returning to the marker.",
+    "text": "**Links render at two sites sharing one identity**: the link's own text inside the block's prose, and an endnote entry in the link list after the children — the position [`aperas tree --view`](../design/treeview.md#id/BlockNode:00CE1GW4YG004) already puts it in. Wikipedia's `cite-ref`/`cite-note` scheme, minus the superscript marker: Wikipedia needs `[1]` because a citation has no visible text of its own, whereas a wikilink already carries the words the reader is looking at, so the link text *is* the marker — it holds `cite-ref-<linkId>-<n>`, jumps to the endnote on click, and is what the endnote's back-caret returns to. What a marker would otherwise have signalled — that an endnote exists below — is carried by styling instead: a wikilink that resolved to a graph node is styled as one, a dangling one is not, which is a distinction worth showing in its own right.",
     "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
@@ -28638,8 +28662,8 @@
   {
     "@id": "BlockNode:00CJ2V1YAR007",
     "@type": "BlockNode",
-    "title": "**Hovering a marker previews, and can promote**",
-    "text": "**Hovering a marker previews, and can promote**: the popover shows the rule-a preview and offers an unfold control that adds the `Link` itself to `unfolds` — which is what makes the endnote below expand. One source of truth; the popover has no fold state of its own.",
+    "title": "**Hovering a link previews, and can promote**",
+    "text": "**Hovering a link previews, and can promote**: the popover shows the rule-a preview and offers an unfold control that adds the `Link` itself to `unfolds` — which is what makes the endnote below expand. One source of truth; the popover has no fold state of its own. The hover target is the link text itself rather than a separate glyph, so the reader hovers the words already being read.",
     "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
@@ -28655,16 +28679,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CJ2V1YAR008:links:Link:00CJ2W4WB8001:props:StringProp:00CJ2W4WBG000",
+            "@id": "BlockNode:00CJ2V1YAR008:links:Link:00CJ2W4WB8001:props:StringProp:00CJ6906CR000",
             "@type": "StringProp",
             "key": "position",
-            "value": "120"
+            "value": "226"
           }
         ]
       }
     ],
     "title": "**Both sites obey canonical position rather than re-deriving it**",
-    "text": "**Both sites obey canonical position rather than re-deriving it**: a link whose target is canonical elsewhere shows the [`[*see <path>]` pointer](../design/treeview.md#id/BlockNode:00CE1GW4YG006) and a jump, never a duplicate preview; an upward link renders as `(outside view)` and offers a zoom instead.",
+    "text": "**Both sites obey canonical position rather than re-deriving it**: how a link's target renders is not a property of the link — it is a property of where that target's structural home sits relative to the current render, which [canonical position](../design/treeview.md#id/BlockNode:00CE1GW4YG006) already decides. Three states. The home is nowhere in the render, and the link renders the target itself — a rule-a preview folded, rule-b one level unfolded. The home is in the render, even as a bare title-only breadcrumb, and the link collapses to the `[*see <path>]` pointer plus a jump, never a second copy of the body. The target sits above the apex, and it renders as `(outside view)` plus a zoom-out. Obeying rather than re-deriving is aimed at a specific temptation: the popover and the endnote are two code paths, and each will locally find it easy to just show the target, at which point the two can disagree with each other and with `aperas tree` while nothing looks broken. Both must read one shared verdict. It also makes link-following cycle-safe for free, so the UI needs no visited set of its own.",
     "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
@@ -28720,45 +28744,45 @@
         "value": "1"
       }
     ],
-    "title": "**Transport is undecided**",
-    "text": "**Transport is undecided**: three options, laid out in Freeflow below. A separate HTTP-to-socket bridge leaves the service untouched but adds a third process; an HTTP listener inside the service is one hop and one lifecycle but widens a surface that today has no auth at all; a Node-hosted shell removes the wire entirely at the cost of a much larger delivery story and a two-writer hazard.",
-    "parent": "BlockNode:00CJ2TESY0001",
+    "title": "**Transport: an HTTP listener inside the ApeironNgn service**",
+    "text": "**Transport: an HTTP listener inside the ApeironNgn service**: the UI has to show the Agent's deep writes as they land, and live notification can only honestly originate in the service — it is the sole writer and the only thing that knows when the store changed, so a separate bridge cannot push what the protocol never tells it. That decides it against the bridge, and a Node-hosted shell is out on delivery cost and on the two-writer hazard besides. The unix socket stays exactly as it is for CLI callers; the listener is an addition beside it, not a replacement for it.",
+    "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ2V5K2R000",
     "@type": "BlockNode",
-    "title": "00CJ2V5K2R000",
-    "text": "**Does the UI need to see the Agent's deep writes as they land?** This is what actually decides the transport question. Live notification can only honestly originate in the service, which is the sole writer and the only thing that knows when the store changed — a bridge cannot push what the protocol never tells it. If manual refresh after a handoff is acceptable, the bridge wins; if not, the in-service listener earns its complexity immediately.",
-    "parent": "BlockNode:00CJ2TESY0001",
+    "title": "**Change notification is a bare tick, not a delta**",
+    "text": "**Change notification is a bare tick, not a delta**: the service pushes *the store changed* and the UI refetches its current apex. The UI renders a view's `unfolds` set rather than a document with cursor state, so there is nothing a per-node delta would preserve that a refetch loses, and no delta format has to be invented to find that out. Carried over SSE — one-directional, no framing library, trivially proxied — which is a second protocol shape alongside today's one-request-per-connection NDJSON rather than a reuse of it.",
+    "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ2V5K2R001",
     "@type": "BlockNode",
-    "title": "00CJ2V5K2R001",
-    "text": "**How is a deep write handed to the Agent?** Composing an intent and handing it off could be a copied prompt, an MCP endpoint, or an embedded chat pane. Unexamined.",
-    "parent": "BlockNode:00CJ2TESY0001",
+    "title": "**Deep-write handoff is Phase 2+**",
+    "text": "**Deep-write handoff is Phase 2+**: composing an intent and handing it to the Agent — a copied prompt, an MCP endpoint, an embedded chat pane — is out of the first phase entirely, unexamined rather than decided against. That pins Phase 1's whole write surface to one thing: an in-place edit of the current node's own text, which is an ordinary `update --text-only` over the same channel.",
+    "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ2V5K2R002",
     "@type": "BlockNode",
-    "title": "**One link cited twice in the same block**",
-    "text": "**One link cited twice in the same block**: Wikipedia answers this with `^ a b` back-references from a single endnote. Whether the render tree even distinguishes two marker positions for one `Link` is unchecked.",
-    "parent": "BlockNode:00CJ2TESY0001",
+    "title": "**One link cited twice in the same block is already the stored shape**",
+    "text": "**One link cited twice in the same block is already the stored shape**: resolution groups a block's wikilinks by distinct *target* (`positionsByTarget`, in `apeironNgn/artifacts.ts`), so one `Link` carries one `position` prop per occurrence, and identity is the target alone — position is metadata on that identity, which is why two occurrences that merely swap order still count as a real change. Wikipedia's `^ a b` is therefore nothing to add: one endnote per `Link`, one back-reference per `position`, and those positions are exactly the link-text occurrences that serve as the markers.",
+    "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CJ2V5K2R003",
     "@type": "BlockNode",
-    "title": "**Projection anchors in stored text**",
-    "text": "**Projection anchors in stored text**: ingested block text carries `<a name='id/...' class='aperas-anchor aperas-id'>` spans. How the UI renders around them — and what an in-place text edit must preserve — is unexamined.",
-    "parent": "BlockNode:00CJ2TESY0001",
+    "title": "**The UI's text input is the ingestion input**",
+    "text": "**The UI's text input is the ingestion input**: no projection anchor has to be preserved across an in-place edit, because none of them are stored. A heading's tree-anchors are scooped into the `treeAnchor` prop and stripped from its title at parse; the `aperas-id` anchor is generated fresh at projection time and never written back; and `stripInlineAnchors` runs at the point of storage itself, so an anchor cannot enter a block's stored text through ingestion or through `update`/`insert` either. The editor therefore round-trips plain authored markdown — the same text the `.md` file carried before projection spliced anything into it.",
+    "parent": "BlockNode:00CJ2TESY0002",
     "type": "listItem",
     "children": []
   },
@@ -28779,8 +28803,8 @@
         "value": "1"
       }
     ],
-    "title": "00CJ2VBQR0001",
-    "text": "**Code inventory, 2026-09-17.** `packages/web` is the unmodified Vite+Solid scaffold — `App.tsx`, `index.tsx`, two CSS files, nothing else. It declares `@aperas/core` as a dependency and imports it nowhere, which is just as well: 14 files under `packages/core/src` import `node:fs`, `node:path` or `oxigraph`, so core cannot be bundled for a browser at all. That dependency is a scaffold leftover and should move to whatever host actually runs the engine.",
+    "title": "**`packages/web`'s code inventory, 2026-09-17**",
+    "text": "**`packages/web`'s code inventory, 2026-09-17**: the unmodified Vite+Solid scaffold — `App.tsx`, `index.tsx`, two CSS files, nothing else. It declares `@aperas/core` as a dependency and imports it nowhere, which is just as well: 14 files under `packages/core/src` import `node:fs`, `node:path` or `oxigraph`, so core cannot be bundled for a browser at all. That dependency is a scaffold leftover and should move to whatever host actually runs the engine.",
     "parent": "BlockNode:00CJ2TESY0003",
     "type": "listItem",
     "children": []
@@ -28788,8 +28812,8 @@
   {
     "@id": "BlockNode:00CJ2VBQR0002",
     "@type": "BlockNode",
-    "title": "00CJ2VBQR0002",
-    "text": "**The renderer is already split where the UI needs it split.** `renderTreeWithView` in `packages/core/src/apeironNgn/node.ts` runs two passes: `discoverCone` builds a render *plan* (`ConeInfo` — which ids are unfolded in this cone, which links escape it, which nested cone each escaping link spawned, the shared canonical/attempt maps) and only then does `emitNode`/`emitLinkLine` flatten it to `string[]`. Pass 1 is exactly what a UI wants; pass 2 is the only part that assumes text.",
+    "title": "**The renderer already splits plan from text**",
+    "text": "**The renderer already splits plan from text**: `renderTreeWithView` in `packages/core/src/apeironNgn/node.ts` runs two passes: `discoverCone` builds a render *plan* (`ConeInfo` — which ids are unfolded in this cone, which links escape it, which nested cone each escaping link spawned, the shared canonical/attempt maps) and only then does `emitNode`/`emitLinkLine` flatten it to `string[]`. Pass 1 is exactly what a UI wants; pass 2 is the only part that assumes text.",
     "parent": "BlockNode:00CJ2TESY0003",
     "type": "listItem",
     "children": []
@@ -28797,8 +28821,8 @@
   {
     "@id": "BlockNode:00CJ2VBQR0003",
     "@type": "BlockNode",
-    "title": "00CJ2VBQR0003",
-    "text": "**Proposed shape of the structured render.** A `buildRenderTree(...)` returning a tree of render items — for a node: id, display label, title, abstract, tier, hidden count, and the starred / tombstoned / holder flags; for a link: link id, predicate, target id, title, abstract, a mode of `preview` / `expanded` / `pointer` / `outside-view`, the pointer target or zoom path where those apply, and its own children and links. Today's text output becomes `toText(buildRenderTree(...))`, which keeps the existing verification suite as the guarantee that the refactor changed nothing — the text render must stay byte-identical. A `format` discriminator on the existing `tree` service op carries it to a caller.",
+    "title": "**Proposed shape of the structured render**",
+    "text": "**Proposed shape of the structured render**: A `buildRenderTree(...)` returning a tree of render items — for a node: id, display label, title, abstract, tier, hidden count, and the starred / tombstoned / holder flags; for a link: link id, predicate, target id, title, abstract, a mode of `preview` / `expanded` / `pointer` / `outside-view`, the pointer target or zoom path where those apply, and its own children and links. Today's text output becomes `toText(buildRenderTree(...))`, which keeps the existing verification suite as the guarantee that the refactor changed nothing — the text render must stay byte-identical. A `format` discriminator on the existing `tree` service op carries it to a caller.",
     "parent": "BlockNode:00CJ2TESY0003",
     "type": "listItem",
     "children": []
@@ -28806,8 +28830,8 @@
   {
     "@id": "BlockNode:00CJ2VBQR0004",
     "@type": "BlockNode",
-    "title": "**The transport comparison in full.** *A separate bridge*",
-    "text": "**The transport comparison in full.** *A separate bridge*: the service changes not at all — NDJSON over a unix socket, single-writer discipline, lock file, code-fingerprint check and conflict reporting all untouched — and the bridge can reuse `serviceClient`'s own spawn helpers, keep the socket filesystem-scoped, and host web-only concerns that should never enter the engine protocol. Against it: a third process alongside the service and the dev server, one connection per request per hop given the protocol is one-request-per-connection, a duplicated slice of error handling, and no answer yet for who starts it in a packaged build. *An in-service listener*: one process, one lifecycle, one hop, conflict and fingerprint reports reaching the browser verbatim from where they are produced, and the only honest origin for change notification. Against it: the service today binds a unix socket with filesystem permissions and no auth whatsoever, so a TCP listener needs origin checking and probably a token before it is safe against any page in the browser — a design task, not a flag — and it further entrenches `packages/cli` owning the service. *A Node-hosted shell*: no wire at all, deep read as a function call, and `@aperas/core` in the UI's dependencies finally honest. Against it: much the largest delivery story, against a repo whose packaging concern is still open; it forecloses opening the UI in a browser; Tauri reintroduces a bridge under another name while Electron ships Chromium; and a shell embedding core in-process while a CLI service also runs gives two writers to one mirror, which is the single thing the service exists to prevent — unless the shell simply is the service, which is the in-service listener again.",
+    "title": "**The transport comparison in full**",
+    "text": "**The transport comparison in full**: *A separate bridge*: the service changes not at all — NDJSON over a unix socket, single-writer discipline, lock file, code-fingerprint check and conflict reporting all untouched — and the bridge can reuse `serviceClient`'s own spawn helpers, keep the socket filesystem-scoped, and host web-only concerns that should never enter the engine protocol. Against it: a third process alongside the service and the dev server, one connection per request per hop given the protocol is one-request-per-connection, a duplicated slice of error handling, and no answer yet for who starts it in a packaged build. *An in-service listener*: one process, one lifecycle, one hop, conflict and fingerprint reports reaching the browser verbatim from where they are produced, and the only honest origin for change notification. Against it: the service today binds a unix socket with filesystem permissions and no auth whatsoever, so a TCP listener needs origin checking and probably a token before it is safe against any page in the browser — a design task, not a flag — and it further entrenches `packages/cli` owning the service. *A Node-hosted shell*: no wire at all, deep read as a function call, and `@aperas/core` in the UI's dependencies finally honest. Against it: much the largest delivery story, against a repo whose packaging concern is still open; it forecloses opening the UI in a browser; Tauri reintroduces a bridge under another name while Electron ships Chromium; and a shell embedding core in-process while a CLI service also runs gives two writers to one mirror, which is the single thing the service exists to prevent — unless the shell simply is the service, which is the in-service listener again.",
     "parent": "BlockNode:00CJ2TESY0003",
     "type": "listItem",
     "children": []
@@ -28815,8 +28839,8 @@
   {
     "@id": "BlockNode:00CJ2VBQR0005",
     "@type": "BlockNode",
-    "title": "00CJ2VBQR0005",
-    "text": "**Write-path footguns the UI must hide.** The input rules are per node type and unforgiving: an existing list item takes bare text with no bullet marker, or `update` replaces its children with a nested list; a heading needs `--text-only`, or reconciliation tombstones its subtree from an empty body. A single `updateText(id, text)` on the host side should pick the right form per type so the UI never encodes any of it. The per-artifact link sweep the service already runs after every write, and the known failure where a write reports links resolved but persists none, both have to surface in the UI rather than being swallowed.",
+    "title": "**Write-path footguns the UI must hide**",
+    "text": "**Write-path footguns the UI must hide**: The input rules are per node type and unforgiving: an existing list item takes bare text with no bullet marker, or `update` replaces its children with a nested list; a heading needs `--text-only`, or reconciliation tombstones its subtree from an empty body. A single `updateText(id, text)` on the host side should pick the right form per type so the UI never encodes any of it. The per-artifact link sweep the service already runs after every write, and the known failure where a write reports links resolved but persists none, both have to surface in the UI rather than being swallowed.",
     "parent": "BlockNode:00CJ2TESY0003",
     "type": "listItem",
     "children": []
@@ -30090,6 +30114,1315 @@
     "title": "00CJ5FATY8003",
     "text": "Graph-tree merge mechanics (what \"a member graph merges into its team graph\" actually does at the node/id level), and how upward `aperas.config.json` discovery behaves when none exists at all. See [Settled: graph discovery](#id/BlockNode:00CDHSCK8R001) below.",
     "parent": "BlockNode:00CJ5ET5Z8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ69EA7G001",
+    "@type": "BlockNode",
+    "title": "**The canonical-position verdict moves into `@aperas/core`**",
+    "text": "**The canonical-position verdict moves into `@aperas/core`**: that computation lives inside the CLI's tree renderer today, so obeying it from the webapp means extracting it as a pure function over a view's `unfolds` set, the current apex and a node, returning the render verdict — with the CLI renderer becoming its first consumer rather than its owner. Both of the webapp's two link sites then read the same function the CLI reads, which is what makes \"obey rather than re-derive\" enforceable instead of merely intended.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ69GNM0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ69GNM0001:props:StringProp:00CJ69GQZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ69GNM0001:props:StringProp:00CJ69GQZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Auth for the in-service listener**",
+    "text": "**Auth for the in-service listener**: the threat is the browser, not the network — once the service listens on TCP, any page the user has open can reach it, and CORS does not stop a simple cross-origin POST from being *sent*, only from being read. Five controls, all cheap. The listener serves an explicit op allowlist — deep read plus `update --text-only` on one node — rather than proxying the whole service protocol; this bounds the damage of every other failure and is the one decision that is hard to retrofit. Every request carries a custom `X-Aperas-Token` header, which forces a CORS preflight and so stops a cross-origin request from ever being sent, independent of the token's value. The listener binds `127.0.0.1` explicitly, never `0.0.0.0`. The token is a per-run `randomBytes(32)` written into the existing run directory beside the lock and socket at mode 0600 — already the trust anchor for the socket, so no new secret-storage story — read by the dev server, which runs as the same user, and compared with `timingSafeEqual`. `Host` is rejected unless it is the loopback address, which is the specific anti-DNS-rebinding control, and `Origin` is allowlisted as defence in depth, never reflected back. TLS on loopback, accounts and request signing buy nothing against this threat model.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ69H0T0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ69H0T0001:props:StringProp:00CJ69H2W0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ69H0T0001:props:StringProp:00CJ69H2W0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Whether the tree renderer surfaces every position of a multi-position `Link`**",
+    "text": "**Whether the tree renderer surfaces every position of a multi-position `Link`**: the graph carries one `position` per occurrence, but whether `aperas tree --view` renders such a link once or once per position is unchecked. A renderer question rather than a model one, and the webapp's endnote back-references need the same answer.",
+    "parent": "BlockNode:00CJ2TESY0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6G02D0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6G02D0001:links:Link:00CJ6G04S8001",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T800H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6G02D0001:links:Link:00CJ6G04S8001:props:StringProp:00CJ6G04S8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "496"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6G02D0001:props:StringProp:00CJ6G04S0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6G02D0001:props:StringProp:00CJ6G04S8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**2026-09-18: legacy `aperas-id` anchors swept from stored text**",
+    "text": "**2026-09-18: legacy `aperas-id` anchors swept from stored text**: 49 live blocks still carried an inline `<a name='id/...' class='aperas-anchor aperas-id'></a>` tag inside their own stored `text` — a remnant of the earlier convention that kept the anchor as literal content, left behind when that switched to scooping a heading's anchor into the `treeAnchor` prop and stripping a list item/paragraph's at the point of storage (`astParser.ts`'s `stripInlineAnchors` call in `convertAstNode`; see [Anchors](../design/linking.md#id/BlockNode:00CDBYV4T800H)). Every affected block predates that fix and none created after it were affected, confirming the write path has been correct since. Swept by piping each block's own stored text back through `aperas update --text-only`, so the strip was performed by the engine's own function rather than by hand, then verified byte-for-byte against independently computed expected output: 0 unquoted anchors left corpus-wide, with no change to any block's type, parent, children or link count. 35 of the tags named their own block's id and were invisible in projection, since `project.ts`'s `hasIdAnchor` idempotency check suppressed the fresh splice; 14 named *another* block's id — the fingerprint of content copied out of an already-projected file — and rendered as a visibly doubled anchor. All were inert for resolution, because `resolveFragmentCode` routes an `id/` fragment straight to the direct-id tier without ever consulting `candidateCarriesAnchor`, but not harmless: five blocks in `discussion/aperas-skill.md` had been falling back to a bare-id title because the tag sat between their lead-in colon and the rest, blocking lead-in derivation. All five derive correctly now.",
+    "parent": "BlockNode:00CDBZ7698003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6SRT50001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6SRT50001:links:Link:00CJ6SRXAG002",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2V5K2R000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6SRT50001:links:Link:00CJ6SRXAG002:props:StringProp:00CJ6SRXAG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "784"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6SRT50001:props:StringProp:00CJ6SRXAG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6SRT50001:props:StringProp:00CJ6SRXAG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The tick stream is consumed with `fetch()` + `ReadableStream`, not `EventSource`**",
+    "text": "**The tick stream is consumed with `fetch()` + `ReadableStream`, not `EventSource`**: `EventSource` cannot set a request header at all — its constructor takes a URL and `withCredentials`, nothing else — so it could carry the token only as a cookie, which is ambient and reintroduces exactly the CSRF shape the custom header exists to prevent, or as a URL ticket, which adds an issuance endpoint and an expiry store. It also collapses every failure into one opaque `onerror`, so a 401 is indistinguishable from a restart; that is a real defect here rather than a nuisance, because the token is per-run and the service restarts constantly in development. What `EventSource` gives in exchange is reconnection, backoff and `Last-Event-ID` resumption — and resumption is worthless against [a bare tick](#id/BlockNode:00CJ2V5K2R000), since a missed tick is not a lost update: the next one refetches everything, and reconnecting refetches unconditionally. That leaves a reconnect loop of a few lines, which we would want to own anyway to refetch on reconnect and pause while the tab is hidden. With `EventSource` out, SSE's wire format stops earning its keep — it exists to be parsed by `EventSource` — so the stream carries NDJSON, already the service's framing on the unix socket, rather than adding a second wire format to the codebase.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6SVHX8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6SVHX8001:links:Link:00CJ6SVM60002",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2V5K2R000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6SVHX8001:links:Link:00CJ6SVM60002:props:StringProp:00CJ6SVM60003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "784"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6SVHX8001:props:StringProp:00CJ6SVM60000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6SVHX8001:props:StringProp:00CJ6SVM60001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The tick stream is consumed with `fetch()` + `ReadableStream`, not `EventSource`**",
+    "text": "**The tick stream is consumed with `fetch()` + `ReadableStream`, not `EventSource`**: `EventSource` cannot set a request header at all — its constructor takes a URL and `withCredentials`, nothing else — so it could carry the token only as a cookie, which is ambient and reintroduces exactly the CSRF shape the custom header exists to prevent, or as a URL ticket, which adds an issuance endpoint and an expiry store. It also collapses every failure into one opaque `onerror`, so a 401 is indistinguishable from a restart; that is a real defect here rather than a nuisance, because the token is per-run and the service restarts constantly in development. What `EventSource` gives in exchange is reconnection, backoff and `Last-Event-ID` resumption — and resumption is worthless against [a bare tick](#id/BlockNode:00CJ2V5K2R000), since a missed tick is not a lost update: the next one refetches everything, and reconnecting refetches unconditionally. That leaves a reconnect loop of a few lines, which we would want to own anyway to refetch on reconnect and pause while the tab is hidden. With `EventSource` out, SSE's wire format stops earning its keep — it exists to be parsed by `EventSource` — so the stream carries NDJSON, already the service's framing on the unix socket, rather than adding a second wire format to the codebase.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSX8001",
+    "@type": "BlockNode",
+    "title": "# Webapp — Design",
+    "parent": "ArtifactNode:00CJ6T0XAG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6TGSY8000",
+      "BlockNode:00CJ6TGSYG005",
+      "BlockNode:00CJ6TGSYR000",
+      "BlockNode:00CJ6TGSYR006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSY8000",
+    "@type": "BlockNode",
+    "title": "## Context",
+    "parent": "BlockNode:00CJ6TGSX8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6TGSY8001",
+      "BlockNode:00CJ6TGSYG000",
+      "BlockNode:00CJ6TGSYG001",
+      "BlockNode:00CJ6TGSYG002",
+      "BlockNode:00CJ6TGSYG003",
+      "BlockNode:00CJ6TGSYG004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSY8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSY8001:links:Link:00CJ6VEBM0000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2TCV40001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSY8001:links:Link:00CJ6VEBM0000:props:StringProp:00CJ6VEBM0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6TGSY8001:props:StringProp:00CJ6TGT0G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6TGSY8001:props:StringProp:00CJ6TGT0G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Discussion**",
+    "text": "**Discussion**: [scope, transport, rendering and auth, with the rejected alternatives behind each](../discussion/webapp.md#id/BlockNode:00CJ2TCV40001).",
+    "parent": "BlockNode:00CJ6TGSY8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG000:links:Link:00CJ6VEMTG000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6V6370001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG000:links:Link:00CJ6VEMTG000:props:StringProp:00CJ6VEMTG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [what is still open and what is still to build](../issues/webapp.md#id/BlockNode:00CJ6V6370001).",
+    "parent": "BlockNode:00CJ6TGSY8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG001:links:Link:00CJ6VEY4G000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6V6CH0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG001:links:Link:00CJ6VEY4G000:props:StringProp:00CJ6VEY4G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "**Planning**",
+    "text": "**Planning**: [the phased implementation plan and its verification](../planning/webapp.md#id/BlockNode:00CJ6V6CH0001).",
+    "parent": "BlockNode:00CJ6TGSY8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG002:links:Link:00CJ6VF6H8000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6V6N9R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG002:links:Link:00CJ6VF6H8000:props:StringProp:00CJ6VF6H8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13"
+          }
+        ]
+      }
+    ],
+    "title": "**History**",
+    "text": "**History**: [current status and milestones](../history/webapp.md#id/BlockNode:00CJ6V6N9R001).",
+    "parent": "BlockNode:00CJ6TGSY8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG003:links:Link:00CJ6TGT28000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y800G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG003:links:Link:00CJ6TGT28000:props:StringProp:00CJ6TGT28001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6TGSYG003:links:Link:00CJ6TGT28002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4YG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG003:links:Link:00CJ6TGT28002:props:StringProp:00CJ6TGT28003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "70"
+          }
+        ]
+      }
+    ],
+    "title": "**TreeView**",
+    "text": "**TreeView**: [Rendering](treeview.md#id/BlockNode:00CE1GW4Y800G) and [Viewcone Zoom](treeview.md#id/BlockNode:00CE1GW4YG008) are the semantics this UI renders. It re-derives none of them.",
+    "parent": "BlockNode:00CJ6TGSY8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG004:links:Link:00CJ6TGT2G000",
+        "@type": "Link",
+        "target": "BlockNode:00CDC0D590010",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG004:links:Link:00CJ6TGT2G000:props:StringProp:00CJ6TGT2G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13"
+          }
+        ]
+      }
+    ],
+    "title": "**Linking**",
+    "text": "**Linking**: [`name` vs `id`](linking.md#id/BlockNode:00CDC0D590010) reserves the `id` attribute for this concern's own HTML element management.",
+    "parent": "BlockNode:00CJ6TGSY8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG005",
+    "@type": "BlockNode",
+    "title": "## Architecture",
+    "parent": "BlockNode:00CJ6TGSX8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6TGSYG006",
+      "BlockNode:00CJ6TGSYG007",
+      "BlockNode:00CJ6TGSYG008",
+      "BlockNode:00CJ6TGSYG009",
+      "BlockNode:00CJ6TGSYG00A",
+      "BlockNode:00CJ6TGSYG00B",
+      "BlockNode:00CJ6TGSYG00C",
+      "BlockNode:00CJ6TGSYG00D",
+      "BlockNode:00CJ6TGSYG00E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG006:links:Link:00CJ6TGT2G002",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEMER007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYG006:links:Link:00CJ6TGT2G002:props:StringProp:00CJ6TGT2G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "127"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6TGSYG006:props:StringProp:00CJ6TGT10000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6TGSYG006:props:StringProp:00CJ6TGT10001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The webapp is a third thin wrapper over `@aperas/core`**",
+    "text": "**The webapp is a third thin wrapper over `@aperas/core`**: the UI-projection tier, alongside `cli` and anticipated by name in [cli's settled scope](../discussion/cli.md#id/BlockNode:00CF2AEMER007). It owns presentation and interaction, not graph semantics — every rule it renders (fold tiers, canonical position, zoom) is computed in core and consumed here.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG007",
+    "@type": "BlockNode",
+    "title": "**The ApeironNgn service remains the sole writer**",
+    "text": "**The ApeironNgn service remains the sole writer**: the webapp never opens the store, reaching the graph only through the service, which keeps single-writer discipline, the lock file, the code-fingerprint check and conflict reporting exactly as they are for CLI callers.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG008",
+    "@type": "BlockNode",
+    "title": "**Transport is an HTTP listener inside the service**",
+    "text": "**Transport is an HTTP listener inside the service**: not a separate bridge process and not a Node-hosted shell. Live notification can only honestly originate in the service, because it is the sole writer and the only thing that knows when the store changed. The unix socket is untouched and remains the CLI's path; the listener is an addition beside it.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG009",
+    "@type": "BlockNode",
+    "title": "**The listener exposes an explicit op allowlist**",
+    "text": "**The listener exposes an explicit op allowlist**: not a proxy onto the service protocol — deep read, plus a single-node text update. This bounds the blast radius of any auth failure and is the part that cannot be retrofitted cheaply.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG00A",
+    "@type": "BlockNode",
+    "title": "**Auth rests on five controls**",
+    "text": "**Auth rests on five controls**: a custom `X-Aperas-Token` header on every request, which forces a CORS preflight and so prevents a cross-origin request being sent at all, independent of the token's value; a `127.0.0.1` bind; a per-run `randomBytes(32)` token stored in the existing run directory beside the lock and socket at mode 0600, compared with `timingSafeEqual`; a `Host` check against the loopback address, which is the specific anti-DNS-rebinding control; and an `Origin` allowlist as defence in depth, never reflected back.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG00B",
+    "@type": "BlockNode",
+    "title": "**Change notification is a bare tick**",
+    "text": "**Change notification is a bare tick**: the service pushes *the store changed*, and the UI refetches its current apex. The tick is idempotent and stateless, so no delta format exists and none is needed.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG00C",
+    "@type": "BlockNode",
+    "title": "**The tick stream is NDJSON over a streaming `fetch()` response**",
+    "text": "**The tick stream is NDJSON over a streaming `fetch()` response**: read with `ReadableStream` rather than `EventSource`, which cannot set a request header and so cannot carry the token without falling back to a cookie or a URL ticket. NDJSON is already the service's framing on the unix socket, so no second wire format is introduced.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG00D",
+    "@type": "BlockNode",
+    "title": "**`buildRenderTree` is core's structured render**",
+    "text": "**`buildRenderTree` is core's structured render**: the CLI's text output becomes a projection of it. `renderTreeWithView` already runs two passes — `discoverCone` builds the render plan, and only then does `emitNode`/`emitLinkLine` flatten it to strings; pass 1 is what a UI wants, pass 2 is the only part that assumes text. Extracting the plan as a tree of render items, and redefining the text render as `toText(buildRenderTree(...))`, keeps the existing verification suite as the guarantee that nothing changed — the text output must stay byte-identical.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYG00E",
+    "@type": "BlockNode",
+    "title": "**A single `updateText(id, text)` hides the write-path's rules**",
+    "text": "**A single `updateText(id, text)` hides the write-path's rules**: on the host side, per node type — an existing list item takes bare text with no bullet marker, a heading needs `--text-only` — so the UI encodes none of it.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR000",
+    "@type": "BlockNode",
+    "title": "## Topology",
+    "parent": "BlockNode:00CJ6TGSX8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6TGSYR001",
+      "BlockNode:00CJ6TGSYR002",
+      "BlockNode:00CJ6TGSYR003",
+      "BlockNode:00CJ6TGSYR004",
+      "BlockNode:00CJ6TGSYR005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6TGSYR001:props:StringProp:00CJ6TGT1G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6TGSYR001:props:StringProp:00CJ6TGT1G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`FolderDiv`'s three slots are the three render tiers**",
+    "text": "**`FolderDiv`'s three slots are the three render tiers**: which is why the port is a port and not a rewrite.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR002",
+    "@type": "BlockNode",
+    "title": "**A link renders at two sites sharing one identity**",
+    "text": "**A link renders at two sites sharing one identity**: its own text inside the block's prose, and an endnote in the link list after the children. Wikipedia's `cite-ref`/`cite-note` scheme without the superscript marker — a wikilink already carries the words the reader is looking at, so the link text *is* the marker. That an endnote exists below is carried by styling: a link that resolved to a graph node is styled as one, a dangling link is not.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYR003:links:Link:00CJ6TGT2R000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4YG006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYR003:links:Link:00CJ6TGT2R000:props:StringProp:00CJ71R7K8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "134"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6TGSYR003:links:Link:00CJ6TGT2R002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4YG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYR003:links:Link:00CJ6TGT2R002:props:StringProp:00CJ71R7WG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "346"
+          }
+        ]
+      }
+    ],
+    "title": "**Both sites obey canonical position**",
+    "text": "**Both sites obey canonical position**: rather than re-deriving it — how a link's target renders is a property of where that target's [structural home](treeview.md#id/BlockNode:00CE1GW4YG006) sits relative to the current render, not a property of the link. Three states: the home is nowhere in the render, and the link renders the target itself ([rule a folded, rule b unfolded](treeview.md#id/BlockNode:00CE1GW4YG004)); the home is in the render, even as a title-only breadcrumb, and the link collapses to the `[*see <path>]` pointer plus a jump; the target sits above the apex, and it renders as `(outside view)` plus a zoom-out. Both sites read one shared verdict, so they cannot disagree with each other or with `aperas tree`. This also makes link-following cycle-safe without a visited set.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR004",
+    "@type": "BlockNode",
+    "title": "**One target cited twice is one `Link`**",
+    "text": "**One target cited twice is one `Link`**: with two positions. Resolution groups by distinct target, so identity is the target alone and each occurrence contributes a `position` — the endnote is therefore per-`Link`, with one back-reference per position, Wikipedia's `^ a b`, already the stored shape.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR005",
+    "@type": "BlockNode",
+    "title": "**The apex is UI-local**",
+    "text": "**The apex is UI-local**: zooming in sets a new apex, zooming out is a click on a breadcrumb above it — neither is view state, and neither is persisted.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR006",
+    "@type": "BlockNode",
+    "title": "## Workflows",
+    "parent": "BlockNode:00CJ6TGSX8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6TGSYR007",
+      "BlockNode:00CJ6TGSYR008",
+      "BlockNode:00CJ6TGSYR009",
+      "BlockNode:00CJ6TGSYR00A",
+      "BlockNode:00CJ6TGSYR00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6TGSYR007:props:StringProp:00CJ6TGT1R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6TGSYR007:props:StringProp:00CJ6TGT1R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Reading renders from the apex down**",
+    "text": "**Reading renders from the apex down**: at whatever tier each node earns, following a link by its endnote or its hover popover — both of which obey canonical position.",
+    "parent": "BlockNode:00CJ6TGSYR006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR008",
+    "@type": "BlockNode",
+    "title": "**Fold and unfold share one arrow handle**",
+    "text": "**Fold and unfold share one arrow handle**: it toggles children and the endnote list alike. Hovering a link offers an unfold control that adds the `Link` itself to `unfolds`, which is what expands its endnote — one source of truth, no fold state in the popover.",
+    "parent": "BlockNode:00CJ6TGSYR006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR009",
+    "@type": "BlockNode",
+    "title": "**Zooming uses the arrow handle and the breadcrumb**",
+    "text": "**Zooming uses the arrow handle and the breadcrumb**: ctrl-click the arrow handle to make that node the apex, click a breadcrumb to zoom back out to it.",
+    "parent": "BlockNode:00CJ6TGSYR006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR00A",
+    "@type": "BlockNode",
+    "title": "**Live sync follows the tick**",
+    "text": "**Live sync follows the tick**: the service pushes one on every store change, the UI refetches its apex, and refetches unconditionally on reconnect. A 401 is surfaced as a distinct state, because the per-run token dies whenever the service restarts.",
+    "parent": "BlockNode:00CJ6TGSYR006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6TGSYR00B",
+    "@type": "BlockNode",
+    "title": "**Shallow write is an in-place text edit**",
+    "text": "**Shallow write is an in-place text edit**: of the current node's own text, sent as a single-node update. The editor round-trips plain authored markdown — no projection anchor is stored, so there is nothing for an edit to preserve.",
+    "parent": "BlockNode:00CJ6TGSYR006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370001",
+    "@type": "BlockNode",
+    "title": "# Webapp — Issues",
+    "parent": "ArtifactNode:00CJ6T137R000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6370002",
+      "BlockNode:00CJ6V6370005",
+      "BlockNode:00CJ6V637000F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370002",
+    "@type": "BlockNode",
+    "title": "## Open Issues",
+    "parent": "BlockNode:00CJ6V6370001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6370003",
+      "BlockNode:00CJ6V6370004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6370003:props:StringProp:00CJ6V637G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6370003:props:StringProp:00CJ6V637G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Whether the tree renderer surfaces every position of a multi-position `Link`**",
+    "text": "**Whether the tree renderer surfaces every position of a multi-position `Link`**: the graph carries one `position` prop per occurrence, and the endnote's `^ a b` back-references need one anchor per position. Whether `renderTreeWithView` emits such a link once or once per position is unchecked. A renderer question, not a model one, and it must be answered before the endnote can claim to be faithful.",
+    "parent": "BlockNode:00CJ6V6370002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370004",
+    "@type": "BlockNode",
+    "title": "**How a deep write is handed to the Agent**",
+    "text": "**How a deep write is handed to the Agent**: composing an intent and handing it off — a copied prompt, an MCP endpoint, an embedded chat pane — is unexamined, and deliberately out of Phase 1. It is deferred rather than rejected, and nothing in Phase 1 should foreclose any of the three.",
+    "parent": "BlockNode:00CJ6V6370002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370005",
+    "@type": "BlockNode",
+    "title": "## Pending Tasks",
+    "parent": "BlockNode:00CJ6V6370001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6370006",
+      "BlockNode:00CJ6V6370007",
+      "BlockNode:00CJ6V6370008",
+      "BlockNode:00CJ6V6370009",
+      "BlockNode:00CJ6V637000A",
+      "BlockNode:00CJ6V637000B",
+      "BlockNode:00CJ6V637000C",
+      "BlockNode:00CJ6V637000D",
+      "BlockNode:00CJ6V637000E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6370006:props:StringProp:00CJ6V637R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6370006:props:StringProp:00CJ6V637R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Extract `buildRenderTree` into `@aperas/core`**",
+    "text": "**Extract `buildRenderTree` into `@aperas/core`**: promote `discoverCone`'s render plan into a returned tree of render items and redefine the text output as `toText(buildRenderTree(...))`. The existing verification suite is the guarantee — the text render must stay byte-identical. Carry it to a caller with a `format` discriminator on the existing `tree` service op.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370007",
+    "@type": "BlockNode",
+    "title": "**Add the HTTP listener to the ApeironNgn service**",
+    "text": "**Add the HTTP listener to the ApeironNgn service**: loopback-bound, serving an explicit op allowlist rather than the whole protocol, alongside the unchanged unix socket.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370008",
+    "@type": "BlockNode",
+    "title": "**Generate and store the per-run auth token**",
+    "text": "**Generate and store the per-run auth token**: `randomBytes(32)` at service start, written into the existing run directory beside the lock and socket at mode 0600, and exposed for the dev server to read. Independent of the listener, and worth landing first so the secret's lifecycle is solved and tested before anything consumes it.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6370009",
+    "@type": "BlockNode",
+    "title": "**Implement the auth checks**",
+    "text": "**Implement the auth checks**: `X-Aperas-Token` required on every request with a restrictive preflight response, `timingSafeEqual` comparison, loopback `Host` check, `Origin` allowlist.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V637000A",
+    "@type": "BlockNode",
+    "title": "**Build the tick channel**",
+    "text": "**Build the tick channel**: a streaming NDJSON endpoint on the service side, and a `fetch()` + `ReadableStream` reader on the client with its own reconnect loop — refetch unconditionally on reconnect, pause while the tab is hidden, surface a 401 as a distinct \"service restarted\" state rather than a silent retry.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V637000B",
+    "@type": "BlockNode",
+    "title": "**Port `FolderDiv` to a Solid component**",
+    "text": "**Port `FolderDiv` to a Solid component**: its three slots map onto the three render tiers unchanged.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V637000C",
+    "@type": "BlockNode",
+    "title": "**Render the two link sites**",
+    "text": "**Render the two link sites**: the link's own text as the `cite-ref` anchor, and the endnote list after the children as `cite-note`, with click-through both ways and one back-reference per position.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V637000D",
+    "@type": "BlockNode",
+    "title": "**Implement zoom**",
+    "text": "**Implement zoom**: ctrl-click on the arrow handle sets a new apex; the breadcrumb above it zooms back out. UI-local state, not view state.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V637000E",
+    "@type": "BlockNode",
+    "title": "**Implement the shallow write**",
+    "text": "**Implement the shallow write**: a single `updateText(id, text)` on the host side that picks the correct per-type input form, so the UI never encodes the write-path's bullet-marker and `--text-only` rules. The service's per-artifact link sweep, and the known failure where a write reports links resolved but persists none, must both surface in the UI rather than being swallowed.",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V637000F",
+    "@type": "BlockNode",
+    "title": "## Resolved",
+    "parent": "BlockNode:00CJ6V6370001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0001",
+    "@type": "BlockNode",
+    "title": "# Webapp — Planning",
+    "parent": "ArtifactNode:00CJ6T19PG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6CH0002",
+      "BlockNode:00CJ6V6CH0006",
+      "BlockNode:00CJ6V6CH8007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0002",
+    "@type": "BlockNode",
+    "title": "## Implementation Plan",
+    "parent": "BlockNode:00CJ6V6CH0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6CH0003",
+      "BlockNode:00CJ6V6CH0004",
+      "BlockNode:00CJ6V6CH0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH0003:props:StringProp:00CJ6V6CHR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6CH0003:props:StringProp:00CJ6V6CHR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Phase 1 is deep read, shallow write**",
+    "text": "**Phase 1 is deep read, shallow write**: the whole read surface plus a single in-place text edit of the current node. This is the phase the settled design describes, and its write boundary is principled rather than a scope cut — one node's own text is the only change that needs no reconciliation and no structural judgment.",
+    "parent": "BlockNode:00CJ6V6CH0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0004",
+    "@type": "BlockNode",
+    "title": "**Phase 2+ is deep write**",
+    "text": "**Phase 2+ is deep write**: composing an intent and handing it to the Agent. Unexamined, and deliberately not foreclosed by anything in Phase 1.",
+    "parent": "BlockNode:00CJ6V6CH0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0005",
+    "@type": "BlockNode",
+    "title": "**The ordering has a rationale**",
+    "text": "**The ordering has a rationale**: core extraction comes first because both the CLI and the UI consume it, and because doing it while the CLI is still the only caller keeps the byte-identical text output as a free regression test. The auth token comes next because it is independent of the listener and is the one piece whose lifecycle should be proven before anything depends on it. The listener, the tick channel and the UI follow in that order, each with a working consumer by the time it lands.",
+    "parent": "BlockNode:00CJ6V6CH0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0006",
+    "@type": "BlockNode",
+    "title": "## Task Breakdown",
+    "parent": "BlockNode:00CJ6V6CH0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6CH0007",
+      "BlockNode:00CJ6V6CH8000",
+      "BlockNode:00CJ6V6CH8001",
+      "BlockNode:00CJ6V6CH8002",
+      "BlockNode:00CJ6V6CH8003",
+      "BlockNode:00CJ6V6CH8004",
+      "BlockNode:00CJ6V6CH8005",
+      "BlockNode:00CJ6V6CH8006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH0007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH0007:props:StringProp:00CJ6V6CJ0000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6CH0007:props:StringProp:00CJ6V6CJ0001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6CH0007:props:StringProp:00CJ6V6CJ0002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Slice 1 — `buildRenderTree` in core**",
+    "text": "**Slice 1 — `buildRenderTree` in core**: promote `discoverCone`'s plan to a returned render tree, redefine `renderTreeWithView` as `toText(buildRenderTree(...))`, and add a `format` discriminator to the `tree` service op.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8000:props:StringProp:00CJ6V6CJ0003",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 2 — per-run auth token**",
+    "text": "**Slice 2 — per-run auth token**: generate at service start, store in the run directory at mode 0600, expose for the dev server.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8001:props:StringProp:00CJ6V6CJ0004",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 3 — HTTP listener**",
+    "text": "**Slice 3 — HTTP listener**: loopback bind, op allowlist, the four auth checks, restrictive CORS preflight.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8002:props:StringProp:00CJ6V6CJ0005",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 4 — tick channel**",
+    "text": "**Slice 4 — tick channel**: streaming NDJSON endpoint, `fetch()` + `ReadableStream` client with reconnect, unconditional refetch on reconnect, hidden-tab pause, and a distinct 401 state.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8003:props:StringProp:00CJ6V6CJ8000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 5 — `FolderDiv` as a Solid component**",
+    "text": "**Slice 5 — `FolderDiv` as a Solid component**: three slots onto three render tiers, fold and unfold via the arrow handle.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8004:props:StringProp:00CJ6V6CJ8001",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 6 — links at two sites**",
+    "text": "**Slice 6 — links at two sites**: link text as `cite-ref`, endnote list as `cite-note`, click-through both ways, one back-reference per position, hover popover that can promote a link into `unfolds`.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8005:props:StringProp:00CJ6V6CJG000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 7 — zoom**",
+    "text": "**Slice 7 — zoom**: ctrl-click to set an apex, breadcrumbs to zoom out.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8006:props:StringProp:00CJ6V6CJG001",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 8 — shallow write**",
+    "text": "**Slice 8 — shallow write**: host-side `updateText(id, text)` choosing the per-type input form, link-sweep results surfaced.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8007",
+    "@type": "BlockNode",
+    "title": "## Verification Plan",
+    "parent": "BlockNode:00CJ6V6CH0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6CH8008",
+      "BlockNode:00CJ6V6CH8009",
+      "BlockNode:00CJ6V6CH800A",
+      "BlockNode:00CJ6V6CH800B",
+      "BlockNode:00CJ6V6CH800C",
+      "BlockNode:00CJ6V6CH800D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8008",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6CH8008:props:StringProp:00CJ6V6CJR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6CH8008:props:StringProp:00CJ6V6CJR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Slice 1 is verified by the existing suite**",
+    "text": "**Slice 1 is verified by the existing suite**: the text render must stay byte-identical across the extraction — any diff is a regression, and no new assertion is needed to catch it.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH8009",
+    "@type": "BlockNode",
+    "title": "**Slice 2 is verified by file mode and lifetime**",
+    "text": "**Slice 2 is verified by file mode and lifetime**: the token file exists at 0600, its value changes across a service restart, and the old value stops being accepted.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH800A",
+    "@type": "BlockNode",
+    "title": "**Slice 3 is verified adversarially**",
+    "text": "**Slice 3 is verified adversarially**: not just positively — a request with no token, with a wrong token, with a foreign `Origin`, and with a non-loopback `Host` must each be rejected; a cross-origin `fetch` from a scratch page must fail at the preflight rather than reaching a handler. An op outside the allowlist must be refused even with a valid token.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH800B",
+    "@type": "BlockNode",
+    "title": "**Slice 4 is verified by killing the service mid-stream**",
+    "text": "**Slice 4 is verified by killing the service mid-stream**: the client must reconnect, refetch unconditionally, and — once the token from the previous run is rejected — surface the 401 state rather than retrying silently.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH800C",
+    "@type": "BlockNode",
+    "title": "**Slices 5 to 7 are verified against `aperas tree --view`**",
+    "text": "**Slices 5 to 7 are verified against `aperas tree --view`**: the same view rendered by the UI and by the CLI must agree on tier, canonical-position verdict and hidden counts for every node, since both now read the same render tree.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6CH800D",
+    "@type": "BlockNode",
+    "title": "**Slice 8 is verified by round-tripping an edit**",
+    "text": "**Slice 8 is verified by round-tripping an edit**: text typed in the UI, stored, projected and re-parsed must come back byte-identical, and a write whose links fail to persist must be visible in the UI rather than swallowed.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6N9R001",
+    "@type": "BlockNode",
+    "title": "# Webapp — History",
+    "parent": "ArtifactNode:00CJ6T1G4G000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6N9R002",
+      "BlockNode:00CJ6V6N9R003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6N9R002",
+    "@type": "BlockNode",
+    "title": "## Current Status",
+    "text": "Design only — nothing is built. `packages/web` is an unmodified Vite + Solid scaffold: `App.tsx`, `index.tsx`, two CSS files. It declares `@aperas/core` as a dependency and imports it nowhere. The read and write semantics the UI will render are already specified and implemented in core and in the CLI; what does not exist yet is the structured render, the HTTP listener, and every part of the UI itself.",
+    "parent": "BlockNode:00CJ6V6N9R001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6N9R003",
+    "@type": "BlockNode",
+    "title": "## Milestones",
+    "parent": "BlockNode:00CJ6V6N9R001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ6V6N9R004",
+      "BlockNode:00CJ6V6N9R005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ6V6N9R004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ6V6N9R004:props:StringProp:00CJ6V6NA0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ6V6N9R004:props:StringProp:00CJ6V6NA0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**2026-09-17: webapp design opened**",
+    "text": "**2026-09-17: webapp design opened**: scope fixed to the UI-projection tier, a third thin wrapper over `@aperas/core` alongside `cli`. Settled that the webapp never owns fold state, that `FolderDiv`'s three slots are already the three render tiers, that the apex is UI-local rather than view state, and that the write boundary is deep read with shallow write for principled reasons rather than as a scope cut.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6V6N9R005",
+    "@type": "BlockNode",
+    "title": "**2026-09-18: transport, auth and the render contract settled**",
+    "text": "**2026-09-18: transport, auth and the render contract settled**: an HTTP listener inside the ApeironNgn service rather than a separate bridge or a Node-hosted shell, chosen because live notification can only honestly originate in the sole writer. Change notification is a bare tick with the UI refetching its apex, carried as NDJSON over a streaming `fetch()` response read with `ReadableStream` — `EventSource` rejected because it cannot set a request header, and its resumption machinery is worthless against an idempotent tick. Auth resolved to five controls with the op allowlist as the load-bearing one. The superscript link marker was dropped in favour of the link text itself, and the canonical-position verdict was committed to `@aperas/core` as `buildRenderTree`, so both link sites and the CLI read one shared computation.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6VK7PR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6VK7PR001:links:Link:00CJ6VK9X0000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6V6370001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6VK7PR001:links:Link:00CJ6VK9X0000:props:StringProp:00CJ6VK9X0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "**Issues**",
+    "text": "**Issues**: [open questions and the pending build](../issues/webapp.md#id/BlockNode:00CJ6V6370001).",
+    "parent": "BlockNode:00CJ2TCV40002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6VKG8G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6VKG8G001:links:Link:00CJ6VKJEG000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6V6CH0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6VKG8G001:links:Link:00CJ6VKJEG000:props:StringProp:00CJ6VKJER000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "**Planning**",
+    "text": "**Planning**: [phases, slices and their verification](../planning/webapp.md#id/BlockNode:00CJ6V6CH0001).",
+    "parent": "BlockNode:00CJ2TCV40002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ6VKRS8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6VKRS8001:links:Link:00CJ6VKV6G000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6V6N9R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6VKRS8001:links:Link:00CJ6VKV6G000:props:StringProp:00CJ6VKV6G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13"
+          }
+        ]
+      }
+    ],
+    "title": "**History**",
+    "text": "**History**: [current status and milestones](../history/webapp.md#id/BlockNode:00CJ6V6N9R001).",
+    "parent": "BlockNode:00CJ2TCV40002",
     "type": "listItem",
     "children": []
   }

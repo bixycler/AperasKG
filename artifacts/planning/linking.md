@@ -32,13 +32,13 @@ No anchor *recognition/absorption* mechanism is needed for Slice 1 — a hand-wr
    - **Resolution gate, required for disambiguation**: <a name='id/BlockNode:00CDBZ77F000J' class='aperas-anchor aperas-id'></a> a `#fragment` link has no `[[...]]`-style wrapper to mark intent, so it's syntactically identical to an ordinary, unrelated same-page anchor link. After the existing name-token/id walk finds a *candidate* target, only accept it if that candidate also carries a `class="aperas-anchor"` tag whose `name` equals the fragment — the heading's stashed anchor prop (Task 3), or a literal scan of a list item's/paragraph's own `text` (no prop is kept for these). See [Distinguishing a wikilink from an ordinary anchor link](../discussion/linking.md#id/BlockNode:00CDBZ76TG006) for why a syntactic heuristic (e.g. requiring a leading dash) isn't enough on its own — it only covers heading-derived slugs, not list-item ones.
 3. [x] **Id-anchor emission** (`astParser.ts` parsing + `project.ts` projection). **Caveat found later**: <a name='id/BlockNode:00CDBZ77F000K' class='aperas-anchor aperas-id'></a> the list-item/paragraph idempotency property this was built to guarantee (see the "List item / paragraph" sub-item below) currently fails `verify.ts`'s own step 13 check ("re-projecting an already-anchored list item duplicates/loses its id-anchor") — reproduces on a clean checkout with no unrelated changes applied, root cause not yet investigated.
    
-   - **Heading**: <a name='id/BlockNode:00CDBZ77F000M' class='aperas-anchor aperas-id'></a>
+   - **Heading**: <a name='id/BlockNode:00CDBZ77F000M' class='aperas-anchor aperas-id'></a> 
      
      - Before assigning `title = rawText` (astParser.ts:279), check for a trailing `<a name='...' class='aperas-anchor aperas-(tree|id)'></a>` on the raw line.
      - If present, strip it from `title` and stash the anchor markup in a prop (`setProp`) — survives reconciliation via the generic props copy.
      - In `project.ts`'s heading case (project.ts:113-119), re-append: <a name='id/BlockNode:00CDBZ77F000Q' class='aperas-anchor aperas-id'></a> the stashed tree-anchor if present, and unconditionally an `<a name='id/<ID>' class='aperas-anchor aperas-id'>` for the block's own permanent id, both at line end.
      - See [Verifying anchor placement against the real parser](../discussion/linking.md#id/BlockNode:00CDBZ76TG004) for why this placement, not a preceding line.
-   - **List item / paragraph**: <a name='id/BlockNode:00CDBZ77F000S' class='aperas-anchor aperas-id'></a>
+   - **List item / paragraph**: <a name='id/BlockNode:00CDBZ77F000S' class='aperas-anchor aperas-id'></a> 
      
      - No title-side change — the anchor lives in `text`, after the colon, as literal content.
      - In `project.ts` (`serializeListItem`, project.ts:157-167, and the paragraph case): <a name='id/BlockNode:00CDBZ77F000V' class='aperas-anchor aperas-id'></a> when a block's `text` doesn't already contain its own `id/<ID>` anchor, splice `<a name='id/<ID>' class='aperas-anchor aperas-id'></a> ` in right after the first `:`.
