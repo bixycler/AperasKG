@@ -20,18 +20,18 @@
     "@id": "ArtifactNode:00CDBYV468000",
     "@type": "ArtifactNode",
     "title": "linking.md",
-    "text": "One open item below — links silently failing to persist, twice this session, via unrelated mechanisms.",
+    "text": "One open item below — links silently failing to persist or resolve, across three distinct mechanisms found so far, via unrelated causes.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "435636ee8abd5cfa5611f6e00fe126d7b95ce294321ffc80e81c88cc0d1072ce",
+    "fileHash": "4c3f2fce4c9f3d9d902d5b1109885c3504f38dc5237712380c3d014a8327b704",
     "lastTrackedAt": "2026-09-16T03:58:36.201Z",
-    "ingestedHash": "435636ee8abd5cfa5611f6e00fe126d7b95ce294321ffc80e81c88cc0d1072ce",
-    "lastIngestedAt": "2026-09-17T12:44:06.532Z",
-    "projectedHash": "435636ee8abd5cfa5611f6e00fe126d7b95ce294321ffc80e81c88cc0d1072ce"
+    "ingestedHash": "4c3f2fce4c9f3d9d902d5b1109885c3504f38dc5237712380c3d014a8327b704",
+    "lastIngestedAt": "2026-09-17T16:17:13.550Z",
+    "projectedHash": "4c3f2fce4c9f3d9d902d5b1109885c3504f38dc5237712380c3d014a8327b704"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
@@ -54,23 +54,18 @@
     "@id": "ArtifactNode:00CDBYV46R000",
     "@type": "ArtifactNode",
     "title": "linking.md",
-    "text": "Refactoring [`documentation.md`](../design/documentation.md#id/BlockNode:00CDD68E80002) surfaced a real bug: writing an internal cross-reference as a bare relative path with a heading segment appended (`../design/documentation.md/Context`) looks like a normal markdown link but isn't one — `documentation.md` is a file, not a folder, so no standard renderer can resolve it. The existing, already-implemented convention for this (`astParser.ts`) turned out to be `[title](<[[deep-path]]>)` — a `[[...]]`-wrapped, angle-bracket-escaped destination — which works, but is heavy: three layers of escaping stacked in one string, visible at scale in `Aperas-apeironngn-design.md`'s own self-references, which repeat full heading text as path segments.",
+    "text": "**Design**: [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002) — the addressing/resolution mechanics: slug-path vs node-ID, anchor syntax, and how a reference actually resolves.",
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
     "children": [
-      "BlockNode:00CDBZ76T8001",
-      "BlockNode:00CDCTB49R001",
-      "BlockNode:00CF1276D0001",
-      "BlockNode:00CGF83D4G001",
-      "BlockNode:00CGG7BN40001",
-      "BlockNode:00CGMX88R0001"
+      "BlockNode:00CDBZ76T8001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "3400b9c9b0dee57aab9722406881d4c27eb16554d51ccfc4073f94088f4b941f",
+    "fileHash": "feb82c3c5ac6eff86cfa6d6fcc998093712e77225e6bdac40ed1ab6c023e3fb6",
     "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "3400b9c9b0dee57aab9722406881d4c27eb16554d51ccfc4073f94088f4b941f",
-    "lastIngestedAt": "2026-09-17T10:05:52.191Z",
-    "projectedHash": "3400b9c9b0dee57aab9722406881d4c27eb16554d51ccfc4073f94088f4b941f"
+    "ingestedHash": "feb82c3c5ac6eff86cfa6d6fcc998093712e77225e6bdac40ed1ab6c023e3fb6",
+    "lastIngestedAt": "2026-09-17T15:59:22.447Z",
+    "projectedHash": "feb82c3c5ac6eff86cfa6d6fcc998093712e77225e6bdac40ed1ab6c023e3fb6"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
@@ -674,11 +669,11 @@
       "BlockNode:00CF2AEMER001"
     ],
     "path": "discussion/cli.md",
-    "fileHash": "7d9564cbf74dc5838708a66bc4672be47d8e8f8f654b2cf1e24a233d79e80035",
+    "fileHash": "397d0bd6b25a2c039aea5961ecdb9a7f68133529a98a895e15077452c3f2e290",
     "lastTrackedAt": "2026-09-12T22:30:32.702Z",
-    "ingestedHash": "7d9564cbf74dc5838708a66bc4672be47d8e8f8f654b2cf1e24a233d79e80035",
-    "lastIngestedAt": "2026-09-13T06:11:06.594Z",
-    "projectedHash": "7d9564cbf74dc5838708a66bc4672be47d8e8f8f654b2cf1e24a233d79e80035"
+    "ingestedHash": "397d0bd6b25a2c039aea5961ecdb9a7f68133529a98a895e15077452c3f2e290",
+    "lastIngestedAt": "2026-09-17T14:59:15.114Z",
+    "projectedHash": "397d0bd6b25a2c039aea5961ecdb9a7f68133529a98a895e15077452c3f2e290"
   },
   {
     "@id": "ArtifactNode:00CF2AEX6R000",
@@ -696,5 +691,20 @@
     "ingestedHash": "6197058f2a99a60080fdd35adf5ee76b2c8ad88312faa179287bd66e94b8694c",
     "lastIngestedAt": "2026-09-15T09:31:49.318Z",
     "projectedHash": "6197058f2a99a60080fdd35adf5ee76b2c8ad88312faa179287bd66e94b8694c"
+  },
+  {
+    "@id": "ArtifactNode:00CJ2TCV40000",
+    "@type": "ArtifactNode",
+    "title": "webapp.md",
+    "text": "**Scope**: `webapp` is the third thin wrapper over the shared `core` engine, alongside `cli` — anticipated by name in [cli's Settled scope](../discussion/cli.md#id/BlockNode:00CF2AEMER007), and sitting over the engine described in [core's Dashboard](../discussion/core.md#id/BlockNode:00CF1WZE18001). Its subject is the **UI projection** tier only; the i-projection it consumes belongs to [treeview](../discussion/treeview.md#id/BlockNode:00CE1DDF4G001).",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "children": [
+      "BlockNode:00CJ2TCV40001"
+    ],
+    "path": "discussion/webapp.md",
+    "fileHash": "9d7f83a349c2f1b711b89884c53e4666848c8d9b652a153d2813f70047c6b896",
+    "ingestedHash": "9d7f83a349c2f1b711b89884c53e4666848c8d9b652a153d2813f70047c6b896",
+    "lastIngestedAt": "2026-09-17T15:00:22.278Z",
+    "projectedHash": "9d7f83a349c2f1b711b89884c53e4666848c8d9b652a153d2813f70047c6b896"
   }
 ]

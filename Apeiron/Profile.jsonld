@@ -17,5 +17,12 @@
     "handle": "antigravity",
     "name": "Antigravity",
     "kind": "agent"
+  },
+  {
+    "@id": "Profile:00CJ2BA3XR000",
+    "@type": "Profile",
+    "handle": "will",
+    "name": "Will LE",
+    "kind": "human"
   }
 ]
