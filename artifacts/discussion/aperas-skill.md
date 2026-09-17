@@ -1295,3 +1295,19 @@ Status: <a name='id/BlockNode:00CHYJDBR8000' class='aperas-anchor aperas-id'></a
 **At the end of a batch — not after each step — run `aperas check-links` once before handing back.** The per-write check the service runs on its own only sweeps the artifact that was written; this is the pass that catches the damage that lands *elsewhere* — an edit in artifact A breaking a citation that lives in artifact B, which nothing scoped to A can see. It costs about 0.6s against the whole corpus, so the reason to run it once per batch rather than per edit is noise, not expense.
 
 The other two link checks need nothing from you, and that is the point — the two recorded losses were both found by a human happening to look, never by a check that fired. The service now sweeps the written artifact after every `update`/`insert`/`remove` and reports anything that write resolved but failed to persist, right under the write's own `Links: N resolved…` line; and it sweeps the whole corpus at startup and on `reload`, carrying any finding on *every* later response until it clears. When either one speaks up, it is describing a link that already looks fine everywhere else — treat it as real and re-run the write (which has fixed it before) or `aperas check-links --repair`.
+
+## v2.6 additions — delta on the v2 snapshot <a name='id/BlockNode:00CJ02BTG0001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). `aperas tree` gained a usable path reference, on a second attempt — the first put it on every line and was wrong, caught on review before it shipped further than this same session; the corrected design (issues/treeview.md) prints it exactly twice: once for the render's own apex, once wherever a `--view` render's viewcone zooms to a new relative root.
+
+### Top matter — Status bumped to v2.6 <a name='id/BlockNode:00CJ02JJM0000' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.5's own status line](#id/BlockNode:00CHYJDBR8000)
+
+Status: <a name='id/BlockNode:00CJ02MMER002' class='aperas-anchor aperas-id'></a> **v2.6** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Mechanics — `aperas tree` names the node it started from, once — not every line <a name='id/BlockNode:00CJ02QEF8001' class='aperas-anchor aperas-id'></a>
+
+The first line of any `aperas tree` render is a breadcrumb, `aperas://tree/<path>` — the walkable path of the node the command was actually pointed at (`.` if none given), directly reusable as a `<ref>` elsewhere with no separate `aperas path` call. It appears exactly once, at the top: every line under it is already relative to that node by construction (that is what a tree render is), so repeating the prefix on each one would say nothing new. Omitted, not shown broken, when the node's own path can't be walked.
+
+`--view` reuses the same idea at a second place it's actually needed: when a link escapes its owner's own viewcone into a nested one (Aperas-treeview-design.md §13 — the target is unfolded independently, and the link, not the target's own structural position, wins canonical placement), everything under that link is now relative to *it*, not to the render's original apex. That position gets its own one-time breadcrumb too, indented to match, for the same reason the apex gets one. An ordinary in-cone link (target already reachable from the apex the normal way) or a "this is superseded, see elsewhere" pointer line needs neither — nothing changes what "here" means at those positions.

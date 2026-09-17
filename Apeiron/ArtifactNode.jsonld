@@ -27,11 +27,11 @@
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "3e40ea2d4590fcc0e253bda23db4870b7ecb1578d9979bb7f1036024b6d37ee7",
+    "fileHash": "435636ee8abd5cfa5611f6e00fe126d7b95ce294321ffc80e81c88cc0d1072ce",
     "lastTrackedAt": "2026-09-16T03:58:36.201Z",
-    "ingestedHash": "3e40ea2d4590fcc0e253bda23db4870b7ecb1578d9979bb7f1036024b6d37ee7",
-    "lastIngestedAt": "2026-09-17T10:03:06.129Z",
-    "projectedHash": "3e40ea2d4590fcc0e253bda23db4870b7ecb1578d9979bb7f1036024b6d37ee7"
+    "ingestedHash": "435636ee8abd5cfa5611f6e00fe126d7b95ce294321ffc80e81c88cc0d1072ce",
+    "lastIngestedAt": "2026-09-17T12:44:06.532Z",
+    "projectedHash": "435636ee8abd5cfa5611f6e00fe126d7b95ce294321ffc80e81c88cc0d1072ce"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
@@ -371,11 +371,11 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "02a7d175922cceef28355280a91580369f0d78f2c905b783847824b83bc73c3b",
+    "fileHash": "23d148ee60c2d014693f7cafb8797647cefbfab8fa09d238278bd2b78900c429",
     "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "02a7d175922cceef28355280a91580369f0d78f2c905b783847824b83bc73c3b",
-    "lastIngestedAt": "2026-09-15T09:08:12.097Z",
-    "projectedHash": "02a7d175922cceef28355280a91580369f0d78f2c905b783847824b83bc73c3b"
+    "ingestedHash": "23d148ee60c2d014693f7cafb8797647cefbfab8fa09d238278bd2b78900c429",
+    "lastIngestedAt": "2026-09-17T11:45:16.979Z",
+    "projectedHash": "23d148ee60c2d014693f7cafb8797647cefbfab8fa09d238278bd2b78900c429"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -507,14 +507,15 @@
       "BlockNode:00CE8XWZJR001",
       "BlockNode:00CH5FJMDR001",
       "BlockNode:00CHXVEW98001",
-      "BlockNode:00CHYJ6PR8001"
+      "BlockNode:00CHYJ6PR8001",
+      "BlockNode:00CJ02BTG0001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "9dd5f96fc8169e04fb371b939fd41e6fcc825bfa0baa75f7e2a9c07c3f60df81",
+    "fileHash": "8d6d05c19955b7125e592648595fe353959d131dc350e13a9fa3172ba8e70fc8",
     "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "9dd5f96fc8169e04fb371b939fd41e6fcc825bfa0baa75f7e2a9c07c3f60df81",
-    "lastIngestedAt": "2026-09-17T10:03:09.312Z",
-    "projectedHash": "9dd5f96fc8169e04fb371b939fd41e6fcc825bfa0baa75f7e2a9c07c3f60df81"
+    "ingestedHash": "8d6d05c19955b7125e592648595fe353959d131dc350e13a9fa3172ba8e70fc8",
+    "lastIngestedAt": "2026-09-17T11:45:10.122Z",
+    "projectedHash": "8d6d05c19955b7125e592648595fe353959d131dc350e13a9fa3172ba8e70fc8"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -598,18 +599,18 @@
     "@id": "ArtifactNode:00CF1WZ3S0000",
     "@type": "ArtifactNode",
     "title": "core.md",
-    "text": "None.",
+    "text": "**`npm run verify` costs ~5 minutes, dominated by a process-lifetime slowdown neither store-freshness nor heap size explains** — instrumented per-step (a `console.log`-wrapping timer keyed on each step's own `\"N. Testing...\"` header, printing a sorted breakdown even on failure) and found the same operation (`checkLinkIntegrity`'s corpus sweep, and separately `parseMarkdownTree`-driven ingestion in Linking Slice steps 13-18) costs low hundreds of ms freshly isolated, but 12-55 *seconds* run as `verify.ts`'s own later steps — steps 3-6 doing the identical kind of parsing work stay fast, steps 7-12 in between do no heavy parsing at all, then 13 onward is uniformly slow. Two credible causes ruled out by direct experiment, not by inspection: (1) oxigraph's own WASM memory footprint (`external`, ~850MB-1GB by that point vs ~50MB fresh) looked causal, but compacting the store mid-run (dehydrate a scratch dir, rehydrate a brand-new `Store` with the identical live content) made the same sweep *slower*, not faster — ruling out \"this one store instance is bloated.\" (2) V8 heap-size tuning (`--max-old-space-size=8192 --max-semi-space-size=128`) changed nothing measurably.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CF1WZ4JG001"
     ],
     "path": "issues/core.md",
-    "fileHash": "4f8b14460e3b7ce8963f6ae936ce628d927557efd516133a297f0c47d3312843",
+    "fileHash": "33c722d843e038cbe641be6d60261b6f89858c93cf787fbe965474ccba24f262",
     "lastTrackedAt": "2026-09-12T22:28:40.384Z",
-    "ingestedHash": "4f8b14460e3b7ce8963f6ae936ce628d927557efd516133a297f0c47d3312843",
-    "lastIngestedAt": "2026-09-17T09:13:28.892Z",
-    "projectedHash": "4f8b14460e3b7ce8963f6ae936ce628d927557efd516133a297f0c47d3312843"
+    "ingestedHash": "33c722d843e038cbe641be6d60261b6f89858c93cf787fbe965474ccba24f262",
+    "lastIngestedAt": "2026-09-17T12:30:37.987Z",
+    "projectedHash": "33c722d843e038cbe641be6d60261b6f89858c93cf787fbe965474ccba24f262"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",

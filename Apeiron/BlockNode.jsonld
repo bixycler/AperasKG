@@ -637,8 +637,7 @@
     "parent": "BlockNode:00CDBYV5A8001",
     "type": "heading",
     "children": [
-      "BlockNode:00CGMWQ6T0001",
-      "BlockNode:00CHYM4Z1G001"
+      "BlockNode:00CGMWQ6T0001"
     ]
   },
   {
@@ -806,6 +805,7 @@
       "BlockNode:00CGGG6N5G001",
       "BlockNode:00CGM5V098001",
       "BlockNode:00CGN6GJVG000",
+      "BlockNode:00CHYM4Z1G001",
       "BlockNode:00CDBYV5A800B"
     ]
   },
@@ -9947,6 +9947,7 @@
       "BlockNode:00CE1GW638005",
       "BlockNode:00CE1GW638006",
       "BlockNode:00CE8T6W7G001",
+      "BlockNode:00CJ01QAJ0000",
       "BlockNode:00CE1GW63800B"
     ]
   },
@@ -16671,10 +16672,13 @@
     "@id": "BlockNode:00CF1WZ4JG002",
     "@type": "BlockNode",
     "title": "## Open Issues",
-    "text": "None.",
     "parent": "BlockNode:00CF1WZ4JG001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CJ0202MG001",
+      "BlockNode:00CJ0HX2Y0000",
+      "BlockNode:00CJ0JZ830001"
+    ]
   },
   {
     "@id": "BlockNode:00CF1WZ4JG003",
@@ -16968,6 +16972,7 @@
       "BlockNode:00CGM54FX0001",
       "BlockNode:00CGR1BM9G001",
       "BlockNode:00CHXSZ56R001",
+      "BlockNode:00CJ023M08001",
       "BlockNode:00CGM4YD4G001"
     ]
   },
@@ -27906,10 +27911,13 @@
       }
     ],
     "title": "**`check-links --repair` re-mints every `Link` id in an affected artifact, not just the broken one**",
-    "text": "**`check-links --repair` re-mints every `Link` id in an affected artifact, not just the broken one**: found while verifying the standing sweep end to end — one deliberately-dropped link edge, repaired, produced a 63-insertion/37-deletion diff across `BlockNode.jsonld`, because `repairLinkIntegrity` re-runs `resolveBlockLinks` over *every* block carrying link text in the affected artifact, and that regenerates each `Link` subdocument (and its `position` `StringProp`) under a fresh id even where nothing was wrong. Targets and positions are preserved, so this is churn rather than data loss — but `Link` ids are addressable in their own right: a `TreeView.unfolds` entry can name one (`node.ts`'s `unfold(ref)` accepts a `Link` id), so a repair can silently orphan an unfolded link, which `pruneStaleUnfolds` then cleans up on the next sweep — the viewer's own fold state quietly lost to a repair that touched an unrelated block. Same identity-preservation principle the skill applies to blocks, one tier down. Not urgent (a repair is rare and explicit), but the fix is contained: re-resolve only the blocks actually named in the discrepancy report, rather than the whole artifact.",
-    "parent": "BlockNode:00CDBYV5A8002",
+    "text": "**`check-links --repair` re-mints every `Link` id in an affected artifact, not just the broken one**: found while verifying the standing sweep end to end — one deliberately-dropped link edge, repaired, produced a 63-insertion/37-deletion diff across `BlockNode.jsonld`, because `repairLinkIntegrity` re-ran `resolveBlockLinks` over *every* block carrying link text in the affected artifact, and that regenerated each `Link` subdocument (and its `position` `StringProp`) under a fresh id even where nothing was wrong. Targets and positions were preserved, so this was churn rather than data loss — but `Link` ids are addressable in their own right: a `TreeView.unfolds` entry can name one (`node.ts`'s `unfold(ref)` accepts a `Link` id), so a repair could silently orphan an unfolded link, which `pruneStaleUnfolds` then cleans up on the next sweep — the viewer's own fold state quietly lost to a repair that touched an unrelated block. Same identity-preservation principle the skill applies to blocks, one tier down.",
+    "parent": "BlockNode:00CDBYV5A800A",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00CJ0W09C8000",
+      "BlockNode:00CJ0XSZ8R001"
+    ]
   },
   {
     "@id": "BlockNode:00CHYN1NH8001",
@@ -27972,6 +27980,252 @@
     "text": "**Three layers of link checking, only one of which anyone has to remember — agreed, built and verified live**: the check existed but nothing triggered it, which is the same failure this concern keeps hitting (\"being asked is the part that fails\"). Measured before designing, since the design turned on it: a full-corpus sweep is ~0.6s of service-side work (1428 live blocks, 358 carrying link text, CLI startup subtracted over three runs), so \"too heavy to run often\" — the premise the first cut rested on — was simply false. Built: **(1)** a scoped, service-side check after every `update`/`insert`/`remove`, sweeping only the written artifact and diffed against a sweep taken just before the write, so it reports only what *that* write broke, on that op's own response directly under its `Links: N resolved…` line — the exact line that lied in both recorded incidents, now self-verifying; `ingest` is excluded deliberately, having always run `resolveBlockLinks` correctly. **(2)** a corpus-wide check at startup and on `reload`, held in a `linkWarning` attached to *every* response the way `contentConflict` already is, so drift that landed while the service was down emerges on the very next command of any kind. **(3)** a corpus-wide sweep at end of batch, the one step left to discipline (skill v2.5, folded into *Stage each verified step*), because it alone catches an edit in artifact A breaking a citation that lives in artifact B. All three report and never repair: the known workaround for [the unreproduced regression](#id/BlockNode:00CGMX88R0003) is \"re-run the identical write and it sticks,\" and a silent auto-retry would erase the evidence it is still being hunted with. Verified end to end rather than from a summary line: one real link edge dropped on disk, service restarted → startup sweep named the block, the warning then rode unrelated `tree` and `path` calls, and `--repair` cleared it. Two things the build itself turned up: the corpus sweep was first placed *before* `markReady`, eating into `waitForReady`'s 5s budget (moved after it, and queued), and `--repair` re-mints every `Link` id in the artifact it touches rather than only the broken one, [filed separately](../issues/linking.md#id/BlockNode:00CHYM4Z1G001).",
     "parent": "BlockNode:00CGMX88R0004",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ01QAJ0000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ01QAJ0000:props:StringProp:00CJ01QE88000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ01QAJ0000:props:StringProp:00CJ01QE88001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CJ01QAJ0000",
+    "text": "**`aperas tree` had no way to name where a render actually started, or where a viewcone zoom moved it to** — every line only ever carried an id and a title, so reading a `tree`/`unfold` render meant a separate `aperas path <id>` call to place it in the corpus at all. First attempt over-corrected: a `(path)` tag on *every* line, immediately caught as wrong — repeating the full path on each descendant says the same prefix over and over, since every line under a render's own apex is already relative to it by construction. **Resolved**: exactly two breadcrumb points instead, each printed once, in `aperas://tree/<path>` form (`aperas path`'s own format, directly reusable as a `<ref>`). (1) The apex `aperas tree <ref>` was actually pointed at, as the render's own first line, computed in `kgTree.ts` rather than inside `TreeNode.renderTree()` itself, so `verify.ts`'s own direct `renderTree()` calls keep their existing line-count assumptions untouched. (2) In `--view` mode, wherever a link escapes its owner's viewcone into its own nested one (§13 — the target's own structural position loses canonical placement to the link, an \"escaping win\"), that position, indented to match — an ordinary in-cone link or a superseded pointer line changes nothing about what \"here\" means, so neither gets one. Verified live: constructed an actual escaping-link case (unfold a link whose target's own natural position is folded elsewhere) and confirmed the zoom breadcrumb appears exactly there, nowhere else.",
+    "parent": "BlockNode:00CE1GW63800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ0202MG001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ0202MG001:props:StringProp:00CJ02061R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ0202MG001:props:StringProp:00CJ02061R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CJ0QD2BR001",
+    "text": "**`npm run verify` costs ~5 minutes, dominated by a process-lifetime slowdown neither store-freshness nor heap size explains** — instrumented per-step (a `console.log`-wrapping timer keyed on each step's own `\"N. Testing...\"` header, printing a sorted breakdown even on failure) and found the same operation (`checkLinkIntegrity`'s corpus sweep, and separately `parseMarkdownTree`-driven ingestion in Linking Slice steps 13-18) costs low hundreds of ms freshly isolated, but 12-55 *seconds* run as `verify.ts`'s own later steps — steps 3-6 doing the identical kind of parsing work stay fast, steps 7-12 in between do no heavy parsing at all, then 13 onward is uniformly slow. Two credible causes ruled out by direct experiment, not by inspection: (1) oxigraph's own WASM memory footprint (`external`, ~850MB-1GB by that point vs ~50MB fresh) looked causal, but compacting the store mid-run (dehydrate a scratch dir, rehydrate a brand-new `Store` with the identical live content) made the same sweep *slower*, not faster — ruling out \"this one store instance is bloated.\" (2) V8 heap-size tuning (`--max-old-space-size=8192 --max-semi-space-size=128`) changed nothing measurably.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CJ0QG048001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ023M08001",
+    "@type": "BlockNode",
+    "title": "00CJ023M08001",
+    "text": "**`npm run verify`'s runtime had no visibility and two real, fixable costs** — nobody could say which of its ~30 steps made a run slow, and two genuine inefficiencies existed unnoticed alongside whatever the process-lifetime slowdown turns out to be (see the still-open entry above). **Resolved, three parts**: (1) a permanent, zero-cost-when-quiet step timer (wraps `console.log`, keys on each step's own numbered header, prints a sorted breakdown at the end even on failure via an outer `try`/`finally`) — the diagnostic that made the still-open finding above possible to state precisely at all. (2) `astParser.ts` built a fresh `unified().use(remarkParse).use(remarkGfm)` pipeline on every single call across three call sites, two of them (`collectLinkCodesFromText`, `findLeadInSpliceOffset`) hit once per block rather than once per document — hoisted into two module-level singletons (one with `remarkFrontmatter` for whole-document parsing, one without, since running the frontmatter plugin over an arbitrary block's own text risks misreading a stylistic `---` thematic break as a frontmatter delimiter). Measured to cost nothing on its own (isolated timing was identical before and after) but removed as real, confirmed waste regardless. (3) `verify.ts`'s own step 19 called `checkLinkIntegrity` immediately before `repairLinkIntegrity`, which recomputed the identical report internally as its own `reportBefore` — `repairLinkIntegrity` now takes an optional pre-computed report, cutting one of four full corpus sweeps in that step. Net effect on the actual numbers: step 19 dropped ~40s, full suite ~326s -> ~290s — real, but small next to the ~230s the still-open process-lifetime slowdown accounts for across steps 13-19.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ02BTG0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ02BTG0001:links:Link:00CJ02E1W8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ02BTG0001:links:Link:00CJ02E1W8000:props:StringProp:00CJ02E1W8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.6 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). `aperas tree` gained a usable path reference, on a second attempt — the first put it on every line and was wrong, caught on review before it shipped further than this same session; the corrected design (issues/treeview.md) prints it exactly twice: once for the render's own apex, once wherever a `--view` render's viewcone zooms to a new relative root.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ02JJM0000",
+      "BlockNode:00CJ02QEF8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ02JJM0000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ02JJM0000:links:Link:00CJ02MQHR000",
+        "@type": "Link",
+        "target": "BlockNode:00CHYJDBR8000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ02JJM0000:links:Link:00CJ02MQHR000:props:StringProp:00CJ02MQHR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.6",
+    "text": "Supersedes: [v2.5's own status line](#id/BlockNode:00CHYJDBR8000)",
+    "parent": "BlockNode:00CJ02BTG0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ02MMER002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ02MMER002",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.6** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CJ02JJM0000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ02QEF8001",
+    "@type": "BlockNode",
+    "title": "### Mechanics — `aperas tree` names the node it started from, once — not every line",
+    "text": "The first line of any `aperas tree` render is a breadcrumb, `aperas://tree/<path>` — the walkable path of the node the command was actually pointed at (`.` if none given), directly reusable as a `<ref>` elsewhere with no separate `aperas path` call. It appears exactly once, at the top: every line under it is already relative to that node by construction (that is what a tree render is), so repeating the prefix on each one would say nothing new. Omitted, not shown broken, when the node's own path can't be walked.",
+    "parent": "BlockNode:00CJ02BTG0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CJ02VX60002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CJ02VX60002",
+    "@type": "BlockNode",
+    "title": "00CJ02VX60002",
+    "text": "`--view` reuses the same idea at a second place it's actually needed: when a link escapes its owner's own viewcone into a nested one (Aperas-treeview-design.md §13 — the target is unfolded independently, and the link, not the target's own structural position, wins canonical placement), everything under that link is now relative to *it*, not to the render's original apex. That position gets its own one-time breadcrumb too, indented to match, for the same reason the apex gets one. An ordinary in-cone link (target already reachable from the apex the normal way) or a \"this is superseded, see elsewhere\" pointer line needs neither — nothing changes what \"here\" means at those positions.",
+    "parent": "BlockNode:00CJ02QEF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ0HX2Y0000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ0HX2Y0000:props:StringProp:00CJ0HX7M8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ0HX2Y0000:props:StringProp:00CJ0HX7M8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CJ0HX2Y0000",
+    "text": "**Why isolation helps is still unexplained** — narrower and lower-stakes now that the split above removes the actual pain, but the mechanism itself is still just \"two ruled-out hypotheses and one unconfirmed one\" (see the entry above: not oxigraph's own memory footprint, not V8 heap-size — leading guess is inline-cache megamorphism or similar JIT-level degradation in a long process running many differently-shaped operations, never directly confirmed). Worth a closer look sometime with real V8 profiling (`--prof`/`--trace-deopt`) if it recurs somewhere a process split isn't a viable fix, but not worth chasing further here.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ0JZ830001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T12:29:36.010Z",
+    "title": "00CJ0JZ830001",
+    "text": "**`aperas update --text-only` on an existing listItem can overwrite its title with an unrelated freshly-minted id** — found incidentally while editing this doc's own entries above, not investigated: a listItem's `title` normally falls back to its own bare id when its text has no colon lead-in (expected, confirmed on an untouched sibling), but after re-pushing text (also with no colon lead-in) via `update --text-only`, the title changed to a *different* id string that matches neither the target nor anything else nearby — looks like the non-heading title re-derivation added earlier this session (`kgUpdate.ts`, [issues/core.md above](#id/BlockNode:00CGM54FX0001)) picks up a throwaway id minted for the freshly re-parsed input tree, rather than leaving the title alone when there's no real lead-in to derive. Cosmetic today (nothing addresses this node by title-derived path), not reproduced under controlled conditions, not fixed.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ0QG048001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ0QG048001:links:Link:00CJ0QKWQR000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ0HX2Y0000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ0QG048001:links:Link:00CJ0QKWQR000:props:StringProp:00CJ0QKWQR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "758"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJ0QG048001:props:StringProp:00CJ0QG3VR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ0QG048001:props:StringProp:00CJ0QG3VR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Practical problem resolved, root cause still not**",
+    "text": "**Practical problem resolved, root cause still not**: since the leading hypothesis was V8-engine-level degradation intrinsic to one long process (only a genuinely fresh process/V8 isolate resets it), split `verify.ts` into two files instead of chasing the exact mechanism further — `verify.ts` (steps 1-12, `npm run verify`) and the new `verifyExtended.ts` (steps 13-19, `npm run verify:slow`), sharing only small structural helpers (`verifySupport.ts`). Measured live: `verify` now runs in ~42s (down from ~290-326s); `verify:slow` alone runs the same steps 13-19 in ~70-100s (down from ~230s+ *inside* the combined process) — confirming the isolation hypothesis practically without confirming *why* isolation helps. That \"why\" is deliberately left open in [the next Open Issues entry](#id/BlockNode:00CJ0HX2Y0000) as a narrower, lower-stakes curiosity now that the actual pain (an unaffordable per-turn cost) is gone.",
+    "parent": "BlockNode:00CJ0202MG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ0W09C8000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-17T12:43:45.690Z",
+    "title": "**Resolved**",
+    "text": "**Resolved**: two compounding causes, not one. First, `repairLinkIntegrity` scoped its re-resolution to every link-bearing block in the affected artifact (`collectAllBlockNodes`) instead of just the blocks the discrepancy report actually names. Second, and more fundamental, it called `resolveBlockLinks` with `oldWikilinksByBlock` left `undefined` — the parameter that lets a freshly-resolved target reuse an existing `Link`'s id rather than minting a new one — so even a single touched block would have reminted every one of its own wikilinks, correct ones included. Fixed by grouping discrepancies by artifact, building `pendingLinks` only from the named blocks, and calling `collectOldWikilinksByBlock` (the same map `ingestFromDisk` already builds before its own `resolveBlockLinks` call) before repairing, so an already-correct wikilink keeps its id and only the genuinely-missing one mints fresh. Verified via `verify:slow`'s own step 19 scenario (one dropped link edge, repaired, discrepancies back to 0) and a clean corpus-wide `check-links` sweep afterward.",
+    "parent": "BlockNode:00CHYM4Z1G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJ0XSZ8R001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJ0XSZ8R001:props:StringProp:00CJ0XT270000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJ0XSZ8R001:props:StringProp:00CJ0XT270001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Resolved**",
+    "text": "**Resolved**: two compounding causes, not one. First, `repairLinkIntegrity` scoped its re-resolution to every link-bearing block in the affected artifact (`collectAllBlockNodes`) instead of just the blocks the discrepancy report actually names. Second, and more fundamental, it called `resolveBlockLinks` with `oldWikilinksByBlock` left `undefined` — the parameter that lets a freshly-resolved target reuse an existing `Link`'s id rather than minting a new one — so even a single touched block would have reminted every one of its own wikilinks, correct ones included. Fixed by grouping discrepancies by artifact, building `pendingLinks` only from the named blocks, and calling `collectOldWikilinksByBlock` (the same map `ingestFromDisk` already builds before its own `resolveBlockLinks` call) before repairing, so an already-correct wikilink keeps its id and only the genuinely-missing one mints fresh. Verified via `verify:slow`'s own step 19 scenario (one dropped link edge, repaired, discrepancies back to 0) and a clean corpus-wide `check-links` sweep afterward.",
+    "parent": "BlockNode:00CHYM4Z1G001",
+    "type": "listItem",
     "children": []
   }
 ]
