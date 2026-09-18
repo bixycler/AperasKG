@@ -28466,6 +28466,7 @@
       "BlockNode:00CJ2VBQR0003",
       "BlockNode:00CJ2VBQR0004",
       "BlockNode:00CJ2VBQR0005",
+      "BlockNode:00CJE97N2G001",
       "BlockNode:00CJ7PNQ2R001",
       "BlockNode:00CJ8E2GAR001"
     ]
@@ -30722,7 +30723,9 @@
       "BlockNode:00CJE14W0R001",
       "BlockNode:00CJ6TGSYR003",
       "BlockNode:00CJ6TGSYR004",
-      "BlockNode:00CJ6TGSYR005"
+      "BlockNode:00CJ6TGSYR005",
+      "BlockNode:00CJEDTR40001",
+      "BlockNode:00CJFDGBVR001"
     ]
   },
   {
@@ -31361,16 +31364,30 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJE1DKBR003:props:StringProp:00CJE1DKBR004",
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJE1DKBR003:props:StringProp:00CJEDYVEG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "1662"
+            "value": "1658"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJEDYVEG001",
+        "@type": "Link",
+        "target": "BlockNode:00CJEDTR40001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJEDYVEG001:props:StringProp:00CJEDYVEG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1756"
           }
         ]
       }
     ],
     "title": "## Current Status",
-    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron. In place of the still-missing tick channel, the dev tab polls its own refetch every 1s (a `sync` checkbox in the header turns it off), which is what makes an external `aperas fold`/`unfold`/CLI write show up without a manual reload — see [why this is explicitly a stopgap, not the settled push design](../design/webapp.md#id/BlockNode:00CJDHHVA8000). `FolderDiv`'s own render polish also landed: [a compact glyph per node kind](../design/webapp.md#id/BlockNode:00CJDHWT9G001) in place of the old `[FolderNode]`/`[heading]`/... bracket, [the fold arrow plus its guide line unified into one hoverable/clickable control](../design/webapp.md#id/BlockNode:00CJDHYES8001), [a link row now shows its target's own kind glyph and splits title from abstract the same way an unfolded node does](../design/webapp.md#id/BlockNode:00CJE14W0R001), and [body text lost the dimming it never needed](../design/webapp.md#id/BlockNode:00CJE11FRR000).",
+    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron. In place of the still-missing tick channel, the dev tab polls its own refetch every 1s (a `sync` checkbox in the header turns it off), which is what makes an external `aperas fold`/`unfold`/CLI write show up without a manual reload — see [why this is explicitly a stopgap, not the settled push design](../design/webapp.md#id/BlockNode:00CJDHHVA8000). `FolderDiv`'s own render polish also landed: [a compact glyph per node kind](../design/webapp.md#id/BlockNode:00CJDHWT9G001) in place of the old `[FolderNode]`/`[heading]`/... bracket, [the fold arrow plus its guide line unified into one hoverable/clickable control](../design/webapp.md#id/BlockNode:00CJDHYES8001), [a link row now shows its target's own kind glyph and splits title from abstract the same way an unfolded node does](../design/webapp.md#id/BlockNode:00CJE14W0R001), [body text lost the dimming it never needed](../design/webapp.md#id/BlockNode:00CJE11FRR000), and [each node's title line now shows its own backlink count, opening a popover of them on click](../design/webapp.md#id/BlockNode:00CJEDTR40001).",
     "parent": "BlockNode:00CJ6V6N9R001",
     "type": "heading",
     "children": []
@@ -31931,6 +31948,73 @@
     "@type": "BlockNode",
     "title": "**A link row shows the target's own kind glyph next to the link glyph, and its title/abstract split like a normal node's**",
     "text": "**A link row shows the target's own kind glyph next to the link glyph, and its title/abstract split like a normal node's**: `RenderLinkItem.targetDisplayLabel` (added alongside `targetTitle`, populated in every mode but `no-target`) is what makes the first half possible — no second lookup, same reasoning as `RenderNodeItemFound.displayLabel`. The two used to run together as one `\"title — abstract\"` string inside a single highlighted span; now only the title carries the link highlight, and the abstract renders as an ordinary `.fd-abstract` line beneath it, so a link preview reads as \"a title, then its actual body text\" the same way an unfolded node does, rather than one long highlighted run.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJE94F88001",
+    "@type": "BlockNode",
+    "title": "**Backlinks surfaced in the tree UI, 2026-09-18**",
+    "text": "**Backlinks surfaced in the tree UI, 2026-09-18**: `FolderDiv` should show, on each node's own title line, a small badge with its backlink count, floating right; clicking it opens a popover above the line listing each backlink as a folded-node-style entry (kind glyph, title, abstract); clicking one of those entries should navigate to it — zoom the apex to the backlink's *source* (the node containing the citing `Link`) with that link pre-unfolded, so the reader lands in the citing context already expanded rather than just at a bare id. Plumbing: `backlinks(store, id, 'target')` (`node.ts`) already gives an indexed, non-scanning count per node — add `backlinkCount: number` to `RenderNodeItemFound` in `buildNodeItem`, gated the same as its other found-node fields, and mirror it into `render.ts`. The popover's actual list reuses the CLI's own `runBacklinks`/`BacklinkEntry` (`kgBacklinks.ts`) via the existing service `'backlinks'` op — no new core computation — fetched lazily on click through a new `/api/backlinks?id=` dev-bridge route, matching `/api/tree`'s own on-demand-fetch pattern in `Inline.tsx`'s hover popover. `BacklinkEntry` needs one new field, `ownerId`, since a `Link`'s id encodes its owner only by string convention (`ownerOfLink`'s own doc comment says querying, not parsing, is how every other lookup here resolves it) — `runBacklinks` already computes `ownerId` internally, so this is exposing an existing value, not new computation.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJE97N2G001",
+    "@type": "BlockNode",
+    "title": "**Backlinks surfaced in the tree UI, 2026-09-18**",
+    "text": "**Backlinks surfaced in the tree UI, 2026-09-18**: `FolderDiv` should show, on each node's own title line, a small badge with its backlink count, floating right; clicking it opens a popover above the line listing each backlink as a folded-node-style entry (kind glyph, title, abstract); clicking one of those entries should navigate to it — zoom the apex to the backlink's *source* (the node containing the citing `Link`) with that link pre-unfolded, so the reader lands in the citing context already expanded rather than just at a bare id. Plumbing: `backlinks(store, id, 'target')` (`node.ts`) already gives an indexed, non-scanning count per node — add `backlinkCount: number` to `RenderNodeItemFound` in `buildNodeItem`, gated the same as its other found-node fields, and mirror it into `render.ts`. The popover's actual list reuses the CLI's own `runBacklinks`/`BacklinkEntry` (`kgBacklinks.ts`) via the existing service `'backlinks'` op — no new core computation — fetched lazily on click through a new `/api/backlinks?id=` dev-bridge route, matching `/api/tree`'s own on-demand-fetch pattern in `Inline.tsx`'s hover popover. `BacklinkEntry` needs one new field, `ownerId`, since a `Link`'s id encodes its owner only by string convention (`ownerOfLink`'s own doc comment says querying, not parsing, is how every other lookup here resolves it) — `runBacklinks` already computes `ownerId` internally, so this is exposing an existing value, not new computation.",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJEDTR40001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJEDTR40001:links:Link:00CJFD9Y4R000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6TGSYR003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJEDTR40001:links:Link:00CJFD9Y4R000:props:StringProp:00CJFD9Y4R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "989"
+          }
+        ]
+      }
+    ],
+    "title": "**A node's title line carries its own backlink count, and a click reveals them**",
+    "text": "**A node's title line carries its own backlink count, and a click reveals them**: `RenderNodeItemFound.backlinkCount` (`backlinks(store, id, 'target').length` in `buildNodeItem`, an indexed store match, not a corpus scan — `0` while `hidden`, like this item's sibling found-node fields) drives a small badge floating right on the title line, shown only once there's something to show. Clicking it fetches the actual list lazily (the dev bridge's `/api/backlinks`, a thin wrapper over the CLI's own `backlinks` service op) and opens a popover above the line (or below, clamped into the viewport, when there isn't room above), each entry rendered like a folded node's own preview — kind glyph, title, abstract — since that's what a backlink is: another node's title-and-text, citing this one. A plain click on an entry unfolds both the citing `Link` and its owning node *without changing the apex*, then scrolls to wherever the owner actually renders — the same canonical-position machinery [both sites already obey](#id/BlockNode:00CJ6TGSYR003) decides whether that's inline content, a pointer elsewhere in the current render, or nowhere at all if the owner isn't reachable from the current apex (in which case the scroll silently finds nothing, same as any anchor to an absent id). Ctrl-click is the stronger action — it also zooms the apex to the owner — matching ctrl-click's meaning everywhere else in this app rather than introducing a third gesture. Revealing the link needs both unfolds, not just the link's own: a node's own links only render at all once the node itself is in the view's `unfolds` set (`buildNodeItem`'s `linksToShow`) — the link's own unfold alone leaves it invisible until its owner is unfolded too.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJFDGBVR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJFDGBVR001:links:Link:00CJFDGFW8000",
+        "@type": "Link",
+        "target": "BlockNode:00CJEDTR40001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJFDGBVR001:links:Link:00CJFDGFW8000:props:StringProp:00CJFDGFW8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "301"
+          }
+        ]
+      }
+    ],
+    "title": "**A link row's click toggles its own fold state; ctrl-click zooms**",
+    "text": "**A link row's click toggles its own fold state; ctrl-click zooms**: `preview` and `expanded` share one row-level `onClick` — plain click unfolds (`preview`) or folds (`expanded`) that link, ctrl/meta-click zooms to its target instead, mirroring the same modifier-key convention this UX pass gave the [backlinks popover](#id/BlockNode:00CJEDTR40001). The `Gutter`'s own arrow/stem click still works too (`e.stopPropagation()` keeps the two from double-toggling on the same click) — this just extends the same fold/unfold gesture to the rest of the row instead of leaving it as the arrow's own private affordance. `pointer`/`outside-view` rows are unchanged: they have no fold state of their own to toggle, so their plain click still jumps directly, same as before.",
     "parent": "BlockNode:00CJ6TGSYR000",
     "type": "listItem",
     "children": []

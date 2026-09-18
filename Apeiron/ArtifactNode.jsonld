@@ -687,10 +687,10 @@
       "BlockNode:00CJ2TCV40001"
     ],
     "path": "discussion/webapp.md",
-    "fileHash": "614911919493e253b68bb2ffbcb694b63ce241ad13bd5186672864e855d45c76",
-    "ingestedHash": "614911919493e253b68bb2ffbcb694b63ce241ad13bd5186672864e855d45c76",
-    "lastIngestedAt": "2026-09-17T21:30:21.088Z",
-    "projectedHash": "614911919493e253b68bb2ffbcb694b63ce241ad13bd5186672864e855d45c76"
+    "fileHash": "49652409792fe9609b0c38a08ba8fe4e18203484207119051a2ac266761da10d",
+    "ingestedHash": "49652409792fe9609b0c38a08ba8fe4e18203484207119051a2ac266761da10d",
+    "lastIngestedAt": "2026-09-18T04:17:43.670Z",
+    "projectedHash": "49652409792fe9609b0c38a08ba8fe4e18203484207119051a2ac266761da10d"
   },
   {
     "@id": "ArtifactNode:00CJ6T0XAG000",
@@ -702,10 +702,10 @@
       "BlockNode:00CJ6TGSX8001"
     ],
     "path": "design/webapp.md",
-    "fileHash": "63098042210c2a8aceb7efa8da910b672d25ec40f4919a14123127d1aa06a9db",
-    "ingestedHash": "63098042210c2a8aceb7efa8da910b672d25ec40f4919a14123127d1aa06a9db",
-    "lastIngestedAt": "2026-09-18T04:00:48.264Z",
-    "projectedHash": "63098042210c2a8aceb7efa8da910b672d25ec40f4919a14123127d1aa06a9db"
+    "fileHash": "e629179d9f33527dc43f6df9b06887b7528d1bb1b1d7ee520a1e002b5560eac2",
+    "ingestedHash": "e629179d9f33527dc43f6df9b06887b7528d1bb1b1d7ee520a1e002b5560eac2",
+    "lastIngestedAt": "2026-09-18T05:37:03.125Z",
+    "projectedHash": "e629179d9f33527dc43f6df9b06887b7528d1bb1b1d7ee520a1e002b5560eac2"
   },
   {
     "@id": "ArtifactNode:00CJ6T137R000",
@@ -741,15 +741,15 @@
     "@id": "ArtifactNode:00CJ6T1G4G000",
     "@type": "ArtifactNode",
     "title": "webapp.md",
-    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron. In place of the still-missing tick channel, the dev tab polls its own refetch every 1s (a `sync` checkbox in the header turns it off), which is what makes an external `aperas fold`/`unfold`/CLI write show up without a manual reload — see [why this is explicitly a stopgap, not the settled push design](../design/webapp.md#id/BlockNode:00CJDHHVA8000). `FolderDiv`'s own render polish also landed: [a compact glyph per node kind](../design/webapp.md#id/BlockNode:00CJDHWT9G001) in place of the old `[FolderNode]`/`[heading]`/... bracket, [the fold arrow plus its guide line unified into one hoverable/clickable control](../design/webapp.md#id/BlockNode:00CJDHYES8001), [a link row now shows its target's own kind glyph and splits title from abstract the same way an unfolded node does](../design/webapp.md#id/BlockNode:00CJE14W0R001), and [body text lost the dimming it never needed](../design/webapp.md#id/BlockNode:00CJE11FRR000).",
+    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron. In place of the still-missing tick channel, the dev tab polls its own refetch every 1s (a `sync` checkbox in the header turns it off), which is what makes an external `aperas fold`/`unfold`/CLI write show up without a manual reload — see [why this is explicitly a stopgap, not the settled push design](../design/webapp.md#id/BlockNode:00CJDHHVA8000). `FolderDiv`'s own render polish also landed: [a compact glyph per node kind](../design/webapp.md#id/BlockNode:00CJDHWT9G001) in place of the old `[FolderNode]`/`[heading]`/... bracket, [the fold arrow plus its guide line unified into one hoverable/clickable control](../design/webapp.md#id/BlockNode:00CJDHYES8001), [a link row now shows its target's own kind glyph and splits title from abstract the same way an unfolded node does](../design/webapp.md#id/BlockNode:00CJE14W0R001), [body text lost the dimming it never needed](../design/webapp.md#id/BlockNode:00CJE11FRR000), and [each node's title line now shows its own backlink count, opening a popover of them on click](../design/webapp.md#id/BlockNode:00CJEDTR40001).",
     "parent": "FolderNode:00CDBYV4BR002",
     "children": [
       "BlockNode:00CJ6V6N9R001"
     ],
     "path": "history/webapp.md",
-    "fileHash": "1858bd9dba40476a1328579912b98c9f9ed4c56da9511ec9cff50f8f242119c6",
-    "ingestedHash": "1858bd9dba40476a1328579912b98c9f9ed4c56da9511ec9cff50f8f242119c6",
-    "lastIngestedAt": "2026-09-18T04:00:49.526Z",
-    "projectedHash": "1858bd9dba40476a1328579912b98c9f9ed4c56da9511ec9cff50f8f242119c6"
+    "fileHash": "bc0bf84a5f33fe80fe5574cd0f42f37cc4b7c6b2c18216005982f2ab54953ee6",
+    "ingestedHash": "bc0bf84a5f33fe80fe5574cd0f42f37cc4b7c6b2c18216005982f2ab54953ee6",
+    "lastIngestedAt": "2026-09-18T04:28:10.326Z",
+    "projectedHash": "bc0bf84a5f33fe80fe5574cd0f42f37cc4b7c6b2c18216005982f2ab54953ee6"
   }
 ]
