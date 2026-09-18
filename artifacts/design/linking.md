@@ -33,10 +33,11 @@ Resolved directly against the graph by Apeiron's own tooling (`kg:tree`, `kg:unf
 
 ### Projected/Pre-Ingestion Context <a name='id/BlockNode:00CDBYV4T800C' class='aperas-anchor aperas-id'></a>
 
-A markdown file meant to also work as a plain file on disk (a projected artifact, or a doc being authored/refactored before ingestion). Compatible syntax uses an ordinary relative file link with a `#fragment`:
+A markdown file meant to also work as a plain file on disk (a projected artifact, or a doc being authored/refactored before ingestion). Compatible syntax uses an ordinary relative file link, optionally with a `#fragment` to address one specific block within the target file:
 
 - `[title](../folder/file#<block-slug-path>)`: <a name='id/BlockNode:00CDBYV4T800D' class='aperas-anchor aperas-id'></a> slugified-path addressing.
 - `[title](../folder/file#id/<ID>)`: <a name='id/BlockNode:00CDBYV4T800E' class='aperas-anchor aperas-id'></a> node-ID addressing, the literal `id/` fragment prefix distinguishing it from a slug-path fragment; backed by a `name="id/<ID>"` anchor, same mechanism as the slug-path form (see [Anchors](#id/BlockNode:00CDBYV4T800H)).
+- `[title](../folder/file)`: <a name='id/BlockNode:00CJATTNZ8001' class='aperas-anchor aperas-id'></a> whole-file/whole-folder reference — omitting the fragment entirely resolves the link directly to the target's own `ArtifactNode`/`FolderNode`; the counterpart to the two fragment forms above, which each additionally address one specific block within the file.
 
 `<ID>` is always the full `Kind:snowflake` form (e.g. `BlockNode:00C5H15NT0000`), never a bare snowflake alone.
 

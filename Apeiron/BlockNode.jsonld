@@ -103,6 +103,22 @@
   {
     "@id": "BlockNode:00CDBYV4T0004",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV4T0004:links:Link:00CJ9G7AQ8000",
+        "@type": "Link",
+        "target": "ArtifactNode:00CDBYV46R000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV4T0004:links:Link:00CJ9G7AQ8000:props:StringProp:00CJ9G7AQ8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
     "props": [
       {
         "@id": "BlockNode:00CDBYV4T0004:props:StringProp:00CE59ADR0000",
@@ -151,6 +167,22 @@
   {
     "@id": "BlockNode:00CDBYV4T8000",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBYV4T8000:links:Link:00CJ9G7SR8000",
+        "@type": "Link",
+        "target": "ArtifactNode:00CDBYV46R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBYV4T8000:links:Link:00CJ9G7SR8000:props:StringProp:00CJ9G7SRG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
     "title": "**Planning**",
     "text": "**Planning**: [First implementation slice](../planning/linking.md).",
     "parent": "BlockNode:00CDBYV4T0002",
@@ -334,12 +366,13 @@
     "@id": "BlockNode:00CDBYV4T800C",
     "@type": "BlockNode",
     "title": "### Projected/Pre-Ingestion Context",
-    "text": "A markdown file meant to also work as a plain file on disk (a projected artifact, or a doc being authored/refactored before ingestion). Compatible syntax uses an ordinary relative file link with a `#fragment`:",
+    "text": "A markdown file meant to also work as a plain file on disk (a projected artifact, or a doc being authored/refactored before ingestion). Compatible syntax uses an ordinary relative file link, optionally with a `#fragment` to address one specific block within the target file:",
     "parent": "BlockNode:00CDBYV4T8007",
     "type": "heading",
     "children": [
       "BlockNode:00CDBYV4T800D",
       "BlockNode:00CDBYV4T800E",
+      "BlockNode:00CJATTNZ8001",
       "BlockNode:00CDBYV4T800F",
       "BlockNode:00CDBYV4T800G"
     ]
@@ -815,6 +848,7 @@
       "BlockNode:00CGM5V098001",
       "BlockNode:00CGN6GJVG000",
       "BlockNode:00CHYM4Z1G001",
+      "BlockNode:00CJAV2W1R001",
       "BlockNode:00CDBYV5A800B"
     ]
   },
@@ -1216,7 +1250,8 @@
       "BlockNode:00CH47P6K8001",
       "BlockNode:00CDBZ7698004",
       "BlockNode:00CH4JM6H0001",
-      "BlockNode:00CJ6G02D0001"
+      "BlockNode:00CJ6G02D0001",
+      "BlockNode:00CJAVGNJG001"
     ]
   },
   {
@@ -1677,6 +1712,22 @@
   {
     "@id": "BlockNode:00CDBZ77EG002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDBZ77EG002:links:Link:00CJ9GESSR000",
+        "@type": "Link",
+        "target": "ArtifactNode:00CDBYV460000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDBZ77EG002:links:Link:00CJ9GESSR000:props:StringProp:00CJ9GESSR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "17"
+          }
+        ]
+      }
+    ],
     "title": "## Implementation Plan",
     "text": "Two slices carry [design/linking.md](../design/linking.md)'s addressing convention to a working implementation:",
     "parent": "BlockNode:00CDBZ77EG001",
@@ -11370,6 +11421,36 @@
   {
     "@id": "BlockNode:00CE32GW3G002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CE32GW3G002:links:Link:00CJ9GESSG000",
+        "@type": "Link",
+        "target": "ArtifactNode:00CE32GQ0R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE32GW3G002:links:Link:00CJ9GESSG000:props:StringProp:00CJ9GESSG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "433"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CE32GW3G002:links:Link:00CJ9GESSG002",
+        "@type": "Link",
+        "target": "ArtifactNode:00CE32GQ10000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CE32GW3G002:links:Link:00CJ9GESSG002:props:StringProp:00CJ9GESSG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "496"
+          }
+        ]
+      }
+    ],
     "title": "## Current Status",
     "text": "Fully implemented and migrated. All three cases of the unified law (consumption, dissolution via merged self, dissolution when orphaned) are live in `astParser.ts`/`project.ts`, `orderedList`/`startIndex` are normalized onto each run's own first item everywhere, and the real corpus (48 legacy anchors relocated, 59 live `list` nodes fixpoint-spliced and tombstoned) has been migrated — zero `list`-typed BlockNodes remain live. See [Issues](../issues/list-consumption.md) (now all resolved) and [Planning](../planning/list-consumption.md) (Task Breakdown, all done).",
     "parent": "BlockNode:00CE32GW3G001",
@@ -30871,87 +30952,6 @@
     ]
   },
   {
-    "@id": "BlockNode:00CJ6V6370006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Extract `buildRenderTree` into `@aperas/core`**",
-    "text": "**Extract `buildRenderTree` into `@aperas/core`**: promote `discoverCone`'s render plan into a returned tree of render items and redefine the text output as `toText(buildRenderTree(...))`. The existing verification suite is the guarantee — the text render must stay byte-identical. Carry it to a caller with a `format` discriminator on the existing `tree` service op.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V6370007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Add the HTTP listener to the ApeironNgn service**",
-    "text": "**Add the HTTP listener to the ApeironNgn service**: loopback-bound, serving an explicit op allowlist rather than the whole protocol, alongside the unchanged unix socket.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V6370008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Generate and store the per-run auth token**",
-    "text": "**Generate and store the per-run auth token**: `randomBytes(32)` at service start, written into the existing run directory beside the lock and socket at mode 0600, and exposed for the dev server to read. Independent of the listener, and worth landing first so the secret's lifecycle is solved and tested before anything consumes it.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V6370009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Implement the auth checks**",
-    "text": "**Implement the auth checks**: `X-Aperas-Token` required on every request with a restrictive preflight response, `timingSafeEqual` comparison, loopback `Host` check, `Origin` allowlist.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V637000A",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Build the tick channel**",
-    "text": "**Build the tick channel**: a streaming NDJSON endpoint on the service side, and a `fetch()` + `ReadableStream` reader on the client with its own reconnect loop — refetch unconditionally on reconnect, pause while the tab is hidden, surface a 401 as a distinct \"service restarted\" state rather than a silent retry.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V637000B",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Port `FolderDiv` to a Solid component**",
-    "text": "**Port `FolderDiv` to a Solid component**: its three slots map onto the three render tiers unchanged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V637000C",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Render the two link sites**",
-    "text": "**Render the two link sites**: the link's own text as the `cite-ref` anchor, and the endnote list after the children as `cite-note`, with click-through both ways and one back-reference per position.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V637000D",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Implement zoom**",
-    "text": "**Implement zoom**: ctrl-click on the arrow handle sets a new apex; the breadcrumb above it zooms back out. UI-local state, not view state.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CJ6V637000E",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-17T21:31:48.358Z",
-    "title": "**Implement the shallow write**",
-    "text": "**Implement the shallow write**: a single `updateText(id, text)` on the host side that picks the correct per-type input form, so the UI never encodes the write-path's bullet-marker and `--text-only` rules. The service's per-artifact link sweep, and the known failure where a write reports links resolved but persists none, must both surface in the UI rather than being swallowed.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CJ6V637000F",
     "@type": "BlockNode",
     "title": "## Resolved",
@@ -30961,7 +30961,8 @@
       "BlockNode:00CJ840278001",
       "BlockNode:00CJ8FJNKR001",
       "BlockNode:00CJ8FJNKR002",
-      "BlockNode:00CJ8FJNKR003"
+      "BlockNode:00CJ8FJNKR003",
+      "BlockNode:00CJAW3BS0001"
     ]
   },
   {
@@ -31307,6 +31308,7 @@
       "BlockNode:00CJ6V6N9R004",
       "BlockNode:00CJ6V6N9R005",
       "BlockNode:00CJ83NV3G001",
+      "BlockNode:00CJAVRF90001",
       "BlockNode:00CJ78H4DG001",
       "BlockNode:00CJ78C5WR001"
     ]
@@ -31586,6 +31588,185 @@
     "@type": "BlockNode",
     "title": "**Resolved: Slice 7 — zoom**",
     "text": "**Resolved: Slice 7 — zoom**: ctrl-click and breadcrumbs both change apex via the same code path a deep-linked URL uses; confirmed live via the browser and via URL query-param navigation.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJATTNZ8001",
+    "@type": "BlockNode",
+    "title": "`[title](../folder/file)`",
+    "text": "`[title](../folder/file)`: whole-file/whole-folder reference — omitting the fragment entirely resolves the link directly to the target's own `ArtifactNode`/`FolderNode`; the counterpart to the two fragment forms above, which each additionally address one specific block within the file.",
+    "parent": "BlockNode:00CDBYV4T800C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJAV2W1R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJAV2W1R001:links:Link:00CJAV2YKR001",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAV2W1R001:links:Link:00CJAV2YKR001:props:StringProp:00CJAV2YKR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "438"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJAV2W1R001:links:Link:00CJAV2YKR003",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T800C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAV2W1R001:links:Link:00CJAV2YKR003:props:StringProp:00CJAV2YKR004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1067"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJAV2W1R001:props:StringProp:00CJAV2YKG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJAV2W1R001:props:StringProp:00CJAV2YKR000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**A bare relative-path link (no fragment) never resolved at all**",
+    "text": "**A bare relative-path link (no fragment) never resolved at all**: `astParser.ts`'s `collectLinkCodes` only ever extracted a link occurrence in three shapes — `[[code]]`-wrapped, `aperas://` scheme, or anything containing a `#` — so an ordinary `[title](../folder/file)` reference with no fragment was invisible to resolution entirely, not merely dangling: confirmed live on an existing corpus link with zero entries in its own `.links`. [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007) already described this form as valid (\"cross-file navigation... an ordinary relative path\"), just never implemented. **Fixed**: `collectLinkCodes` now also extracts a `./`/`../`-leading href with no fragment; `apeironNgn/artifacts.ts`'s `resolveOneCode` routes it through a new `resolveBarePathCode`, canonicalizing via the same OS-relative arithmetic the fragment form already uses (`leadingPart.ts`) and resolving directly to whatever's live there — no anchor-matching gate needed, since a bare path names exactly one target. Documented as its own addressing form in [Projected/Pre-Ingestion Context](../design/linking.md#id/BlockNode:00CDBYV4T800C). Corpus-wide `check-links --repair` found and fixed 2 more pre-existing instances of the same gap once the resolver landed.",
+    "parent": "BlockNode:00CDBYV5A800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJAVGNJG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJAVGNJG001:links:Link:00CJAVGR3G001",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAVGNJG001:links:Link:00CJAVGR3G001:props:StringProp:00CJAVGR3G002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "141"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJAVGNJG001:links:Link:00CJAVGR3G003",
+        "@type": "Link",
+        "target": "BlockNode:00CJAV2W1R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAVGNJG001:links:Link:00CJAVGR3G003:props:StringProp:00CJAVGR3G004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "827"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJAVGNJG001:links:Link:00CJAVGR3R000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T800C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAVGNJG001:links:Link:00CJAVGR3R000:props:StringProp:00CJAVGR3R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "891"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CJAVGNJG001:props:StringProp:00CJAVGR38000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJAVGNJG001:props:StringProp:00CJAVGR3G000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**2026-09-18: bare relative-path links (no fragment) now resolve**",
+    "text": "**2026-09-18: bare relative-path links (no fragment) now resolve**: a `[title](../folder/file)` reference with no `#fragment` — described in [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007) as valid \"cross-file navigation,\" but never actually implemented — was invisible to link resolution entirely, not merely dangling: `collectLinkCodes` (`astParser.ts`) never extracted it as an occurrence at all. Fixed by also extracting a `./`/`../`-leading href with no fragment, resolved via a new `resolveBarePathCode` (`apeironNgn/artifacts.ts`) straight to the target's own `ArtifactNode`/`FolderNode` — the same OS-relative path arithmetic the fragment form already uses, no anchor-matching gate needed. `check-links --repair` found and fixed 2 pre-existing corpus instances of the same gap once the resolver landed. See [Resolved](../issues/linking.md#id/BlockNode:00CJAV2W1R001) and [Projected/Pre-Ingestion Context](../design/linking.md#id/BlockNode:00CDBYV4T800C).",
+    "parent": "BlockNode:00CDBZ7698003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJAVRF90001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJAVRF90001:links:Link:00CJAVRHYG000",
+        "@type": "Link",
+        "target": "BlockNode:00CJAVGNJG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAVRF90001:links:Link:00CJAVRHYG000:props:StringProp:00CJAVRHYG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "74"
+          }
+        ]
+      }
+    ],
+    "title": "**2026-09-18: bare-path corpus links made navigable in the render tree**",
+    "text": "**2026-09-18: bare-path corpus links made navigable in the render tree**: [design/linking.md's bare relative-path form](../history/linking.md#id/BlockNode:00CJAVGNJG001), fixed the same day, resolves in the graph now — but the webapp's `Inline.tsx` has no server round trip of its own to learn a link's target; it only ever recognizes a `#id/<Kind>:<id>` fragment already sitting in the href text, so a correctly-resolved bare-path link still rendered inert. Fixed with `bakeResolvedLinkIds` (`apeironNgn/node.ts`): before truncating a node's `abstract`/a link's `targetAbstract` for the render tree, it splices `#id/<target>` onto any `./`/`../`-leading href, using each `Link`'s own stored occurrence `position` — render-tree-only, the stored text and every projected file stay untouched. Verified live in a real browser: clicking `design/linking.md`'s `**Discussion**`/`**Planning**` links now navigates to their target `ArtifactNode`s, breadcrumbs and content updating correctly.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJAW3BS0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJAW3BS0001:links:Link:00CJAW3E5R000",
+        "@type": "Link",
+        "target": "BlockNode:00CJAVGNJG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJAW3BS0001:links:Link:00CJAW3E5R000:props:StringProp:00CJAW3E5R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "309"
+          }
+        ]
+      }
+    ],
+    "title": "**Resolved: bare-path corpus links (no `#id/...` fragment) rendered inert in the UI**",
+    "text": "**Resolved: bare-path corpus links (no `#id/...` fragment) rendered inert in the UI**: `design/linking.md`'s Context section links `**Discussion**`/`**Planning**` by plain relative path with no fragment at all — a form the graph's own resolver never even attempted to resolve until the same-day core fix (see [History](../history/linking.md#id/BlockNode:00CJAVGNJG001)). Resolving it in the graph wasn't enough on its own: `Inline.tsx` has no server round trip of its own to learn a link's target, so it still needs a `#id/<Kind>:<id>` fragment sitting in the href text itself. Fixed with `bakeResolvedLinkIds` (`apeironNgn/node.ts`), which bakes each already-resolved bare-path link's target into its href for the render tree only — the stored text and every projected file stay untouched. Verified live in a real browser: clicking both links now navigates to their target `ArtifactNode`, breadcrumbs and content updating correctly.",
     "parent": "BlockNode:00CJ6V637000F",
     "type": "listItem",
     "children": []
