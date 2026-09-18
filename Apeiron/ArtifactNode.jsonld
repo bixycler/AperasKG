@@ -741,15 +741,15 @@
     "@id": "ArtifactNode:00CJ6T1G4G000",
     "@type": "ArtifactNode",
     "title": "webapp.md",
-    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs.",
+    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron.",
     "parent": "FolderNode:00CDBYV4BR002",
     "children": [
       "BlockNode:00CJ6V6N9R001"
     ],
     "path": "history/webapp.md",
-    "fileHash": "3e90c8bf70a60066973aa9cf4845d9bbb046e8b86c1667bcf6e16cae28e612f2",
-    "ingestedHash": "3e90c8bf70a60066973aa9cf4845d9bbb046e8b86c1667bcf6e16cae28e612f2",
-    "lastIngestedAt": "2026-09-18T00:19:23.714Z",
-    "projectedHash": "3e90c8bf70a60066973aa9cf4845d9bbb046e8b86c1667bcf6e16cae28e612f2"
+    "fileHash": "f4c6cfd96afd653bb0aaa9e7ddfc99788ce167f8c41f8d8738a38e87bd452939",
+    "ingestedHash": "f4c6cfd96afd653bb0aaa9e7ddfc99788ce167f8c41f8d8738a38e87bd452939",
+    "lastIngestedAt": "2026-09-18T01:50:50.822Z",
+    "projectedHash": "f4c6cfd96afd653bb0aaa9e7ddfc99788ce167f8c41f8d8738a38e87bd452939"
   }
 ]

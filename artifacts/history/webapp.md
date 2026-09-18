@@ -2,7 +2,7 @@
 
 ## Current Status <a name='id/BlockNode:00CJ6V6N9R002' class='aperas-anchor aperas-id'></a>
 
-Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs.
+Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron.
 
 ## Milestones <a name='id/BlockNode:00CJ6V6N9R003' class='aperas-anchor aperas-id'></a>
 

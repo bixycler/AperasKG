@@ -24,5 +24,11 @@
     "handle": "will",
     "name": "Will LE",
     "kind": "human"
+  },
+  {
+    "@id": "Profile:00CJC4S69R000",
+    "@type": "Profile",
+    "handle": "dinhlx",
+    "name": "Dinh Le"
   }
 ]
