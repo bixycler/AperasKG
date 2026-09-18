@@ -30590,6 +30590,7 @@
       "BlockNode:00CJ6TGSYG009",
       "BlockNode:00CJ6TGSYG00A",
       "BlockNode:00CJ6TGSYG00B",
+      "BlockNode:00CJDHHVA8000",
       "BlockNode:00CJ6TGSYG00C",
       "BlockNode:00CJ6TGSYG00D",
       "BlockNode:00CJ6TGSYG00E"
@@ -30714,7 +30715,11 @@
     "type": "heading",
     "children": [
       "BlockNode:00CJ6TGSYR001",
+      "BlockNode:00CJDHWT9G001",
+      "BlockNode:00CJDHYES8001",
+      "BlockNode:00CJE11FRR000",
       "BlockNode:00CJ6TGSYR002",
+      "BlockNode:00CJE14W0R001",
       "BlockNode:00CJ6TGSYR003",
       "BlockNode:00CJ6TGSYR004",
       "BlockNode:00CJ6TGSYR005"
@@ -31292,8 +31297,80 @@
   {
     "@id": "BlockNode:00CJ6V6N9R002",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJDJ9G5G000",
+        "@type": "Link",
+        "target": "BlockNode:00CJDHHVA8000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJDJ9G5G000:props:StringProp:00CJDJ9G5G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1063"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJDJ9G5G002",
+        "@type": "Link",
+        "target": "BlockNode:00CJDHYES8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJDJ9G5G002:props:StringProp:00CJE1DKBR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1361"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJDJNETR000",
+        "@type": "Link",
+        "target": "BlockNode:00CJDHWT9G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJDJNETR000:props:StringProp:00CJDJNETR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1221"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJE1DKBR001",
+        "@type": "Link",
+        "target": "BlockNode:00CJE14W0R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJE1DKBR001:props:StringProp:00CJE1DKBR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1492"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJE1DKBR003",
+        "@type": "Link",
+        "target": "BlockNode:00CJE11FRR000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6V6N9R002:links:Link:00CJE1DKBR003:props:StringProp:00CJE1DKBR004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1662"
+          }
+        ]
+      }
+    ],
     "title": "## Current Status",
-    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron.",
+    "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron. In place of the still-missing tick channel, the dev tab polls its own refetch every 1s (a `sync` checkbox in the header turns it off), which is what makes an external `aperas fold`/`unfold`/CLI write show up without a manual reload — see [why this is explicitly a stopgap, not the settled push design](../design/webapp.md#id/BlockNode:00CJDHHVA8000). `FolderDiv`'s own render polish also landed: [a compact glyph per node kind](../design/webapp.md#id/BlockNode:00CJDHWT9G001) in place of the old `[FolderNode]`/`[heading]`/... bracket, [the fold arrow plus its guide line unified into one hoverable/clickable control](../design/webapp.md#id/BlockNode:00CJDHYES8001), [a link row now shows its target's own kind glyph and splits title from abstract the same way an unfolded node does](../design/webapp.md#id/BlockNode:00CJE14W0R001), and [body text lost the dimming it never needed](../design/webapp.md#id/BlockNode:00CJE11FRR000).",
     "parent": "BlockNode:00CJ6V6N9R001",
     "type": "heading",
     "children": []
@@ -31768,6 +31845,93 @@
     "title": "**Resolved: bare-path corpus links (no `#id/...` fragment) rendered inert in the UI**",
     "text": "**Resolved: bare-path corpus links (no `#id/...` fragment) rendered inert in the UI**: `design/linking.md`'s Context section links `**Discussion**`/`**Planning**` by plain relative path with no fragment at all — a form the graph's own resolver never even attempted to resolve until the same-day core fix (see [History](../history/linking.md#id/BlockNode:00CJAVGNJG001)). Resolving it in the graph wasn't enough on its own: `Inline.tsx` has no server round trip of its own to learn a link's target, so it still needs a `#id/<Kind>:<id>` fragment sitting in the href text itself. Fixed with `bakeResolvedLinkIds` (`apeironNgn/node.ts`), which bakes each already-resolved bare-path link's target into its href for the render tree only — the stored text and every projected file stay untouched. Verified live in a real browser: clicking both links now navigates to their target `ArtifactNode`, breadcrumbs and content updating correctly.",
     "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJDHHVA8000",
+    "@type": "BlockNode",
+    "title": "**Until the tick channel ships, a client-side poll stands in**",
+    "text": "**Until the tick channel ships, a client-side poll stands in**: the dev tab bumps its own refetch every 1s regardless of whether anything actually changed, through the same refetch path an in-page fold/edit action already uses — so an external `aperas fold`/`unfold`/CLI write is picked up without a manual reload. User-toggleable (a `sync` checkbox in the header), since a poll racing a session that's deliberately mid-edit via the CLI is more noise than help. Deliberately not the design above: it's a poll, not a push, and it lives entirely client-side rather than in the service.",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJDHWT9G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJDHWT9G001:props:StringProp:00CJDHWY1R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJDHWT9G001:props:StringProp:00CJDHWY1R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The node-kind tag is a glyph, not a bracketed type name**",
+    "text": "**The node-kind tag is a glyph, not a bracketed type name**: `📂`/`📄`/`§`/`¶`/`🔗` for `FolderNode`/`ArtifactNode`/heading/paragraph/link — the handful of kinds a reader actually orients by — and no tag at all for anything else (`listItem`, `code`, `table`, ...), rather than falling back to the old `[type]` text. A silent per-kind opt-in, not a universal re-skin: unmapped kinds stay exactly as bare as a plain list item always read.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJDHYES8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJDHYES8001:props:StringProp:00CJDHYJM8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJDHYES8001:props:StringProp:00CJDHYJMG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The arrow and its stem are one control, not two**",
+    "text": "**The arrow and its stem are one control, not two**: hovering or clicking either the fold arrow or the guide line below it is the same action, ported from the original vanilla `FolderDiv.js` sketch's single `<label>` wrapping both (`UniinfoNotes/assets/HTML/FolderDiv.js`, outside this repo). The stem's own position falls out of sharing the arrow's fixed-width column rather than from a separately-guessed margin — the earlier `.fd-children` border-left had no actual relationship to the arrow's position, which is what made it misaligned. Hovering recolors the arrow and the line together; it never washes the row with a background highlight, which read as an unrelated hover box rather than part of the control.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJE11FRR000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CJE11FRR000:props:StringProp:00CJE11K7R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CJE11FRR000:props:StringProp:00CJE11K7R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Body text renders at full brightness, not dimmed by default**",
+    "text": "**Body text renders at full brightness, not dimmed by default**: `.fd-abstract` and the link-preview popover's own abstract used to sit at reduced opacity or a muted color (`0.75`, `var(--fg-muted)`) for no reason tied to actual state. Dimming is reserved for things that are genuinely secondary — a tombstoned tag, a truncation ellipsis, the poll status line — not for a node's own stored text. A link's title is the one exception in the other direction: it's link-highlighted (the same blue as an inline wikilink) precisely because it's the part that's clickable, while its abstract stays at that same full brightness rather than sharing the highlight.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CJE14W0R001",
+    "@type": "BlockNode",
+    "title": "**A link row shows the target's own kind glyph next to the link glyph, and its title/abstract split like a normal node's**",
+    "text": "**A link row shows the target's own kind glyph next to the link glyph, and its title/abstract split like a normal node's**: `RenderLinkItem.targetDisplayLabel` (added alongside `targetTitle`, populated in every mode but `no-target`) is what makes the first half possible — no second lookup, same reasoning as `RenderNodeItemFound.displayLabel`. The two used to run together as one `\"title — abstract\"` string inside a single highlighted span; now only the title carries the link highlight, and the abstract renders as an ordinary `.fd-abstract` line beneath it, so a link preview reads as \"a title, then its actual body text\" the same way an unfolded node does, rather than one long highlighted run.",
+    "parent": "BlockNode:00CJ6TGSYR000",
     "type": "listItem",
     "children": []
   }
