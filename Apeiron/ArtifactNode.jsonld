@@ -586,11 +586,11 @@
       "BlockNode:00CF1WZ4JG001"
     ],
     "path": "issues/core.md",
-    "fileHash": "33c722d843e038cbe641be6d60261b6f89858c93cf787fbe965474ccba24f262",
+    "fileHash": "669340ed11d461d6f6c995a65f5cd57afe4ea32e5e96f3bc0440f74caf9eeab2",
     "lastTrackedAt": "2026-09-12T22:28:40.384Z",
-    "ingestedHash": "33c722d843e038cbe641be6d60261b6f89858c93cf787fbe965474ccba24f262",
-    "lastIngestedAt": "2026-09-17T12:30:37.987Z",
-    "projectedHash": "33c722d843e038cbe641be6d60261b6f89858c93cf787fbe965474ccba24f262"
+    "ingestedHash": "669340ed11d461d6f6c995a65f5cd57afe4ea32e5e96f3bc0440f74caf9eeab2",
+    "lastIngestedAt": "2026-09-20T06:52:11.536Z",
+    "projectedHash": "669340ed11d461d6f6c995a65f5cd57afe4ea32e5e96f3bc0440f74caf9eeab2"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -603,11 +603,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "fd20b289031c9b4fd2e1ede8f260f82bb04d1e8e01626baf3cf6a76b1f62793c",
+    "fileHash": "c61c107e261f9b39f74d3125d613714984545f3e08fbf6ff58cb4694e88d2d43",
     "lastTrackedAt": "2026-09-12T22:28:41.435Z",
-    "ingestedHash": "fd20b289031c9b4fd2e1ede8f260f82bb04d1e8e01626baf3cf6a76b1f62793c",
-    "lastIngestedAt": "2026-09-17T17:29:42.893Z",
-    "projectedHash": "fd20b289031c9b4fd2e1ede8f260f82bb04d1e8e01626baf3cf6a76b1f62793c"
+    "ingestedHash": "c61c107e261f9b39f74d3125d613714984545f3e08fbf6ff58cb4694e88d2d43",
+    "lastIngestedAt": "2026-09-20T06:27:09.765Z",
+    "projectedHash": "c61c107e261f9b39f74d3125d613714984545f3e08fbf6ff58cb4694e88d2d43"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",

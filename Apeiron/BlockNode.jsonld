@@ -16778,6 +16778,9 @@
     "children": [
       "BlockNode:00CJ0202MG001",
       "BlockNode:00CJ0HX2Y0000",
+      "BlockNode:00CKSAK04R001",
+      "BlockNode:00CKSAFHW0001",
+      "BlockNode:00CKE4R93R001",
       "BlockNode:00CJ0JZ830001"
     ]
   },
@@ -17074,6 +17077,7 @@
       "BlockNode:00CGR1BM9G001",
       "BlockNode:00CHXSZ56R001",
       "BlockNode:00CJ023M08001",
+      "BlockNode:00CKSP8JX0000",
       "BlockNode:00CGM4YD4G001"
     ]
   },
@@ -17293,6 +17297,12 @@
       "BlockNode:00CGQDBM58000",
       "BlockNode:00CGR1F620001",
       "BlockNode:00CJ4H44J8001",
+      "BlockNode:00CKE4FFF0001",
+      "BlockNode:00CKE3TGD0001",
+      "BlockNode:00CKE3TGD0002",
+      "BlockNode:00CKE3TGD8000",
+      "BlockNode:00CKE3TGD8001",
+      "BlockNode:00CKE3TGD8002",
       "BlockNode:00CJ4X8VB0001"
     ]
   },
@@ -32016,6 +32026,278 @@
     "title": "**A link row's click toggles its own fold state; ctrl-click zooms**",
     "text": "**A link row's click toggles its own fold state; ctrl-click zooms**: `preview` and `expanded` share one row-level `onClick` — plain click unfolds (`preview`) or folds (`expanded`) that link, ctrl/meta-click zooms to its target instead, mirroring the same modifier-key convention this UX pass gave the [backlinks popover](#id/BlockNode:00CJEDTR40001). The `Gutter`'s own arrow/stem click still works too (`e.stopPropagation()` keeps the two from double-toggling on the same click) — this just extends the same fold/unfold gesture to the rest of the row instead of leaving it as the arrow's own private affordance. `pointer`/`outside-view` rows are unchanged: they have no fold state of their own to toggle, so their plain click still jumps directly, same as before.",
     "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE3TGD0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-19T17:23:29.263Z",
+    "title": "**Frontmatter-backed `description` replaces the abstract dupe, 2026-09-20**",
+    "text": "**Frontmatter-backed `description` replaces the abstract dupe, 2026-09-20**: found while chasing why a `../discussion/linking.md` link inside `linking.md`'s own `**Discussion**:` line still rendered `inline-link-inert` in a folder listing, even after the bare-relative-path resolver fix and the `bakeResolvedLinkIds` render-time fix ([history/linking.md](../history/linking.md), [history/webapp.md](../history/webapp.md), both 2026-09-18) were verified working for the direct case. Root cause: a folder/artifact listing's abstract reads `ArtifactNode`/`FolderNode.text`, which is a *copy* of the first content-bearing descendant's text (`extractAbstract`), made once at hydration time — the descendant's own `Link` (confirmed already correctly resolved via `aperas show`) is never duplicated onto the container, so `bakeResolvedLinkIds(node.text, node.links)` finds `node.links` empty and has nothing to bake with.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE3TGD0002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-19T17:23:30.505Z",
+    "title": "A narrower fix was considered first",
+    "text": "A narrower fix was considered first: a persisted `abstractSourceId` pointer riding alongside the existing `.text` copy, set at the same hydration moment, so render time could cheaply look up the real source's links. That fell apart on one question: how does the copy get refreshed when a descendant changes? Checked directly against `kgUpdate.ts` — it doesn't. `target.text = text` there never touches an ancestor's own `.text`; only a full re-hydration (`hydrateFromParsed`) or the one-time holder-promotion path (`kgProject.ts`) ever recomputes it. So the abstract is a stale-until-next-full-reingest snapshot *by design* — a reasonable feature when the main direction was ingestion (Phase 0: capture whatever's on disk), but a flaw now that the main direction is projection/live editing: once captured, it's stuck there forever, and a pointer riding on top of a frozen copy would only add a second thing that's frozen alongside it, not fix the freezing.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE3TGD8000",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-19T17:23:31.676Z",
+    "title": "Chosen direction instead",
+    "text": "Chosen direction instead: retire the copy-and-heuristic mechanism (`extractAbstract`/`deriveAbstractFromLiveChildren`) for `ArtifactNode`/`FolderNode` entirely. Give both a real, directly-authored `description` field living in the artifact/folder's own YAML frontmatter — already parsed out separately by `astParser.ts` via `remark-frontmatter`, but today kept fully opaque past one narrow `lang:` regex read. `description` may contain markdown links, extracted into real `Link`s owned by the container itself, so the original baking bug dissolves rather than needing a workaround: the container legitimately owns its own abstract's links now. Storage: stop treating the whole frontmatter block as one opaque `StringProp` — parse it into one `StringProp` per key found, known or not, so a hand-authored key the engine doesn't yet recognize still round-trips through projection instead of silently vanishing.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE3TGD8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-19T17:23:32.806Z",
+    "title": "Edit path settled without inventing anything new",
+    "text": "Edit path settled without inventing anything new: this is the project's own long-standing \"update as a scoped reconciliation\" philosophy, making direct use of the ingestion mechanism — `aperas update <id>` already re-parses piped markdown and reconciles it exactly like a real re-ingest would. It just has two gaps to close: it rejects `FolderNode` targets outright today, and it never consumes the `frontmatter` that `parseMarkdownTree` already extracts from the piped input. Closing both means editing `description` is just piping a doc with a `description:` frontmatter line at the exact same call site every other edit already uses — no bespoke flag, no separate command.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE3TGD8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-19T17:23:34.135Z",
+    "title": "Migration still needed",
+    "text": "Migration still needed: every already-tracked artifact/folder holds the old opaque `frontmatter` prop and a stale `.text` copy; a one-time pass has to split existing frontmatter into per-key props and seed `description` from the current `.text` wherever `description` isn't already set. Filed as an Open Issue ([issues/core.md](../issues/core.md)) rather than a Design entry — `design/core.md` doesn't exist yet, and this corpus's own convention reserves Design for crystallized/built architecture, not a plan agreed in conversation but not yet implemented.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE4FFF0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CKE4FFF0001:links:Link:00CKQSHD6R000",
+        "@type": "Link",
+        "target": "BlockNode:00CJAVGNJG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4FFF0001:links:Link:00CKQSHD6R000:props:StringProp:00CKQSHD70000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "334"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CKE4FFF0001:links:Link:00CKQSHD70001",
+        "@type": "Link",
+        "target": "BlockNode:00CJAVRF90001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4FFF0001:links:Link:00CKQSHD70001:props:StringProp:00CKQSHD70002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "406"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CKE4FFF0001:links:Link:00CKQSHD70003",
+        "@type": "Link",
+        "target": "BlockNode:00CKE4R93R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4FFF0001:links:Link:00CKQSHD70003:props:StringProp:00CKQSHD70004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3821"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CKE4FFF0001:props:StringProp:00CKE4FHW8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CKE4FFF0001:props:StringProp:00CKE4FHW8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Frontmatter-backed `description` replaces the abstract dupe, 2026-09-20**",
+    "text": "**Frontmatter-backed `description` replaces the abstract dupe, 2026-09-20**: found while chasing why a `../discussion/linking.md` link inside `linking.md`'s own `**Discussion**:` line still rendered `inline-link-inert` in a folder listing, even after the bare-relative-path resolver fix and the `bakeResolvedLinkIds` render-time fix ([history/linking.md](../history/linking.md#id/BlockNode:00CJAVGNJG001), [history/webapp.md](../history/webapp.md#id/BlockNode:00CJAVRF90001), both 2026-09-18) were verified working for the direct case. Root cause: a folder/artifact listing's abstract reads `ArtifactNode`/`FolderNode.text`, which is a *copy* of the first content-bearing descendant's text (`extractAbstract`), made once at hydration time — the descendant's own `Link` (confirmed already correctly resolved via `aperas show`) is never duplicated onto the container, so `bakeResolvedLinkIds(node.text, node.links)` finds `node.links` empty and has nothing to bake with. A narrower fix was considered first: a persisted `abstractSourceId` pointer riding alongside the existing `.text` copy, set at the same hydration moment, so render time could cheaply look up the real source's links. That fell apart on one question: how does the copy get refreshed when a descendant changes? Checked directly against `kgUpdate.ts` — it doesn't. `target.text = text` there never touches an ancestor's own `.text`; only a full re-hydration (`hydrateFromParsed`) or the one-time holder-promotion path (`kgProject.ts`) ever recomputes it. So the abstract is a stale-until-next-full-reingest snapshot *by design* — a reasonable feature when the main direction was ingestion (Phase 0: capture whatever's on disk), but a flaw now that the main direction is projection/live editing: once captured, it's stuck there forever, and a pointer riding on top of a frozen copy would only add a second thing that's frozen alongside it, not fix the freezing. Chosen direction instead: retire the copy-and-heuristic mechanism (`extractAbstract`/`deriveAbstractFromLiveChildren`) for `ArtifactNode`/`FolderNode` entirely. Give both a real, directly-authored `description` field living in the artifact/folder's own YAML frontmatter — already parsed out separately by `astParser.ts` via `remark-frontmatter`, but today kept fully opaque past one narrow `lang:` regex read. `description` may contain markdown links, extracted into real `Link`s owned by the container itself, so the original baking bug dissolves rather than needing a workaround: the container legitimately owns its own abstract's links now. Storage: stop treating the whole frontmatter block as one opaque `StringProp` — parse it into one `StringProp` per key found, known or not, so a hand-authored key the engine doesn't yet recognize still round-trips through projection instead of silently vanishing. Edit path settled without inventing anything new: this is the project's own long-standing \"update as a scoped reconciliation\" philosophy, making direct use of the ingestion mechanism — `aperas update <id>` already re-parses piped markdown and reconciles it exactly like a real re-ingest would. It just has two gaps to close: it rejects `FolderNode` targets outright today, and it never consumes the `frontmatter` that `parseMarkdownTree` already extracts from the piped input. Closing both means editing `description` is just piping a doc with a `description:` frontmatter line at the exact same call site every other edit already uses — no bespoke flag, no separate command. Migration still needed: every already-tracked artifact/folder holds the old opaque `frontmatter` prop and a stale `.text` copy; a one-time pass has to split existing frontmatter into per-key props and seed `description` from the current `.text` wherever `description` isn't already set. Filed as an Open Issue ([issues/core.md](../issues/core.md#id/BlockNode:00CKE4R93R001)) rather than a Design entry — `design/core.md` doesn't exist yet, and this corpus's own convention reserves Design for crystallized/built architecture, not a plan agreed in conversation but not yet implemented.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKE4R93R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CKE4R93R001:links:Link:00CKQSXCHG000",
+        "@type": "Link",
+        "target": "BlockNode:00CJAVGNJG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4R93R001:links:Link:00CKQSXCHG000:props:StringProp:00CKQSXCHG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "371"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CKE4R93R001:links:Link:00CKQSXCHG002",
+        "@type": "Link",
+        "target": "BlockNode:00CJAVRF90001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4R93R001:links:Link:00CKQSXCHG002:props:StringProp:00CKQSXCHG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "443"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CKE4R93R001:links:Link:00CKQSXCHR000",
+        "@type": "Link",
+        "target": "BlockNode:00CKE4FFF0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4R93R001:links:Link:00CKQSXCHR000:props:StringProp:00CKQSXCHR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1319"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CKE4R93R001:props:StringProp:00CKE4RBM8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CKE4R93R001:props:StringProp:00CKE4RBM8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`ArtifactNode`/`FolderNode.text` is a stale, heuristic copy that can't be baked — found via a folder-listing link that stayed inert after the fix meant to cover it**",
+    "text": "**`ArtifactNode`/`FolderNode.text` is a stale, heuristic copy that can't be baked — found via a folder-listing link that stayed inert after the fix meant to cover it**: `design/linking.md`'s own `**Discussion**:` line rendered `inline-link-inert` in the \"design\" folder's listing, even after the bare-relative-path resolver fix and `bakeResolvedLinkIds` render-time fix ([history/linking.md](../history/linking.md#id/BlockNode:00CJAVGNJG001), [history/webapp.md](../history/webapp.md#id/BlockNode:00CJAVRF90001), both 2026-09-18) were verified working for the direct case. Root cause: the folder-listing preview reads the `ArtifactNode`'s own `.text`, which is a *copy* of its first content-bearing descendant's text (`extractAbstract`), made once at hydration time — the descendant's real `Link` (confirmed already correctly resolved via `aperas show`) is never duplicated onto the container, so `bakeResolvedLinkIds` has nothing to bake with for this render path specifically. Deeper problem underneath: this copy is never refreshed by an ordinary deep edit either — `kgUpdate.ts`'s `target.text = text` never touches an ancestor's own `.text`, only a full re-hydration or the one-time holder-promotion path ever recomputes it — so the preview can go stale independent of this specific bug too. Direction agreed (see [discussion/core.md](../discussion/core.md#id/BlockNode:00CKE4FFF0001)'s 2026-09-20 Freeflow entry for full rationale): retire the copy/heuristic entirely; give `ArtifactNode`/`FolderNode` a real `description` field in their own YAML frontmatter, with its own genuinely-owned `Link`s, edited via `aperas update` extended to accept `FolderNode` and to consume `frontmatter` — the corpus's long-standing \"update as a scoped reconciliation\" pattern, not a new bespoke channel. Not yet implemented.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKSAFHW0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-20T06:26:23.794Z",
+    "title": "**Confirmed at real production scale, 2026-09-20**",
+    "text": "**Confirmed at real production scale, 2026-09-20**: a corpus-wide re-ingestion left the entire service unresponsive for 40 minutes straight, not merely slow. `kg:migrate-frontmatter` (the [frontmatter-as-props redesign](../discussion/core.md#id/BlockNode:00CKE4FFF0001)'s one-time pass, re-running `ingestFromDisk` against every live `ArtifactNode` with `bypassUnchangedCheck: true`) started 2026-09-20T05:14:39Z, ran continuously with the service process pinned at 150-280% CPU (confirmed still doing real work, never idle), and was still running with no end in sight when killed at approximately 2026-09-20T05:55Z, roughly 40 minutes in — for a corpus on the order of 50 artifacts, this is the same \"12-55 seconds per operation, compounding the longer the process has been alive\" pathology the entry above already names, stretched by scale from seconds into most of an hour. Root cause of the unresponsiveness, confirmed by reading `service.ts` directly rather than guessing: its migration loop calls `ingestArtifact` → `ingestFromDisk` → `reconcileTree` synchronously per artifact with no `await`/yield point anywhere in that path, and Node's single-threaded event loop cannot service *anything else* — a timer, a new socket connection, another CLI command — while a synchronous call is still on the stack. `service.ts`'s own 10-second auto-flush (`setInterval(() => enqueue(() => flushIfDirty()), 10_000)`, line 401-403) never got a single chance to fire for the whole run, confirmed directly: the JSON-LD mirror's own mtime never moved once during those 40 minutes. Independently corroborated live: a plain `aperas show <id>` issued from a separate terminal while the migration was still running failed with \"No ApeironNgn service running\" — not a crash, the event loop was simply never free to accept or process that new connection. Killed for an unrelated reason — a separate `reconcile.ts` bug this same run surfaced (`carryForwardFields` not re-syncing a fallback-titled block's `title` when it carries the *old* `blockId` forward, since `astParser.ts`'s own fallback sets `title` to a block's *fresh* scratch `blockId` when no real lead-in exists), not yet filed as its own entry — not because the operation had actually stalled.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKSAK04R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CKSAK04R001:links:Link:00CKSAK2BG002",
+        "@type": "Link",
+        "target": "BlockNode:00CKE4FFF0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKSAK04R001:links:Link:00CKSAK2BG002:props:StringProp:00CKSAK2BG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "188"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CKSAK04R001:props:StringProp:00CKSAK2BG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CKSAK04R001:props:StringProp:00CKSAK2BG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Confirmed at real production scale, 2026-09-20**",
+    "text": "**Confirmed at real production scale, 2026-09-20**: a corpus-wide re-ingestion left the entire service unresponsive for 40 minutes straight, not merely slow. `kg:migrate-frontmatter` (the [frontmatter-as-props redesign](../discussion/core.md#id/BlockNode:00CKE4FFF0001)'s one-time pass, re-running `ingestFromDisk` against every live `ArtifactNode` with `bypassUnchangedCheck: true`) started 2026-09-20T05:14:39Z, ran continuously with the service process pinned at 150-280% CPU (confirmed still doing real work, never idle), and was still running with no end in sight when killed at approximately 2026-09-20T05:55Z, roughly 40 minutes in — for a corpus on the order of 50 artifacts, this is the same \"12-55 seconds per operation, compounding the longer the process has been alive\" pathology the entry above already names, stretched by scale from seconds into most of an hour. Root cause of the unresponsiveness, confirmed by reading `service.ts` directly rather than guessing: its migration loop calls `ingestArtifact` → `ingestFromDisk` → `reconcileTree` synchronously per artifact with no `await`/yield point anywhere in that path, and Node's single-threaded event loop cannot service *anything else* — a timer, a new socket connection, another CLI command — while a synchronous call is still on the stack. `service.ts`'s own 10-second auto-flush (`setInterval(() => enqueue(() => flushIfDirty()), 10_000)`, line 401-403) never got a single chance to fire for the whole run, confirmed directly: the JSON-LD mirror's own mtime never moved once during those 40 minutes. Independently corroborated live: a plain `aperas show <id>` issued from a separate terminal while the migration was still running failed with \"No ApeironNgn service running\" — not a crash, the event loop was simply never free to accept or process that new connection. Killed for an unrelated reason — a separate `reconcile.ts` bug this same run surfaced (`carryForwardFields` not re-syncing a fallback-titled block's `title` when it carries the *old* `blockId` forward, since `astParser.ts`'s own fallback sets `title` to a block's *fresh* scratch `blockId` when no real lead-in exists), not yet filed as its own entry — not because the operation had actually stalled.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CKSP8JX0000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CKSP8JX0000:links:Link:00CKSP8NV8000",
+        "@type": "Link",
+        "target": "BlockNode:00CKSAK04R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKSP8JX0000:links:Link:00CKSP8NV8000:props:StringProp:00CKSP8NVG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "152"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CKSP8JX0000:links:Link:00CKSP8NVG001",
+        "@type": "Link",
+        "target": "BlockNode:00CGM54FX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKSP8JX0000:links:Link:00CKSP8NVG001:props:StringProp:00CKSP8NVG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1063"
+          }
+        ]
+      }
+    ],
+    "title": "**`reconcile.ts`'s `carryForwardFields` corrupts `title` on any fallback-titled block it reconciles, breaking its own path resolution**",
+    "text": "**`reconcile.ts`'s `carryForwardFields` corrupts `title` on any fallback-titled block it reconciles, breaking its own path resolution**: found live via [kg:migrate-frontmatter's corpus-wide re-ingestion run](../issues/core.md#id/BlockNode:00CKSAK04R001) (2026-09-20). `astParser.ts`'s fallback title for a block with no extractable lead-in term (`let title = blockId`) is the block's own *fresh, scratch* id, assigned during that parse, before reconciliation ever runs — not a function of its text the way every other title is. `carryForwardFields` carries the matched pair's *old* `blockId` forward (correctly preserving identity) but never re-synced `title` to match, on the explicit — and, for this one case, false — assumption in its own doc comment that a matched block's freshly-computed title is always already identical to what carrying the old one forward would have produced. Confirmed live: 37 blocks across the corpus had `title` silently overwritten with a fresh scratch id from a discarded parse the moment they were reconciled — the same family as [the `ArtifactNode`-title corruption already fixed above](../issues/core.md#id/BlockNode:00CGM54FX0001), one level down, at the ordinary-block scale, and with the same downstream break: `toPath()`'s slug-based addressing uses `title` directly, so a corrupted one makes the block unreachable by its own path. **Resolved**: `carryForwardFields` now captures the fresh node's own about-to-be-discarded `blockId` before overwriting it, and re-points `title` at the id it's actually keeping whenever `title` was only ever mirroring that discarded value. Not yet re-verified against a live corpus-wide reconciliation pass — the run that surfaced it was reverted, corruption and all, rather than repaired in place.",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": []
   }
