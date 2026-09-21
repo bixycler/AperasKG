@@ -10019,6 +10019,7 @@
       "BlockNode:00CE1GW638006",
       "BlockNode:00CE8T6W7G001",
       "BlockNode:00CJ01QAJ0000",
+      "BlockNode:00CMPNS0B0001",
       "BlockNode:00CE1GW63800B"
     ]
   },
@@ -30729,13 +30730,16 @@
       "BlockNode:00CJDHWT9G001",
       "BlockNode:00CJDHYES8001",
       "BlockNode:00CJE11FRR000",
+      "BlockNode:00CMNJY31G001",
       "BlockNode:00CJ6TGSYR002",
       "BlockNode:00CJE14W0R001",
       "BlockNode:00CJ6TGSYR003",
       "BlockNode:00CJ6TGSYR004",
       "BlockNode:00CJ6TGSYR005",
       "BlockNode:00CJEDTR40001",
-      "BlockNode:00CJFDGBVR001"
+      "BlockNode:00CJFDGBVR001",
+      "BlockNode:00CMPNNP90001",
+      "BlockNode:00CMPNQAVR001"
     ]
   },
   {
@@ -32298,6 +32302,102 @@
     "title": "**`reconcile.ts`'s `carryForwardFields` corrupts `title` on any fallback-titled block it reconciles, breaking its own path resolution**",
     "text": "**`reconcile.ts`'s `carryForwardFields` corrupts `title` on any fallback-titled block it reconciles, breaking its own path resolution**: found live via [kg:migrate-frontmatter's corpus-wide re-ingestion run](../issues/core.md#id/BlockNode:00CKSAK04R001) (2026-09-20). `astParser.ts`'s fallback title for a block with no extractable lead-in term (`let title = blockId`) is the block's own *fresh, scratch* id, assigned during that parse, before reconciliation ever runs — not a function of its text the way every other title is. `carryForwardFields` carries the matched pair's *old* `blockId` forward (correctly preserving identity) but never re-synced `title` to match, on the explicit — and, for this one case, false — assumption in its own doc comment that a matched block's freshly-computed title is always already identical to what carrying the old one forward would have produced. Confirmed live: 37 blocks across the corpus had `title` silently overwritten with a fresh scratch id from a discarded parse the moment they were reconciled — the same family as [the `ArtifactNode`-title corruption already fixed above](../issues/core.md#id/BlockNode:00CGM54FX0001), one level down, at the ordinary-block scale, and with the same downstream break: `toPath()`'s slug-based addressing uses `title` directly, so a corrupted one makes the block unreachable by its own path. **Resolved**: `carryForwardFields` now captures the fresh node's own about-to-be-discarded `blockId` before overwriting it, and re-points `title` at the id it's actually keeping whenever `title` was only ever mirroring that discarded value. Not yet re-verified against a live corpus-wide reconciliation pass — the run that surfaced it was reverted, corruption and all, rather than repaired in place.",
     "parent": "BlockNode:00CF1WZ4JG00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMNJY31G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMNJY31G001:links:Link:00CMNJY5Z8000",
+        "@type": "Link",
+        "target": "BlockNode:00CJE11FRR000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMNJY31G001:links:Link:00CMNJY5Z8000:props:StringProp:00CMNJY5Z8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "287"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CMNJY31G001:props:StringProp:00CMNJY5Z0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMNJY31G001:props:StringProp:00CMNJY5Z0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The palette is explicit and dual: screen dark, print light**",
+    "text": "**The palette is explicit and dual: screen dark, print light**: every theme color is a `--bg`/`--fg`/`--fg-muted`/`--border`/`--surface`/`--surface-hover`/`--accent` custom property on `:root` (`index.css`), never left to an inherited `color-scheme` default — the same discipline behind [full-brightness body text](#id/BlockNode:00CJE11FRR000): an implicit color is one half of a pairing that can silently disagree with its other half. Screen values (`--bg #26292b`, `--surface #313538`, `--fg #9ea4aa`, `--fg-muted #6b7278`, `--border #3a3d40`, `--accent #5aa7ff`) were sampled directly from the pixels of the Logseq UI this app is read alongside day to day (`UniinfoNotes/logseq/custom.css`), not eyeballed — the first pass matched a numerically-close but wrong pixel cluster (Logseq's page-title heading rather than its ordinary body text) and had to be corrected once compared by role, not just by value. `--accent` was never checked against Logseq this way; its hue happens to land within ~10° of Logseq's own `--accent` (`#0090ff`) regardless, apparently by common convergence on \"the obvious blue\" rather than by design. An `@media print` block on the same `:root` re-declares every variable for light-on-white (`--bg #fff`, `--fg #1b1e21`, `--accent #1a63c4`, ...) plus `color-scheme: light` and `print-color-adjust: exact`, so print never depends on the browser's own \"Background graphics\" toggle — that option only decides whether an authored background survives, and a page with no light palette of its own had nothing to fall back to once one was stripped. This only holds where a rule actually reads the variable: a literal hex bypasses both the Logseq match and the print fallback silently, which is how `.fd-link-title`, `.inline-link`, and the gutter's hover state each carried their own hardcoded blue until found by inspection.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMPNNP90001",
+    "@type": "BlockNode",
+    "title": "**The hover popover's open is delayed too, not just its close**",
+    "text": "**The hover popover's open is delayed too, not just its close**: a quick pass over a link — reading down the list, not actually pausing on it — used to trigger the popover on every link the pointer crossed. `NavigableLink`'s `onEnter` (`Inline.tsx`) now schedules the same way `scheduleClose` already did, cancelled by a matching `cancelOpen` if the pointer leaves before it fires — 600ms, tuned to match this OS's own tooltip delay.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMPNQAVR001",
+    "@type": "BlockNode",
+    "title": "**Every row gets its own id-copy button, next to the edit pencil**",
+    "text": "**Every row gets its own id-copy button, next to the edit pencil**: `CopyIdButton` (`FolderDiv.tsx`) copies that row's exact id — a node's own `n.id`, or a `Link`'s own `l().linkId` on every `LinkRow` mode, which had no pencil to sit next to at all — to the clipboard, swapping to `✅` for about a second first: unlike the pencil's own click (a visible edit box opens) or an unfold (a visible expansion), a clipboard write has no effect of its own to see, so leaving it silent would read as broken. Same hover-reveal styling as the pencil. The pencil itself was quietly illegible before this same pass too — `✎` (U+270E) renders as a thin, low-contrast outline glyph in most fonts — swapped for the two-tone `✏️` (U+270F+FE0F) emoji presentation, matching every other icon already in the row.",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMPNS0B0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMPNS0B0001:links:Link:00CMPNS2F8000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ01QAJ0000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMPNS0B0001:links:Link:00CMPNS2F8000:props:StringProp:00CMPNS2F8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "56"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CMPNS0B0001:props:StringProp:00CMPNS2F0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMPNS0B0001:props:StringProp:00CMPNS2F0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`kg:unfold` never got the breadcrumb `kg:tree` did**",
+    "text": "**`kg:unfold` never got the breadcrumb `kg:tree` did**: [the fix above](#id/BlockNode:00CJ01QAJ0000) only touched `kgTree.ts` — `kg:unfold`'s own output (`kgUnfold.ts`) kept printing straight from `id  [label]  title`, no `aperas://tree/<path>` anywhere, even though its own target is exactly as reusable a `<ref>` as a tree render's apex is. **Resolved**: same format, same placement — one line before the target's own, computed the same way (`TreeNode.toPath()`), omitted rather than printed broken wherever `toPath()` can't walk it. For the `Link` case, the breadcrumb names the *target*'s path, not the Link's own (a Link has none — same reason the ref resolver can't route one through path-segment matching either), matching the target getting the full/uncapped text treatment right below it.",
+    "parent": "BlockNode:00CE1GW63800A",
     "type": "listItem",
     "children": []
   }
