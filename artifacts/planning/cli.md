@@ -1,3 +1,7 @@
+---
+description: The now-complete fix for `kg:insert`'s anchor-validation ordering — resolved before hydration so a bad anchor can never leave an orphan behind.
+---
+
 # CLI — Planning <a name='id/BlockNode:00CF2AEXN8001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CF2AEXN8002' class='aperas-anchor aperas-id'></a>

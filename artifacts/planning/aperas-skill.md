@@ -1,3 +1,7 @@
+---
+description: Restructuring the skill in place rather than rewriting from scratch, since every existing item was paid for by a real incident.
+---
+
 # Aperas Skill — Planning <a name='id/BlockNode:00CEA5M6S8001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CEA5M6S8002' class='aperas-anchor aperas-id'></a>

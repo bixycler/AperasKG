@@ -1,3 +1,7 @@
+---
+description: Fully implemented and migrated: all three cases of the unified list law are live, and the real corpus has zero bare `list` nodes left.
+---
+
 # List Consumption — History <a name='id/BlockNode:00CE32GW3G001' class='aperas-anchor aperas-id'></a>
 
 ## Current Status <a name='id/BlockNode:00CE32GW3G002' class='aperas-anchor aperas-id'></a>

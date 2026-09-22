@@ -1,3 +1,7 @@
+---
+description: The now-complete parser-and-serializer change that landed the list-consumption law and migrated the whole corpus in one gated pass.
+---
+
 # List Consumption — Planning <a name='id/BlockNode:00CE32GTR8001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CE32GTR8002' class='aperas-anchor aperas-id'></a>

@@ -1,3 +1,7 @@
+---
+description: The 19-step packaging build-out, all done and verified, from the three-package workspace split through the `aperas` dispatcher.
+---
+
 # Packaging — Planning <a name='id/BlockNode:00CDDVCDW8001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CDDVCDW8002' class='aperas-anchor aperas-id'></a>

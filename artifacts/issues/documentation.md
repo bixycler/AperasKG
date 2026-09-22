@@ -1,3 +1,7 @@
+---
+description: No open issues — the Context/Discussion boundary question that used to sit here is resolved.
+---
+
 # Documentation — Issues <a name='id/BlockNode:00CDD68FE0001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CDD68FE0002' class='aperas-anchor aperas-id'></a>

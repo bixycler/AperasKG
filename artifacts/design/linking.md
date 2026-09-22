@@ -1,3 +1,7 @@
+---
+description: How an internal reference resolves before and after ingestion: slug-path addressing pre-ingest, stable node-ID addressing after, coexisting via a compatibility anchor.
+---
+
 # Internal Linking & Addressing <a name='id/BlockNode:00CDBYV4T0001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CDBYV4T0002' class='aperas-anchor aperas-id'></a>

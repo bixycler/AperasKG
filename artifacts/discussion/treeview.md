@@ -1,3 +1,7 @@
+---
+description: Verifying `Aperas-treeview-design.md`'s claims against the real code — which parts were already built, which were stale, and which are still genuinely open.
+---
+
 # TreeView — Discussion <a name='id/BlockNode:00CE1DDF4G001' class='aperas-anchor aperas-id'></a>
 
 ## Dashboard <a name='id/BlockNode:00CE1HQW18001' class='aperas-anchor aperas-id'></a>

@@ -1,3 +1,7 @@
+---
+description: How the list-consumption law was found: a corpus survey showing consumption and dissolution are the same rule, differing only in what precedes the list.
+---
+
 # List Consumption — Discussion <a name='id/BlockNode:00CE32GXH0001' class='aperas-anchor aperas-id'></a>
 
 ## Dashboard <a name='id/BlockNode:00CE32GXH0002' class='aperas-anchor aperas-id'></a>

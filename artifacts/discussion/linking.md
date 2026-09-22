@@ -1,3 +1,7 @@
+---
+description: Why addressing needs two forms, not one: slug-paths for pre-ingestion authoring, node-IDs after — and the one still-unreproduced case where a link resolves but `.links` stays empty.
+---
+
 # Internal Linking & Addressing — Discussion <a name='id/BlockNode:00CDBZ76T8001' class='aperas-anchor aperas-id'></a>
 
 ## Dashboard <a name='id/BlockNode:00CJ37GPRR000' class='aperas-anchor aperas-id'></a>

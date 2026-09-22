@@ -1,3 +1,7 @@
+---
+description: Two open snags in the archive split: `Aperas-design.md` doesn't map onto a normal concern-doc shape, and a full-corpus rename sweep once collided inside `archive/`.
+---
+
 # Archive Migration — Issues <a name='id/BlockNode:00CE01Y0T0001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CE01Y0T0002' class='aperas-anchor aperas-id'></a>

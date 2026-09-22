@@ -1,3 +1,7 @@
+---
+description: What's still open in the webapp: an unverified renderer question about multi-position links, deep-write hand-off left unexamined, and a ctrl-click gesture bug that contradicts the settled design.
+---
+
 # Webapp — Issues <a name='id/BlockNode:00CJ6V6370001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CJ6V6370002' class='aperas-anchor aperas-id'></a>
@@ -19,7 +23,6 @@
 ## Resolved <a name='id/BlockNode:00CJ6V637000F' class='aperas-anchor aperas-id'></a>
 
 - **Resolved: fold/unfold felt like seconds per click**: <a name='id/BlockNode:00CJ840278001' class='aperas-anchor aperas-id'></a> the dev API bridge shelled out a fresh `tsx packages/cli/src/aperas.ts <verb>` subprocess per request — a full Node-plus-TypeScript-transpile startup on every click, on top of the service round trip that was already fast. Fixed by moving the bridge into its own long-lived process (`packages/web/devApiServer.ts`, spawned once by `vite.config.ts`) that talks to the ApeironNgn service directly over its unix socket, the same `request`/`ensureServiceRunning` every `kg*.ts` entrypoint already uses. A second, independent cause compounded it: `flush: true` on the `unfold`/`fold` service calls forced a full ~1600-node content-mirror dehydrate to disk on every click, because `service.ts`'s own 'unfold'/'fold' cases set the content-`dirty` flag unconditionally (a defensive catch-all for the rare case where resolving a bare `--view` mints a first-use `Profile`). `TreeView`'s own fold state is genuinely ephemeral UI state with its own independently-tunable flush cadence (design/webapp.md's Persistence) — it needs no per-click disk write at all. Fixed by dropping `flush` from the dev bridge's `unfold`/`fold` calls. Timed before/after: ~450ms per click down to ~10ms once both fixes landed — nothing here was ever a SolidJS cost.
-
 - **Resolved: Slice 1 — `buildRenderTree` extracted into `@aperas/core`**: <a name='id/BlockNode:00CJ8FJNKR001' class='aperas-anchor aperas-id'></a> verified against the existing suite plus a live before/after byte-diff on a real corpus view, and again exhaustively against the UI — every one of 36 rendered rows' fold counts matched `aperas tree --view`'s own `[+N]` tags in sequence, extracted straight from the live DOM.
 - **Resolved: Slice 5 — `FolderDiv` ported to Solid**: <a name='id/BlockNode:00CJ8FJNKR002' class='aperas-anchor aperas-id'></a> fold/unfold writes to the real `TreeView.unfolds` set and refetches; verified exhaustively against the CLI (see Slice 1's own entry, same check covers both).
 - **Resolved: Slice 7 — zoom**: <a name='id/BlockNode:00CJ8FJNKR003' class='aperas-anchor aperas-id'></a> ctrl-click and breadcrumbs both change apex via the same code path a deep-linked URL uses; confirmed live via the browser and via URL query-param navigation.

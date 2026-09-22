@@ -1,3 +1,7 @@
+---
+description: No open issues in the CLI dispatcher layer itself — see Resolved for the single `kg:insert` ordering bug that used to live here.
+---
+
 # CLI — Issues <a name='id/BlockNode:00CF2AEAX0001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CF2AEAX0002' class='aperas-anchor aperas-id'></a>

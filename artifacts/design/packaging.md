@@ -1,3 +1,7 @@
+---
+description: The single `aperas` binary as a thin dispatcher over the shared `core` engine, and the three-package (`core`/`cli`/`web`) workspace split behind it.
+---
+
 # Packaging — Design <a name='id/BlockNode:00CDDVBXH8001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CDDVBXHG000' class='aperas-anchor aperas-id'></a>

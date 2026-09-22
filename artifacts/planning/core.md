@@ -1,3 +1,7 @@
+---
+description: The batch plan for `core`'s reconcile-identity bug family, reordered once actually reading `reconcile.ts` showed the original filing order didn't match the real mechanism.
+---
+
 # Core — Planning <a name='id/BlockNode:00CF23FB1G001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CF23FB1G002' class='aperas-anchor aperas-id'></a>

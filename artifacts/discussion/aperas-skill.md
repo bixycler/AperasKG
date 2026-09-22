@@ -1,3 +1,7 @@
+---
+description: Open questions and freeflow notes behind the skill's four-level design — including whether an indirect-edge relationship deserves its own linking convention.
+---
+
 # Aperas Skill — Discussion <a name='id/BlockNode:00CE8XWZJR001' class='aperas-anchor aperas-id'></a>
 
 ## Dashboard <a name='id/BlockNode:00CE8XWZK0000' class='aperas-anchor aperas-id'></a>

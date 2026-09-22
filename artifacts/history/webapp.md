@@ -1,3 +1,7 @@
+---
+description: Where the webapp actually stands: Slice 1 and the UI (Slices 5-8) have a real working dev build; the auth token, HTTP listener and tick channel (Slices 2-4) are still not built.
+---
+
 # Webapp — History <a name='id/BlockNode:00CJ6V6N9R001' class='aperas-anchor aperas-id'></a>
 
 ## Current Status <a name='id/BlockNode:00CJ6V6N9R002' class='aperas-anchor aperas-id'></a>

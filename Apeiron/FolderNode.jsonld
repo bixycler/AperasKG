@@ -2,6 +2,14 @@
   {
     "@id": "FolderNode:00CDBYV47G000",
     "@type": "FolderNode",
+    "props": [
+      {
+        "@id": "FolderNode:00CDBYV47G000:props:StringProp:00CN1QEACR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The Aperas project's knowledge-graph corpus root: every design/issues/planning/history/discussion doc lives under here, live-ingested rather than static documentation."
+      }
+    ],
     "title": "Artifacts",
     "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode` content in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both documentation and a live corpus the substrate ingests itself.",
     "path": ".",
@@ -87,10 +95,20 @@
   {
     "@id": "FolderNode:00CDBYV4BR000",
     "@type": "FolderNode",
+    "props": [
+      {
+        "@id": "FolderNode:00CDBYV4BR000:props:StringProp:00CN4ZQAK8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Crystallized architecture — settled design decisions for each concern, once they've matured out of discussion."
+      }
+    ],
     "title": "design",
+    "text": "Design docs for the Aperas project, one per concern (webapp, treeview, linking, list-consumption, packaging, documentation, aperas-skill). Each holds the current, normative shape of that concern — Architecture and Topology, not the reasoning that got there; see the matching `discussion/` doc for that.",
     "parent": "FolderNode:00CDBYV47G000",
     "path": "design",
     "children": [
+      "BlockNode:00CN4ZQA80001",
       "ArtifactNode:00CEA5Y4Y8000",
       "ArtifactNode:00CE01XZ88000",
       "ArtifactNode:00CDD68DS8000",
@@ -104,10 +122,20 @@
   {
     "@id": "FolderNode:00CDBYV4BR001",
     "@type": "FolderNode",
+    "props": [
+      {
+        "@id": "FolderNode:00CDBYV4BR001:props:StringProp:00CN4ZQAKR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The unbounded Freeflow layer — where every incident, open question and reasoning trace starts, before anything crystallizes into design, issues, planning or history."
+      }
+    ],
     "title": "discussion",
+    "text": "Discussion docs for the Aperas project, one per concern. Schema-free and append-only — a Dashboard of pointers, Open Questions, Settled decisions, and a Freeflow list of raw investigation notes. Most things never need to leave this layer at all.",
     "parent": "FolderNode:00CDBYV47G000",
     "path": "discussion",
     "children": [
+      "BlockNode:00CN4ZQA8G001",
       "ArtifactNode:00CE8XWYYG000",
       "ArtifactNode:00CE01XZ8R000",
       "ArtifactNode:00CF2AEKZG000",
@@ -123,10 +151,20 @@
   {
     "@id": "FolderNode:00CDBYV4BR002",
     "@type": "FolderNode",
+    "props": [
+      {
+        "@id": "FolderNode:00CDBYV4BR002:props:StringProp:00CN4ZQAMR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Current status and milestones for each concern — what's actually built and verified today."
+      }
+    ],
     "title": "history",
+    "text": "History docs for the Aperas project, one per concern. Each holds a Current Status summary and a Milestones list, recording what shipped and when, distinct from the reasoning in `discussion/` or the plan in `planning/`.",
     "parent": "FolderNode:00CDBYV47G000",
     "path": "history",
     "children": [
+      "BlockNode:00CN4ZQA90001",
       "ArtifactNode:00CEA5MGZR000",
       "ArtifactNode:00CE01XZ8G002",
       "ArtifactNode:00CDBYV46G000",
@@ -139,10 +177,20 @@
   {
     "@id": "FolderNode:00CDBYV4BR003",
     "@type": "FolderNode",
+    "props": [
+      {
+        "@id": "FolderNode:00CDBYV4BR003:props:StringProp:00CN4ZQAN8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Open bugs and gaps for each concern, plus a Resolved record once they're fixed."
+      }
+    ],
     "title": "issues",
+    "text": "Issue docs for the Aperas project, one per concern. Each tracks that concern's own Open Issues and Pending Tasks, with a Resolved section recording what was found and how it was fixed, rather than deleting the record once closed.",
     "parent": "FolderNode:00CDBYV47G000",
     "path": "issues",
     "children": [
+      "BlockNode:00CN4ZQAAG001",
       "ArtifactNode:00CEA5KVFR000",
       "ArtifactNode:00CE01XZ8G000",
       "ArtifactNode:00CF2AEA78000",
@@ -152,17 +200,27 @@
       "ArtifactNode:00CE32GQ0R001",
       "ArtifactNode:00CDDTBYG0000",
       "ArtifactNode:00CE1GW4B8000",
-      "ArtifactNode:00CF1TZQV8000",
-      "ArtifactNode:00CJ6T137R000"
+      "ArtifactNode:00CJ6T137R000",
+      "ArtifactNode:00CF1TZQV8000"
     ]
   },
   {
     "@id": "FolderNode:00CDBYV4BR004",
     "@type": "FolderNode",
+    "props": [
+      {
+        "@id": "FolderNode:00CDBYV4BR004:props:StringProp:00CN4ZQANG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Implementation plans and ordered task breakdowns for each concern's outstanding work."
+      }
+    ],
     "title": "planning",
+    "text": "Planning docs for the Aperas project, one per concern. Each holds an Implementation Plan and a Task Breakdown — the ordered steps from a concern's Open Issues to its Current Status.",
     "parent": "FolderNode:00CDBYV47G000",
     "path": "planning",
     "children": [
+      "BlockNode:00CN4ZQAB0001",
       "ArtifactNode:00CEA5M69R000",
       "ArtifactNode:00CE01XZ8G001",
       "ArtifactNode:00CF2AEX6R000",
@@ -208,5 +266,13 @@
       "BlockNode:00CDD68E00001",
       "FolderNode:00CDBYV4CG002"
     ]
+  },
+  {
+    "@id": "FolderNode:00CN4MY5H8000",
+    "@type": "FolderNode",
+    "tombstonedAt": "2026-09-22T09:19:02.868Z",
+    "title": "__scratch_retype_collision",
+    "path": "__scratch_retype_collision",
+    "children": []
   }
 ]

@@ -2,6 +2,14 @@
   {
     "@id": "ArtifactNode:00CDBYV460000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDBYV460000:props:StringProp:00CN3YJK4R000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "How an internal reference resolves before and after ingestion: slug-path addressing pre-ingest, stable node-ID addressing after, coexisting via a compatibility anchor."
+      }
+    ],
     "title": "linking.md",
     "text": "**Discussion**: [Why this syntax, and what we considered instead](../discussion/linking.md).",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -10,15 +18,23 @@
       "BlockNode:00CDBYV4T0001"
     ],
     "path": "design/linking.md",
-    "fileHash": "bcac656aa199260f5099c5038041341bf563747b1d78cd407807c43bb4ebc98b",
-    "lastTrackedAt": "2026-09-10T07:14:29.305Z",
-    "ingestedHash": "bcac656aa199260f5099c5038041341bf563747b1d78cd407807c43bb4ebc98b",
-    "lastIngestedAt": "2026-09-18T00:19:20.159Z",
-    "projectedHash": "bcac656aa199260f5099c5038041341bf563747b1d78cd407807c43bb4ebc98b"
+    "fileHash": "b2c80c22aefe06a9792e7e171fe23f4d5bf2097c6773d95abca1f9fe1e4b0fbe",
+    "lastTrackedAt": "2026-09-22T08:06:10.910Z",
+    "ingestedHash": "b2c80c22aefe06a9792e7e171fe23f4d5bf2097c6773d95abca1f9fe1e4b0fbe",
+    "lastIngestedAt": "2026-09-22T08:22:58.556Z",
+    "projectedHash": "b2c80c22aefe06a9792e7e171fe23f4d5bf2097c6773d95abca1f9fe1e4b0fbe"
   },
   {
     "@id": "ArtifactNode:00CDBYV468000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDBYV468000:props:StringProp:00CN3Z31DR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Links that silently fail to persist or resolve despite every visible signal looking normal — three distinct mechanisms found, two fixed, one still unreproduced."
+      }
+    ],
     "title": "linking.md",
     "text": "One open item below — links silently failing to persist or resolve, across three distinct mechanisms found so far, via unrelated causes.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -27,15 +43,23 @@
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "68f588badb1ac3ed7db1d8ec56fa6d57da260740ecf77a159c137c30d74758f7",
-    "lastTrackedAt": "2026-09-16T03:58:36.201Z",
-    "ingestedHash": "68f588badb1ac3ed7db1d8ec56fa6d57da260740ecf77a159c137c30d74758f7",
-    "lastIngestedAt": "2026-09-18T00:19:21.349Z",
-    "projectedHash": "68f588badb1ac3ed7db1d8ec56fa6d57da260740ecf77a159c137c30d74758f7"
+    "fileHash": "296dc45bf89dc7e73256fd094d33355c21f3ea65f63407cc9ef13da2ce5dc667",
+    "lastTrackedAt": "2026-09-22T08:07:16.888Z",
+    "ingestedHash": "296dc45bf89dc7e73256fd094d33355c21f3ea65f63407cc9ef13da2ce5dc667",
+    "lastIngestedAt": "2026-09-22T08:57:24.487Z",
+    "projectedHash": "296dc45bf89dc7e73256fd094d33355c21f3ea65f63407cc9ef13da2ce5dc667"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDBYV46G000:props:StringProp:00CN3ZPMSG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The two internal-reference conventions that coexist today — node-ID addressing carried over from the TerminusDB era, and a slug-anchor form prototyped but not yet adopted corpus-wide."
+      }
+    ],
     "title": "linking.md",
     "text": "Two internal-reference conventions coexist: node-ID addressing (currently implemented as `[[code]]`-wrapped `Kind:snowflake`, verified in `astParser.ts`/`resolve.ts`; the target design drops the `[[...]]` wrapper in favor of `aperas://id/<ID>` or `#id/<ID>`, see [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002) and [Topology](../design/linking.md#id/BlockNode:00CDBYV4T8007)) and slug-anchor addressing (`#fragment` matched against an injected `<a name=\"...\">`, prototyped but not yet adopted corpus-wide — see [Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002)).",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -44,15 +68,23 @@
       "BlockNode:00CDBZ7698001"
     ],
     "path": "history/linking.md",
-    "fileHash": "88a9bcbeab205c4344331a0f2cfbdcf7f7018ccdd25215f60b4e15c40418cfba",
-    "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "88a9bcbeab205c4344331a0f2cfbdcf7f7018ccdd25215f60b4e15c40418cfba",
-    "lastIngestedAt": "2026-09-18T00:19:22.574Z",
-    "projectedHash": "88a9bcbeab205c4344331a0f2cfbdcf7f7018ccdd25215f60b4e15c40418cfba"
+    "fileHash": "d78cdd90d3b564e923668a866b53dd4a74984e26c422cf7075acfad713c3e8f1",
+    "lastTrackedAt": "2026-09-22T08:08:38.598Z",
+    "ingestedHash": "d78cdd90d3b564e923668a866b53dd4a74984e26c422cf7075acfad713c3e8f1",
+    "lastIngestedAt": "2026-09-22T08:24:26.158Z",
+    "projectedHash": "d78cdd90d3b564e923668a866b53dd4a74984e26c422cf7075acfad713c3e8f1"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDBYV46R000:props:StringProp:00CN3YW400000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Why addressing needs two forms, not one: slug-paths for pre-ingestion authoring, node-IDs after — and the one still-unreproduced case where a link resolves but `.links` stays empty."
+      }
+    ],
     "title": "linking.md",
     "text": "**Design**: [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002) — the addressing/resolution mechanics: slug-path vs node-ID, anchor syntax, and how a reference actually resolves.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -61,15 +93,23 @@
       "BlockNode:00CDBZ76T8001"
     ],
     "path": "discussion/linking.md",
-    "fileHash": "aad1957eb7d7c17d2ef19201682f7b12d03e84adad3d8da6ae5a21a891243fc4",
-    "lastTrackedAt": "2026-09-10T07:14:29.306Z",
-    "ingestedHash": "aad1957eb7d7c17d2ef19201682f7b12d03e84adad3d8da6ae5a21a891243fc4",
-    "lastIngestedAt": "2026-09-17T19:09:08.494Z",
-    "projectedHash": "aad1957eb7d7c17d2ef19201682f7b12d03e84adad3d8da6ae5a21a891243fc4"
+    "fileHash": "4b088d10d83f9a49ce747b5086e6f1dd0068edaed43dc61bad8d7110f00573d2",
+    "lastTrackedAt": "2026-09-22T08:06:49.914Z",
+    "ingestedHash": "4b088d10d83f9a49ce747b5086e6f1dd0068edaed43dc61bad8d7110f00573d2",
+    "lastIngestedAt": "2026-09-22T08:23:13.688Z",
+    "projectedHash": "4b088d10d83f9a49ce747b5086e6f1dd0068edaed43dc61bad8d7110f00573d2"
   },
   {
     "@id": "ArtifactNode:00CDBYV46R001",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDBYV46R001:props:StringProp:00CN3ZBE78000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The two implementation slices that carried linking's addressing convention from design to a working, verified mechanism."
+      }
+    ],
     "title": "linking.md",
     "text": "Two slices carry [design/linking.md](../design/linking.md)'s addressing convention to a working implementation:",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -78,15 +118,23 @@
       "BlockNode:00CDBZ77EG001"
     ],
     "path": "planning/linking.md",
-    "fileHash": "af4c81ca2022bfce0e5c42a6c2a881dd06dc958baab01b04d49dd9d917937e88",
-    "lastTrackedAt": "2026-09-10T07:14:29.307Z",
-    "ingestedHash": "af4c81ca2022bfce0e5c42a6c2a881dd06dc958baab01b04d49dd9d917937e88",
-    "lastIngestedAt": "2026-09-17T22:44:33.695Z",
-    "projectedHash": "af4c81ca2022bfce0e5c42a6c2a881dd06dc958baab01b04d49dd9d917937e88"
+    "fileHash": "4c83b8801c435502d02d450e55fab0cb87451ec04537dd5cac567b339fffec96",
+    "lastTrackedAt": "2026-09-22T08:07:52.704Z",
+    "ingestedHash": "4c83b8801c435502d02d450e55fab0cb87451ec04537dd5cac567b339fffec96",
+    "lastIngestedAt": "2026-09-22T08:24:12.583Z",
+    "projectedHash": "4c83b8801c435502d02d450e55fab0cb87451ec04537dd5cac567b339fffec96"
   },
   {
     "@id": "ArtifactNode:00CDD68DS8000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDD68DS8000:props:StringProp:00CN3YJ858000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The concern taxonomy — design/issues/planning/history/discussion — that keeps each doc's own logical thread isolated instead of mixed together."
+      }
+    ],
     "title": "documentation.md",
     "text": "**Discussion**: [Motivation — the mixing problem](../discussion/documentation.md#id/BlockNode:00CDD68EV8002) — rationale for adopting block-based separation, evidenced by the pre-Phase-1.1 corpus.",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -95,15 +143,23 @@
       "BlockNode:00CDD68E80001"
     ],
     "path": "design/documentation.md",
-    "fileHash": "53018e16f0dd7bb014676982df632cf9d1f3362683ea505c862e7ffccea31a03",
-    "lastTrackedAt": "2026-09-10T08:48:21.034Z",
-    "ingestedHash": "53018e16f0dd7bb014676982df632cf9d1f3362683ea505c862e7ffccea31a03",
-    "lastIngestedAt": "2026-09-11T17:50:24.961Z",
-    "projectedHash": "53018e16f0dd7bb014676982df632cf9d1f3362683ea505c862e7ffccea31a03"
+    "fileHash": "2bc2a0619adefd81422c875936a27009347439fd4b539d5131c1a7891a0e6d9c",
+    "lastTrackedAt": "2026-09-22T08:06:09.428Z",
+    "ingestedHash": "2bc2a0619adefd81422c875936a27009347439fd4b539d5131c1a7891a0e6d9c",
+    "lastIngestedAt": "2026-09-22T08:22:57.431Z",
+    "projectedHash": "2bc2a0619adefd81422c875936a27009347439fd4b539d5131c1a7891a0e6d9c"
   },
   {
     "@id": "ArtifactNode:00CDD68DSG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDD68DSG000:props:StringProp:00CN3YTBG0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The mixing-problem evidence — real corpus files blending design, issues, history and rationale in one paragraph — that motivated splitting concerns apart."
+      }
+    ],
     "title": "documentation.md",
     "text": "Currently, documents in `AperasKG/artifacts/` are massive mixtures of completely different logical concerns. Looking at actual project files (e.g., `Aperas-crud-design.md` and `Aperas-treeview-design.md`), the writer often mixes everything into a single document and sometimes even the same paragraph.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -112,15 +168,23 @@
       "BlockNode:00CDD68EV8001"
     ],
     "path": "discussion/documentation.md",
-    "fileHash": "e83e44d86508b223ad8c9f8b9ebc9a8bd746ea1f778eb603298cde4a3cc62e3c",
-    "lastTrackedAt": "2026-09-10T08:48:21.035Z",
-    "ingestedHash": "e83e44d86508b223ad8c9f8b9ebc9a8bd746ea1f778eb603298cde4a3cc62e3c",
-    "lastIngestedAt": "2026-09-11T12:41:29.117Z",
-    "projectedHash": "e83e44d86508b223ad8c9f8b9ebc9a8bd746ea1f778eb603298cde4a3cc62e3c"
+    "fileHash": "0bb85374d41b8b4e59451f14ceaacf6e4173f66f6a88c31e6410d05b9edcfc11",
+    "lastTrackedAt": "2026-09-22T08:06:38.090Z",
+    "ingestedHash": "0bb85374d41b8b4e59451f14ceaacf6e4173f66f6a88c31e6410d05b9edcfc11",
+    "lastIngestedAt": "2026-09-22T08:23:25.106Z",
+    "projectedHash": "0bb85374d41b8b4e59451f14ceaacf6e4173f66f6a88c31e6410d05b9edcfc11"
   },
   {
     "@id": "ArtifactNode:00CDD68DSG001",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDD68DSG001:props:StringProp:00CN3Z2BPR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "No open issues — the Context/Discussion boundary question that used to sit here is resolved."
+      }
+    ],
     "title": "documentation.md",
     "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -129,15 +193,23 @@
       "BlockNode:00CDD68FE0001"
     ],
     "path": "issues/documentation.md",
-    "fileHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3",
-    "lastTrackedAt": "2026-09-10T08:48:21.035Z",
-    "ingestedHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3",
-    "lastIngestedAt": "2026-09-11T12:41:35.275Z",
-    "projectedHash": "e9d169607a0e8cf6827573e2cfc948f5318be5e2305535a0e435ea7931e7dea3"
+    "fileHash": "42188a6cb591d3542ab848d95af842b8ef89f32dee5cce8016d71b0dc9321b31",
+    "lastTrackedAt": "2026-09-22T08:07:15.540Z",
+    "ingestedHash": "42188a6cb591d3542ab848d95af842b8ef89f32dee5cce8016d71b0dc9321b31",
+    "lastIngestedAt": "2026-09-22T08:23:40.420Z",
+    "projectedHash": "42188a6cb591d3542ab848d95af842b8ef89f32dee5cce8016d71b0dc9321b31"
   },
   {
     "@id": "ArtifactNode:00CDDTBJBG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDDTBJBG000:props:StringProp:00CN3YK9T0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The single `aperas` binary as a thin dispatcher over the shared `core` engine, and the three-package (`core`/`cli`/`web`) workspace split behind it."
+      }
+    ],
     "title": "packaging.md",
     "text": "**Discussion**: [Motivation and the options considered](../discussion/packaging.md#id/BlockNode:00CDDVC33G006) — why this needs packaging, and why a single dispatcher over many bins.",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -146,15 +218,23 @@
       "BlockNode:00CDDVBXH8001"
     ],
     "path": "design/packaging.md",
-    "fileHash": "f3b15e92a1703747c0c71eef3afd247a977c02a883a3c389a878addde5ddd24c",
-    "lastTrackedAt": "2026-09-10T12:38:08.500Z",
-    "ingestedHash": "f3b15e92a1703747c0c71eef3afd247a977c02a883a3c389a878addde5ddd24c",
-    "lastIngestedAt": "2026-09-11T12:41:27.418Z",
-    "projectedHash": "f3b15e92a1703747c0c71eef3afd247a977c02a883a3c389a878addde5ddd24c"
+    "fileHash": "0d1bf0c8496b802da9d6162b903726cff9380a5a521a8190f77e08cb9cfe4a43",
+    "lastTrackedAt": "2026-09-22T08:06:13.848Z",
+    "ingestedHash": "0d1bf0c8496b802da9d6162b903726cff9380a5a521a8190f77e08cb9cfe4a43",
+    "lastIngestedAt": "2026-09-22T08:23:01.026Z",
+    "projectedHash": "0d1bf0c8496b802da9d6162b903726cff9380a5a521a8190f77e08cb9cfe4a43"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDDTBQWG000:props:StringProp:00CN3YWSB8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Open packaging questions: no build step yet for a published binary, no answer for where an installed CLI finds its own graph, and no safe rename primitive for an `ArtifactNode`."
+      }
+    ],
     "title": "packaging.md",
     "text": "[Design](../design/packaging.md#id/BlockNode:00CDDVBXH8001) — architecture decisions once crystallized.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -164,15 +244,23 @@
       "BlockNode:00CDG9DD4R001"
     ],
     "path": "discussion/packaging.md",
-    "fileHash": "7152cf5f7a0bfa29b73e91c75a0d86ab00f9af26435e7fcf22f3b048ecf931a5",
-    "lastTrackedAt": "2026-09-10T12:38:09.339Z",
-    "ingestedHash": "7152cf5f7a0bfa29b73e91c75a0d86ab00f9af26435e7fcf22f3b048ecf931a5",
-    "lastIngestedAt": "2026-09-17T18:08:24.094Z",
-    "projectedHash": "7152cf5f7a0bfa29b73e91c75a0d86ab00f9af26435e7fcf22f3b048ecf931a5"
+    "fileHash": "693354883d6b4aefad4a7aafd125d1e0fb67a8a44a813604e7e5373b94aa64e9",
+    "lastTrackedAt": "2026-09-22T08:06:52.658Z",
+    "ingestedHash": "693354883d6b4aefad4a7aafd125d1e0fb67a8a44a813604e7e5373b94aa64e9",
+    "lastIngestedAt": "2026-09-22T08:39:35.474Z",
+    "projectedHash": "693354883d6b4aefad4a7aafd125d1e0fb67a8a44a813604e7e5373b94aa64e9"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDDTBYG0000:props:StringProp:00CN3Z73NG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "No open issues — every packaging gap (build step, graph discovery, artifact rename) is resolved."
+      }
+    ],
     "title": "packaging.md",
     "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -181,15 +269,23 @@
       "BlockNode:00CDDVC8N0001"
     ],
     "path": "issues/packaging.md",
-    "fileHash": "35941b5b75feccd4648fbc3d1ec44f5a42fda443d7609492c9542c1055e38e14",
-    "lastTrackedAt": "2026-09-10T12:38:10.045Z",
-    "ingestedHash": "35941b5b75feccd4648fbc3d1ec44f5a42fda443d7609492c9542c1055e38e14",
-    "lastIngestedAt": "2026-09-15T04:17:57.413Z",
-    "projectedHash": "35941b5b75feccd4648fbc3d1ec44f5a42fda443d7609492c9542c1055e38e14"
+    "fileHash": "d214f765afa74b6819b1f542c91e9af33e189eae11d315c89e5e139bcabe4f29",
+    "lastTrackedAt": "2026-09-22T08:07:34.967Z",
+    "ingestedHash": "d214f765afa74b6819b1f542c91e9af33e189eae11d315c89e5e139bcabe4f29",
+    "lastIngestedAt": "2026-09-22T08:24:02.617Z",
+    "projectedHash": "d214f765afa74b6819b1f542c91e9af33e189eae11d315c89e5e139bcabe4f29"
   },
   {
     "@id": "ArtifactNode:00CDDTC3S0000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDDTC3S0000:props:StringProp:00CN3ZHZX0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The 19-step packaging build-out, all done and verified, from the three-package workspace split through the `aperas` dispatcher."
+      }
+    ],
     "title": "packaging.md",
     "text": "Broken down below once [the graph-location question](../issues/packaging.md#id/BlockNode:00CDDVC8N0002) had an answer. All 19 numbered steps are done and verified — see [history](../history/packaging.md#id/BlockNode:00CDDVCKCG002) for the closing summary.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -198,15 +294,23 @@
       "BlockNode:00CDDVCDW8001"
     ],
     "path": "planning/packaging.md",
-    "fileHash": "2a71880aa1c0195df61430508de3144d0c68033823ef91aa5db1d25142beb308",
-    "lastTrackedAt": "2026-09-10T12:38:10.743Z",
-    "ingestedHash": "2a71880aa1c0195df61430508de3144d0c68033823ef91aa5db1d25142beb308",
-    "lastIngestedAt": "2026-09-15T09:31:53.642Z",
-    "projectedHash": "2a71880aa1c0195df61430508de3144d0c68033823ef91aa5db1d25142beb308"
+    "fileHash": "e93aab1f8be8a18848748a9239620db0a807db81fb8bd429e612220989b1a1c5",
+    "lastTrackedAt": "2026-09-22T08:08:19.554Z",
+    "ingestedHash": "e93aab1f8be8a18848748a9239620db0a807db81fb8bd429e612220989b1a1c5",
+    "lastIngestedAt": "2026-09-22T08:24:14.734Z",
+    "projectedHash": "e93aab1f8be8a18848748a9239620db0a807db81fb8bd429e612220989b1a1c5"
   },
   {
     "@id": "ArtifactNode:00CDDTC8H0000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CDDTC8H0000:props:StringProp:00CN3ZQBK8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The full packaging effort, done with no open gaps — dispatcher, workspace split, configuration, build, and the explicit-start service redesign all shipped."
+      }
+    ],
     "title": "packaging.md",
     "text": "The full packaging effort is done, with no open gaps: the rename to `packaging.md`, the 3-way workspace split, the `aperas` dispatcher, `identity.json`/`aperas.config.json` configuration (including two independent path roots), a real build-to-`bin`, and the explicit-start service redesign are all shipped and verified — see [Configuration](../design/packaging.md#id/BlockNode:00CDHSJQE8001), [Workflow](../design/packaging.md#id/BlockNode:00CDY7PGG0001), and [Distribution](../design/packaging.md#id/BlockNode:00CDW3R42G001). `kg:show <ref>` — a raw single-node inspection command, once tracked here — turned out to be a TreeView/node-rendering gap rather than a packaging one, and moved to `AperasKG/artifacts/archive/Aperas-treeview-design.md`.",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -214,15 +318,23 @@
       "BlockNode:00CDDVCKCG001"
     ],
     "path": "history/packaging.md",
-    "fileHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c",
-    "lastTrackedAt": "2026-09-10T12:38:11.449Z",
-    "ingestedHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c",
-    "lastIngestedAt": "2026-09-11T12:41:33.664Z",
-    "projectedHash": "5d8a2b5bc03e9fa78c9518e8be014ed309676f442662d34ccf9f5656c2d0ea1c"
+    "fileHash": "2f56238403a7960240796432a0f5fc5ba7bfc6874bb2a8732740bd1c3ce96a4f",
+    "lastTrackedAt": "2026-09-22T08:08:41.526Z",
+    "ingestedHash": "2f56238403a7960240796432a0f5fc5ba7bfc6874bb2a8732740bd1c3ce96a4f",
+    "lastIngestedAt": "2026-09-22T08:24:28.465Z",
+    "projectedHash": "2f56238403a7960240796432a0f5fc5ba7bfc6874bb2a8732740bd1c3ce96a4f"
   },
   {
     "@id": "ArtifactNode:00CE01XZ88000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE01XZ88000:props:StringProp:00CN3YCSE8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "How a legacy `archive/` doc gets split into its own design/issues/planning/history/discussion concern set, disk-first via `kg-doc-ingest`."
+      }
+    ],
     "title": "archive-migration.md",
     "text": "**Discussion**: [Inventory and open questions](../discussion/archive-migration.md#id/BlockNode:00CE0YFEN0003) — what's in `artifacts/archive/`, and decisions still open about how to split it.",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -231,15 +343,23 @@
       "BlockNode:00CE01XZPG001"
     ],
     "path": "design/archive-migration.md",
-    "fileHash": "3336dc2ab280129ab6d433eb3338d9d80510ec30ae9f870b372932025defc079",
-    "lastTrackedAt": "2026-09-11T06:35:09.601Z",
-    "ingestedHash": "3336dc2ab280129ab6d433eb3338d9d80510ec30ae9f870b372932025defc079",
-    "lastIngestedAt": "2026-09-11T12:41:25.071Z",
-    "projectedHash": "3336dc2ab280129ab6d433eb3338d9d80510ec30ae9f870b372932025defc079"
+    "fileHash": "36c9df3cfe20a3eab57109a02a35d2bca7fa386bd13eba1ce35503ef20ac4635",
+    "lastTrackedAt": "2026-09-22T08:05:47.149Z",
+    "ingestedHash": "36c9df3cfe20a3eab57109a02a35d2bca7fa386bd13eba1ce35503ef20ac4635",
+    "lastIngestedAt": "2026-09-22T08:22:56.236Z",
+    "projectedHash": "36c9df3cfe20a3eab57109a02a35d2bca7fa386bd13eba1ce35503ef20ac4635"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8G000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE01XZ8G000:props:StringProp:00CN3Z1B58000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Two open snags in the archive split: `Aperas-design.md` doesn't map onto a normal concern-doc shape, and a full-corpus rename sweep once collided inside `archive/`."
+      }
+    ],
     "title": "archive-migration.md",
     "text": "**`Aperas-design.md` needs a dedicated brainstorm, not a mechanical split**: unlike every other doc in this migration, it doesn't map cleanly onto one subsystem's design/issues/planning/history/discussion shape — see [Open Questions](../discussion/archive-migration.md#id/BlockNode:00CE0HD0H8001). (`Aperas-dev-status.md` is no longer grouped here — it's TDB-era in origin and follows that era's settled approach; see [design](../design/archive-migration.md#id/BlockNode:00CE0HPRV8001).)",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -248,15 +368,23 @@
       "BlockNode:00CE01Y0T0001"
     ],
     "path": "issues/archive-migration.md",
-    "fileHash": "e5c31048392bed3cea93a9e82ada3b78423a7d5aed0b43877e4c7d492f4212d1",
-    "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "e5c31048392bed3cea93a9e82ada3b78423a7d5aed0b43877e4c7d492f4212d1",
-    "lastIngestedAt": "2026-09-11T12:41:34.738Z",
-    "projectedHash": "e5c31048392bed3cea93a9e82ada3b78423a7d5aed0b43877e4c7d492f4212d1"
+    "fileHash": "076fbc3c51d8795db0736c3ef2459f268d73a02ee597b131ae552dd52fb36b48",
+    "lastTrackedAt": "2026-09-22T08:07:11.344Z",
+    "ingestedHash": "076fbc3c51d8795db0736c3ef2459f268d73a02ee597b131ae552dd52fb36b48",
+    "lastIngestedAt": "2026-09-22T08:23:37.071Z",
+    "projectedHash": "076fbc3c51d8795db0736c3ef2459f268d73a02ee597b131ae552dd52fb36b48"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8G001",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE01XZ8G001:props:StringProp:00CN3ZA7CG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The sub-task order for migrating `archive/`'s legacy docs, newest era first since the newest docs are most load-bearing to have in the graph early."
+      }
+    ],
     "title": "archive-migration.md",
     "text": "Per sub-task: author the split concern-doc-set on disk under a new concern name, `aperas ingest --track --flush`, verify round-trip fidelity (`aperas project --dry-run`, diff modulo anchors), project for real, re-ingest to confirm a clean pass, then upgrade any legacy prose cross-references into real wikilinks and verify with `aperas backlinks`. Fold anything learned back into the [`aperas`](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00E)/`kg-doc-ingest` skills before starting the next sub-task.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -265,15 +393,23 @@
       "BlockNode:00CE01Y1Z8001"
     ],
     "path": "planning/archive-migration.md",
-    "fileHash": "aaaf0151ea9f5e206da8776a99bff8e03a490246e9eb4a06d682956f1a729486",
-    "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "aaaf0151ea9f5e206da8776a99bff8e03a490246e9eb4a06d682956f1a729486",
-    "lastIngestedAt": "2026-09-15T09:31:48.369Z",
-    "projectedHash": "aaaf0151ea9f5e206da8776a99bff8e03a490246e9eb4a06d682956f1a729486"
+    "fileHash": "325343038eafa08c272f60543eff0694f83bc3d652ea40b04b50f8d03f2341ff",
+    "lastTrackedAt": "2026-09-22T08:07:47.236Z",
+    "ingestedHash": "325343038eafa08c272f60543eff0694f83bc3d652ea40b04b50f8d03f2341ff",
+    "lastIngestedAt": "2026-09-22T08:24:09.253Z",
+    "projectedHash": "325343038eafa08c272f60543eff0694f83bc3d652ea40b04b50f8d03f2341ff"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8G002",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE01XZ8G002:props:StringProp:00CN3ZP8F0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Progress on the archive migration: `treeview` fully split out and verified; `crud` is next."
+      }
+    ],
     "title": "archive-migration.md",
     "text": "Meta-task kicked off 2026-09-11: doc set created and tracked. First sub-task done: `Aperas-treeview-design.md` migrated to `treeview`'s concern-doc-set (see [Task Breakdown](../planning/archive-migration.md#id/BlockNode:00CE01Y1Z8003)). Next up: `crud`.",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -282,15 +418,23 @@
       "BlockNode:00CE01Y320001"
     ],
     "path": "history/archive-migration.md",
-    "fileHash": "3fd5df3e1e9d3e8670bdd5a9f0eabeea4d5872c2a100ae4a73d5c240396f02fa",
-    "lastTrackedAt": "2026-09-11T06:35:09.602Z",
-    "ingestedHash": "3fd5df3e1e9d3e8670bdd5a9f0eabeea4d5872c2a100ae4a73d5c240396f02fa",
-    "lastIngestedAt": "2026-09-12T20:02:19.612Z",
-    "projectedHash": "3fd5df3e1e9d3e8670bdd5a9f0eabeea4d5872c2a100ae4a73d5c240396f02fa"
+    "fileHash": "cc743b2a103e9b7abb92769002465cbef9630a273558ab9ea7778cb2ea525f7e",
+    "lastTrackedAt": "2026-09-22T08:08:36.988Z",
+    "ingestedHash": "cc743b2a103e9b7abb92769002465cbef9630a273558ab9ea7778cb2ea525f7e",
+    "lastIngestedAt": "2026-09-22T08:24:35.509Z",
+    "projectedHash": "cc743b2a103e9b7abb92769002465cbef9630a273558ab9ea7778cb2ea525f7e"
   },
   {
     "@id": "ArtifactNode:00CE01XZ8R000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE01XZ8R000:props:StringProp:00CN3YMRT8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "What's still undecided about splitting `artifacts/archive/`'s legacy docs — chiefly `Aperas-design.md`, which doesn't map onto one subsystem's concern-doc shape."
+      }
+    ],
     "title": "archive-migration.md",
     "text": "[Design](../design/archive-migration.md#id/BlockNode:00CE01XZPG001) — architecture/topology once crystallized.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -299,15 +443,23 @@
       "BlockNode:00CE01Y42R001"
     ],
     "path": "discussion/archive-migration.md",
-    "fileHash": "86262711ad2d844ce096f9e518b2dabee01f4e491cff42b062dc9565da0abade",
-    "lastTrackedAt": "2026-09-11T06:35:09.603Z",
-    "ingestedHash": "86262711ad2d844ce096f9e518b2dabee01f4e491cff42b062dc9565da0abade",
-    "lastIngestedAt": "2026-09-12T20:02:47.481Z",
-    "projectedHash": "86262711ad2d844ce096f9e518b2dabee01f4e491cff42b062dc9565da0abade"
+    "fileHash": "24d7716de50328a57770883ae6d6a4f45da6d9e612676db72ca95089ecf66723",
+    "lastTrackedAt": "2026-09-22T08:06:19.510Z",
+    "ingestedHash": "24d7716de50328a57770883ae6d6a4f45da6d9e612676db72ca95089ecf66723",
+    "lastIngestedAt": "2026-09-22T08:23:09.064Z",
+    "projectedHash": "24d7716de50328a57770883ae6d6a4f45da6d9e612676db72ca95089ecf66723"
   },
   {
     "@id": "ArtifactNode:00CE1DDEHG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE1DDEHG000:props:StringProp:00CN3YX4K0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Verifying `Aperas-treeview-design.md`'s claims against the real code — which parts were already built, which were stale, and which are still genuinely open."
+      }
+    ],
     "title": "treeview.md",
     "text": "[Design](../design/treeview.md#id/BlockNode:00CE1GW4Y8001) — architecture once crystallized.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -316,15 +468,39 @@
       "BlockNode:00CE1DDF4G001"
     ],
     "path": "discussion/treeview.md",
-    "fileHash": "23280f14b4cee6e877f91ebbefc3cf2a600404f739383568f9aa74782c8ed1d0",
-    "lastTrackedAt": "2026-09-11T08:10:09.094Z",
-    "ingestedHash": "23280f14b4cee6e877f91ebbefc3cf2a600404f739383568f9aa74782c8ed1d0",
-    "lastIngestedAt": "2026-09-15T08:38:23.940Z",
-    "projectedHash": "23280f14b4cee6e877f91ebbefc3cf2a600404f739383568f9aa74782c8ed1d0"
+    "fileHash": "878a814db89e38ef07e0742c6382d0e3ae88161e335a659b355aa2852d930760",
+    "lastTrackedAt": "2026-09-22T08:06:54.134Z",
+    "ingestedHash": "878a814db89e38ef07e0742c6382d0e3ae88161e335a659b355aa2852d930760",
+    "lastIngestedAt": "2026-09-22T08:23:17.074Z",
+    "projectedHash": "878a814db89e38ef07e0742c6382d0e3ae88161e335a659b355aa2852d930760"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B0000",
     "@type": "ArtifactNode",
+    "links": [
+      {
+        "@id": "ArtifactNode:00CE1GW4B0000:links:Link:00CMZSA9XG000",
+        "@type": "Link",
+        "target": "BlockNode:00CDBYV4T8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "ArtifactNode:00CE1GW4B0000:links:Link:00CMZSA9XG000:props:StringProp:00CMZSA9XG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "104"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE1GW4B0000:props:StringProp:00CMZSA9W8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "`TreeView`'s fold state as its own i-projection layer between the raw graph and any UI, built on top of [linking's own resolution mechanism](../design/linking.md#id/BlockNode:00CDBYV4T8002)."
+      }
+    ],
     "title": "treeview.md",
     "text": "**Discussion**: [Inventory and split rationale](../discussion/treeview.md#id/BlockNode:00CE1DDF58005) — how `Aperas-treeview-design.md` was divided across concerns.",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -333,15 +509,23 @@
       "BlockNode:00CE1GW4Y8001"
     ],
     "path": "design/treeview.md",
-    "fileHash": "4acecb41be1c42bd51f36369f05277328657a131db6957d9d68181f72f7f88e3",
-    "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "4acecb41be1c42bd51f36369f05277328657a131db6957d9d68181f72f7f88e3",
-    "lastIngestedAt": "2026-09-12T21:01:49.151Z",
-    "projectedHash": "4acecb41be1c42bd51f36369f05277328657a131db6957d9d68181f72f7f88e3"
+    "fileHash": "957889aced1836026e79796c443d5836920b50f5e7fa4cd2070e052aac4f9c5c",
+    "lastTrackedAt": "2026-09-22T03:15:04.357Z",
+    "ingestedHash": "957889aced1836026e79796c443d5836920b50f5e7fa4cd2070e052aac4f9c5c",
+    "lastIngestedAt": "2026-09-22T08:22:53.912Z",
+    "projectedHash": "957889aced1836026e79796c443d5836920b50f5e7fa4cd2070e052aac4f9c5c"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE1GW4B8000:props:StringProp:00CN3Z7E1G000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "No open issues — the three real gaps found (stale `unfolds`, a mutating bare `unfold`, no raw inspection command) are all fixed."
+      }
+    ],
     "title": "treeview.md",
     "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -350,15 +534,23 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "a849ee07920acf0a6840594723ac416ed781002e59aa43ee40c6947c62cfe12f",
-    "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "a849ee07920acf0a6840594723ac416ed781002e59aa43ee40c6947c62cfe12f",
-    "lastIngestedAt": "2026-09-21T16:38:23.322Z",
-    "projectedHash": "a849ee07920acf0a6840594723ac416ed781002e59aa43ee40c6947c62cfe12f"
+    "fileHash": "cbcbaa6401469aa86babd6078fbe15eddaeb94b00819ebcaba61ef31c899e198",
+    "lastTrackedAt": "2026-09-22T08:07:36.316Z",
+    "ingestedHash": "cbcbaa6401469aa86babd6078fbe15eddaeb94b00819ebcaba61ef31c899e198",
+    "lastIngestedAt": "2026-09-22T08:23:54.038Z",
+    "projectedHash": "cbcbaa6401469aa86babd6078fbe15eddaeb94b00819ebcaba61ef31c899e198"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE1GW4B8001:props:StringProp:00CN3ZG7ZG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The now-done fix list for treeview's real gaps: stale `unfolds` tracking, a mutating bare `unfold`, no raw inspection command, plus two relocated parser bugs."
+      }
+    ],
     "title": "treeview.md",
     "text": "Fix the treeview-specific gaps and the two relocated ingest/parser gaps together, since they were bundled by direct instruction rather than filed separately. No particular cross-dependency between them — order by whichever's simplest to verify in isolation.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -367,15 +559,23 @@
       "BlockNode:00CE1GW7CG001"
     ],
     "path": "planning/treeview.md",
-    "fileHash": "365b25a0aacf36274661c90a6c2f55cef3b27137478cfed37d8dbb588f66180a",
-    "lastTrackedAt": "2026-09-11T08:17:42.445Z",
-    "ingestedHash": "365b25a0aacf36274661c90a6c2f55cef3b27137478cfed37d8dbb588f66180a",
-    "lastIngestedAt": "2026-09-15T09:31:46.464Z",
-    "projectedHash": "365b25a0aacf36274661c90a6c2f55cef3b27137478cfed37d8dbb588f66180a"
+    "fileHash": "30746d92665d778d73b3e5b95e749bcc284c8a3e57831ec673ee5c48ddde1fac",
+    "lastTrackedAt": "2026-09-22T08:08:11.895Z",
+    "ingestedHash": "30746d92665d778d73b3e5b95e749bcc284c8a3e57831ec673ee5c48ddde1fac",
+    "lastIngestedAt": "2026-09-22T08:24:15.821Z",
+    "projectedHash": "30746d92665d778d73b3e5b95e749bcc284c8a3e57831ec673ee5c48ddde1fac"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8002",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE1GW4B8002:props:StringProp:00CN3ZQQ38000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "What's implemented and verified in TreeView today, checked directly against the real corpus rather than assumed from the design doc."
+      }
+    ],
     "title": "treeview.md",
     "text": "The `Profile`/`TreeView` data model, three-tier rendering, canonical-position rule, viewcone zoom, and the `.state/` vs. tracked-mirror git split are all implemented and live-verified (against a synthetic graph exercising every scenario the design doc worked through by hand — not yet exercised against the real `AperasKG/Apeiron/` corpus, which has no live wikilinks yet to actually escape a viewcone with). `Profile`/`kg:profile` and the upward-pointing-link fix in viewcone zoom, both originally tracked as \"designed, not yet implemented,\" are confirmed fully built — see Milestones. Three real gaps remain open: stale `TreeView.unfolds` references, a bare `aperas unfold` wrongly mutating the default view, and no raw single-node inspection command — see [Issues](../issues/treeview.md#id/BlockNode:00CE1GW638002).",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -384,15 +584,23 @@
       "BlockNode:00CE1GW8T8001"
     ],
     "path": "history/treeview.md",
-    "fileHash": "b6d64d5d50ca173b65649b2b1671dca12b0a078eb38dc2555e33167a6c4a130b",
-    "lastTrackedAt": "2026-09-11T08:17:42.446Z",
-    "ingestedHash": "b6d64d5d50ca173b65649b2b1671dca12b0a078eb38dc2555e33167a6c4a130b",
-    "lastIngestedAt": "2026-09-11T12:41:34.199Z",
-    "projectedHash": "b6d64d5d50ca173b65649b2b1671dca12b0a078eb38dc2555e33167a6c4a130b"
+    "fileHash": "18070c7d813120ec5f113ef01baa1e2fd964bd9cad8b72ef5aa4e70820912e9d",
+    "lastTrackedAt": "2026-09-22T08:08:42.999Z",
+    "ingestedHash": "18070c7d813120ec5f113ef01baa1e2fd964bd9cad8b72ef5aa4e70820912e9d",
+    "lastIngestedAt": "2026-09-22T08:24:29.549Z",
+    "projectedHash": "18070c7d813120ec5f113ef01baa1e2fd964bd9cad8b72ef5aa4e70820912e9d"
   },
   {
     "@id": "ArtifactNode:00CE32GQ0R000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE32GQ0R000:props:StringProp:00CN3YJZ58000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The one law governing a markdown list at parse time: it either nests into whatever precedes it or dissolves flat into that node's own children — never survives as a bare list node."
+      }
+    ],
     "title": "list-consumption.md",
     "text": "**Discussion**: [The unified law, and how it was found](../discussion/list-consumption.md#id/BlockNode:00CE32GXH000A) — the consumption/dissolution distinction and the corpus survey behind it.",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -401,15 +609,23 @@
       "BlockNode:00CE32GQM8001"
     ],
     "path": "design/list-consumption.md",
-    "fileHash": "709a9da0e2ff408f231158516287fa68ac7b260bee0180f0127ae1cad1fc8f4c",
-    "lastTrackedAt": "2026-09-11T10:06:09.283Z",
-    "ingestedHash": "709a9da0e2ff408f231158516287fa68ac7b260bee0180f0127ae1cad1fc8f4c",
-    "lastIngestedAt": "2026-09-17T19:09:09.563Z",
-    "projectedHash": "709a9da0e2ff408f231158516287fa68ac7b260bee0180f0127ae1cad1fc8f4c"
+    "fileHash": "dad09e8a534cbb681a7353c02a1bf09e224233ed5b5a8a191669c180c2778932",
+    "lastTrackedAt": "2026-09-22T08:06:12.480Z",
+    "ingestedHash": "dad09e8a534cbb681a7353c02a1bf09e224233ed5b5a8a191669c180c2778932",
+    "lastIngestedAt": "2026-09-22T08:22:59.935Z",
+    "projectedHash": "dad09e8a534cbb681a7353c02a1bf09e224233ed5b5a8a191669c180c2778932"
   },
   {
     "@id": "ArtifactNode:00CE32GQ0R001",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE32GQ0R001:props:StringProp:00CN3Z6S30000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "No open issues — the list-consumption law is fully implemented and the corpus migration is complete."
+      }
+    ],
     "title": "list-consumption.md",
     "text": "None.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -418,15 +634,23 @@
       "BlockNode:00CE32GRZ8001"
     ],
     "path": "issues/list-consumption.md",
-    "fileHash": "2df9cac7bc2ea10fb3148c7e85d5e79f7fd09f9330c6a20a7ccba2c85e570495",
-    "lastTrackedAt": "2026-09-11T10:06:09.284Z",
-    "ingestedHash": "2df9cac7bc2ea10fb3148c7e85d5e79f7fd09f9330c6a20a7ccba2c85e570495",
-    "lastIngestedAt": "2026-09-15T08:38:27.922Z",
-    "projectedHash": "2df9cac7bc2ea10fb3148c7e85d5e79f7fd09f9330c6a20a7ccba2c85e570495"
+    "fileHash": "4fd311e5f28882250b9fe4e332386411267881bc232d0f411827a68c354925b7",
+    "lastTrackedAt": "2026-09-22T08:07:33.625Z",
+    "ingestedHash": "4fd311e5f28882250b9fe4e332386411267881bc232d0f411827a68c354925b7",
+    "lastIngestedAt": "2026-09-22T08:23:42.737Z",
+    "projectedHash": "4fd311e5f28882250b9fe4e332386411267881bc232d0f411827a68c354925b7"
   },
   {
     "@id": "ArtifactNode:00CE32GQ10000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE32GQ10000:props:StringProp:00CN3ZD4V8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The now-complete parser-and-serializer change that landed the list-consumption law and migrated the whole corpus in one gated pass."
+      }
+    ],
     "title": "list-consumption.md",
     "text": "The parser change (orphan-dissolution) and the serializer change (props-on-run-leader) land together, not sequentially — shipping either alone leaves the other case silently wrong (an orphan-dissolved run with no node-level props to read, or a node-level prop read that can't tell two dissolved runs apart). The corpus migration follows once both are verified against a synthetic multi-run case, then runs against the real corpus with a full before/after diff as the gate.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -435,15 +659,23 @@
       "BlockNode:00CE32GTR8001"
     ],
     "path": "planning/list-consumption.md",
-    "fileHash": "215373c97337f8dbc09caa3bf6049683034dd6a705509bcb2353683dd63ba43f",
-    "lastTrackedAt": "2026-09-11T10:06:09.285Z",
-    "ingestedHash": "215373c97337f8dbc09caa3bf6049683034dd6a705509bcb2353683dd63ba43f",
-    "lastIngestedAt": "2026-09-15T09:31:47.395Z",
-    "projectedHash": "215373c97337f8dbc09caa3bf6049683034dd6a705509bcb2353683dd63ba43f"
+    "fileHash": "21736a0cdffe6ad4323805911a329eecdfe749e3fa3d404741759619a63e9558",
+    "lastTrackedAt": "2026-09-22T08:07:54.136Z",
+    "ingestedHash": "21736a0cdffe6ad4323805911a329eecdfe749e3fa3d404741759619a63e9558",
+    "lastIngestedAt": "2026-09-22T08:24:13.661Z",
+    "projectedHash": "21736a0cdffe6ad4323805911a329eecdfe749e3fa3d404741759619a63e9558"
   },
   {
     "@id": "ArtifactNode:00CE32GQ18000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE32GQ18000:props:StringProp:00CN3ZQ058000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Fully implemented and migrated: all three cases of the unified list law are live, and the real corpus has zero bare `list` nodes left."
+      }
+    ],
     "title": "list-consumption.md",
     "text": "Fully implemented and migrated. All three cases of the unified law (consumption, dissolution via merged self, dissolution when orphaned) are live in `astParser.ts`/`project.ts`, `orderedList`/`startIndex` are normalized onto each run's own first item everywhere, and the real corpus (48 legacy anchors relocated, 59 live `list` nodes fixpoint-spliced and tombstoned) has been migrated — zero `list`-typed BlockNodes remain live. See [Issues](../issues/list-consumption.md) (now all resolved) and [Planning](../planning/list-consumption.md) (Task Breakdown, all done).",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -452,15 +684,23 @@
       "BlockNode:00CE32GW3G001"
     ],
     "path": "history/list-consumption.md",
-    "fileHash": "793d2d9b824b3fa311c71df4a3e6d0bf1247d527f31ee056536c86e0546bbfde",
-    "lastTrackedAt": "2026-09-11T10:06:09.285Z",
-    "ingestedHash": "793d2d9b824b3fa311c71df4a3e6d0bf1247d527f31ee056536c86e0546bbfde",
-    "lastIngestedAt": "2026-09-17T22:44:32.404Z",
-    "projectedHash": "793d2d9b824b3fa311c71df4a3e6d0bf1247d527f31ee056536c86e0546bbfde"
+    "fileHash": "c55040065c136960a296aa5c0d66813ae00b98c28652403e55805fa7ae00b1fd",
+    "lastTrackedAt": "2026-09-22T08:08:40.070Z",
+    "ingestedHash": "c55040065c136960a296aa5c0d66813ae00b98c28652403e55805fa7ae00b1fd",
+    "lastIngestedAt": "2026-09-22T08:24:27.338Z",
+    "projectedHash": "c55040065c136960a296aa5c0d66813ae00b98c28652403e55805fa7ae00b1fd"
   },
   {
     "@id": "ArtifactNode:00CE32GQ1G000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE32GQ1G000:props:StringProp:00CN3YWEP8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "How the list-consumption law was found: a corpus survey showing consumption and dissolution are the same rule, differing only in what precedes the list."
+      }
+    ],
     "title": "list-consumption.md",
     "text": "[Design](../design/list-consumption.md#id/BlockNode:00CE32GQM8001) — the unified law once crystallized.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -469,15 +709,23 @@
       "BlockNode:00CE32GXH0001"
     ],
     "path": "discussion/list-consumption.md",
-    "fileHash": "15823f6356deff078ea41e2e8ebb9c92981194bd700102eb57b449dc1ab4ad4d",
-    "lastTrackedAt": "2026-09-11T10:06:09.286Z",
-    "ingestedHash": "15823f6356deff078ea41e2e8ebb9c92981194bd700102eb57b449dc1ab4ad4d",
-    "lastIngestedAt": "2026-09-15T08:38:26.999Z",
-    "projectedHash": "15823f6356deff078ea41e2e8ebb9c92981194bd700102eb57b449dc1ab4ad4d"
+    "fileHash": "919b0beb7e2142deb6f075e54993cc25d5db87d84b54ef6a11412a0a039910bd",
+    "lastTrackedAt": "2026-09-22T08:06:51.311Z",
+    "ingestedHash": "919b0beb7e2142deb6f075e54993cc25d5db87d84b54ef6a11412a0a039910bd",
+    "lastIngestedAt": "2026-09-22T08:23:14.804Z",
+    "projectedHash": "919b0beb7e2142deb6f075e54993cc25d5db87d84b54ef6a11412a0a039910bd"
   },
   {
     "@id": "ArtifactNode:00CE8XWYYG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CE8XWYYG000:props:StringProp:00CN3YMAN8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Open questions and freeflow notes behind the skill's four-level design — including whether an indirect-edge relationship deserves its own linking convention."
+      }
+    ],
     "title": "aperas-skill.md",
     "text": "[Design](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG003) — the four-level shape, abstract to concrete, the rewrite is aiming at.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -491,15 +739,23 @@
       "BlockNode:00CJ5207P8001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "75dd1a9a88e0ee12f8126700af882f6eb518187953c93085ba1b180267b51476",
-    "lastTrackedAt": "2026-09-11T16:55:29.915Z",
-    "ingestedHash": "75dd1a9a88e0ee12f8126700af882f6eb518187953c93085ba1b180267b51476",
-    "lastIngestedAt": "2026-09-17T19:09:07.228Z",
-    "projectedHash": "75dd1a9a88e0ee12f8126700af882f6eb518187953c93085ba1b180267b51476"
+    "fileHash": "aecc3ad463a7a579823ea21ec3b9f868583fd71302da2b19b741bc8f04f3cd37",
+    "lastTrackedAt": "2026-09-22T08:06:17.752Z",
+    "ingestedHash": "aecc3ad463a7a579823ea21ec3b9f868583fd71302da2b19b741bc8f04f3cd37",
+    "lastIngestedAt": "2026-09-22T08:23:07.848Z",
+    "projectedHash": "aecc3ad463a7a579823ea21ec3b9f868583fd71302da2b19b741bc8f04f3cd37"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CEA5KVFR000:props:StringProp:00CN3Z00P0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "No open issues — the last nine were closed by the session that first confirmed consenting to the skill still didn't govern the work."
+      }
+    ],
     "title": "aperas-skill.md",
     "text": "None — v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -508,15 +764,23 @@
       "BlockNode:00CEA5KW4G001"
     ],
     "path": "issues/aperas-skill.md",
-    "fileHash": "c53d9b46ab20ab3d5bf1188ed75feeff80d75262d363594899cd634d47a52b46",
-    "lastTrackedAt": "2026-09-11T18:22:15.487Z",
-    "ingestedHash": "c53d9b46ab20ab3d5bf1188ed75feeff80d75262d363594899cd634d47a52b46",
-    "lastIngestedAt": "2026-09-15T02:51:20.144Z",
-    "projectedHash": "c53d9b46ab20ab3d5bf1188ed75feeff80d75262d363594899cd634d47a52b46"
+    "fileHash": "9e7a75a3aa8c9b2557ac1a21a468bedf00a0fef5e94cbc1e58ea1458c4a2cc57",
+    "lastTrackedAt": "2026-09-22T08:07:05.911Z",
+    "ingestedHash": "9e7a75a3aa8c9b2557ac1a21a468bedf00a0fef5e94cbc1e58ea1458c4a2cc57",
+    "lastIngestedAt": "2026-09-22T08:23:35.799Z",
+    "projectedHash": "9e7a75a3aa8c9b2557ac1a21a468bedf00a0fef5e94cbc1e58ea1458c4a2cc57"
   },
   {
     "@id": "ArtifactNode:00CEA5M69R000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CEA5M69R000:props:StringProp:00CN3Z98FR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Restructuring the skill in place rather than rewriting from scratch, since every existing item was paid for by a real incident."
+      }
+    ],
     "title": "aperas-skill.md",
     "text": "Restructure in place rather than rewriting from a blank file. Every existing item was paid for by a live incident, so the content is the asset and the arrangement is the defect — a fresh draft would silently drop hard-won specifics that no one would notice missing until the incident recurred.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -525,15 +789,23 @@
       "BlockNode:00CEA5M6S8001"
     ],
     "path": "planning/aperas-skill.md",
-    "fileHash": "11f5cca0188d9a9fd1352cdcbd712130eaede68327b31dcfdfbe7371bde3fe25",
-    "lastTrackedAt": "2026-09-11T18:22:16.871Z",
-    "ingestedHash": "11f5cca0188d9a9fd1352cdcbd712130eaede68327b31dcfdfbe7371bde3fe25",
-    "lastIngestedAt": "2026-09-14T20:57:02.090Z",
-    "projectedHash": "11f5cca0188d9a9fd1352cdcbd712130eaede68327b31dcfdfbe7371bde3fe25"
+    "fileHash": "b3e77b174f0845a3d63c27b945e53b9ae22d0feeb3e1cb39e8bb05ece6bd0c0b",
+    "lastTrackedAt": "2026-09-22T08:07:43.768Z",
+    "ingestedHash": "b3e77b174f0845a3d63c27b945e53b9ae22d0feeb3e1cb39e8bb05ece6bd0c0b",
+    "lastIngestedAt": "2026-09-22T08:24:08.072Z",
+    "projectedHash": "b3e77b174f0845a3d63c27b945e53b9ae22d0feeb3e1cb39e8bb05ece6bd0c0b"
   },
   {
     "@id": "ArtifactNode:00CEA5MGZR000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CEA5MGZR000:props:StringProp:00CN3ZSV5R000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The skill's version history — five revisions since the v0 restructure, all eighteen original items relevelled rather than rewritten, none lost."
+      }
+    ],
     "title": "aperas-skill.md",
     "text": "The restructure has landed and has been revised five times since. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is v2: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with a scope statement and a worked example at each of the first three levels, and only current, verified items in the file at all. v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them, and v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph. Open Issues is empty; what remains is [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A), still unmeasured.",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -542,15 +814,23 @@
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "445822445e922b5974e45e4c5b4e2621d6805134a19483173b7e6844e50f6416",
-    "lastTrackedAt": "2026-09-11T18:22:18.239Z",
-    "ingestedHash": "445822445e922b5974e45e4c5b4e2621d6805134a19483173b7e6844e50f6416",
-    "lastIngestedAt": "2026-09-15T04:17:58.410Z",
-    "projectedHash": "445822445e922b5974e45e4c5b4e2621d6805134a19483173b7e6844e50f6416"
+    "fileHash": "1ac59965c63bd4a8c02f23078ee20e685ff35c62c291b808aaa39142041c9230",
+    "lastTrackedAt": "2026-09-22T08:08:49.651Z",
+    "ingestedHash": "1ac59965c63bd4a8c02f23078ee20e685ff35c62c291b808aaa39142041c9230",
+    "lastIngestedAt": "2026-09-22T08:24:21.983Z",
+    "projectedHash": "1ac59965c63bd4a8c02f23078ee20e685ff35c62c291b808aaa39142041c9230"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CEA5Y4Y8000:props:StringProp:00CN1QNHT8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The four-level shape (Philosophy → Orientation → Discipline → Mechanics) the skill rewrite is organized around, each level explaining a consequence of the one above it."
+      }
+    ],
     "title": "aperas-skill.md",
     "text": "**Discussion**: [Settled](../discussion/aperas-skill.md#id/BlockNode:00CEA56A0G001) — the philosophy this design is drawn from, and the incidents it was drawn from.",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -559,11 +839,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "14b719aa264d278134fd7bf238265c58486d10928075a50af4540bffbad1156d",
-    "lastTrackedAt": "2026-09-11T18:22:57.657Z",
-    "ingestedHash": "14b719aa264d278134fd7bf238265c58486d10928075a50af4540bffbad1156d",
-    "lastIngestedAt": "2026-09-15T02:51:18.158Z",
-    "projectedHash": "14b719aa264d278134fd7bf238265c58486d10928075a50af4540bffbad1156d"
+    "fileHash": "4bf817f5aee1fe56e62c0007b9b73be767053217b1d9fb33b8a5beec233f5b67",
+    "lastTrackedAt": "2026-09-22T05:31:16.879Z",
+    "ingestedHash": "4bf817f5aee1fe56e62c0007b9b73be767053217b1d9fb33b8a5beec233f5b67",
+    "lastIngestedAt": "2026-09-22T08:22:55.056Z",
+    "projectedHash": "4bf817f5aee1fe56e62c0007b9b73be767053217b1d9fb33b8a5beec233f5b67"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
@@ -578,6 +858,14 @@
   {
     "@id": "ArtifactNode:00CF1WZ3S0000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CF1WZ3S0000:props:StringProp:00CN3Z21F0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The engine-level bug family this concern owns — most prominently a still-unexplained per-operation slowdown that compounds the longer a long-lived process stays alive, once bad enough to hang the whole service for 40 minutes."
+      }
+    ],
     "title": "core.md",
     "text": "**`npm run verify` costs ~5 minutes, dominated by a process-lifetime slowdown neither store-freshness nor heap size explains** — instrumented per-step (a `console.log`-wrapping timer keyed on each step's own `\"N. Testing...\"` header, printing a sorted breakdown even on failure) and found the same operation (`checkLinkIntegrity`'s corpus sweep, and separately `parseMarkdownTree`-driven ingestion in Linking Slice steps 13-18) costs low hundreds of ms freshly isolated, but 12-55 *seconds* run as `verify.ts`'s own later steps — steps 3-6 doing the identical kind of parsing work stay fast, steps 7-12 in between do no heavy parsing at all, then 13 onward is uniformly slow. Two credible causes ruled out by direct experiment, not by inspection: (1) oxigraph's own WASM memory footprint (`external`, ~850MB-1GB by that point vs ~50MB fresh) looked causal, but compacting the store mid-run (dehydrate a scratch dir, rehydrate a brand-new `Store` with the identical live content) made the same sweep *slower*, not faster — ruling out \"this one store instance is bloated.\" (2) V8 heap-size tuning (`--max-old-space-size=8192 --max-semi-space-size=128`) changed nothing measurably.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -586,15 +874,23 @@
       "BlockNode:00CF1WZ4JG001"
     ],
     "path": "issues/core.md",
-    "fileHash": "669340ed11d461d6f6c995a65f5cd57afe4ea32e5e96f3bc0440f74caf9eeab2",
-    "lastTrackedAt": "2026-09-12T22:28:40.384Z",
-    "ingestedHash": "669340ed11d461d6f6c995a65f5cd57afe4ea32e5e96f3bc0440f74caf9eeab2",
-    "lastIngestedAt": "2026-09-20T06:52:11.536Z",
-    "projectedHash": "669340ed11d461d6f6c995a65f5cd57afe4ea32e5e96f3bc0440f74caf9eeab2"
+    "fileHash": "01549a028c74d26f5c37917c1eecfb2167458f4dc033968585d386127c776f3a",
+    "lastTrackedAt": "2026-09-22T08:07:14.204Z",
+    "ingestedHash": "01549a028c74d26f5c37917c1eecfb2167458f4dc033968585d386127c776f3a",
+    "lastIngestedAt": "2026-09-22T08:23:39.306Z",
+    "projectedHash": "01549a028c74d26f5c37917c1eecfb2167458f4dc033968585d386127c776f3a"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CF1WZDHG000:props:StringProp:00CN3YRVPG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Freeflow record for `core`, the shared ApeironNgn engine: the reconcile-identity bug family, `aperas retype`, and the frontmatter-backed `description` redesign this very sweep exercises."
+      }
+    ],
     "title": "core.md",
     "text": "**Issues**: [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) — the cross-cutting bugs with no single sub-part home, plus a rollup of each sub-part's own.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -603,15 +899,23 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "c61c107e261f9b39f74d3125d613714984545f3e08fbf6ff58cb4694e88d2d43",
-    "lastTrackedAt": "2026-09-12T22:28:41.435Z",
-    "ingestedHash": "c61c107e261f9b39f74d3125d613714984545f3e08fbf6ff58cb4694e88d2d43",
-    "lastIngestedAt": "2026-09-20T06:27:09.765Z",
-    "projectedHash": "c61c107e261f9b39f74d3125d613714984545f3e08fbf6ff58cb4694e88d2d43"
+    "fileHash": "3ecba666f74ef85e44d01f489be0933f83452b70604cf8e5c014cac1e950b74e",
+    "lastTrackedAt": "2026-09-22T08:06:36.591Z",
+    "ingestedHash": "3ecba666f74ef85e44d01f489be0933f83452b70604cf8e5c014cac1e950b74e",
+    "lastIngestedAt": "2026-09-22T08:39:36.678Z",
+    "projectedHash": "3ecba666f74ef85e44d01f489be0933f83452b70604cf8e5c014cac1e950b74e"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CF23FACG000:props:StringProp:00CN3ZB3K0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The batch plan for `core`'s reconcile-identity bug family, reordered once actually reading `reconcile.ts` showed the original filing order didn't match the real mechanism."
+      }
+    ],
     "title": "core.md",
     "text": "Batched, not fixed by the original filing order below — that plan was sketched before `reconcile.ts` was actually read, and wasn't followed as written once it was. [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) are grouped by which batch actually closes them, per [Task Breakdown](#id/BlockNode:00CF23FB1G003).",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -620,15 +924,23 @@
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "f32bbffcb8fc9758768aa6a1707d7edab4984f91b116b009b2c74a3fedc26c0d",
-    "lastTrackedAt": "2026-09-12T22:28:42.464Z",
-    "ingestedHash": "f32bbffcb8fc9758768aa6a1707d7edab4984f91b116b009b2c74a3fedc26c0d",
-    "lastIngestedAt": "2026-09-15T09:31:45.485Z",
-    "projectedHash": "f32bbffcb8fc9758768aa6a1707d7edab4984f91b116b009b2c74a3fedc26c0d"
+    "fileHash": "aac843e24b9b99f77f4cccfc482b885aa32ef5c424dc6a67b5eec65b7f1cb13f",
+    "lastTrackedAt": "2026-09-22T08:07:51.361Z",
+    "ingestedHash": "aac843e24b9b99f77f4cccfc482b885aa32ef5c424dc6a67b5eec65b7f1cb13f",
+    "lastIngestedAt": "2026-09-22T08:24:11.463Z",
+    "projectedHash": "aac843e24b9b99f77f4cccfc482b885aa32ef5c424dc6a67b5eec65b7f1cb13f"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CF2AEA78000:props:StringProp:00CN3Z1P1G000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "No open issues in the CLI dispatcher layer itself — see Resolved for the single `kg:insert` ordering bug that used to live here."
+      }
+    ],
     "title": "cli.md",
     "text": "None currently — see Resolved below.",
     "parent": "FolderNode:00CDBYV4BR003",
@@ -637,15 +949,23 @@
       "BlockNode:00CF2AEAX0001"
     ],
     "path": "issues/cli.md",
-    "fileHash": "16c0b60771b51976f586702a1705c9addf4da6289a64e6f66cdabbb9ae0a749e",
-    "lastTrackedAt": "2026-09-12T22:30:31.454Z",
-    "ingestedHash": "16c0b60771b51976f586702a1705c9addf4da6289a64e6f66cdabbb9ae0a749e",
-    "lastIngestedAt": "2026-09-13T06:11:32.755Z",
-    "projectedHash": "16c0b60771b51976f586702a1705c9addf4da6289a64e6f66cdabbb9ae0a749e"
+    "fileHash": "cdd795a6b6c51c7d975e44268ef4cd408be6925a754e2c1aa2a3edfce1e7cc88",
+    "lastTrackedAt": "2026-09-22T08:07:12.762Z",
+    "ingestedHash": "cdd795a6b6c51c7d975e44268ef4cd408be6925a754e2c1aa2a3edfce1e7cc88",
+    "lastIngestedAt": "2026-09-22T08:23:38.168Z",
+    "projectedHash": "cdd795a6b6c51c7d975e44268ef4cd408be6925a754e2c1aa2a3edfce1e7cc88"
   },
   {
     "@id": "ArtifactNode:00CF2AEKZG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CF2AEKZG000:props:StringProp:00CN3YPBD8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Why `cli` ended up thin: everything that looked CLI-specific except the `kg:insert` ordering gap and `packaging` turned out to be `core` engine content instead."
+      }
+    ],
     "title": "cli.md",
     "text": "**Issues**: [Open Issues](../issues/cli.md#id/BlockNode:00CF2AEAX0002) — what's genuinely CLI-dispatcher-specific, not engine-level.",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -654,15 +974,23 @@
       "BlockNode:00CF2AEMER001"
     ],
     "path": "discussion/cli.md",
-    "fileHash": "397d0bd6b25a2c039aea5961ecdb9a7f68133529a98a895e15077452c3f2e290",
-    "lastTrackedAt": "2026-09-12T22:30:32.702Z",
-    "ingestedHash": "397d0bd6b25a2c039aea5961ecdb9a7f68133529a98a895e15077452c3f2e290",
-    "lastIngestedAt": "2026-09-17T14:59:15.114Z",
-    "projectedHash": "397d0bd6b25a2c039aea5961ecdb9a7f68133529a98a895e15077452c3f2e290"
+    "fileHash": "bee268163c3202e019f622392be987635e9dd7e4ab23d6a06e97a3fe123e4889",
+    "lastTrackedAt": "2026-09-22T08:06:25.771Z",
+    "ingestedHash": "bee268163c3202e019f622392be987635e9dd7e4ab23d6a06e97a3fe123e4889",
+    "lastIngestedAt": "2026-09-22T08:23:10.360Z",
+    "projectedHash": "bee268163c3202e019f622392be987635e9dd7e4ab23d6a06e97a3fe123e4889"
   },
   {
     "@id": "ArtifactNode:00CF2AEX6R000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CF2AEX6R000:props:StringProp:00CN3ZAS7R000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The now-complete fix for `kg:insert`'s anchor-validation ordering — resolved before hydration so a bad anchor can never leave an orphan behind."
+      }
+    ],
     "title": "cli.md",
     "text": "Fix the single open issue directly in `kgInsert.ts` — no `core` changes needed, unlike its former siblings that moved to `core`.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -671,15 +999,23 @@
       "BlockNode:00CF2AEXN8001"
     ],
     "path": "planning/cli.md",
-    "fileHash": "6197058f2a99a60080fdd35adf5ee76b2c8ad88312faa179287bd66e94b8694c",
-    "lastTrackedAt": "2026-09-12T22:30:33.883Z",
-    "ingestedHash": "6197058f2a99a60080fdd35adf5ee76b2c8ad88312faa179287bd66e94b8694c",
-    "lastIngestedAt": "2026-09-15T09:31:49.318Z",
-    "projectedHash": "6197058f2a99a60080fdd35adf5ee76b2c8ad88312faa179287bd66e94b8694c"
+    "fileHash": "e168c016ef7b800cdb9f3084211616117dfcee7b8562eab6600a26fc0d3ca3ce",
+    "lastTrackedAt": "2026-09-22T08:07:49.471Z",
+    "ingestedHash": "e168c016ef7b800cdb9f3084211616117dfcee7b8562eab6600a26fc0d3ca3ce",
+    "lastIngestedAt": "2026-09-22T08:24:10.376Z",
+    "projectedHash": "e168c016ef7b800cdb9f3084211616117dfcee7b8562eab6600a26fc0d3ca3ce"
   },
   {
     "@id": "ArtifactNode:00CJ2TCV40000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CJ2TCV40000:props:StringProp:00CN3YXG28000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Scope, transport, rendering and auth decisions for the webapp, each with the alternative it was chosen over — see [design/webapp.md](../design/webapp.md#id/BlockNode:00CJ6TGSX8001) for the settled result."
+      }
+    ],
     "title": "webapp.md",
     "text": "**Scope**: `webapp` is the third thin wrapper over the shared `core` engine, alongside `cli` — anticipated by name in [cli's Settled scope](../discussion/cli.md#id/BlockNode:00CF2AEMER007), and sitting over the engine described in [core's Dashboard](../discussion/core.md#id/BlockNode:00CF1WZE18001). Its subject is the **UI projection** tier only; the i-projection it consumes belongs to [treeview](../discussion/treeview.md#id/BlockNode:00CE1DDF4G001).",
     "parent": "FolderNode:00CDBYV4BR001",
@@ -687,14 +1023,39 @@
       "BlockNode:00CJ2TCV40001"
     ],
     "path": "discussion/webapp.md",
-    "fileHash": "1d67eb941a3b33be42b522c454e3703f7119a379e879d4456d4795f3276a5584",
-    "ingestedHash": "1d67eb941a3b33be42b522c454e3703f7119a379e879d4456d4795f3276a5584",
-    "lastIngestedAt": "2026-09-22T00:13:17.524Z",
-    "projectedHash": "1d67eb941a3b33be42b522c454e3703f7119a379e879d4456d4795f3276a5584"
+    "fileHash": "c89a801c95914a804825b937a5299d9e1df738654d18439ba3ca0c76222a17d7",
+    "lastTrackedAt": "2026-09-22T08:06:55.574Z",
+    "ingestedHash": "c89a801c95914a804825b937a5299d9e1df738654d18439ba3ca0c76222a17d7",
+    "lastIngestedAt": "2026-09-22T08:23:18.177Z",
+    "projectedHash": "c89a801c95914a804825b937a5299d9e1df738654d18439ba3ca0c76222a17d7"
   },
   {
     "@id": "ArtifactNode:00CJ6T0XAG000",
     "@type": "ArtifactNode",
+    "links": [
+      {
+        "@id": "ArtifactNode:00CJ6T0XAG000:links:Link:00CN3YKXMG000",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEMER007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "ArtifactNode:00CJ6T0XAG000:links:Link:00CN3YKXMG000:props:StringProp:00CN3YKXMG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "66"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "ArtifactNode:00CJ6T0XAG000:props:StringProp:00CN3YKXJG000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The webapp as a third thin wrapper over `@aperas/core`, alongside [`cli`](../discussion/cli.md#id/BlockNode:00CF2AEMER007) — deep read now, an explicit op allowlist, and a client-side poll standing in for the tick channel."
+      }
+    ],
     "title": "webapp.md",
     "text": "**Discussion**: [scope, transport, rendering and auth, with the rejected alternatives behind each](../discussion/webapp.md#id/BlockNode:00CJ2TCV40001).",
     "parent": "FolderNode:00CDBYV4BR000",
@@ -702,29 +1063,48 @@
       "BlockNode:00CJ6TGSX8001"
     ],
     "path": "design/webapp.md",
-    "fileHash": "afcca55c30f0e28b0d475af8839d687e113b6c80a6d6ebe95aece6954bbd5fb9",
-    "ingestedHash": "afcca55c30f0e28b0d475af8839d687e113b6c80a6d6ebe95aece6954bbd5fb9",
-    "lastIngestedAt": "2026-09-22T00:24:17.932Z",
-    "projectedHash": "afcca55c30f0e28b0d475af8839d687e113b6c80a6d6ebe95aece6954bbd5fb9"
+    "fileHash": "32d6a7190804502bd8f3bdf8c2fd84c782b7b435184520af78c6598e498e33dc",
+    "lastTrackedAt": "2026-09-22T08:06:16.357Z",
+    "ingestedHash": "32d6a7190804502bd8f3bdf8c2fd84c782b7b435184520af78c6598e498e33dc",
+    "lastIngestedAt": "2026-09-22T08:23:02.165Z",
+    "projectedHash": "32d6a7190804502bd8f3bdf8c2fd84c782b7b435184520af78c6598e498e33dc"
   },
   {
     "@id": "ArtifactNode:00CJ6T137R000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CJ6T137R000:props:StringProp:00CN3Z7Y0G000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "What's still open in the webapp: an unverified renderer question about multi-position links, deep-write hand-off left unexamined, and a ctrl-click gesture bug that contradicts the settled design."
+      }
+    ],
     "title": "webapp.md",
     "text": "**Whether the tree renderer surfaces every position of a multi-position `Link`**: the graph carries one `position` prop per occurrence, and the endnote's `^ a b` back-references need one anchor per position. Whether `renderTreeWithView` emits such a link once or once per position is unchecked. A renderer question, not a model one, and it must be answered before the endnote can claim to be faithful.",
     "parent": "FolderNode:00CDBYV4BR003",
+    "type": "root",
     "children": [
       "BlockNode:00CJ6V6370001"
     ],
     "path": "issues/webapp.md",
-    "fileHash": "882a06bd79db19a2e6d1a15e8fb3b7200b818403810d99a5aeb2b207c4e763c9",
-    "ingestedHash": "882a06bd79db19a2e6d1a15e8fb3b7200b818403810d99a5aeb2b207c4e763c9",
-    "lastIngestedAt": "2026-09-22T00:41:26.731Z",
-    "projectedHash": "882a06bd79db19a2e6d1a15e8fb3b7200b818403810d99a5aeb2b207c4e763c9"
+    "fileHash": "3b135439b1f1785c3c2c83800a414bcfd99878cf7f1d2828c9372c6cc0b7b797",
+    "lastTrackedAt": "2026-09-22T08:07:37.717Z",
+    "ingestedHash": "3b135439b1f1785c3c2c83800a414bcfd99878cf7f1d2828c9372c6cc0b7b797",
+    "lastIngestedAt": "2026-09-22T08:23:55.129Z",
+    "projectedHash": "3b135439b1f1785c3c2c83800a414bcfd99878cf7f1d2828c9372c6cc0b7b797"
   },
   {
     "@id": "ArtifactNode:00CJ6T19PG000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CJ6T19PG000:props:StringProp:00CN3ZGMGR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The phased webapp build: deep read with a single shallow text edit in Phase 1, deep write deliberately deferred to Phase 2+."
+      }
+    ],
     "title": "webapp.md",
     "text": "**Phase 1 is deep read, shallow write**: the whole read surface plus a single in-place text edit of the current node. This is the phase the settled design describes, and its write boundary is principled rather than a scope cut — one node's own text is the only change that needs no reconciliation and no structural judgment.",
     "parent": "FolderNode:00CDBYV4BR004",
@@ -732,14 +1112,23 @@
       "BlockNode:00CJ6V6CH0001"
     ],
     "path": "planning/webapp.md",
-    "fileHash": "a6d444c4f6c70daa15b472468e44d59af94659308237a05afaf6859a0a313625",
-    "ingestedHash": "a6d444c4f6c70daa15b472468e44d59af94659308237a05afaf6859a0a313625",
-    "lastIngestedAt": "2026-09-22T00:33:31.176Z",
-    "projectedHash": "a6d444c4f6c70daa15b472468e44d59af94659308237a05afaf6859a0a313625"
+    "fileHash": "98dfaf2e33f9e2c265523c40883ca368eefa78ccea5cb4f7928a85035fce8699",
+    "lastTrackedAt": "2026-09-22T08:08:14.006Z",
+    "ingestedHash": "98dfaf2e33f9e2c265523c40883ca368eefa78ccea5cb4f7928a85035fce8699",
+    "lastIngestedAt": "2026-09-22T08:24:17.000Z",
+    "projectedHash": "98dfaf2e33f9e2c265523c40883ca368eefa78ccea5cb4f7928a85035fce8699"
   },
   {
     "@id": "ArtifactNode:00CJ6T1G4G000",
     "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CJ6T1G4G000:props:StringProp:00CN3ZR2GR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Where the webapp actually stands: Slice 1 and the UI (Slices 5-8) have a real working dev build; the auth token, HTTP listener and tick channel (Slices 2-4) are still not built."
+      }
+    ],
     "title": "webapp.md",
     "text": "Slice 1 is built. The UI itself (Slices 5-8: `FolderDiv`, links at two sites, zoom, shallow write) also has a real, working dev build — running against the live graph through a dev-only bridge (`packages/web/devApiServer.ts`), not the production listener. Not built: the per-run auth token, the real HTTP listener, and the tick channel (Slices 2-4) — the dev bridge talks to the ApeironNgn service directly over its unix socket instead, which is honest for local development but has none of the auth or the live-push story a shipped listener needs. The dev bridge defaults to fixed ports rather than Vite's own default or an ephemeral one: the Vite dev server listens on 2737, the bridge on 2734, both spelled out in `packages/web/vite.config.ts` and derived from the project names — `aper` from Aperas, `apei` from Apeiron. In place of the still-missing tick channel, the dev tab polls its own refetch every 1s (a `sync` checkbox in the header turns it off), which is what makes an external `aperas fold`/`unfold`/CLI write show up without a manual reload — see [why this is explicitly a stopgap, not the settled push design](../design/webapp.md#id/BlockNode:00CJDHHVA8000). `FolderDiv`'s own render polish also landed: [a compact glyph per node kind](../design/webapp.md#id/BlockNode:00CJDHWT9G001) in place of the old `[FolderNode]`/`[heading]`/... bracket, [the fold arrow plus its guide line unified into one hoverable/clickable control](../design/webapp.md#id/BlockNode:00CJDHYES8001), [a link row now shows its target's own kind glyph and splits title from abstract the same way an unfolded node does](../design/webapp.md#id/BlockNode:00CJE14W0R001), [body text lost the dimming it never needed](../design/webapp.md#id/BlockNode:00CJE11FRR000), and [each node's title line now shows its own backlink count, opening a popover of them on click](../design/webapp.md#id/BlockNode:00CJEDTR40001).",
     "parent": "FolderNode:00CDBYV4BR002",
@@ -747,9 +1136,168 @@
       "BlockNode:00CJ6V6N9R001"
     ],
     "path": "history/webapp.md",
-    "fileHash": "bc0bf84a5f33fe80fe5574cd0f42f37cc4b7c6b2c18216005982f2ab54953ee6",
-    "ingestedHash": "bc0bf84a5f33fe80fe5574cd0f42f37cc4b7c6b2c18216005982f2ab54953ee6",
-    "lastIngestedAt": "2026-09-18T04:28:10.326Z",
-    "projectedHash": "bc0bf84a5f33fe80fe5574cd0f42f37cc4b7c6b2c18216005982f2ab54953ee6"
+    "fileHash": "22cf94307d98d8149d855602f799b79d9b4d148a5b984a7223f300b5903a2b92",
+    "lastTrackedAt": "2026-09-22T08:08:44.464Z",
+    "ingestedHash": "22cf94307d98d8149d855602f799b79d9b4d148a5b984a7223f300b5903a2b92",
+    "lastIngestedAt": "2026-09-22T08:24:30.626Z",
+    "projectedHash": "22cf94307d98d8149d855602f799b79d9b4d148a5b984a7223f300b5903a2b92"
+  },
+  {
+    "@id": "ArtifactNode:00CN1QE950000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CN1QE950000:props:StringProp:00CN1QEEQ8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The Aperas project's knowledge-graph corpus root: every design/issues/planning/history/discussion doc lives under here, live-ingested rather than static documentation."
+      }
+    ],
+    "title": "README.md",
+    "text": "Design docs, dev status, and reports for the Aperas project, tracked as `ArtifactNode`/`FolderNode` content in ApeironNgn's own knowledge graph (`Aperas-apeironngn-design.md`) — this tree is both documentation and a live corpus the substrate ingests itself.",
+    "type": "root",
+    "children": [
+      "BlockNode:00CN1QEAGG001"
+    ],
+    "path": "README.md",
+    "fileHash": "adcb2e690fedf95d4e1af52a852b9651db8dc1344f0eb3c18812b8c0967da37d",
+    "lastTrackedAt": "2026-09-22T05:30:47.316Z",
+    "ingestedHash": "adcb2e690fedf95d4e1af52a852b9651db8dc1344f0eb3c18812b8c0967da37d",
+    "lastIngestedAt": "2026-09-22T08:22:52.719Z",
+    "projectedHash": "adcb2e690fedf95d4e1af52a852b9651db8dc1344f0eb3c18812b8c0967da37d"
+  },
+  {
+    "@id": "ArtifactNode:00CN4MY48R000",
+    "@type": "ArtifactNode",
+    "tombstonedAt": "2026-09-22T08:56:40.416Z",
+    "title": "test.md",
+    "text": "**Existing Sibling**: this list item, once retyped into a heading, will derive the exact same title as its own sibling heading below — same lead-in term, same slug, same parent.",
+    "type": "root",
+    "children": [],
+    "path": "__scratch_retype_collision/test.md",
+    "fileHash": "a8936117826f427eae18da727597299c1a0d0e76fe46b36a113a30dadcb3b229",
+    "lastTrackedAt": "2026-09-22T08:56:04.556Z",
+    "ingestedHash": "a8936117826f427eae18da727597299c1a0d0e76fe46b36a113a30dadcb3b229",
+    "lastIngestedAt": "2026-09-22T08:56:04.709Z"
+  },
+  {
+    "@id": "ArtifactNode:00CN4ZQ8Y0000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CN4ZQ8Y0000:props:StringProp:00CN4ZQFJ0000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Crystallized architecture — settled design decisions for each concern, once they've matured out of discussion."
+      }
+    ],
+    "title": "README.md",
+    "text": "Design docs for the Aperas project, one per concern (webapp, treeview, linking, list-consumption, packaging, documentation, aperas-skill). Each holds the current, normative shape of that concern — Architecture and Topology, not the reasoning that got there; see the matching `discussion/` doc for that.",
+    "type": "root",
+    "children": [
+      "BlockNode:00CN4ZQAPG001"
+    ],
+    "path": "design/README.md",
+    "fileHash": "7d632fa044951be76ae837c637ef92bd0997fb868bebf9ee25f4eebe34e1ddb3",
+    "lastTrackedAt": "2026-09-22T09:18:35.640Z",
+    "ingestedHash": "7d632fa044951be76ae837c637ef92bd0997fb868bebf9ee25f4eebe34e1ddb3",
+    "lastIngestedAt": "2026-09-22T09:19:13.497Z",
+    "projectedHash": "7d632fa044951be76ae837c637ef92bd0997fb868bebf9ee25f4eebe34e1ddb3"
+  },
+  {
+    "@id": "ArtifactNode:00CN4ZSF58000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CN4ZSF58000:props:StringProp:00CN4ZSNK8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The unbounded Freeflow layer — where every incident, open question and reasoning trace starts, before anything crystallizes into design, issues, planning or history."
+      }
+    ],
+    "title": "README.md",
+    "text": "Discussion docs for the Aperas project, one per concern. Schema-free and append-only — a Dashboard of pointers, Open Questions, Settled decisions, and a Freeflow list of raw investigation notes. Most things never need to leave this layer at all.",
+    "type": "root",
+    "children": [
+      "BlockNode:00CN4ZSHMG001"
+    ],
+    "path": "discussion/README.md",
+    "fileHash": "280b5e0c70b8bf86bd00b70a0b268b9ab06fa2426cc450a950506008a3aa3788",
+    "lastTrackedAt": "2026-09-22T09:18:44.629Z",
+    "ingestedHash": "280b5e0c70b8bf86bd00b70a0b268b9ab06fa2426cc450a950506008a3aa3788",
+    "lastIngestedAt": "2026-09-22T09:19:14.701Z",
+    "projectedHash": "280b5e0c70b8bf86bd00b70a0b268b9ab06fa2426cc450a950506008a3aa3788"
+  },
+  {
+    "@id": "ArtifactNode:00CN4ZTZRR000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CN4ZTZRR000:props:StringProp:00CN4ZV5Y8000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Open bugs and gaps for each concern, plus a Resolved record once they're fixed."
+      }
+    ],
+    "title": "README.md",
+    "text": "Issue docs for the Aperas project, one per concern. Each tracks that concern's own Open Issues and Pending Tasks, with a Resolved section recording what was found and how it was fixed, rather than deleting the record once closed.",
+    "type": "root",
+    "children": [
+      "BlockNode:00CN4ZV1G8001"
+    ],
+    "path": "issues/README.md",
+    "fileHash": "5793381ab64b95f89785dcbd9d5ecd4d48bbb3f8aca056fd80d474aff804dc4c",
+    "lastTrackedAt": "2026-09-22T09:18:50.851Z",
+    "ingestedHash": "5793381ab64b95f89785dcbd9d5ecd4d48bbb3f8aca056fd80d474aff804dc4c",
+    "lastIngestedAt": "2026-09-22T09:19:15.876Z",
+    "projectedHash": "5793381ab64b95f89785dcbd9d5ecd4d48bbb3f8aca056fd80d474aff804dc4c"
+  },
+  {
+    "@id": "ArtifactNode:00CN4ZWHCG000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CN4ZWHCG000:props:StringProp:00CN4ZWPTR000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Implementation plans and ordered task breakdowns for each concern's outstanding work."
+      }
+    ],
+    "title": "README.md",
+    "text": "Planning docs for the Aperas project, one per concern. Each holds an Implementation Plan and a Task Breakdown — the ordered steps from a concern's Open Issues to its Current Status.",
+    "type": "root",
+    "children": [
+      "BlockNode:00CN4ZWJMG001"
+    ],
+    "path": "planning/README.md",
+    "fileHash": "b78e67d6ad5a13e3fad35e923129db96eedf907b45f7e5b6e80a3e668ac52aec",
+    "lastTrackedAt": "2026-09-22T09:18:57.203Z",
+    "ingestedHash": "b78e67d6ad5a13e3fad35e923129db96eedf907b45f7e5b6e80a3e668ac52aec",
+    "lastIngestedAt": "2026-09-22T09:19:17.005Z",
+    "projectedHash": "b78e67d6ad5a13e3fad35e923129db96eedf907b45f7e5b6e80a3e668ac52aec"
+  },
+  {
+    "@id": "ArtifactNode:00CN4ZXWJ8000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00CN4ZXWJ8000:props:StringProp:00CN4ZY25G000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "Current status and milestones for each concern — what's actually built and verified today."
+      }
+    ],
+    "title": "README.md",
+    "text": "History docs for the Aperas project, one per concern. Each holds a Current Status summary and a Milestones list, recording what shipped and when, distinct from the reasoning in `discussion/` or the plan in `planning/`.",
+    "type": "root",
+    "children": [
+      "BlockNode:00CN4ZXXRR001"
+    ],
+    "path": "history/README.md",
+    "fileHash": "ab8d596e09a1e26e640b03829cf861463968488806d42683d10765dff2851e9f",
+    "lastTrackedAt": "2026-09-22T09:19:02.729Z",
+    "ingestedHash": "ab8d596e09a1e26e640b03829cf861463968488806d42683d10765dff2851e9f",
+    "lastIngestedAt": "2026-09-22T09:19:18.127Z",
+    "projectedHash": "ab8d596e09a1e26e640b03829cf861463968488806d42683d10765dff2851e9f"
   }
 ]

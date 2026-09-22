@@ -1,3 +1,7 @@
+---
+description: What's implemented and verified in TreeView today, checked directly against the real corpus rather than assumed from the design doc.
+---
+
 # TreeView — History <a name='id/BlockNode:00CE1GW8T8001' class='aperas-anchor aperas-id'></a>
 
 ## Current Status <a name='id/BlockNode:00CE1GW8T8002' class='aperas-anchor aperas-id'></a>

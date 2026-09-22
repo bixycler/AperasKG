@@ -1,3 +1,7 @@
+---
+description: No open issues — every packaging gap (build step, graph discovery, artifact rename) is resolved.
+---
+
 # Packaging — Issues <a name='id/BlockNode:00CDDVC8N0001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CDDVC8N0002' class='aperas-anchor aperas-id'></a>

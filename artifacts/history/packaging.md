@@ -1,3 +1,7 @@
+---
+description: The full packaging effort, done with no open gaps — dispatcher, workspace split, configuration, build, and the explicit-start service redesign all shipped.
+---
+
 # Packaging — History <a name='id/BlockNode:00CDDVCKCG001' class='aperas-anchor aperas-id'></a>
 
 ## Current Status <a name='id/BlockNode:00CDDVCKCG002' class='aperas-anchor aperas-id'></a>

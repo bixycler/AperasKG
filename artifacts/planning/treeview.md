@@ -1,3 +1,7 @@
+---
+description: The now-done fix list for treeview's real gaps: stale `unfolds` tracking, a mutating bare `unfold`, no raw inspection command, plus two relocated parser bugs.
+---
+
 # TreeView — Planning <a name='id/BlockNode:00CE1GW7CG001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CE1GW7CG002' class='aperas-anchor aperas-id'></a>

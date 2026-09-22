@@ -1,3 +1,7 @@
+---
+description: The sub-task order for migrating `archive/`'s legacy docs, newest era first since the newest docs are most load-bearing to have in the graph early.
+---
+
 # Archive Migration — Planning <a name='id/BlockNode:00CE01Y1Z8001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CE01Y1Z8002' class='aperas-anchor aperas-id'></a>

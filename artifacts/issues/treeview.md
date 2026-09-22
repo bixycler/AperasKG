@@ -1,3 +1,7 @@
+---
+description: No open issues — the three real gaps found (stale `unfolds`, a mutating bare `unfold`, no raw inspection command) are all fixed.
+---
+
 # TreeView — Issues <a name='id/BlockNode:00CE1GW638001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CE1GW638002' class='aperas-anchor aperas-id'></a>

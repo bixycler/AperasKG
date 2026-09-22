@@ -1,3 +1,7 @@
+---
+description: The concern taxonomy — design/issues/planning/history/discussion — that keeps each doc's own logical thread isolated instead of mixed together.
+---
+
 # Architecture of Documents: Separation of Concerns & Matrix Workflow <a name='id/BlockNode:00CDD68E80001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CDD68E80002' class='aperas-anchor aperas-id'></a>

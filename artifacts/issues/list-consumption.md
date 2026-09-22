@@ -1,3 +1,7 @@
+---
+description: No open issues — the list-consumption law is fully implemented and the corpus migration is complete.
+---
+
 # List Consumption — Issues <a name='id/BlockNode:00CE32GRZ8001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CE32GRZG000' class='aperas-anchor aperas-id'></a>

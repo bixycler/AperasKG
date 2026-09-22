@@ -1,3 +1,7 @@
+---
+description: `TreeView`'s fold state as its own i-projection layer between the raw graph and any UI, built on top of [linking's own resolution mechanism](../design/linking.md#id/BlockNode:00CDBYV4T8002).
+---
+
 # TreeView — Design <a name='id/BlockNode:00CE1GW4Y8001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CE1GW4Y8002' class='aperas-anchor aperas-id'></a>

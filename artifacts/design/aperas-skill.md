@@ -1,3 +1,7 @@
+---
+description: The four-level shape (Philosophy → Orientation → Discipline → Mechanics) the skill rewrite is organized around, each level explaining a consequence of the one above it.
+---
+
 # Aperas Skill — Design <a name='id/BlockNode:00CEA5Y5J8001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CEA5Y5J8002' class='aperas-anchor aperas-id'></a>

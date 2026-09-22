@@ -1,3 +1,7 @@
+---
+description: The two internal-reference conventions that coexist today — node-ID addressing carried over from the TerminusDB era, and a slug-anchor form prototyped but not yet adopted corpus-wide.
+---
+
 # Linking — History <a name='id/BlockNode:00CDBZ7698001' class='aperas-anchor aperas-id'></a>
 
 ## Current Status <a name='id/BlockNode:00CDBZ7698002' class='aperas-anchor aperas-id'></a>

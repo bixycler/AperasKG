@@ -1,3 +1,7 @@
+---
+description: The one law governing a markdown list at parse time: it either nests into whatever precedes it or dissolves flat into that node's own children — never survives as a bare list node.
+---
+
 # List Consumption — Design <a name='id/BlockNode:00CE32GQM8001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CE32GQM8002' class='aperas-anchor aperas-id'></a>

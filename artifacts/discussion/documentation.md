@@ -1,3 +1,7 @@
+---
+description: The mixing-problem evidence — real corpus files blending design, issues, history and rationale in one paragraph — that motivated splitting concerns apart.
+---
+
 # Documentation Architecture — Discussion <a name='id/BlockNode:00CDD68EV8001' class='aperas-anchor aperas-id'></a>
 
 ## Motivation: The Mixing Problem <a name='id/BlockNode:00CDD68EV8002' class='aperas-anchor aperas-id'></a>

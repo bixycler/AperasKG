@@ -1,3 +1,7 @@
+---
+description: How a legacy `archive/` doc gets split into its own design/issues/planning/history/discussion concern set, disk-first via `kg-doc-ingest`.
+---
+
 # Archive Migration — Design <a name='id/BlockNode:00CE01XZPG001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CE01XZPG002' class='aperas-anchor aperas-id'></a>

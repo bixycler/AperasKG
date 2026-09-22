@@ -1,3 +1,7 @@
+---
+description: The webapp as a third thin wrapper over `@aperas/core`, alongside [`cli`](../discussion/cli.md#id/BlockNode:00CF2AEMER007) — deep read now, an explicit op allowlist, and a client-side poll standing in for the tick channel.
+---
+
 # Webapp — Design <a name='id/BlockNode:00CJ6TGSX8001' class='aperas-anchor aperas-id'></a>
 
 ## Context <a name='id/BlockNode:00CJ6TGSY8000' class='aperas-anchor aperas-id'></a>

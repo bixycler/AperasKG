@@ -1,3 +1,7 @@
+---
+description: Scope, transport, rendering and auth decisions for the webapp, each with the alternative it was chosen over — see [design/webapp.md](../design/webapp.md#id/BlockNode:00CJ6TGSX8001) for the settled result.
+---
+
 # Webapp — Discussion <a name='id/BlockNode:00CJ2TCV40001' class='aperas-anchor aperas-id'></a>
 
 ## Dashboard <a name='id/BlockNode:00CJ2TCV40002' class='aperas-anchor aperas-id'></a>

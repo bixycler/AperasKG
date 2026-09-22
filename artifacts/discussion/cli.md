@@ -1,3 +1,7 @@
+---
+description: Why `cli` ended up thin: everything that looked CLI-specific except the `kg:insert` ordering gap and `packaging` turned out to be `core` engine content instead.
+---
+
 # CLI — Discussion <a name='id/BlockNode:00CF2AEMER001' class='aperas-anchor aperas-id'></a>
 
 ## Dashboard <a name='id/BlockNode:00CF2AEMER002' class='aperas-anchor aperas-id'></a>

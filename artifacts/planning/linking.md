@@ -1,3 +1,7 @@
+---
+description: The two implementation slices that carried linking's addressing convention from design to a working, verified mechanism.
+---
+
 # Linking — Planning <a name='id/BlockNode:00CDBZ77EG001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CDBZ77EG002' class='aperas-anchor aperas-id'></a>

@@ -1,3 +1,7 @@
+---
+description: The phased webapp build: deep read with a single shallow text edit in Phase 1, deep write deliberately deferred to Phase 2+.
+---
+
 # Webapp — Planning <a name='id/BlockNode:00CJ6V6CH0001' class='aperas-anchor aperas-id'></a>
 
 ## Implementation Plan <a name='id/BlockNode:00CJ6V6CH0002' class='aperas-anchor aperas-id'></a>
