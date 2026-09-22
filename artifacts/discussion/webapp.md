@@ -38,6 +38,58 @@
 
 - **The tick stream is consumed with `fetch()` + `ReadableStream`, not `EventSource`**: <a name='id/BlockNode:00CJ6SVHX8001' class='aperas-anchor aperas-id'></a> `EventSource` cannot set a request header at all — its constructor takes a URL and `withCredentials`, nothing else — so it could carry the token only as a cookie, which is ambient and reintroduces exactly the CSRF shape the custom header exists to prevent, or as a URL ticket, which adds an issuance endpoint and an expiry store. It also collapses every failure into one opaque `onerror`, so a 401 is indistinguishable from a restart; that is a real defect here rather than a nuisance, because the token is per-run and the service restarts constantly in development. What `EventSource` gives in exchange is reconnection, backoff and `Last-Event-ID` resumption — and resumption is worthless against [a bare tick](#id/BlockNode:00CJ2V5K2R000), since a missed tick is not a lost update: the next one refetches everything, and reconnecting refetches unconditionally. That leaves a reconnect loop of a few lines, which we would want to own anyway to refetch on reconnect and pause while the tab is hidden. With `EventSource` out, SSE's wire format stops earning its keep — it exists to be parsed by `EventSource` — so the stream carries NDJSON, already the service's framing on the unix socket, rather than adding a second wire format to the codebase.
 
+- **Fold state is two axes, not one bit — whether a node is pinned, and how much of its children shows**: <a name='id/BlockNode:00CMWKJYR0001' class='aperas-anchor aperas-id'></a> the binary folded/unfolded can't name what the renderer actually produces, since a node whose text shows only because its parent previews it is neither. One shape, two fills, three angles: fill says pinned (`▶`, in `unfolds`) or not (`▷`), angle says how much is revealed — east nothing, southeast partially, south fully — so `▷` never reaches south, correctly, because an unpinned node never shows children as content. Revelation is a total order, `{▷0° ≡ ▶0°} < ▷45° < ▶45° < ▶90°`, and its one tie (1 and 1′, both title-only) is separated by fill alone, which is right: collapsing should look like folding. `●` is U+25CF, not U+2022, per `FolderDiv.js`'s own note that the standard bullet is too small; `▶`/`▷` are U+25B6/U+25B7, a designed solid/hollow pair with near-identical metrics, rotated through the `transform` transition `.fd-arrow` already carries.
+  
+  | State | Glyph | Own line | Children | Pinned |
+  | --- | --- | --- | --- | --- |
+  | 1 | `▷` 0° | title | none as content — may still pass a breadcrumb child through | no |
+  | 2 | `▷` 45° | title + text | none | no |
+  | 2′ | `●` | title + text | none exist — confirmed dead end | yes |
+  | 1′ | `▶` 0° | title | hidden, their own pins kept | yes |
+  | 3 | `▶` 45° | title + text | as bare titles | yes |
+  | 4 | `▶` 90° | title + text | with their own text | yes |
+  | cut-off | `…` | title + text | render stopped at `maxDepth` | n/a — a property of the render, not the node |
+
+- **A solid stem means "fold me"; a sparse dotted guide means "this is path, not content"**: <a name='id/BlockNode:00CMWMMRGG001' class='aperas-anchor aperas-id'></a> the stem appears only in states 3 and 4 — pinned, children rendered as content — so its click action is always `fold`, never a lie. That restores the original sketch's own rule (`#stemLine { display: none }`, shown only when unfolded), which the Solid port lost by keying the stem on "has children" instead, leaving inert full-height stems on rows with no toggle at all — the [arrow and stem are one control](../design/webapp.md#id/BlockNode:00CJDHYES8001), so a stem with nothing behind it is a broken promise. A breadcrumb still showing a child below it gets a *passive* guide instead: no hover, no pointer, depth legibility only. That distinction is the point rather than a consolation — a non-recursive fold renders the path to pinned descendants as a stairway instead of `a/b/c`, and the passive guide is what says the child below is the next path segment, not this node's own content. UI: a `repeating-linear-gradient`, roughly 2px on / 5px off, since `dotted`/`dashed` at 1px read as a merely-lighter solid line. Console: `╎` — which needs more than a character swap, because `'│ '.repeat(depth)` cannot express per-column variation (the mark at column *k* belongs to the ancestor at depth *k*), so the prefix has to be built from a per-level stack in both `toText` and `renderTreeLines`.
+
+- **`fold` stops cascading, and the gestures follow the state rather than a fixed verb**: <a name='id/BlockNode:00CMWMP6X8001' class='aperas-anchor aperas-id'></a> plain `fold` now removes only this node's own entry, leaving descendants pinned so it reduces to a breadcrumb; `fold --stash` keeps the entry and hides the children, remembering their pins — the outliner-standard collapse, and the everyday "put it away"; `fold --recursive` keeps today's cascade, demoted to deliberate cleanup. `unfold` gains the reciprocal `--recursive`, plus `--no-preview` for the titles level and `--unstash` to reopen. Recursive unfold is not reopening a settled call: the archive's own §5 records it as "corrected from an earlier draft" purely to match the then-current `setUnfolded` implementation, never rejected on merit — and its neighbouring principle, that `unfolds` records intent one entry per explicit act while visibility is derived, is exactly why `--recursive` stores a flag rather than materialising every descendant id. On the UI the bare click always does the obvious thing to whatever is in front of it, and ctrl applies on the arrow and stem as well as the row — which [this section already specified](#id/BlockNode:00CJ2V1YAR009) and the implementation never honoured.
+  
+  | Gesture | unpinned (1, 2) | 1′ stashed | 3 titles | 4 previews | 2′ leaf | cut-off |
+  | --- | --- | --- | --- | --- | --- | --- |
+  | click | `unfold` → 4 | `unfold --unstash` → the level it held | `fold --stash` → 1′ | `fold --stash` → 1′ | `fold` — unpin | zoom / re-root |
+  | shift | `unfold --no-preview` → 3 | `unfold --unstash --no-preview` → 3 | → 4 | → 3 | — | — |
+  | ctrl | zoom | zoom | zoom | zoom | zoom | zoom |
+  | alt | — (already unpinned) | `fold` → unpinned | `fold` → unpinned | `fold` → unpinned | = click | — |
+  | alt+shift | `unfold --recursive` | `unfold --recursive` | `fold --recursive` | `fold --recursive` | — | — |
+  
+  ```
+                  unpinned       1′ stashed     3 titles       4 previews
+                  1 ▷0°  2 ▷45°  ▶0°            ▶45°           ▶90°
+   click          ●────────────────────────────────────────────▶    unfold → 4
+   click                         ◀──────────────●──────────────●    fold --stash → 1′
+   click                         ●──────────────▶╌╌╌╌╌╌╌╌╌╌╌╌╌╌▶    unfold --unstash → whichever level it held
+   shift          ●──────────────●──────────────▶                   unfold --no-preview → 3  ·  unstash to 3
+   shift                                        ◀──────────────▶    titles ⇄ previews
+   alt            ◀──────────────●──────────────●──────────────●    fold — unpin only this; becomes a breadcrumb
+   alt+shift      ●──────────────●─────────────────────────────▶    unfold --recursive
+   alt+shift      ◀─────────────────────────────●──────────────●    fold --recursive — clears descendants’ pins
+   ────────────────────────────────────────────────────────────────────────────────────────────────────────
+   ctrl          zoom / re-root — from any state, on the row and on the arrow alike
+   2′ (leaf)     click unpins; it has no level axis, so nothing else applies
+   cut-off (…)   click zooms; the cut belongs to the render, not to the node
+  ```
+
+- **The level is two orthogonal subset fields on `TreeView`, not a reified entry and not one ordered scalar**: <a name='id/BlockNode:00CMWMRX88001' class='aperas-anchor aperas-id'></a> `unfolds` is a bare `reference`-kind field — one triple per entry, with nowhere to hang a prop — so a per-node level means either reifying each entry the way `Link` already is (the right shape, but a schema change plus migrating every existing view) or adding hard-coded sibling fields. Two of them: `unfoldsCollapsed` and `unfoldsNoPreview`, both subsets of `unfolds`, with the default level costing no storage at all. Orthogonal rather than one ordered scalar, deliberately — the same two fields either way, but a scalar makes "collapsed" and "titles-only" mutually exclusive, an invariant that has to be enforced in code and can be violated by any writer, while independent flags make all four combinations legal and the fourth is precisely the memory that lets unstash return to the level it came from instead of guessing. `unfolds` itself keeps membership alone, so `removeDanglingUnfolds` and `pruneStaleUnfolds` keep working as they are — though each new field has to join both sweeps, and the former's doc comment stops being true where it claims `unfolds` is the only `reference` field whose target can be a `Link`.
+  
+  | `collapsed` | `noPreview` | renders as | unstash returns to |
+  | --- | --- | --- | --- |
+  | 0 | 0 | 4 — previews | — |
+  | 0 | 1 | 3 — titles | — |
+  | 1 | 0 | 1′ — stashed | 4, previews |
+  | 1 | 1 | 1′ — stashed | 3, titles |
+
+- **The webapp's depth limit is computed from available width, and stays a server-side render option**: <a name='id/BlockNode:00CMWMVMV0001' class='aperas-anchor aperas-id'></a> indentation is a fixed `1.2rem` gutter per level, so the point at which a render stops being legible is arithmetic — `floor((width − buffer) / gutter)` — rather than a guessed constant. It is a legibility backstop, not a performance cap: at a typical viewport that lands around thirty levels, far past anything this corpus nests to, so the `…` control is rare by construction. Kept as `maxDepth` on the server render, recomputed and refetched (debounced) on resize, rather than truncated client-side — that way `truncated` keeps a single meaning and the UI grows no parallel notion of depth, driving the same field the [link preview popover](#id/BlockNode:00CJ2V1YAR007) already uses with `depth: 0`.
+
 ## Freeflow <a name='id/BlockNode:00CJ2TESY0003' class='aperas-anchor aperas-id'></a>
 
 - **`packages/web`'s code inventory, 2026-09-17**: <a name='id/BlockNode:00CJ2VBQR0001' class='aperas-anchor aperas-id'></a> the unmodified Vite+Solid scaffold — `App.tsx`, `index.tsx`, two CSS files, nothing else. It declares `@aperas/core` as a dependency and imports it nowhere, which is just as well: 14 files under `packages/core/src` import `node:fs`, `node:path` or `oxigraph`, so core cannot be bundled for a browser at all. That dependency is a scaffold leftover and should move to whatever host actually runs the engine.

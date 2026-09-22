@@ -687,10 +687,10 @@
       "BlockNode:00CJ2TCV40001"
     ],
     "path": "discussion/webapp.md",
-    "fileHash": "49652409792fe9609b0c38a08ba8fe4e18203484207119051a2ac266761da10d",
-    "ingestedHash": "49652409792fe9609b0c38a08ba8fe4e18203484207119051a2ac266761da10d",
-    "lastIngestedAt": "2026-09-18T04:17:43.670Z",
-    "projectedHash": "49652409792fe9609b0c38a08ba8fe4e18203484207119051a2ac266761da10d"
+    "fileHash": "1d67eb941a3b33be42b522c454e3703f7119a379e879d4456d4795f3276a5584",
+    "ingestedHash": "1d67eb941a3b33be42b522c454e3703f7119a379e879d4456d4795f3276a5584",
+    "lastIngestedAt": "2026-09-22T00:13:17.524Z",
+    "projectedHash": "1d67eb941a3b33be42b522c454e3703f7119a379e879d4456d4795f3276a5584"
   },
   {
     "@id": "ArtifactNode:00CJ6T0XAG000",
@@ -702,10 +702,10 @@
       "BlockNode:00CJ6TGSX8001"
     ],
     "path": "design/webapp.md",
-    "fileHash": "41cc06692b38059b1bcbe7d2087223167024fff812e3573f044c792ce46cb97a",
-    "ingestedHash": "41cc06692b38059b1bcbe7d2087223167024fff812e3573f044c792ce46cb97a",
-    "lastIngestedAt": "2026-09-21T16:38:21.374Z",
-    "projectedHash": "41cc06692b38059b1bcbe7d2087223167024fff812e3573f044c792ce46cb97a"
+    "fileHash": "afcca55c30f0e28b0d475af8839d687e113b6c80a6d6ebe95aece6954bbd5fb9",
+    "ingestedHash": "afcca55c30f0e28b0d475af8839d687e113b6c80a6d6ebe95aece6954bbd5fb9",
+    "lastIngestedAt": "2026-09-22T00:24:17.932Z",
+    "projectedHash": "afcca55c30f0e28b0d475af8839d687e113b6c80a6d6ebe95aece6954bbd5fb9"
   },
   {
     "@id": "ArtifactNode:00CJ6T137R000",
@@ -717,10 +717,10 @@
       "BlockNode:00CJ6V6370001"
     ],
     "path": "issues/webapp.md",
-    "fileHash": "6086c7e58661a354527ba6207aaf2592361a2e44367497a1d1ecc506d7eed790",
-    "ingestedHash": "6086c7e58661a354527ba6207aaf2592361a2e44367497a1d1ecc506d7eed790",
-    "lastIngestedAt": "2026-09-18T00:19:25.035Z",
-    "projectedHash": "6086c7e58661a354527ba6207aaf2592361a2e44367497a1d1ecc506d7eed790"
+    "fileHash": "882a06bd79db19a2e6d1a15e8fb3b7200b818403810d99a5aeb2b207c4e763c9",
+    "ingestedHash": "882a06bd79db19a2e6d1a15e8fb3b7200b818403810d99a5aeb2b207c4e763c9",
+    "lastIngestedAt": "2026-09-22T00:41:26.731Z",
+    "projectedHash": "882a06bd79db19a2e6d1a15e8fb3b7200b818403810d99a5aeb2b207c4e763c9"
   },
   {
     "@id": "ArtifactNode:00CJ6T19PG000",
@@ -732,10 +732,10 @@
       "BlockNode:00CJ6V6CH0001"
     ],
     "path": "planning/webapp.md",
-    "fileHash": "4bc73732e932f4fa5dfdb439781f3cbc2a88f82764aa4dfeed75e4911f50cffa",
-    "ingestedHash": "4bc73732e932f4fa5dfdb439781f3cbc2a88f82764aa4dfeed75e4911f50cffa",
-    "lastIngestedAt": "2026-09-17T21:33:02.869Z",
-    "projectedHash": "4bc73732e932f4fa5dfdb439781f3cbc2a88f82764aa4dfeed75e4911f50cffa"
+    "fileHash": "a6d444c4f6c70daa15b472468e44d59af94659308237a05afaf6859a0a313625",
+    "ingestedHash": "a6d444c4f6c70daa15b472468e44d59af94659308237a05afaf6859a0a313625",
+    "lastIngestedAt": "2026-09-22T00:33:31.176Z",
+    "projectedHash": "a6d444c4f6c70daa15b472468e44d59af94659308237a05afaf6859a0a313625"
   },
   {
     "@id": "ArtifactNode:00CJ6T1G4G000",

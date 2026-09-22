@@ -28462,7 +28462,12 @@
       "BlockNode:00CJ2V5K2R003",
       "BlockNode:00CJ69EA7G001",
       "BlockNode:00CJ69GNM0001",
-      "BlockNode:00CJ6SVHX8001"
+      "BlockNode:00CJ6SVHX8001",
+      "BlockNode:00CMWKJYR0001",
+      "BlockNode:00CMWMMRGG001",
+      "BlockNode:00CMWMP6X8001",
+      "BlockNode:00CMWMRX88001",
+      "BlockNode:00CMWMVMV0001"
     ]
   },
   {
@@ -30605,7 +30610,8 @@
       "BlockNode:00CJDHHVA8000",
       "BlockNode:00CJ6TGSYG00C",
       "BlockNode:00CJ6TGSYG00D",
-      "BlockNode:00CJ6TGSYG00E"
+      "BlockNode:00CJ6TGSYG00E",
+      "BlockNode:00CMX5GNB0001"
     ]
   },
   {
@@ -30738,8 +30744,13 @@
       "BlockNode:00CJ6TGSYR005",
       "BlockNode:00CJEDTR40001",
       "BlockNode:00CJFDGBVR001",
+      "BlockNode:00CMXB0X6R001",
       "BlockNode:00CMPNNP90001",
-      "BlockNode:00CMPNQAVR001"
+      "BlockNode:00CMPNQAVR001",
+      "BlockNode:00CMX5F2H8001",
+      "BlockNode:00CMX5FF3G001",
+      "BlockNode:00CMX5FXA0001",
+      "BlockNode:00CMX5G968001"
     ]
   },
   {
@@ -30924,7 +30935,10 @@
     "type": "heading",
     "children": [
       "BlockNode:00CJ6V6370003",
-      "BlockNode:00CJ6V6370004"
+      "BlockNode:00CJ6V6370004",
+      "BlockNode:00CMWN0XDG001",
+      "BlockNode:00CMX4NCW8001",
+      "BlockNode:00CMXJQX1R001"
     ]
   },
   {
@@ -31066,7 +31080,21 @@
       "BlockNode:00CJ6V6CH8003",
       "BlockNode:00CJ6V6CH8004",
       "BlockNode:00CJ6V6CH8005",
-      "BlockNode:00CJ6V6CH8006"
+      "BlockNode:00CJ6V6CH8006",
+      "BlockNode:00CMXF4WTR001",
+      "BlockNode:00CMXF5K98001",
+      "BlockNode:00CMXF6AD8001",
+      "BlockNode:00CMXF727R001",
+      "BlockNode:00CMXF7RG0001",
+      "BlockNode:00CMXF8EYG001",
+      "BlockNode:00CMXF94Z8001",
+      "BlockNode:00CMX5ZN68001",
+      "BlockNode:00CMX600WG001",
+      "BlockNode:00CMX60DEG001",
+      "BlockNode:00CMX60VA8001",
+      "BlockNode:00CMX6173R001",
+      "BlockNode:00CMX61KG8001",
+      "BlockNode:00CMX61YK0001"
     ]
   },
   {
@@ -32398,6 +32426,680 @@
     "title": "**`kg:unfold` never got the breadcrumb `kg:tree` did**",
     "text": "**`kg:unfold` never got the breadcrumb `kg:tree` did**: [the fix above](#id/BlockNode:00CJ01QAJ0000) only touched `kgTree.ts` — `kg:unfold`'s own output (`kgUnfold.ts`) kept printing straight from `id  [label]  title`, no `aperas://tree/<path>` anywhere, even though its own target is exactly as reusable a `<ref>` as a tree render's apex is. **Resolved**: same format, same placement — one line before the target's own, computed the same way (`TreeNode.toPath()`), omitted rather than printed broken wherever `toPath()` can't walk it. For the `Link` case, the breadcrumb names the *target*'s path, not the Link's own (a Link has none — same reason the ref resolver can't route one through path-segment matching either), matching the target getting the full/uncapped text treatment right below it.",
     "parent": "BlockNode:00CE1GW63800A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMWKJYR0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMWKJYR0001:props:StringProp:00CMWKK168000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMWKJYR0001:props:StringProp:00CMWKK168001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Fold state is two axes, not one bit — whether a node is pinned, and how much of its children shows**",
+    "text": "**Fold state is two axes, not one bit — whether a node is pinned, and how much of its children shows**: the binary folded/unfolded can't name what the renderer actually produces, since a node whose text shows only because its parent previews it is neither. One shape, two fills, three angles: fill says pinned (`▶`, in `unfolds`) or not (`▷`), angle says how much is revealed — east nothing, southeast partially, south fully — so `▷` never reaches south, correctly, because an unpinned node never shows children as content. Revelation is a total order, `{▷0° ≡ ▶0°} < ▷45° < ▶45° < ▶90°`, and its one tie (1 and 1′, both title-only) is separated by fill alone, which is right: collapsing should look like folding. `●` is U+25CF, not U+2022, per `FolderDiv.js`'s own note that the standard bullet is too small; `▶`/`▷` are U+25B6/U+25B7, a designed solid/hollow pair with near-identical metrics, rotated through the `transform` transition `.fd-arrow` already carries.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CMWKMG40001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CMWKMG40001",
+    "@type": "BlockNode",
+    "title": "00CMWKMG40001",
+    "text": "| State | Glyph | Own line | Children | Pinned |\n| --- | --- | --- | --- | --- |\n| 1 | `▷` 0° | title | none as content — may still pass a breadcrumb child through | no |\n| 2 | `▷` 45° | title + text | none | no |\n| 2′ | `●` | title + text | none exist — confirmed dead end | yes |\n| 1′ | `▶` 0° | title | hidden, their own pins kept | yes |\n| 3 | `▶` 45° | title + text | as bare titles | yes |\n| 4 | `▶` 90° | title + text | with their own text | yes |\n| cut-off | `…` | title + text | render stopped at `maxDepth` | n/a — a property of the render, not the node |",
+    "parent": "BlockNode:00CMWKJYR0001",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMWMMRGG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMWMMRGG001:links:Link:00CMWMMTZR002",
+        "@type": "Link",
+        "target": "BlockNode:00CJDHYES8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMWMMRGG001:links:Link:00CMWMMTZR002:props:StringProp:00CMWMMTZR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "467"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CMWMMRGG001:props:StringProp:00CMWMMTZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMWMMRGG001:props:StringProp:00CMWMMTZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**A solid stem means \"fold me\"; a sparse dotted guide means \"this is path, not content\"**",
+    "text": "**A solid stem means \"fold me\"; a sparse dotted guide means \"this is path, not content\"**: the stem appears only in states 3 and 4 — pinned, children rendered as content — so its click action is always `fold`, never a lie. That restores the original sketch's own rule (`#stemLine { display: none }`, shown only when unfolded), which the Solid port lost by keying the stem on \"has children\" instead, leaving inert full-height stems on rows with no toggle at all — the [arrow and stem are one control](../design/webapp.md#id/BlockNode:00CJDHYES8001), so a stem with nothing behind it is a broken promise. A breadcrumb still showing a child below it gets a *passive* guide instead: no hover, no pointer, depth legibility only. That distinction is the point rather than a consolation — a non-recursive fold renders the path to pinned descendants as a stairway instead of `a/b/c`, and the passive guide is what says the child below is the next path segment, not this node's own content. UI: a `repeating-linear-gradient`, roughly 2px on / 5px off, since `dotted`/`dashed` at 1px read as a merely-lighter solid line. Console: `╎` — which needs more than a character swap, because `'│ '.repeat(depth)` cannot express per-column variation (the mark at column *k* belongs to the ancestor at depth *k*), so the prefix has to be built from a per-level stack in both `toText` and `renderTreeLines`.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMWMP6X8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMWMP6X8001:links:Link:00CMWMP97G000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2V1YAR009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMWMP6X8001:links:Link:00CMWMP97G000:props:StringProp:00CMWMP97G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1097"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CMWMP6X8001:props:StringProp:00CMWMP978000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMWMP6X8001:props:StringProp:00CMWMP978001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`fold` stops cascading, and the gestures follow the state rather than a fixed verb**",
+    "text": "**`fold` stops cascading, and the gestures follow the state rather than a fixed verb**: plain `fold` now removes only this node's own entry, leaving descendants pinned so it reduces to a breadcrumb; `fold --stash` keeps the entry and hides the children, remembering their pins — the outliner-standard collapse, and the everyday \"put it away\"; `fold --recursive` keeps today's cascade, demoted to deliberate cleanup. `unfold` gains the reciprocal `--recursive`, plus `--no-preview` for the titles level and `--unstash` to reopen. Recursive unfold is not reopening a settled call: the archive's own §5 records it as \"corrected from an earlier draft\" purely to match the then-current `setUnfolded` implementation, never rejected on merit — and its neighbouring principle, that `unfolds` records intent one entry per explicit act while visibility is derived, is exactly why `--recursive` stores a flag rather than materialising every descendant id. On the UI the bare click always does the obvious thing to whatever is in front of it, and ctrl applies on the arrow and stem as well as the row — which [this section already specified](#id/BlockNode:00CJ2V1YAR009) and the implementation never honoured.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CMWMQK30001",
+      "BlockNode:00CMX3M5S0001",
+      "BlockNode:00CMX3MHE8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CMWMQK30001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:07:47.289Z",
+    "title": "00CMWMQK30001",
+    "text": "```\n                unpinned       1′ stashed     3 titles       4 previews\n                1 ▷0°  2 ▷45°  ▶0°            ▶45°           ▶90°\n click          ●────────────────────────────────────────────▶    unfold → 4\n shift          ●─────────────────────────────▶                   unfold --no-preview → 3\n click                         ◀──────────────●──────────────●    fold --stash → 1′\n click                         ●─────────────────────────────▶    unfold --unstash → the level it held\n shift                                        ◀──────────────▶    titles ⇄ previews\n alt            ◀──────────────●──────────────●──────────────●    fold — unpin only this; becomes a breadcrumb\n alt+shift      ◀──────────────●──────────────●──────────────●    fold --recursive — clears descendants’ pins\n ────────────────────────────────────────────────────────────────────────────────────────────────────────\n ctrl          zoom / re-root — from any state, on the row and on the arrow alike\n 2′ (leaf)     click unpins; it has no level axis, so nothing else applies\n cut-off (…)   click zooms; the cut belongs to the render, not to the node\n```",
+    "parent": "BlockNode:00CMWMP6X8001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMWMRX88001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMWMRX88001:props:StringProp:00CMWMRZH8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMWMRX88001:props:StringProp:00CMWMRZH8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The level is two orthogonal subset fields on `TreeView`, not a reified entry and not one ordered scalar**",
+    "text": "**The level is two orthogonal subset fields on `TreeView`, not a reified entry and not one ordered scalar**: `unfolds` is a bare `reference`-kind field — one triple per entry, with nowhere to hang a prop — so a per-node level means either reifying each entry the way `Link` already is (the right shape, but a schema change plus migrating every existing view) or adding hard-coded sibling fields. Two of them: `unfoldsCollapsed` and `unfoldsNoPreview`, both subsets of `unfolds`, with the default level costing no storage at all. Orthogonal rather than one ordered scalar, deliberately — the same two fields either way, but a scalar makes \"collapsed\" and \"titles-only\" mutually exclusive, an invariant that has to be enforced in code and can be violated by any writer, while independent flags make all four combinations legal and the fourth is precisely the memory that lets unstash return to the level it came from instead of guessing. `unfolds` itself keeps membership alone, so `removeDanglingUnfolds` and `pruneStaleUnfolds` keep working as they are — though each new field has to join both sweeps, and the former's doc comment stops being true where it claims `unfolds` is the only `reference` field whose target can be a `Link`.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CMWMTAMG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CMWMTAMG001",
+    "@type": "BlockNode",
+    "title": "00CMWMTAMG001",
+    "text": "| `collapsed` | `noPreview` | renders as | unstash returns to |\n| --- | --- | --- | --- |\n| 0 | 0 | 4 — previews | — |\n| 0 | 1 | 3 — titles | — |\n| 1 | 0 | 1′ — stashed | 4, previews |\n| 1 | 1 | 1′ — stashed | 3, titles |",
+    "parent": "BlockNode:00CMWMRX88001",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMWMVMV0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMWMVMV0001:links:Link:00CMWMVQ40000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2V1YAR007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMWMVMV0001:links:Link:00CMWMVQ40000:props:StringProp:00CMWMVQ40001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "721"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CMWMVMV0001:props:StringProp:00CMWMVQ3R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CMWMVMV0001:props:StringProp:00CMWMVQ3R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The webapp's depth limit is computed from available width, and stays a server-side render option**",
+    "text": "**The webapp's depth limit is computed from available width, and stays a server-side render option**: indentation is a fixed `1.2rem` gutter per level, so the point at which a render stops being legible is arithmetic — `floor((width − buffer) / gutter)` — rather than a guessed constant. It is a legibility backstop, not a performance cap: at a typical viewport that lands around thirty levels, far past anything this corpus nests to, so the `…` control is rare by construction. Kept as `maxDepth` on the server render, recomputed and refetched (debounced) on resize, rather than truncated client-side — that way `truncated` keeps a single meaning and the UI grows no parallel notion of depth, driving the same field the [link preview popover](#id/BlockNode:00CJ2V1YAR007) already uses with `depth: 0`.",
+    "parent": "BlockNode:00CJ2TESY0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMWN0XDG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMWN0XDG001:links:Link:00CMWN11BR000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2V1YAR009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMWN0XDG001:links:Link:00CMWN11BR000:props:StringProp:00CMWN11BR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "653"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CMWN0XDG001:links:Link:00CMWN11BR002",
+        "@type": "Link",
+        "target": "BlockNode:00CMWMP6X8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMWN0XDG001:links:Link:00CMWN11BR002:props:StringProp:00CMWN11C0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "931"
+          }
+        ]
+      }
+    ],
+    "title": "**Ctrl-click on the fold arrow folds instead of zooming, and swallows the event**",
+    "text": "**Ctrl-click on the fold arrow folds instead of zooming, and swallows the event**: `FolderDiv.tsx`'s `Gutter` is the only click site in that file which never checks `ctrlKey`/`metaKey` — the node line, both link-row modes and the backlinks popover all do — and because its handler calls `e.stopPropagation()`, the row's own zoom handler never sees the event either. So ctrl-clicking the arrow silently folds and the zoom is simply lost, which reads as \"zoom doesn't work\" to anyone who aims at the control rather than at the title; found by a user hitting it on first use of the app. This contradicts the settled design rather than filling a gap in it: [zoom in is a new apex](../discussion/webapp.md#id/BlockNode:00CJ2V1YAR009) specifies the gesture on the arrow itself (\"ctrl-clicking a fold arrow re-renders with that node as apex\"), so the implementation has never matched what was agreed. Fixing it is also a precondition for [the redesigned gesture set](../discussion/webapp.md#id/BlockNode:00CMWMP6X8001), where ctrl must work uniformly on the row, the arrow and the stem.",
+    "parent": "BlockNode:00CJ6V6370002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX3M5S0001",
+    "@type": "BlockNode",
+    "title": "00CMX3M5S0001",
+    "text": "| Gesture | unpinned (1, 2) | 1′ stashed | 3 titles | 4 previews | 2′ leaf | cut-off |\n| --- | --- | --- | --- | --- | --- | --- |\n| click | `unfold` → 4 | `unfold --unstash` → the level it held | `fold --stash` → 1′ | `fold --stash` → 1′ | `fold` — unpin | zoom / re-root |\n| shift | `unfold --no-preview` → 3 | `unfold --unstash --no-preview` → 3 | → 4 | → 3 | — | — |\n| ctrl | zoom | zoom | zoom | zoom | zoom | zoom |\n| alt | — (already unpinned) | `fold` → unpinned | `fold` → unpinned | `fold` → unpinned | = click | — |\n| alt+shift | `unfold --recursive` | `unfold --recursive` | `fold --recursive` | `fold --recursive` | — | — |",
+    "parent": "BlockNode:00CMWMP6X8001",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX3MHE8001",
+    "@type": "BlockNode",
+    "title": "00CMX3MHE8001",
+    "text": "```\n                unpinned       1′ stashed     3 titles       4 previews\n                1 ▷0°  2 ▷45°  ▶0°            ▶45°           ▶90°\n click          ●────────────────────────────────────────────▶    unfold → 4\n click                         ◀──────────────●──────────────●    fold --stash → 1′\n click                         ●──────────────▶╌╌╌╌╌╌╌╌╌╌╌╌╌╌▶    unfold --unstash → whichever level it held\n shift          ●──────────────●──────────────▶                   unfold --no-preview → 3  ·  unstash to 3\n shift                                        ◀──────────────▶    titles ⇄ previews\n alt            ◀──────────────●──────────────●──────────────●    fold — unpin only this; becomes a breadcrumb\n alt+shift      ●──────────────●─────────────────────────────▶    unfold --recursive\n alt+shift      ◀─────────────────────────────●──────────────●    fold --recursive — clears descendants’ pins\n ────────────────────────────────────────────────────────────────────────────────────────────────────────\n ctrl          zoom / re-root — from any state, on the row and on the arrow alike\n 2′ (leaf)     click unpins; it has no level axis, so nothing else applies\n cut-off (…)   click zooms; the cut belongs to the render, not to the node\n```",
+    "parent": "BlockNode:00CMWMP6X8001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX4NCW8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMX4NCW8001:links:Link:00CMX4NFH8000",
+        "@type": "Link",
+        "target": "BlockNode:00CMWMP6X8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX4NCW8001:links:Link:00CMX4NFH8000:props:StringProp:00CMX4NFH8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1398"
+          }
+        ]
+      }
+    ],
+    "title": "**Every block-structured node renders as one flattened run of literal markup in the UI — tables, fenced code and ASCII diagrams are all unreadable**",
+    "text": "**Every block-structured node renders as one flattened run of literal markup in the UI — tables, fenced code and ASCII diagrams are all unreadable**: a `[table]` shows as `| a | b | | --- | --- | | 1 | 2 |` in flowing prose, and a `[code]` block shows its own ``` fences as text with every line rewrapped, destroying column alignment. Three independent causes, confirmed live rather than inferred. **(1) The structure is already gone server-side**: every `RenderNodeItem.abstract` is a one-line preview, and `truncateForPreview` (`astParser.ts`) collapses *all* whitespace — `text.replace(/\\s+/g, ' ')` — so newlines die with the spaces; `/api/tree` returns the table's abstract containing no `\\n` at all, which is why `.fd-abstract`'s `white-space: pre-wrap` preserves nothing. **(2) There is no block-level renderer**: `Inline.tsx` is deliberately inline-only (`**bold**`, `` `code` ``, `*italic*`, `[text](href)`), so even with newlines restored it would emit literal pipes and fences. **(3) The row's title is a raw snowflake**: `table`/`code` have no extractable lead-in term, so `astParser.ts`'s fallback title (the block's own id) is what the UI prints as the node's name. Presentation-only — the stored text and the projected `.md` are both correct, and `aperas tree`/`unfold` previews collapse identically, so this is not webapp-specific and no data is at risk. It matters now because the [fold/unfold redesign](../discussion/webapp.md#id/BlockNode:00CMWMP6X8001) deliberately carries its state table, gesture matrix and transition diagram as `[table]`/`[code]` blocks: the document most worth reading in the UI is the one the UI renders worst.",
+    "parent": "BlockNode:00CJ6V6370002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX5F2H8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMX5F2H8001:links:Link:00CMX5F520000",
+        "@type": "Link",
+        "target": "BlockNode:00CMWKJYR0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5F2H8001:links:Link:00CMX5F520000:props:StringProp:00CMX5F520001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "816"
+          }
+        ]
+      }
+    ],
+    "title": "**A node's fold state is two axes: whether it is pinned, and how much of its children shows**",
+    "text": "**A node's fold state is two axes: whether it is pinned, and how much of its children shows**: `unfolds` membership is the first axis; a per-node *level* — stashed, titles, previews — is the second, and applies only to a pinned node. The two together produce six states, plus a seventh (cut off by `maxDepth`) that belongs to the render rather than to the node and so carries no arrow at all — there the `…` marker is itself the control. One shape, two fills, three angles: `▶` (U+25B6) pinned, `▷` (U+25B7) not, rotated 0°/45°/90° through the `transform` transition `.fd-arrow` already carries. Angle reads east-nothing, southeast-partially, south-fully, so `▷` never reaches south: an unpinned node never shows children as content. `●` (U+25CF, not the too-small U+2022) marks a pinned leaf, a confirmed dead end. [Every state tabulated, and why two axes rather than one bit](../discussion/webapp.md#id/BlockNode:00CMWKJYR0001).",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX5FF3G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMX5FF3G001:links:Link:00CMX5FHF8000",
+        "@type": "Link",
+        "target": "BlockNode:00CMWN0XDG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5FF3G001:links:Link:00CMX5FHF8000:props:StringProp:00CMX5FHF8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "741"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CMX5FF3G001:links:Link:00CMX5FHF8002",
+        "@type": "Link",
+        "target": "BlockNode:00CMWMP6X8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5FF3G001:links:Link:00CMX5FHF8002:props:StringProp:00CMX5FHF8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "826"
+          }
+        ]
+      }
+    ],
+    "title": "**The gesture is chosen by the state it lands on, not fixed per key**",
+    "text": "**The gesture is chosen by the state it lands on, not fixed per key**: bare click always does the obvious thing to whatever is in front of it — unfold when folded, stash when open, unstash when stashed, unpin at a leaf, zoom at a depth cut-off — so one click reads as \"close this\" wherever the row looks closed and \"open this\" wherever it looks open, and never needs a second gesture to mean the same intent. Modifiers rank by how often they are wanted: shift steps the level, ctrl zooms, alt is the plain non-recursive `fold`, alt+shift the recursive pair. Bare click therefore never removes a node from `unfolds` except at a leaf — click is \"remember\", alt is \"forget\". Ctrl applies on the arrow and the stem as well as the row, which the [arrow has never actually honoured](../issues/webapp.md#id/BlockNode:00CMWN0XDG001). [The full gesture matrix and its transition diagram](../discussion/webapp.md#id/BlockNode:00CMWMP6X8001).",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX5FXA0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMX5FXA0001:links:Link:00CMX5FZHG000",
+        "@type": "Link",
+        "target": "BlockNode:00CJDHYES8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5FXA0001:links:Link:00CMX5FZHG000:props:StringProp:00CMX5FZHG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "530"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CMX5FXA0001:links:Link:00CMX5FZHG002",
+        "@type": "Link",
+        "target": "BlockNode:00CMWMMRGG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5FXA0001:links:Link:00CMX5FZHG002:props:StringProp:00CMX5FZHG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "803"
+          }
+        ]
+      }
+    ],
+    "title": "**The stem is the fold control; a passive guide marks path**",
+    "text": "**The stem is the fold control; a passive guide marks path**: a solid, hoverable stem appears only where a node is pinned *and* its children render as content, so clicking it always folds and never promises an action that isn't there. A row showing a child only because something deeper is pinned — a breadcrumb — gets a non-interactive sparse dotted guide instead (`repeating-linear-gradient`, roughly 2px on / 5px off; `╎` on the console), which is what tells a path stairway apart from real content. This restores the rule the [arrow and its stem are one control](#id/BlockNode:00CJDHYES8001) already implied and the Solid port lost by keying the stem on \"has children\". On the console the prefix has to be built from a per-level stack rather than `'│ '.repeat(depth)`, which cannot vary per column. [Rationale](../discussion/webapp.md#id/BlockNode:00CMWMMRGG001).",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX5G968001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMX5G968001:links:Link:00CMX5GBM0000",
+        "@type": "Link",
+        "target": "BlockNode:00CMWMVMV0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5G968001:links:Link:00CMX5GBM0000:props:StringProp:00CMX5GBM0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "469"
+          }
+        ]
+      }
+    ],
+    "title": "**The webapp's depth limit is derived from available width**",
+    "text": "**The webapp's depth limit is derived from available width**: `floor((width − buffer) / gutter)` against a fixed `1.2rem` gutter, recomputed and refetched (debounced) on resize, and kept as `maxDepth` on the server render rather than truncated client-side so that `truncated` keeps a single meaning. A legibility backstop rather than a performance cap — at a typical viewport it lands far past anything this corpus nests to, so the `…` control is rare by construction. [Rationale](../discussion/webapp.md#id/BlockNode:00CMWMVMV0001).",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX5GNB0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMX5GNB0001:links:Link:00CMX5GQQ0000",
+        "@type": "Link",
+        "target": "BlockNode:00CMWMRX88001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX5GNB0001:links:Link:00CMX5GQQ0000:props:StringProp:00CMX5GQQ0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "539"
+          }
+        ]
+      }
+    ],
+    "title": "**`TreeView` carries the child-display level as two orthogonal subset fields**",
+    "text": "**`TreeView` carries the child-display level as two orthogonal subset fields**: `unfolds` keeps membership alone, so every existing sweep over it is untouched; `unfoldsCollapsed` and `unfoldsNoPreview` are subsets of it, and the default level (previews) is the absence of both, costing no storage. Orthogonal rather than one ordered scalar so that no mutual-exclusion invariant has to be enforced in code, and so that stashing remembers the level to return to. Both new fields have to join `removeDanglingUnfolds` and `pruneStaleUnfolds`. [The four sub-states, and why not a reified entry](../discussion/webapp.md#id/BlockNode:00CMWMRX88001).",
+    "parent": "BlockNode:00CJ6TGSYG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX5ZN68001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:01.712Z",
+    "title": "**Slice 9 — the level fields on `TreeView`**",
+    "text": "**Slice 9 — the level fields on `TreeView`**: add `unfoldsCollapsed` and `unfoldsNoPreview` as `reference`-kind subsets of `unfolds`, extend `removeDanglingUnfolds` and `pruneStaleUnfolds` to sweep both, and correct the former's doc comment where it claims `unfolds` is the only such field. Storage only — nothing reads the fields yet — so it lands and flushes safely on its own, and every existing view stays valid with both sets empty (the default level).",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX600WG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:04.632Z",
+    "title": "**Slice 10 — level-aware rendering in core**",
+    "text": "**Slice 10 — level-aware rendering in core**: split the double duty `isGenuinelyUnfolded` currently does in `buildNodeItem` (which children to walk *and* what tier they render at) so the titles level shows children title-only, and make the stashed level prune `cone.neededChildren` so a stashed node's pinned descendants stop forcing themselves into view. The pruning is the only part that touches cone *discovery* rather than tier assignment, and it deliberately breaks the standing guarantee that a pinned node is always reachable — with the knock-on that a hidden home lets a `Link` elsewhere win canonical position, which is intended. Carry the resolved level onto `RenderNodeItem` so both renderers can pick a glyph without recomputing it.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX60DEG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:07.540Z",
+    "title": "**Slice 11 — the verbs**",
+    "text": "**Slice 11 — the verbs**: `fold` stops cascading by default, gaining `--recursive` for today's behaviour and `--stash` for the collapse that keeps the entry; `unfold` gains `--recursive`, `--no-preview` and `--unstash`. Service protocol ops and CLI flags together, since the webapp reaches them through the same ops. `fold`'s default changes for every existing caller, so `verify.ts`'s fold expectations have to be re-read rather than assumed — this is the one slice that alters behaviour already relied on.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX60VA8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:10.652Z",
+    "title": "**Slice 12 — stem and guide on the console**",
+    "text": "**Slice 12 — stem and guide on the console**: rebuild the line prefix from a per-level stack of ancestor states in both `toText` and `renderTreeLines`, replacing `'│ '.repeat(depth)`, which cannot vary per column — solid `│` where an ancestor is pinned with content, `╎` where it is only a breadcrumb. `toText`'s \"byte-identical to the old output by construction\" doc comment stops being true and is updated rather than left to quietly go false; `verify.ts`'s tree assertions are substring-based, so they do not trip.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX6173R001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:13.544Z",
+    "title": "**Slice 13 — glyph and stem vocabulary in the UI**",
+    "text": "**Slice 13 — glyph and stem vocabulary in the UI**: `▶`/`▷` rotated 0°/45°/90° off the level rather than the current open/closed boolean, `●` for a pinned leaf, `…` promoted from a marker beneath the row to the control itself at a depth cut-off (with the arrow disabled there, since nothing about the node can be toggled), and `hasStem` keyed on the level instead of on `hasChildren()` — which is what removes today's inert full-height stems. The passive guide is a `repeating-linear-gradient` rather than `dotted`/`dashed`, both of which read as a merely-lighter solid line at 1px.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX61KG8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:16.401Z",
+    "title": "**Slice 14 — gestures**",
+    "text": "**Slice 14 — gestures**: the click/shift/ctrl/alt/alt+shift matrix wired onto the row, the arrow and the stem alike. Fixes [ctrl-click on the arrow](../issues/webapp.md#id/BlockNode:00CMWN0XDG001) as a side effect rather than as a separate errand, since that bug is exactly the uniformity this slice has to establish; the `Gutter`'s `e.stopPropagation()` has to start letting a modified click through instead of swallowing it.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMX61YK0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:33:19.279Z",
+    "title": "**Slice 15 — width-derived depth**",
+    "text": "**Slice 15 — width-derived depth**: compute `maxDepth` as `floor((width − buffer) / gutter)` in the webapp, thread it through `/api/tree`, and refetch debounced on resize. Independent of the rest and safe to land last; until it does, the cut-off state simply never occurs in the UI, exactly as today.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXB0X6R001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T00:24:15.420Z",
+    "title": "00CMXB0X6R001",
+    "text": "scratch move-test node",
+    "parent": "BlockNode:00CJ6TGSYR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF4WTR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF4WTR001:props:StringProp:00CMXF4ZAR000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 9 — the level fields on `TreeView`**",
+    "text": "**Slice 9 — the level fields on `TreeView`**: add `unfoldsCollapsed` and `unfoldsNoPreview` as `reference`-kind subsets of `unfolds`, extend `removeDanglingUnfolds` and `pruneStaleUnfolds` to sweep both, and correct the former's doc comment where it claims `unfolds` is the only such field. Storage only — nothing reads the fields yet — so it lands and flushes safely on its own, and every existing view stays valid with both sets empty (the default level).",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF5K98001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF5K98001:props:StringProp:00CMXF5NPG000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 10 — level-aware rendering in core**",
+    "text": "**Slice 10 — level-aware rendering in core**: split the double duty `isGenuinelyUnfolded` currently does in `buildNodeItem` (which children to walk *and* what tier they render at) so the titles level shows children title-only, and make the stashed level prune `cone.neededChildren` so a stashed node's pinned descendants stop forcing themselves into view. The pruning is the only part that touches cone *discovery* rather than tier assignment, and it deliberately breaks the standing guarantee that a pinned node is always reachable — with the knock-on that a hidden home lets a `Link` elsewhere win canonical position, which is intended. Carry the resolved level onto `RenderNodeItem` so both renderers can pick a glyph without recomputing it.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF6AD8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF6AD8001:props:StringProp:00CMXF6D9G000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 11 — the verbs**",
+    "text": "**Slice 11 — the verbs**: `fold` stops cascading by default, gaining `--recursive` for today's behaviour and `--stash` for the collapse that keeps the entry; `unfold` gains `--recursive`, `--no-preview` and `--unstash`. Service protocol ops and CLI flags together, since the webapp reaches them through the same ops. `fold`'s default changes for every existing caller, so `verify.ts`'s fold expectations have to be re-read rather than assumed — this is the one slice that alters behaviour already relied on.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF727R001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF727R001:props:StringProp:00CMXF74T0000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 12 — stem and guide on the console**",
+    "text": "**Slice 12 — stem and guide on the console**: rebuild the line prefix from a per-level stack of ancestor states in both `toText` and `renderTreeLines`, replacing `'│ '.repeat(depth)`, which cannot vary per column — solid `│` where an ancestor is pinned with content, `╎` where it is only a breadcrumb. `toText`'s \"byte-identical to the old output by construction\" doc comment stops being true and is updated rather than left to quietly go false; `verify.ts`'s tree assertions are substring-based, so they do not trip.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF7RG0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF7RG0001:props:StringProp:00CMXF7V0R000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 13 — glyph and stem vocabulary in the UI**",
+    "text": "**Slice 13 — glyph and stem vocabulary in the UI**: `▶`/`▷` rotated 0°/45°/90° off the level rather than the current open/closed boolean, `●` for a pinned leaf, `…` promoted from a marker beneath the row to the control itself at a depth cut-off (with the arrow disabled there, since nothing about the node can be toggled), and `hasStem` keyed on the level instead of on `hasChildren()` — which is what removes today's inert full-height stems. The passive guide is a `repeating-linear-gradient` rather than `dotted`/`dashed`, both of which read as a merely-lighter solid line at 1px.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF8EYG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMXF8EYG001:links:Link:00CMXF8HDR000",
+        "@type": "Link",
+        "target": "BlockNode:00CMWN0XDG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMXF8EYG001:links:Link:00CMXF8HDR000:props:StringProp:00CMXF8HDR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "127"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF8EYG001:props:StringProp:00CMXF8HDG000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 14 — gestures**",
+    "text": "**Slice 14 — gestures**: the click/shift/ctrl/alt/alt+shift matrix wired onto the row, the arrow and the stem alike. Fixes [ctrl-click on the arrow](../issues/webapp.md#id/BlockNode:00CMWN0XDG001) as a side effect rather than as a separate errand, since that bug is exactly the uniformity this slice has to establish; the `Gutter`'s `e.stopPropagation()` has to start letting a modified click through instead of swallowing it.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXF94Z8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CMXF94Z8001:props:StringProp:00CMXF97F8000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Slice 15 — width-derived depth**",
+    "text": "**Slice 15 — width-derived depth**: compute `maxDepth` as `floor((width − buffer) / gutter)` in the webapp, thread it through `/api/tree`, and refetch debounced on resize. Independent of the rest and safe to land last; until it does, the cut-off state simply never occurs in the UI, exactly as today.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CMXJQX1R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CMXJQX1R001:links:Link:00CMXJQZKR000",
+        "@type": "Link",
+        "target": "BlockNode:00CMX4NCW8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMXJQX1R001:links:Link:00CMXJQZKR000:props:StringProp:00CMXJQZM0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "659"
+          }
+        ]
+      }
+    ],
+    "title": "**A checkbox's checked state never reaches any renderer, console or webapp**",
+    "text": "**A checkbox's checked state never reaches any renderer, console or webapp**: `astParser.ts:705-706` stores it correctly as a `checked` prop and strips the literal `[ ]`/`[x]` from `.text`/`.title` so it isn't duplicated as text, and `project.ts` re-emits it correctly on the way back to `.md` — but `RenderNodeItem` (`node.ts`) has no `checked` field at all, and `buildNodeItem` never reads the prop, so every reader downstream of the render tree sees a plain listItem with no marker anywhere: not `aperas tree`, not `aperas unfold`'s own preview, not the webapp. The round trip through disk is correct; only the *reading* path drops it, the mirror image of [the table/code gap above](#id/BlockNode:00CMX4NCW8001) — that one loses structure already present in the abstract string, this one never puts the value in the string's carrier (`RenderNodeItem`) to begin with. Fix is additive: a `checked?: boolean` field, read via `getProp` the same way `holder`/`starred` already are, surfaced as a real glyph rather than folded into title text (a `- [ ]`/`- [x]` prefix would collide with `.fd-title`'s own bold styling the way it collides with nothing today).",
+    "parent": "BlockNode:00CJ6V6370002",
     "type": "listItem",
     "children": []
   }
