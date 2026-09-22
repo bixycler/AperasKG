@@ -1342,6 +1342,7 @@ Crossing the heading/non-heading boundary migrates the title too, because the tw
 ## v2.8 additions — delta on the v2 snapshot <a name='id/BlockNode:00CN7YEND0001' class='aperas-anchor aperas-id'></a>
 
 Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reading the corpus gains a direction rule of its own: the concern gradient that already governs where a citation may point also governs where a read may enter, and drift between a tier and what it governs is visible only where a top-down descent and a bottom-up pinpoint meet. Both confirmations came from one session, one in each direction — a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled shape in [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001).
+Relocated, not rewritten: the `Dense linking is the precondition for both` and `A link is placed at the maturity the relationship has earned` paragraphs moved up to close *Deep read and deep write run along the same three directions*, whose final sentence is the antecedent of that "both". The new subsection had been inserted between them, which left the pair reading as though "both" bound to top-down and bottom-up instead — an ambiguity the flat layout cannot express away, since a paragraph belongs to whatever heading precedes it and nothing marks which one it was written for.
 
 ### Top matter — Status bumped to v2.8 <a name='id/BlockNode:00CN7ZQFN8001' class='aperas-anchor aperas-id'></a>
 
@@ -1377,3 +1378,18 @@ grep -n 'reconcile.ts' AperasKG/Apeiron/BlockNode.jsonld   # candidate ids
 aperas unfold <id> --view <task>                           # then work them in the graph
 aperas unfold <design-block>                               # keep climbing — stop at design, not here
 ```
+
+## v2.9 additions — delta on the v2 snapshot <a name='id/BlockNode:00CN8K8JCR001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). A layout repair rather than a new rule: two Orientation items are promoted to subsections of their own, so each one's scope is stated rather than inferred from adjacency. Both were written when Orientation had no subsections at all, and were silently re-scoped the moment "Deep read and deep write run along the same three directions" was introduced above them — in a flat layout a paragraph belongs to whatever heading precedes it, so an item written for the section level is captured by the first subsection appearing before it, with nothing marking which one it was meant for. Neither item lost or gained a word; each bold lead-in simply became the `###` heading it had been acting as. Promotion rather than relocation is what restores the scoping, since once a subsection opens there is no way back to section level except to precede every subsection or to carry a heading of one's own. Surfaced when [v2.8](#id/BlockNode:00CN7YEND0001)'s new subsection landed between "Dense linking is the precondition for both" and the sentence supplying that "both", making a long-standing mis-scoping visible by breaking a pronoun.
+
+### Top matter — Status bumped to v2.9 <a name='id/BlockNode:00CN8KBK9G001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.8's own status line](#id/BlockNode:00CN7ZQFN8002)
+
+Status: <a name='id/BlockNode:00CN8KBK9G002' class='aperas-anchor aperas-id'></a> **v2.9** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
+
+### Orientation — two section-level items promoted to their own subsections <a name='id/BlockNode:00CN8KC5W8001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [the "Keep an active view" paragraph](#id/BlockNode:00CGF613W000X)
+Supersedes: [the "Worked example" lead line](#id/BlockNode:00CGF613W0011)

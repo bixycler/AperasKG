@@ -33604,7 +33604,7 @@
       }
     ],
     "title": "## v2.8 additions — delta on the v2 snapshot",
-    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reading the corpus gains a direction rule of its own: the concern gradient that already governs where a citation may point also governs where a read may enter, and drift between a tier and what it governs is visible only where a top-down descent and a bottom-up pinpoint meet. Both confirmations came from one session, one in each direction — a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled shape in [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001).",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reading the corpus gains a direction rule of its own: the concern gradient that already governs where a citation may point also governs where a read may enter, and drift between a tier and what it governs is visible only where a top-down descent and a bottom-up pinpoint meet. Both confirmations came from one session, one in each direction — a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled shape in [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001).\nRelocated, not rewritten: the `Dense linking is the precondition for both` and `A link is placed at the maturity the relationship has earned` paragraphs moved up to close *Deep read and deep write run along the same three directions*, whose final sentence is the antecedent of that \"both\". The new subsection had been inserted between them, which left the pair reading as though \"both\" bound to top-down and bottom-up instead — an ambiguity the flat layout cannot express away, since a paragraph belongs to whatever heading precedes it and nothing marks which one it was written for.",
     "parent": "ArtifactNode:00CE8XWYYG000",
     "type": "heading",
     "children": [
@@ -33803,6 +33803,135 @@
     "text": "**Every generation below the current snapshot is unverified, so the provenance layers can be corrupted or destroyed with no signal at all**: `recorded_roots` takes the latest snapshot plus the deltas above it and nothing else, deliberately — its own docstring reasons that \"older snapshots are history, not a baseline,\" since v1 restructuring v0 wholesale is the point of a major version rather than drift, and comparing against v0 would report the entire rewrite as drops. That is correct for detecting drift against the *current* file, but it means the v0 and v1 generations — six snapshot/delta section roots as of 2026-09-22, holding the reasoning for how most current rules came to be — are never read by any check. Confirmed live and unpleasantly: the `Supersedes:` line on the v1.1 Citation-direction entry was overwritten outright, taking with it the only recorded account of what v1 paragraph that entry replaced, and the very next run still reported `DROPPED, unaccounted — 0`. It was recovered from `git show HEAD:` rather than from anything the instrument said, and only because a reader thought to ask where the line had gone. Same blindness applies to the deltas' own cross-references: a `Supersedes:` target in a superseded generation can rot to a tombstoned or nonexistent id without anything noticing. Fix direction, two candidates rather than one settled choice: either a second, cheaper integrity mode that verifies each older generation against itself — entries still parse, `Supersedes:` targets still resolve to live blocks, no entry silently emptied — or an explicit decision that history layers are write-once and unprotected, recorded as such so nobody later assumes a passing check covers them. The sibling gap in the same instrument, which does affect in-scope entries, is [the containment-direction blind spot](#id/BlockNode:00CN89ERE8000). Not yet implemented.",
     "parent": "BlockNode:00CEA5KW4G002",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN8K8JCR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN8K8JCR001:links:Link:00CN8K8P50000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN8K8JCR001:links:Link:00CN8K8P50000:props:StringProp:00CN8K8P50001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CN8K8JCR001:links:Link:00CN8K8P50002",
+        "@type": "Link",
+        "target": "BlockNode:00CN7YEND0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN8K8JCR001:links:Link:00CN8K8P50002:props:StringProp:00CN8KZK80000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "967"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.9 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). A layout repair rather than a new rule: two Orientation items are promoted to subsections of their own, so each one's scope is stated rather than inferred from adjacency. Both were written when Orientation had no subsections at all, and were silently re-scoped the moment \"Deep read and deep write run along the same three directions\" was introduced above them — in a flat layout a paragraph belongs to whatever heading precedes it, so an item written for the section level is captured by the first subsection appearing before it, with nothing marking which one it was meant for. Neither item lost or gained a word; each bold lead-in simply became the `###` heading it had been acting as. Promotion rather than relocation is what restores the scoping, since once a subsection opens there is no way back to section level except to precede every subsection or to carry a heading of one's own. Surfaced when [v2.8](#id/BlockNode:00CN7YEND0001)'s new subsection landed between \"Dense linking is the precondition for both\" and the sentence supplying that \"both\", making a long-standing mis-scoping visible by breaking a pronoun.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN8KBK9G001",
+      "BlockNode:00CN8KC5W8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN8KBK9G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN8KBK9G001:links:Link:00CN8KBQ60000",
+        "@type": "Link",
+        "target": "BlockNode:00CN7ZQFN8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN8KBK9G001:links:Link:00CN8KBQ60000:props:StringProp:00CN8KBQ60001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.9",
+    "text": "Supersedes: [v2.8's own status line](#id/BlockNode:00CN7ZQFN8002)",
+    "parent": "BlockNode:00CN8K8JCR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN8KBK9G002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN8KBK9G002",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.9** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CN8KBK9G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN8KC5W8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN8KC5W8001:links:Link:00CN8KC9P8000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613W000X",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN8KC5W8001:links:Link:00CN8KC9P8000:props:StringProp:00CN8KC9P8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CN8KC5W8001:links:Link:00CN8KC9PG000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613W0011",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN8KC5W8001:links:Link:00CN8KC9PG000:props:StringProp:00CN8KC9PG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "91"
+          }
+        ]
+      }
+    ],
+    "title": "### Orientation — two section-level items promoted to their own subsections",
+    "text": "Supersedes: [the \"Keep an active view\" paragraph](#id/BlockNode:00CGF613W000X)\nSupersedes: [the \"Worked example\" lead line](#id/BlockNode:00CGF613W0011)",
+    "parent": "BlockNode:00CN8K8JCR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN8KC5W8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN8KC5W8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-22T13:32:35.903Z",
+    "title": "00CN8KC5W8002",
+    "text": "Both items were written when Orientation had no subsections at all, and were silently re-scoped the moment \"Deep read and deep write run along the same three directions\" was introduced above them: in a flat layout a paragraph belongs to whatever heading precedes it, so an item written for the section level is captured by the first subsection that appears before it, with nothing marking which one it was meant for. Neither item lost or gained a word — each bold lead-in simply became the `###` heading it had been acting as. Promotion rather than relocation is what restores the scoping, since once a subsection opens there is no way back to section level except to precede every subsection or to carry a heading of one's own.",
+    "parent": "BlockNode:00CN8KC5W8001",
+    "type": "paragraph",
     "children": []
   }
 ]
