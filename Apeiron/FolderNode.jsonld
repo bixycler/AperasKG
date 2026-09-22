@@ -266,13 +266,5 @@
       "BlockNode:00CDD68E00001",
       "FolderNode:00CDBYV4CG002"
     ]
-  },
-  {
-    "@id": "FolderNode:00CN4MY5H8000",
-    "@type": "FolderNode",
-    "tombstonedAt": "2026-09-22T09:19:02.868Z",
-    "title": "__scratch_retype_collision",
-    "path": "__scratch_retype_collision",
-    "children": []
   }
 ]

@@ -12617,7 +12617,8 @@
       "BlockNode:00CF9M8BC8001",
       "BlockNode:00CFB1A7GR001",
       "BlockNode:00CG9MDJF0001",
-      "BlockNode:00CGF35FNG001"
+      "BlockNode:00CGF35FNG001",
+      "BlockNode:00CN6S7HWR000"
     ]
   },
   {
@@ -13485,19 +13486,23 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5KW4G002:links:Link:00CECG3FRG000:props:StringProp:00CGF7JH40000",
+            "@id": "BlockNode:00CEA5KW4G002:links:Link:00CECG3FRG000:props:StringProp:00CN89SW00000",
             "@type": "StringProp",
             "key": "position",
-            "value": "295"
+            "value": "519"
           }
         ]
       }
     ],
     "title": "## Open Issues",
-    "text": "None — v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "text": "Three open — design drifting against SKILL.md, with the two-way wiring that detects it built but so far applied to a single section, and two blind spots in the drift check that let the record itself be corrupted without complaint. v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "BlockNode:00CEA5KW4G001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CN7G6D0G001",
+      "BlockNode:00CN89ERE8000",
+      "BlockNode:00CN89NQKG001"
+    ]
   },
   {
     "@id": "BlockNode:00CEA5KW4G003",
@@ -14339,6 +14344,7 @@
       "BlockNode:00CEB8N5EG001",
       "BlockNode:00CEA5Y5JG00E",
       "BlockNode:00CEA5Y5JG00G",
+      "BlockNode:00CN7XM9TG001",
       "BlockNode:00CEA5Y5JG00J",
       "BlockNode:00CF595QQR001"
     ]
@@ -14385,18 +14391,35 @@
       }
     ],
     "title": "### Citation direction",
-    "text": "The concerns form an abstraction gradient, `design` most abstract and `discussion` least, with `issues`, `planning` and `history` between. A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): \"one link plus a brief, non-argumentative summary per doc\") already states this same up-only citation shape for that one sanctioned exception, independently of this rule.",
+    "text": "The concerns form an abstraction gradient, `design` most abstract and `discussion` least, with `issues`, `planning` and `history` between. A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): \"one link plus a brief, non-argumentative summary per doc\") already states this same up-only citation shape for its own instance of that exception, independently of this rule.",
     "parent": "BlockNode:00CEA5Y5JG00D",
     "type": "heading",
     "children": [
-      "BlockNode:00CEA5Y5JG00H"
+      "BlockNode:00CEA5Y5JG00H",
+      "BlockNode:00CN6SMSX0001"
     ]
   },
   {
     "@id": "BlockNode:00CEA5Y5JG00H",
     "@type": "BlockNode",
-    "title": "00CEA5Y5JG00H",
-    "text": "The one sanctioned exception is a designated index. A design doc's `# Context` section exists precisely to index its own concern's other facets, one link each — a single structurally-privileged reference, not a citation scattered through the body.",
+    "links": [
+      {
+        "@id": "BlockNode:00CEA5Y5JG00H:links:Link:00CN6VMWA8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5GK5BR003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEA5Y5JG00H:links:Link:00CN6VMWA8000:props:StringProp:00CN6VMWAG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "454"
+          }
+        ]
+      }
+    ],
+    "title": "00CN6VMRA0001",
+    "text": "The sanctioned exception is a **normative, singular** pointer — one whose target is the block's whole referent rather than one of many possible mentions. A design doc's own `# Context` section is the familiar instance, one link per facet over a fixed set, but it is the *property* that is sanctioned rather than that location: a history milestone announcing one snapshot, or a design block naming *the* canonical exemplar, qualify the same way. Reflects [v1.1](../discussion/aperas-skill.md#id/BlockNode:00CF5GK5BR003).",
     "parent": "BlockNode:00CEA5Y5JG00G",
     "type": "paragraph",
     "children": []
@@ -16756,7 +16779,8 @@
       "BlockNode:00CKSAFHW0001",
       "BlockNode:00CKE4R93R001",
       "BlockNode:00CJ0JZ830001",
-      "BlockNode:00CN1PT1B0001"
+      "BlockNode:00CN1PT1B0001",
+      "BlockNode:00CN7V9BX0001"
     ]
   },
   {
@@ -20169,13 +20193,41 @@
     "@type": "BlockNode",
     "links": [
       {
-        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CGRTYDMR000",
+        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CN854YV0000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CN854YV0000:props:StringProp:00CN87B9H8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "105"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CN854YV0002",
+        "@type": "Link",
+        "target": "BlockNode:00CN6SMSX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CN854YV0002:props:StringProp:00CN87B9YR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "184"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CF5GK5BR002:links:Link:00CN87B94G000",
         "@type": "Link",
         "target": "BlockNode:00CF46W4QR00C",
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CGRTYDMR000:props:StringProp:00CGRTYDN0000",
+            "@id": "BlockNode:00CF5GK5BR002:links:Link:00CN87B94G000:props:StringProp:00CN87B94G001",
             "@type": "StringProp",
             "key": "position",
             "value": "12"
@@ -20184,7 +20236,7 @@
       }
     ],
     "title": "### Discipline — Citation direction, exception generalized",
-    "text": "Supersedes: [v1's \"one sanctioned exception\" paragraph](#id/BlockNode:00CF46W4QR00C)",
+    "text": "Supersedes: [v1's \"one sanctioned exception\" paragraph](#id/BlockNode:00CF46W4QR00C)\nFolded into design: [Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00H) and [its incompleteness test](../design/aperas-skill.md#id/BlockNode:00CN6SMSX0001).",
     "parent": "BlockNode:00CF4QNWZR001",
     "type": "heading",
     "children": [
@@ -20195,7 +20247,7 @@
   {
     "@id": "BlockNode:00CF5GK5BR003",
     "@type": "BlockNode",
-    "title": "00CF5GK5BR003",
+    "title": "00CN853N1G001",
     "text": "The sanctioned exception is a **normative, singular** pointer — one whose target is the block's whole referent rather than one of many possible mentions. A design doc's own `# Context` section is the familiar instance (one link per facet, a fixed set), but it is the *property* that is sanctioned, not that location: a history milestone announcing one snapshot, or a design block naming *the* canonical exemplar, qualify the same way.",
     "parent": "BlockNode:00CF5GK5BR002",
     "type": "paragraph",
@@ -20204,7 +20256,7 @@
   {
     "@id": "BlockNode:00CF5GK5BR004",
     "@type": "BlockNode",
-    "title": "00CF5GK5BR004",
+    "title": "00CN854AT0001",
     "text": "The test is whether removing the link leaves the block **incomplete**. A milestone whose content is \"this snapshot was taken\" no longer says what it exists to say once its pointer is gone; \"here is a discussion that also touched on this\" loses only enrichment, and stays forbidden. What the rule is actually against is a *list of children* — unbounded, discretionary, accumulating — so cardinality is the real criterion and direction is only its usual symptom. [current] Generalized after a milestone needed exactly such a pointer and the rule, stated as \"designated index,\" named an instance where it meant a property.",
     "parent": "BlockNode:00CF5GK5BR002",
     "type": "paragraph",
@@ -32041,6 +32093,20 @@
             "value": "1319"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CKE4R93R001:links:Link:00CN7VHFCR000",
+        "@type": "Link",
+        "target": "BlockNode:00CN7V9BX0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CKE4R93R001:links:Link:00CN7VHFCR000:props:StringProp:00CN7VHFCR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1980"
+          }
+        ]
       }
     ],
     "props": [
@@ -32058,7 +32124,7 @@
       }
     ],
     "title": "**`ArtifactNode`/`FolderNode.text` is a stale, heuristic copy that can't be baked — found via a folder-listing link that stayed inert after the fix meant to cover it**",
-    "text": "**`ArtifactNode`/`FolderNode.text` is a stale, heuristic copy that can't be baked — found via a folder-listing link that stayed inert after the fix meant to cover it**: `design/linking.md`'s own `**Discussion**:` line rendered `inline-link-inert` in the \"design\" folder's listing, even after the bare-relative-path resolver fix and `bakeResolvedLinkIds` render-time fix ([history/linking.md](../history/linking.md#id/BlockNode:00CJAVGNJG001), [history/webapp.md](../history/webapp.md#id/BlockNode:00CJAVRF90001), both 2026-09-18) were verified working for the direct case. Root cause: the folder-listing preview reads the `ArtifactNode`'s own `.text`, which is a *copy* of its first content-bearing descendant's text (`extractAbstract`), made once at hydration time — the descendant's real `Link` (confirmed already correctly resolved via `aperas show`) is never duplicated onto the container, so `bakeResolvedLinkIds` has nothing to bake with for this render path specifically. Deeper problem underneath: this copy is never refreshed by an ordinary deep edit either — `kgUpdate.ts`'s `target.text = text` never touches an ancestor's own `.text`, only a full re-hydration or the one-time holder-promotion path ever recomputes it — so the preview can go stale independent of this specific bug too. Direction agreed (see [discussion/core.md](../discussion/core.md#id/BlockNode:00CKE4FFF0001)'s 2026-09-20 Freeflow entry for full rationale): retire the copy/heuristic entirely; give `ArtifactNode`/`FolderNode` a real `description` field in their own YAML frontmatter, with its own genuinely-owned `Link`s, edited via `aperas update` extended to accept `FolderNode` and to consume `frontmatter` — the corpus's long-standing \"update as a scoped reconciliation\" pattern, not a new bespoke channel. Not yet implemented.",
+    "text": "**`ArtifactNode`/`FolderNode.text` is a stale, heuristic copy that can't be baked — found via a folder-listing link that stayed inert after the fix meant to cover it**: `design/linking.md`'s own `**Discussion**:` line rendered `inline-link-inert` in the \"design\" folder's listing, even after the bare-relative-path resolver fix and `bakeResolvedLinkIds` render-time fix ([history/linking.md](../history/linking.md#id/BlockNode:00CJAVGNJG001), [history/webapp.md](../history/webapp.md#id/BlockNode:00CJAVRF90001), both 2026-09-18) were verified working for the direct case. Root cause: the folder-listing preview reads the `ArtifactNode`'s own `.text`, which is a *copy* of its first content-bearing descendant's text (`extractAbstract`), made once at hydration time — the descendant's real `Link` (confirmed already correctly resolved via `aperas show`) is never duplicated onto the container, so `bakeResolvedLinkIds` has nothing to bake with for this render path specifically. Deeper problem underneath: this copy is never refreshed by an ordinary deep edit either — `kgUpdate.ts`'s `target.text = text` never touches an ancestor's own `.text`, only a full re-hydration or the one-time holder-promotion path ever recomputes it — so the preview can go stale independent of this specific bug too. Direction agreed (see [discussion/core.md](../discussion/core.md#id/BlockNode:00CKE4FFF0001)'s 2026-09-20 Freeflow entry for full rationale): retire the copy/heuristic entirely; give `ArtifactNode`/`FolderNode` a real `description` field in their own YAML frontmatter, with its own genuinely-owned `Link`s, edited via `aperas update` extended to accept `FolderNode` and to consume `frontmatter` — the corpus's long-standing \"update as a scoped reconciliation\" pattern, not a new bespoke channel. Implemented in `e66996b`, but only partly: the `description` prop and its bakeable links landed, while one of the two preview paths still reads the copy this issue exists to retire — see [the follow-on](#id/BlockNode:00CN7V9BX0001).",
     "parent": "BlockNode:00CF1WZ4JG002",
     "type": "listItem",
     "children": []
@@ -33110,8 +33176,8 @@
   {
     "@id": "BlockNode:00CN4DGBQ0001",
     "@type": "BlockNode",
-    "title": "00CN4DGBQ0001",
-    "text": "**A real, pre-existing slug-path collision in `planning/packaging.md`'s own Task Breakdown, latent since 2026-09-10, only surfaced by the first full re-ingest of the file in 12 days — 2026-09-22.** `aperas ingest planning/packaging.md --track --flush` (run as part of the corpus-wide frontmatter sweep) failed outright: `Full-slug-path collision: 'planning/packaging.md/--packaging---planning/---task-breakdown/root--package-json-' is already used by another live block (BlockNode:00CDH90MNG004) — rejected before writing anything.` Root cause: two separate Task Breakdown list items share the identical bold lead-in term `**Root `package.json`**` — item 3 (`BlockNode:00CDGV1RKR001`, \"workspaces field, updated `kg:*` script paths, dropped dead deps\") and item 9 (`BlockNode:00CDH90MNG004`, \"add an `\\\"aperas\\\": ...\\\" script\"`) — so both slugify to the exact same path. Traced via `git log -S` on each id: item 3 was introduced in `8dffd92` (2026-09-10 20:07:45, \"Package to monorepo/packages/{core,cli,web}\"), item 9 seventeen minutes later in `5b1d894` (2026-09-10 20:24:43, \"Package kg:<command> to `aperas <command>`; Add identity.json & aperas.config.json\") — the collision has existed in the graph since that second commit, invisible for twelve days because nothing had forced a full-body re-ingest of this specific artifact since (ordinary `aperas update`/`insert` calls at the block level never trigger `rejectSlugPathCollisions`, which only runs inside `ArtifactNode.ingestFromDisk`'s whole-document path). Both items already carry real, working id-anchors and resolve correctly via `aperas show`/`aperas tree` — this is purely a stale-slug-path hazard for any *future* full re-ingest of this one file, not a currently-broken read. Not fixed: fixing it means rewording one of the two lead-ins to be distinct (a content decision, not mechanical), out of scope for the frontmatter sweep that found it.",
+    "title": "**A real, pre-existing slug-path collision in `planning/packaging.md`'s own Task Breakdown, latent since 2026-09-10, only surfaced by the first full re-ingest of the file in 12 days — 2026-09-22**",
+    "text": "**A real, pre-existing slug-path collision in `planning/packaging.md`'s own Task Breakdown, latent since 2026-09-10, only surfaced by the first full re-ingest of the file in 12 days — 2026-09-22**: `aperas ingest planning/packaging.md --track --flush` (run as part of the corpus-wide frontmatter sweep) failed outright: `Full-slug-path collision: 'planning/packaging.md/--packaging---planning/---task-breakdown/root--package-json-' is already used by another live block (BlockNode:00CDH90MNG004) — rejected before writing anything.` Root cause: two separate Task Breakdown list items share the identical bold lead-in term `**Root `package.json`**` — item 3 (`BlockNode:00CDGV1RKR001`, \"workspaces field, updated `kg:*` script paths, dropped dead deps\") and item 9 (`BlockNode:00CDH90MNG004`, \"add an `\\\"aperas\\\": ...\\\" script\"`) — so both slugify to the exact same path. Traced via `git log -S` on each id: item 3 was introduced in `8dffd92` (2026-09-10 20:07:45, \"Package to monorepo/packages/{core,cli,web}\"), item 9 seventeen minutes later in `5b1d894` (2026-09-10 20:24:43, \"Package kg:<command> to `aperas <command>`; Add identity.json & aperas.config.json\") — the collision has existed in the graph since that second commit, invisible for twelve days because nothing had forced a full-body re-ingest of this specific artifact since (ordinary `aperas update`/`insert` calls at the block level never trigger `rejectSlugPathCollisions`, which only runs inside `ArtifactNode.ingestFromDisk`'s whole-document path). Both items already carry real, working id-anchors and resolve correctly via `aperas show`/`aperas tree` — this is purely a stale-slug-path hazard for any *future* full re-ingest of this one file, not a currently-broken read. Not fixed: fixing it means rewording one of the two lead-ins to be distinct (a content decision, not mechanical), out of scope for the frontmatter sweep that found it.",
     "parent": "BlockNode:00CJ5ET5Z8005",
     "type": "listItem",
     "children": []
@@ -33170,101 +33236,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CN4MY5Q0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:56:40.416Z",
-    "title": "# Retype Collision Scratch Test",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4MY5Q0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:56:40.416Z",
-    "title": "## Parent Heading",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4MY5Q0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:55:16.411Z",
-    "title": "Convert me",
-    "text": "Convert me: this list item will be retyped into a heading, deriving a title that collides.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4N1NER003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:55:33.671Z",
-    "title": "**Existing Sibling**",
-    "text": "**Existing Sibling**: this list item, once retyped into a heading, will derive the exact same title as the sibling above — same lead-in term.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4N5W9R003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:55:43.992Z",
-    "title": "## Other Heading",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4N5W9R004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:55:43.992Z",
-    "title": "**Existing Sibling**",
-    "text": "**Existing Sibling**: this list item, once retyped into a heading, will derive the exact same title as the sibling heading above — same lead-in term, same slug, but under a *different* parent heading.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4N8CY0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:56:40.416Z",
-    "title": "### Existing Sibling",
-    "text": "Content of the existing sibling heading, whose slug the retyped item will collide with.",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4N8CY0004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:55:52.262Z",
-    "title": "**Existing Sibling**",
-    "text": "**Existing Sibling**: this list item, once retyped into a heading, will derive the exact same title as its own sibling heading above — same lead-in term, same slug, same parent.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4NADH8004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:56:04.709Z",
-    "title": "### Holder Heading",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4NADH8005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:56:04.709Z",
-    "title": "**Existing Sibling**",
-    "text": "**Existing Sibling**: this list item, once retyped into a heading, will derive the exact same title as its own sibling heading above — same lead-in term, same slug, same grandparent.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CN4NDES8003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T08:56:40.416Z",
-    "title": "### Existing Sibling",
-    "text": "this list item, once retyped into a heading, will derive the exact same title as its own sibling heading below — same lead-in term, same slug, same parent.",
-    "type": "heading",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CN4NZRRR001",
     "@type": "BlockNode",
     "links": [
@@ -33297,8 +33268,8 @@
         "value": "1"
       }
     ],
-    "title": "00CN4NZRRR001",
-    "text": "**`aperas retype`'s automatic title derivation has no slug-path collision guard, unlike every other title-changing write path** — confirmed live: `rejectSlugPathCollisions` (`node.ts`, design/linking.md's Full-Path Collisions) is called from `ArtifactNode.ingestFromDisk` (`node.ts`), `kg:insert` (`kgInsert.ts:125`), and `kg:update` for *any* title change, heading retitle or non-heading re-derivation alike (`kgUpdate.ts:207-214`, explicitly scoped to cover exactly this case per its own comment: \"relevant whenever `title` actually changed... heading retitle or non-heading re-derivation alike\"). `kgRetype.ts` has no such call anywhere in the file — its title assignment at `target.title = toTitle` (line 248) is a bare, unguarded write, even though retype's own defining feature is deriving a *fresh* title (folding a heading's words into a lead-in, or cutting a lead-in back out into a heading) exactly the kind of change the other three sites exist to protect. Reproduced live in a scratch artifact: two sibling blocks under one parent heading, one a heading titled \"Existing Sibling\", the other a listItem with the identical bold lead-in \"**Existing Sibling**\" — `aperas retype <listItem> --to h3` succeeded with no error or warning, producing two live sibling headings both titled \"### Existing Sibling\" under the same parent, indistinguishable in `aperas tree`'s own render. Fix direction: call `rejectSlugPathCollisions(store, target.parent.toPath(), [...])` at `kgRetype.ts`'s title-assignment point, the same shape `kgUpdate.ts:207-214` already uses — not yet implemented, found while auditing every title-extraction path after [the packaging slug-path collision](../discussion/packaging.md#id/BlockNode:00CN4DGBQ0001) raised the question of whether the guard covers every site that mints or changes a title, not just full-document ingest.",
+    "title": "**`aperas retype`'s automatic title derivation has no slug-path collision guard, unlike every other title-changing write path**",
+    "text": "**`aperas retype`'s automatic title derivation has no slug-path collision guard, unlike every other title-changing write path**: confirmed live — `rejectSlugPathCollisions` (`node.ts`, design/linking.md's Full-Path Collisions) is called from `ArtifactNode.ingestFromDisk` (`node.ts`), `kg:insert` (`kgInsert.ts:125`), and `kg:update` for *any* title change, heading retitle or non-heading re-derivation alike (`kgUpdate.ts:207-214`, explicitly scoped to cover exactly this case per its own comment: \"relevant whenever `title` actually changed... heading retitle or non-heading re-derivation alike\"). `kgRetype.ts` has no such call anywhere in the file — its title assignment at `target.title = toTitle` (line 248) is a bare, unguarded write, even though retype's own defining feature is deriving a *fresh* title (folding a heading's words into a lead-in, or cutting a lead-in back out into a heading) exactly the kind of change the other three sites exist to protect. Reproduced live in a scratch artifact: two sibling blocks under one parent heading, one a heading titled \"Existing Sibling\", the other a listItem with the identical bold lead-in \"**Existing Sibling**\" — `aperas retype <listItem> --to h3` succeeded with no error or warning, producing two live sibling headings both titled \"### Existing Sibling\" under the same parent, indistinguishable in `aperas tree`'s own render. Fix direction: call `rejectSlugPathCollisions(store, target.parent.toPath(), [...])` at `kgRetype.ts`'s title-assignment point, the same shape `kgUpdate.ts:207-214` already uses — not yet implemented, found while auditing every title-extraction path after [the packaging slug-path collision](../discussion/packaging.md#id/BlockNode:00CN4DGBQ0001) raised the question of whether the guard covers every site that mints or changes a title, not just full-document ingest.",
     "parent": "BlockNode:00CDBYV5A8002",
     "type": "listItem",
     "children": []
@@ -33391,6 +33362,447 @@
     "text": "History docs for the Aperas project, one per concern. Each holds a Current Status summary and a\nMilestones list, recording what shipped and when, distinct from the reasoning in `discussion/` or\nthe plan in `planning/`.",
     "parent": "ArtifactNode:00CN4ZXWJ8000",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN6S7HWR000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN6S7NG0001",
+        "@type": "Link",
+        "target": "BlockNode:00CF5GK5BR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN6S7NG0001:props:StringProp:00CN6S7NG0002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "461"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN6S7NG8000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN6S7NG8000:props:StringProp:00CN6S7NG8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "532"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN6S7NG8002",
+        "@type": "Link",
+        "target": "BlockNode:00CF4D9XT0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN6S7NG8002:props:StringProp:00CN6S7NG8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1320"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN7GGDA8000",
+        "@type": "Link",
+        "target": "BlockNode:00CN7G6D0G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN6S7HWR000:links:Link:00CN7GGDA8000:props:StringProp:00CN7GGDA8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2037"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CN6S7HWR000:props:StringProp:00CN6S7NFR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CN6S7HWR000:props:StringProp:00CN6S7NG0000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`design/aperas-skill.md`'s Citation direction sat thirteen versions behind its own projection, and none of the three existing instruments could have caught it**",
+    "text": "**`design/aperas-skill.md`'s Citation direction sat thirteen versions behind its own projection, and none of the three existing instruments could have caught it**: v1.1 generalized the sanctioned exception from \"a designated index\" to a **normative, singular** pointer, tested by whether removing the link leaves the block incomplete — cardinality is the real criterion and direction only its usual symptom. That landed in SKILL.md and was recorded as a delta ([v1.1](#id/BlockNode:00CF5GK5BR002)), but the design block it revised ([Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00H)) was never updated, and still asserted the pre-v1.1 wording at v2.7 — read top-down and quoted back as current before the gap was noticed. Measured while finding it: of design's 50 live blocks, 43 carry v1-authoring ids, 6 are v1.x-era and 1 is v2-era, with none after — additions land, revisions strand. The cause is structural rather than disciplinary: the edit loop's deep-write step answers \"what did this change make stale?\" by backlinks, and SKILL.md is a generative projection with no node and therefore no backlinks, so on the design ↔ SKILL.md edge that step has nothing to traverse. All three instruments sit on the other edge — `skill_drift.py` compares SKILL.md against the snapshot/delta thread, the [vertical thread](#id/BlockNode:00CF4D9XT0001) wires principles to their realizers *inside* the v1 snapshot and was never rebuilt past v1.2, and the snapshot/delta record is SKILL.md's own history rather than design's. `aperas backlinks` on the drifted block returned nothing at all. Remedy adopted: a version delta that revises a rule links **up** to the design block it revises — upward and so legal by citation direction, singular and constitutive and so sanctioned by that same rule's own test — which makes a design block's backlinks its status check, a backlink from a delta newer than the block's last edit being the staleness signal, and no backlinks at all meaning no version has yet revised it. Promoted to [issues/aperas-skill.md](../issues/aperas-skill.md#id/BlockNode:00CN7G6D0G001).",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN6SMSX0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN6SMSX0001:links:Link:00CN6VN9N8000",
+        "@type": "Link",
+        "target": "BlockNode:00CF5GK5BR004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN6SMSX0001:links:Link:00CN6VN9N8000:props:StringProp:00CN6VN9N8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "475"
+          }
+        ]
+      }
+    ],
+    "title": "00CN6VN62G001",
+    "text": "The test is whether removing the link leaves the block **incomplete**. A milestone whose content is \"this snapshot was taken\" no longer says what it exists to say once its pointer is gone, while \"here is a discussion that also touched on this\" loses only enrichment and stays forbidden. What the rule is actually against is a *list of children* — unbounded, discretionary, accumulating — so cardinality is the real criterion and direction is only its usual symptom. Reflects [v1.1](../discussion/aperas-skill.md#id/BlockNode:00CF5GK5BR004).",
+    "parent": "BlockNode:00CEA5Y5JG00G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7G6D0G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN7G6D0G001:links:Link:00CN7G6GZG000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN7G6D0G001:links:Link:00CN7G6GZG000:props:StringProp:00CN7G6GZG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1316"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CN7G6D0G001:props:StringProp:00CN7G6GZ8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CN7G6D0G001:props:StringProp:00CN7G6GZ8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`design/aperas-skill.md` drifts silently against SKILL.md, because revisions strand where additions land and nothing on that edge can detect it**",
+    "text": "**`design/aperas-skill.md` drifts silently against SKILL.md, because revisions strand where additions land and nothing on that edge can detect it**: measured 2026-09-22 — of design's 50 live blocks, 43 carry v1-authoring ids, 6 are v1.x-era and 1 v2-era with none later, while SKILL.md stands at v2.7; across the 137 blocks in the v1.1–v2.7 delta sections, 2 link into design. The failure is structural rather than disciplinary. An addition has an obvious home and writing it is the whole job, whereas a revision first requires *discovering* that some existing design block asserts what just changed — precisely the question the edit loop's deep-write step answers by backlinks, and precisely what SKILL.md cannot participate in, being a generative projection with no node and therefore no backlinks. Staleness cannot be recovered after the fact either: a BlockNode carries no last-edit time at all (`tombstonedAt` is the only timestamp present on any of the 1825 nodes), and an id encodes creation, surviving every later rewrite unchanged. All three existing instruments sit on the SKILL.md ↔ discussion edge — `scripts/skill_drift.py`, the v1 vertical thread (itself never rebuilt past v1.2), and the snapshot/delta record itself — which leaves the design edge with none. The remedy is two-way wiring, live now at [Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00G) as the worked example: the design block declares the revision it reflects as a downward pointer — sanctioned by that section's own rule, being normative, singular, and replaced rather than accumulated — while the delta that revised it links back up, so staleness reduces to comparing two recorded facts, a declared version against the newest incoming delta link, instead of inferring from a timestamp the graph does not store. Remaining work: walk the 137 delta blocks, decide which of them revise something design actually asserts (many introduced new SKILL.md items with no design counterpart, and correctly link nowhere), wire those, and repair whatever design blocks turn out stale along the way — the wiring pass and the drift sweep are one walk, since a delta that should link up and doesn't is either an unwired edge or a stale block, with nothing to distinguish them until someone looks.",
+    "parent": "BlockNode:00CEA5KW4G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7V9BX0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN7V9BX0001:links:Link:00CN7V9FNG000",
+        "@type": "Link",
+        "target": "BlockNode:00CKE4R93R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN7V9BX0001:links:Link:00CN7V9FNG000:props:StringProp:00CN7V9FNR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "215"
+          }
+        ]
+      }
+    ],
+    "title": "**The frontmatter-`description` retirement of `ArtifactNode`/`FolderNode.text` landed on only one of the two preview paths, so `unfold` and `backlinks` still show the stale heuristic copy**",
+    "text": "**The frontmatter-`description` retirement of `ArtifactNode`/`FolderNode.text` landed on only one of the two preview paths, so `unfold` and `backlinks` still show the stale heuristic copy**: the direction agreed in [the parent issue](#id/BlockNode:00CKE4R93R001) shipped in `e66996b` — `description` became a real frontmatter-owned prop carrying its own bakeable `Link`s — and `buildNodeItem` (`node.ts:1799-1801`) was updated to read `description ?? .text` for `ArtifactNode`/`FolderNode`, which is what `aperas tree` and the webapp render through `emitNode`. `kgUnfold.ts`'s `nodeAbstract` (lines 32-46) was not: it reads `node.text` unconditionally, for every node kind, with no `description` check at all — and it feeds the unfolded target's own line, every structural child line, every link-target preview, and `aperas backlinks --text`, which is the reason that function was extracted in the first place. So for any artifact or folder whose authored `description` differs from the derived `.text`, the two surfaces disagree, and `aperas unfold` — the orientation command the skill puts first — renders precisely the heuristic copy the redesign set out to retire. Confirmed live 2026-09-22 against `issues/aperas-skill.md`, whose two values currently differ: `tree` and the webapp show the description, `unfold` shows `.text` both when the artifact is the target and when it appears as a child of its folder. It stayed invisible because the two values normally paraphrase each other — the corpus-wide frontmatter sweep seeded most descriptions from text that already said much the same thing — so only an artifact whose description was authored to differ exposes it. `aperas show` is not part of the defect: it prints the stored node raw, which is what made the divergence legible in the first place. Notably this is a re-run of a defect this same file already records in its own doc comment — \"this file has its own, separate preview-printing path (not `emitNode`), so it had its own separate instance of the same bug\" — the duplicated preview path diverging a second time, on the next change that crossed it. Fix direction: give `nodeAbstract` the same `description ?? .text` precedence `buildNodeItem` uses, or better, have both call one shared helper, since the recorded history of these two paths is that they diverge on every change that touches only one. Not yet implemented.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7XM9TG001",
+    "@type": "BlockNode",
+    "title": "### Entry route — both directions, and the gap where they meet",
+    "text": "The gradient that constrains citation is also the route for reading along it, and both directions are legitimate. Top-down — `design`, then `issues`/`history`, then `discussion`, then the code — narrows like a binary search and yields the frame: what the corpus claims about an area, and which facet the work is actually in. Bottom-up — a concrete identifier grepped against the store, landing on the exact node, then climbing outward — yields the pinpoint, which a top-down descent cannot supply without first choosing among dozens of sibling entries. Neither is a fallback for the other.",
+    "parent": "BlockNode:00CEA5Y5JG00D",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN7XM9TG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN7XM9TG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN7XM9TG002:links:Link:00CN7YM2NR000",
+        "@type": "Link",
+        "target": "BlockNode:00CN7YEND0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN7XM9TG002:links:Link:00CN7YM2NR000:props:StringProp:00CN7YM2P0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "893"
+          }
+        ]
+      }
+    ],
+    "title": "00CN7YKYH0001",
+    "text": "Drift between a tier and what it governs is detectable only where the two directions meet, because it is an absence as often as a contradiction — the abstract tier silent where the concrete has a rule, or asserting one the concrete has since replaced — and in both forms it is indistinguishable from agreement until something has been compared against it. Descending alone confirms the abstract; ascending alone confirms the concrete. Which axis carries the climb follows from citation direction: a lower block cites the higher one it realizes, so forward links usually run up the gradient, while a higher block points down only where it speaks normatively; backlinks are that same relation from the other end, and are how an abstract block's realizers below are found; ancestors climb within one artifact only, recovering the surrounding thread rather than the tier that governs it. Reflects [v2.8](../discussion/aperas-skill.md#id/BlockNode:00CN7YEND0002).",
+    "parent": "BlockNode:00CN7XM9TG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7YEND0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN7YEND0001:links:Link:00CN7ZVK5R000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN7YEND0001:links:Link:00CN7ZVK5R000:props:StringProp:00CN7ZVK5R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CN7YEND0001:links:Link:00CN7ZVK5R002",
+        "@type": "Link",
+        "target": "BlockNode:00CN7XM9TG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN7YEND0001:links:Link:00CN7ZVK5R002:props:StringProp:00CN7ZVK5R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "595"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.8 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reading the corpus gains a direction rule of its own: the concern gradient that already governs where a citation may point also governs where a read may enter, and drift between a tier and what it governs is visible only where a top-down descent and a bottom-up pinpoint meet. Both confirmations came from one session, one in each direction — a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled shape in [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001).",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN7ZQFN8001",
+      "BlockNode:00CN7YEND0002",
+      "BlockNode:00CN7YEND0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN7YEND0002",
+    "@type": "BlockNode",
+    "title": "### Orientation — entering the corpus, two directions",
+    "text": "The three directions above move *from* a node. Acquiring the first one is its own decision, and the corpus has a gradient of its own to move along: the concern docs run `design` most abstract and `discussion` least, with `issues`, `planning` and `history` between. Both directions along it are legitimate, and they do different jobs.",
+    "parent": "BlockNode:00CN7YEND0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN7ZPCG8001",
+      "BlockNode:00CN7ZPCG8002",
+      "BlockNode:00CN7ZPCGG000",
+      "BlockNode:00CN7ZPCGG001",
+      "BlockNode:00CN7ZPCGG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN7YEND0003",
+    "@type": "BlockNode",
+    "title": "### Discipline — the code-entry recipe gains its return leg",
+    "text": "The third line is the half that gets dropped. A keyword lands you wherever it happens to match, which for a concrete identifier is nearly always `discussion` — the tier where concrete identifiers live. Stopping there gives you the reasoning trail and none of the settled rule, so whatever the code does reads as correct by default. Follow the landed node's forward links up until you reach `design`, and compare what it states against what the code does: that comparison is the only thing that can tell a gap from agreement (*Entering the corpus*, Orientation).",
+    "parent": "BlockNode:00CN7YEND0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN7ZPYJ8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN7ZPCG8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CN7ZPCG8001:props:StringProp:00CN7ZPG48000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CN7ZPCG8001:props:StringProp:00CN7ZPG48001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CN7ZPCG8001",
+    "text": "**Top-down — frame, then zoom in.** `design/<concern>.md` for the settled shape, then `issues`/`history` for what is open and what already landed, then `discussion` for the reasoning trail, and only then the code. It narrows like a binary search, and what it buys is the frame: what the corpus *claims* about this area, and which facet you are actually in.",
+    "parent": "BlockNode:00CN7YEND0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7ZPCG8002",
+    "@type": "BlockNode",
+    "title": "00CN7ZPCG8002",
+    "text": "**Bottom-up — pinpoint, then zoom out.** A concrete identifier — a source filename, a symbol, an error string — grepped against the store lands you on the exact node in one step, where a top-down descent would still be choosing among forty Freeflow items. Then climb by following that node's own **forward links**, which usually run up the gradient: a lower block cites the higher one it realizes, while a higher block points down only where it speaks normatively. So a downward link met on the way up is the higher tier governing the lower, not a route further down. **Backlinks** are that same relation from the other end — what cites *this* node — and are how a design block's realizers below are found. Ancestors climb within one artifact only: they recover the surrounding thread, not the statement that governs it.",
+    "parent": "BlockNode:00CN7YEND0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7ZPCGG000",
+    "@type": "BlockNode",
+    "title": "00CN7ZPCGG000",
+    "text": "Neither is a fallback for the other, and neither alone can find drift. **Drift is an absence as often as a contradiction — the design silent where the code has a rule, or asserting a rule the code has since replaced — and in both forms it is indistinguishable from agreement until both directions have been run and compared.** Descend only and you confirm the design; ascend only and you confirm the code, which is why a bottom-up fix is so often correct and still leaves the design a version behind. The finding is the discrepancy at the point the two meet, so a pinpointed node is not oriented until the climb has reached the tier that should govern it: for a code-shaped entry, upward does not stop when the block's meaning stabilizes — it stops at `design`.",
+    "parent": "BlockNode:00CN7YEND0002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7ZPCGG001",
+    "@type": "BlockNode",
+    "title": "00CN7ZPCGG001",
+    "text": "Confirmed live, once in each direction. A lead-in-term title-extraction fix traced cold out of `astParser.ts` worked correctly and revealed nothing, while `design/linking.md`'s own Lead-In Term Detection — documenting two checks where the code has three — was stale in exactly the clause the fix depended on. In the same session the reverse: `design/aperas-skill.md`'s Citation direction, read top-down, asserted a rule its own projection had replaced thirteen versions earlier, and was quoted back as current.",
+    "parent": "BlockNode:00CN7YEND0002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7ZPCGG002",
+    "@type": "BlockNode",
+    "title": "00CN7ZPCGG002",
+    "text": "```bash\ngrep -n 'astParser.ts' AperasKG/Apeiron/BlockNode.jsonld  # pinpoint → candidate ids\n# a planning-tier hit cites the tier above it:\n#   \"see [Lead-In Term Detection](../design/linking.md#id/BlockNode:00CDBYV4TG000)\"\naperas unfold BlockNode:00CDBYV4TG000                     # follow it up to design\n# two checks documented, three in the code — that difference is the finding\n```",
+    "parent": "BlockNode:00CN7YEND0002",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7ZPYJ8001",
+    "@type": "BlockNode",
+    "title": "00CN7ZPYJ8001",
+    "text": "```bash\ngrep -n 'reconcile.ts' AperasKG/Apeiron/BlockNode.jsonld   # candidate ids\naperas unfold <id> --view <task>                           # then work them in the graph\naperas unfold <design-block>                               # keep climbing — stop at design, not here\n```",
+    "parent": "BlockNode:00CN7YEND0003",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN7ZQFN8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN7ZQFN8001:links:Link:00CN7ZQKK0000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ5207P8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN7ZQFN8001:links:Link:00CN7ZQKK0000:props:StringProp:00CN7ZQKK0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.8",
+    "text": "Supersedes: [v2.7's own status line](#id/BlockNode:00CJ5207P8003)",
+    "parent": "BlockNode:00CN7YEND0001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CN7ZQFN8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CN7ZQFN8002",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.8** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CN7ZQFN8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN89ERE8000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CN89ERE8000:props:StringProp:00CN89EWCG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CN89ERE8000:props:StringProp:00CN89EWCG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`skill_drift.py` only ever checks that SKILL.md is contained in the record, never that the record is contained in SKILL.md, so text appended to a recorded entry is undetectable**",
+    "text": "**`skill_drift.py` only ever checks that SKILL.md is contained in the record, never that the record is contained in SKILL.md, so text appended to a recorded entry is undetectable**: the ADDED pass asks `b not in haystack` against every recorded section joined into one string, and the DROPPED pass fingerprints each recorded entry by its first 120 characters (`b[:FINGERPRINT_CHARS] not in filetext`). Appending to the *tail* of a verbatim entry therefore leaves the original text intact as a substring and leaves the fingerprint prefix unchanged, and both passes report clean; only a prepend or an interior rewrite would be caught. Simulated against the live corpus on an in-scope v2.x delta entry (`BlockNode:00CGMY04AG003`), appending one sentence: ADDED does not flag, DROPPED does not flag. Found the hard way — two v1.1 delta paragraphs were contaminated exactly this way while the check reported `ADDED but unrecorded — 0` and `DROPPED, unaccounted — 0`, and the contamination surfaced only because a reader asked whether the appended sentence broke the verbatim rule. The reason a blanket \"record ⊆ file\" comparison cannot simply be added: the record deliberately mixes verbatim entries with meta scaffolding — a delta section's own framing text, a `Supersedes:` line, a pointer to where a rule was folded into design — and that split is carried by *convention* (meta on the entry heading, verbatim in its child paragraphs) rather than by any marked property the script can read. So the fix has to make the distinction explicit before it can enforce it: mark verbatim blocks as such and require exact equality for those, leaving heading/meta blocks exempt. Not yet implemented.",
+    "parent": "BlockNode:00CEA5KW4G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CN89NQKG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CN89NQKG001:links:Link:00CN89NVQR002",
+        "@type": "Link",
+        "target": "BlockNode:00CN89ERE8000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CN89NQKG001:links:Link:00CN89NVQR002:props:StringProp:00CN89NVQR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1800"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CN89NQKG001:props:StringProp:00CN89NVQR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CN89NQKG001:props:StringProp:00CN89NVQR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Every generation below the current snapshot is unverified, so the provenance layers can be corrupted or destroyed with no signal at all**",
+    "text": "**Every generation below the current snapshot is unverified, so the provenance layers can be corrupted or destroyed with no signal at all**: `recorded_roots` takes the latest snapshot plus the deltas above it and nothing else, deliberately — its own docstring reasons that \"older snapshots are history, not a baseline,\" since v1 restructuring v0 wholesale is the point of a major version rather than drift, and comparing against v0 would report the entire rewrite as drops. That is correct for detecting drift against the *current* file, but it means the v0 and v1 generations — six snapshot/delta section roots as of 2026-09-22, holding the reasoning for how most current rules came to be — are never read by any check. Confirmed live and unpleasantly: the `Supersedes:` line on the v1.1 Citation-direction entry was overwritten outright, taking with it the only recorded account of what v1 paragraph that entry replaced, and the very next run still reported `DROPPED, unaccounted — 0`. It was recovered from `git show HEAD:` rather than from anything the instrument said, and only because a reader thought to ask where the line had gone. Same blindness applies to the deltas' own cross-references: a `Supersedes:` target in a superseded generation can rot to a tombstoned or nonexistent id without anything noticing. Fix direction, two candidates rather than one settled choice: either a second, cheaper integrity mode that verifies each older generation against itself — entries still parse, `Supersedes:` targets still resolve to live blocks, no entry silently emptied — or an explicit decision that history layers are write-once and unprotected, recorded as such so nobody later assumes a passing check covers them. The sibling gap in the same instrument, which does affect in-scope entries, is [the containment-direction blind spot](#id/BlockNode:00CN89ERE8000). Not yet implemented.",
+    "parent": "BlockNode:00CEA5KW4G002",
+    "type": "listItem",
     "children": []
   }
 ]
