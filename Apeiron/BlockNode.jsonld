@@ -28394,6 +28394,9 @@
       "BlockNode:00CJ2VBQR0004",
       "BlockNode:00CJ2VBQR0005",
       "BlockNode:00CJE97N2G001",
+      "BlockNode:00CNR2E3D0001",
+      "BlockNode:00CNR1X7RG001",
+      "BlockNode:00CNR1X7RG002",
       "BlockNode:00CJ7PNQ2R001",
       "BlockNode:00CJ8E2GAR001"
     ]
@@ -30882,7 +30885,8 @@
       "BlockNode:00CJ8FJNKR001",
       "BlockNode:00CJ8FJNKR002",
       "BlockNode:00CJ8FJNKR003",
-      "BlockNode:00CJAW3BS0001"
+      "BlockNode:00CJAW3BS0001",
+      "BlockNode:00CNRB3A90001"
     ]
   },
   {
@@ -33932,6 +33936,90 @@
     "text": "Both items were written when Orientation had no subsections at all, and were silently re-scoped the moment \"Deep read and deep write run along the same three directions\" was introduced above them: in a flat layout a paragraph belongs to whatever heading precedes it, so an item written for the section level is captured by the first subsection that appears before it, with nothing marking which one it was meant for. Neither item lost or gained a word — each bold lead-in simply became the `###` heading it had been acting as. Promotion rather than relocation is what restores the scoping, since once a subsection opens there is no way back to section level except to precede every subsection or to carry a heading of one's own.",
     "parent": "BlockNode:00CN8KC5W8001",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNR1X7RG001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T07:32:20.182Z",
+    "title": "**The webapp's 1s poll causes a full-tree remount, not a genuine reload, 2026-09-23**",
+    "text": "**The webapp's 1s poll causes a full-tree remount, not a genuine reload, 2026-09-23**: `App.tsx`'s `refreshTick` signal drives `createResource`'s key (`{apex, view, tick}`), so every poll fetches a brand-new `TreeResponse` — a fresh object graph with new references top to bottom, even when nothing changed. `FolderDiv.tsx`'s recursive `<For each={n.children}>` reconciles by object reference, not by id, so it cannot match old items to new ones: it tears down and remounts every row in the tree every second, dropping any open inline editor (`editing` signal) mid-edit and resetting scroll/focus. Fix is `reconcile(data, {key: 'id'})` from `solid-js/store`, merging each poll's response into a persistent store keyed by node id instead of handing `<For>` a fresh object graph each time — recorded as its own pattern in the `solidjs` skill's *Reconciling polled/re-fetched data into a store* section.",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNR1X7RG002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T07:32:21.525Z",
+    "title": "Reconciling by a single `id` key surfaced a second, unrelated defect",
+    "text": "Reconciling by a single `id` key surfaced a second, unrelated defect: `RenderLinkItem` (`core/src/apeironNgn/node.ts`) names its identifier `linkId`, unlike every other `RenderItem` variant and unlike the graph itself — `BlockNode.jsonld`'s `@id` is a single uniform field across every node kind, links included. Traced to [Proposed shape of the structured render](#id/BlockNode:00CJ2VBQR0003), which introduced the split with no stated rationale. Renamed to `id` across `RenderLinkItem`, `buildLinkItem`'s construction sites, `toText`'s link branch, and the webapp's mirrored type and consumers, so `reconcile` keys uniformly across both `RenderItem` variants and the naming matches the corpus's own convention.",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNR2E3D0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CNR2E3D0001:links:Link:00CNR8F320000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ2VBQR0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNR2E3D0001:links:Link:00CNR8F320000:props:StringProp:00CNR8F320001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1225"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CNR2E3D0001:links:Link:00CNRB9DH0000",
+        "@type": "Link",
+        "target": "BlockNode:00CNRB3A90001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNR2E3D0001:links:Link:00CNRB9DH0000:props:StringProp:00CNRB9DH0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1627"
+          }
+        ]
+      }
+    ],
+    "title": "**The webapp's 1s poll causes a full-tree remount, not a surgical update, 2026-09-23**",
+    "text": "**The webapp's 1s poll causes a full-tree remount, not a surgical update, 2026-09-23**: `App.tsx`'s `refreshTick` signal drives `createResource`'s key (`{apex, view, tick}`), so every poll fetches a brand-new `TreeResponse` — a fresh object graph with new references top to bottom, even when nothing changed. `FolderDiv.tsx`'s recursive `<For each={n.children}>` reconciles by object reference, not by id, so it cannot match old items to new ones: it tears down and remounts every row in the tree every second, dropping any open inline editor (`editing` signal) mid-edit and resetting scroll/focus. Fix is `reconcile(data, {key: 'id'})` from `solid-js/store`, merging each poll's response into a persistent store keyed by node id instead of handing `<For>` a fresh object graph each time — recorded as its own pattern in the `solidjs` skill's *Reconciling polled/re-fetched data into a store* section. Reconciling by a single `id` key surfaced a second, unrelated defect: `RenderLinkItem` (`core/src/apeironNgn/node.ts`) names its identifier `linkId`, unlike every other `RenderItem` variant and unlike the graph itself — `BlockNode.jsonld`'s `@id` is a single uniform field across every node kind, links included. Traced to [Proposed shape of the structured render](#id/BlockNode:00CJ2VBQR0003), which introduced the split with no stated rationale. Renamed to `id` across `RenderLinkItem`, `buildLinkItem`'s construction sites, `toText`'s link branch, and the webapp's mirrored type and consumers, so `reconcile` keys uniformly across both `RenderItem` variants and the naming matches the corpus's own convention. Promoted to [Resolved](../issues/webapp.md#id/BlockNode:00CNRB3A90001).",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNRB3A90001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CNRB3A90001:links:Link:00CNRB3E6R000",
+        "@type": "Link",
+        "target": "BlockNode:00CNR2E3D0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNRB3A90001:links:Link:00CNRB3E6R000:props:StringProp:00CNRB3E70000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "716"
+          }
+        ]
+      }
+    ],
+    "title": "**Resolved: the webapp's 1s poll remounted the entire tree**",
+    "text": "**Resolved: the webapp's 1s poll remounted the entire tree**: `<For>` reconciles by object reference, and a plain `createResource` handed it a fresh object graph on every poll — so it tore down and remounted every row each second, dropping any open inline editor mid-edit. Fixed with `reconcile(data, {key: 'id'})` (`solid-js/store`), merging each poll's response into a persistent store by node id. Unblocked by renaming `RenderLinkItem.linkId` to `id` in `core` — an unmotivated naming split with no functional reason, found while auditing for a uniform reconcile key. Verified live in a browser: 45 tagged DOM nodes and a mid-edit, unsaved textarea both survived 4 poll ticks with no remount. Full investigation: [Freeflow](../discussion/webapp.md#id/BlockNode:00CNR2E3D0001).",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
     "children": []
   }
 ]
