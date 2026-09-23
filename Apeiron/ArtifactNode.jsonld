@@ -738,14 +738,15 @@
       "BlockNode:00CJ02BTG0001",
       "BlockNode:00CJ5207P8001",
       "BlockNode:00CN7YEND0001",
-      "BlockNode:00CN8K8JCR001"
+      "BlockNode:00CN8K8JCR001",
+      "BlockNode:00CNW4V5GG001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "4ca062d1bc5629053a5dd3fbf17cde14101ccf01e3beb93ea5b73b7c655f93c1",
+    "fileHash": "270382e5d2c34eccf867e40f5a034dcf86ffbd6dd7a1a47f1d5df4263dfb54a1",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "4ca062d1bc5629053a5dd3fbf17cde14101ccf01e3beb93ea5b73b7c655f93c1",
-    "lastIngestedAt": "2026-09-22T13:32:49.742Z",
-    "projectedHash": "4ca062d1bc5629053a5dd3fbf17cde14101ccf01e3beb93ea5b73b7c655f93c1"
+    "ingestedHash": "270382e5d2c34eccf867e40f5a034dcf86ffbd6dd7a1a47f1d5df4263dfb54a1",
+    "lastIngestedAt": "2026-09-23T13:30:06.660Z",
+    "projectedHash": "270382e5d2c34eccf867e40f5a034dcf86ffbd6dd7a1a47f1d5df4263dfb54a1"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -759,18 +760,18 @@
       }
     ],
     "title": "aperas-skill.md",
-    "text": "Three open — design drifting against SKILL.md, with the two-way wiring that detects it built but so far applied to a single section, and two blind spots in the drift check that let the record itself be corrupted without complaint. v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "text": "Four open — design drifting against SKILL.md, with the two-way wiring that detects it built but so far applied to a single section, and three blind spots in the drift check that let the record itself be corrupted without complaint. v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CEA5KW4G001"
     ],
     "path": "issues/aperas-skill.md",
-    "fileHash": "4d4cd6219facf189587af853dccf719a5ef0de62f950de5600c7ce2fc4ca4511",
+    "fileHash": "66cc0c430604c3dbd1ddda5f52b8f173233539ea0a8c2324deb1bdefd800fb1b",
     "lastTrackedAt": "2026-09-22T13:10:43.858Z",
-    "ingestedHash": "7f696f2ba5d34f43dd3dd4834da60b36b5fdf329264bb84100e10460a6dc8896",
-    "lastIngestedAt": "2026-09-22T13:10:22.038Z",
-    "projectedHash": "7f696f2ba5d34f43dd3dd4834da60b36b5fdf329264bb84100e10460a6dc8896"
+    "ingestedHash": "66cc0c430604c3dbd1ddda5f52b8f173233539ea0a8c2324deb1bdefd800fb1b",
+    "lastIngestedAt": "2026-09-23T13:19:59.320Z",
+    "projectedHash": "66cc0c430604c3dbd1ddda5f52b8f173233539ea0a8c2324deb1bdefd800fb1b"
   },
   {
     "@id": "ArtifactNode:00CEA5M69R000",
@@ -876,11 +877,11 @@
       "BlockNode:00CF1WZ4JG001"
     ],
     "path": "issues/core.md",
-    "fileHash": "25fe7cb945c9570b04a89692a62daa308241c4d68fe2df37ad03a5d899a113f4",
+    "fileHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "25fe7cb945c9570b04a89692a62daa308241c4d68fe2df37ad03a5d899a113f4",
-    "lastIngestedAt": "2026-09-22T12:39:24.527Z",
-    "projectedHash": "25fe7cb945c9570b04a89692a62daa308241c4d68fe2df37ad03a5d899a113f4"
+    "ingestedHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c",
+    "lastIngestedAt": "2026-09-23T13:21:03.060Z",
+    "projectedHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -1287,5 +1288,20 @@
     "ingestedHash": "ab8d596e09a1e26e640b03829cf861463968488806d42683d10765dff2851e9f",
     "lastIngestedAt": "2026-09-22T09:19:18.127Z",
     "projectedHash": "ab8d596e09a1e26e640b03829cf861463968488806d42683d10765dff2851e9f"
+  },
+  {
+    "@id": "ArtifactNode:00CNWSJNMR000",
+    "@type": "ArtifactNode",
+    "tombstonedAt": "2026-09-23T13:17:47.349Z",
+    "title": "_scratch_test.md",
+    "text": "**Bold checkbox item**: original text with a real lead-in term.",
+    "parent": "FolderNode:00CDBYV4BR001",
+    "type": "root",
+    "children": [],
+    "path": "discussion/_scratch_test.md",
+    "fileHash": "9cf7775dc9a84d298263897c2f1c559d9c69b07948ba5c288e8ff560a611cfaf",
+    "lastTrackedAt": "2026-09-23T13:02:53.652Z",
+    "ingestedHash": "9cf7775dc9a84d298263897c2f1c559d9c69b07948ba5c288e8ff560a611cfaf",
+    "lastIngestedAt": "2026-09-23T13:02:54.424Z"
   }
 ]

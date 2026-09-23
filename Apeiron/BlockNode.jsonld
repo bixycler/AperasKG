@@ -13486,22 +13486,24 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5KW4G002:links:Link:00CECG3FRG000:props:StringProp:00CN89SW00000",
+            "@id": "BlockNode:00CEA5KW4G002:links:Link:00CECG3FRG000:props:StringProp:00CNX1AANR000",
             "@type": "StringProp",
             "key": "position",
-            "value": "519"
+            "value": "520"
           }
         ]
       }
     ],
     "title": "## Open Issues",
-    "text": "Three open — design drifting against SKILL.md, with the two-way wiring that detects it built but so far applied to a single section, and two blind spots in the drift check that let the record itself be corrupted without complaint. v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
+    "text": "Four open — design drifting against SKILL.md, with the two-way wiring that detects it built but so far applied to a single section, and three blind spots in the drift check that let the record itself be corrupted without complaint. v2 closed the four found by a user read of v1.4, v1.4 closed the nine found by the session that confirmed the skill can be loaded, consented to, and still not govern the work, and the v1 restructure's seven are resolved below them. Other gaps found while working the graph stay parked in [Freeflow](../discussion/aperas-skill.md#id/BlockNode:00CE8XWZK0001) until a dedicated home exists.",
     "parent": "BlockNode:00CEA5KW4G001",
     "type": "heading",
     "children": [
       "BlockNode:00CN7G6D0G001",
       "BlockNode:00CN89ERE8000",
-      "BlockNode:00CN89NQKG001"
+      "BlockNode:00CN89NQKG001",
+      "BlockNode:00CNX13PMR001",
+      "BlockNode:00CNX0WDA8001"
     ]
   },
   {
@@ -16780,7 +16782,8 @@
       "BlockNode:00CKE4R93R001",
       "BlockNode:00CJ0JZ830001",
       "BlockNode:00CN1PT1B0001",
-      "BlockNode:00CN7V9BX0001"
+      "BlockNode:00CN7V9BX0001",
+      "BlockNode:00CNX1T4XG001"
     ]
   },
   {
@@ -32740,69 +32743,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CMX5ZN68001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 9 — the level fields on `TreeView`**",
-    "text": "**Slice 9 — the level fields on `TreeView`**: add `unfoldsCollapsed` and `unfoldsNoPreview` as `reference`-kind subsets of `unfolds`, extend `removeDanglingUnfolds` and `pruneStaleUnfolds` to sweep both, and correct the former's doc comment where it claims `unfolds` is the only such field. Storage only — nothing reads the fields yet — so it lands and flushes safely on its own, and every existing view stays valid with both sets empty (the default level).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CMX600WG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 10 — level-aware rendering in core**",
-    "text": "**Slice 10 — level-aware rendering in core**: split the double duty `isGenuinelyUnfolded` currently does in `buildNodeItem` (which children to walk *and* what tier they render at) so the titles level shows children title-only, and make the stashed level prune `cone.neededChildren` so a stashed node's pinned descendants stop forcing themselves into view. The pruning is the only part that touches cone *discovery* rather than tier assignment, and it deliberately breaks the standing guarantee that a pinned node is always reachable — with the knock-on that a hidden home lets a `Link` elsewhere win canonical position, which is intended. Carry the resolved level onto `RenderNodeItem` so both renderers can pick a glyph without recomputing it.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CMX60DEG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 11 — the verbs**",
-    "text": "**Slice 11 — the verbs**: `fold` stops cascading by default, gaining `--recursive` for today's behaviour and `--stash` for the collapse that keeps the entry; `unfold` gains `--recursive`, `--no-preview` and `--unstash`. Service protocol ops and CLI flags together, since the webapp reaches them through the same ops. `fold`'s default changes for every existing caller, so `verify.ts`'s fold expectations have to be re-read rather than assumed — this is the one slice that alters behaviour already relied on.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CMX60VA8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 12 — stem and guide on the console**",
-    "text": "**Slice 12 — stem and guide on the console**: rebuild the line prefix from a per-level stack of ancestor states in both `toText` and `renderTreeLines`, replacing `'│ '.repeat(depth)`, which cannot vary per column — solid `│` where an ancestor is pinned with content, `╎` where it is only a breadcrumb. `toText`'s \"byte-identical to the old output by construction\" doc comment stops being true and is updated rather than left to quietly go false; `verify.ts`'s tree assertions are substring-based, so they do not trip.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CMX6173R001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 13 — glyph and stem vocabulary in the UI**",
-    "text": "**Slice 13 — glyph and stem vocabulary in the UI**: `▶`/`▷` rotated 0°/45°/90° off the level rather than the current open/closed boolean, `●` for a pinned leaf, `…` promoted from a marker beneath the row to the control itself at a depth cut-off (with the arrow disabled there, since nothing about the node can be toggled), and `hasStem` keyed on the level instead of on `hasChildren()` — which is what removes today's inert full-height stems. The passive guide is a `repeating-linear-gradient` rather than `dotted`/`dashed`, both of which read as a merely-lighter solid line at 1px.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CMX61KG8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 14 — gestures**",
-    "text": "**Slice 14 — gestures**: the click/shift/ctrl/alt/alt+shift matrix wired onto the row, the arrow and the stem alike. Fixes [ctrl-click on the arrow](../issues/webapp.md#id/BlockNode:00CMWN0XDG001) as a side effect rather than as a separate errand, since that bug is exactly the uniformity this slice has to establish; the `Gutter`'s `e.stopPropagation()` has to start letting a modified click through instead of swallowing it.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CMX61YK0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 15 — width-derived depth**",
-    "text": "**Slice 15 — width-derived depth**: compute `maxDepth` as `floor((width − buffer) / gutter)` in the webapp, thread it through `/api/tree`, and refetch debounced on resize. Independent of the rest and safe to land last; until it does, the cut-off state simply never occurs in the UI, exactly as today.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CMXB0X6R001",
     "@type": "BlockNode",
     "tombstonedAt": "2026-09-22T00:24:15.420Z",
@@ -34004,15 +33944,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CNS79GJR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:39:08.660Z",
-    "title": "**Slice 16 — packaging**",
-    "text": "**Slice 16 — packaging**: static asset serving on the same listener (the webapp's built `dist/`, with the current auth token injected into `index.html` server-side so the page's own same-origin JS can read it), a shared `apiFetch()` helper that attaches `X-Aperas-Token` on every call once the token is present, a new `aperas serve` subcommand that resolves the graph from cwd and ensures a service is running for it, and a `build.mjs` step that also builds the webapp and bundles its static output alongside the CLI binary — turning Slices 2/3 into one self-contained, distributable artifact rather than something only reachable from a source checkout.",
-    "type": "paragraph",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CNS7EXQ8000",
     "@type": "BlockNode",
     "props": [
@@ -34115,11 +34046,355 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CNSTT2X0001",
+    "@id": "BlockNode:00CNW4PD00001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-23T09:37:25.963Z",
-    "title": "**Slice 2 — per-run auth token**",
-    "text": "**Slice 2 — per-run auth token**: generate at service start, store in the run directory at mode 0600, expose for the dev server.",
+    "links": [
+      {
+        "@id": "BlockNode:00CNW4PD00001:links:Link:00CNW4PH08000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNW4PD00001:links:Link:00CNW4PH08000:props:StringProp:00CNW4PH08001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.10 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Generalizes v2.3's own warning (piping a bulleted string at an existing list item nests it instead of merging) rather than replacing it: `aperas update` now adopts a single parsed top-level node's full state — of any type, not only a bare paragraph — closing the gap that left `checked` and a genuinely-empty-text-with-children case with no safe input at all. Found while updating `planning/webapp.md`'s Task Breakdown checkboxes: piping `- [x] ...` at an existing item nested it as a stray child exactly as v2.3 already warned bulleted input would, but there was no bare-paragraph escape hatch for a checkbox the way there is for plain text, since checkbox state can only be expressed through the marker itself. Two more defects surfaced verifying the fix rather than assuming it: a title-rederivation bug (a text update that loses its lead-in term was adopting a throwaway parse-time id as the block's new title, not leaving the old one alone) and a spurious-run-leader hazard (naively adopting a solo parsed item's `orderedList`/`startIndex` would convert a plain continuation item into a new run boundary, since every standalone parse looks like the first item of its own list). Both closed as part of the same change. The `aperas insert` ordered-list append case picked up a matching fix: it already dropped a new item's ordering props when landing next to a plain continuation, but never validated the number it was given, and never covered landing next to a run-leader directly — both closed by computing the expected next number from the run's leader and rejecting a mismatch instead of silently discarding whatever was piped.",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNW4V5GG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CNW4V5GG001:links:Link:00CNW4V9BG000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNW4V5GG001:links:Link:00CNW4V9BG000:props:StringProp:00CNW4V9BG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.10 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Generalizes v2.3's own warning (piping a bulleted string at an existing list item nests it instead of merging) rather than replacing it: `aperas update` now adopts a single parsed top-level node's full state — of any type, not only a bare paragraph — closing the gap that left `checked` and a genuinely-empty-text-with-children case with no safe input at all. Found while updating `planning/webapp.md`'s Task Breakdown checkboxes: piping `- [x] ...` at an existing item nested it as a stray child exactly as v2.3 already warned bulleted input would, but there was no bare-paragraph escape hatch for a checkbox the way there is for plain text, since checkbox state can only be expressed through the marker itself. Two more defects surfaced verifying the fix rather than assuming it: a title-rederivation bug (a text update that loses its lead-in term was adopting a throwaway parse-time id as the block's new title, not leaving the old one alone) and a spurious-run-leader hazard (naively adopting a solo parsed item's `orderedList`/`startIndex` would convert a plain continuation item into a new run boundary, since every standalone parse looks like the first item of its own list). Both closed as part of the same change. The `aperas insert` ordered-list append case picked up a matching fix: it already dropped a new item's ordering props when landing next to a plain continuation, but never validated the number it was given, and never covered landing next to a run-leader directly — both closed by computing the expected next number from the run's leader and rejecting a mismatch instead of silently discarding whatever was piped.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CNW50VZ8001",
+      "BlockNode:00CNW58YAG001",
+      "BlockNode:00CNWKKD80001",
+      "BlockNode:00CNW5Y57G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CNW50VZ8001",
+    "@type": "BlockNode",
+    "title": "00CNWK33W0001",
+    "text": "For an **ordered** list, direct insertion is riskier because a freshly inserted item becomes its own run-leader and can restart the numbering rather than continuing it.",
+    "parent": "BlockNode:00CNW4V5GG001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CNWK33W0002",
+      "BlockNode:00CNWK33W0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CNW58YAG001",
+    "@type": "BlockNode",
+    "title": "00CNWKA6Q0001",
+    "text": "To update the text of an *existing* list item without changing its identity, use `aperas update <item-id>`.",
+    "parent": "BlockNode:00CNW4V5GG001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CNWKA6Q0002",
+      "BlockNode:00CNWKA6Q0003",
+      "BlockNode:00CNX5YVV0001",
+      "BlockNode:00CNWKA6Q0005",
+      "BlockNode:00CNWKA6Q0006",
+      "BlockNode:00CNWKA6Q0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CNW5Y57G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CNW5Y57G001:links:Link:00CNW5Y920000",
+        "@type": "Link",
+        "target": "BlockNode:00CN8KBK9G002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNW5Y57G001:links:Link:00CNW5Y920000:props:StringProp:00CNW5Y920001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.10",
+    "text": "Supersedes: [v2.9's own status line](#id/BlockNode:00CN8KBK9G002)",
+    "parent": "BlockNode:00CNW4V5GG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CNW61XZG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CNW61XZG001",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.10** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CNW5Y57G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWK33W0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CNWK33W0002:props:StringProp:00CNWK39NG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CNWK33W0002:props:StringProp:00CNWK39NG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CNWK33W0002",
+    "text": "**Appending at the end is safe when the number is right.** For a list numbered `1, 2, …, n-1`, piping `n. new item` after the last one is accepted. Piping any other number is rejected outright, naming the number it expected instead.",
+    "parent": "BlockNode:00CNW50VZ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWK33W0003",
+    "@type": "BlockNode",
+    "title": "00CNWK33W0003",
+    "text": "**A middle-of-the-list insertion still needs the full renumbering route** — the fix above only covers appending at the end, since inserting in the middle genuinely requires renumbering everything after it. The safer route there is to target the list's **parent heading** (`aperas update <heading-id>`) and pipe the heading line plus the *complete* list (every existing item verbatim plus the new one).",
+    "parent": "BlockNode:00CNW50VZ8001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CNWK33W0004",
+      "BlockNode:00CNWK33W0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CNWK33W0004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CNWK33W0004:props:StringProp:00CNWK39NG002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CNWK33W0004:props:StringProp:00CNWK39NG003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CNWK33W0004",
+    "text": "Exact-key matching reuses every unchanged item's id, **but only while every item keeps its parent and depth**. A push that changes item depth (e.g. regrouping under sub-headings) recreates everything; use `aperas insert` (moves) for that instead.",
+    "parent": "BlockNode:00CNWK33W0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWK33W0005",
+    "@type": "BlockNode",
+    "title": "00CNWK33W0005",
+    "text": "**This only works if the piped content is genuinely complete.** Piping the heading plus *only* the new item reconciles the existing ones away as removed, tombstoning real content.",
+    "parent": "BlockNode:00CNWK33W0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWKA6Q0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CNWKA6Q0002:props:StringProp:00CNWKAC48000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CNWKA6Q0002:props:StringProp:00CNWKAC48001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CNWMVMBR001",
+    "text": "**For an ordinary text change, pipe bare text with no bullet marker** (e.g. `updated text`, not `- updated text`). This also updates any nested children in the same call, if you include them — see the next point for the cases that need a marker instead.",
+    "parent": "BlockNode:00CNW58YAG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWKA6Q0003",
+    "@type": "BlockNode",
+    "title": "00CNWKA6Q0003",
+    "text": "**A marker is needed only for a checkbox, an ordered item's position, or text that's deliberately blank.** Use whatever you'd normally write: `- [x]`/`- [ ]` for a checkbox, `n.` for an ordered item, or a bare `- ` (nothing after it) if you want the item's own text to end up empty while still giving it children:",
+    "parent": "BlockNode:00CNW58YAG001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CNWKA6Q0004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CNWKA6Q0004",
+    "@type": "BlockNode",
+    "title": "00CNWKA6Q0004",
+    "text": "```\n  - \n    - child\n  ```",
+    "parent": "BlockNode:00CNWKA6Q0003",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWKA6Q0005",
+    "@type": "BlockNode",
+    "title": "00CNWKA6Q0005",
+    "text": "**Updating an item never changes where it sits in the list.** Whether it's ordered or unordered, and its position in the numbering, stays exactly as it was, no matter which marker you use to update it. To actually reorder or renumber, use the parent-plus-complete-list technique above — not a single-item update.",
+    "parent": "BlockNode:00CNW58YAG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWKA6Q0006",
+    "@type": "BlockNode",
+    "title": "00CNWQMSVG001",
+    "text": "**The title always tracks your current text, never the old one.** If your new text has a bold lead-in term (`**Like this**: ...`), the title updates to match it. If it doesn't, the title falls back to the item's own id — the same fallback any untitled node gets — rather than keeping whatever the title used to say about text that's now gone.",
+    "parent": "BlockNode:00CNW58YAG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWKA6Q0007",
+    "@type": "BlockNode",
+    "title": "00CNWKA6Q0007",
+    "text": "**The text itself works differently: leaving it out clears it.** If you only pipe new children (a list, with no text of its own before it), the item's own text becomes empty — unlike the title, nothing here is left alone by default. Restate the existing text if you don't want it wiped.",
+    "parent": "BlockNode:00CNW58YAG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNWKKD80001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CNWKKD80001:links:Link:00CNWKKGV0000",
+        "@type": "Link",
+        "target": "BlockNode:00CH5FJME8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNWKKD80001:links:Link:00CNWKKGV0000:props:StringProp:00CNWKKGV8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CNWKKD80001:links:Link:00CNWKKGV8001",
+        "@type": "Link",
+        "target": "BlockNode:00CH5FJME8003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNWKKD80001:links:Link:00CNWKKGV8001:props:StringProp:00CNWKKGV8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "59"
+          }
+        ]
+      }
+    ],
+    "title": "### Supersedes note — the old input-rule bullets",
+    "text": "Supersedes: [The input rule](#id/BlockNode:00CH5FJME8002), [Explanation](#id/BlockNode:00CH5FJME8003)",
+    "parent": "BlockNode:00CNW4V5GG001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNX0WDA8001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T13:19:00.863Z",
+    "title": "**`skill_drift.py` runs `norm()` before stripping a `Supersedes:` line, so the strip only works when that line is the block's entire text**",
+    "text": "**`skill_drift.py` runs `norm()` before stripping a `Supersedes:` line, so the strip only works when that line is the block's entire text**: `subtree_texts` computes `body = norm(node.get(\"text\") or \"\")` first, then `SUPERSEDES_RE.sub(\"\", body)` — but `norm()` collapses newlines to spaces, and `SUPERSEDES_RE` is line-anchored (`^\\s*Supersedes:\\s*(.+)$`, multiline). Once the newline before \"Supersedes:\" has already been flattened into a space, there is no line boundary left for `^` to match, so the substitution is a silent no-op whenever a Supersedes line follows real content in the same text field — the bookkeeping stays embedded and poisons the fingerprint comparison. Confirmed live: appending `Supersedes: [...]` on its own line after a substantive sentence in one block's own `.text` made that block report `DROPPED, unaccounted` even though the *convention* (Supersedes as delta bookkeeping) says it shouldn't. The existing \"Top matter\" pattern elsewhere in this doc only avoids the bug by coincidence — its text is *nothing but* the Supersedes line, so it strips to empty and gets exempted by `subtree_texts`'s own `if body:` check before the ordering bug ever matters. Confirmed via direct reproduction against the actual functions (`skill_drift.norm`, `skill_drift.SUPERSEDES_RE`), not inferred. Not yet implemented: the fix is to strip before normalizing (or make `norm()` newline-preserving until after the strip runs), so a Supersedes line can safely follow real content in the same block instead of requiring a dedicated wrapper block every time.",
+    "parent": "BlockNode:00CEA5KW4G002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNX13PMR001",
+    "@type": "BlockNode",
+    "title": "**`skill_drift.py` runs `norm()` before stripping a `Supersedes:` line, so the strip only works when that line is the block's entire text**",
+    "text": "**`skill_drift.py` runs `norm()` before stripping a `Supersedes:` line, so the strip only works when that line is the block's entire text**: `subtree_texts` computes `body = norm(node.get(\"text\") or \"\")` first, then `SUPERSEDES_RE.sub(\"\", body)` — but `norm()` collapses newlines to spaces, and `SUPERSEDES_RE` is line-anchored (`^\\s*Supersedes:\\s*(.+)$`, multiline). Once the newline before \"Supersedes:\" has already been flattened into a space, there is no line boundary left for `^` to match, so the substitution is a silent no-op whenever a Supersedes line follows real content in the same text field — the bookkeeping stays embedded and poisons the fingerprint comparison. Confirmed live: appending `Supersedes: [...]` on its own line after a substantive sentence in one block's own `.text` made that block report `DROPPED, unaccounted` even though the *convention* (Supersedes as delta bookkeeping) says it shouldn't. The existing \"Top matter\" pattern elsewhere in this doc only avoids the bug by coincidence — its text is *nothing but* the Supersedes line, so it strips to empty and gets exempted by `subtree_texts`'s own `if body:` check before the ordering bug ever matters. Confirmed via direct reproduction against the actual functions (`skill_drift.norm`, `skill_drift.SUPERSEDES_RE`), not inferred. Not yet implemented: the fix is to strip before normalizing (or make `norm()` newline-preserving until after the strip runs), so a Supersedes line can safely follow real content in the same block instead of requiring a dedicated wrapper block every time.",
+    "parent": "BlockNode:00CEA5KW4G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNX1T4XG001",
+    "@type": "BlockNode",
+    "title": "**A corpus-wide `aperas ingest` (no path) can hang indefinitely on an interactive confirmation prompt with no signal that it's waiting rather than working**",
+    "text": "**A corpus-wide `aperas ingest` (no path) can hang indefinitely on an interactive confirmation prompt with no signal that it's waiting rather than working**: `kg:ingest` run unscoped detected content it proposed to remove and printed `Are you sure you want to remove these? [yes/NO]:`, then blocked on stdin. Run from a non-interactive shell (no tty attached), that stdin is immediately at EOF, so the prompt never resolves — the process just sits there. Confirmed live: the process showed near-zero CPU the entire time (ruling out \"genuinely slow on a large corpus,\" which shows sustained high CPU instead, e.g. at service startup), and the ApeironNgn service itself answered an unrelated read (`aperas backlinks`) instantly throughout, proving the request never even reached the service's own queue — the block is entirely client-side, before `request()` is ever called. When stdin finally closed, the process exited 0 with the prompt still unanswered on screen; the flagged items turned out to already be old tombstones (dated a week prior), so nothing was actually lost this time, but nothing in the tool's own behavior guarantees that — an EOF being treated as \"no\" is incidental, not a documented contract. Not yet implemented: either a `--yes`/`--non-interactive` flag that skips the prompt with an explicit answer, or a `stdin.isTTY` check that hard-refuses (rather than blocking) when the answer can't actually be given.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNX5SB9R001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CNX5SB9R001:props:StringProp:00CNX5SBA8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CNX5SB9R001:props:StringProp:00CNX5SBA8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CNX5SB9R001",
+    "text": "**A bare `- ` with real text but no `[x]`/`[ ]` removes an existing checkbox entirely** (e.g. `- updated text`, not `updated text`). Choosing list syntax at all is what signals \"this edit addresses the checkbox\" — a marker-less bullet clears it, while bare text (no bullet at all, the first point above) never touches it either way.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNX5YVV0001",
+    "@type": "BlockNode",
+    "title": "00CNX5YVV0001",
+    "text": "**A bare `- ` with real text but no `[x]`/`[ ]` removes an existing checkbox entirely** (e.g. `- updated text`, not `updated text`). Choosing list syntax at all is what signals \"this edit addresses the checkbox\" — a marker-less bullet clears it, while bare text (no bullet at all, the first point above) never touches it either way.",
+    "parent": "BlockNode:00CNW58YAG001",
     "type": "listItem",
     "children": []
   }

@@ -136,6 +136,7 @@
     "path": "discussion",
     "children": [
       "BlockNode:00CN4ZQA8G001",
+      "ArtifactNode:00CNWSJNMR000",
       "ArtifactNode:00CE8XWYYG000",
       "ArtifactNode:00CE01XZ8R000",
       "ArtifactNode:00CF2AEKZG000",

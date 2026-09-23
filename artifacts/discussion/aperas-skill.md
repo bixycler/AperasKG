@@ -1393,3 +1393,39 @@ Status: <a name='id/BlockNode:00CN8KBK9G002' class='aperas-anchor aperas-id'></a
 
 Supersedes: [the "Keep an active view" paragraph](#id/BlockNode:00CGF613W000X)
 Supersedes: [the "Worked example" lead line](#id/BlockNode:00CGF613W0011)
+
+## v2.10 additions — delta on the v2 snapshot <a name='id/BlockNode:00CNW4V5GG001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Generalizes v2.3's own warning (piping a bulleted string at an existing list item nests it instead of merging) rather than replacing it: `aperas update` now adopts a single parsed top-level node's full state — of any type, not only a bare paragraph — closing the gap that left `checked` and a genuinely-empty-text-with-children case with no safe input at all. Found while updating `planning/webapp.md`'s Task Breakdown checkboxes: piping `- [x] ...` at an existing item nested it as a stray child exactly as v2.3 already warned bulleted input would, but there was no bare-paragraph escape hatch for a checkbox the way there is for plain text, since checkbox state can only be expressed through the marker itself. Two more defects surfaced verifying the fix rather than assuming it: a title-rederivation bug (a text update that loses its lead-in term was adopting a throwaway parse-time id as the block's new title, not leaving the old one alone) and a spurious-run-leader hazard (naively adopting a solo parsed item's `orderedList`/`startIndex` would convert a plain continuation item into a new run boundary, since every standalone parse looks like the first item of its own list). Both closed as part of the same change. The `aperas insert` ordered-list append case picked up a matching fix: it already dropped a new item's ordering props when landing next to a plain continuation, but never validated the number it was given, and never covered landing next to a run-leader directly — both closed by computing the expected next number from the run's leader and rejecting a mismatch instead of silently discarding whatever was piped.
+
+For an **ordered** list, direct insertion is riskier because a freshly inserted item becomes its own run-leader and can restart the numbering rather than continuing it.
+
+- **Appending at the end is safe when the number is right.** For a list numbered `1, 2, …, n-1`, piping `n. new item` after the last one is accepted. Piping any other number is rejected outright, naming the number it expected instead.
+- **A middle-of-the-list insertion still needs the full renumbering route** — the fix above only covers appending at the end, since inserting in the middle genuinely requires renumbering everything after it. The safer route there is to target the list's **parent heading** (`aperas update <heading-id>`) and pipe the heading line plus the *complete* list (every existing item verbatim plus the new one).
+  
+  - Exact-key matching reuses every unchanged item's id, **but only while every item keeps its parent and depth**. A push that changes item depth (e.g. regrouping under sub-headings) recreates everything; use `aperas insert` (moves) for that instead.
+  - **This only works if the piped content is genuinely complete.** Piping the heading plus *only* the new item reconciles the existing ones away as removed, tombstoning real content.
+
+To update the text of an *existing* list item without changing its identity, use `aperas update <item-id>`.
+
+- **For an ordinary text change, pipe bare text with no bullet marker** (e.g. `updated text`, not `- updated text`). This also updates any nested children in the same call, if you include them — see the next point for the cases that need a marker instead.
+- **A marker is needed only for a checkbox, an ordered item's position, or text that's deliberately blank.** Use whatever you'd normally write: `- [x]`/`- [ ]` for a checkbox, `n.` for an ordered item, or a bare `- ` (nothing after it) if you want the item's own text to end up empty while still giving it children:
+  
+  ```
+  - 
+    - child
+  ```
+- **A bare `- ` with real text but no `[x]`/`[ ]` removes an existing checkbox entirely** (e.g. `- updated text`, not `updated text`). Choosing list syntax at all is what signals "this edit addresses the checkbox" — a marker-less bullet clears it, while bare text (no bullet at all, the first point above) never touches it either way.
+- **Updating an item never changes where it sits in the list.** Whether it's ordered or unordered, and its position in the numbering, stays exactly as it was, no matter which marker you use to update it. To actually reorder or renumber, use the parent-plus-complete-list technique above — not a single-item update.
+- **The title always tracks your current text, never the old one.** If your new text has a bold lead-in term (`**Like this**: ...`), the title updates to match it. If it doesn't, the title falls back to the item's own id — the same fallback any untitled node gets — rather than keeping whatever the title used to say about text that's now gone.
+- **The text itself works differently: leaving it out clears it.** If you only pipe new children (a list, with no text of its own before it), the item's own text becomes empty — unlike the title, nothing here is left alone by default. Restate the existing text if you don't want it wiped.
+
+### Supersedes note — the old input-rule bullets <a name='id/BlockNode:00CNWKKD80001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [The input rule](#id/BlockNode:00CH5FJME8002), [Explanation](#id/BlockNode:00CH5FJME8003)
+
+### Top matter — Status bumped to v2.10 <a name='id/BlockNode:00CNW5Y57G001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.9's own status line](#id/BlockNode:00CN8KBK9G002)
+
+Status: <a name='id/BlockNode:00CNW61XZG001' class='aperas-anchor aperas-id'></a> **v2.10** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
