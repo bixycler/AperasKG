@@ -1,3 +1,4 @@
 {
-  "graph": { "apeiron": "./Apeiron", "artifacts": "./artifacts" }
+  "graph": { "apeiron": "./Apeiron", "artifacts": "./artifacts" },
+  "name": "AperasKG"
 }

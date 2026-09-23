@@ -6133,8 +6133,8 @@
   {
     "@id": "BlockNode:00CDHSJQEG001",
     "@type": "BlockNode",
-    "title": "00CDHSJQEG001",
-    "text": "`aperas.config.json` — shared, committed, sits at a graph's own root: the directory directly containing that graph's `artifacts/` and `Apeiron/` (for this repo, `AperasKG/aperas.config.json`, `{ \"graph\": \".\" }`). Describes that graph's place in a tree (corp > teams > members, each mergeable into its parent). Its `graph` field takes either shape: a plain path (shorthand — both `artifacts/` and `Apeiron/` co-located directly under it, as above) or `{ \"apeiron\": \"<path>\", \"artifacts\": \"<path>\" }` (two independently-specifiable roots, for a graph whose data and markdown tree aren't co-located). `parent`: a path/url to the graph above, or absent for a root graph. Discovered the way `git` finds `.git` — walking up from a starting directory, nearest file wins — so a member's own graph is found before its team's, a team's before its corp's.",
+    "title": "`aperas.config.json` — shared, committed, sits at a graph's own root",
+    "text": "`aperas.config.json` — shared, committed, sits at a graph's own root: the directory directly containing that graph's `artifacts/` and `Apeiron/` (for this repo, `AperasKG/aperas.config.json`). Describes that graph's place in a tree (corp > teams > members, each mergeable into its parent). Its `graph` field takes either shape: a plain path (shorthand — both `artifacts/` and `Apeiron/` co-located directly under it) or `{ \"apeiron\": \"<path>\", \"artifacts\": \"<path>\" }` (two independently-specifiable roots, for a graph whose data and markdown tree aren't co-located, which is what this repo's own config actually uses). `parent`: a path/url to the graph above, or absent for a root graph. `name`: an optional human-readable display name for the graph, surfaced in host UIs — the webapp reads it via `resolveEffectiveGraphName()` (`graphConfig.ts`) for its `<h1>` and page title (`<name> | Aperas`). Discovered the way `git` finds `.git` — walking up from a starting directory, nearest file wins — so a member's own graph is found before its team's, a team's before its corp's.",
     "parent": "BlockNode:00CDHSJQE8001",
     "type": "listItem",
     "children": []
@@ -28395,6 +28395,7 @@
       "BlockNode:00CJ2VBQR0005",
       "BlockNode:00CJE97N2G001",
       "BlockNode:00CNR2E3D0001",
+      "BlockNode:00CNSMR03R001",
       "BlockNode:00CNR1X7RG001",
       "BlockNode:00CNR1X7RG002",
       "BlockNode:00CJ7PNQ2R001",
@@ -30869,6 +30870,7 @@
     "children": [
       "BlockNode:00CJ8FEVNR002",
       "BlockNode:00CJ8FEVNR003",
+      "BlockNode:00CNS7TBTR001",
       "BlockNode:00CJ8FEVP0000",
       "BlockNode:00CJ8FEVP0001",
       "BlockNode:00CJ8FEVP0002"
@@ -30886,6 +30888,9 @@
       "BlockNode:00CJ8FJNKR002",
       "BlockNode:00CJ8FJNKR003",
       "BlockNode:00CJAW3BS0001",
+      "BlockNode:00CNSME9Z8001",
+      "BlockNode:00CNSME9Z8002",
+      "BlockNode:00CNSME9ZG000",
       "BlockNode:00CNRB3A90001"
     ]
   },
@@ -30949,7 +30954,7 @@
     "@id": "BlockNode:00CJ6V6CH0005",
     "@type": "BlockNode",
     "title": "**The ordering has a rationale**",
-    "text": "**The ordering has a rationale**: core extraction comes first because both the CLI and the UI consume it, and because doing it while the CLI is still the only caller keeps the byte-identical text output as a free regression test. The auth token comes next because it is independent of the listener and is the one piece whose lifecycle should be proven before anything depends on it. The listener, the tick channel and the UI follow in that order, each with a working consumer by the time it lands.",
+    "text": "**The ordering has a rationale**: core extraction comes first because both the CLI and the UI consume it, and because doing it while the CLI is still the only caller keeps the byte-identical text output as a free regression test. The auth token comes next because it is independent of the listener and is the one piece whose lifecycle should be proven before anything depends on it. The listener, the tick channel and the UI follow in that order, each with a working consumer by the time it lands. Revised: the tick channel (Slice 4) is deferred past the listener rather than following it immediately — it is the first long-lived connection this service would ever hold (everything else, including the listener, is one-request-one-response), so it carries new lifecycle surface (a stream registry, cleanup on disconnect, detecting a stale per-run token mid-stream) and a verification loop that requires killing the service mid-stream and watching timing-sensitive reconnect behavior, all disproportionate to Slice 4's own value once Slices 2/3 already work — the existing 1s poll keeps the app fully correct against the listener in the meantime, just less snappy. Slice 16 (packaging) takes its place immediately after the listener instead, since a working, packaged, testable end-to-end app is worth more sooner than a push channel layered onto one that doesn't exist yet.",
     "parent": "BlockNode:00CJ6V6CH0002",
     "type": "listItem",
     "children": []
@@ -30976,13 +30981,7 @@
       "BlockNode:00CMXF7RG0001",
       "BlockNode:00CMXF8EYG001",
       "BlockNode:00CMXF94Z8001",
-      "BlockNode:00CMX5ZN68001",
-      "BlockNode:00CMX600WG001",
-      "BlockNode:00CMX60DEG001",
-      "BlockNode:00CMX60VA8001",
-      "BlockNode:00CMX6173R001",
-      "BlockNode:00CMX61KG8001",
-      "BlockNode:00CMX61YK0001"
+      "BlockNode:00CNS7EXQ8000"
     ]
   },
   {
@@ -31019,10 +31018,10 @@
     "@type": "BlockNode",
     "props": [
       {
-        "@id": "BlockNode:00CJ6V6CH8000:props:StringProp:00CJ6V6CJ0003",
+        "@id": "BlockNode:00CJ6V6CH8000:props:StringProp:00CNSWA2EG000",
         "@type": "StringProp",
         "key": "checked",
-        "value": "false"
+        "value": "true"
       }
     ],
     "title": "**Slice 2 — per-run auth token**",
@@ -31036,10 +31035,10 @@
     "@type": "BlockNode",
     "props": [
       {
-        "@id": "BlockNode:00CJ6V6CH8001:props:StringProp:00CJ6V6CJ0004",
+        "@id": "BlockNode:00CJ6V6CH8001:props:StringProp:00CNSWA35R000",
         "@type": "StringProp",
         "key": "checked",
-        "value": "false"
+        "value": "true"
       }
     ],
     "title": "**Slice 3 — HTTP listener**",
@@ -31145,7 +31144,8 @@
       "BlockNode:00CJ6V6CH800A",
       "BlockNode:00CJ6V6CH800B",
       "BlockNode:00CJ6V6CH800C",
-      "BlockNode:00CJ6V6CH800D"
+      "BlockNode:00CJ6V6CH800D",
+      "BlockNode:00CNS7K630001"
     ]
   },
   {
@@ -31519,20 +31519,7 @@
   {
     "@id": "BlockNode:00CJ8FEVNR002",
     "@type": "BlockNode",
-    "props": [
-      {
-        "@id": "BlockNode:00CJ8FEVNR002:props:StringProp:00CJ8FEYMR000",
-        "@type": "StringProp",
-        "key": "orderedList",
-        "value": "false"
-      },
-      {
-        "@id": "BlockNode:00CJ8FEVNR002:props:StringProp:00CJ8FEYMR001",
-        "@type": "StringProp",
-        "key": "startIndex",
-        "value": "1"
-      }
-    ],
+    "tombstonedAt": "2026-09-23T09:21:22.864Z",
     "title": "**Generate and store the per-run auth token**",
     "text": "**Generate and store the per-run auth token**: independent of the listener, and worth landing first per planning/webapp.md's own ordering rationale.",
     "parent": "BlockNode:00CJ6V6370005",
@@ -31542,6 +31529,7 @@
   {
     "@id": "BlockNode:00CJ8FEVNR003",
     "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T09:21:24.219Z",
     "title": "**Add the HTTP listener to the ApeironNgn service**",
     "text": "**Add the HTTP listener to the ApeironNgn service**: loopback bind, op allowlist, the four auth checks, restrictive CORS preflight — replacing the dev-only bridge (`packages/web/devApiServer.ts`) that talks to the service directly and has none of this.",
     "parent": "BlockNode:00CJ6V6370005",
@@ -32754,70 +32742,63 @@
   {
     "@id": "BlockNode:00CMX5ZN68001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:01.712Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 9 — the level fields on `TreeView`**",
     "text": "**Slice 9 — the level fields on `TreeView`**: add `unfoldsCollapsed` and `unfoldsNoPreview` as `reference`-kind subsets of `unfolds`, extend `removeDanglingUnfolds` and `pruneStaleUnfolds` to sweep both, and correct the former's doc comment where it claims `unfolds` is the only such field. Storage only — nothing reads the fields yet — so it lands and flushes safely on its own, and every existing view stays valid with both sets empty (the default level).",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CMX600WG001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:04.632Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 10 — level-aware rendering in core**",
     "text": "**Slice 10 — level-aware rendering in core**: split the double duty `isGenuinelyUnfolded` currently does in `buildNodeItem` (which children to walk *and* what tier they render at) so the titles level shows children title-only, and make the stashed level prune `cone.neededChildren` so a stashed node's pinned descendants stop forcing themselves into view. The pruning is the only part that touches cone *discovery* rather than tier assignment, and it deliberately breaks the standing guarantee that a pinned node is always reachable — with the knock-on that a hidden home lets a `Link` elsewhere win canonical position, which is intended. Carry the resolved level onto `RenderNodeItem` so both renderers can pick a glyph without recomputing it.",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CMX60DEG001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:07.540Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 11 — the verbs**",
     "text": "**Slice 11 — the verbs**: `fold` stops cascading by default, gaining `--recursive` for today's behaviour and `--stash` for the collapse that keeps the entry; `unfold` gains `--recursive`, `--no-preview` and `--unstash`. Service protocol ops and CLI flags together, since the webapp reaches them through the same ops. `fold`'s default changes for every existing caller, so `verify.ts`'s fold expectations have to be re-read rather than assumed — this is the one slice that alters behaviour already relied on.",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CMX60VA8001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:10.652Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 12 — stem and guide on the console**",
     "text": "**Slice 12 — stem and guide on the console**: rebuild the line prefix from a per-level stack of ancestor states in both `toText` and `renderTreeLines`, replacing `'│ '.repeat(depth)`, which cannot vary per column — solid `│` where an ancestor is pinned with content, `╎` where it is only a breadcrumb. `toText`'s \"byte-identical to the old output by construction\" doc comment stops being true and is updated rather than left to quietly go false; `verify.ts`'s tree assertions are substring-based, so they do not trip.",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CMX6173R001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:13.544Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 13 — glyph and stem vocabulary in the UI**",
     "text": "**Slice 13 — glyph and stem vocabulary in the UI**: `▶`/`▷` rotated 0°/45°/90° off the level rather than the current open/closed boolean, `●` for a pinned leaf, `…` promoted from a marker beneath the row to the control itself at a depth cut-off (with the arrow disabled there, since nothing about the node can be toggled), and `hasStem` keyed on the level instead of on `hasChildren()` — which is what removes today's inert full-height stems. The passive guide is a `repeating-linear-gradient` rather than `dotted`/`dashed`, both of which read as a merely-lighter solid line at 1px.",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CMX61KG8001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:16.401Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 14 — gestures**",
     "text": "**Slice 14 — gestures**: the click/shift/ctrl/alt/alt+shift matrix wired onto the row, the arrow and the stem alike. Fixes [ctrl-click on the arrow](../issues/webapp.md#id/BlockNode:00CMWN0XDG001) as a side effect rather than as a separate errand, since that bug is exactly the uniformity this slice has to establish; the `Gutter`'s `e.stopPropagation()` has to start letting a modified click through instead of swallowing it.",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
   {
     "@id": "BlockNode:00CMX61YK0001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-22T00:33:19.279Z",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
     "title": "**Slice 15 — width-derived depth**",
     "text": "**Slice 15 — width-derived depth**: compute `maxDepth` as `floor((width − buffer) / gutter)` in the webapp, thread it through `/api/tree`, and refetch debounced on resize. Independent of the rest and safe to land last; until it does, the cut-off state simply never occurs in the UI, exactly as today.",
-    "parent": "BlockNode:00CJ6V6CH0006",
     "type": "listItem",
     "children": []
   },
@@ -34019,6 +34000,126 @@
     "title": "**Resolved: the webapp's 1s poll remounted the entire tree**",
     "text": "**Resolved: the webapp's 1s poll remounted the entire tree**: `<For>` reconciles by object reference, and a plain `createResource` handed it a fresh object graph on every poll — so it tore down and remounted every row each second, dropping any open inline editor mid-edit. Fixed with `reconcile(data, {key: 'id'})` (`solid-js/store`), merging each poll's response into a persistent store by node id. Unblocked by renaming `RenderLinkItem.linkId` to `id` in `core` — an unmotivated naming split with no functional reason, found while auditing for a uniform reconcile key. Verified live in a browser: 45 tagged DOM nodes and a mid-edit, unsaved textarea both survived 4 poll ticks with no remount. Full investigation: [Freeflow](../discussion/webapp.md#id/BlockNode:00CNR2E3D0001).",
     "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNS79GJR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T09:39:08.660Z",
+    "title": "**Slice 16 — packaging**",
+    "text": "**Slice 16 — packaging**: static asset serving on the same listener (the webapp's built `dist/`, with the current auth token injected into `index.html` server-side so the page's own same-origin JS can read it), a shared `apiFetch()` helper that attaches `X-Aperas-Token` on every call once the token is present, a new `aperas serve` subcommand that resolves the graph from cwd and ensures a service is running for it, and a `build.mjs` step that also builds the webapp and bundles its static output alongside the CLI binary — turning Slices 2/3 into one self-contained, distributable artifact rather than something only reachable from a source checkout.",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNS7EXQ8000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CNS7EXQ8000:props:StringProp:00CNSWA36R000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "true"
+      }
+    ],
+    "title": "**Slice 16 — packaging**",
+    "text": "**Slice 16 — packaging**: static asset serving on the same listener (the webapp's built `dist/`, with the current auth token injected into `index.html` server-side so the page's own same-origin JS can read it), a shared `apiFetch()` helper that attaches `X-Aperas-Token` on every call once the token is present, a new `aperas serve` subcommand that resolves the graph from cwd and ensures a service is running for it, and a `build.mjs` step that also builds the webapp and bundles its static output alongside the CLI binary — turning Slices 2/3 into one self-contained, distributable artifact rather than something only reachable from a source checkout.",
+    "parent": "BlockNode:00CJ6V6CH0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNS7K630001",
+    "@type": "BlockNode",
+    "title": "**Slice 16 is verified end-to-end against a second graph**",
+    "text": "**Slice 16 is verified end-to-end against a second graph**: the packaged binary, run from a throwaway graph's own directory with the AperasKG-bound service stopped first (the service is a single machine-wide singleton — `serviceLock.ts` — so this is sequential, not concurrent), must show that graph's own name in the UI and support fold/unfold/zoom/edit against it, exactly as it does against AperasKG from source. Slice 3's own adversarial checks (no token, wrong token, foreign `Origin`, non-loopback `Host`, an op outside the allowlist) are re-run against the packaged listener specifically, not assumed to still hold from testing the source checkout.",
+    "parent": "BlockNode:00CJ6V6CH8007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNS7TBTR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T09:21:25.398Z",
+    "title": "**Package the webapp as a self-contained, distributable artifact (Slice 16)**",
+    "text": "**Package the webapp as a self-contained, distributable artifact (Slice 16)**: static asset serving on the same in-service listener, an `apiFetch()` helper on the webapp side that attaches the per-run token, a new `aperas serve` subcommand, and a `build.mjs` step bundling the webapp's build output alongside the CLI binary — see [planning/webapp.md](../planning/webapp.md#id/BlockNode:00CNS7EXQ8000). Sequenced immediately after the HTTP listener, ahead of the tick channel — see [the revised ordering rationale](../planning/webapp.md#id/BlockNode:00CJ6V6CH0005).",
+    "parent": "BlockNode:00CJ6V6370005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNSME9Z8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CNSME9Z8001:props:StringProp:00CNSMEE4G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CNSME9Z8001:props:StringProp:00CNSMEE4G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Resolved: Slice 2 — per-run auth token**",
+    "text": "**Resolved: Slice 2 — per-run auth token**: `randomBytes(32).toString('hex')`, generated once at service startup (`service.ts#main`) and written to the run directory (`serviceLock.ts#writeToken`) at mode 0600, alongside the lock and socket it already trusts. Verified per plan: file exists at 0600, and a service restart rotates it (a request bearing the old value is rejected once the new service is up).",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNSME9Z8002",
+    "@type": "BlockNode",
+    "title": "**Resolved: Slice 3 — HTTP listener**",
+    "text": "**Resolved: Slice 3 — HTTP listener**: the route table itself (`apiRoutes.ts`) is shared with the dev-only bridge (`packages/web/devApiServer.ts`) rather than duplicated — one op allowlist, dispatched in-process via `handle()` (`service.ts`) for the production listener, or over the unix socket via `request()` for the dev bridge. Auth (`listenerAuth.ts`): loopback-only `Host`, an `Origin` allowlist, and `X-Aperas-Token` compared with `timingSafeEqual`; a restrictive `OPTIONS` preflight response (no `Access-Control-Allow-Origin` for anything but the listener's own origin) is what actually stops a hostile cross-origin page's real request from ever being sent. Verified adversarially: no token, wrong token, foreign `Origin`, and non-loopback `Host` each rejected (401/401/403/400); an op outside the allowlist 404s even with a valid token; a same-origin call with a valid token and matching `Origin` succeeds and returns real graph content.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNSME9ZG000",
+    "@type": "BlockNode",
+    "title": "**Resolved: Slice 16 — packaging**",
+    "text": "**Resolved: Slice 16 — packaging**: static asset serving added to the same listener (`staticServe.ts`), `index.html` getting the current token injected server-side so the page's own same-origin JS can read it (`window.__APERAS_TOKEN__`); the webapp's `apiFetch()` helper attaches it to every `/api/*` call, a no-op in dev where the token is undefined. New `aperas serve` subcommand (`kgServe.ts`) resolves the graph from cwd, ensures a service is running for it, and prints the listener's URL. `build.mjs` now also runs `vite build` in `packages/web` and copies its `dist/` to `dist/web/`, sibling to the CLI bundle, so the packaged binary is self-contained. Verified end-to-end against a throwaway second graph (its own `aperas.config.json`, distinct name and content) with the AperasKG-bound service stopped first: the packaged `aperas serve` showed the throwaway graph's own name and content, fold/unfold/edit worked against it, an external CLI edit was picked up by the existing poll through the new listener, and every Slice 3 adversarial check was re-run against the packaged instance specifically rather than assumed from source-checkout testing. Surfaced one real bug along the way — `resolveEffectiveGraphName()` (`graphConfig.ts`) resolved from the *service process's own* cwd, which for a packaged binary is wherever it's installed, never the graph's directory; it silently reported \"AperasKG\" while genuinely serving the throwaway graph's data. Fixed by adding the same `APERAS_GRAPH_NAME` env-var passthrough `APERAS_APEIRON_ROOT`/`APERAS_ARTIFACTS_ROOT` already had, resolved once by `bindAndSpawn` (`kgService.ts`) from *its own* correct cwd and threaded through `spawnService`.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNSMR03R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CNSMR03R001:links:Link:00CNSMY860000",
+        "@type": "Link",
+        "target": "BlockNode:00CNSME9ZG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CNSMR03R001:links:Link:00CNSMY860000:props:StringProp:00CNSMY868000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1363"
+          }
+        ]
+      }
+    ],
+    "title": "**`resolveEffectiveGraphName()` resolved from the wrong process's cwd, 2026-09-23**",
+    "text": "**`resolveEffectiveGraphName()` resolved from the wrong process's cwd, 2026-09-23**: undetected until Slices 2/3/16 were verified against a genuine second graph, since this repo's own dev setup always runs the service with `cwd: monorepoRoot` (`vite.config.ts`'s spawn), where the ancestor-walk-then-fallback happened to land on AperasKG either way. The production listener calls `resolveEffectiveGraphName()` with no `startDir` from *inside* the long-lived service process — whose cwd, for a packaged binary, is wherever it's installed, never the graph's directory. Confirmed live: `aperas serve` from a throwaway graph's own directory reported `{\"name\":\"AperasKG\"}` over `/api/graph` while genuinely serving the throwaway graph's tree content. Fixed by giving name resolution the same `APERAS_GRAPH_NAME` env-var passthrough `APERAS_APEIRON_ROOT`/`APERAS_ARTIFACTS_ROOT` already had — resolved once, correctly, by `bindAndSpawn` (`kgService.ts`) from *its own* cwd (the same place the other two roots are resolved from) and threaded through `spawnService` into the child's env. The doc comment this session wrote for `resolveEffectiveGraphName` when the graph-name feature first landed claimed \"No env-var override... nothing to pass between a spawning and a spawned process\" — wrong, corrected in place rather than left to mislead the next reader. Folded into [Resolved: Slice 16 — packaging](../issues/webapp.md#id/BlockNode:00CNSME9ZG000).",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CNSTT2X0001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-23T09:37:25.963Z",
+    "title": "**Slice 2 — per-run auth token**",
+    "text": "**Slice 2 — per-run auth token**: generate at service start, store in the run directory at mode 0600, expose for the dev server.",
     "type": "listItem",
     "children": []
   }
