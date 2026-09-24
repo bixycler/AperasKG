@@ -4447,6 +4447,8 @@
       "BlockNode:00CDXG7H30002",
       "BlockNode:00CDY7A3P0002",
       "BlockNode:00CDZQJVG8002",
+      "BlockNode:00CP9R475R001",
+      "BlockNode:00CP9R475R002",
       "BlockNode:00CDWQ0V88001"
     ]
   },
@@ -4622,6 +4624,9 @@
       "BlockNode:00CDY8A3KG002",
       "BlockNode:00CDY8A3KG001",
       "BlockNode:00CDZQWM0G002",
+      "BlockNode:00CP9QYPN8001",
+      "BlockNode:00CP9QYPNG000",
+      "BlockNode:00CP9QYPNG001",
       "BlockNode:00CDZQWM0G001"
     ]
   },
@@ -6102,6 +6107,7 @@
     "children": [
       "BlockNode:00CDHSJQEG000",
       "BlockNode:00CDHSJQEG001",
+      "BlockNode:00CP9QMPWR001",
       "BlockNode:00CDHSJQEG002",
       "BlockNode:00CDXSVBNG001",
       "BlockNode:00CDXSVBNR002"
@@ -6238,7 +6244,10 @@
     "text": "Publishing is a separate build step, not a second mode of the dev workspace's own `package.json`/`exports` (see [discussion](../discussion/packaging.md#id/BlockNode:00CDHJGZV0001)): `esbuild` bundles `packages/cli/src/aperas.ts` (pulling in `core` transitively) into one output file, `oxigraph` marked `--external` since it's WASM-backed and can't be inlined, with a `#!/usr/bin/env node` banner. The build also writes its own minimal `package.json` alongside the bundle — `name`/`version` synced from source, `bin` pointing at the bundle, `oxigraph` (and any other external) listed as a real `dependencies` entry — making the build output a self-contained publishable unit, never touching `packages/cli/package.json`'s own dev-mode `exports` (which keeps pointing at `.ts` source for the workspace, unaffected).",
     "parent": "BlockNode:00CDDVBXH8001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CP9QR9PG001",
+      "BlockNode:00CP9QTHXR001"
+    ]
   },
   {
     "@id": "BlockNode:00CDW3XN08002",
@@ -31336,6 +31345,7 @@
       "BlockNode:00CJ6V6N9R005",
       "BlockNode:00CJ83NV3G001",
       "BlockNode:00CJAVRF90001",
+      "BlockNode:00CP9R7P50001",
       "BlockNode:00CJ78H4DG001",
       "BlockNode:00CJ78C5WR001"
     ]
@@ -34151,7 +34161,8 @@
     "parent": "BlockNode:00CNW4V5GG001",
     "type": "heading",
     "children": [
-      "BlockNode:00CNW61XZG001"
+      "BlockNode:00CNW61XZG001",
+      "BlockNode:00CP9RSEW0001"
     ]
   },
   {
@@ -34396,6 +34407,226 @@
     "text": "**A bare `- ` with real text but no `[x]`/`[ ]` removes an existing checkbox entirely** (e.g. `- updated text`, not `updated text`). Choosing list syntax at all is what signals \"this edit addresses the checkbox\" — a marker-less bullet clears it, while bare text (no bullet at all, the first point above) never touches it either way.",
     "parent": "BlockNode:00CNW58YAG001",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QJ9PG000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CP9QJ9PG000:props:StringProp:00CP9QJE2G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CP9QJ9PG000:props:StringProp:00CP9QJE2G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "`aperas init` bootstraps a brand-new graph in the current directory",
+    "text": "`aperas init` bootstraps a brand-new graph in the current directory: creates `aperas.config.json`, an empty `Apeiron/` store (`BlockNode`/`ArtifactNode`/`FolderNode`/`Profile` `.jsonld`, each `[]`), and an `artifacts/` tree — refusing if a config already exists here, never overwriting an existing `.jsonld` file. Without it, `rehydrateStore` (`store.ts`) treats a missing instance file as a real `ENOENT` rather than an empty graph, and the service crashes on startup — which `aperas serve`/`aperas service start` can only report as a generic \"did not become ready in time\", giving no hint that the real problem is a directory that was never initialized. Found live installing the published package into a fresh project with no `Apeiron/` at all.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QMPWR001",
+    "@type": "BlockNode",
+    "title": "`aperas init` bootstraps a brand-new graph in the current directory",
+    "text": "`aperas init` bootstraps a brand-new graph in the current directory: creates `aperas.config.json`, an empty `Apeiron/` store (`BlockNode`/`ArtifactNode`/`FolderNode`/`Profile` `.jsonld`, each `[]`), and an `artifacts/` tree — refusing if a config already exists here, never overwriting an existing `.jsonld` file. Without it, `rehydrateStore` (`store.ts`) treats a missing instance file as a real `ENOENT` rather than an empty graph, and the service crashes on startup — which `aperas serve`/`aperas service start` can only report as a generic \"did not become ready in time\", giving no hint that the real problem is a directory that was never initialized. Found live installing the published package into a fresh project with no `Apeiron/` at all.",
+    "parent": "BlockNode:00CDHSJQE8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QR9PG001",
+    "@type": "BlockNode",
+    "title": "`aperas` shipped for real",
+    "text": "`aperas` shipped for real: published on the public npm registry (`0.1.2` through `0.2.2`, `npm publish` from `packages/cli/dist/`) — anyone can `npm install -g aperas` today, not just build the bundle locally. Versioning follows its own scheme rather than semver-as-changelog: the middle number is a linear development-phase counter, independent of any other \"Phase N\" naming used elsewhere in this project, and the last is a build number within that phase — `0.2.1` is phase 2's first published build, `0.2.2` its second. `0.1.2` predates the scheme.",
+    "parent": "BlockNode:00CDW3R42G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QTHXR001",
+    "@type": "BlockNode",
+    "title": "00CP9QTHXR001",
+    "text": "The published package also carries this project's own two end-user-facing skills (`skills/aperas`, `skills/kg-doc-ingest` — this repo's other, dev-only skills are never bundled) copied into `dist/skills/` by the same build step, plus a new `aperas skill install` command (`kgSkill.ts`) that copies them into an agent's `.claude/skills/` (or `~/.claude/skills/` with `--global`). Without this, an agent working against an installed `aperas` binary has the CLI but none of the graph-first discipline the skill encodes — found live installing `aperas` into a project with no skill counterpart at all.",
+    "parent": "BlockNode:00CDW3R42G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QYPN8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CP9QYPN8001:links:Link:00CP9QZEC0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDW3R42G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CP9QYPN8001:links:Link:00CP9QZEC0000:props:StringProp:00CP9QZEC8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "191"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CP9QYPN8001:props:StringProp:00CP9QZEB8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CP9QYPN8001:props:StringProp:00CP9QZEB8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Published to npm",
+    "text": "Published to npm: `aperas` shipped for real on the public npm registry (`0.1.2` through `0.2.2`), closing the gap between \"builds to a real `bin`\" and \"an end user can actually get it\" — see [Distribution](../design/packaging.md#id/BlockNode:00CDW3R42G001).",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QYPNG000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CP9QYPNG000:links:Link:00CP9QZEC8001",
+        "@type": "Link",
+        "target": "BlockNode:00CDHSJQE8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CP9QYPNG000:links:Link:00CP9QZEC8001:props:StringProp:00CP9QZEC8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "363"
+          }
+        ]
+      }
+    ],
+    "title": "`aperas init` added",
+    "text": "`aperas init` added: a fresh graph directory had no way to bootstrap `aperas.config.json`/`Apeiron/`/`artifacts/` — found live installing the published package into a brand-new project, whose service crashed on startup with a misleading generic timeout rather than a real \"this directory was never initialized\" error. Fixed with a new `aperas init` command — see [Configuration](../design/packaging.md#id/BlockNode:00CDHSJQE8001).",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9QYPNG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CP9QYPNG001:links:Link:00CP9QZEC8003",
+        "@type": "Link",
+        "target": "BlockNode:00CDW3R42G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CP9QYPNG001:links:Link:00CP9QZEC8003:props:StringProp:00CP9QZED8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "394"
+          }
+        ]
+      }
+    ],
+    "title": "`aperas skill install` added",
+    "text": "`aperas skill install` added: an agent working against an installed `aperas` binary had the CLI but none of the graph-first discipline this project's own `aperas`/`kg-doc-ingest` skills encode — those only ever lived in this repo's own `.claude/skills/`. Fixed by bundling both into the published package and adding `aperas skill install` to copy them into an agent's own skill directory — see [Distribution](../design/packaging.md#id/BlockNode:00CDW3R42G001).",
+    "parent": "BlockNode:00CDDVCKCG003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9R475R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CP9R475R001:links:Link:00CP9R4BP8000",
+        "@type": "Link",
+        "target": "BlockNode:00CP9QYPNG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CP9R475R001:links:Link:00CP9R4BP8000:props:StringProp:00CP9R4BP8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "581"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CP9R475R001:props:StringProp:00CP9R4BP0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CP9R475R001:props:StringProp:00CP9R4BP0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Missing bootstrap for a brand-new graph",
+    "text": "Missing bootstrap for a brand-new graph: `rehydrateStore` (`store.ts`) treats a missing `Apeiron/*.jsonld` instance file as `ENOENT`, not an empty graph, so a fresh directory with no store files at all crashed the service on startup — surfacing only as `aperas serve`/`aperas service start`'s generic \"did not become ready in time\", with nothing pointing at the real cause. Found live installing the published `aperas` package into a brand-new project. Fixed with a new `aperas init` command that creates `aperas.config.json`, the four empty instance files, and `artifacts/` — see [history](../history/packaging.md#id/BlockNode:00CP9QYPNG000).",
+    "parent": "BlockNode:00CDDVC8N0007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9R475R002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CP9R475R002:links:Link:00CP9R4BPG000",
+        "@type": "Link",
+        "target": "BlockNode:00CP9QYPNG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CP9R475R002:links:Link:00CP9R4BPG000:props:StringProp:00CP9R4BPG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "445"
+          }
+        ]
+      }
+    ],
+    "title": "No skill counterpart for an installed `aperas`",
+    "text": "No skill counterpart for an installed `aperas`: this project's own `aperas`/`kg-doc-ingest` skills only ever lived in this repo's `.claude/skills/`, so an agent working against a plain `npm install -g aperas` had the CLI with none of the graph-first discipline the skill encodes. Fixed by bundling both skills into the published package (`dist/skills/`) and adding `aperas skill install` to copy them into an agent's own `.claude/skills/` — see [history](../history/packaging.md#id/BlockNode:00CP9QYPNG001).",
+    "parent": "BlockNode:00CDDVC8N0007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9R7P50001",
+    "@type": "BlockNode",
+    "title": "**2026-09-24: production listener's port fixed to follow the project's own naming convention**",
+    "text": "**2026-09-24: production listener's port fixed to follow the project's own naming convention**: `aperas serve`'s HTTP+auth listener (Slices 2-3) defaulted to `4173` — Vite's own `vite preview` port, carried over incidentally rather than derived from anything project-specific, unlike the dev bridge's `2737`/`2734`. Changed to `2736`, continuing the same phone-keypad-spelling scheme: `apeo` (2=A, 7=P, 3=E, 6=O), from Ape[ras] + [Apei]o[n] — deliberately distinct from the dev ports so a dev server and a served instance can run side by side against the same graph without colliding. `serviceLock.ts#resolveHttpPort`.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CP9RSEW0001",
+    "@type": "BlockNode",
+    "title": "00CP9RSEW0001",
+    "text": "> **Aperas-repo insiders**: `aperas` ships as a real published package (`npm install -g aperas`) as of `0.2.2`, but this repo still develops it from source — running the bare `aperas <verb> ...` commands below here would invoke whatever's globally installed, not your local changes. Run them as `npm run aperas -- <verb> ...` from `Aperas/monorepo/` instead.",
+    "parent": "BlockNode:00CNW5Y57G001",
+    "type": "blockquote",
     "children": []
   }
 ]

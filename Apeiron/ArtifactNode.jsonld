@@ -218,11 +218,11 @@
       "BlockNode:00CDDVBXH8001"
     ],
     "path": "design/packaging.md",
-    "fileHash": "7b64920acb5ed2f82ab06859613cab28ac36b038acc863079e7c143e3f6c1015",
+    "fileHash": "4815f74df92bcb26c54ef089d5922cd4c0145019a6d9256109eb15c68a8d39bc",
     "lastTrackedAt": "2026-09-22T08:06:13.848Z",
-    "ingestedHash": "7b64920acb5ed2f82ab06859613cab28ac36b038acc863079e7c143e3f6c1015",
-    "lastIngestedAt": "2026-09-23T08:08:19.223Z",
-    "projectedHash": "7b64920acb5ed2f82ab06859613cab28ac36b038acc863079e7c143e3f6c1015"
+    "ingestedHash": "4815f74df92bcb26c54ef089d5922cd4c0145019a6d9256109eb15c68a8d39bc",
+    "lastIngestedAt": "2026-09-24T04:11:54.439Z",
+    "projectedHash": "4815f74df92bcb26c54ef089d5922cd4c0145019a6d9256109eb15c68a8d39bc"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
@@ -269,11 +269,11 @@
       "BlockNode:00CDDVC8N0001"
     ],
     "path": "issues/packaging.md",
-    "fileHash": "d214f765afa74b6819b1f542c91e9af33e189eae11d315c89e5e139bcabe4f29",
+    "fileHash": "83efb713b96ec8c5ed3ede1c407d8d7170d7ec2ce47df83e79bd7e1ca1c654fd",
     "lastTrackedAt": "2026-09-22T08:07:34.967Z",
-    "ingestedHash": "d214f765afa74b6819b1f542c91e9af33e189eae11d315c89e5e139bcabe4f29",
-    "lastIngestedAt": "2026-09-22T08:24:02.617Z",
-    "projectedHash": "d214f765afa74b6819b1f542c91e9af33e189eae11d315c89e5e139bcabe4f29"
+    "ingestedHash": "83efb713b96ec8c5ed3ede1c407d8d7170d7ec2ce47df83e79bd7e1ca1c654fd",
+    "lastIngestedAt": "2026-09-24T04:11:57.212Z",
+    "projectedHash": "83efb713b96ec8c5ed3ede1c407d8d7170d7ec2ce47df83e79bd7e1ca1c654fd"
   },
   {
     "@id": "ArtifactNode:00CDDTC3S0000",
@@ -318,11 +318,11 @@
       "BlockNode:00CDDVCKCG001"
     ],
     "path": "history/packaging.md",
-    "fileHash": "2f56238403a7960240796432a0f5fc5ba7bfc6874bb2a8732740bd1c3ce96a4f",
+    "fileHash": "8f79681500817cf68bf55417ef88920bba84c3d79221439257dcdefc975f35e9",
     "lastTrackedAt": "2026-09-22T08:08:41.526Z",
-    "ingestedHash": "2f56238403a7960240796432a0f5fc5ba7bfc6874bb2a8732740bd1c3ce96a4f",
-    "lastIngestedAt": "2026-09-22T08:24:28.465Z",
-    "projectedHash": "2f56238403a7960240796432a0f5fc5ba7bfc6874bb2a8732740bd1c3ce96a4f"
+    "ingestedHash": "8f79681500817cf68bf55417ef88920bba84c3d79221439257dcdefc975f35e9",
+    "lastIngestedAt": "2026-09-24T04:11:55.733Z",
+    "projectedHash": "8f79681500817cf68bf55417ef88920bba84c3d79221439257dcdefc975f35e9"
   },
   {
     "@id": "ArtifactNode:00CE01XZ88000",
@@ -742,11 +742,11 @@
       "BlockNode:00CNW4V5GG001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "270382e5d2c34eccf867e40f5a034dcf86ffbd6dd7a1a47f1d5df4263dfb54a1",
+    "fileHash": "c4b7d2c0237921005c483a8843e065eae8dacd2e1f53907cdfbcc334d85a5304",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "270382e5d2c34eccf867e40f5a034dcf86ffbd6dd7a1a47f1d5df4263dfb54a1",
-    "lastIngestedAt": "2026-09-23T13:30:06.660Z",
-    "projectedHash": "270382e5d2c34eccf867e40f5a034dcf86ffbd6dd7a1a47f1d5df4263dfb54a1"
+    "ingestedHash": "c4b7d2c0237921005c483a8843e065eae8dacd2e1f53907cdfbcc334d85a5304",
+    "lastIngestedAt": "2026-09-24T04:12:00.030Z",
+    "projectedHash": "c4b7d2c0237921005c483a8843e065eae8dacd2e1f53907cdfbcc334d85a5304"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -1139,11 +1139,11 @@
       "BlockNode:00CJ6V6N9R001"
     ],
     "path": "history/webapp.md",
-    "fileHash": "22cf94307d98d8149d855602f799b79d9b4d148a5b984a7223f300b5903a2b92",
+    "fileHash": "49579e7227f32ceaffbe755a39e63a6249c3564deb9b290fe402c8def4440416",
     "lastTrackedAt": "2026-09-22T08:08:44.464Z",
-    "ingestedHash": "22cf94307d98d8149d855602f799b79d9b4d148a5b984a7223f300b5903a2b92",
-    "lastIngestedAt": "2026-09-22T08:24:30.626Z",
-    "projectedHash": "22cf94307d98d8149d855602f799b79d9b4d148a5b984a7223f300b5903a2b92"
+    "ingestedHash": "49579e7227f32ceaffbe755a39e63a6249c3564deb9b290fe402c8def4440416",
+    "lastIngestedAt": "2026-09-24T04:11:58.495Z",
+    "projectedHash": "49579e7227f32ceaffbe755a39e63a6249c3564deb9b290fe402c8def4440416"
   },
   {
     "@id": "ArtifactNode:00CN1QE950000",
