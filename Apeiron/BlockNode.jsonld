@@ -30905,7 +30905,8 @@
       "BlockNode:00CNSME9ZG000",
       "BlockNode:00CNRB3A90001",
       "BlockNode:00CPYRQN40001",
-      "BlockNode:00CMX4NCW8001"
+      "BlockNode:00CMX4NCW8001",
+      "BlockNode:00CQ0VT1NR001"
     ]
   },
   {
@@ -31350,6 +31351,7 @@
       "BlockNode:00CP9R7P50001",
       "BlockNode:00CPYRTRA0001",
       "BlockNode:00CPYRTRA0002",
+      "BlockNode:00CQ1BGR2R001",
       "BlockNode:00CJ78H4DG001",
       "BlockNode:00CJ78C5WR001"
     ]
@@ -34741,6 +34743,59 @@
     "text": "**A table/code block's own row title is a raw snowflake, not a readable name**: `table`/`code` blocks have no extractable lead-in term, so `astParser.ts`'s fallback title (the block's own snowflake id) is what the UI prints as the row's name. Split out from [the block-rendering bug it was originally filed under](#id/BlockNode:00CMX4NCW8001) once that bug's other two causes were fixed — a separate, server-side naming concern with no clear fix identified yet, not the same shape of problem.",
     "parent": "BlockNode:00CJ6V6370002",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ0VT1NR001",
+    "@type": "BlockNode",
+    "title": "**Resolved: every markdown construct the webapp renders now goes through one shared `remark-gfm` AST parser, not four independent hand-rolled implementations**",
+    "text": "**Resolved: every markdown construct the webapp renders now goes through one shared `remark-gfm` AST parser, not four independent hand-rolled implementations**: `MarkdownTable.tsx`, `MarkdownQuote.tsx`, `CodeBlock.tsx`'s fence detection, and `Inline.tsx`'s own inline tokenizer each parsed a different piece of the same spec by hand, free to disagree with `core`'s own `astParser.ts` (and with each other) on any edge case none of them happened to think of. Fixed with one new shared module (`markdown.ts`): `unified`+`remark-parse`+`remark-gfm` (same versions `core` already depends on) parses a block's own text into a real mdast AST once, and `classifyBlock` reads its top-level structure to decide whether it's a table/blockquote/code-fence/Mermaid-diagram/plain prose — replacing `MarkdownTable`'s hand-rolled `splitTableRow`/`isDelimiterRow`, `MarkdownQuote`'s regex check, `CodeBlock`'s fence-boundary parser, and `mermaidDetect.ts`'s diagram-type-keyword regex (now just `code.lang === 'mermaid'`, which also fixed a real gap: the old keyword list didn't know about every Mermaid diagram type). `Inline.tsx` now renders the AST's own inline nodes recursively (`renderInline`, exported so `MarkdownTable`/`MarkdownQuote` render an already-parsed cell/paragraph directly rather than re-serializing and re-parsing), which is also a real correctness gain: GFM strikethrough, nested formatting inside a link's own text, and autolinks all render correctly now, none of which the old regex tokenizer recognized at all. Along the way, `CodeBlock.tsx`'s own hand-rolled 5-language syntax highlighter was swapped for `highlight.js` (core + 21 explicitly registered languages, not the full ~190-language barrel — the 6 confirmed live in this corpus (`bash`/`javascript`/`typescript`/`json`/`markdown`/`rust`) plus 15 more common ones added ahead of need: `python`/`yaml`/`css`/`scss`/`xml`/`sql`/`go`/`java`/`c`/`cpp`/`csharp`/`dockerfile`/`ini`/`diff`/`graphql`), since the old keyword sets didn't even cover most of the corpus's own usage (no `json`, `rust`, `markdown`, or `text` entries existed). A fenced language outside that registered set degrades to plain, unhighlighted text rather than a guess — `highlightAuto` was tried first, but it only ever guesses *among the registered languages*, and was confirmed live to confidently mislabel a Python snippet as `bash` before `python` was added, which is worse than no highlighting at all. Verified live against real corpus content: a table renders identically (6 real `<table>` rows), a real `bash` fence gets correct `hljs-*` syntax classes, a scratch `python` fence highlights correctly too, and a blockquote with a bold lead-in plus multiple inline-code spans renders its nested formatting correctly. Both `MarkdownTable` and `CodeBlock` also gained a Copy button (`CodeBlock` had none before); the table's is view-aware — TSV in the rendered \"Table\" view (pastes into a spreadsheet), the original Markdown in \"Source\" view.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ1BGR2R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQ1BGR2R001:links:Link:00CQ1BGWF0000",
+        "@type": "Link",
+        "target": "BlockNode:00CQ0VT1NR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQ1BGR2R001:links:Link:00CQ1BGWF0000:props:StringProp:00CQ1TMG60000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1574"
+          }
+        ]
+      }
+    ],
+    "title": "**2026-09-25: every hand-rolled markdown parser replaced with one shared `remark-gfm` AST**",
+    "text": "**2026-09-25: every hand-rolled markdown parser replaced with one shared `remark-gfm` AST**: `MarkdownTable`/`MarkdownQuote`/`CodeBlock`'s fence detection/`Inline.tsx`'s inline tokenizer were four independent regex/string-walking re-implementations of the same spec `core`'s own `astParser.ts` already parses correctly — a real correctness risk (two independent decisions about what's a valid GFM table, free to disagree), not just duplication. New shared `markdown.ts` parses once via `unified`+`remark-parse`+`remark-gfm`; `classifyBlock` reads the resulting AST to detect table/quote/code/Mermaid instead of a bespoke sniffer per kind. Real wins beyond consistency: GFM strikethrough, nested formatting inside link text, and autolinks now render correctly, none of which the old tokenizer recognized; Mermaid detection is now `code.lang === 'mermaid'` instead of a diagram-type keyword list that didn't cover every type. `CodeBlock.tsx`'s own hand-rolled 5-language highlighter was also swapped for `highlight.js` (core + 21 explicitly registered languages, not the full ~190-language barrel — the 6 this corpus already uses plus 15 more common ones added ahead of need), since the old one had no entries for `json`/`rust`/`markdown`/`text` at all; an unregistered language now degrades to plain text rather than `highlightAuto` guessing among the registered set (confirmed live to mislabel Python as bash before Python was added). Both `MarkdownTable` and `CodeBlock` gained a Copy button; the table's is view-aware (TSV in \"Table\" view, Markdown in \"Source\" view). See [issues](../issues/webapp.md#id/BlockNode:00CQ0VT1NR001) for the full resolution.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ1SVJ28001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-25T08:10:29.406Z",
+    "title": "00CQ1SVJ28001",
+    "text": "scratch test",
+    "parent": "ArtifactNode:00CF1WZ3S0000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ1SVJ28002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-25T08:10:29.406Z",
+    "title": "00CQ1SVJ28002",
+    "text": "```python\n  def foo(x):\n      return x + 1\n  ```",
+    "type": "code",
     "children": []
   }
 ]
