@@ -30837,8 +30837,8 @@
       "BlockNode:00CJ6V6370003",
       "BlockNode:00CJ6V6370004",
       "BlockNode:00CMWN0XDG001",
-      "BlockNode:00CMX4NCW8001",
-      "BlockNode:00CMXJQX1R001"
+      "BlockNode:00CMXJQX1R001",
+      "BlockNode:00CQ0KYYQG000"
     ]
   },
   {
@@ -30903,7 +30903,9 @@
       "BlockNode:00CNSME9Z8001",
       "BlockNode:00CNSME9Z8002",
       "BlockNode:00CNSME9ZG000",
-      "BlockNode:00CNRB3A90001"
+      "BlockNode:00CNRB3A90001",
+      "BlockNode:00CPYRQN40001",
+      "BlockNode:00CMX4NCW8001"
     ]
   },
   {
@@ -31346,6 +31348,8 @@
       "BlockNode:00CJ83NV3G001",
       "BlockNode:00CJAVRF90001",
       "BlockNode:00CP9R7P50001",
+      "BlockNode:00CPYRTRA0001",
+      "BlockNode:00CPYRTRA0002",
       "BlockNode:00CJ78H4DG001",
       "BlockNode:00CJ78C5WR001"
     ]
@@ -32585,17 +32589,45 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CMX4NCW8001:links:Link:00CMX4NFH8000:props:StringProp:00CN3Z7Z6R000",
+            "@id": "BlockNode:00CMX4NCW8001:links:Link:00CMX4NFH8000:props:StringProp:00CQ0M4CH8000",
             "@type": "StringProp",
             "key": "position",
-            "value": "1472"
+            "value": "844"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CMX4NCW8001:links:Link:00CPZF3D8G000",
+        "@type": "Link",
+        "target": "BlockNode:00CPYRTRA0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX4NCW8001:links:Link:00CPZF3D8G000:props:StringProp:00CQ0M4BM8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "560"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CMX4NCW8001:links:Link:00CQ0M4CH8001",
+        "@type": "Link",
+        "target": "BlockNode:00CQ0KYYQG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CMX4NCW8001:links:Link:00CQ0M4CH8001:props:StringProp:00CQ0M4CH8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1258"
           }
         ]
       }
     ],
-    "title": "**Every block-structured node renders as one flattened run of literal markup in the UI — tables, fenced code and ASCII diagrams are all unreadable**",
-    "text": "**Every block-structured node renders as one flattened run of literal markup in the UI — tables, fenced code and ASCII diagrams are all unreadable**: a `[table]` shows as `| a | b | | --- | --- | | 1 | 2 |` in flowing prose, and a `[code]` block shows its own ``` fences as text with every line rewrapped, destroying column alignment. Three independent causes, confirmed live rather than inferred. **(1) The structure is already gone server-side**: every `RenderNodeItem.abstract` is a one-line preview, and `truncateForPreview` (`astParser.ts`) collapses *all* whitespace — `text.replace(/\\s+/g, ' ')` — so newlines die with the spaces; `/api/tree` returns the table's abstract containing no `\\n` at all, which is why `.fd-abstract`'s `white-space: pre-wrap` preserves nothing. **(2) There is no block-level renderer**: `Inline.tsx` is deliberately inline-only (`**bold**`, `` `code` ``, `*italic*`, `[text](href)`), so even with newlines restored it would emit literal pipes and fences. **(3) The row's title is a raw snowflake**: `table`/`code` have no extractable lead-in term, so `astParser.ts`'s fallback title (the block's own id) is what the UI prints as the node's name. Presentation-only — the stored text and the projected `.md` are both correct, and `aperas tree`/`unfold` previews collapse identically, so this is not webapp-specific and no data is at risk. It matters now because the [fold/unfold redesign](../discussion/webapp.md#id/BlockNode:00CMWMP6X8001) deliberately carries its state table, gesture matrix and transition diagram as `[table]`/`[code]` blocks: the document most worth reading in the UI is the one the UI renders worst.",
-    "parent": "BlockNode:00CJ6V6370002",
+    "title": "**Resolved: every block-structured node rendered as one flattened run of literal markup in the UI — tables and fenced code were unreadable**",
+    "text": "**Resolved: every block-structured node rendered as one flattened run of literal markup in the UI — tables and fenced code were unreadable**: a `[table]` showed as `| a | b | | --- | --- | | 1 | 2 |` in flowing prose, and a `[code]` block showed its own ``` fences as text with every line rewrapped, destroying column alignment. Two causes, both fixed: every `RenderNodeItem.abstract` is a one-line preview with all whitespace collapsed (`truncateForPreview`, `astParser.ts`), and `Inline.tsx` was deliberately inline-only with no block-level renderer at all. [AnDT1211's `feat/web-markdown-rendering`](../history/webapp.md#id/BlockNode:00CPYRTRA0001) added real block-level renderers (`MarkdownTable.tsx`, `CodeBlock.tsx`) that read a node's own full `.text` instead of the collapsed `.abstract`. Verified live against this exact corpus's own [fold/unfold redesign](../discussion/webapp.md#id/BlockNode:00CMWMP6X8001) content, the issue's original worked example: a real 6-row `<table>` and a code block with preserved line breaks and alignment, confirmed via direct DOM inspection. A third cause originally filed here — the row's own title falling back to a raw snowflake id — has no clear fix yet and isn't the same shape of problem, so it's split out as [its own open issue](#id/BlockNode:00CQ0KYYQG000).",
+    "parent": "BlockNode:00CJ6V637000F",
     "type": "listItem",
     "children": []
   },
@@ -34627,6 +34659,88 @@
     "text": "> **Aperas-repo insiders**: `aperas` ships as a real published package (`npm install -g aperas`) as of `0.2.2`, but this repo still develops it from source — running the bare `aperas <verb> ...` commands below here would invoke whatever's globally installed, not your local changes. Run them as `npm run aperas -- <verb> ...` from `Aperas/monorepo/` instead.",
     "parent": "BlockNode:00CNW5Y57G001",
     "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CPYRQN40001",
+    "@type": "BlockNode",
+    "title": "**Resolved: the production webapp's hover link-preview never resolved, stuck on \"Loading…\"**",
+    "text": "**Resolved: the production webapp's hover link-preview never resolved, stuck on \"Loading…\"**: `Inline.tsx`'s `LinkPopover` fetched `/api/tree` with a plain `fetch()`, never `apiFetch()` — unauthenticated against the production HTTP+auth listener (Slice 3), so it got a 401 with a JSON error body. `fetch()` doesn't reject on HTTP error statuses, and this call never checked `res.ok`, so the 401's `{error: ...}` body was parsed as if it were a real `TreeResponse`; `body.tree` was silently `undefined`, `preview()` never settled and `error()` never got set, leaving the loading guard (`preview() === undefined && !error()`) true forever. Predates Slice 3's auth work entirely — never exercised end-to-end against the real production listener until now. Fixed to match every other fetch in the app: `apiFetch()` plus a `res.ok`/`body.error` check. Verified live against the built package's own listener (not dev): dispatched a real `mouseenter` on a corpus link and confirmed the popover rendered its actual title/abstract instead of hanging.",
+    "parent": "BlockNode:00CJ6V637000F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CPYRTRA0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CPYRTRA0001:props:StringProp:00CPYRTW8G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CPYRTRA0001:props:StringProp:00CPYRTW8G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**2026-09-25: markdown rendering merged from AnDT1211's `feat/web-markdown-rendering`**",
+    "text": "**2026-09-25: markdown rendering merged from AnDT1211's `feat/web-markdown-rendering`**: four new renderer components — `CodeBlock.tsx`, `MarkdownTable.tsx`, `MarkdownQuote.tsx`, `MermaidDiagram.tsx` — so a node's own prose renders fenced code, tables, blockquotes, and Mermaid diagrams instead of literal markdown syntax, wired into `FolderDiv.tsx`'s content rendering. Same PR also added `fetchTree`'s own response-dedup cache (skip re-parsing/re-returning an identical `/api/tree` body across polls), `fetchGraphInfo`/`/api/graph` (the graph's display name, consumed by `App.tsx`'s `document.title` effect), and root-level `npm run dev`/`build:web` convenience scripts delegating to `packages/web`'s own. Merged via a rebase of this branch onto `main`; the conflicts (`RenderLinkItem`'s `id`-vs-`linkId` rename against this PR's added `text` field, and `fetchTree`'s caching against this branch's `apiFetch`/`fetchGraphInfo` additions) were both genuinely independent, non-competing changes — resolved by keeping both sides at every site, not by picking one.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CPYRTRA0002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CPYRTRA0002:links:Link:00CPYRTW8R000",
+        "@type": "Link",
+        "target": "BlockNode:00CPYRQN40001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CPYRTRA0002:links:Link:00CPYRTW8R000:props:StringProp:00CPYRTW8R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "308"
+          }
+        ]
+      }
+    ],
+    "title": "**2026-09-25: the hover link-preview auth bug (above) found and fixed**",
+    "text": "**2026-09-25: the hover link-preview auth bug (above) found and fixed**: surfaced only once the merged tree was actually exercised against the real production listener in a browser — `Inline.tsx`'s pre-existing `LinkPopover` fetch predates Slice 3's auth work entirely and was never updated to match it. See [issues](../issues/webapp.md#id/BlockNode:00CPYRQN40001) for the full root cause.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ0KYYQG000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQ0KYYQG000:links:Link:00CQ0KZ2P8000",
+        "@type": "Link",
+        "target": "BlockNode:00CMX4NCW8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQ0KYYQG000:links:Link:00CQ0KZ2P8000:props:StringProp:00CQ0KZ2P8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "258"
+          }
+        ]
+      }
+    ],
+    "title": "**A table/code block's own row title is a raw snowflake, not a readable name**",
+    "text": "**A table/code block's own row title is a raw snowflake, not a readable name**: `table`/`code` blocks have no extractable lead-in term, so `astParser.ts`'s fallback title (the block's own snowflake id) is what the UI prints as the row's name. Split out from [the block-rendering bug it was originally filed under](#id/BlockNode:00CMX4NCW8001) once that bug's other two causes were fixed — a separate, server-side naming concern with no clear fix identified yet, not the same shape of problem.",
+    "parent": "BlockNode:00CJ6V6370002",
+    "type": "listItem",
     "children": []
   }
 ]
