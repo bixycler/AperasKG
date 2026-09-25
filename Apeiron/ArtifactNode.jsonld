@@ -875,7 +875,8 @@
     "type": "root",
     "children": [
       "BlockNode:00CF1WZ4JG001",
-      "BlockNode:00CQ1SVJ28001"
+      "BlockNode:00CQ1SVJ28001",
+      "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
     "fileHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c",
@@ -1140,11 +1141,11 @@
       "BlockNode:00CJ6V6N9R001"
     ],
     "path": "history/webapp.md",
-    "fileHash": "df466270bdd582c0d0eb28d70487ed3c5679603f6704c771a5eeb265f0487698",
+    "fileHash": "de3799c05a73e32c55de5c8096dde7118a5d1ea5529e3460b79747fb6f9305a6",
     "lastTrackedAt": "2026-09-22T08:08:44.464Z",
-    "ingestedHash": "df466270bdd582c0d0eb28d70487ed3c5679603f6704c771a5eeb265f0487698",
-    "lastIngestedAt": "2026-09-25T08:11:50.850Z",
-    "projectedHash": "df466270bdd582c0d0eb28d70487ed3c5679603f6704c771a5eeb265f0487698"
+    "ingestedHash": "de3799c05a73e32c55de5c8096dde7118a5d1ea5529e3460b79747fb6f9305a6",
+    "lastIngestedAt": "2026-09-25T09:25:44.836Z",
+    "projectedHash": "de3799c05a73e32c55de5c8096dde7118a5d1ea5529e3460b79747fb6f9305a6"
   },
   {
     "@id": "ArtifactNode:00CN1QE950000",

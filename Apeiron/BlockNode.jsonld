@@ -31352,6 +31352,8 @@
       "BlockNode:00CPYRTRA0001",
       "BlockNode:00CPYRTRA0002",
       "BlockNode:00CQ1BGR2R001",
+      "BlockNode:00CQ2N1Z1R000",
+      "BlockNode:00CQ2WETBG001",
       "BlockNode:00CJ78H4DG001",
       "BlockNode:00CJ78C5WR001"
     ]
@@ -34790,12 +34792,72 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CQ1SVJ28002",
+    "@id": "BlockNode:00CQ2M3QM0001",
     "@type": "BlockNode",
-    "tombstonedAt": "2026-09-25T08:10:29.406Z",
-    "title": "00CQ1SVJ28002",
-    "text": "```python\n  def foo(x):\n      return x + 1\n  ```",
-    "type": "code",
+    "tombstonedAt": "2026-09-25T09:08:51.790Z",
+    "title": "## ZZ math scratch",
+    "text": "Euler: $e^{i\\pi}+1=0$ and price $5 to $10.",
+    "parent": "ArtifactNode:00CF1WZ3S0000",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ2M3QM0002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-25T09:08:51.790Z",
+    "title": "00CQ2M3QM0002",
+    "text": "$$\n\\int_0^1 x^2\\,dx = \\frac{1}{3}\n$$",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ2N1Z1R000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQ2N1Z1R000:links:Link:00CQ2N23E8000",
+        "@type": "Link",
+        "target": "BlockNode:00CQ1BGR2R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQ2N1Z1R000:links:Link:00CQ2N23E8000:props:StringProp:00CQ2N23EG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "166"
+          }
+        ]
+      }
+    ],
+    "title": "**2026-09-25: inline `$…$` and display `$$…$$` math, rendered lazily via KaTeX**",
+    "text": "**2026-09-25: inline `$…$` and display `$$…$$` math, rendered lazily via KaTeX**: `remark-math` joins `remark-gfm` in the shared `markdown.ts` processor (building on [the shared-parser rewrite](#id/BlockNode:00CQ1BGR2R001)), so `inlineMath`/`math` are real AST nodes. `Inline.tsx` renders both through a `lazy(() => import('./KatexMath'))` component: KaTeX and its CSS and fonts load only on a page that actually contains math, and the KaTeX chunk is the same one Mermaid already ships (not duplicated). The entry chunk grew ~6KB (the micromark math extension). A display block stays an ordinary `paragraph` node at ingestion (`core` doesn't parse math), and `Inline.tsx` renders its `math` child as display math. Single-`$` was chosen knowingly: prose like \"$5 to $10\" parses as math, and the fix is escaping (`\\$`). Same change: `vite.config.ts`'s `chunkSizeWarningLimit` raised to 1500kB, since only lazy-loaded Mermaid internals (elk ~1.46MB, one GWT-compiled file, not splittable) exceeded the 500kB default.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQ2WETBG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQ2WETBG001:links:Link:00CQ2WEY70000",
+        "@type": "Link",
+        "target": "BlockNode:00CQ2N1Z1R000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQ2WETBG001:links:Link:00CQ2WEY70000:props:StringProp:00CQ2WEY88000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "496"
+          }
+        ]
+      }
+    ],
+    "title": "**2026-09-25: single `~` no longer strikes through**",
+    "text": "**2026-09-25: single `~` no longer strikes through**: GFM's default `singleTilde: true` turned `range 5~10 and 20~30` into \"5<del>10 and 20</del>30\" (hit in real use). The shared processor in `markdown.ts` now passes `remarkGfm` `{ singleTilde: false }`, so only `~~x~~` strikes and a single `~` (approximately, ranges, `~/` paths) renders literally. A corpus-wide parse beforehand found no existing strikethrough of either form, so nothing depended on the single-tilde form. Web-only, alongside [inline/display math](#id/BlockNode:00CQ2N1Z1R000): `core` uses `remark-gfm` only for block boundaries, which strikethrough never affects.",
+    "parent": "BlockNode:00CJ6V6N9R003",
+    "type": "listItem",
     "children": []
   }
 ]
