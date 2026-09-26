@@ -5364,8 +5364,24 @@
   {
     "@id": "BlockNode:00CDGTZHSR005",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CDGTZHSR005:links:Link:00CQYCHFT0000",
+        "@type": "Link",
+        "target": "BlockNode:00CDDVBXHG005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CDGTZHSR005:links:Link:00CQYCHFT0000:props:StringProp:00CQYCHFT0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "452"
+          }
+        ]
+      }
+    ],
     "title": "00CDGTZHSR005",
-    "text": "Cross-package imports go through each package's own `exports` map (`\"./*\": \"./src/*.ts\"`), not relative dot-paths — `import ... from '@aperas/core/apeironNgn/node'` instead of `'../apeironNgn/node'` — resolved by npm workspace symlinking, the same subpath shape the code already uses today, so the rewrite is a mechanical prefix swap, not a redesign. Root `package.json` keeps the existing `kg:*` script names (pointing at their new `packages/cli/src/...` locations) so the dogfooding workflow (`npm run kg:X -- <args>`, now run from `Aperas/monorepo/`) is unchanged in shape. Two unused dependencies (`terminusdb`, `rehype-stringify`/`remark-rehype` — confirmed zero references anywhere in `src/`) are dropped rather than assigned to any package.",
+    "text": "Cross-package imports go through each package's own `exports` map (`\"./*\": \"./src/*.ts\"`), not relative dot-paths — `import ... from '@aperas/core/apeironNgn/node'` instead of `'../apeironNgn/node'` — resolved by npm workspace symlinking, the same subpath shape the code already uses today, so the rewrite is a mechanical prefix swap, not a redesign. Root `package.json` no longer carries the old `kg:*` script names: once the `aperas` dispatcher (see [Architecture](#id/BlockNode:00CDDVBXHG005)) covered every verb through the same `run*`/`request()` calls the old scripts used, `npm run kg:X -- <args>` and `npm run aperas -- X <args>` were doing identical work, so the older aliases were dropped rather than kept indefinitely. The dogfooding workflow is `npm run aperas -- <verb> <args>` in a source checkout and the built `aperas <verb>` once installed — one command surface in dev and in production, not two. Two unused dependencies (`terminusdb`, `rehype-stringify`/`remark-rehype` — confirmed zero references anywhere in `src/`) are dropped rather than assigned to any package.",
     "parent": "BlockNode:00CDGTZHSR001",
     "type": "paragraph",
     "children": []
@@ -34802,15 +34818,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CQ2M3QM0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-25T09:08:51.790Z",
-    "title": "00CQ2M3QM0002",
-    "text": "$$\n\\int_0^1 x^2\\,dx = \\frac{1}{3}\n$$",
-    "type": "paragraph",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CQ2N1Z1R000",
     "@type": "BlockNode",
     "links": [
@@ -34858,6 +34865,133 @@
     "text": "**2026-09-25: single `~` no longer strikes through**: GFM's default `singleTilde: true` turned `range 5~10 and 20~30` into \"5<del>10 and 20</del>30\" (hit in real use). The shared processor in `markdown.ts` now passes `remarkGfm` `{ singleTilde: false }`, so only `~~x~~` strikes and a single `~` (approximately, ranges, `~/` paths) renders literally. A corpus-wide parse beforehand found no existing strikethrough of either form, so nothing depended on the single-tilde form. Web-only, alongside [inline/display math](#id/BlockNode:00CQ2N1Z1R000): `core` uses `remark-gfm` only for block boundaries, which strikethrough never affects.",
     "parent": "BlockNode:00CJ6V6N9R003",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQYGPR50001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQYGPR50001:links:Link:00CQYGPV40000",
+        "@type": "Link",
+        "target": "BlockNode:00CGF613VR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQYGPR50001:links:Link:00CQYGPV40000:props:StringProp:00CQYGPV40001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CQYGPR50001:links:Link:00CQYGPV40002",
+        "@type": "Link",
+        "target": "BlockNode:00CDGTZHSR005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQYGPR50001:links:Link:00CQYGPV40002:props:StringProp:00CQYGPV40003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "359"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CQYGPR50001:links:Link:00CQYGPV40004",
+        "@type": "Link",
+        "target": "BlockNode:00CDY84BJ8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQYGPR50001:links:Link:00CQYGPV40004:props:StringProp:00CQYGPV40005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "854"
+          }
+        ]
+      }
+    ],
+    "title": "## v2.11 additions — delta on the v2 snapshot",
+    "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Root `package.json`'s `kg:*` npm scripts were removed: once the `aperas` dispatcher covered every verb identically in dev (`npm run aperas -- <verb>`) and in the packaged binary, they were a second command surface doing exactly the same work as the first, not a distinct dogfooding workflow — see [design/packaging.md's Topology](../design/packaging.md#id/BlockNode:00CDGTZHSR005), which supersedes its own prior rationale for keeping them. Runtime `console.log`/`console.error` prefixes across every `kgX.ts` file, plus the flush/reload conflict-resolution hint (`serviceProtocol.ts`'s `CONFLICT_RESOLUTION_HINT`), were rewritten from `[ApeironNgn kg:X]`/`npm run kg:X` to `[aperas X]`/`npm run aperas -- X` to match — the `--help` usage lines had already been rewritten in an earlier pass ([history/packaging.md](../history/packaging.md#id/BlockNode:00CDY84BJ8002)), but these runtime messages had been missed until now. This skill's own one remaining `kg:*` mention, in the `check-links` Mechanics entry below, is closed the same way.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CQYGPR50002",
+      "BlockNode:00CQYGPR50003",
+      "BlockNode:00CQYGPR50004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CQYGPR50002",
+    "@type": "BlockNode",
+    "title": "### Mechanics — `check-links` dispatch corrected to `aperas`",
+    "text": "Answers exactly the question dense linking depends on and nothing else routinely checks: does every internal-style reference a live block's text actually names (`[[code]]`, `aperas://...`, `path#fragment`) have a matching resolved `Link` in that block's own `.links`? `aperas check-links` reports discrepancies; `aperas check-links --repair` re-resolves and flushes them in the same call. It resolves each occurrence for real (the same dispatch `aperas update`/`aperas insert` themselves use, read-only here — never mints a placeholder as a side effect of a scan) rather than guessing from the text, so it correctly stays silent on a code that simply doesn't resolve yet (routine, or already tracked separately as a dangling reference) and only flags a code that resolves to a live target with nothing to show for it in `.links` — the exact, previously-invisible failure mode this tool exists for.",
+    "parent": "BlockNode:00CQYGPR50001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQYGPR50003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQYGPR50003:links:Link:00CQYGPV48000",
+        "@type": "Link",
+        "target": "BlockNode:00CHXVYA0R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQYGPR50003:links:Link:00CQYGPV48000:props:StringProp:00CQYGPV48001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Supersedes note — the old `kg:`-worded check-links entry",
+    "text": "Supersedes: [Mechanics — `aperas check-links` documented](#id/BlockNode:00CHXVYA0R001)",
+    "parent": "BlockNode:00CQYGPR50001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CQYGPR50004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CQYGPR50004:links:Link:00CQYGPV48002",
+        "@type": "Link",
+        "target": "BlockNode:00CNW61XZG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CQYGPR50004:links:Link:00CQYGPV48002:props:StringProp:00CQYGPV48003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### Top matter — Status bumped to v2.11",
+    "text": "Supersedes: [v2.10's own status line](#id/BlockNode:00CNW61XZG001)",
+    "parent": "BlockNode:00CQYGPR50001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CQYGPR50005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CQYGPR50005",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v2.11** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CQYGPR50004",
+    "type": "paragraph",
     "children": []
   }
 ]

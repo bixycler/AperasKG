@@ -1431,3 +1431,21 @@ Supersedes: [v2.9's own status line](#id/BlockNode:00CN8KBK9G002)
 Status: <a name='id/BlockNode:00CNW61XZG001' class='aperas-anchor aperas-id'></a> **v2.10** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
 
 > **Aperas-repo insiders**: `aperas` ships as a real published package (`npm install -g aperas`) as of `0.2.2`, but this repo still develops it from source — running the bare `aperas <verb> ...` commands below here would invoke whatever's globally installed, not your local changes. Run them as `npm run aperas -- <verb> ...` from `Aperas/monorepo/` instead.
+
+## v2.11 additions — delta on the v2 snapshot <a name='id/BlockNode:00CQYGPR50001' class='aperas-anchor aperas-id'></a>
+
+Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Root `package.json`'s `kg:*` npm scripts were removed: once the `aperas` dispatcher covered every verb identically in dev (`npm run aperas -- <verb>`) and in the packaged binary, they were a second command surface doing exactly the same work as the first, not a distinct dogfooding workflow — see [design/packaging.md's Topology](../design/packaging.md#id/BlockNode:00CDGTZHSR005), which supersedes its own prior rationale for keeping them. Runtime `console.log`/`console.error` prefixes across every `kgX.ts` file, plus the flush/reload conflict-resolution hint (`serviceProtocol.ts`'s `CONFLICT_RESOLUTION_HINT`), were rewritten from `[ApeironNgn kg:X]`/`npm run kg:X` to `[aperas X]`/`npm run aperas -- X` to match — the `--help` usage lines had already been rewritten in an earlier pass ([history/packaging.md](../history/packaging.md#id/BlockNode:00CDY84BJ8002)), but these runtime messages had been missed until now. This skill's own one remaining `kg:*` mention, in the `check-links` Mechanics entry below, is closed the same way.
+
+### Mechanics — `check-links` dispatch corrected to `aperas` <a name='id/BlockNode:00CQYGPR50002' class='aperas-anchor aperas-id'></a>
+
+Answers exactly the question dense linking depends on and nothing else routinely checks: does every internal-style reference a live block's text actually names (`[[code]]`, `aperas://...`, `path#fragment`) have a matching resolved `Link` in that block's own `.links`? `aperas check-links` reports discrepancies; `aperas check-links --repair` re-resolves and flushes them in the same call. It resolves each occurrence for real (the same dispatch `aperas update`/`aperas insert` themselves use, read-only here — never mints a placeholder as a side effect of a scan) rather than guessing from the text, so it correctly stays silent on a code that simply doesn't resolve yet (routine, or already tracked separately as a dangling reference) and only flags a code that resolves to a live target with nothing to show for it in `.links` — the exact, previously-invisible failure mode this tool exists for.
+
+### Supersedes note — the old `kg:`-worded check-links entry <a name='id/BlockNode:00CQYGPR50003' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [Mechanics — `aperas check-links` documented](#id/BlockNode:00CHXVYA0R001)
+
+### Top matter — Status bumped to v2.11 <a name='id/BlockNode:00CQYGPR50004' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v2.10's own status line](#id/BlockNode:00CNW61XZG001)
+
+Status: <a name='id/BlockNode:00CQYGPR50005' class='aperas-anchor aperas-id'></a> **v2.11** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.
