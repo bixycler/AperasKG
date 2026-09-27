@@ -1,12 +1,14 @@
 ---
-description: No open issues in the CLI dispatcher layer itself — see Resolved for the single `kg:insert` ordering bug that used to live here.
+description: One open — `aperas check-links`'s runtime prefix, missed by the CLI's own `kg:*`-to-`aperas` rename; see Resolved for the single `kg:insert` ordering bug that used to live here.
 ---
 
 # CLI — Issues <a name='id/BlockNode:00CF2AEAX0001' class='aperas-anchor aperas-id'></a>
 
 ## Open Issues <a name='id/BlockNode:00CF2AEAX0002' class='aperas-anchor aperas-id'></a>
 
-None currently — see Resolved below.
+One open — `aperas check-links`'s runtime prefix, missed by the CLI's own `kg:*`-to-`aperas` rename.
+
+- **`aperas check-links` still prints the old `[ApeironNgn check-links]` prefix**: <a name='id/BlockNode:00CR8XN9VG002' class='aperas-anchor aperas-id'></a> `packages/cli/src/kgCheckLinks.ts` prints `[ApeironNgn check-links]` at all five sites (lines 44, 58, 61, 65, 79) — every other `kgX.ts` file's runtime `console.log`/`console.error` prefix was already rewritten from `[ApeironNgn kg:X]` to `[aperas X]`, matching [the `aperas` dispatcher covering every verb identically](../design/packaging.md#id/BlockNode:00CDGTZHSR005). This file's prefix had no `kg:` in it, which likely let it escape a pattern-based rename. Fix: reword the five sites to `[aperas check-links]`, matching the convention every other command's runtime prefix already follows. Found by the grapher, reproduced by the orchestrator, 2026-09-27.
 
 ## Sub-Parts <a name='id/BlockNode:00CF2AEAX0004' class='aperas-anchor aperas-id'></a>
 

@@ -731,24 +731,14 @@
     "parent": "FolderNode:00CDBYV4BR001",
     "type": "root",
     "children": [
-      "BlockNode:00CE8XWZJR001",
-      "BlockNode:00CH5FJMDR001",
-      "BlockNode:00CHXVEW98001",
-      "BlockNode:00CHYJ6PR8001",
-      "BlockNode:00CJ02BTG0001",
-      "BlockNode:00CJ5207P8001",
-      "BlockNode:00CN7YEND0001",
-      "BlockNode:00CN8K8JCR001",
-      "BlockNode:00CNW4V5GG001",
-      "BlockNode:00CQYGPR50001",
-      "BlockNode:00CR5GCSEG001"
+      "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "f497579da8e2fb7186401d65e36cfc30b1731e9b18fd05388107c86e313347b0",
+    "fileHash": "680ee415e2ef59dfce74f33a47b278118449d84f49f37fd2e77e9bbf890adbcc",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "f497579da8e2fb7186401d65e36cfc30b1731e9b18fd05388107c86e313347b0",
-    "lastIngestedAt": "2026-09-27T01:46:13.367Z",
-    "projectedHash": "f497579da8e2fb7186401d65e36cfc30b1731e9b18fd05388107c86e313347b0"
+    "ingestedHash": "680ee415e2ef59dfce74f33a47b278118449d84f49f37fd2e77e9bbf890adbcc",
+    "lastIngestedAt": "2026-09-27T06:20:33.802Z",
+    "projectedHash": "680ee415e2ef59dfce74f33a47b278118449d84f49f37fd2e77e9bbf890adbcc"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -812,18 +802,18 @@
       }
     ],
     "title": "aperas-skill.md",
-    "text": "The restructure has landed and has been revised five times since. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is v2: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with a scope statement and a worked example at each of the first three levels, and only current, verified items in the file at all. v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them, and v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph. Open Issues is empty; what remains is [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A), still unmeasured.",
+    "text": "The restructure has landed and has been revised through v3.1 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, then a role split at v3 and v3.1's own first-run repair. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is now the base every role loads: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with what each role does with it living in its own file (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, and v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them. v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph; v2.1 through v2.11 followed as tool-and-discipline fixes on that baseline rather than a further restructure, detailed one by one below. v3 split the skill across three roles handing off through the graph, and v3.1 — the first live run under that split — moved the whole task loop into the base after failing on its own defects. Open Issues, once empty, now carries entries of its own, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "1ac59965c63bd4a8c02f23078ee20e685ff35c62c291b808aaa39142041c9230",
+    "fileHash": "007d9f7a7e817b0e867a0250194f9d2b2d6f8188078d7a2753700ec2ae51eeae",
     "lastTrackedAt": "2026-09-22T08:08:49.651Z",
-    "ingestedHash": "1ac59965c63bd4a8c02f23078ee20e685ff35c62c291b808aaa39142041c9230",
-    "lastIngestedAt": "2026-09-22T08:24:21.983Z",
-    "projectedHash": "1ac59965c63bd4a8c02f23078ee20e685ff35c62c291b808aaa39142041c9230"
+    "ingestedHash": "007d9f7a7e817b0e867a0250194f9d2b2d6f8188078d7a2753700ec2ae51eeae",
+    "lastIngestedAt": "2026-09-27T05:45:48.276Z",
+    "projectedHash": "007d9f7a7e817b0e867a0250194f9d2b2d6f8188078d7a2753700ec2ae51eeae"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -844,11 +834,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "060499bbc9ef0d6dc5157f1aecf1b4acfc59889a1b8dea2ae82cc307cfe12fd0",
+    "fileHash": "b773f341bdd966bafb7f7332c6fadcdf8aafa6924d1cfd6362a82cf18c7e6000",
     "lastTrackedAt": "2026-09-22T05:31:16.879Z",
-    "ingestedHash": "060499bbc9ef0d6dc5157f1aecf1b4acfc59889a1b8dea2ae82cc307cfe12fd0",
-    "lastIngestedAt": "2026-09-27T01:46:07.643Z",
-    "projectedHash": "060499bbc9ef0d6dc5157f1aecf1b4acfc59889a1b8dea2ae82cc307cfe12fd0"
+    "ingestedHash": "b773f341bdd966bafb7f7332c6fadcdf8aafa6924d1cfd6362a82cf18c7e6000",
+    "lastIngestedAt": "2026-09-27T06:20:35.386Z",
+    "projectedHash": "b773f341bdd966bafb7f7332c6fadcdf8aafa6924d1cfd6362a82cf18c7e6000"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
@@ -942,25 +932,25 @@
     "@type": "ArtifactNode",
     "props": [
       {
-        "@id": "ArtifactNode:00CF2AEA78000:props:StringProp:00CN3Z1P1G000",
+        "@id": "ArtifactNode:00CF2AEA78000:props:StringProp:00CR8YRY00000",
         "@type": "StringProp",
         "key": "description",
-        "value": "No open issues in the CLI dispatcher layer itself — see Resolved for the single `kg:insert` ordering bug that used to live here."
+        "value": "One open — `aperas check-links`'s runtime prefix, missed by the CLI's own `kg:*`-to-`aperas` rename; see Resolved for the single `kg:insert` ordering bug that used to live here."
       }
     ],
     "title": "cli.md",
-    "text": "None currently — see Resolved below.",
+    "text": "One open — `aperas check-links`'s runtime prefix, missed by the CLI's own `kg:*`-to-`aperas` rename.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CF2AEAX0001"
     ],
     "path": "issues/cli.md",
-    "fileHash": "cdd795a6b6c51c7d975e44268ef4cd408be6925a754e2c1aa2a3edfce1e7cc88",
+    "fileHash": "95176ac2c66c8e7b391c190cb10c56705c64142db1585602c7f5c4783290bc65",
     "lastTrackedAt": "2026-09-22T08:07:12.762Z",
-    "ingestedHash": "cdd795a6b6c51c7d975e44268ef4cd408be6925a754e2c1aa2a3edfce1e7cc88",
-    "lastIngestedAt": "2026-09-22T08:23:38.168Z",
-    "projectedHash": "cdd795a6b6c51c7d975e44268ef4cd408be6925a754e2c1aa2a3edfce1e7cc88"
+    "ingestedHash": "95176ac2c66c8e7b391c190cb10c56705c64142db1585602c7f5c4783290bc65",
+    "lastIngestedAt": "2026-09-27T05:47:10.767Z",
+    "projectedHash": "95176ac2c66c8e7b391c190cb10c56705c64142db1585602c7f5c4783290bc65"
   },
   {
     "@id": "ArtifactNode:00CF2AEKZG000",
@@ -981,11 +971,11 @@
       "BlockNode:00CF2AEMER001"
     ],
     "path": "discussion/cli.md",
-    "fileHash": "bee268163c3202e019f622392be987635e9dd7e4ab23d6a06e97a3fe123e4889",
+    "fileHash": "31f69b8e86a7458a0cfffbaa15c79ec9f195b16ae5c8f4b4973daf44444bb2c7",
     "lastTrackedAt": "2026-09-22T08:06:25.771Z",
-    "ingestedHash": "bee268163c3202e019f622392be987635e9dd7e4ab23d6a06e97a3fe123e4889",
-    "lastIngestedAt": "2026-09-22T08:23:10.360Z",
-    "projectedHash": "bee268163c3202e019f622392be987635e9dd7e4ab23d6a06e97a3fe123e4889"
+    "ingestedHash": "31f69b8e86a7458a0cfffbaa15c79ec9f195b16ae5c8f4b4973daf44444bb2c7",
+    "lastIngestedAt": "2026-09-27T05:45:51.748Z",
+    "projectedHash": "31f69b8e86a7458a0cfffbaa15c79ec9f195b16ae5c8f4b4973daf44444bb2c7"
   },
   {
     "@id": "ArtifactNode:00CF2AEX6R000",

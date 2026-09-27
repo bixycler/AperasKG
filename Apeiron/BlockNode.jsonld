@@ -9137,7 +9137,11 @@
       "BlockNode:00CE315NGG002",
       "BlockNode:00CE8T49MR001",
       "BlockNode:00CGJHDK68001",
-      "BlockNode:00CE1DDF58004"
+      "BlockNode:00CR6BEFQG001",
+      "BlockNode:00CR81SWZR001",
+      "BlockNode:00CR81SDX8001",
+      "BlockNode:00CE1DDF58004",
+      "BlockNode:00CR98J7KR001"
     ]
   },
   {
@@ -12600,6 +12604,17 @@
       "BlockNode:00CGF613VR001",
       "BlockNode:00CGMY04AG001",
       "BlockNode:00CGN8W9M8001",
+      "BlockNode:00CH5FJMDR001",
+      "BlockNode:00CHXVEW98001",
+      "BlockNode:00CHYJ6PR8001",
+      "BlockNode:00CJ02BTG0001",
+      "BlockNode:00CJ5207P8001",
+      "BlockNode:00CN7YEND0001",
+      "BlockNode:00CN8K8JCR001",
+      "BlockNode:00CNW4V5GG001",
+      "BlockNode:00CQYGPR50001",
+      "BlockNode:00CR5GCSEG001",
+      "BlockNode:00CR874TC8001",
       "BlockNode:00CF4QNX0000B"
     ]
   },
@@ -12649,7 +12664,10 @@
       "BlockNode:00CG9MDJF0001",
       "BlockNode:00CGF35FNG001",
       "BlockNode:00CN6S7HWR000",
-      "BlockNode:00CR3XZ220001"
+      "BlockNode:00CR3XZ220001",
+      "BlockNode:00CR7N7Z60001",
+      "BlockNode:00CR81Y470001",
+      "BlockNode:00CR92ZRJ8001"
     ]
   },
   {
@@ -13932,16 +13950,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5MHD8002:links:Link:00CGA5YE0R000:props:StringProp:00CGF6Y918000",
+            "@id": "BlockNode:00CEA5MHD8002:links:Link:00CGA5YE0R000:props:StringProp:00CR8WDE8R000",
             "@type": "StringProp",
             "key": "position",
-            "value": "976"
+            "value": "1507"
           }
         ]
       }
     ],
     "title": "## Current Status",
-    "text": "The restructure has landed and has been revised five times since. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is v2: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with a scope statement and a worked example at each of the first three levels, and only current, verified items in the file at all. v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them, and v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph. Open Issues is empty; what remains is [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A), still unmeasured.",
+    "text": "The restructure has landed and has been revised through v3.1 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, then a role split at v3 and v3.1's own first-run repair. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is now the base every role loads: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with what each role does with it living in its own file (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, and v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them. v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph; v2.1 through v2.11 followed as tool-and-discipline fixes on that baseline rather than a further restructure, detailed one by one below. v3 split the skill across three roles handing off through the graph, and v3.1 — the first live run under that split — moved the whole task loop into the base after failing on its own defects. Open Issues, once empty, now carries entries of its own, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "BlockNode:00CEA5MHD8001",
     "type": "heading",
     "children": [
@@ -13959,16 +13977,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5MHD8003:links:Link:00CGGFP470000:props:StringProp:00CGGFP470001",
+            "@id": "BlockNode:00CEA5MHD8003:links:Link:00CGGFP470000:props:StringProp:00CR8WGXM8000",
             "@type": "StringProp",
             "key": "position",
-            "value": "521"
+            "value": "13"
           }
         ]
       }
     ],
-    "title": "00CEA5MHD8003",
-    "text": "All eighteen original items survived, relevelled rather than rewritten — item 18's graph-substance principle promoted to Orientation where it explains the rest, items 1/2/11/12/17 and half of 14 gathered into Discipline around an explicit edit loop, and the syntax and command-level items collected into Mechanics. Item 14's other half (the Freeflow document shape) left the skill entirely for `design/documentation.md`, and item 8's tool gap became a pointer to its tracked issue instead of inline prose. Remaining from [Task Breakdown](../planning/aperas-skill.md#id/BlockNode:00CEA5M6S8005): step 5's example harvest is partially done — the contrast pair, the traversal transcript and the edit loop are in, the Mechanics command-plus-failure-text examples are not yet systematic.",
+    "title": "All three of [Task Breakdown](../planning/aperas-skill.md#id/BlockNode:00CEA5M6S8005)'s batches have now shipped",
+    "text": "All three of [Task Breakdown](../planning/aperas-skill.md#id/BlockNode:00CEA5M6S8005)'s batches have now shipped: Batch 1 (the v1 restructure itself) as v1 through v1.3, Batch 2 (the read-side and code-side rules) as v1.4, and Batch 3 (the multi-agent split) as v3 and v3.1. v2 and its v2.1–v2.11 deltas landed in between, from user reads rather than from planned batch work.",
     "parent": "BlockNode:00CEA5MHD8002",
     "type": "paragraph",
     "children": []
@@ -13992,7 +14010,20 @@
       "BlockNode:00CF5ZS9QR001",
       "BlockNode:00CFATN6S8001",
       "BlockNode:00CGA5Y2P8001",
-      "BlockNode:00CGF71QX8001"
+      "BlockNode:00CGF71QX8001",
+      "BlockNode:00CR8VMQHG001",
+      "BlockNode:00CR8VV1J8001",
+      "BlockNode:00CR8VVFQG001",
+      "BlockNode:00CR8VVYM0001",
+      "BlockNode:00CR8VWD4R001",
+      "BlockNode:00CR8W2EJ0001",
+      "BlockNode:00CR8W30N0001",
+      "BlockNode:00CR8W3FSG001",
+      "BlockNode:00CR8W3YQ8001",
+      "BlockNode:00CR8W6F7G001",
+      "BlockNode:00CR8W7200001",
+      "BlockNode:00CR8MWVY8001",
+      "BlockNode:00CR8MWVYG000"
     ]
   },
   {
@@ -17586,10 +17617,12 @@
     "@id": "BlockNode:00CF2AEAX0002",
     "@type": "BlockNode",
     "title": "## Open Issues",
-    "text": "None currently — see Resolved below.",
+    "text": "One open — `aperas check-links`'s runtime prefix, missed by the CLI's own `kg:*`-to-`aperas` rename.",
     "parent": "BlockNode:00CF2AEAX0001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CR8XN9VG002"
+    ]
   },
   {
     "@id": "BlockNode:00CF2AEAX0003",
@@ -17692,7 +17725,8 @@
     "type": "heading",
     "children": [
       "BlockNode:00CF2AEMER002",
-      "BlockNode:00CF2AEMER006"
+      "BlockNode:00CF2AEMER006",
+      "BlockNode:00CR81TAV8001"
     ]
   },
   {
@@ -27428,7 +27462,7 @@
     ],
     "title": "## v2.3 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reordering and clarification of the Mechanics section for inserting and updating list items, to explicitly warn against a newly discovered failure mode where updating an existing list item by piping a bulleted string accidentally nests it (by replacing its children with a new list, rather than adopting a bare paragraph's text).",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CH5FJMDR002",
@@ -27774,7 +27808,7 @@
     ],
     "title": "## v2.4 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). This round is a correctness/completeness pass, not new discipline: a user-requested review of the GC-persistence and link-integrity-check fixes found both incomplete on first landing, fixed for real here, plus the frontmatter reformat (`>-` block scalar) that had never been re-recorded since it landed.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CHXVP090001",
@@ -27932,7 +27966,7 @@
     ],
     "title": "## v2.5 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). v2.4 documented `aperas check-links` as a tool with no discipline attached to it, which left the check in exactly the position this skill's own Philosophy warns against — available, correct, and dependent on somebody remembering to ask. Resolved by moving two of the three checks out of discipline entirely and into the service, leaving only the one an agent genuinely has to run. Measured before designing: a corpus-wide sweep is ~0.6s of service-side work (1428 live blocks, 358 carrying link text), so \"too expensive to run often\" — the premise the first cut of this design rested on — was simply false.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CHYJB998001",
@@ -28171,7 +28205,7 @@
     ],
     "title": "## v2.6 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). `aperas tree` gained a usable path reference, on a second attempt — the first put it on every line and was wrong, caught on review before it shipped further than this same session; the corrected design (issues/treeview.md) prints it exactly twice: once for the render's own apex, once wherever a `--view` render's viewcone zooms to a new relative root.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CJ02JJM0000",
@@ -28446,6 +28480,7 @@
       "BlockNode:00CJE97N2G001",
       "BlockNode:00CNR2E3D0001",
       "BlockNode:00CNSMR03R001",
+      "BlockNode:00CR8G1CP8001",
       "BlockNode:00CNR1X7RG001",
       "BlockNode:00CNR1X7RG002",
       "BlockNode:00CJ7PNQ2R001",
@@ -29903,7 +29938,7 @@
     ],
     "title": "## v2.7 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). A block's `type` — heading depth included — became changeable in place, closing the last case where *Preserve identity* had no identity-preserving route and `remove` + `insert` was the only option. Built and verified the same session it was designed (discussion/core.md's own working record).",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CJ5207P8002",
@@ -33630,7 +33665,7 @@
     ],
     "title": "## v2.8 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Reading the corpus gains a direction rule of its own: the concern gradient that already governs where a citation may point also governs where a read may enter, and drift between a tier and what it governs is visible only where a top-down descent and a bottom-up pinpoint meet. Both confirmations came from one session, one in each direction — a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled shape in [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001).\nRelocated, not rewritten: the `Dense linking is the precondition for both` and `A link is placed at the maturity the relationship has earned` paragraphs moved up to close *Deep read and deep write run along the same three directions*, whose final sentence is the antecedent of that \"both\". The new subsection had been inserted between them, which left the pair reading as though \"both\" bound to top-down and bottom-up instead — an ambiguity the flat layout cannot express away, since a paragraph belongs to whatever heading precedes it and nothing marks which one it was written for.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CN7ZQFN8001",
@@ -33865,7 +33900,7 @@
     ],
     "title": "## v2.9 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). A layout repair rather than a new rule: two Orientation items are promoted to subsections of their own, so each one's scope is stated rather than inferred from adjacency. Both were written when Orientation had no subsections at all, and were silently re-scoped the moment \"Deep read and deep write run along the same three directions\" was introduced above them — in a flat layout a paragraph belongs to whatever heading precedes it, so an item written for the section level is captured by the first subsection appearing before it, with nothing marking which one it was meant for. Neither item lost or gained a word; each bold lead-in simply became the `###` heading it had been acting as. Promotion rather than relocation is what restores the scoping, since once a subsection opens there is no way back to section level except to precede every subsection or to carry a heading of one's own. Surfaced when [v2.8](#id/BlockNode:00CN7YEND0001)'s new subsection landed between \"Dense linking is the precondition for both\" and the sentence supplying that \"both\", making a long-standing mis-scoping visible by breaking a pronoun.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CN8KBK9G001",
@@ -34190,7 +34225,7 @@
     ],
     "title": "## v2.10 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Generalizes v2.3's own warning (piping a bulleted string at an existing list item nests it instead of merging) rather than replacing it: `aperas update` now adopts a single parsed top-level node's full state — of any type, not only a bare paragraph — closing the gap that left `checked` and a genuinely-empty-text-with-children case with no safe input at all. Found while updating `planning/webapp.md`'s Task Breakdown checkboxes: piping `- [x] ...` at an existing item nested it as a stray child exactly as v2.3 already warned bulleted input would, but there was no bare-paragraph escape hatch for a checkbox the way there is for plain text, since checkbox state can only be expressed through the marker itself. Two more defects surfaced verifying the fix rather than assuming it: a title-rederivation bug (a text update that loses its lead-in term was adopting a throwaway parse-time id as the block's new title, not leaving the old one alone) and a spurious-run-leader hazard (naively adopting a solo parsed item's `orderedList`/`startIndex` would convert a plain continuation item into a new run boundary, since every standalone parse looks like the first item of its own list). Both closed as part of the same change. The `aperas insert` ordered-list append case picked up a matching fix: it already dropped a new item's ordering props when landing next to a plain continuation, but never validated the number it was given, and never covered landing next to a run-leader directly — both closed by computing the expected next number from the run's leader and rejecting a mismatch instead of silently discarding whatever was piped.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CNW50VZ8001",
@@ -34954,7 +34989,7 @@
     ],
     "title": "## v2.11 additions — delta on the v2 snapshot",
     "text": "Threaded onto [the v2 snapshot](#id/BlockNode:00CGF613VR001). Root `package.json`'s `kg:*` npm scripts were removed: once the `aperas` dispatcher covered every verb identically in dev (`npm run aperas -- <verb>`) and in the packaged binary, they were a second command surface doing exactly the same work as the first, not a distinct dogfooding workflow — see [design/packaging.md's Topology](../design/packaging.md#id/BlockNode:00CDGTZHSR005), which supersedes its own prior rationale for keeping them. Runtime `console.log`/`console.error` prefixes across every `kgX.ts` file, plus the flush/reload conflict-resolution hint (`serviceProtocol.ts`'s `CONFLICT_RESOLUTION_HINT`), were rewritten from `[ApeironNgn kg:X]`/`npm run kg:X` to `[aperas X]`/`npm run aperas -- X` to match — the `--help` usage lines had already been rewritten in an earlier pass ([history/packaging.md](../history/packaging.md#id/BlockNode:00CDY84BJ8002)), but these runtime messages had been missed until now. This skill's own one remaining `kg:*` mention, in the `check-links` Mechanics entry below, is closed the same way.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CQYGPR50002",
@@ -35096,7 +35131,7 @@
       }
     ],
     "title": "**Orchestrator**",
-    "text": "**Orchestrator**: records the conversation with the user as `discussion` freeflow, decides what happens next, and hands work to a subagent. It writes only freeflow and its own turns in the subagent threads.",
+    "text": "**Orchestrator**: records the conversation with the user as `discussion` freeflow — creating the topic's `## Freeflow` when it has none — decides what happens next, and hands work to a subagent. It writes only freeflow and its own turns in the subagent threads, and stages those writes itself, as every role stages what it writes for its own recovery. It reads the graph and the code directly to verify a result or a claim before relaying it, and whatever it relays goes into freeflow first, citing its source; a task's first read of the graph and its first map of the code stay with the grapher and the coder.",
     "parent": "BlockNode:00CR3X3N00002",
     "type": "listItem",
     "children": []
@@ -35123,7 +35158,7 @@
     "@id": "BlockNode:00CR3X3N08001",
     "@type": "BlockNode",
     "title": "### The loop",
-    "text": "A task alternates between the two subagents, grapher always first: grapher surveys the graph, coder surveys the code, grapher files that survey, coder changes the code, grapher records the result — for as many rounds as the task takes. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
+    "text": "A task runs a fixed sequence of turns, grapher always first: grapher surveys the graph, coder surveys the code without changing it, grapher files that survey, coder changes the code, the orchestrator verifies the diff and the tests itself, grapher files the result — the last three repeated for as many rounds as the task takes, then grapher's finishing turn. Each survey stays on its own side: grapher touches source code only to pinpoint an entry into the graph, and an Ask asks only for its receiver's kind of work. Every Ask cites the freeflow nodes for the decisions it relies on, so a decision that exists only in chat blocks the hand-off until it is recorded. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
     "parent": "BlockNode:00CR3X3N00001",
     "type": "heading",
     "children": []
@@ -35168,7 +35203,7 @@
     "@id": "BlockNode:00CR3X3N08004",
     "@type": "BlockNode",
     "title": "### Threads",
-    "text": "Each subagent has one thread, `artifacts/.threads/<role>.md` — `grapher.md`, `coder.md` — one per role while work is not parallel. A thread is a tree of topic (named by the user) > task (set by the orchestrator) > turn (one exchange with the orchestrator) > subturn. Subturn is optional as a level but not as content: across a batch of tool calls it records the progress and reasoning an agent narrates while it works and the essence of each tool result a later turn will need, written as it happens or at the end of the turn. A result left unrecorded is gone for every later turn, since the thread, not the chat, is what carries context forward. A topic is a concern the user names — usually one concern's artifact set, sometimes spanning concerns, or a batch of related tasks.",
+    "text": "Each subagent has one thread, `artifacts/.threads/<role>.md` — `grapher.md`, `coder.md` — one per role while work is not parallel. A thread is a tree of topic (named by the user) > task (set by the orchestrator) > turn (one exchange with the orchestrator) > subturn. Every turn has subturns, at least one per batch of tool calls: the turn's Work line holds the approach in a single line and cannot hold the results, so each subturn records its batch's progress and reasoning and the essence of each tool result a later turn will need, written as it happens or at the end of the turn. A result left unrecorded is gone for every later turn, since the thread, not the chat, is what carries context forward. A subturn also records the friction it hit — a workaround built, a call that failed or hung, a retry and what changed — and the Report lists each as a tool gap for the grapher to file. A topic is a concern the user names — usually one concern's artifact set, sometimes spanning concerns, or a batch of related tasks.",
     "parent": "BlockNode:00CR3X3N00001",
     "type": "heading",
     "children": [
@@ -35227,7 +35262,7 @@
     "@id": "BlockNode:00CR3X3N08007",
     "@type": "BlockNode",
     "title": "### Skill packaging",
-    "text": "One shared base skill — working the graph — loaded by every role, plus one role skill each for orchestrator, grapher and coder, stating only what that role writes, when it hands off, and how. Each subagent is an agent definition that preloads the base and its role skill: `.claude/agents/<name>.md` for Claude Code, `.agents/agents/<name>.md` for Antigravity, both shipped by `aperas skill install`.",
+    "text": "One shared base skill — working the graph — loaded by every role, plus one role skill each for orchestrator, grapher and coder, stating only what that role writes, when it hands off, and how. The task loop itself lives in the base skill, so every role sees the whole sequence around its own turns; each role skill details only its own. Each subagent is an agent definition that preloads the base and its role skill: `.claude/agents/<name>.md` for Claude Code, `.agents/agents/<name>.md` for Antigravity, both shipped by `aperas skill install`.",
     "parent": "BlockNode:00CR3X3N00001",
     "type": "heading",
     "children": []
@@ -35644,7 +35679,7 @@
     ],
     "title": "## v3 SKILL.md (verbatim, 2026-09-27)",
     "text": "Dumped verbatim from the four v3 skill files, the same way v0/v1/v2 were — extended to more than one file since the skill itself split across roles ([Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001)). A fresh snapshot rather than a delta: `skills/aperas/SKILL.md`'s own Discipline section was rewritten wholesale into role hand-off mechanics, and the three role-skill files (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`) are new, with no prior baseline to delta against.",
-    "parent": "ArtifactNode:00CE8XWYYG000",
+    "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
       "BlockNode:00CR5GCSEG002",
@@ -38390,6 +38425,3245 @@
     "title": "00CR5GCSH8004",
     "text": "**No turn without a Report.**",
     "parent": "BlockNode:00CR5GCSH8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR6BEFQG001",
+    "@type": "BlockNode",
+    "title": "**User asked to add a `--format:{short|long}` flag to `aperas tree`**",
+    "text": "**User asked to add a `--format:{short|long}` flag to `aperas tree`**: default `long` when `--view` is given, `short` otherwise. Small task, first real run of the grapher/coder multi-agent loop end to end.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR7N8FM8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z60001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR7N7Z60001:links:Link:00CR7N82SR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR6BEFQG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR7N7Z60001:links:Link:00CR7N82SR000:props:StringProp:00CR7N82SR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "111"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR7N7Z60001:links:Link:00CR7N82SR002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3XZ220001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR7N7Z60001:links:Link:00CR7N82SR002:props:StringProp:00CR7N82SR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "237"
+          }
+        ]
+      }
+    ],
+    "title": "**First live run of the v3 loop (2026-09-27) surfaced skill defects before any code was written**",
+    "text": "**First live run of the v3 loop (2026-09-27) surfaced skill defects before any code was written**: the run was [the `tree --format` task](../discussion/treeview.md#id/BlockNode:00CR6BEFQG001), reset afterwards as a failed try. It tested [v3 — the skill split across three agents](../discussion/aperas-skill.md#id/BlockNode:00CR3XZ220001).",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR7N7Z60002",
+      "BlockNode:00CR7N7Z68000",
+      "BlockNode:00CR7N7Z68001",
+      "BlockNode:00CR7N7Z68002",
+      "BlockNode:00CR7N7Z68003",
+      "BlockNode:00CR7N7Z68004",
+      "BlockNode:00CR7N7Z68005",
+      "BlockNode:00CR7N7Z68006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z60002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR7N7Z60002:props:StringProp:00CR7N82S0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR7N7Z60002:props:StringProp:00CR7N82S8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Staging exemption contradicts its own section**",
+    "text": "**Staging exemption contradicts its own section**: `aperas/SKILL.md`'s *Stage each verified step* ends \"the orchestrator stages neither, since it writes nothing that is not staged by the grapher's next turn\". The rationale is wrong: each agent stages its own edits for its own recovery, and does not hand that to another role's next turn. Decided (user): remove the exemption; every role stages what it writes.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68000",
+    "@type": "BlockNode",
+    "title": "**No guidance when the topic's discussion lacks `## Freeflow`**",
+    "text": "**No guidance when the topic's discussion lacks `## Freeflow`**: `discussion/cli.md` has only Dashboard and Settled. The orchestrator stalled, went to `design/documentation.md` to learn the convention, and switched to `discussion/treeview.md` instead. Decided (user): the orchestrator just creates it.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68001",
+    "@type": "BlockNode",
+    "title": "**The orchestrator pre-surveyed the corpus itself**",
+    "text": "**The orchestrator pre-surveyed the corpus itself**: to find where to record, it chose between `cli.md` and `treeview.md` and read the Freeflow shape in `design/documentation.md`. That is deep read, which belongs to the grapher. The gap above partly forced it.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68002",
+    "@type": "BlockNode",
+    "title": "**The first Ask folded the coder's survey turn into the grapher's**",
+    "text": "**The first Ask folded the coder's survey turn into the grapher's**: it told the grapher to find `tree`'s source and map its render behavior. `aperas-coder` makes the coder's first turn a no-change code survey that the grapher files; the grapher's own survey is graph-first and touches code only to pinpoint. The orchestrator was also about to send the coder straight to implementation, skipping that survey turn.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68003",
+    "@type": "BlockNode",
+    "title": "**The orchestrator read `node.ts` itself mid-discussion**",
+    "text": "**The orchestrator read `node.ts` itself mid-discussion**: after relaying the grapher's summary wrongly twice, it read the code for ground truth instead of sending a follow-up Ask. The resulting finding — scope and detail are independent axes — lived only in chat until recorded under the task's freeflow entry.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68004",
+    "@type": "BlockNode",
+    "title": "**Freeflow lagged the conversation**",
+    "text": "**Freeflow lagged the conversation**: three user corrections and two decisions went unrecorded until after the fact, despite \"record before acting\".",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68005",
+    "@type": "BlockNode",
+    "title": "**A failed insert left a live orphan**",
+    "text": "**A failed insert left a live orphan**: a rejected `aperas insert` (the item itself passed as parent) hydrated `BlockNode:00CR6BD1X0001` before anchor validation, and the retry placed a second copy. This is known tool behavior (base Mechanics, *`--after`/`--before` anchors*); the orchestrator didn't clean up after the failure.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N7Z68006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR7N7Z68006:links:Link:00CR8213RG000",
+        "@type": "Link",
+        "target": "BlockNode:00CR81SWZR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR7N7Z68006:links:Link:00CR8213RG000:props:StringProp:00CR8213RG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "172"
+          }
+        ]
+      }
+    ],
+    "title": "**A doubled `#id/` fragment in the grapher's Work was a render bug, not the grapher's**",
+    "text": "**A doubled `#id/` fragment in the grapher's Work was a render bug, not the grapher's**: the stored link was correct; `tree --view`'s preview doubles an existing fragment ([the render bug](../discussion/treeview.md#id/BlockNode:00CR81SWZR001)). The orchestrator first attributed it to the grapher from the rendered preview, without checking the stored text with `aperas show`.",
+    "parent": "BlockNode:00CR7N7Z60001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N8FM8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR7N8FM8001:links:Link:00CR7N8JEG000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y800G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR7N8FM8001:links:Link:00CR7N8JEG000:props:StringProp:00CR7N8JEG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "203"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR7N8FM8001:props:StringProp:00CR7N8JE8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR7N8FM8001:props:StringProp:00CR7N8JE8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Design settled with the user (2026-09-27)**",
+    "text": "**Design settled with the user (2026-09-27)**: the flag is `--detail short|long`, not `--format`, because `aperas tree` already has `--format <text|render-tree>` for output shape (code-only, absent from [Rendering](../design/treeview.md#id/BlockNode:00CE1GW4Y800G)). `short` = title, `long` = title + text; nothing else changes.",
+    "parent": "BlockNode:00CR6BEFQG001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR7N8FM8002",
+      "BlockNode:00CR7N8FM8003",
+      "BlockNode:00CR7N8FM8004",
+      "BlockNode:00CR7N8FM8005",
+      "BlockNode:00CR92W8TR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR7N8FM8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR7N8FM8002:props:StringProp:00CR7N8JE8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR7N8FM8002:props:StringProp:00CR7N8JE8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Two independent axes in `buildNodeItem`** (`packages/core/src/apeironNgn/node.ts`)",
+    "text": "**Two independent axes in `buildNodeItem`** (`packages/core/src/apeironNgn/node.ts`): structural scope `childrenToShow`, driven by the view's cone/`unfolds`, and per-node detail `showAbstract`, driven by the tier logic. `--detail` touches only the detail axis. Bare `renderTreeLines` already recurses the full tree, title only.",
+    "parent": "BlockNode:00CR7N8FM8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N8FM8003",
+    "@type": "BlockNode",
+    "title": "**Behavior**",
+    "text": "**Behavior**: without `--view` the default is `short` (unchanged), and `long` adds each node's text to the same full recursion. With `--view` the default is `long` (today's tiered render), and `short` forces title-only on every shown node, same scope.",
+    "parent": "BlockNode:00CR7N8FM8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N8FM8004",
+    "@type": "BlockNode",
+    "title": "**Corrected on the way**",
+    "text": "**Corrected on the way**: the orchestrator first claimed `long` without `--view` needs an `unfolds` set (wrong: `short` already shows the full tree), then proposed that `short` with `--view` ignore the tiers (wrong: only detail changes).",
+    "parent": "BlockNode:00CR7N8FM8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR7N8FM8005",
+    "@type": "BlockNode",
+    "title": "**Open**",
+    "text": "**Open**: whether `long` shows the truncated preview the view render uses today, or full text.",
+    "parent": "BlockNode:00CR7N8FM8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81SDX8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR81SDX8001:links:Link:00CR81SJJ8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3WYRG8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81SDX8001:links:Link:00CR81SJJ8000:props:StringProp:00CR81SJJ8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "106"
+          }
+        ]
+      }
+    ],
+    "title": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**",
+    "text": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**: this contradicts [Threads persist to `.state/` by membership, not by class](../design/treeview.md#id/BlockNode:00CR3WYRG8001), which says pruning a thread is an ordinary `remove`. Found 2026-09-27 when resetting both threads.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR81SDX8002",
+      "BlockNode:00CR81SDX8003",
+      "BlockNode:00CR81SDX8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR81SDX8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR81SDX8002:props:StringProp:00CR81SJJ0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR81SDX8002:props:StringProp:00CR81SJJ0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Mechanism**",
+    "text": "**Mechanism**: `aperas remove` on a thread heading keeps the removed root's `parent`, so the root stays in `Apeiron/.state/BlockNode.jsonld`. Every descendant loses its `parent`, so the ancestor walk to `artifacts/.threads/` no longer reaches it, and it dehydrates into tracked `Apeiron/BlockNode.jsonld`. Placement has to hold for tombstones too, not only while an ancestor under `.threads` is still reachable.",
+    "parent": "BlockNode:00CR81SDX8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81SDX8003",
+    "@type": "BlockNode",
+    "title": "**Repro**",
+    "text": "**Repro**: remove `## tree --format flag` in `.threads/grapher.md` (`BlockNode:00CR6BH1PR001`). The heading lands in `.state`; its Task, Turn, Ask, Work and Report nodes (e.g. `BlockNode:00CR6BKSS8001`, `BlockNode:00CR6BRTPG001`) land tracked with `tombstonedAt` and no `parent`. 15 thread tombstones leaked this way, and they are now in `AperasKG`'s git index.",
+    "parent": "BlockNode:00CR81SDX8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81SDX8004",
+    "@type": "BlockNode",
+    "title": "**Also needed**",
+    "text": "**Also needed**: moving the already-leaked tombstones back into `.state`.",
+    "parent": "BlockNode:00CR81SDX8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81SWZR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR81SWZR001:links:Link:00CR81T04G002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y800G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81SWZR001:links:Link:00CR81T04G002:props:StringProp:00CR81T04G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "427"
+          }
+        ]
+      }
+    ],
+    "title": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**",
+    "text": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**: `bakeResolvedLinkIds` in `packages/core/src/apeironNgn/node.ts` appends `#id/<target>` to every relative href it has a resolved `Link` for, whether or not the href already has a fragment. The base skill tells agents to write `[title](../x.md#id/BlockNode:<ID>)`, which is exactly that case. This belongs to the preview text of [Rendering](../design/treeview.md#id/BlockNode:00CE1GW4Y800G). Found 2026-09-27.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR81SWZR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR81SWZR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR81SWZR002:props:StringProp:00CR81T04G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR81SWZR002:props:StringProp:00CR81T04G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Repro**",
+    "text": "**Repro**: a block whose stored text is `[design/treeview.md's Rendering section](../design/treeview.md#id/BlockNode:00CE1GW4Y800G)` renders under `tree --view` as `…#id/BlockNode:00CE1GW4Y800G#id/BlockNode:00CE1GW4Y800G`. The stored text and its `Link` are correct, and `aperas check-links` is right to stay clean.",
+    "parent": "BlockNode:00CR81SWZR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81TAV8001",
+    "@type": "BlockNode",
+    "title": "## Freeflow",
+    "parent": "BlockNode:00CF2AEMER001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR81W4RG001",
+      "BlockNode:00CR8RVCF8001",
+      "BlockNode:00CR92SVXG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR81W4RG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR81W4RG001:links:Link:00CR81W81R004",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEAX0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81W4RG001:links:Link:00CR81W81R004:props:StringProp:00CR81W820000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "85"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR81W4RG001:props:StringProp:00CR81W81R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR81W4RG001:props:StringProp:00CR81W81R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**",
+    "text": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**: [A single `kg:insert` call isn't transactional](../issues/cli.md#id/BlockNode:00CF2AEAX0003) is marked Resolved, having moved anchor *resolution* ahead of hydration, verified only with a nonexistent anchor id. An anchor that resolves but isn't a child of the given parent is still rejected late, in `insertOrderedChild`, after the piped nodes are hydrated. Found 2026-09-27.",
+    "parent": "BlockNode:00CR81TAV8001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR81W4RG002",
+      "BlockNode:00CR81W4RG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR81W4RG002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR81W4RG002:props:StringProp:00CR81W81R002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR81W4RG002:props:StringProp:00CR81W81R003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Repro**",
+    "text": "**Repro**: `cat item.md | aperas insert BlockNode:00CGJHDK68001 --after BlockNode:00CGJHDK68001` (the item passed as its own parent) failed with \"insertOrderedChild: anchor … is not a child of …\" and left the live parentless orphan `BlockNode:00CR6BD1X0001` (since tombstoned).",
+    "parent": "BlockNode:00CR81W4RG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81W4RG003",
+    "@type": "BlockNode",
+    "title": "**Skill drift**",
+    "text": "**Skill drift**: the base skill's *`--after`/`--before` anchors* still says \"Be aware this failure is not clean\". That is stale against the Resolved issue for a missing anchor, and still true for a misplaced one.",
+    "parent": "BlockNode:00CR81W4RG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81Y470001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR81Y470001:links:Link:00CR81Y7W8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR81SDX8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81Y470001:links:Link:00CR81Y7W8000:props:StringProp:00CR81Y7W8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "238"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR81Y470001:links:Link:00CR81Y7W8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR81SWZR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81Y470001:links:Link:00CR81Y7W8002:props:StringProp:00CR81Y7W8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "323"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR81Y470001:links:Link:00CR81Y7W8004",
+        "@type": "Link",
+        "target": "BlockNode:00CR81W4RG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81Y470001:links:Link:00CR81Y7W8004:props:StringProp:00CR81Y7W8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "428"
+          }
+        ]
+      }
+    ],
+    "title": "**Skill v3.1 — decisions from the first-run findings (2026-09-27)**",
+    "text": "**Skill v3.1 — decisions from the first-run findings (2026-09-27)**: the orchestrator writes the skill change as code and hands it to the grapher to record. The three tool issues found in the run are held back as the test tasks for v3.1: [the `.state` tombstone leak](../discussion/treeview.md#id/BlockNode:00CR81SDX8001), [the doubled `#id/` fragment in `tree --view`](../discussion/treeview.md#id/BlockNode:00CR81SWZR001) and [the partial insert-transactionality fix](../discussion/cli.md#id/BlockNode:00CR81W4RG001).",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR81Y470002",
+      "BlockNode:00CR81Y470003",
+      "BlockNode:00CR81Y470004",
+      "BlockNode:00CR81Y470005",
+      "BlockNode:00CR87QPK0001",
+      "BlockNode:00CR88MS2G001",
+      "BlockNode:00CR8G0T70001",
+      "BlockNode:00CR8RXY6R001",
+      "BlockNode:00CR9045TR001",
+      "BlockNode:00CR9G5RS8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR81Y470002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR81Y470002:props:StringProp:00CR81Y7W0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR81Y470002:props:StringProp:00CR81Y7W0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Decided — staging**",
+    "text": "**Decided — staging**: delete the orchestrator exemption in *Stage each verified step*. Every role stages what it writes, for its own recovery.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81Y470003",
+    "@type": "BlockNode",
+    "title": "**Decided — missing `## Freeflow`**",
+    "text": "**Decided — missing `## Freeflow`**: the orchestrator creates it.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81Y470004",
+    "@type": "BlockNode",
+    "title": "**Decided — the orchestrator's reads use read-and-record**",
+    "text": "**Decided — the orchestrator's reads use read-and-record**: the orchestrator may read the graph or code itself, for example to verify or to answer the user, but any finding it relays must first go into freeflow, citing its source. Chosen over routing every question as a follow-up Ask, because a subagent round-trip took about 6.5 minutes and what routing protects for a read is the record.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR81Y470005",
+    "@type": "BlockNode",
+    "title": "**Decided — the loop lives in the base skill, and an Ask cites its decisions**",
+    "text": "**Decided — the loop lives in the base skill, and an Ask cites its decisions**: user approved 2026-09-27. Move the full loop and its turn types into the base skill's *Three roles* section: grapher survey (graph only), coder survey (no change), grapher files, coder change, orchestrator verifies, grapher files, finish. A hand-off Ask must cite a freeflow node for every decision it relies on, so an unrecorded decision blocks the Ask. The orchestrator makes the skill edit itself, since the skill has not held, then hands it to the grapher to record.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TC8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CR874XX8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSEG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CR874XX8000:props:StringProp:00CR874XX8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "14"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CR874XX8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR81Y470001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CR874XX8002:props:StringProp:00CR874XX8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "102"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CR874XX8004",
+        "@type": "Link",
+        "target": "BlockNode:00CR7N7Z60001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CR874XX8004:props:StringProp:00CR874XXG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "210"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CR8JJ12R000",
+        "@type": "Link",
+        "target": "BlockNode:00CR8G0T70001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CR8JJ12R000:props:StringProp:00CR9DHH38000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "911"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CR9DHH38001",
+        "@type": "Link",
+        "target": "BlockNode:00CR98HFCG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CR9DHH38001:props:StringProp:00CR9DHH3G000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1074"
+          }
+        ]
+      }
+    ],
+    "title": "## v3.1 additions — delta on the v3 snapshot",
+    "text": "Threaded onto [the v3 snapshot](#id/BlockNode:00CR5GCSEG001), across all four skill files. Implements [Skill v3.1 — decisions from the first-run findings](#id/BlockNode:00CR81Y470001), which answer the defects [the first live run of the v3 loop](#id/BlockNode:00CR7N7Z60001) surfaced: the orchestrator's staging exemption contradicting its own section, no guidance for a discussion without `## Freeflow`, the orchestrator surveying for itself, a grapher Ask that folded in the coder's survey, and freeflow lagging the conversation. The full task loop moves into the base skill so every role sees the turns around its own; the orchestrator's *Running a task* now follows it step for step, and each role skill's survey is scoped to its own side. Written by the orchestrator in the skill files and recorded here afterwards by the grapher, as the decision itself directed.\nTwo entries were added the same day under [the follow-up decisions](#id/BlockNode:00CR8G0T70001): subturns required in *Threads*, and the drift-script path corrected in the grapher skill. A further entry, [the skill asks for detailed records](#id/BlockNode:00CR98HFCG001), added tool-gap recording and filing across all four skill files.",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TC8002",
+      "BlockNode:00CR874TC8004",
+      "BlockNode:00CR8JD5VG001",
+      "BlockNode:00CR9D1WW0001",
+      "BlockNode:00CR9D5Z60001",
+      "BlockNode:00CR874TCG005",
+      "BlockNode:00CR874TCG007",
+      "BlockNode:00CR874TCG009",
+      "BlockNode:00CR9D7DVR001",
+      "BlockNode:00CR874TCG00C",
+      "BlockNode:00CR874TD0004",
+      "BlockNode:00CR874TD8000",
+      "BlockNode:00CR9D8210001",
+      "BlockNode:00CR874TD8002",
+      "BlockNode:00CR9D9NQG001",
+      "BlockNode:00CR8JDSQG001",
+      "BlockNode:00CR874TD8003",
+      "BlockNode:00CR9DA7KG001",
+      "BlockNode:00CR874TD8005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TC8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TC8002:links:Link:00CR874XXG001",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSEG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8002:links:Link:00CR874XXG001:props:StringProp:00CR874XXG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Top matter — Status bumped to v3.1",
+    "text": "Supersedes: [v3's base status line](#id/BlockNode:00CR5GCSEG004)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TC8003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TC8003",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.1** — the base every role loads: four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. What each role does with it lives in its role skill — `aperas-orchestrator`, `aperas-grapher`, `aperas-coder`. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CR874TC8002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TC8004",
+    "@type": "BlockNode",
+    "title": "### aperas — Discipline — The task loop",
+    "text": "Every task runs the same sequence of turns. Each role skill details its own turns; the whole sequence lives here, so every role knows what comes before and after its part:",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TC8005",
+      "BlockNode:00CR874TC8006",
+      "BlockNode:00CR874TC8007",
+      "BlockNode:00CR874TCG000",
+      "BlockNode:00CR874TCG001",
+      "BlockNode:00CR874TCG002",
+      "BlockNode:00CR874TCG003",
+      "BlockNode:00CR874TCG004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TC8005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR874TC8005:props:StringProp:00CR874XVR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR874TC8005:props:StringProp:00CR874XW0000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Grapher survey.** The graph for the task",
+    "text": "**Grapher survey.** The graph for the task: the governing design, open issues, planned items, prior history, and any drift between them. Source code is touched only to pinpoint an entry into the graph (*Entering the corpus*), never to map how the code behaves.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TC8006",
+    "@type": "BlockNode",
+    "title": "**Coder survey.** No code changes",
+    "text": "**Coder survey.** No code changes: map where the behavior lives, starting from the grapher's survey, and report where the code disagrees with it.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TC8007",
+    "@type": "BlockNode",
+    "title": "00CR874TC8007",
+    "text": "**Grapher files** the coder's survey, so the change starts from a recorded picture rather than one in the coder's context.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG000",
+    "@type": "BlockNode",
+    "title": "00CR874TCG000",
+    "text": "**Coder change**, starting from the filed survey.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG001",
+    "@type": "BlockNode",
+    "title": "00CR874TCG001",
+    "text": "**Orchestrator verifies** the diff and the tests itself.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG002",
+    "@type": "BlockNode",
+    "title": "00CR874TCG002",
+    "text": "**Grapher files** the result.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG003",
+    "@type": "BlockNode",
+    "title": "00CR874TCG003",
+    "text": "**Repeat 4–6** as the task needs, then the **grapher's finishing turn**.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG004",
+    "@type": "BlockNode",
+    "title": "00CR874TCG004",
+    "text": "An Ask asks only for its receiver's kind of work. A grapher Ask that says \"find the source\" or \"map the behavior\" has folded the coder's survey into the grapher's turn, and the coder then starts its change from a code map nobody filed.",
+    "parent": "BlockNode:00CR874TC8004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TCG005:links:Link:00CR874XXG003",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSF8008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG005:links:Link:00CR874XXG003:props:StringProp:00CR874XXG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Discipline — Stage each verified step, every role stages its own writes",
+    "text": "Supersedes: [v3's per-role staging sentence](#id/BlockNode:00CR5GCSF8008)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TCG006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TCG006",
+    "@type": "BlockNode",
+    "title": "00CR874TCG006",
+    "text": "Every role stages what it writes, in the repo it wrote to: the orchestrator and the grapher stage `AperasKG/`, the coder stages the code repo. The checkpoint exists for the writer's own recovery, so it is never left to another role's next turn.",
+    "parent": "BlockNode:00CR874TCG005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG007",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TCG007:links:Link:00CR874XXR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG800Y",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG007:links:Link:00CR874XXR000:props:StringProp:00CR874XXR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-orchestrator — Top matter — Status bumped to v3.1, with a staging clause",
+    "text": "Supersedes: [v3's orchestrator status line](#id/BlockNode:00CR5GCSG800Y)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TCG008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TCG008",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.1**. You are the orchestrator. The base `aperas` skill applies in full; this adds what only the orchestrator does. You talk with the user and run the loop. You do not do the graph work or the code work: you write `discussion` freeflow recording the conversation, and your own Ask nodes in the two threads — nothing else in the graph, and no source code. Stage each of those writes in `AperasKG/` as it lands (base: *Stage each verified step*).",
+    "parent": "BlockNode:00CR874TCG007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG009",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TCG009:links:Link:00CR874XXR002",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG800Z",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG009:links:Link:00CR874XXR002:props:StringProp:00CR874XXR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-orchestrator — Every exchange with the user — a missing Freeflow, and every Ask cites its decisions",
+    "text": "Supersedes: [v3's opening paragraph of Every exchange with the user](#id/BlockNode:00CR5GCSG800Z)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TCG00A",
+      "BlockNode:00CR874TCG00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00A",
+    "@type": "BlockNode",
+    "title": "Record it in the topic's discussion `## Freeflow` before acting on it",
+    "text": "Record it in the topic's discussion `## Freeflow` before acting on it: what was asked, what was decided, what was corrected, and why. The conversation can be compacted or cut off at any point, and a decision that only ever existed as chat is gone the moment that happens, with no way to resume or hand it off from what is on disk. Freeflow is raw material — record as you go, not once things are resolved; the grapher organizes and promotes it. If the topic's discussion has no `## Freeflow` yet, create it.",
+    "parent": "BlockNode:00CR874TCG009",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00B",
+    "@type": "BlockNode",
+    "title": "00CR874TCG00B",
+    "text": "**Every Ask cites the freeflow nodes for the decisions it relies on.** A discussion has no moment of acting to trigger the record, so decisions and corrections pile up in chat until an Ask is written. The citation makes the record checkable at that point: a decision that exists only in chat has nothing to cite, and the Ask can't be written until it is recorded.",
+    "parent": "BlockNode:00CR874TCG009",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00C",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR004",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG8013",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR004:props:StringProp:00CR874XXR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR006",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG8015",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR006:props:StringProp:00CR874XXR007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "66"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR008",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG8016",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR008:props:StringProp:00CR874XXR009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "116"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR00A",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG8017",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XXR00A:props:StringProp:00CR874XY0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "155"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XY0001",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG8018",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XY0001:props:StringProp:00CR874XY0002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "207"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XY0003",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG8019",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TCG00C:links:Link:00CR874XY0003:props:StringProp:00CR874XY0004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "250"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-orchestrator — Running a task — the steps follow the base task loop",
+    "text": "Supersedes: [Grapher first, always](#id/BlockNode:00CR5GCSG8013), [Hand to the coder](#id/BlockNode:00CR5GCSG8015), [Verify](#id/BlockNode:00CR5GCSG8016), [Back to the grapher](#id/BlockNode:00CR5GCSG8017), [Repeat 4–6](#id/BlockNode:00CR5GCSG8018), [Finish](#id/BlockNode:00CR5GCSG8019)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TCG00D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00D",
+    "@type": "BlockNode",
+    "title": "00CR874TCG00D",
+    "text": "The turns are the base skill's *The task loop*; what the orchestrator does at each:",
+    "parent": "BlockNode:00CR874TCG00C",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CR874TCG00E",
+      "BlockNode:00CR874TCG00F",
+      "BlockNode:00CR874TCG00G",
+      "BlockNode:00CR874TCG00H",
+      "BlockNode:00CR874TCG00J",
+      "BlockNode:00CR874TD0000",
+      "BlockNode:00CR874TD0001",
+      "BlockNode:00CR874TD0002",
+      "BlockNode:00CR874TD0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00E",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR874TCG00E:props:StringProp:00CR874XWG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR874TCG00E:props:StringProp:00CR874XWG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR874TCG00E",
+    "text": "**Open it.** In both threads, a `## <topic>` heading if the topic is new, then a `### <task>` heading for the task.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00F",
+    "@type": "BlockNode",
+    "title": "00CR874TCG00F",
+    "text": "**Grapher survey.** An Ask to survey the graph for the task, citing the freeflow items that define it. Ask for the graph, not the code. Zoom `<p>-orchestrator-grapher`; message the grapher.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00G",
+    "@type": "BlockNode",
+    "title": "00CR874TCG00G",
+    "text": "**Read the Report** (`aperas tree --view <p>-grapher-orchestrator`). Ask follow-ups as new turns until it is clear.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00H",
+    "@type": "BlockNode",
+    "title": "00CR874TCG00H",
+    "text": "**Coder survey.** An Ask citing the grapher's Report and the nodes the task turns on, for a code map with no changes. Zoom `<p>-orchestrator-coder`; message the coder.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TCG00J",
+    "@type": "BlockNode",
+    "title": "00CR874TCG00J",
+    "text": "**Grapher files** the coder's survey.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD0000",
+    "@type": "BlockNode",
+    "title": "00CR874TD0000",
+    "text": "**Coder change.** An Ask citing the filed survey and the decisions the change rests on.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD0001",
+    "@type": "BlockNode",
+    "title": "00CR874TD0001",
+    "text": "**Verify** the coder's result yourself — the diff, the tests — before accepting it (*Reading for yourself*, below). A fix is a new Ask, not a correction you make.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD0002",
+    "@type": "BlockNode",
+    "title": "00CR874TD0002",
+    "text": "**Grapher files** the result.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD0003",
+    "@type": "BlockNode",
+    "title": "00CR874TD0003",
+    "text": "**Repeat 6–8** for as many rounds as the task takes, then ask the grapher for the finishing turn and report to the user.",
+    "parent": "BlockNode:00CR874TCG00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD0004",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator — Reading for yourself — read and record",
+    "text": "Verifying is yours: the coder's diff and tests before you accept them, and any claim before you relay it to the user as fact — including a subagent's summary. Read the graph or the code directly for that. Whatever the reading finds that you then relay or act on goes into freeflow first, citing its source: the node, or the file and line. What routing protects for a write is the owning role's surrounding steps; for a read it is the record, and a finding that lives only in chat is lost to the next turn and to every other role.",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TD0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TD0005",
+    "@type": "BlockNode",
+    "title": "00CR874TD0005",
+    "text": "Verifying is not surveying. A task's first read of the graph is still the grapher's survey, and its first map of the code is still the coder's. A question neither Report answers is a follow-up Ask, not a survey of your own.",
+    "parent": "BlockNode:00CR874TD0004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD8000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TD8000:links:Link:00CR874XY0005",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSGG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TD8000:links:Link:00CR874XY0005:props:StringProp:00CR874XY0006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Top matter — Status bumped to v3.1",
+    "text": "Supersedes: [v3's grapher status line](#id/BlockNode:00CR5GCSGG003)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TD8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TD8001",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.1**. You are the grapher. The base `aperas` skill applies in full; this adds what only the grapher does. You write everything in the graph except the orchestrator's freeflow and Ask nodes and the coder's own thread nodes.",
+    "parent": "BlockNode:00CR874TD8000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD8002",
+    "@type": "BlockNode",
+    "title": "### aperas-grapher — Survey — the graph's side only",
+    "text": "The survey is the graph's side only. Touch source code just to pinpoint an entry into the graph; mapping how the code behaves is the coder's survey, the next turn (base: *The task loop*). If an Ask asks you for that map, say so in your Report rather than doing it.",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD8003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TD8003:links:Link:00CR874XY0007",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSH000B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TD8003:links:Link:00CR874XY0007:props:StringProp:00CR874XY0008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-coder — Top matter — Status bumped to v3.1",
+    "text": "Supersedes: [v3's coder status line](#id/BlockNode:00CR5GCSH000B)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TD8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TD8004",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.1**. You are the coder. The base `aperas` skill applies in full; this adds what only the coder does. You change source code. You read the graph as much as the work needs, and you write to exactly one place in it: your own nodes in `.threads/coder.md`.",
+    "parent": "BlockNode:00CR874TD8003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR874TD8005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR874TD8005:links:Link:00CR874XY0009",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSH000T",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TD8005:links:Link:00CR874XY0009:props:StringProp:00CR874XY8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-coder — A survey turn changes no code — the first turn is always a survey",
+    "text": "Supersedes: [v3's survey-turn paragraph](#id/BlockNode:00CR5GCSH000T)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR874TD8006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR874TD8006",
+    "@type": "BlockNode",
+    "title": "00CR874TD8006",
+    "text": "The first coder turn of a task is a survey (base: *The task loop*): read the code the Ask points at, map where the behavior lives, and report that map. The grapher files it before any change is made, which is what lets the change turn start from a recorded picture instead of the one in your context.",
+    "parent": "BlockNode:00CR874TD8005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR87QPK0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR874TC8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8000:props:StringProp:00CR87QSW8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "91"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8002:props:StringProp:00CR87QSW8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "190"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8004",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8004:props:StringProp:00CR87QSW8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "310"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8006",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR87QPK0001:links:Link:00CR87QSW8006:props:StringProp:00CR87QSW8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "462"
+          }
+        ]
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: the skill edit implementing these four decisions is recorded as [v3.1 additions — delta on the v3 snapshot](#id/BlockNode:00CR874TC8001), and promoted to design's [Orchestrator](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003) (missing `## Freeflow`, staging, read-and-record), [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) (the full turn sequence, each survey on its own side, Asks citing their decisions) and [Skill packaging](../design/aperas-skill.md#id/BlockNode:00CR3X3N08007) (the loop lives in the base skill).",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR88MS2G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR88MS2G001:links:Link:00CR88MXQ8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR874TC8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR88MS2G001:links:Link:00CR88MXQ8000:props:StringProp:00CR88MXQ8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "172"
+          }
+        ]
+      }
+    ],
+    "title": "**Orchestrator verified the grapher's recording turn**",
+    "text": "**Orchestrator verified the grapher's recording turn**: `skills/aperas/scripts/skill_drift.py` reports 0 added, 0 dropped and 12 superseded (all accounted for) against the [v3.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001). The code repo has no top-level `scripts/`, so the skill's `scripts/skill_drift.py` path is wrong as the grapher reported. The skill edit itself landed as commit `67c695e`, committed by the user.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8G0T70001",
+    "@type": "BlockNode",
+    "title": "**Follow-ups decided after the v3.1 recording turn (2026-09-27)**",
+    "text": "**Follow-ups decided after the v3.1 recording turn (2026-09-27)**: the user's decisions on the grapher's two questions, plus two more items.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR8G0T70002",
+      "BlockNode:00CR8G0T78000",
+      "BlockNode:00CR8G0T78001",
+      "BlockNode:00CR8G0T78002",
+      "BlockNode:00CR8N0ZVR001",
+      "BlockNode:00CR8NV4ZR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR8G0T70002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR8G0T70002:props:StringProp:00CR8G0YFG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8G0T70002:props:StringProp:00CR8G0YFG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Decided — correct the drift-script path**",
+    "text": "**Decided — correct the drift-script path**: `aperas-grapher/SKILL.md` names `scripts/skill_drift.py`, but the script lives at `skills/aperas/scripts/skill_drift.py` (repo root has no `scripts/`). The orchestrator fixes the skill text; the grapher records it.",
+    "parent": "BlockNode:00CR8G0T70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8G0T78000",
+    "@type": "BlockNode",
+    "title": "**Decided — history milestones**",
+    "text": "**Decided — history milestones**: the grapher adds v3 and v3.1 milestones to `history/aperas-skill.md`, whose milestones stop at v2.",
+    "parent": "BlockNode:00CR8G0T70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8G0T78001",
+    "@type": "BlockNode",
+    "title": "**Decided — fix the heading level of the later version sections**",
+    "text": "**Decided — fix the heading level of the later version sections**: in `discussion/aperas-skill.md`, the v2.3 deltas onward (through the v3 snapshot and the v3.1 delta) sit at the document root instead of under the H1 like v0–v2.2. The user noticed this long ago and left it. The grapher fixes it by moving the nodes, keeping their ids.",
+    "parent": "BlockNode:00CR8G0T70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8G0T78002",
+    "@type": "BlockNode",
+    "title": "**Decided — subturns are required, not optional as a level**",
+    "text": "**Decided — subturns are required, not optional as a level**: the user questioned the base skill's *Threads* wording \"Subturns are optional as a level and mandatory as content\", and approved the fix 2026-09-27. The Work line holds the approach in one line and subturns hold results, so no multi-call turn can fold them in, and a single-call turn's result is already in the Report. The rule becomes: at least one subturn per batch of tool calls, each holding that batch's results. The orchestrator edits the skill; the grapher records it.",
+    "parent": "BlockNode:00CR8G0T70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8G1CP8001",
+    "@type": "BlockNode",
+    "title": "**The webapp opens a newly loaded view at the folder root, not at the view's root**",
+    "text": "**The webapp opens a newly loaded view at the folder root, not at the view's root**: reported by the user 2026-09-27. A view's root is its current zoom (set by `aperas zoom`), which is also where `aperas tree --view` renders from by default. The webapp should open a view there too.",
+    "parent": "BlockNode:00CJ2TESY0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8JD5VG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8JD5VG001:links:Link:00CR8JDA1R000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSF000K",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8JD5VG001:links:Link:00CR8JDA1R000:props:StringProp:00CR8JDA1R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Discipline — Threads, every turn has subturns",
+    "text": "Supersedes: [v3's subturn paragraph in Threads](#id/BlockNode:00CR5GCSF000K)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR8JD5VG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR8JD5VG002",
+    "@type": "BlockNode",
+    "title": "00CR8JD5VG002",
+    "text": "**Every turn has subturns: at least one per batch of tool calls.** The Work line holds the approach in one line; the results belong in subturns, and no turn with more than one call can fold them into that line. For each batch, a subturn records the progress, the reasoning, and the *essence of each tool result* a later turn will need — the failing assertion's line, the id that came back, the count, the file that turned out to own the behavior — not \"ran the tests\". Write them as you go or at the end of the turn, but before the turn ends: a result that is not in the thread is gone for every later turn, since the next invocation starts from the thread, not from this one's context.",
+    "parent": "BlockNode:00CR8JD5VG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8JDSQG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8JDSQG001:links:Link:00CR8JDWZ8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSH0004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8JDSQG001:links:Link:00CR8JDWZ8000:props:StringProp:00CR8JDWZ8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8JDSQG001:links:Link:00CR8JDWZ8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSH0005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8JDSQG001:links:Link:00CR8JDWZ8002:props:StringProp:00CR8JDWZ8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "112"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Checking the skill against its own record — the drift-script path corrected",
+    "text": "Supersedes: [v3's opening paragraph of Checking the skill against its own record](#id/BlockNode:00CR5GCSH0004), [v3's drift-script commands](#id/BlockNode:00CR5GCSH0005)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR8JDSQG002",
+      "BlockNode:00CR8JDSQG003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR8JDSQG002",
+    "@type": "BlockNode",
+    "title": "00CR8JDSQG002",
+    "text": "`SKILL.md` is a *generative* projection of its concern — authored from design rather than serialized by a command — so unlike an `aperas project` artifact it can drift from its source with nothing detecting it. `skill_drift.py`, in the base `aperas` skill's `scripts/`, compares the file against the graph's record of it (the latest snapshot plus the deltas above it). From the repo root:",
+    "parent": "BlockNode:00CR8JDSQG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8JDSQG003",
+    "@type": "BlockNode",
+    "title": "00CR8JDSQG003",
+    "text": "```bash\nskills/aperas/scripts/skill_drift.py              # both directions\nskills/aperas/scripts/skill_drift.py --added      # written into the file, never recorded\nskills/aperas/scripts/skill_drift.py --dropped    # recorded, no longer in the file\n```",
+    "parent": "BlockNode:00CR8JDSQG001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8MWVY8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8MWVY8001:links:Link:00CR8MWZTR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8MWVY8001:links:Link:00CR8MWZTR000:props:StringProp:00CR8MWZTR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "756"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8MWVY8001:links:Link:00CR8MWZTR002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3XQKNG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8MWVY8001:links:Link:00CR8MWZTR002:props:StringProp:00CR8MWZTR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "847"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8MWVY8001:links:Link:00CR8MWZTR004",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSEG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8MWVY8001:links:Link:00CR8MWZTR004:props:StringProp:00CR8MWZTR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "926"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8MWVY8001:props:StringProp:00CR8MWZTG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8MWVY8001:props:StringProp:00CR8MWZTG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v3 — the skill split across three roles, with the graph as the medium they hand off through**",
+    "text": "**v3 — the skill split across three roles, with the graph as the medium they hand off through**: by 2026-09-27 the loop had outgrown what one agent follows reliably, and the user was routinely reminding agents of the steps they dropped. The skill became a base every role loads plus three role skills: an orchestrator that talks with the user and writes only freeflow and its own Asks, a grapher that owns every other graph write, and a coder that owns source code and writes only its own thread. Roles hand off through per-role threads and through views rooted on the current Ask or Report: the view carries the state of the work, the chat only its progress. Threads sit at the bottom of the citation gradient, so nothing outside one links in. Settled as [Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001) and planned as [Batch 3](../planning/aperas-skill.md#id/BlockNode:00CR3XQKNG001). Recorded as [v3 SKILL.md (verbatim, 2026-09-27)](../discussion/aperas-skill.md#id/BlockNode:00CR5GCSEG001), a fresh snapshot and the first to span more than one file, since the base skill's Discipline was rewritten wholesale and the three role files had no baseline to delta against.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8MWVYG000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8MWVYG000:links:Link:00CR8MWZV0000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8MWVYG000:links:Link:00CR8MWZV0000:props:StringProp:00CR8MWZV0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "700"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8MWVYG000:links:Link:00CR8MWZV0002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8MWVYG000:links:Link:00CR8MWZV0002:props:StringProp:00CR8MWZV0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1034"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8MWVYG000:links:Link:00CR8MWZV0004",
+        "@type": "Link",
+        "target": "BlockNode:00CR874TC8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8MWVYG000:links:Link:00CR8MWZV0004:props:StringProp:00CR8MWZV0005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1222"
+          }
+        ]
+      }
+    ],
+    "title": "**v3.1 — the first live run of the loop failed on the skill's own defects, and the full task loop moved into the base**",
+    "text": "**v3.1 — the first live run of the loop failed on the skill's own defects, and the full task loop moved into the base**: the first task run under v3, the same day, was reset as a failed try before any code was written. The orchestrator's staging exemption contradicted its own section, a topic discussion without `## Freeflow` left it with no guidance, it surveyed the corpus itself, and its first Ask folded the coder's survey into the grapher's turn; freeflow lagged the conversation throughout. The fix put the whole turn sequence — grapher survey, coder survey, grapher files, coder change, orchestrator verifies, grapher files — into the base skill, so every role sees the turns around its own ([The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001)). Every role now stages its own writes, every Ask cites the freeflow nodes for the decisions it relies on, and the orchestrator reads for itself only by recording what it relays. Two follow-ups the same day made subturns required, at least one per batch of tool calls ([threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)), and corrected the drift-script path. The three tool issues the run found were held back as v3.1's test tasks. Recorded as [the v3.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001). Notable as the first version written under the split v3 introduced: the orchestrator edited the skill files and the grapher recorded them.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8N0ZVR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142G000",
+        "@type": "Link",
+        "target": "BlockNode:00CR8JD5VG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142G000:props:StringProp:00CR8N142R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "81"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R001",
+        "@type": "Link",
+        "target": "BlockNode:00CR8JDSQG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R001:props:StringProp:00CR8N142R002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "171"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R003",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R003:props:StringProp:00CR8N142R004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "337"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R005",
+        "@type": "Link",
+        "target": "BlockNode:00CR8MWVY8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R005:props:StringProp:00CR8N142R006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "429"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R007",
+        "@type": "Link",
+        "target": "BlockNode:00CR8MWVYG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8N0ZVR001:links:Link:00CR8N142R007:props:StringProp:00CR8N142R008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "493"
+          }
+        ]
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: the two skill edits are recorded in the v3.1 delta as [aperas — Discipline — Threads, every turn has subturns](#id/BlockNode:00CR8JD5VG001) and [aperas-grapher — Checking the skill against its own record — the drift-script path corrected](#id/BlockNode:00CR8JDSQG001); the subturn rule is promoted to design's [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004). The history milestones are [v3](../history/aperas-skill.md#id/BlockNode:00CR8MWVY8001) and [v3.1](../history/aperas-skill.md#id/BlockNode:00CR8MWVYG000). The v2.3-onward sections now sit under this document's H1, ids unchanged.",
+    "parent": "BlockNode:00CR8G0T70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8NV4ZR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8NV4ZR001:links:Link:00CR8NV8AR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR8MWVY8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8NV4ZR001:links:Link:00CR8NV8AR000:props:StringProp:00CR8NV8B0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "222"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8NV4ZR001:links:Link:00CR8NV8B0001",
+        "@type": "Link",
+        "target": "BlockNode:00CR8MWVYG000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8NV4ZR001:links:Link:00CR8NV8B0001:props:StringProp:00CR8NV8B0002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "286"
+          }
+        ]
+      }
+    ],
+    "title": "**Orchestrator verified the grapher's Turn 2**",
+    "text": "**Orchestrator verified the grapher's Turn 2**: `skill_drift.py` reports 0 added, 0 dropped and 14 superseded. `discussion/aperas-skill.md` now has every version section under its H1, and `history/aperas-skill.md` has the [v3](../history/aperas-skill.md#id/BlockNode:00CR8MWVY8001) and [v3.1](../history/aperas-skill.md#id/BlockNode:00CR8MWVYG000) milestones. The grapher's Work carried nine subturns, the first turn run under the required-subturn rule.",
+    "parent": "BlockNode:00CR8G0T70001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8RVCF8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8RVCF8001:links:Link:00CR8RVGR8001",
+        "@type": "Link",
+        "target": "BlockNode:00CQYGPR50001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8RVCF8001:links:Link:00CR8RVGR8001:props:StringProp:00CR8RVGR8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "85"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8RVCF8001:links:Link:00CR8Y2YNR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR8XN9VG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8RVCF8001:links:Link:00CR8Y2YNR000:props:StringProp:00CR8Y2YNR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "498"
+          }
+        ]
+      }
+    ],
+    "title": "**`aperas check-links` still prints the old `[ApeironNgn check-links]` prefix**",
+    "text": "**`aperas check-links` still prints the old `[ApeironNgn check-links]` prefix**: the [v2.11 delta](../discussion/aperas-skill.md#id/BlockNode:00CQYGPR50001) records runtime prefixes rewritten from `[ApeironNgn kg:X]` to `[aperas X]`, but `packages/cli/src/kgCheckLinks.ts` prints `[ApeironNgn check-links]` at all five sites (lines 44, 58, 61, 65, 79). The prefix had no `kg:` in it, which likely let it escape the rename. Found by the grapher, reproduced by the orchestrator, 2026-09-27. Filed as [an Open Issue in issues/cli.md](../issues/cli.md#id/BlockNode:00CR8XN9VG002).",
+    "parent": "BlockNode:00CR81TAV8001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR8RVCF8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR8RVCF8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR8RVCF8002:props:StringProp:00CR8RVGR0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8RVCF8002:props:StringProp:00CR8RVGR8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Possibly related**",
+    "text": "**Possibly related**: `packages/cli/src/apeironNgn/service.ts` logs `[ApeironNgn service]`. That may be intentional, since it names the service component rather than a CLI verb.",
+    "parent": "BlockNode:00CR8RVCF8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8RXY6R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8RXY6R001:links:Link:00CR8RY1Z0000",
+        "@type": "Link",
+        "target": "BlockNode:00CR8RVCF8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8RXY6R001:links:Link:00CR8RY1Z0000:props:StringProp:00CR8RY1Z0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "280"
+          }
+        ]
+      }
+    ],
+    "title": "**Decided — history, round two** (2026-09-27)",
+    "text": "**Decided — history, round two** (2026-09-27): the grapher adds the missing v2.1–v2.11 milestones to `history/aperas-skill.md`, matching the v1.1–v1.4 convention, and rewrites its Current Status paragraph, which still describes the v1 restructure, for v3.1. The user also had the [`check-links` prefix bug](../discussion/cli.md#id/BlockNode:00CR8RVCF8001) filed, not reserved as a test task.",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VMQHG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VMQHG001:links:Link:00CR8VMV7R000",
+        "@type": "Link",
+        "target": "BlockNode:00CGMY04AG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VMQHG001:links:Link:00CR8VMV7R000:props:StringProp:00CR8VMV7R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "623"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.1 — link-write verification named as the sharpest instance of \"verify by traversal\"**",
+    "text": "**v2.1 — link-write verification named as the sharpest instance of \"verify by traversal\"**: two confirmed-live incidents in one session — a corpus-wide sweep finding 9 nodes whose links had silently never resolved, and a separate incident watching four freshly-resolved links vanish from nodes that had just been moved and re-texted — showed a write can report `\"N resolved\"` and still leave `.links` empty, with nothing else surfacing it. Discipline's \"Verify by traversal\" item was rewritten to treat a link-bearing write as unverified until `aperas show`/`aperas backlinks --text` actually shows the `Link`. Recorded as [the v2.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CGMY04AG001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VN7BG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VN7BG001:links:Link:00CR8VNAXR002",
+        "@type": "Link",
+        "target": "BlockNode:00CGN8W9M8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VN7BG001:links:Link:00CR8VNAXR002:props:StringProp:00CR8VNAXR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "377"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VN7BG001:props:StringProp:00CR8VNAXR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VN7BG001:props:StringProp:00CR8VNAXR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.2 — Mechanics caught up to the toolset v2.1 itself relied on**",
+    "text": "**v2.2 — Mechanics caught up to the toolset v2.1 itself relied on**: `aperas show`, tombstone hiding, bare-`unfold` peek, `pruneStaleUnfolds` and the run-leader fix had all landed without being folded back into the file's own Mechanics section, leaving it describing tools by their pre-fix state right next to a Discipline item already written in the post-fix one. Recorded as [the v2.2 delta](../discussion/aperas-skill.md#id/BlockNode:00CGN8W9M8001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VNJE0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VNJE0001:links:Link:00CR8VNNT8000",
+        "@type": "Link",
+        "target": "BlockNode:00CH5FJMDR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VNJE0001:links:Link:00CR8VNNT8000:props:StringProp:00CR8VNNT8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "302"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VNJE0001:props:StringProp:00CR8VNNT0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VNJE0001:props:StringProp:00CR8VNNT0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.3 — the list-manipulation Mechanics reordered and rewritten around a newly found nesting bug**",
+    "text": "**v2.3 — the list-manipulation Mechanics reordered and rewritten around a newly found nesting bug**: piping a bulleted string at an existing list item to update it was found to nest it instead of merging, replacing its children with a new list rather than adopting a bare paragraph's text. Recorded as [the v2.3 delta](../discussion/aperas-skill.md#id/BlockNode:00CH5FJMDR001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VNY0R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VNY0R001:links:Link:00CR8VP228002",
+        "@type": "Link",
+        "target": "BlockNode:00CHXVEW98001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VNY0R001:links:Link:00CR8VP228002:props:StringProp:00CR8VP228003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "407"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VNY0R001:props:StringProp:00CR8VP228000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VNY0R001:props:StringProp:00CR8VP228001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.4 — a correctness pass on fixes already claimed done**",
+    "text": "**v2.4 — a correctness pass on fixes already claimed done**: a user-requested review found both the GC-persistence and link-integrity-check fixes incomplete on first landing; both were finished for real here, `aperas check-links` was documented in Mechanics for the first time, and the frontmatter's `>-` block-scalar reformat — shipped earlier but never recorded — was written up alongside it. Recorded as [the v2.4 delta](../discussion/aperas-skill.md#id/BlockNode:00CHXVEW98001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VP8WR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VP8WR001:links:Link:00CR8VPBY0002",
+        "@type": "Link",
+        "target": "BlockNode:00CHYJ6PR8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VP8WR001:links:Link:00CR8VPBY0002:props:StringProp:00CR8VPBY0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "608"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VP8WR001:props:StringProp:00CR8VPBY0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VP8WR001:props:StringProp:00CR8VPBY0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.5 — `check-links` moved from a discipline to remember into a check the service runs itself**",
+    "text": "**v2.5 — `check-links` moved from a discipline to remember into a check the service runs itself**: documenting the tool in v2.4 without attaching discipline to it left it exactly where Philosophy warns against — available, correct, and dependent on somebody remembering to run it. Two of the three checks moved into the service (per-write and corpus-wide-at-reload sweeps); only the end-of-batch sweep remains an agent's own responsibility. Measured before designing: a corpus-wide sweep costs about 0.6s, so \"too expensive to run often\" — the premise the first design cut rested on — was false. Recorded as [the v2.5 delta](../discussion/aperas-skill.md#id/BlockNode:00CHYJ6PR8001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VPHZ8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VPHZ8001:links:Link:00CR8VPP3R002",
+        "@type": "Link",
+        "target": "BlockNode:00CJ02BTG0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VPHZ8001:links:Link:00CR8VPP3R002:props:StringProp:00CR8VPP40000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "394"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VPHZ8001:props:StringProp:00CR8VPP3R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VPHZ8001:props:StringProp:00CR8VPP3R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.6 — `aperas tree`'s breadcrumb corrected on a second attempt**",
+    "text": "**v2.6 — `aperas tree`'s breadcrumb corrected on a second attempt**: a usable path reference was added to `aperas tree`'s output; the first attempt printed it on every line and was wrong, caught on review before shipping further. The corrected design prints it exactly twice — once for the render's own apex, once wherever a `--view` render's viewcone zooms to a new relative root. Recorded as [the v2.6 delta](../discussion/aperas-skill.md#id/BlockNode:00CJ02BTG0001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VPWV0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VPWV0001:links:Link:00CR8VQ03R002",
+        "@type": "Link",
+        "target": "BlockNode:00CJ5207P8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VPWV0001:links:Link:00CR8VQ03R002:props:StringProp:00CR8VQ040000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "340"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VPWV0001:props:StringProp:00CR8VQ03R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VPWV0001:props:StringProp:00CR8VQ03R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.7 — `aperas retype` closed the last case Preserve Identity had no route for**",
+    "text": "**v2.7 — `aperas retype` closed the last case Preserve Identity had no route for**: a block's `type`, heading depth included, became changeable in place, closing the one remaining case where converting a heading to a list item (or back) had no route but `remove` + `insert`. Built and verified the same session it was designed. Recorded as [the v2.7 delta](../discussion/aperas-skill.md#id/BlockNode:00CJ5207P8001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VQ6BG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VQ6BG001:links:Link:00CR8VQ9V8002",
+        "@type": "Link",
+        "target": "BlockNode:00CN7XM9TG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VQ6BG001:links:Link:00CR8VQ9V8002:props:StringProp:00CR8VQ9V8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "544"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8VQ6BG001:links:Link:00CR8VQ9V8004",
+        "@type": "Link",
+        "target": "BlockNode:00CN7YEND0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VQ6BG001:links:Link:00CR8VQ9V8004:props:StringProp:00CR8VQ9V8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "729"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VQ6BG001:props:StringProp:00CR8VQ9V8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VQ6BG001:props:StringProp:00CR8VQ9V8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.8 — reading gained a direction rule of its own, confirmed once each way in one session**",
+    "text": "**v2.8 — reading gained a direction rule of its own, confirmed once each way in one session**: the concern gradient that already governs where a citation may point was found to also govern where a read may enter, with drift between a tier and what it governs visible only where a top-down descent and a bottom-up pinpoint meet. One confirmation per direction: a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled as [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001); two paragraphs were relocated, not rewritten, to fix a dangling \"both\" the new subsection had orphaned. Recorded as [the v2.8 delta](../discussion/aperas-skill.md#id/BlockNode:00CN7YEND0001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VQG98001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VQG98001:links:Link:00CR8VQKE0002",
+        "@type": "Link",
+        "target": "BlockNode:00CN8K8JCR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VQG98001:links:Link:00CR8VQKE0002:props:StringProp:00CR8VQKE0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "366"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VQG98001:props:StringProp:00CR8VQKE0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VQG98001:props:StringProp:00CR8VQKE0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.9 — a layout repair, not a new rule**",
+    "text": "**v2.9 — a layout repair, not a new rule**: two Orientation items written when the section had no subsections of its own were silently re-scoped the moment v2.8's new subsection landed between them and the pronoun (\"both\") one of them was written to supply. Each bold lead-in became the `###` heading it had already been acting as; nothing was reworded. Recorded as [the v2.9 delta](../discussion/aperas-skill.md#id/BlockNode:00CN8K8JCR001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VQSGR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VQSGR001:links:Link:00CR8VQX98002",
+        "@type": "Link",
+        "target": "BlockNode:00CNW4V5GG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VQSGR001:links:Link:00CR8VQX98002:props:StringProp:00CR8VQX98003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "796"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VQSGR001:props:StringProp:00CR8VQX98000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VQSGR001:props:StringProp:00CR8VQX98001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.10 — `aperas update` generalized to adopt a parsed node's full state, closing the checkbox gap v2.3 left open**",
+    "text": "**v2.10 — `aperas update` generalized to adopt a parsed node's full state, closing the checkbox gap v2.3 left open**: found while updating `planning/webapp.md`'s checkboxes — piping `- [x] ...` at an existing item nested it exactly as v2.3's warning predicted, but unlike plain text there was no bare-paragraph escape hatch, since checkbox state can only be expressed through the marker itself. Verifying the fix surfaced two more defects closed in the same change: a title-rederivation bug adopting a throwaway parse-time id instead of leaving the old title alone, and a spurious-run-leader hazard from naively adopting a solo item's ordering props. `aperas insert`'s ordered-list append picked up a matching fix, validating the number it is given instead of silently discarding it. Recorded as [the v2.10 delta](../discussion/aperas-skill.md#id/BlockNode:00CNW4V5GG001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VR6ZR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VR6ZR001:links:Link:00CR8VRAE8002",
+        "@type": "Link",
+        "target": "BlockNode:00CQYGPR50001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VR6ZR001:links:Link:00CR8VRAE8002:props:StringProp:00CR8VRAEG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "572"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8VR6ZR001:props:StringProp:00CR8VRAE8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8VR6ZR001:props:StringProp:00CR8VRAE8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v2.11 — the `kg:*`-to-`aperas` rename's one missed spot, closed**",
+    "text": "**v2.11 — the `kg:*`-to-`aperas` rename's one missed spot, closed**: root `package.json`'s `kg:*` npm scripts were removed now that the `aperas` dispatcher covers every verb identically in dev and packaged; runtime `console.log`/`console.error` prefixes across every `kgX.ts` file, plus the flush/reload conflict-resolution hint, were rewritten from `[ApeironNgn kg:X]`/`npm run kg:X` to `[aperas X]`/`npm run aperas -- X` to match — the `--help` usage lines had already been rewritten in an earlier pass, but these runtime messages had been missed until now. Recorded as [the v2.11 delta](../discussion/aperas-skill.md#id/BlockNode:00CQYGPR50001).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VV1J8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VV1J8001:links:Link:00CR8VV4ZG000",
+        "@type": "Link",
+        "target": "BlockNode:00CGN8W9M8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VV1J8001:links:Link:00CR8VV4ZG000:props:StringProp:00CR8VV4ZG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "377"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.2 — Mechanics caught up to the toolset v2.1 itself relied on**",
+    "text": "**v2.2 — Mechanics caught up to the toolset v2.1 itself relied on**: `aperas show`, tombstone hiding, bare-`unfold` peek, `pruneStaleUnfolds` and the run-leader fix had all landed without being folded back into the file's own Mechanics section, leaving it describing tools by their pre-fix state right next to a Discipline item already written in the post-fix one. Recorded as [the v2.2 delta](../discussion/aperas-skill.md#id/BlockNode:00CGN8W9M8001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VVFQG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VVFQG001:links:Link:00CR8VVKB8000",
+        "@type": "Link",
+        "target": "BlockNode:00CH5FJMDR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VVFQG001:links:Link:00CR8VVKB8000:props:StringProp:00CR8VVKB8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "302"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.3 — the list-manipulation Mechanics reordered and rewritten around a newly found nesting bug**",
+    "text": "**v2.3 — the list-manipulation Mechanics reordered and rewritten around a newly found nesting bug**: piping a bulleted string at an existing list item to update it was found to nest it instead of merging, replacing its children with a new list rather than adopting a bare paragraph's text. Recorded as [the v2.3 delta](../discussion/aperas-skill.md#id/BlockNode:00CH5FJMDR001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VVYM0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VVYM0001:links:Link:00CR8VW228000",
+        "@type": "Link",
+        "target": "BlockNode:00CHXVEW98001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VVYM0001:links:Link:00CR8VW228000:props:StringProp:00CR8VW228001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "407"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.4 — a correctness pass on fixes already claimed done**",
+    "text": "**v2.4 — a correctness pass on fixes already claimed done**: a user-requested review found both the GC-persistence and link-integrity-check fixes incomplete on first landing; both were finished for real here, `aperas check-links` was documented in Mechanics for the first time, and the frontmatter's `>-` block-scalar reformat — shipped earlier but never recorded — was written up alongside it. Recorded as [the v2.4 delta](../discussion/aperas-skill.md#id/BlockNode:00CHXVEW98001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8VWD4R001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8VWD4R001:links:Link:00CR8VZC4G000",
+        "@type": "Link",
+        "target": "BlockNode:00CHYJ6PR8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8VWD4R001:links:Link:00CR8VZC4G000:props:StringProp:00CR8VZC4G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "608"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.5 — `check-links` moved from a discipline to remember into a check the service runs itself**",
+    "text": "**v2.5 — `check-links` moved from a discipline to remember into a check the service runs itself**: documenting the tool in v2.4 without attaching discipline to it left it exactly where Philosophy warns against — available, correct, and dependent on somebody remembering to run it. Two of the three checks moved into the service (per-write and corpus-wide-at-reload sweeps); only the end-of-batch sweep remains an agent's own responsibility. Measured before designing: a corpus-wide sweep costs about 0.6s, so \"too expensive to run often\" — the premise the first design cut rested on — was false. Recorded as [the v2.5 delta](../discussion/aperas-skill.md#id/BlockNode:00CHYJ6PR8001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8W2EJ0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8W2EJ0001:links:Link:00CR8W2KHR000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ02BTG0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W2EJ0001:links:Link:00CR8W2KHR000:props:StringProp:00CR8W2KHR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "394"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.6 — `aperas tree`'s breadcrumb corrected on a second attempt**",
+    "text": "**v2.6 — `aperas tree`'s breadcrumb corrected on a second attempt**: a usable path reference was added to `aperas tree`'s output; the first attempt printed it on every line and was wrong, caught on review before shipping further. The corrected design prints it exactly twice — once for the render's own apex, once wherever a `--view` render's viewcone zooms to a new relative root. Recorded as [the v2.6 delta](../discussion/aperas-skill.md#id/BlockNode:00CJ02BTG0001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8W30N0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8W30N0001:links:Link:00CR8W346G000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ5207P8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W30N0001:links:Link:00CR8W346G000:props:StringProp:00CR8W346G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "340"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.7 — `aperas retype` closed the last case Preserve Identity had no route for**",
+    "text": "**v2.7 — `aperas retype` closed the last case Preserve Identity had no route for**: a block's `type`, heading depth included, became changeable in place, closing the one remaining case where converting a heading to a list item (or back) had no route but `remove` + `insert`. Built and verified the same session it was designed. Recorded as [the v2.7 delta](../discussion/aperas-skill.md#id/BlockNode:00CJ5207P8001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8W3FSG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8W3FSG001:links:Link:00CR8W3KC8000",
+        "@type": "Link",
+        "target": "BlockNode:00CN7XM9TG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W3FSG001:links:Link:00CR8W3KC8000:props:StringProp:00CR8W3KC8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "544"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR8W3FSG001:links:Link:00CR8W3KC8002",
+        "@type": "Link",
+        "target": "BlockNode:00CN7YEND0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W3FSG001:links:Link:00CR8W3KC8002:props:StringProp:00CR8W3KC8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "729"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.8 — reading gained a direction rule of its own, confirmed once each way in one session**",
+    "text": "**v2.8 — reading gained a direction rule of its own, confirmed once each way in one session**: the concern gradient that already governs where a citation may point was found to also govern where a read may enter, with drift between a tier and what it governs visible only where a top-down descent and a bottom-up pinpoint meet. One confirmation per direction: a code-entry fix that worked while leaving its design clause stale, and a top-down read that quoted a design rule its own projection had replaced thirteen versions earlier. Settled as [Entry route](../design/aperas-skill.md#id/BlockNode:00CN7XM9TG001); two paragraphs were relocated, not rewritten, to fix a dangling \"both\" the new subsection had orphaned. Recorded as [the v2.8 delta](../discussion/aperas-skill.md#id/BlockNode:00CN7YEND0001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8W3YQ8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8W3YQ8001:links:Link:00CR8W4298000",
+        "@type": "Link",
+        "target": "BlockNode:00CN8K8JCR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W3YQ8001:links:Link:00CR8W4298000:props:StringProp:00CR8W4298001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "366"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.9 — a layout repair, not a new rule**",
+    "text": "**v2.9 — a layout repair, not a new rule**: two Orientation items written when the section had no subsections of its own were silently re-scoped the moment v2.8's new subsection landed between them and the pronoun (\"both\") one of them was written to supply. Each bold lead-in became the `###` heading it had already been acting as; nothing was reworded. Recorded as [the v2.9 delta](../discussion/aperas-skill.md#id/BlockNode:00CN8K8JCR001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8W6F7G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8W6F7G001:links:Link:00CR8W6K38000",
+        "@type": "Link",
+        "target": "BlockNode:00CNW4V5GG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W6F7G001:links:Link:00CR8W6K38000:props:StringProp:00CR8W6K38001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "796"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.10 — `aperas update` generalized to adopt a parsed node's full state, closing the checkbox gap v2.3 left open**",
+    "text": "**v2.10 — `aperas update` generalized to adopt a parsed node's full state, closing the checkbox gap v2.3 left open**: found while updating `planning/webapp.md`'s checkboxes — piping `- [x] ...` at an existing item nested it exactly as v2.3's warning predicted, but unlike plain text there was no bare-paragraph escape hatch, since checkbox state can only be expressed through the marker itself. Verifying the fix surfaced two more defects closed in the same change: a title-rederivation bug adopting a throwaway parse-time id instead of leaving the old title alone, and a spurious-run-leader hazard from naively adopting a solo item's ordering props. `aperas insert`'s ordered-list append picked up a matching fix, validating the number it is given instead of silently discarding it. Recorded as [the v2.10 delta](../discussion/aperas-skill.md#id/BlockNode:00CNW4V5GG001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8W7200001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8W7200001:links:Link:00CR8W75J0000",
+        "@type": "Link",
+        "target": "BlockNode:00CQYGPR50001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8W7200001:links:Link:00CR8W75J0000:props:StringProp:00CR8W75J0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "572"
+          }
+        ]
+      }
+    ],
+    "title": "**v2.11 — the `kg:*`-to-`aperas` rename's one missed spot, closed**",
+    "text": "**v2.11 — the `kg:*`-to-`aperas` rename's one missed spot, closed**: root `package.json`'s `kg:*` npm scripts were removed now that the `aperas` dispatcher covers every verb identically in dev and packaged; runtime `console.log`/`console.error` prefixes across every `kgX.ts` file, plus the flush/reload conflict-resolution hint, were rewritten from `[ApeironNgn kg:X]`/`npm run kg:X` to `[aperas X]`/`npm run aperas -- X` to match — the `--help` usage lines had already been rewritten in an earlier pass, but these runtime messages had been missed until now. Recorded as [the v2.11 delta](../discussion/aperas-skill.md#id/BlockNode:00CQYGPR50001).",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR8XN9VG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR8XN9VG002:links:Link:00CR8XNDSG002",
+        "@type": "Link",
+        "target": "BlockNode:00CDGTZHSR005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR8XN9VG002:links:Link:00CR8XNDSG002:props:StringProp:00CR8XNDSR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "343"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR8XN9VG002:props:StringProp:00CR8XNDSG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR8XN9VG002:props:StringProp:00CR8XNDSG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**`aperas check-links` still prints the old `[ApeironNgn check-links]` prefix**",
+    "text": "**`aperas check-links` still prints the old `[ApeironNgn check-links]` prefix**: `packages/cli/src/kgCheckLinks.ts` prints `[ApeironNgn check-links]` at all five sites (lines 44, 58, 61, 65, 79) — every other `kgX.ts` file's runtime `console.log`/`console.error` prefix was already rewritten from `[ApeironNgn kg:X]` to `[aperas X]`, matching [the `aperas` dispatcher covering every verb identically](../design/packaging.md#id/BlockNode:00CDGTZHSR005). This file's prefix had no `kg:` in it, which likely let it escape a pattern-based rename. Fix: reword the five sites to `[aperas check-links]`, matching the convention every other command's runtime prefix already follows. Found by the grapher, reproduced by the orchestrator, 2026-09-27.",
+    "parent": "BlockNode:00CF2AEAX0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR902B3G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR902B3G001:links:Link:00CR902F60002",
+        "@type": "Link",
+        "target": "BlockNode:00CR8XN9VG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR902B3G001:links:Link:00CR902F60002:props:StringProp:00CR902F60003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "213"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR902B3G001:props:StringProp:00CR902F60000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR902B3G001:props:StringProp:00CR902F60001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Orchestrator verified the grapher's Turn 3**",
+    "text": "**Orchestrator verified the grapher's Turn 3**: `history/aperas-skill.md`'s Milestones now runs v1 through v3.1 with no gaps, and Current Status describes the three planning batches against what actually shipped. [The check-links prefix issue](../issues/cli.md#id/BlockNode:00CR8XN9VG002) is filed under Open Issues, and the freeflow entry that reported it now points up to it, not the other way — correct citation direction. `aperas check-links` is clean (2196 blocks).",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9045TR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9045TR001:links:Link:00CR9049G8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR8XN9VG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9045TR001:links:Link:00CR9049G8000:props:StringProp:00CR9049G8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "213"
+          }
+        ]
+      }
+    ],
+    "title": "**Orchestrator verified the grapher's Turn 3**",
+    "text": "**Orchestrator verified the grapher's Turn 3**: `history/aperas-skill.md`'s Milestones now runs v1 through v3.1 with no gaps, and Current Status describes the three planning batches against what actually shipped. [The check-links prefix issue](../issues/cli.md#id/BlockNode:00CR8XN9VG002) is filed under Open Issues, and the freeflow entry that reported it now points up to it, not the other way — correct citation direction. `aperas check-links` is clean (2196 blocks).",
+    "parent": "BlockNode:00CR81Y470001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR92SVXG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR92SVXG001:links:Link:00CR98C338000",
+        "@type": "Link",
+        "target": "BlockNode:00CNX1T4XG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR92SVXG001:links:Link:00CR98C338000:props:StringProp:00CR98C338001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "665"
+          }
+        ]
+      }
+    ],
+    "title": "**A stdin-less `aperas insert --after` (a move) hung in the grapher's shell, cause unknown**",
+    "text": "**A stdin-less `aperas insert --after` (a move) hung in the grapher's shell, cause unknown**: found 2026-09-27. The grapher stopped the call, reran it with `< /dev/null`, and it succeeded. The orchestrator first blamed `readStdinIfPiped` in `packages/cli/src/kgInsert.ts` (it reads stdin to end-of-file whenever stdin isn't a TTY). But in the orchestrator's shell stdin is `/dev/null` and reaches end-of-file at once, so that read cannot block there. Unconfirmed alternatives: the subagent's shell has a different stdin, or the service was unresponsive (it dropped or was slow to start twice the same session) and the retry simply came later. Related but distinct: [the unscoped `aperas ingest` hang on a confirmation prompt](../issues/core.md#id/BlockNode:00CNX1T4XG001).",
+    "parent": "BlockNode:00CR81TAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR92W8TR001",
+    "@type": "BlockNode",
+    "title": "**Evidence for the open question — agents need full text of a subtree**",
+    "text": "**Evidence for the open question — agents need full text of a subtree**: no command returns a subtree's exact text. `tree`/`unfold` truncate, `show --text` covers one node, and projected files are off limits. Both the grapher (a `dump.sh` script) and the orchestrator (loops over `show --text`) built the same workaround on 2026-09-27. That argues for `--detail long` showing full text, or for a separate recursive read.",
+    "parent": "BlockNode:00CR7N8FM8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR92ZRJ8001",
+    "@type": "BlockNode",
+    "title": "**Subturns record results but not friction with the tools (2026-09-27)**",
+    "text": "**Subturns record results but not friction with the tools (2026-09-27)**: in the grapher's Turn 2 on the v3.1 recording task, the user saw three events in the live trace that the thread never mentions. The subturns covered every result; what they left out were the workarounds.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR92ZRJ8002",
+      "BlockNode:00CR92ZRJ8003",
+      "BlockNode:00CR92ZRJ8004",
+      "BlockNode:00CR92ZRJ8005",
+      "BlockNode:00CR98HFCG001",
+      "BlockNode:00CR994X80001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR92ZRJ8002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR92ZRJ8002:links:Link:00CR92ZWCG000",
+        "@type": "Link",
+        "target": "BlockNode:00CR92W8TR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR92ZRJ8002:links:Link:00CR92ZWCG000:props:StringProp:00CR92ZWCG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "183"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR92ZRJ8002:props:StringProp:00CR92ZWBG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR92ZRJ8002:props:StringProp:00CR92ZWBG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**A recursive dump script**",
+    "text": "**A recursive dump script**: the grapher wrote `dump.sh`, a recursive `aperas show` walk printing each node's exact text, to read whole Asks, freeflow entries and delta sections. See [the missing full-text subtree read](../discussion/treeview.md#id/BlockNode:00CR92W8TR001).",
+    "parent": "BlockNode:00CR92ZRJ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR92ZRJ8003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR92ZRJ8003:links:Link:00CR92ZWCG002",
+        "@type": "Link",
+        "target": "BlockNode:00CR92SVXG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR92ZRJ8003:links:Link:00CR92ZWCG002:props:StringProp:00CR92ZWCG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "192"
+          }
+        ]
+      }
+    ],
+    "title": "**A hung move**",
+    "text": "**A hung move**: a stdin-less `aperas insert --after` blocked until the grapher stopped it, then succeeded rerun with `< /dev/null`. The subturn says only that each move reported `moved`. See [the stdin hang](../discussion/cli.md#id/BlockNode:00CR92SVXG001).",
+    "parent": "BlockNode:00CR92ZRJ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR92ZRJ8004",
+    "@type": "BlockNode",
+    "title": "**A title-collision fix**",
+    "text": "**A title-collision fix**: named in the trace (\"Fix title collisions and insert remaining subturns\"), cause not recorded.",
+    "parent": "BlockNode:00CR92ZRJ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR92ZRJ8005",
+    "@type": "BlockNode",
+    "title": "**Gap in the skill**",
+    "text": "**Gap in the skill**: *Threads* asks subturns for \"the essence of each tool result a later turn will need\", which reads as task results. Nothing asks for a workaround built, a call that hung or failed, or a tool that fell short, so that friction is invisible after the turn — though the base skill's own premise is that the graph must notice what no one will remember. The orchestrator has the same habit: it looped `aperas show --text` over children twice this session for the same reason.",
+    "parent": "BlockNode:00CR92ZRJ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR98HFCG001",
+    "@type": "BlockNode",
+    "title": "**Decided — the skill asks for detailed records**",
+    "text": "**Decided — the skill asks for detailed records**: user, 2026-09-27. Subturns record friction as well as results: every workaround built, every call that failed, hung or was stopped, and every retry with what changed. The Report lists them as tool gaps for the grapher to file. The orchestrator edits the skill; the grapher records it.",
+    "parent": "BlockNode:00CR92ZRJ8001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR9DYEZR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR98J7KR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR98J7KR001:links:Link:00CR98JAWR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR92W8TR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR98J7KR001:links:Link:00CR98JAWR000:props:StringProp:00CR98RJG8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "265"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR98J7KR001:links:Link:00CR98JAWR002",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y800G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR98J7KR001:links:Link:00CR98JAWR002:props:StringProp:00CR98RJX8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "373"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR98J7KR001:props:StringProp:00CR98JAWG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR98J7KR001:props:StringProp:00CR98JAWG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Decided — remove the output length caps from `aperas tree` and `aperas unfold`**",
+    "text": "**Decided — remove the output length caps from `aperas tree` and `aperas unfold`**: user, 2026-09-27. The caps are a legacy of a past ingest bug that put a whole file into one block's `text` field, and nothing needs them now. Agents currently work around them: see [agents need full text of a subtree](../discussion/treeview.md#id/BlockNode:00CR92W8TR001). The previews in [Rendering](../design/treeview.md#id/BlockNode:00CE1GW4Y800G) should show a block's full text.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR991CVG000",
+      "BlockNode:00CR991CVG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR98J7KR002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-27T06:08:50.861Z",
+    "title": "**Settles an open question**",
+    "text": "**Settles an open question**: in the reset `tree --detail` design, `long` shows full text rather than a truncated preview.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR98J7KR003",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-27T06:08:50.861Z",
+    "title": "00CR98J7KR003",
+    "text": "**First task run under skill v3.1**, through the full loop.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR991CVG000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR991CVG000:props:StringProp:00CR991GT0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR991CVG000:props:StringProp:00CR991GT0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Settles an open question**",
+    "text": "**Settles an open question**: in the reset `tree --detail` design, `long` shows full text rather than a truncated preview.",
+    "parent": "BlockNode:00CR98J7KR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR991CVG001",
+    "@type": "BlockNode",
+    "title": "**First task run under skill v3.1**",
+    "text": "**First task run under skill v3.1**: it goes through the full loop.",
+    "parent": "BlockNode:00CR98J7KR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR994X80001",
+    "@type": "BlockNode",
+    "title": "**Friction — a text-only `aperas update` on a list item tombstones its children**",
+    "text": "**Friction — a text-only `aperas update` on a list item tombstones its children**: the orchestrator piped only the item's own text (from `aperas show --text`) to fix a lead-in, and the item's two children were tombstoned (`BlockNode:00CR98J7KR002`, `BlockNode:00CR98J7KR003`, since recreated). The base skill's *Updating an existing list item* says that leaving the text out clears it. It does not say that leaving the children out removes them, and \"this also updates any nested children in the same call, if you include them\" reads as if omitted children are left alone.",
+    "parent": "BlockNode:00CR92ZRJ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9D1WW0001",
+    "@type": "BlockNode",
+    "title": "### aperas — Discipline — Threads, the Report template gains a Tool gap line",
+    "text": "The template's **Report** step gains a line after **Question**:",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR9D1WW0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9D1WW0002",
+    "@type": "BlockNode",
+    "title": "00CR9D1WW0002",
+    "text": "```\n  - **Tool gap**: <a workaround built, a call that failed or hung — see below>\n```",
+    "parent": "BlockNode:00CR9D1WW0001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9D5Z60001",
+    "@type": "BlockNode",
+    "title": "### aperas — Discipline — Threads, record the friction not only the results",
+    "text": "**Record the friction, not only the results.** A subturn also records every place the tools got in the way: a workaround you built (a script, a loop over a command, a detour through another verb), a call that failed, hung or had to be stopped, each retry and what changed in it, an error you routed around, a write that did something you didn't intend. Give the command and what happened, even once you got past it — especially then, because a problem you solved leaves no trace in the results, and nobody will remember it after the turn. The Report lists each one as a **Tool gap**, so the grapher can file it. A gap that is not in the thread is one the graph can never notice.",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9D7DVR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9D7DVR001:links:Link:00CR9D7KHG000",
+        "@type": "Link",
+        "target": "BlockNode:00CR874TCG00A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9D7DVR001:links:Link:00CR9D7KHG000:props:StringProp:00CR9D7KHG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-orchestrator — Every exchange with the user, friction recorded too",
+    "text": "Supersedes: [the missing-Freeflow entry](#id/BlockNode:00CR874TCG00A)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR9D7DVR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9D7DVR002",
+    "@type": "BlockNode",
+    "title": "Record it in the topic's discussion `## Freeflow` before acting on it",
+    "text": "Record it in the topic's discussion `## Freeflow` before acting on it: what was asked, what was decided, what was corrected, and why. The conversation can be compacted or cut off at any point, and a decision that only ever existed as chat is gone the moment that happens, with no way to resume or hand it off from what is on disk. Freeflow is raw material — record as you go, not once things are resolved; the grapher organizes and promotes it. If the topic's discussion has no `## Freeflow` yet, create it. Friction you hit yourself — a workaround, a call that failed or hung, a write that did something you didn't intend — goes into freeflow too, the way a subagent records it in its subturns (base: *Threads*).",
+    "parent": "BlockNode:00CR9D7DVR001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9D8210001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9D8210001:links:Link:00CR9D8590000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSGG008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9D8210001:links:Link:00CR9D8590000:props:StringProp:00CR9D8590001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Every invocation, Report step lists tool gaps too",
+    "text": "Supersedes: [v3's grapher Report step](#id/BlockNode:00CR5GCSGG008)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR9D8210002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9D8210002",
+    "@type": "BlockNode",
+    "title": "00CR9D8210002",
+    "text": "**Report.** A Report node citing what you found or changed, any open question, and every tool gap the turn hit (base: *Threads*); zoom `<p>-grapher-orchestrator` onto it; one or two lines of chat naming the view and anything the orchestrator has to decide.",
+    "parent": "BlockNode:00CR9D8210001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9D9NQG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9D9NQG001:links:Link:00CR9D9S9G000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSGG00D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9D9NQG001:links:Link:00CR9D9S9G000:props:StringProp:00CR9D9S9G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Filing — after each coder turn, tool gaps get filed too",
+    "text": "Supersedes: [v3's Filing section](#id/BlockNode:00CR5GCSGG00D)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR9D9NQG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9D9NQG002",
+    "@type": "BlockNode",
+    "title": "00CR9D9NQG002",
+    "text": "Read the coder's latest Report and the Work under it in `.threads/coder.md`. Record what the coder found where it belongs: into the task's `discussion` freeflow first, then promoted into `issues`/`history`/`design` once it has earned a home (*Discussion is where meta-info is born*, below). Copy content up; never link into a thread. Where the coder reports code and design disagreeing, that discrepancy is itself the finding — record it, and fix whichever side is stale. File every tool gap in a Report, the coder's or your own, in the freeflow of the concern that owns the tool.",
+    "parent": "BlockNode:00CR9D9NQG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9DA7KG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9DA7KG001:links:Link:00CR9DAAWR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSH000G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DA7KG001:links:Link:00CR9DAAWR000:props:StringProp:00CR9DAAWR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-coder — Every invocation, Report step lists tool gaps too",
+    "text": "Supersedes: [v3's coder Report step](#id/BlockNode:00CR5GCSH000G)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR9DA7KG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9DA7KG002",
+    "@type": "BlockNode",
+    "title": "00CR9DA7KG002",
+    "text": "**Report.** A Report node listing the files changed, what the work found, anywhere the code and the graph disagree, every question the turn raised (next section), and every tool gap it hit (base: *Threads*); citing the graph nodes the work bears on. Zoom `<p>-coder-orchestrator` onto it; one or two lines of chat naming the view.",
+    "parent": "BlockNode:00CR9DA7KG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9DYEZR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D1WW0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8000:props:StringProp:00CR9DYJA8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "69"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D5Z60001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8002:props:StringProp:00CR9DYJA8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "174"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8004",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D7DVR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8004:props:StringProp:00CR9DYJA8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "278"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8006",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D8210001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8006:props:StringProp:00CR9DYJA8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "384"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8008",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D9NQG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA8008:props:StringProp:00CR9DYJA8009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "483"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA800A",
+        "@type": "Link",
+        "target": "BlockNode:00CR9DA7KG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA800A:props:StringProp:00CR9DYJA800B",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "591"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA800C",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9DYEZR001:links:Link:00CR9DYJA800C:props:StringProp:00CR9DYJA800D",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "721"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR9DYEZR001:props:StringProp:00CR9DYJA0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9DYEZR001:props:StringProp:00CR9DYJA0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: the edit is recorded in the v3.1 delta as [aperas — Discipline — Threads, the Report template gains a Tool gap line](#id/BlockNode:00CR9D1WW0001), [aperas — Discipline — Threads, record the friction not only the results](#id/BlockNode:00CR9D5Z60001), [aperas-orchestrator — Every exchange with the user, friction recorded too](#id/BlockNode:00CR9D7DVR001), [aperas-grapher — Every invocation, Report step lists tool gaps too](#id/BlockNode:00CR9D8210001), [aperas-grapher — Filing — after each coder turn, tool gaps get filed too](#id/BlockNode:00CR9D9NQG001) and [aperas-coder — Every invocation, Report step lists tool gaps too](#id/BlockNode:00CR9DA7KG001); the rule is promoted to design's [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004).",
+    "parent": "BlockNode:00CR98HFCG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9G5RS8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9G5RS8001:links:Link:00CR9G5XER000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9G5RS8001:links:Link:00CR9G5XER000:props:StringProp:00CR9G5XER001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "119"
+          }
+        ]
+      }
+    ],
+    "title": "**Orchestrator verified the grapher's Turn 4**",
+    "text": "**Orchestrator verified the grapher's Turn 4**: `skill_drift.py --added` reports 0, `aperas check-links` is clean, and [design's Threads block](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) states the friction/tool-gap rule matching the staged code. First turn recorded under the new rule itself: the grapher's own tool gap (a symlinked `AperasKG/` rejecting `git add` from the code repo, worked around with `cd`) is in its Report, this being that same, already-known layout fact rather than a new bug.",
+    "parent": "BlockNode:00CR81Y470001",
     "type": "listItem",
     "children": []
   }
