@@ -9829,10 +9829,13 @@
     "@id": "BlockNode:00CE1GW638002",
     "@type": "BlockNode",
     "title": "## Open Issues",
-    "text": "None.",
     "parent": "BlockNode:00CE1GW638001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CRCGRGJR002",
+      "BlockNode:00CRCGRGJR006",
+      "BlockNode:00CRCGRGJR008"
+    ]
   },
   {
     "@id": "BlockNode:00CE1GW638004",
@@ -12672,7 +12675,10 @@
       "BlockNode:00CR3XZ220001",
       "BlockNode:00CR7N7Z60001",
       "BlockNode:00CR81Y470001",
-      "BlockNode:00CR92ZRJ8001"
+      "BlockNode:00CR92ZRJ8001",
+      "BlockNode:00CRAQQ2V0001",
+      "BlockNode:00CRBWFJJ0001",
+      "BlockNode:00CRC1S4MR001"
     ]
   },
   {
@@ -14453,10 +14459,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CF10T8HG000:props:StringProp:00CR3X8Y1G000",
+            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CF10T8HG000:props:StringProp:00CRAZQXB8000",
             "@type": "StringProp",
             "key": "position",
-            "value": "587"
+            "value": "658"
           }
         ]
       },
@@ -14467,16 +14473,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CR3XDMSR000:props:StringProp:00CR3XDMSR001",
+            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CR3XDMSR000:props:StringProp:00CRAZQWAG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "271"
+            "value": "342"
           }
         ]
       }
     ],
     "title": "### Citation direction",
-    "text": "The concerns form an abstraction gradient: `design` most abstract, then `issues`, `planning` and `history`, then the shared `concepts` map, then `discussion`, with an agent's own `thread` least. Because nothing ranks below a thread, nothing outside one can cite into it ([threads](#id/BlockNode:00CR3X3N08004)). A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): \"one link plus a brief, non-argumentative summary per doc\") already states this same up-only citation shape for its own instance of that exception, independently of this rule.",
+    "text": "The concerns form an abstraction gradient: `design` most abstract, then `issues`, `planning` and `history`, then the shared `concepts` map, then `discussion`, with an agent's own `thread` least. Because nothing ranks below the threads tier, nothing above it can cite into a thread, while threads cite each other sideways like any other tier ([threads](#id/BlockNode:00CR3X3N08004)). A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): \"one link plus a brief, non-argumentative summary per doc\") already states this same up-only citation shape for its own instance of that exception, independently of this rule.",
     "parent": "BlockNode:00CEA5Y5JG00D",
     "type": "heading",
     "children": [
@@ -16866,7 +16872,8 @@
       "BlockNode:00CJ0JZ830001",
       "BlockNode:00CN1PT1B0001",
       "BlockNode:00CN7V9BX0001",
-      "BlockNode:00CNX1T4XG001"
+      "BlockNode:00CNX1T4XG001",
+      "BlockNode:00CRBJ0VYG001"
     ]
   },
   {
@@ -17395,7 +17402,10 @@
       "BlockNode:00CMZPGTW0001",
       "BlockNode:00CMZPGTW0002",
       "BlockNode:00CMZPC898000",
-      "BlockNode:00CMZPC898001"
+      "BlockNode:00CMZPC898001",
+      "BlockNode:00CRBGW5PR001",
+      "BlockNode:00CRC6N7TG001",
+      "BlockNode:00CRC9E2SR001"
     ]
   },
   {
@@ -17626,7 +17636,9 @@
     "parent": "BlockNode:00CF2AEAX0001",
     "type": "heading",
     "children": [
-      "BlockNode:00CR8XN9VG002"
+      "BlockNode:00CR8XN9VG002",
+      "BlockNode:00CRCGZDT0001",
+      "BlockNode:00CRCH1DBR001"
     ]
   },
   {
@@ -35163,7 +35175,7 @@
     "@id": "BlockNode:00CR3X3N08001",
     "@type": "BlockNode",
     "title": "### The loop",
-    "text": "A task runs a fixed sequence of turns, grapher always first: grapher surveys the graph, coder surveys the code without changing it, grapher files that survey, coder changes the code, the orchestrator verifies the diff and the tests itself, grapher files the result — the last three repeated for as many rounds as the task takes, then grapher's finishing turn. Each survey stays on its own side: grapher touches source code only to pinpoint an entry into the graph, and an Ask asks only for its receiver's kind of work. Every Ask cites the freeflow nodes for the decisions it relies on, so a decision that exists only in chat blocks the hand-off until it is recorded. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
+    "text": "A task runs a fixed sequence of turns, grapher always first: grapher surveys the graph, coder surveys the code without changing it, grapher files that survey, coder changes the code, the orchestrator verifies the diff and the tests itself, grapher files the result — the last three repeated for as many rounds as the task takes, then grapher's finishing turn. Each survey stays on its own side: grapher touches source code only to pinpoint an entry into the graph, and an Ask asks only for its receiver's kind of work. Every Ask cites the freeflow nodes for the decisions it relies on, so a decision that exists only in chat blocks the hand-off until it is recorded. Before dispatch the orchestrator runs each Ask against a short checklist of the rules most often broken while one is being written — only the receiver's kind of work, every decision cited from freeflow, cite rather than retype, one task per dispatch — since nothing else raises them at that moment. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
     "parent": "BlockNode:00CR3X3N00001",
     "type": "heading",
     "children": []
@@ -35208,7 +35220,7 @@
     "@id": "BlockNode:00CR3X3N08004",
     "@type": "BlockNode",
     "title": "### Threads",
-    "text": "Each subagent has one thread, `artifacts/.threads/<role>.md` — `grapher.md`, `coder.md` — one per role while work is not parallel. A thread is a tree of topic (named by the user) > task (set by the orchestrator) > turn (one exchange with the orchestrator) > subturn. Every turn has subturns, at least one per batch of tool calls: the turn's Work line holds the approach in a single line and cannot hold the results, so each subturn records its batch's progress and reasoning and the essence of each tool result a later turn will need, written as it happens or at the end of the turn. A result left unrecorded is gone for every later turn, since the thread, not the chat, is what carries context forward. A subturn also records the friction it hit — a workaround built, a call that failed or hung, a retry and what changed — and the Report lists each as a tool gap for the grapher to file. A topic is a concern the user names — usually one concern's artifact set, sometimes spanning concerns, or a batch of related tasks.",
+    "text": "Each subagent has one thread, `artifacts/.threads/<role>.md` — `grapher.md`, `coder.md` — one per role while work is not parallel. A thread is a tree of topic (named by the user) > task (set by the orchestrator) > turn (one exchange with the orchestrator) > subturn. Every turn has subturns, at least one per batch of tool calls: the turn's Work line holds the approach in a single line and cannot hold the results, so each subturn records its batch's progress and reasoning and the essence of each tool result a later turn will need, written as it happens or at the end of the turn. A result left unrecorded is gone for every later turn, since the thread, not the chat, is what carries context forward. A subturn also records the friction it hit — a workaround built, a call that failed or hung, a retry and what changed — and the Report lists each as a tool gap for the grapher to file, giving each its own lead-in term when there is more than one, since sibling slugs derive from it and two identical lead-ins collide and reject the whole write. A topic is a concern the user names — usually one concern's artifact set, sometimes spanning concerns, or a batch of related tasks.",
     "parent": "BlockNode:00CR3X3N00001",
     "type": "heading",
     "children": [
@@ -35240,16 +35252,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CR3X3N08005:links:Link:00CR3X49ER004:props:StringProp:00CR3X49WG000",
+            "@id": "BlockNode:00CR3X3N08005:links:Link:00CR3X49ER004:props:StringProp:00CRAZQF78000",
             "@type": "StringProp",
             "key": "position",
-            "value": "253"
+            "value": "325"
           }
         ]
       }
     ],
     "title": "00CR3X3N08005",
-    "text": "Threads are the lowest tier of the [citation gradient](#id/BlockNode:00CEA5Y5JG00G), so nothing outside a thread links into one, and promotion copies content upward rather than citing it. Their graph content persists to the gitignored `.state/` mirror ([thread persistence](../design/treeview.md#id/BlockNode:00CR3WYRG8001)). Every write to a thread checks it against a size cap and warns once the cap is reached; grapher then prunes it with an ordinary `remove`.",
+    "text": "Threads are the lowest tier of the [citation gradient](#id/BlockNode:00CEA5Y5JG00G), so a thread cites upward and threads cite each other sideways, while nothing above the threads tier links into one, and promotion copies content upward rather than citing it. Their graph content persists to the gitignored `.state/` mirror ([thread persistence](../design/treeview.md#id/BlockNode:00CR3WYRG8001)). Every write to a thread checks it against a size cap and warns once the cap is reached; grapher then prunes it with an ordinary `remove`.",
     "parent": "BlockNode:00CR3X3N08004",
     "type": "paragraph",
     "children": []
@@ -38736,10 +38748,24 @@
             "value": "106"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CR81SDX8001:links:Link:00CRCHNQ8G000",
+        "@type": "Link",
+        "target": "BlockNode:00CRCGRGJR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81SDX8001:links:Link:00CRCHNQ8G000:props:StringProp:00CRCHNQ8R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "327"
+          }
+        ]
       }
     ],
     "title": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**",
-    "text": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**: this contradicts [Threads persist to `.state/` by membership, not by class](../design/treeview.md#id/BlockNode:00CR3WYRG8001), which says pruning a thread is an ordinary `remove`. Found 2026-09-27 when resetting both threads.",
+    "text": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**: this contradicts [Threads persist to `.state/` by membership, not by class](../design/treeview.md#id/BlockNode:00CR3WYRG8001), which says pruning a thread is an ordinary `remove`. Found 2026-09-27 when resetting both threads. Promoted to [issues/treeview.md](../issues/treeview.md#id/BlockNode:00CRCGRGJR002).",
     "parent": "BlockNode:00CE1DDF58003",
     "type": "listItem",
     "children": [
@@ -38806,10 +38832,24 @@
             "value": "427"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CR81SWZR001:links:Link:00CRCHP860000",
+        "@type": "Link",
+        "target": "BlockNode:00CRCGRGJR006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81SWZR001:links:Link:00CRCHP860000:props:StringProp:00CRCHP860001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "520"
+          }
+        ]
       }
     ],
     "title": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**",
-    "text": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**: `bakeResolvedLinkIds` in `packages/core/src/apeironNgn/node.ts` appends `#id/<target>` to every relative href it has a resolved `Link` for, whether or not the href already has a fragment. The base skill tells agents to write `[title](../x.md#id/BlockNode:<ID>)`, which is exactly that case. This belongs to the preview text of [Rendering](../design/treeview.md#id/BlockNode:00CE1GW4Y800G). Found 2026-09-27.",
+    "text": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**: `bakeResolvedLinkIds` in `packages/core/src/apeironNgn/node.ts` appends `#id/<target>` to every relative href it has a resolved `Link` for, whether or not the href already has a fragment. The base skill tells agents to write `[title](../x.md#id/BlockNode:<ID>)`, which is exactly that case. This belongs to the preview text of [Rendering](../design/treeview.md#id/BlockNode:00CE1GW4Y800G). Found 2026-09-27. Promoted to [issues/treeview.md](../issues/treeview.md#id/BlockNode:00CRCGRGJR006).",
     "parent": "BlockNode:00CE1DDF58003",
     "type": "listItem",
     "children": [
@@ -38848,7 +38888,9 @@
     "children": [
       "BlockNode:00CR81W4RG001",
       "BlockNode:00CR8RVCF8001",
-      "BlockNode:00CR92SVXG001"
+      "BlockNode:00CR92SVXG001",
+      "BlockNode:00CRBW8248001",
+      "BlockNode:00CRCE6HY8001"
     ]
   },
   {
@@ -38868,6 +38910,20 @@
             "value": "85"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CR81W4RG001:links:Link:00CRCHQ89R000",
+        "@type": "Link",
+        "target": "BlockNode:00CRCGZDT0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR81W4RG001:links:Link:00CRCHQ89R000:props:StringProp:00CRCHQ89R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "472"
+          }
+        ]
       }
     ],
     "props": [
@@ -38885,7 +38941,7 @@
       }
     ],
     "title": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**",
-    "text": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**: [A single `kg:insert` call isn't transactional](../issues/cli.md#id/BlockNode:00CF2AEAX0003) is marked Resolved, having moved anchor *resolution* ahead of hydration, verified only with a nonexistent anchor id. An anchor that resolves but isn't a child of the given parent is still rejected late, in `insertOrderedChild`, after the piped nodes are hydrated. Found 2026-09-27.",
+    "text": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**: [A single `kg:insert` call isn't transactional](../issues/cli.md#id/BlockNode:00CF2AEAX0003) is marked Resolved, having moved anchor *resolution* ahead of hydration, verified only with a nonexistent anchor id. An anchor that resolves but isn't a child of the given parent is still rejected late, in `insertOrderedChild`, after the piped nodes are hydrated. Found 2026-09-27. Promoted to [issues/cli.md](../issues/cli.md#id/BlockNode:00CRCGZDT0001).",
     "parent": "BlockNode:00CR81TAV8001",
     "type": "listItem",
     "children": [
@@ -39112,10 +39168,52 @@
             "value": "1074"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CRAZW4T8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR9KFCN0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CRAZW4T8000:props:StringProp:00CRAZW4T8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1207"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CRAZW4T8002",
+        "@type": "Link",
+        "target": "BlockNode:00CRAX4MZ0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CRAZW4T8002:props:StringProp:00CRAZW4TG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1384"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR874TC8001:links:Link:00CRAZW4TG001",
+        "@type": "Link",
+        "target": "BlockNode:00CRAX4MZ8000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR874TC8001:links:Link:00CRAZW4TG001:props:StringProp:00CRAZW4TG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1512"
+          }
+        ]
       }
     ],
     "title": "## v3.1 additions — delta on the v3 snapshot",
-    "text": "Threaded onto [the v3 snapshot](#id/BlockNode:00CR5GCSEG001), across all four skill files. Implements [Skill v3.1 — decisions from the first-run findings](#id/BlockNode:00CR81Y470001), which answer the defects [the first live run of the v3 loop](#id/BlockNode:00CR7N7Z60001) surfaced: the orchestrator's staging exemption contradicting its own section, no guidance for a discussion without `## Freeflow`, the orchestrator surveying for itself, a grapher Ask that folded in the coder's survey, and freeflow lagging the conversation. The full task loop moves into the base skill so every role sees the turns around its own; the orchestrator's *Running a task* now follows it step for step, and each role skill's survey is scoped to its own side. Written by the orchestrator in the skill files and recorded here afterwards by the grapher, as the decision itself directed.\nTwo entries were added the same day under [the follow-up decisions](#id/BlockNode:00CR8G0T70001): subturns required in *Threads*, and the drift-script path corrected in the grapher skill. A further entry, [the skill asks for detailed records](#id/BlockNode:00CR98HFCG001), added tool-gap recording and filing across all four skill files.",
+    "text": "Threaded onto [the v3 snapshot](#id/BlockNode:00CR5GCSEG001), across all four skill files. Implements [Skill v3.1 — decisions from the first-run findings](#id/BlockNode:00CR81Y470001), which answer the defects [the first live run of the v3 loop](#id/BlockNode:00CR7N7Z60001) surfaced: the orchestrator's staging exemption contradicting its own section, no guidance for a discussion without `## Freeflow`, the orchestrator surveying for itself, a grapher Ask that folded in the coder's survey, and freeflow lagging the conversation. The full task loop moves into the base skill so every role sees the turns around its own; the orchestrator's *Running a task* now follows it step for step, and each role skill's survey is scoped to its own side. Written by the orchestrator in the skill files and recorded here afterwards by the grapher, as the decision itself directed.\nTwo entries were added the same day under [the follow-up decisions](#id/BlockNode:00CR8G0T70001): subturns required in *Threads*, and the drift-script path corrected in the grapher skill. A further entry, [the skill asks for detailed records](#id/BlockNode:00CR98HFCG001), added tool-gap recording and filing across all four skill files. [Fixing the misleading \"if you include them\" clause](#id/BlockNode:00CR9KFCN0001) corrected two bullets in the base skill's *Updating an existing list item*. Two more followed: [threads may link to each other](#id/BlockNode:00CRAX4MZ0001) reworded the thread-tier rule in the base and grapher skills, and [the pre-send checklist for Asks](#id/BlockNode:00CRAX4MZ8000) added a new section to the orchestrator skill.",
     "parent": "BlockNode:00CE8XWZJR001",
     "type": "heading",
     "children": [
@@ -39124,21 +39222,27 @@
       "BlockNode:00CR8JD5VG001",
       "BlockNode:00CR9D1WW0001",
       "BlockNode:00CR9D5Z60001",
+      "BlockNode:00CRAZ91C8001",
+      "BlockNode:00CRAZB02G001",
       "BlockNode:00CR874TCG005",
       "BlockNode:00CR9P6W40001",
       "BlockNode:00CR874TCG007",
       "BlockNode:00CR874TCG009",
       "BlockNode:00CR9D7DVR001",
       "BlockNode:00CR874TCG00C",
+      "BlockNode:00CRAZC840001",
       "BlockNode:00CR874TD0004",
       "BlockNode:00CR874TD8000",
       "BlockNode:00CR9D8210001",
       "BlockNode:00CR874TD8002",
       "BlockNode:00CR9D9NQG001",
+      "BlockNode:00CRAZBN0G001",
       "BlockNode:00CR8JDSQG001",
       "BlockNode:00CR874TD8003",
       "BlockNode:00CR9DA7KG001",
-      "BlockNode:00CR874TD8005"
+      "BlockNode:00CR874TD8005",
+      "BlockNode:00CRBE35S8001",
+      "BlockNode:00CRBYWS98001"
     ]
   },
   {
@@ -41156,7 +41260,10 @@
     "text": "**Evidence for the open question — agents need full text of a subtree**: no command returns a subtree's exact text. `tree`/`unfold` truncate, `show --text` covers one node, and projected files are off limits. Both the grapher (a `dump.sh` script) and the orchestrator (loops over `show --text`) built the same workaround on 2026-09-27. That argues for `--detail long` showing full text, or for a separate recursive read.",
     "parent": "BlockNode:00CR7N8FM8001",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00CRBWA180001",
+      "BlockNode:00CRC97EM0001"
+    ]
   },
   {
     "@id": "BlockNode:00CR92ZRJ8001",
@@ -41369,8 +41476,24 @@
   {
     "@id": "BlockNode:00CR9D1WW0001",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9D1WW0001:links:Link:00CRBA4J10002",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSF000H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9D1WW0001:links:Link:00CRBA4J10002:props:StringProp:00CRBA4J10003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
     "title": "### aperas — Discipline — Threads, the Report template gains a Tool gap line",
-    "text": "The template's **Report** step gains a line after **Question**:",
+    "text": "Supersedes: [v3's thread-template code block](#id/BlockNode:00CR5GCSF000H)",
     "parent": "BlockNode:00CR874TC8001",
     "type": "heading",
     "children": [
@@ -41381,7 +41504,7 @@
     "@id": "BlockNode:00CR9D1WW0002",
     "@type": "BlockNode",
     "title": "00CR9D1WW0002",
-    "text": "```\n  - **Tool gap**: <a workaround built, a call that failed or hung — see below>\n```",
+    "text": "```markdown\n# Grapher thread\n## <topic>                                   ← named by the user\n### <task>                                   ← set by the orchestrator\n#### Turn <n>                                ← one exchange with the orchestrator\n- **Ask**: <what is wanted, in a sentence>   ← orchestrator; root of <p>-orchestrator-grapher\n  - [<argument>](../design/x.md#id/BlockNode:…) — why it matters here\n- **Work**: <the approach, in a line>        ← subagent; subturns nested under it\n  - <subturn>\n- **Report**: <the outcome, in a sentence>   ← subagent; root of <p>-grapher-orchestrator\n  - [<changed or found node>](…) — what changed, or what it shows\n  - **Question**: <whatever the Ask left unsettled — see below>\n  - **Tool gap**: <a workaround built, a call that failed or hung — see below>\n```",
     "parent": "BlockNode:00CR9D1WW0001",
     "type": "code",
     "children": []
@@ -41745,10 +41868,24 @@
             "value": "530"
           }
         ]
+      },
+      {
+        "@id": "BlockNode:00CR9MCPXG001:links:Link:00CRCHPQK0000",
+        "@type": "Link",
+        "target": "BlockNode:00CRCGRGJR008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9MCPXG001:links:Link:00CRCHPQK0000:props:StringProp:00CRCHPQK0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "677"
+          }
+        ]
       }
     ],
     "title": "**A tombstoned node stays listed in its parent's `children` array**",
-    "text": "**A tombstoned node stays listed in its parent's `children` array**: `ArtifactNode:00CR5ANC6G000` (`.threads/coder.md`'s holder) still lists `BlockNode:00CR6BXGTR001` as a child, though it was tombstoned during the September 27 thread reset. `tree`/`unfold` hide it correctly since both filter tombstoned nodes at render time, but `aperas show` on the parent exposes the stale reference, and a bare anchor-less `insert` after it would have needed a live anchor. Found 2026-09-27, not yet investigated further; possibly related to [the `.state` tombstone leak](../discussion/treeview.md#id/BlockNode:00CR81SDX8001), a different symptom of the same area of the code.",
+    "text": "**A tombstoned node stays listed in its parent's `children` array**: `ArtifactNode:00CR5ANC6G000` (`.threads/coder.md`'s holder) still lists `BlockNode:00CR6BXGTR001` as a child, though it was tombstoned during the September 27 thread reset. `tree`/`unfold` hide it correctly since both filter tombstoned nodes at render time, but `aperas show` on the parent exposes the stale reference, and a bare anchor-less `insert` after it would have needed a live anchor. Found 2026-09-27, not yet investigated further; possibly related to [the `.state` tombstone leak](../discussion/treeview.md#id/BlockNode:00CR81SDX8001), a different symptom of the same area of the code. Promoted to [issues/treeview.md](../issues/treeview.md#id/BlockNode:00CRCGRGJR008).",
     "parent": "BlockNode:00CE1DDF58003",
     "type": "listItem",
     "children": []
@@ -42079,6 +42216,15 @@
     "children": []
   },
   {
+    "@id": "BlockNode:00CR9SRMW8002",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-27T09:19:07.664Z",
+    "title": "**Report**",
+    "text": "**Report**: every truncation point in `tree`'s and `unfold`'s preview paths is mapped, with what depends on each and what doesn't — the coder's own survey can start from this rather than re-deriving it.",
+    "type": "listItem",
+    "children": []
+  },
+  {
     "@id": "BlockNode:00CR9Y09Y0001",
     "@type": "BlockNode",
     "title": "00CR9Y09Y0001",
@@ -42226,6 +42372,1221 @@
     "text": "**The tiers show a node's full text, not a capped preview**: `abstract` in the tier list above is the node's complete stored text — `aperas tree` and `aperas unfold` never truncate it, at any tier. Only `aperas backlinks --text` still returns a length-capped preview line.",
     "parent": "BlockNode:00CE1GW4Y800G",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0001",
+    "@type": "BlockNode",
+    "title": "**Review of the first v3.1 run, the cap-removal task (2026-09-27)**",
+    "text": "**Review of the first v3.1 run, the cap-removal task (2026-09-27)**: the turn sequence ran as designed: grapher survey, coder survey with no change, grapher filing, coder change, orchestrator verification, finishing turn. Subturns were detailed, both subagents reported tool gaps, the coder asked questions instead of guessing, and the orchestrator's verification caught an id conflation in the coder's Report. Several rules still failed.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRAQQ2V0002",
+      "BlockNode:00CRAQQ2V0003",
+      "BlockNode:00CRAQQ2V0004",
+      "BlockNode:00CRAQQ2V0005",
+      "BlockNode:00CRAQQ2V0006",
+      "BlockNode:00CRAQQ2V0007",
+      "BlockNode:00CRAQQ2V0008",
+      "BlockNode:00CRAX4MZ0001",
+      "BlockNode:00CRAX4MZ8000",
+      "BlockNode:00CRB10KC0001",
+      "BlockNode:00CRB689SR001",
+      "BlockNode:00CRB6ZTXG001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRAQQ2V0002:props:StringProp:00CRAQQ6W0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRAQQ2V0002:props:StringProp:00CRAQQ6W0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The grapher survey Ask asked for a code map again**",
+    "text": "**The grapher survey Ask asked for a code map again**: it said \"find every truncation point… report what each one caps\", which is exactly what *The task loop* forbids in a grapher Ask. The grapher didn't flag it, though its skill now says to. The coder's survey then became a re-check of the grapher's code map.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0003",
+    "@type": "BlockNode",
+    "title": "**The orchestrator re-surveyed the code between the two surveys**",
+    "text": "**The orchestrator re-surveyed the code between the two surveys**: it read `astParser.ts`, `node.ts`, `kgUnfold.ts` and `kgBacklinks.ts` to \"verify\" the grapher's map before the coder had run. That is surveying, not verifying, and the finding it relayed (\"matches exactly\") went unrecorded, breaking read-and-record.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0004",
+    "@type": "BlockNode",
+    "title": "**Asks retyped content instead of citing it**",
+    "text": "**Asks retyped content instead of citing it**: the coder's survey Ask inlined the grapher's whole map, and the filing Ask pre-wrote the filing. Dispatch messages also carried work that never reached the thread, such as the hint to check that `show --text` is uncapped.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0005",
+    "@type": "BlockNode",
+    "title": "**A scope decision skipped freeflow**",
+    "text": "**A scope decision skipped freeflow**: the orchestrator resolved the coder's three Questions itself (print-side fix, `previewChildren` in scope, `kgBacklinks` out) and wrote them straight into an Ask. That breaks the rule that an Ask cites freeflow for its decisions, and the user heard about it only at the end.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0006",
+    "@type": "BlockNode",
+    "title": "**Thread-boundary slips**",
+    "text": "**Thread-boundary slips**: a verification note written under the coder's own Ask, and a freeflow entry linking into `.threads/coder.md`, both undone. The rule itself is also ambiguous: the orchestrator skill tells a coder Ask to cite the grapher's Report, a thread-to-thread link, while the base says \"nothing outside a thread links into one\".",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0007",
+    "@type": "BlockNode",
+    "title": "**Two tasks in one dispatch**",
+    "text": "**Two tasks in one dispatch**: a hand-off view has one root, so the second task's Ask was only reachable through the chat message.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAQQ2V0008",
+    "@type": "BlockNode",
+    "title": "**The finishing turn missed its own friction**",
+    "text": "**The finishing turn missed its own friction**: its trace shows `TreeView 'claude-grapher' not found` and a new `claude-grapher` view created to get past it, yet the Report and handback say no tool gaps. That view, the coder's throwaway `coder-verify`, and `tree-format-flag` from the failed first run are all still present.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAX4MZ0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRAX4MZ0001:props:StringProp:00CRAX4SG8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRAX4MZ0001:props:StringProp:00CRAX4SG8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Decided — threads may link to each other** (user, 2026-09-27)",
+    "text": "**Decided — threads may link to each other** (user, 2026-09-27): threads sit on the same tier, so a link between them is sideways and allowed. A coder Ask citing the grapher's Report is fine. What stays forbidden is any link into a thread from outside the threads tier: formal docs, `concepts.md`, discussion. The base skill's \"nothing outside a thread links into one\" is reworded to say so.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRAZZ8A0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAX4MZ8000",
+    "@type": "BlockNode",
+    "title": "**Decided — apply the pre-send checklist for Asks** (user, 2026-09-27)",
+    "text": "**Decided — apply the pre-send checklist for Asks** (user, 2026-09-27): the orchestrator skill gains a checklist to run on every Ask before dispatch: only the receiver's kind of work, a freeflow citation for every decision, cite rather than retype, one task per dispatch. The user also noted that the run's rule failures — surveying the code three times and retyping content across Asks — explain why it took much longer than the old single-agent workflow.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRAZZWR0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAZ91C8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRAZ91C8001:links:Link:00CRAZ95M8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSF000N",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZ91C8001:links:Link:00CRAZ95M8000:props:StringProp:00CRAZ95M8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Discipline — Threads, threads may link to each other",
+    "text": "Supersedes: [v3's thread-tier paragraph in Threads](#id/BlockNode:00CR5GCSF000N)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CRAZ91C8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAZ91C8002",
+    "@type": "BlockNode",
+    "title": "00CRAZ91C8002",
+    "text": "Threads are the lowest tier of the gradient (*Citation direction*, below), so a thread cites upward freely, and threads cite each other sideways — an Ask citing the other subagent's Report is the ordinary case. **Nothing above the threads tier links into one**: no formal doc, `concepts.md` entry or discussion node. What a thread finds reaches the rest of the graph by the grapher copying it up, never by citation.",
+    "parent": "BlockNode:00CRAZ91C8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZB02G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRAZB02G001:links:Link:00CRAZB51R000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSF0011",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZB02G001:links:Link:00CRAZB51R000:props:StringProp:00CRAZB51R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Discipline — Every claim carries its source, the thread clause follows the tier rule",
+    "text": "Supersedes: [v3's where-you-check paragraph in Every claim carries its source](#id/BlockNode:00CR5GCSF0011)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CRAZB02G002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAZB02G002",
+    "@type": "BlockNode",
+    "title": "00CRAZB02G002",
+    "text": "Where you check depends on where you wrote it. A thread or freeflow entry cites forward, since nothing above the threads tier links into a thread and freeflow is not itself a citation target (base *Citation direction*, below) — so the check there is simply: does this entry's own text name what it rests on? A formal-doc entry can be checked from the other side, and more strongly: run `aperas backlinks <id> --text` on **what you just wrote**, not only on what you were about to read. A node whose claims rest on nothing returns nothing, and that silence is the entire signal. The mechanics of applying this to a formal-doc promotion — where the link goes when citation direction forbids the obvious direction — belong to the grapher, the only role that writes one (`aperas-grapher`'s *Provenance at the origin*).",
+    "parent": "BlockNode:00CRAZB02G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZBN0G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRAZBN0G001:links:Link:00CRAZBRQR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D9NQG002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZBN0G001:links:Link:00CRAZBRQR000:props:StringProp:00CRAZBRQR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Filing — never link into a thread from the graph above it",
+    "text": "Supersedes: [the tool-gap Filing entry](#id/BlockNode:00CR9D9NQG002)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CRAZBN0G002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAZBN0G002",
+    "@type": "BlockNode",
+    "title": "00CRAZBN0G002",
+    "text": "Read the coder's latest Report and the Work under it in `.threads/coder.md`. Record what the coder found where it belongs: into the task's `discussion` freeflow first, then promoted into `issues`/`history`/`design` once it has earned a home (*Discussion is where meta-info is born*, below). Copy content up; never link into a thread from the graph above it. Where the coder reports code and design disagreeing, that discrepancy is itself the finding — record it, and fix whichever side is stale. File every tool gap in a Report, the coder's or your own, in the freeflow of the concern that owns the tool.",
+    "parent": "BlockNode:00CRAZBN0G001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZC840001",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator — Before sending an Ask — a new section, the pre-send checklist",
+    "text": "Run every Ask against this list before dispatching it. Each item is a rule stated elsewhere that has already been broken while an Ask was being written, because nothing brings it up at that moment:",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CRAZC840002",
+      "BlockNode:00CRAZC840003",
+      "BlockNode:00CRAZC840004",
+      "BlockNode:00CRAZC840005",
+      "BlockNode:00CRAZC840006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRAZC840002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRAZC840002:props:StringProp:00CRAZCEP0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRAZC840002:props:StringProp:00CRAZCEP0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CRAZC840002",
+    "text": "**Only the receiver's kind of work.** A grapher Ask asks for the graph, never \"find the source\" or \"map the behavior\"; a coder Ask asks for code, never for a graph write (base: *The task loop*).",
+    "parent": "BlockNode:00CRAZC840001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZC840003",
+    "@type": "BlockNode",
+    "title": "00CRAZC840003",
+    "text": "**Every decision cited from freeflow.** A scope call, a resolved Question, a choice between approaches: if it isn't recorded in freeflow yet, record it first, then cite it (*Every exchange with the user*).",
+    "parent": "BlockNode:00CRAZC840001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZC840004",
+    "@type": "BlockNode",
+    "title": "00CRAZC840004",
+    "text": "**Cite, don't retype.** Point at the Report, the filed entry or the design block; don't paste its content into the Ask or the chat message (base: *Hand-offs*). The message names the view and at most one argument.",
+    "parent": "BlockNode:00CRAZC840001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZC840005",
+    "@type": "BlockNode",
+    "title": "00CRAZC840005",
+    "text": "**One task per dispatch.** A hand-off view has one root; a second task's Ask would be reachable only through chat.",
+    "parent": "BlockNode:00CRAZC840001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZC840006",
+    "@type": "BlockNode",
+    "title": "Skipping these costs more than time",
+    "text": "Skipping these costs more than time: a code map surveyed twice, an Ask that repeats what it should cite, and a turn built on a decision nobody recorded.",
+    "parent": "BlockNode:00CRAZC840001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZZ8A0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBT8002",
+        "@type": "Link",
+        "target": "BlockNode:00CRAZ91C8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBT8002:props:StringProp:00CRAZZBTG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "27"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG001",
+        "@type": "Link",
+        "target": "BlockNode:00CRAZB02G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG001:props:StringProp:00CRAZZBTG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "150"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG003",
+        "@type": "Link",
+        "target": "BlockNode:00CRAZBN0G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG003:props:StringProp:00CRAZZBTG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "308"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG005",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG005:props:StringProp:00CRAZZBTG006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "515"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG007",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZ8A0001:links:Link:00CRAZZBTG007:props:StringProp:00CRAZZBTG008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "603"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:props:StringProp:00CRAZZBT8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRAZZ8A0001:props:StringProp:00CRAZZBT8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: [aperas — Discipline — Threads, threads may link to each other](../discussion/aperas-skill.md#id/BlockNode:00CRAZ91C8001), [aperas — Discipline — Every claim carries its source, the thread clause follows the tier rule](../discussion/aperas-skill.md#id/BlockNode:00CRAZB02G001) and [aperas-grapher — Filing — never link into a thread from the graph above it](../discussion/aperas-skill.md#id/BlockNode:00CRAZBN0G001) record the rewording as v3.1 delta entries. Design now says the same in [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)'s tier paragraph and in [Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00G).",
+    "parent": "BlockNode:00CRAX4MZ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRAZZWR0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRAZZWR0001:links:Link:00CRB000F8000",
+        "@type": "Link",
+        "target": "BlockNode:00CRAZC840001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZWR0001:links:Link:00CRB000F8000:props:StringProp:00CRB000F8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "27"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRAZZWR0001:links:Link:00CRB000F8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRAZZWR0001:links:Link:00CRB000F8002:props:StringProp:00CRB000F8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "227"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRAZZWR0001:props:StringProp:00CRB000F0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRAZZWR0001:props:StringProp:00CRB000F0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: [aperas-orchestrator — Before sending an Ask — a new section, the pre-send checklist](../discussion/aperas-skill.md#id/BlockNode:00CRAZC840001) records the new section as a v3.1 delta entry. Design's [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) now names the checklist.",
+    "parent": "BlockNode:00CRAX4MZ8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRB10KC0001",
+    "@type": "BlockNode",
+    "title": "**Orchestrator verified Turn 6**",
+    "text": "**Orchestrator verified Turn 6**: `skill_drift.py` shows 0 added; `check-links` clean. Both design edits read correctly and consistently — line 85 (Citation direction) and line 143 (Threads) both state threads cite sideways, nothing above the tier cites in.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRB689SR001",
+    "@type": "BlockNode",
+    "title": "00CRB689SR001",
+    "text": "**Decided — subagents get their own personal view, named `${profile}-${topic-or-task}`** (user, 2026-09-27): the grapher's Turn 3 finishing turn needed to browse across a whole task and had nowhere sanctioned to do it — its only two views are the fixed hand-off ones (`claude-orchestrator-grapher`, owned by the orchestrator; `claude-grapher-orchestrator`, re-rooted onto its Report every turn), neither meant for free browsing. It created a bare-named `claude-grapher` view on the spot to work around this. The orchestrator already does this for itself (`kg-cleanup`, `core-redesign`, `webapp-design`, bare topic names, no prefix), but `TreeView` names are globally unique, so a subagent using the same bare-topic convention would collide with the orchestrator's own view on that topic. The profile prefix avoids that. The base skill's *Keep an active view, and keep it current* gets this stated as the convention for any role's personal view, not only the orchestrator's.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRBE4WDR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRB6ZTXG001",
+    "@type": "BlockNode",
+    "title": "**Decided — Turn 6 follow-ups** (user, 2026-09-27)",
+    "text": "**Decided — Turn 6 follow-ups** (user, 2026-09-27): fix the misattributed drift entry now (`BlockNode:00CR9D1WW0001`'s heading, a note about the change rather than skill text, incorrectly flagged as a code-block matching problem); leave the v3.1 history milestone for the actual finishing turn.",
+    "parent": "BlockNode:00CRAQQ2V0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBE35S8001",
+    "@type": "BlockNode",
+    "title": "### aperas — Orientation — Keep an active view, personal-view naming for any role",
+    "text": "This is separate from the fixed hand-off views a subagent already owns (*Hand-offs*, below), which are re-rooted onto an Ask or a Report every turn and aren't meant for free browsing. A subagent that needs to look around a whole task — to write a finishing turn, say — sets up one of these for itself the same way. `TreeView` names are globally unique, so name it `${profile}-${topic-or-task}`, not a bare topic name: the orchestrator's own personal views are bare (`kg-cleanup`, `core-redesign`), and a subagent using the same bare name for the same topic would collide with one that already exists.",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBE4WDR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBE4WDR001:links:Link:00CRBE50N8000",
+        "@type": "Link",
+        "target": "BlockNode:00CRBE35S8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBE4WDR001:links:Link:00CRBE50N8000:props:StringProp:00CRBE50N8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "73"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRBE4WDR001:props:StringProp:00CRBE50N0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRBE4WDR001:props:StringProp:00CRBE50N0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: the decision is recorded in the v3.1 delta as [aperas — Orientation — Keep an active view, personal-view naming for any role](#id/BlockNode:00CRBE35S8001).",
+    "parent": "BlockNode:00CRB689SR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBGW5PR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBGW5PR001:links:Link:00CRBJ3ZPG000",
+        "@type": "Link",
+        "target": "BlockNode:00CRBJ0VYG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBGW5PR001:links:Link:00CRBJ3ZPG000:props:StringProp:00CRBJ3ZPR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1002"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRBGW5PR001:props:StringProp:00CRBGWB48000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRBGW5PR001:props:StringProp:00CRBGWB48001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The ApeironNgn service has died silently twice in one session, and a stuck prior process can survive `service stop`/`start`**",
+    "text": "**The ApeironNgn service has died silently twice in one session, and a stuck prior process can survive `service stop`/`start`**: found 2026-09-27 during the skill-v3.1 work. First: `service restart`/`service start` timed out (\"did not become ready in time\") once while a prior instance was still mid-rehydration under load; a retry a few seconds later succeeded. Second, worse: the service died mid-turn with no error until the next call, and the stuck old process (90+ minutes old, no lock file, invisible to `service stop`) sat consuming growing CPU/memory; `service start` failed twice with the same \"did not become ready\" message before it was killed by PID and a fresh start came up clean in about a minute. No data was lost either time — every write had been flushed and survived on disk — but the failure mode itself (a dead process with no lock file, not visible to `service stop`, and a readiness check that may be too tight for this corpus's current size) is new and undiagnosed. Promoted to [issues/core.md's Open Issues](../issues/core.md#id/BlockNode:00CRBJ0VYG001).",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBJ0VYG001",
+    "@type": "BlockNode",
+    "title": "**The ApeironNgn service can die silently, and a stuck prior process can survive `service stop`/`start`**",
+    "text": "**The ApeironNgn service can die silently, and a stuck prior process can survive `service stop`/`start`**: found 2026-09-27, twice in one session. First: `service restart`/`service start` timed out (\"did not become ready in time\") once while a prior instance was still mid-rehydration under load; a retry a few seconds later succeeded. Second, worse: the service died mid-turn with no error until the next call, and the stuck old process (90+ minutes old, no lock file, invisible to `service stop`) sat consuming growing CPU/memory; `service start` failed twice with the same \"did not become ready\" message before the stuck process was killed by PID and a fresh start came up clean in about a minute. No data was lost either time — every write had been flushed and survived on disk. Undiagnosed: why the process dies silently, why it leaves no lock file and is invisible to `service stop`, and whether the readiness check is too tight for this corpus's current size.",
+    "parent": "BlockNode:00CF1WZ4JG002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBW8248001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBW8248001:links:Link:00CRCHQQ3G000",
+        "@type": "Link",
+        "target": "BlockNode:00CRCH1DBR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBW8248001:links:Link:00CRCHQQ3G000:props:StringProp:00CRCHQQ3G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "618"
+          }
+        ]
+      }
+    ],
+    "title": "**`aperas update --text-only` always reports \"overflow prepended, no reconciliation\", even with zero overflow**",
+    "text": "**`aperas update --text-only` always reports \"overflow prepended, no reconciliation\", even with zero overflow**: `kgUpdate.ts:444` prints that message unconditionally whenever `--text-only` is passed, not gated on whether any content actually followed the leading paragraph. Confirmed live: a bare single-line `--text-only` update against a disposable throwaway node printed the same message with nothing to prepend. Behavior is correct — nothing gets reconciled away either way — only the message is misleading. First noticed in Turn 4 of the skill-v3.1 recording task, confirmed reproducible 2026-09-27. Promoted to [issues/cli.md](../issues/cli.md#id/BlockNode:00CRCH1DBR001).",
+    "parent": "BlockNode:00CR81TAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBWA180001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRBWA180001:props:StringProp:00CRBWA700000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRBWA180001:props:StringProp:00CRBWA700001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Cap removal only reaches one level down, not a whole subtree**",
+    "text": "**Cap removal only reaches one level down, not a whole subtree**: verified live 2026-09-27, after the cap-removal fix landed. Genuinely unfolding a node now auto-reveals full, uncapped text for its *direct* children (the tier-2 preview), which is a real improvement — a single Work or Report node's subturns now read in one `unfold` + `tree --view`. But grandchildren stay fully collapsed behind a bare `[+N]` count, revealing nothing, confirmed against a real 3-level chain in `design/linking.md`. A genuinely deep, cross-cutting read — several Turns' chains plus separate entries elsewhere — still needs a script or many manual unfolds, one per level, same as before the fix.",
+    "parent": "BlockNode:00CR92W8TR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBWCQNG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBWCQNG001:links:Link:00CRBWCWAG002",
+        "@type": "Link",
+        "target": "BlockNode:00CRBW8248001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBWCQNG001:links:Link:00CRBWCWAG002:props:StringProp:00CRBWCWAR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "308"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRBWCQNG001:links:Link:00CRBWCWAR001",
+        "@type": "Link",
+        "target": "BlockNode:00CRBWA180001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBWCQNG001:links:Link:00CRBWCWAR001:props:StringProp:00CRBWCWAR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "508"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRBWCQNG001:props:StringProp:00CRBWCWAG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRBWCQNG001:props:StringProp:00CRBWCWAG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CRBWCQNG001",
+    "text": "**Decided — fix the Tool gap template and file the `--text-only` message bug** (user, 2026-09-27): the base skill's thread-shape template shows two `**Tool gap — <what>**` examples now, distinguished by lead-in term, plus a note that a bare repeated \"Tool gap\" collides outright and rejects the whole write. [The `--text-only` message bug](../discussion/cli.md#id/BlockNode:00CRBW8248001) is filed in `cli.md`'s Freeflow, confirmed reproducible by the orchestrator against a disposable node. Also clarified: [cap removal only reaches one level down](../discussion/treeview.md#id/BlockNode:00CRBWA180001), not a whole subtree — the \"agents need full text\" gap is improved, not closed.",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBWFJJ0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBWFJJ0001:links:Link:00CRBWFPX8000",
+        "@type": "Link",
+        "target": "BlockNode:00CRBW8248001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBWFJJ0001:links:Link:00CRBWFPX8000:props:StringProp:00CRBWJ8C8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "307"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRBWFJJ0001:links:Link:00CRBWFPX8002",
+        "@type": "Link",
+        "target": "BlockNode:00CRBWA180001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBWFJJ0001:links:Link:00CRBWFPX8002:props:StringProp:00CRBWJ8TG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "507"
+          }
+        ]
+      }
+    ],
+    "title": "**Decided — fix the Tool gap template and file the `--text-only` message bug**",
+    "text": "**Decided — fix the Tool gap template and file the `--text-only` message bug**: User, 2026-09-27. the base skill's thread-shape template shows two `**Tool gap — <what>**` examples now, distinguished by lead-in term, plus a note that a bare repeated \"Tool gap\" collides outright and rejects the whole write. [The `--text-only` message bug](../discussion/cli.md#id/BlockNode:00CRBW8248001) is filed in `cli.md`'s Freeflow, confirmed reproducible by the orchestrator against a disposable node. Also clarified: [cap removal only reaches one level down](../discussion/treeview.md#id/BlockNode:00CRBWA180001), not a whole subtree — the \"agents need full text\" gap is improved, not closed.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRBZ9EB8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRBYWS98001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBYWS98001:links:Link:00CRBYWXN0000",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D1WW0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBYWS98001:links:Link:00CRBYWXN0000:props:StringProp:00CRBYWXN0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Discipline — Threads, distinct lead-in terms for multiple Tool gaps",
+    "text": "Supersedes: [v3.1's single-example Report template](#id/BlockNode:00CR9D1WW0001)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CRBYWS98002",
+      "BlockNode:00CRBYWS98003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRBYWS98002",
+    "@type": "BlockNode",
+    "title": "00CRBYWS98002",
+    "text": "```markdown\n# Grapher thread\n## <topic>                                   ← named by the user\n### <task>                                   ← set by the orchestrator\n#### Turn <n>                                ← one exchange with the orchestrator\n- **Ask**: <what is wanted, in a sentence>   ← orchestrator; root of <p>-orchestrator-grapher\n  - [<argument>](../design/x.md#id/BlockNode:…) — why it matters here\n- **Work**: <the approach, in a line>        ← subagent; subturns nested under it\n  - <subturn>\n- **Report**: <the outcome, in a sentence>   ← subagent; root of <p>-grapher-orchestrator\n  - [<changed or found node>](…) — what changed, or what it shows\n  - **Question**: <whatever the Ask left unsettled — see below>\n  - **Tool gap — <what>**: <a workaround built, a call that failed or hung — see below>\n  - **Tool gap — <what else>**: <a second one, if the turn hit more than one>\n```",
+    "parent": "BlockNode:00CRBYWS98001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBYWS98003",
+    "@type": "BlockNode",
+    "title": "00CRBYWS98003",
+    "text": "More than one **Tool gap** in a Report needs a distinct lead-in for each — `<what>`, not a bare repeat of the word \"Tool gap\" — since sibling slugs are derived from the lead-in term, and two identical ones collide outright: the write is rejected in full, nothing written, before either one lands.",
+    "parent": "BlockNode:00CRBYWS98001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRBZ9EB8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRBZ9EB8001:links:Link:00CRBZ9JP0002",
+        "@type": "Link",
+        "target": "BlockNode:00CRBYWS98001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBZ9EB8001:links:Link:00CRBZ9JP0002:props:StringProp:00CRBZ9JP8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "27"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRBZ9EB8001:links:Link:00CRBZ9JP8001",
+        "@type": "Link",
+        "target": "BlockNode:00CR9D1WW0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBZ9EB8001:links:Link:00CRBZ9JP8001:props:StringProp:00CRBZ9JP8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "212"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRBZ9EB8001:links:Link:00CRBZ9JP8003",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRBZ9EB8001:links:Link:00CRBZ9JP8003:props:StringProp:00CRBZ9JP8004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "341"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRBZ9EB8001:props:StringProp:00CRBZ9JP0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRBZ9EB8001:props:StringProp:00CRBZ9JP0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: [aperas — Discipline — Threads, distinct lead-in terms for multiple Tool gaps](../discussion/aperas-skill.md#id/BlockNode:00CRBYWS98001) records this as a v3.1 delta entry, superseding [the single-example Report template](../discussion/aperas-skill.md#id/BlockNode:00CR9D1WW0001); the rule is promoted to design's [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004). The `--text-only` message bug and the cap-removal clarification are left where they already are, per this task's Ask.",
+    "parent": "BlockNode:00CRBWFJJ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRC1S4MR001",
+    "@type": "BlockNode",
+    "title": "**The orchestrator cleared the grapher's own Turn 8 Report text**",
+    "text": "**The orchestrator cleared the grapher's own Turn 8 Report text**: ran `printf '\\n' | aperas update BlockNode:00CRC0M9GG001 --text-only` against the live Report node, as an idle check of whether a thread-size warning still fired after pruning — exactly the trap the base skill's *Updating an existing list item* documents (leaving text out wipes it), hit carelessly against production content instead of a disposable node. Only one child (the pruning note) survived; the Report's substance was in its own top-level text, now empty. `.threads/` and `Apeiron/.state/` are both gitignored, so there was no git-based recovery path. The orchestrator independently reverified the underlying facts (the new v3.1 delta entry, the design promotion, the provenance link, clean drift/check-links) and is routing the restoration to the grapher rather than writing into its own thread content.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRC6N7TG001",
+    "@type": "BlockNode",
+    "title": "**A flushed `update`/`project` can stay in the `.state/` mirror without reaching the tracked `Apeiron/BlockNode.jsonld` file**",
+    "text": "**A flushed `update`/`project` can stay in the `.state/` mirror without reaching the tracked `Apeiron/BlockNode.jsonld` file**: found 2026-09-27 while restoring the accidentally-cleared Turn 8 Report (`.threads/grapher.md`). After `aperas update ... --flush` and `aperas project ... --flush`, the new content was live in the service and in `Apeiron/.state/BlockNode.jsonld`, but absent from the git-tracked `Apeiron/BlockNode.jsonld` — plain `--flush` didn't sync the tracked file this time. `aperas service restart` forced it. The restart's own `pruneUnreachableTombstones` GC also hard-deleted the already-tombstoned Turn 1–3 \"tree rendering\" thread content still lingering in the tracked mirror at that point — confirmed intended, documented behavior (that content was already tombstoned by an approved prune), not new data loss.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRC9JSGR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRC97EM0001",
+    "@type": "BlockNode",
+    "title": "**Resolution — `--detail {long|short}`, as already designed, is not implemented**",
+    "text": "**Resolution — `--detail {long|short}`, as already designed, is not implemented**: `--detail` appears nowhere in `packages/cli/src/*.ts` and nowhere in `design/treeview.md` as a CLI flag — confirmed 2026-09-27. The coding task itself was cancelled when the first-run test was reset before implementation, and the cap-removal task that ran afterward only fixed the truncation prerequisite, not the flag. `--detail {long|short}` remains the correct answer to this evidence; it just hasn't been built.",
+    "parent": "BlockNode:00CR92W8TR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRC9E2SR001",
+    "@type": "BlockNode",
+    "tombstonedAt": "2026-09-27T09:40:11.438Z",
+    "title": "**Correction — this was not a sync failure, it was correct, by-design behavior**",
+    "text": "**Correction — this was not a sync failure, it was correct, by-design behavior**: verified 2026-09-27 by reading `dehydrate.ts` and `threadScope.ts` directly. A `.threads/`-scoped `BlockNode`/`ArtifactNode`/`FolderNode` is unconditionally excluded from `dehydrateToJsonLd` (the tracked mirror) and written only via `dehydrateStateToJsonLd`, into `.state/` — for every such node, not intermittently. Confirmed live against the restored Turn 8 Report: it's in `Apeiron/.state/BlockNode.jsonld` (5 occurrences) and correctly absent from tracked `Apeiron/BlockNode.jsonld` (0 occurrences), exactly as design intends. `--flush` did its job the whole time; nothing needed forcing. The `service restart`'s real effect was unrelated: its own `pruneUnreachableTombstones` GC, which happened to run at the same moment. The original entry below is left for the record, corrected rather than deleted.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRC9JSGR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRC9JSGR001:props:StringProp:00CRC9JYKR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRC9JSGR001:props:StringProp:00CRC9JYKR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Correction — this was not a sync failure, it was correct, by-design behavior**",
+    "text": "**Correction — this was not a sync failure, it was correct, by-design behavior**: verified 2026-09-27 by reading `dehydrate.ts` and `threadScope.ts` directly. A `.threads/`-scoped `BlockNode`/`ArtifactNode`/`FolderNode` is unconditionally excluded from `dehydrateToJsonLd` (the tracked mirror) and written only via `dehydrateStateToJsonLd`, into `.state/` — for every such node, not intermittently. Confirmed live against the restored Turn 8 Report: it's in `Apeiron/.state/BlockNode.jsonld` (5 occurrences) and correctly absent from tracked `Apeiron/BlockNode.jsonld` (0 occurrences), exactly as design intends. `--flush` did its job the whole time; nothing needed forcing. The `service restart`'s real effect was unrelated: its own `pruneUnreachableTombstones` GC, which happened to run at the same moment. Left uncorrected above, since retyping the mistake in place would erase the trail — this is the standing correction.",
+    "parent": "BlockNode:00CRC6N7TG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCE6HY8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PP8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR81SDX8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PP8000:props:StringProp:00CRCE8TM0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "108"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PP8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR81SWZR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PP8002:props:StringProp:00CRCE8V20000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "193"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PPG001",
+        "@type": "Link",
+        "target": "BlockNode:00CR9MCPXG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PPG001:props:StringProp:00CRCE8VMR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "295"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PPG003",
+        "@type": "Link",
+        "target": "BlockNode:00CR81W4RG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PPG003:props:StringProp:00CRCE8XP8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "432"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PPG005",
+        "@type": "Link",
+        "target": "BlockNode:00CRBW8248001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCE6HY8001:links:Link:00CRCE6PPG005:props:StringProp:00CRCE8YQ0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "568"
+          }
+        ]
+      }
+    ],
+    "title": "**Decided — promote five tool gaps from discussion to issues**",
+    "text": "**Decided — promote five tool gaps from discussion to issues**: User, 2026-09-27. to `issues/treeview.md` — [the `.state` tombstone leak](../discussion/treeview.md#id/BlockNode:00CR81SDX8001), [the doubled `#id/` fragment in `tree --view`](../discussion/treeview.md#id/BlockNode:00CR81SWZR001), [a tombstoned node staying in its parent's `children` array](../discussion/treeview.md#id/BlockNode:00CR9MCPXG001). To `issues/cli.md` — [the insert-transactionality fix covering only a missing anchor, not a misplaced one](../discussion/cli.md#id/BlockNode:00CR81W4RG001), [`update --text-only`'s misleading \"overflow prepended\" message](../discussion/cli.md#id/BlockNode:00CRBW8248001). Excluded: the stdin-less insert hang whose cause is unconfirmed — not promoted while the diagnosis itself is still open.",
+    "parent": "BlockNode:00CR81TAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRCGRGJR002:links:Link:00CRCGRNB0000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3WYRG8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCGRGJR002:links:Link:00CRCGRNB0000:props:StringProp:00CRCGRNB0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "106"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CRCGRGJR002:props:StringProp:00CRCGRNA8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRCGRGJR002:props:StringProp:00CRCGRNA8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**",
+    "text": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**: this contradicts [Threads persist to `.state/` by membership, not by class](../design/treeview.md#id/BlockNode:00CR3WYRG8001), which says pruning a thread is an ordinary `remove`. Found 2026-09-27 when resetting both threads.",
+    "parent": "BlockNode:00CE1GW638002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRCGRGJR003",
+      "BlockNode:00CRCGRGJR004",
+      "BlockNode:00CRCGRGJR005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRCGRGJR003:props:StringProp:00CRCGRNAG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRCGRGJR003:props:StringProp:00CRCGRNAG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Mechanism**",
+    "text": "**Mechanism**: `aperas remove` on a thread heading keeps the removed root's `parent`, so the root stays in `Apeiron/.state/BlockNode.jsonld`. Every descendant loses its `parent`, so the ancestor walk to `artifacts/.threads/` no longer reaches it, and it dehydrates into tracked `Apeiron/BlockNode.jsonld`. Placement has to hold for tombstones too, not only while an ancestor under `.threads` is still reachable.",
+    "parent": "BlockNode:00CRCGRGJR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR004",
+    "@type": "BlockNode",
+    "title": "**Repro**",
+    "text": "**Repro**: remove `## tree --format flag` in `.threads/grapher.md` (`BlockNode:00CR6BH1PR001`). The heading lands in `.state`; its Task, Turn, Ask, Work and Report nodes (e.g. `BlockNode:00CR6BKSS8001`, `BlockNode:00CR6BRTPG001`) land tracked with `tombstonedAt` and no `parent`. 15 thread tombstones leaked this way, and they are now in `AperasKG`'s git index.",
+    "parent": "BlockNode:00CRCGRGJR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR005",
+    "@type": "BlockNode",
+    "title": "**Also needed**",
+    "text": "**Also needed**: moving the already-leaked tombstones back into `.state`.",
+    "parent": "BlockNode:00CRCGRGJR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRCGRGJR006:links:Link:00CRCGRNB8000",
+        "@type": "Link",
+        "target": "BlockNode:00CE1GW4Y800G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCGRGJR006:links:Link:00CRCGRNB8000:props:StringProp:00CRCGRNB8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "427"
+          }
+        ]
+      }
+    ],
+    "title": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**",
+    "text": "**`aperas tree --view` doubles a link's `#id/` fragment when the stored href already carries one**: `bakeResolvedLinkIds` in `packages/core/src/apeironNgn/node.ts` appends `#id/<target>` to every relative href it has a resolved `Link` for, whether or not the href already has a fragment. The base skill tells agents to write `[title](../x.md#id/BlockNode:<ID>)`, which is exactly that case. This belongs to the preview text of [Rendering](../design/treeview.md#id/BlockNode:00CE1GW4Y800G). Found 2026-09-27.",
+    "parent": "BlockNode:00CE1GW638002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRCGRGJR007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRCGRGJR007:props:StringProp:00CRCGRNAR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRCGRGJR007:props:StringProp:00CRCGRNAR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Repro**",
+    "text": "**Repro**: a block whose stored text is `[design/treeview.md's Rendering section](../design/treeview.md#id/BlockNode:00CE1GW4Y800G)` renders under `tree --view` as `…#id/BlockNode:00CE1GW4Y800G#id/BlockNode:00CE1GW4Y800G`. The stored text and its `Link` are correct, and `aperas check-links` is right to stay clean.",
+    "parent": "BlockNode:00CRCGRGJR006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGRGJR008",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRCGRGJR008:links:Link:00CRCH7N0G000",
+        "@type": "Link",
+        "target": "BlockNode:00CRCGRGJR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCGRGJR008:links:Link:00CRCH7N0G000:props:StringProp:00CRCH7N0G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "512"
+          }
+        ]
+      }
+    ],
+    "title": "**A tombstoned node stays listed in its parent's `children` array**",
+    "text": "**A tombstoned node stays listed in its parent's `children` array**: `ArtifactNode:00CR5ANC6G000` (`.threads/coder.md`'s holder) still lists `BlockNode:00CR6BXGTR001` as a child, though it was tombstoned during the September 27 thread reset. `tree`/`unfold` hide it correctly since both filter tombstoned nodes at render time, but `aperas show` on the parent exposes the stale reference, and a bare anchor-less `insert` after it would have needed a live anchor. Not yet investigated further; possibly related to [the tracked-mirror tombstone leak above](#id/BlockNode:00CRCGRGJR002), a different symptom of the same area of the code.",
+    "parent": "BlockNode:00CE1GW638002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGZDT0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CRCGZDT0001:links:Link:00CRCGZHY0002",
+        "@type": "Link",
+        "target": "BlockNode:00CF2AEAX0003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CRCGZDT0001:links:Link:00CRCGZHY0002:props:StringProp:00CRCGZHY0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "85"
+          }
+        ]
+      }
+    ],
+    "title": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**",
+    "text": "**The insert-transactionality fix covers a missing anchor but not a misplaced one**: [A single `kg:insert` call isn't transactional](../issues/cli.md#id/BlockNode:00CF2AEAX0003) is marked Resolved, having moved anchor *resolution* ahead of hydration, verified only with a nonexistent anchor id. An anchor that resolves but isn't a child of the given parent is still rejected late, in `insertOrderedChild`, after the piped nodes are hydrated. Found 2026-09-27.",
+    "parent": "BlockNode:00CF2AEAX0002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRCGZDT0002",
+      "BlockNode:00CRCGZDT0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRCGZDT0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRCGZDT0002:props:StringProp:00CRCGZHY0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRCGZDT0002:props:StringProp:00CRCGZHY0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Repro**",
+    "text": "**Repro**: `cat item.md | aperas insert BlockNode:00CGJHDK68001 --after BlockNode:00CGJHDK68001` (the item passed as its own parent) failed with \"insertOrderedChild: anchor … is not a child of …\" and left the live parentless orphan `BlockNode:00CR6BD1X0001` (since tombstoned).",
+    "parent": "BlockNode:00CRCGZDT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCGZDT0003",
+    "@type": "BlockNode",
+    "title": "**Skill drift**",
+    "text": "**Skill drift**: the base skill's *`--after`/`--before` anchors* still says \"Be aware this failure is not clean\". That is stale against the Resolved issue for a missing anchor, and still true for a misplaced one.",
+    "parent": "BlockNode:00CRCGZDT0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRCH1DBR001",
+    "@type": "BlockNode",
+    "title": "**`aperas update --text-only` always reports \"overflow prepended, no reconciliation\", even with zero overflow**",
+    "text": "**`aperas update --text-only` always reports \"overflow prepended, no reconciliation\", even with zero overflow**: `kgUpdate.ts:444` prints that message unconditionally whenever `--text-only` is passed, not gated on whether any content actually followed the leading paragraph. Confirmed live: a bare single-line `--text-only` update against a disposable throwaway node printed the same message with nothing to prepend. Behavior is correct — nothing gets reconciled away either way — only the message is misleading. Found 2026-09-27.",
+    "parent": "BlockNode:00CF2AEAX0002",
+    "type": "listItem",
     "children": []
   }
 ]

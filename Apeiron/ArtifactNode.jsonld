@@ -468,11 +468,11 @@
       "BlockNode:00CE1DDF4G001"
     ],
     "path": "discussion/treeview.md",
-    "fileHash": "9902bd7a691deac33a5aeb6593819073c882efbea5f9042fc6ba5cb9b347050e",
+    "fileHash": "32c66f58a932de44af6b36816e81e1f72ec7b81620720579491895b043573873",
     "lastTrackedAt": "2026-09-22T08:06:54.134Z",
-    "ingestedHash": "9902bd7a691deac33a5aeb6593819073c882efbea5f9042fc6ba5cb9b347050e",
-    "lastIngestedAt": "2026-09-27T07:20:03.969Z",
-    "projectedHash": "9902bd7a691deac33a5aeb6593819073c882efbea5f9042fc6ba5cb9b347050e"
+    "ingestedHash": "32c66f58a932de44af6b36816e81e1f72ec7b81620720579491895b043573873",
+    "lastIngestedAt": "2026-09-27T09:58:37.120Z",
+    "projectedHash": "32c66f58a932de44af6b36816e81e1f72ec7b81620720579491895b043573873"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B0000",
@@ -527,18 +527,18 @@
       }
     ],
     "title": "treeview.md",
-    "text": "None.",
+    "text": "**Removing a thread subtree leaks its descendants' tombstones into the tracked mirror**: this contradicts [Threads persist to `.state/` by membership, not by class](../design/treeview.md#id/BlockNode:00CR3WYRG8001), which says pruning a thread is an ordinary `remove`. Found 2026-09-27 when resetting both threads.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "cbcbaa6401469aa86babd6078fbe15eddaeb94b00819ebcaba61ef31c899e198",
+    "fileHash": "53a3005714c91a4472e83d20eaaaf6e3961e2690709cf441342c89212f6f6906",
     "lastTrackedAt": "2026-09-22T08:07:36.316Z",
-    "ingestedHash": "cbcbaa6401469aa86babd6078fbe15eddaeb94b00819ebcaba61ef31c899e198",
-    "lastIngestedAt": "2026-09-22T08:23:54.038Z",
-    "projectedHash": "cbcbaa6401469aa86babd6078fbe15eddaeb94b00819ebcaba61ef31c899e198"
+    "ingestedHash": "53a3005714c91a4472e83d20eaaaf6e3961e2690709cf441342c89212f6f6906",
+    "lastIngestedAt": "2026-09-27T09:58:32.796Z",
+    "projectedHash": "53a3005714c91a4472e83d20eaaaf6e3961e2690709cf441342c89212f6f6906"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "0ee97c7947769f0fcc787f01ff2311a6a0f4ee5ac07671018efcffcc51ad7904",
+    "fileHash": "c5f55d7e71b5d4967e42edbe720989ef867fd0ac6a2b287b23ab0ee82287c9fd",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "0ee97c7947769f0fcc787f01ff2311a6a0f4ee5ac07671018efcffcc51ad7904",
-    "lastIngestedAt": "2026-09-27T06:39:57.608Z",
-    "projectedHash": "0ee97c7947769f0fcc787f01ff2311a6a0f4ee5ac07671018efcffcc51ad7904"
+    "ingestedHash": "c5f55d7e71b5d4967e42edbe720989ef867fd0ac6a2b287b23ab0ee82287c9fd",
+    "lastIngestedAt": "2026-09-27T09:18:06.094Z",
+    "projectedHash": "c5f55d7e71b5d4967e42edbe720989ef867fd0ac6a2b287b23ab0ee82287c9fd"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -834,11 +834,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "b773f341bdd966bafb7f7332c6fadcdf8aafa6924d1cfd6362a82cf18c7e6000",
+    "fileHash": "258f149533f9fbf015e46a3c0abb18c37d8833d0bbe1042a0f9c495ea5ffa9cc",
     "lastTrackedAt": "2026-09-22T05:31:16.879Z",
-    "ingestedHash": "b773f341bdd966bafb7f7332c6fadcdf8aafa6924d1cfd6362a82cf18c7e6000",
-    "lastIngestedAt": "2026-09-27T06:20:35.386Z",
-    "projectedHash": "b773f341bdd966bafb7f7332c6fadcdf8aafa6924d1cfd6362a82cf18c7e6000"
+    "ingestedHash": "258f149533f9fbf015e46a3c0abb18c37d8833d0bbe1042a0f9c495ea5ffa9cc",
+    "lastIngestedAt": "2026-09-27T09:18:07.783Z",
+    "projectedHash": "258f149533f9fbf015e46a3c0abb18c37d8833d0bbe1042a0f9c495ea5ffa9cc"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c",
+    "fileHash": "3e956e735a544cc347c871e33e712287eabd6d6a9beab338fdcd422073e2a4d4",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c",
-    "lastIngestedAt": "2026-09-23T13:21:03.060Z",
-    "projectedHash": "3ee3979eb979953c8a74c63f2ea1181794b364ce4a1fec899851300b3d27af6c"
+    "ingestedHash": "3e956e735a544cc347c871e33e712287eabd6d6a9beab338fdcd422073e2a4d4",
+    "lastIngestedAt": "2026-09-27T08:49:22.620Z",
+    "projectedHash": "3e956e735a544cc347c871e33e712287eabd6d6a9beab338fdcd422073e2a4d4"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,11 +896,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "3ecba666f74ef85e44d01f489be0933f83452b70604cf8e5c014cac1e950b74e",
+    "fileHash": "7c0fc30c7e16ff92b949b84c59e436765c3f1bd9e1556b305e6a4142be8a474c",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "3ecba666f74ef85e44d01f489be0933f83452b70604cf8e5c014cac1e950b74e",
-    "lastIngestedAt": "2026-09-22T08:39:36.678Z",
-    "projectedHash": "3ecba666f74ef85e44d01f489be0933f83452b70604cf8e5c014cac1e950b74e"
+    "ingestedHash": "7c0fc30c7e16ff92b949b84c59e436765c3f1bd9e1556b305e6a4142be8a474c",
+    "lastIngestedAt": "2026-09-27T08:49:24.178Z",
+    "projectedHash": "7c0fc30c7e16ff92b949b84c59e436765c3f1bd9e1556b305e6a4142be8a474c"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -946,11 +946,11 @@
       "BlockNode:00CF2AEAX0001"
     ],
     "path": "issues/cli.md",
-    "fileHash": "95176ac2c66c8e7b391c190cb10c56705c64142db1585602c7f5c4783290bc65",
+    "fileHash": "2b1ed7252c722ef3576aa62fbfcd486bdcdc5db30860e0324d20c64c2b6edf36",
     "lastTrackedAt": "2026-09-22T08:07:12.762Z",
-    "ingestedHash": "95176ac2c66c8e7b391c190cb10c56705c64142db1585602c7f5c4783290bc65",
-    "lastIngestedAt": "2026-09-27T05:47:10.767Z",
-    "projectedHash": "95176ac2c66c8e7b391c190cb10c56705c64142db1585602c7f5c4783290bc65"
+    "ingestedHash": "2b1ed7252c722ef3576aa62fbfcd486bdcdc5db30860e0324d20c64c2b6edf36",
+    "lastIngestedAt": "2026-09-27T09:58:35.671Z",
+    "projectedHash": "2b1ed7252c722ef3576aa62fbfcd486bdcdc5db30860e0324d20c64c2b6edf36"
   },
   {
     "@id": "ArtifactNode:00CF2AEKZG000",
@@ -971,11 +971,11 @@
       "BlockNode:00CF2AEMER001"
     ],
     "path": "discussion/cli.md",
-    "fileHash": "31f69b8e86a7458a0cfffbaa15c79ec9f195b16ae5c8f4b4973daf44444bb2c7",
+    "fileHash": "b12c7aa87b6693fd09b1bd102aa7c8a5e4dfb9244682983f9661f5b6d568a8c4",
     "lastTrackedAt": "2026-09-22T08:06:25.771Z",
-    "ingestedHash": "31f69b8e86a7458a0cfffbaa15c79ec9f195b16ae5c8f4b4973daf44444bb2c7",
-    "lastIngestedAt": "2026-09-27T05:45:51.748Z",
-    "projectedHash": "31f69b8e86a7458a0cfffbaa15c79ec9f195b16ae5c8f4b4973daf44444bb2c7"
+    "ingestedHash": "b12c7aa87b6693fd09b1bd102aa7c8a5e4dfb9244682983f9661f5b6d568a8c4",
+    "lastIngestedAt": "2026-09-27T09:58:38.549Z",
+    "projectedHash": "b12c7aa87b6693fd09b1bd102aa7c8a5e4dfb9244682983f9661f5b6d568a8c4"
   },
   {
     "@id": "ArtifactNode:00CF2AEX6R000",

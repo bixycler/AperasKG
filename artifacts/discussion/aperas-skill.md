@@ -270,6 +270,30 @@ description: Open questions and freeflow notes behind the skill's four-level des
     - **Decided — fix the misleading "if you include them" clause**: <a name='id/BlockNode:00CR9KFCN0001' class='aperas-anchor aperas-id'></a> User, 2026-09-27. [the update-tombstones-children friction](../discussion/aperas-skill.md#id/BlockNode:00CR994X80001) read as if omitting children left them alone; the CLI's own `--help` and the actual behavior say otherwise. Fixed in the base skill's *Updating an existing list item*: the text-change bullet now says a bare-text update replaces children too, and the text-clears bullet is rewritten as one symmetric rule — whichever side (text or children) you don't restate is wiped. The orchestrator edits the skill; the grapher records it.
       
       - **Recorded and promoted**: <a name='id/BlockNode:00CR9PS008001' class='aperas-anchor aperas-id'></a> [aperas — Mechanics — Updating an existing list item, the misleading "if you include them" clause fixed](../discussion/aperas-skill.md#id/BlockNode:00CR9P6W40001) records this fix as a v3.1 delta entry. `design/aperas-skill.md` has no mention of the old wording to correct.
+- **Review of the first v3.1 run, the cap-removal task (2026-09-27)**: <a name='id/BlockNode:00CRAQQ2V0001' class='aperas-anchor aperas-id'></a> the turn sequence ran as designed: grapher survey, coder survey with no change, grapher filing, coder change, orchestrator verification, finishing turn. Subturns were detailed, both subagents reported tool gaps, the coder asked questions instead of guessing, and the orchestrator's verification caught an id conflation in the coder's Report. Several rules still failed.
+  
+  - **The grapher survey Ask asked for a code map again**: <a name='id/BlockNode:00CRAQQ2V0002' class='aperas-anchor aperas-id'></a> it said "find every truncation point… report what each one caps", which is exactly what *The task loop* forbids in a grapher Ask. The grapher didn't flag it, though its skill now says to. The coder's survey then became a re-check of the grapher's code map.
+  - **The orchestrator re-surveyed the code between the two surveys**: <a name='id/BlockNode:00CRAQQ2V0003' class='aperas-anchor aperas-id'></a> it read `astParser.ts`, `node.ts`, `kgUnfold.ts` and `kgBacklinks.ts` to "verify" the grapher's map before the coder had run. That is surveying, not verifying, and the finding it relayed ("matches exactly") went unrecorded, breaking read-and-record.
+  - **Asks retyped content instead of citing it**: <a name='id/BlockNode:00CRAQQ2V0004' class='aperas-anchor aperas-id'></a> the coder's survey Ask inlined the grapher's whole map, and the filing Ask pre-wrote the filing. Dispatch messages also carried work that never reached the thread, such as the hint to check that `show --text` is uncapped.
+  - **A scope decision skipped freeflow**: <a name='id/BlockNode:00CRAQQ2V0005' class='aperas-anchor aperas-id'></a> the orchestrator resolved the coder's three Questions itself (print-side fix, `previewChildren` in scope, `kgBacklinks` out) and wrote them straight into an Ask. That breaks the rule that an Ask cites freeflow for its decisions, and the user heard about it only at the end.
+  - **Thread-boundary slips**: <a name='id/BlockNode:00CRAQQ2V0006' class='aperas-anchor aperas-id'></a> a verification note written under the coder's own Ask, and a freeflow entry linking into `.threads/coder.md`, both undone. The rule itself is also ambiguous: the orchestrator skill tells a coder Ask to cite the grapher's Report, a thread-to-thread link, while the base says "nothing outside a thread links into one".
+  - **Two tasks in one dispatch**: <a name='id/BlockNode:00CRAQQ2V0007' class='aperas-anchor aperas-id'></a> a hand-off view has one root, so the second task's Ask was only reachable through the chat message.
+  - **The finishing turn missed its own friction**: <a name='id/BlockNode:00CRAQQ2V0008' class='aperas-anchor aperas-id'></a> its trace shows `TreeView 'claude-grapher' not found` and a new `claude-grapher` view created to get past it, yet the Report and handback say no tool gaps. That view, the coder's throwaway `coder-verify`, and `tree-format-flag` from the failed first run are all still present.
+  
+  - **Decided — threads may link to each other** (user, 2026-09-27): <a name='id/BlockNode:00CRAX4MZ0001' class='aperas-anchor aperas-id'></a> threads sit on the same tier, so a link between them is sideways and allowed. A coder Ask citing the grapher's Report is fine. What stays forbidden is any link into a thread from outside the threads tier: formal docs, `concepts.md`, discussion. The base skill's "nothing outside a thread links into one" is reworded to say so.
+    
+    - **Recorded and promoted**: <a name='id/BlockNode:00CRAZZ8A0001' class='aperas-anchor aperas-id'></a> [aperas — Discipline — Threads, threads may link to each other](../discussion/aperas-skill.md#id/BlockNode:00CRAZ91C8001), [aperas — Discipline — Every claim carries its source, the thread clause follows the tier rule](../discussion/aperas-skill.md#id/BlockNode:00CRAZB02G001) and [aperas-grapher — Filing — never link into a thread from the graph above it](../discussion/aperas-skill.md#id/BlockNode:00CRAZBN0G001) record the rewording as v3.1 delta entries. Design now says the same in [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)'s tier paragraph and in [Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00G).
+  - **Decided — apply the pre-send checklist for Asks** (user, 2026-09-27): <a name='id/BlockNode:00CRAX4MZ8000' class='aperas-anchor aperas-id'></a> the orchestrator skill gains a checklist to run on every Ask before dispatch: only the receiver's kind of work, a freeflow citation for every decision, cite rather than retype, one task per dispatch. The user also noted that the run's rule failures — surveying the code three times and retyping content across Asks — explain why it took much longer than the old single-agent workflow.
+    
+    - **Recorded and promoted**: <a name='id/BlockNode:00CRAZZWR0001' class='aperas-anchor aperas-id'></a> [aperas-orchestrator — Before sending an Ask — a new section, the pre-send checklist](../discussion/aperas-skill.md#id/BlockNode:00CRAZC840001) records the new section as a v3.1 delta entry. Design's [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) now names the checklist.
+  - **Orchestrator verified Turn 6**: <a name='id/BlockNode:00CRB10KC0001' class='aperas-anchor aperas-id'></a> `skill_drift.py` shows 0 added; `check-links` clean. Both design edits read correctly and consistently — line 85 (Citation direction) and line 143 (Threads) both state threads cite sideways, nothing above the tier cites in.
+  - **Decided — subagents get their own personal view, named `${profile}-${topic-or-task}`** (user, 2026-09-27): the grapher's Turn 3 finishing turn needed to browse across a whole task and had nowhere sanctioned to do it — its only two views are the fixed hand-off ones (`claude-orchestrator-grapher`, owned by the orchestrator; `claude-grapher-orchestrator`, re-rooted onto its Report every turn), neither meant for free browsing. It created a bare-named `claude-grapher` view on the spot to work around this. The orchestrator already does this for itself (`kg-cleanup`, `core-redesign`, `webapp-design`, bare topic names, no prefix), but `TreeView` names are globally unique, so a subagent using the same bare-topic convention would collide with the orchestrator's own view on that topic. The profile prefix avoids that. The base skill's *Keep an active view, and keep it current* gets this stated as the convention for any role's personal view, not only the orchestrator's.
+    
+    - **Recorded and promoted**: <a name='id/BlockNode:00CRBE4WDR001' class='aperas-anchor aperas-id'></a> the decision is recorded in the v3.1 delta as [aperas — Orientation — Keep an active view, personal-view naming for any role](#id/BlockNode:00CRBE35S8001).
+  - **Decided — Turn 6 follow-ups** (user, 2026-09-27): <a name='id/BlockNode:00CRB6ZTXG001' class='aperas-anchor aperas-id'></a> fix the misattributed drift entry now (`BlockNode:00CR9D1WW0001`'s heading, a note about the change rather than skill text, incorrectly flagged as a code-block matching problem); leave the v3.1 history milestone for the actual finishing turn.
+- **Decided — fix the Tool gap template and file the `--text-only` message bug**: <a name='id/BlockNode:00CRBWFJJ0001' class='aperas-anchor aperas-id'></a> User, 2026-09-27. the base skill's thread-shape template shows two `**Tool gap — <what>**` examples now, distinguished by lead-in term, plus a note that a bare repeated "Tool gap" collides outright and rejects the whole write. [The `--text-only` message bug](../discussion/cli.md#id/BlockNode:00CRBW8248001) is filed in `cli.md`'s Freeflow, confirmed reproducible by the orchestrator against a disposable node. Also clarified: [cap removal only reaches one level down](../discussion/treeview.md#id/BlockNode:00CRBWA180001), not a whole subtree — the "agents need full text" gap is improved, not closed.
+  
+  - **Recorded and promoted**: <a name='id/BlockNode:00CRBZ9EB8001' class='aperas-anchor aperas-id'></a> [aperas — Discipline — Threads, distinct lead-in terms for multiple Tool gaps](../discussion/aperas-skill.md#id/BlockNode:00CRBYWS98001) records this as a v3.1 delta entry, superseding [the single-example Report template](../discussion/aperas-skill.md#id/BlockNode:00CR9D1WW0001); the rule is promoted to design's [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004). The `--text-only` message bug and the cap-removal clarification are left where they already are, per this task's Ask.
 
 ## v0 SKILL.md (verbatim, 2026-09-12) <a name='id/BlockNode:00CE95MVP8001' class='aperas-anchor aperas-id'></a>
 
@@ -2153,7 +2177,7 @@ In this role, "record what the work found" means your Work and Report nodes. The
 ## v3.1 additions — delta on the v3 snapshot <a name='id/BlockNode:00CR874TC8001' class='aperas-anchor aperas-id'></a>
 
 Threaded onto [the v3 snapshot](#id/BlockNode:00CR5GCSEG001), across all four skill files. Implements [Skill v3.1 — decisions from the first-run findings](#id/BlockNode:00CR81Y470001), which answer the defects [the first live run of the v3 loop](#id/BlockNode:00CR7N7Z60001) surfaced: the orchestrator's staging exemption contradicting its own section, no guidance for a discussion without `## Freeflow`, the orchestrator surveying for itself, a grapher Ask that folded in the coder's survey, and freeflow lagging the conversation. The full task loop moves into the base skill so every role sees the turns around its own; the orchestrator's *Running a task* now follows it step for step, and each role skill's survey is scoped to its own side. Written by the orchestrator in the skill files and recorded here afterwards by the grapher, as the decision itself directed.
-Two entries were added the same day under [the follow-up decisions](#id/BlockNode:00CR8G0T70001): subturns required in *Threads*, and the drift-script path corrected in the grapher skill. A further entry, [the skill asks for detailed records](#id/BlockNode:00CR98HFCG001), added tool-gap recording and filing across all four skill files.
+Two entries were added the same day under [the follow-up decisions](#id/BlockNode:00CR8G0T70001): subturns required in *Threads*, and the drift-script path corrected in the grapher skill. A further entry, [the skill asks for detailed records](#id/BlockNode:00CR98HFCG001), added tool-gap recording and filing across all four skill files. [Fixing the misleading "if you include them" clause](#id/BlockNode:00CR9KFCN0001) corrected two bullets in the base skill's *Updating an existing list item*. Two more followed: [threads may link to each other](#id/BlockNode:00CRAX4MZ0001) reworded the thread-tier rule in the base and grapher skills, and [the pre-send checklist for Asks](#id/BlockNode:00CRAX4MZ8000) added a new section to the orchestrator skill.
 
 ### aperas — Top matter — Status bumped to v3.1 <a name='id/BlockNode:00CR874TC8002' class='aperas-anchor aperas-id'></a>
 
@@ -2183,15 +2207,38 @@ Supersedes: [v3's subturn paragraph in Threads](#id/BlockNode:00CR5GCSF000K)
 
 ### aperas — Discipline — Threads, the Report template gains a Tool gap line <a name='id/BlockNode:00CR9D1WW0001' class='aperas-anchor aperas-id'></a>
 
-The template's **Report** step gains a line after **Question**:
+Supersedes: [v3's thread-template code block](#id/BlockNode:00CR5GCSF000H)
 
-```
+```markdown
+# Grapher thread
+## <topic>                                   ← named by the user
+### <task>                                   ← set by the orchestrator
+#### Turn <n>                                ← one exchange with the orchestrator
+- **Ask**: <what is wanted, in a sentence>   ← orchestrator; root of <p>-orchestrator-grapher
+  - [<argument>](../design/x.md#id/BlockNode:…) — why it matters here
+- **Work**: <the approach, in a line>        ← subagent; subturns nested under it
+  - <subturn>
+- **Report**: <the outcome, in a sentence>   ← subagent; root of <p>-grapher-orchestrator
+  - [<changed or found node>](…) — what changed, or what it shows
+  - **Question**: <whatever the Ask left unsettled — see below>
   - **Tool gap**: <a workaround built, a call that failed or hung — see below>
 ```
 
 ### aperas — Discipline — Threads, record the friction not only the results <a name='id/BlockNode:00CR9D5Z60001' class='aperas-anchor aperas-id'></a>
 
 **Record the friction, not only the results.** A subturn also records every place the tools got in the way: a workaround you built (a script, a loop over a command, a detour through another verb), a call that failed, hung or had to be stopped, each retry and what changed in it, an error you routed around, a write that did something you didn't intend. Give the command and what happened, even once you got past it — especially then, because a problem you solved leaves no trace in the results, and nobody will remember it after the turn. The Report lists each one as a **Tool gap**, so the grapher can file it. A gap that is not in the thread is one the graph can never notice.
+
+### aperas — Discipline — Threads, threads may link to each other <a name='id/BlockNode:00CRAZ91C8001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v3's thread-tier paragraph in Threads](#id/BlockNode:00CR5GCSF000N)
+
+Threads are the lowest tier of the gradient (*Citation direction*, below), so a thread cites upward freely, and threads cite each other sideways — an Ask citing the other subagent's Report is the ordinary case. **Nothing above the threads tier links into one**: no formal doc, `concepts.md` entry or discussion node. What a thread finds reaches the rest of the graph by the grapher copying it up, never by citation.
+
+### aperas — Discipline — Every claim carries its source, the thread clause follows the tier rule <a name='id/BlockNode:00CRAZB02G001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v3's where-you-check paragraph in Every claim carries its source](#id/BlockNode:00CR5GCSF0011)
+
+Where you check depends on where you wrote it. A thread or freeflow entry cites forward, since nothing above the threads tier links into a thread and freeflow is not itself a citation target (base *Citation direction*, below) — so the check there is simply: does this entry's own text name what it rests on? A formal-doc entry can be checked from the other side, and more strongly: run `aperas backlinks <id> --text` on **what you just wrote**, not only on what you were about to read. A node whose claims rest on nothing returns nothing, and that silence is the entire signal. The mechanics of applying this to a formal-doc promotion — where the link goes when citation direction forbids the obvious direction — belong to the grapher, the only role that writes one (`aperas-grapher`'s *Provenance at the origin*).
 
 ### aperas — Discipline — Stage each verified step, every role stages its own writes <a name='id/BlockNode:00CR874TCG005' class='aperas-anchor aperas-id'></a>
 
@@ -2242,6 +2289,17 @@ The turns are the base skill's *The task loop*; what the orchestrator does at ea
 8. **Grapher files** the result.
 9. **Repeat 6–8** for as many rounds as the task takes, then ask the grapher for the finishing turn and report to the user.
 
+### aperas-orchestrator — Before sending an Ask — a new section, the pre-send checklist <a name='id/BlockNode:00CRAZC840001' class='aperas-anchor aperas-id'></a>
+
+Run every Ask against this list before dispatching it. Each item is a rule stated elsewhere that has already been broken while an Ask was being written, because nothing brings it up at that moment:
+
+- **Only the receiver's kind of work.** A grapher Ask asks for the graph, never "find the source" or "map the behavior"; a coder Ask asks for code, never for a graph write (base: *The task loop*).
+- **Every decision cited from freeflow.** A scope call, a resolved Question, a choice between approaches: if it isn't recorded in freeflow yet, record it first, then cite it (*Every exchange with the user*).
+- **Cite, don't retype.** Point at the Report, the filed entry or the design block; don't paste its content into the Ask or the chat message (base: *Hand-offs*). The message names the view and at most one argument.
+- **One task per dispatch.** A hand-off view has one root; a second task's Ask would be reachable only through chat.
+
+Skipping these costs more than time: <a name='id/BlockNode:00CRAZC840006' class='aperas-anchor aperas-id'></a> a code map surveyed twice, an Ask that repeats what it should cite, and a turn built on a decision nobody recorded.
+
 ### aperas-orchestrator — Reading for yourself — read and record <a name='id/BlockNode:00CR874TD0004' class='aperas-anchor aperas-id'></a>
 
 Verifying is yours: the coder's diff and tests before you accept them, and any claim before you relay it to the user as fact — including a subagent's summary. Read the graph or the code directly for that. Whatever the reading finds that you then relay or act on goes into freeflow first, citing its source: the node, or the file and line. What routing protects for a write is the owning role's surrounding steps; for a read it is the record, and a finding that lives only in chat is lost to the next turn and to every other role.
@@ -2269,6 +2327,12 @@ The survey is the graph's side only. Touch source code just to pinpoint an entry
 Supersedes: [v3's Filing section](#id/BlockNode:00CR5GCSGG00D)
 
 Read the coder's latest Report and the Work under it in `.threads/coder.md`. Record what the coder found where it belongs: into the task's `discussion` freeflow first, then promoted into `issues`/`history`/`design` once it has earned a home (*Discussion is where meta-info is born*, below). Copy content up; never link into a thread. Where the coder reports code and design disagreeing, that discrepancy is itself the finding — record it, and fix whichever side is stale. File every tool gap in a Report, the coder's or your own, in the freeflow of the concern that owns the tool.
+
+### aperas-grapher — Filing — never link into a thread from the graph above it <a name='id/BlockNode:00CRAZBN0G001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [the tool-gap Filing entry](#id/BlockNode:00CR9D9NQG002)
+
+Read the coder's latest Report and the Work under it in `.threads/coder.md`. Record what the coder found where it belongs: into the task's `discussion` freeflow first, then promoted into `issues`/`history`/`design` once it has earned a home (*Discussion is where meta-info is born*, below). Copy content up; never link into a thread from the graph above it. Where the coder reports code and design disagreeing, that discrepancy is itself the finding — record it, and fix whichever side is stale. File every tool gap in a Report, the coder's or your own, in the freeflow of the concern that owns the tool.
 
 ### aperas-grapher — Checking the skill against its own record — the drift-script path corrected <a name='id/BlockNode:00CR8JDSQG001' class='aperas-anchor aperas-id'></a>
 
@@ -2299,3 +2363,29 @@ Supersedes: [v3's coder Report step](#id/BlockNode:00CR5GCSH000G)
 Supersedes: [v3's survey-turn paragraph](#id/BlockNode:00CR5GCSH000T)
 
 The first coder turn of a task is a survey (base: *The task loop*): read the code the Ask points at, map where the behavior lives, and report that map. The grapher files it before any change is made, which is what lets the change turn start from a recorded picture instead of the one in your context.
+
+### aperas — Orientation — Keep an active view, personal-view naming for any role <a name='id/BlockNode:00CRBE35S8001' class='aperas-anchor aperas-id'></a>
+
+This is separate from the fixed hand-off views a subagent already owns (*Hand-offs*, below), which are re-rooted onto an Ask or a Report every turn and aren't meant for free browsing. A subagent that needs to look around a whole task — to write a finishing turn, say — sets up one of these for itself the same way. `TreeView` names are globally unique, so name it `${profile}-${topic-or-task}`, not a bare topic name: the orchestrator's own personal views are bare (`kg-cleanup`, `core-redesign`), and a subagent using the same bare name for the same topic would collide with one that already exists.
+
+### aperas — Discipline — Threads, distinct lead-in terms for multiple Tool gaps <a name='id/BlockNode:00CRBYWS98001' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v3.1's single-example Report template](#id/BlockNode:00CR9D1WW0001)
+
+```markdown
+# Grapher thread
+## <topic>                                   ← named by the user
+### <task>                                   ← set by the orchestrator
+#### Turn <n>                                ← one exchange with the orchestrator
+- **Ask**: <what is wanted, in a sentence>   ← orchestrator; root of <p>-orchestrator-grapher
+  - [<argument>](../design/x.md#id/BlockNode:…) — why it matters here
+- **Work**: <the approach, in a line>        ← subagent; subturns nested under it
+  - <subturn>
+- **Report**: <the outcome, in a sentence>   ← subagent; root of <p>-grapher-orchestrator
+  - [<changed or found node>](…) — what changed, or what it shows
+  - **Question**: <whatever the Ask left unsettled — see below>
+  - **Tool gap — <what>**: <a workaround built, a call that failed or hung — see below>
+  - **Tool gap — <what else>**: <a second one, if the turn hit more than one>
+```
+
+More than one **Tool gap** in a Report needs a distinct lead-in for each — `<what>`, not a bare repeat of the word "Tool gap" — since sibling slugs are derived from the lead-in term, and two identical ones collide outright: the write is rejected in full, nothing written, before either one lands.
