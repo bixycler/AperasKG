@@ -3343,6 +3343,8 @@
       "BlockNode:00CDD68E8000A",
       "BlockNode:00CDD68E8000B",
       "BlockNode:00CDD68E8000C",
+      "BlockNode:00CR3XH5DG000",
+      "BlockNode:00CR3XJX5G001",
       "BlockNode:00CDD68E8000D"
     ]
   },
@@ -9581,14 +9583,15 @@
       "BlockNode:00CE1GW4Y800C",
       "BlockNode:00CE1GW4Y800D",
       "BlockNode:00CE1GW4Y800E",
-      "BlockNode:00CE1GW4Y800F"
+      "BlockNode:00CE1GW4Y800F",
+      "BlockNode:00CR3WYBM8001"
     ]
   },
   {
     "@id": "BlockNode:00CE1GW4Y800C",
     "@type": "BlockNode",
     "title": "00CE1GW4Y800C",
-    "text": "```\nProfile\n  handle:      One, xsd:string           -- stable, addressable slug (\"default\", \"will\", \"claude-agent-1\")\n  name:        Optional xsd:string       -- display/social name\n  kind:        Optional xsd:string       -- open label, suggested {\"human\",\"agent\"}; no enforced enum, no auth\n  preferences: Set, embed -> StringProp  -- arbitrary key/value bag, same shape as BlockNode.props\n\nTreeView\n  profile: One, reference -> Profile\n  name:    One, xsd:string               -- stable, globally-unique addressable handle\n  unfolds: Set, reference -> (TreeNode | Link)\n```",
+    "text": "```\nProfile\n  handle:      One, xsd:string           -- stable, addressable slug (\"default\", \"will\", \"claude-agent-1\")\n  name:        Optional xsd:string       -- display/social name\n  kind:        Optional xsd:string       -- open label, suggested {\"human\",\"agent\"}; no enforced enum, no auth\n  preferences: Set, embed -> StringProp  -- arbitrary key/value bag, same shape as BlockNode.props\n\nTreeView\n  profile: One, reference -> Profile\n  name:    One, xsd:string               -- stable, globally-unique addressable handle\n  unfolds: Set, reference -> (TreeNode | Link)\n  root:    Optional, reference -> TreeNode  -- current zoom apex; only the current one is recorded\n```",
     "parent": "BlockNode:00CE1GW4Y800B",
     "type": "code",
     "children": []
@@ -9772,7 +9775,9 @@
     "text": "`TreeView` is per-viewer UI state — genuinely ephemeral, churning on every expand/collapse — written to a gitignored `AperasKG/Apeiron/.state/TreeView.jsonld` on its own, independently-tunable flush interval, separate from the ordinary content-mirror cadence. `Profile` is stable identity and preferences that should survive a `git clone` and diff like any other tracked file (even though it's still \"per-viewer\" in the sense that each caller owns their own rows) — dehydrated to the ordinary tracked mirror (`Profile.jsonld`) alongside `BlockNode`/`ArtifactNode`/`FolderNode`, on the ordinary flush cadence. Whether a given repo actually commits `Profile.jsonld` is that repo's own `.gitignore` decision, not something the code enforces. Neither file is auto-staged by the `pre-commit` hook, which only reflects `aperas track`'s own rewrite of the three content-mirror files into the same commit as the `.md` change that triggered it — a `Profile.jsonld` change (from `aperas profile` or a direct edit) is a manual `git add`, like any other hand-edited settings file.",
     "parent": "BlockNode:00CE1GW4Y8001",
     "type": "heading",
-    "children": []
+    "children": [
+      "BlockNode:00CR3WYRG8001"
+    ]
   },
   {
     "@id": "BlockNode:00CE1GW4YG00D",
@@ -12643,7 +12648,8 @@
       "BlockNode:00CFB1A7GR001",
       "BlockNode:00CG9MDJF0001",
       "BlockNode:00CGF35FNG001",
-      "BlockNode:00CN6S7HWR000"
+      "BlockNode:00CN6S7HWR000",
+      "BlockNode:00CR3XZ220001"
     ]
   },
   {
@@ -13743,7 +13749,8 @@
     "children": [
       "BlockNode:00CFAMC7XG001",
       "BlockNode:00CFAMC7XG003",
-      "BlockNode:00CFAMC7XR000"
+      "BlockNode:00CFAMC7XR000",
+      "BlockNode:00CR3XQKNG001"
     ]
   },
   {
@@ -14080,7 +14087,8 @@
       "BlockNode:00CEA5Y5J8002",
       "BlockNode:00CEA5Y5JG003",
       "BlockNode:00CEA5Y5JG00A",
-      "BlockNode:00CEA5Y5JG00D"
+      "BlockNode:00CEA5Y5JG00D",
+      "BlockNode:00CR3X3N00001"
     ]
   },
   {
@@ -14409,16 +14417,30 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CF10T8HG000:props:StringProp:00CF10T8HG001",
+            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CF10T8HG000:props:StringProp:00CR3X8Y1G000",
             "@type": "StringProp",
             "key": "position",
-            "value": "414"
+            "value": "587"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CR3XDMSR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEA5Y5JG00G:links:Link:00CR3XDMSR000:props:StringProp:00CR3XDMSR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "271"
           }
         ]
       }
     ],
     "title": "### Citation direction",
-    "text": "The concerns form an abstraction gradient, `design` most abstract and `discussion` least, with `issues`, `planning` and `history` between. A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): \"one link plus a brief, non-argumentative summary per doc\") already states this same up-only citation shape for its own instance of that exception, independently of this rule.",
+    "text": "The concerns form an abstraction gradient: `design` most abstract, then `issues`, `planning` and `history`, then the shared `concepts` map, then `discussion`, with an agent's own `thread` least. Because nothing ranks below a thread, nothing outside one can cite into it ([threads](#id/BlockNode:00CR3X3N08004)). A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): \"one link plus a brief, non-argumentative summary per doc\") already states this same up-only citation shape for its own instance of that exception, independently of this rule.",
     "parent": "BlockNode:00CEA5Y5JG00D",
     "type": "heading",
     "children": [
@@ -30752,8 +30774,8 @@
   {
     "@id": "BlockNode:00CJ6TGSYR005",
     "@type": "BlockNode",
-    "title": "**The apex is UI-local**",
-    "text": "**The apex is UI-local**: zooming in sets a new apex, zooming out is a click on a breadcrumb above it — neither is view state, and neither is persisted.",
+    "title": "**The apex is recorded, not merely local**",
+    "text": "**The apex is recorded, not merely local**: zooming (a tree click, a backlink zoom, a breadcrumb, or the root button) sets the local apex immediately and persists it as the current view's `root` alongside it (`/api/zoom`) — the same field `aperas zoom` sets from the CLI (design/treeview.md's \"root records the current zoom\"). A bare `?view=<name>` deep link with no `path` at all resolves from that recorded root, not the corpus root; an explicit `path=.` still means the corpus root regardless of what root a view carries.",
     "parent": "BlockNode:00CJ6TGSYR000",
     "type": "listItem",
     "children": []
@@ -30807,8 +30829,24 @@
   {
     "@id": "BlockNode:00CJ6TGSYR009",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CJ6TGSYR009:links:Link:00CR623RDG000",
+        "@type": "Link",
+        "target": "BlockNode:00CJ6TGSYR005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CJ6TGSYR009:links:Link:00CR623RDG000:props:StringProp:00CR623RDG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "245"
+          }
+        ]
+      }
+    ],
     "title": "**Zooming uses the arrow handle and the breadcrumb**",
-    "text": "**Zooming uses the arrow handle and the breadcrumb**: ctrl-click the arrow handle to make that node the apex, click a breadcrumb to zoom back out to it.",
+    "text": "**Zooming uses the arrow handle and the breadcrumb**: ctrl-click the arrow handle to make that node the apex, click a breadcrumb to zoom back out to it. Either action also persists the new apex as the view's `root`, not only the local one — see [The apex is recorded, not merely local](#id/BlockNode:00CJ6TGSYR005).",
     "parent": "BlockNode:00CJ6TGSYR006",
     "type": "listItem",
     "children": []
@@ -34992,6 +35030,3367 @@
     "text": "Status: **v2.11** — four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
     "parent": "BlockNode:00CQYGPR50004",
     "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3WYBM8001",
+    "@type": "BlockNode",
+    "title": "**`root` records the current zoom**",
+    "text": "**`root` records the current zoom**: a view's `root` is the apex `aperas tree --view` renders from when no apex is given, and every zoom — an agent re-rooting a view for a hand-off, or a human zooming in the webapp — overwrites it. Only the current root is recorded, not a history of past ones. Unset means the whole corpus, as before `root` existed. Rooting a view on a dashboard node is what turns a dashboard from a list of links into a working lens: the reader sees exactly the scope the author gathered under that node, reached through its children and links, with the unfold state on top of that deciding how deep each part opens.",
+    "parent": "BlockNode:00CE1GW4Y800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3WYRG8001",
+    "@type": "BlockNode",
+    "title": "**Threads persist to `.state/` by membership, not by class**",
+    "text": "**Threads persist to `.state/` by membership, not by class**: every node inside an `artifacts/.threads/` artifact's subtree — the ArtifactNode, its BlockNodes and their links — is dehydrated into `.state/` beside `TreeView`, never into the tracked content mirror, because an agent's thread is working state as per-agent and as ephemeral as a view. They are ordinary `ArtifactNode`/`BlockNode`s otherwise, so every existing verb (`unfold`, `show`, `update`, `insert`, `remove`) works on them unchanged, and pruning is an ordinary `remove` under the existing tombstone mechanism, with no separate deletion path. Nothing outside a thread links into one, which is what makes the split safe: the tracked mirror never holds a reference into state it doesn't carry.",
+    "parent": "BlockNode:00CE1GW4YG00C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N00001",
+    "@type": "BlockNode",
+    "title": "## Multi-agent working",
+    "text": "Three roles share one graph: an **orchestrator** that talks with the user, a **grapher** that works the graph, and a **coder** that works the code. One agent carrying the whole skill alone drops steps, because the loop has outgrown what a single context reliably keeps in hand, so the work is split by what each role writes. Every role loads the same base skill, since the graph is both the substrate of all the work and the medium the roles communicate through.",
+    "parent": "BlockNode:00CEA5Y5J8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR3X3N00002",
+      "BlockNode:00CR3X3N08001",
+      "BlockNode:00CR3X3N08002",
+      "BlockNode:00CR3X3N08004",
+      "BlockNode:00CR3X3N08006",
+      "BlockNode:00CR3X3N08007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR3X3N00002",
+    "@type": "BlockNode",
+    "title": "### Roles and write scope",
+    "parent": "BlockNode:00CR3X3N00001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR3X3N00003",
+      "BlockNode:00CR3X3N00004",
+      "BlockNode:00CR3X3N08000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR3X3N00003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR3X3N00003:props:StringProp:00CR3X49DR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR3X3N00003:props:StringProp:00CR3X49DR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Orchestrator**",
+    "text": "**Orchestrator**: records the conversation with the user as `discussion` freeflow, decides what happens next, and hands work to a subagent. It writes only freeflow and its own turns in the subagent threads.",
+    "parent": "BlockNode:00CR3X3N00002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N00004",
+    "@type": "BlockNode",
+    "title": "**Grapher**",
+    "text": "**Grapher**: does every other graph operation — deep read to find what is relevant, deep write to update it, every promotion (thread to `concepts.md` or higher, discussion to the formal docs), and each thread's lifecycle. It is the only role that writes the graph at large.",
+    "parent": "BlockNode:00CR3X3N00002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08000",
+    "@type": "BlockNode",
+    "title": "**Coder**",
+    "text": "**Coder**: surveys and changes source code. It reads the graph for context and writes only to its own thread.",
+    "parent": "BlockNode:00CR3X3N00002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08001",
+    "@type": "BlockNode",
+    "title": "### The loop",
+    "text": "A task alternates between the two subagents, grapher always first: grapher surveys the graph, coder surveys the code, grapher files that survey, coder changes the code, grapher records the result — for as many rounds as the task takes. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
+    "parent": "BlockNode:00CR3X3N00001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08002",
+    "@type": "BlockNode",
+    "title": "### Communication — views carry data, chat carries control",
+    "text": "A message between roles is a call: the view is its shared context, like `this`, and the message can still name specific nodes, links and questions as further arguments. Chat tracks progress; the view tracks the current state of the work. A subagent's continuity between turns is its thread plus its views rather than its chat history, so the design holds on a platform that does not keep a subagent alive between invocations.",
+    "parent": "BlockNode:00CR3X3N00001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR3X3N08003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3X3N08003:links:Link:00CR3X49ER000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3WYBM8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3X3N08003:links:Link:00CR3X49ER000:props:StringProp:00CR3X49ER001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "353"
+          }
+        ]
+      }
+    ],
+    "title": "00CR3X3N08003",
+    "text": "A dashboard is where a view is projected from. Between user and orchestrator it is the discussion doc's `## Dashboard`; between orchestrator and a subagent it is that subagent's thread. Each turn the sender adds only the nodes and links that changed, creates a new root node citing them alongside the content already there, and re-roots its view on it ([TreeView root](../design/treeview.md#id/BlockNode:00CR3WYBM8001)). The root moves every turn while the content beneath it is mostly reused.",
+    "parent": "BlockNode:00CR3X3N08002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08004",
+    "@type": "BlockNode",
+    "title": "### Threads",
+    "text": "Each subagent has one thread, `artifacts/.threads/<role>.md` — `grapher.md`, `coder.md` — one per role while work is not parallel. A thread is a tree of topic (named by the user) > task (set by the orchestrator) > turn (one exchange with the orchestrator) > subturn. Subturn is optional as a level but not as content: across a batch of tool calls it records the progress and reasoning an agent narrates while it works and the essence of each tool result a later turn will need, written as it happens or at the end of the turn. A result left unrecorded is gone for every later turn, since the thread, not the chat, is what carries context forward. A topic is a concern the user names — usually one concern's artifact set, sometimes spanning concerns, or a batch of related tasks.",
+    "parent": "BlockNode:00CR3X3N00001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR3X3N08005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3X3N08005:links:Link:00CR3X49ER002",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG00G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3X3N08005:links:Link:00CR3X49ER002:props:StringProp:00CR3X49ER003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "35"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR3X3N08005:links:Link:00CR3X49ER004",
+        "@type": "Link",
+        "target": "BlockNode:00CR3WYRG8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3X3N08005:links:Link:00CR3X49ER004:props:StringProp:00CR3X49WG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "253"
+          }
+        ]
+      }
+    ],
+    "title": "00CR3X3N08005",
+    "text": "Threads are the lowest tier of the [citation gradient](#id/BlockNode:00CEA5Y5JG00G), so nothing outside a thread links into one, and promotion copies content upward rather than citing it. Their graph content persists to the gitignored `.state/` mirror ([thread persistence](../design/treeview.md#id/BlockNode:00CR3WYRG8001)). Every write to a thread checks it against a size cap and warns once the cap is reached; grapher then prunes it with an ordinary `remove`.",
+    "parent": "BlockNode:00CR3X3N08004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08006",
+    "@type": "BlockNode",
+    "title": "### Profiles and view naming",
+    "text": "Per platform `<p>` (`claude`, `antigravity`), three profiles: `<p>`, `<p>-grapher`, `<p>-coder`. Views facing the user are `<p>-<topic>`. The orchestrator's views facing each subagent are `<p>-orchestrator-grapher` and `<p>-orchestrator-coder`; each subagent's view facing the orchestrator is `<p>-grapher-orchestrator` or `<p>-coder-orchestrator`. Each thread therefore carries two views, one from each side.",
+    "parent": "BlockNode:00CR3X3N00001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3X3N08007",
+    "@type": "BlockNode",
+    "title": "### Skill packaging",
+    "text": "One shared base skill — working the graph — loaded by every role, plus one role skill each for orchestrator, grapher and coder, stating only what that role writes, when it hands off, and how. Each subagent is an agent definition that preloads the base and its role skill: `.claude/agents/<name>.md` for Claude Code, `.agents/agents/<name>.md` for Antigravity, both shipped by `aperas skill install`.",
+    "parent": "BlockNode:00CR3X3N00001",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XH5DG000",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR3XH5DG000:props:StringProp:00CR3XH880000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR3XH5DG000:props:StringProp:00CR3XH880001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Concepts Doc**",
+    "text": "**Concepts Doc**: `artifacts/concepts.md`, one concept map shared across every concern — the vocabulary and relationships the work keeps reusing, promoted up from discussion and from agent threads. It ranks above discussion and below the formal docs.",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XJX5G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XJX5G001:links:Link:00CR3XK030000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XJX5G001:links:Link:00CR3XK030000:props:StringProp:00CR3XK030001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "188"
+          }
+        ]
+      }
+    ],
+    "title": "**Threads**",
+    "text": "**Threads**: `artifacts/.threads/<agent>.md`, each subagent's own linear working record, the least mature tier. Gitignored and persisted to `.state/`, and cited by nothing outside itself ([threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)).",
+    "parent": "BlockNode:00CDD68E80007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XQKNG001:links:Link:00CR3XQPY0000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XQKNG001:links:Link:00CR3XQPY0000:props:StringProp:00CR3XQPY0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "9"
+          }
+        ]
+      }
+    ],
+    "title": "### Batch 3 — multi-agent v3",
+    "text": "Realizes [Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001). The skills are drafted and reviewed before any tooling, since they are the contract the tooling has to serve.",
+    "parent": "BlockNode:00CEA5M6S8005",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR3XQKNG002",
+      "BlockNode:00CR3XQKNR000",
+      "BlockNode:00CR3XQKNR001",
+      "BlockNode:00CR3XQKNR002",
+      "BlockNode:00CR3XQKNR003",
+      "BlockNode:00CR3XQKNR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNG002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XQKNG002:links:Link:00CR3XQPY8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XQKNG002:links:Link:00CR3XQPY8000:props:StringProp:00CR3XQPY8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "167"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR3XQKNG002:props:StringProp:00CR3XQPXR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR3XQKNG002:props:StringProp:00CR3XQPXR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR3XQKNG002",
+    "text": "Draft the v3 skills for review — a shared base skill plus orchestrator, grapher and coder role skills, and the agent definitions for Claude Code and Antigravity — per [Skill packaging](../design/aperas-skill.md#id/BlockNode:00CR3X3N08007). Nothing is installed until reviewed.",
+    "parent": "BlockNode:00CR3XQKNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNR000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XQKNR000:links:Link:00CR3XQPY8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3WYBM8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XQKNR000:links:Link:00CR3XQPY8002:props:StringProp:00CR3XQPY8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "22"
+          }
+        ]
+      }
+    ],
+    "title": "Add `TreeView.root` — [TreeView root](../design/treeview.md#id/BlockNode:00CR3WYBM8001)",
+    "text": "Add `TreeView.root` — [TreeView root](../design/treeview.md#id/BlockNode:00CR3WYBM8001): the shape field, a CLI verb to set it, `aperas tree --view` rendering from it by default, and the webapp's zoom writing it.",
+    "parent": "BlockNode:00CR3XQKNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XQKNR001:links:Link:00CR3XQPY8004",
+        "@type": "Link",
+        "target": "BlockNode:00CR3WYRG8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XQKNR001:links:Link:00CR3XQPY8004:props:StringProp:00CR3XQPY8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "39"
+          }
+        ]
+      }
+    ],
+    "title": "Persist thread subtrees to `.state/` — [thread persistence](../design/treeview.md#id/BlockNode:00CR3WYRG8001)",
+    "text": "Persist thread subtrees to `.state/` — [thread persistence](../design/treeview.md#id/BlockNode:00CR3WYRG8001): dehydrate and rehydrate partition every node under an `artifacts/.threads/` artifact into `.state/`, and `artifacts/.threads/` is gitignored.",
+    "parent": "BlockNode:00CR3XQKNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XQKNR002:links:Link:00CR3XQPY8006",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XQKNR002:links:Link:00CR3XQPY8006:props:StringProp:00CR3XQPY8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "22"
+          }
+        ]
+      }
+    ],
+    "title": "Warn on thread size — [threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)",
+    "text": "Warn on thread size — [threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004): every write to a thread checks it against a cap and reports once the cap is reached.",
+    "parent": "BlockNode:00CR3XQKNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNR003",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XQKNR003:links:Link:00CR3XQPYG000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XQKNR003:links:Link:00CR3XQPYG000:props:StringProp:00CR3XQPYG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "Bootstrap — [profiles and view naming](../design/aperas-skill.md#id/BlockNode:00CR3X3N08006)",
+    "text": "Bootstrap — [profiles and view naming](../design/aperas-skill.md#id/BlockNode:00CR3X3N08006): the three profiles per platform and their standing views, `artifacts/concepts.md`, and the two thread files.",
+    "parent": "BlockNode:00CR3XQKNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XQKNR004",
+    "@type": "BlockNode",
+    "title": "Install and record",
+    "text": "Install and record: `aperas skill install` ships the base, role skills and agent definitions; the v3 snapshot is recorded in `discussion/aperas-skill.md`, and `scripts/skill_drift.py` is extended to cover more than one skill file.",
+    "parent": "BlockNode:00CR3XQKNG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ220001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR3XZ220001:links:Link:00CR3XZ4Z0000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XZ220001:links:Link:00CR3XZ4Z0000:props:StringProp:00CR3Y7TMG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "590"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR3XZ220001:links:Link:00CR3XZ4Z0002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3XQKNG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR3XZ220001:links:Link:00CR3XZ4Z0002:props:StringProp:00CR3Y7TZ8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "681"
+          }
+        ]
+      }
+    ],
+    "title": "**v3 — the skill split across three agents, communicating through views, because one agent can no longer follow the whole loop**",
+    "text": "**v3 — the skill split across three agents, communicating through views, because one agent can no longer follow the whole loop**: on 2026-09-27 the workflow has grown past what a single agent follows reliably — the user routinely has to remind agents (Claude, and Antigravity more so) of the steps they dropped. Proposed: an orchestrator that talks with the user, a grapher that owns the graph, a coder that owns the code, with the graph itself as the interface — a view tracks the state of the work (data), chat tracks its progress (control). Settled in the same conversation, promoted to [Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001) and planned as [Batch 3](../planning/aperas-skill.md#id/BlockNode:00CR3XQKNG001):",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR3XZ220002",
+      "BlockNode:00CR3XZ228000",
+      "BlockNode:00CR3XZ228001",
+      "BlockNode:00CR3XZ228002",
+      "BlockNode:00CR3XZ228003",
+      "BlockNode:00CR3XZ228004",
+      "BlockNode:00CR3YAK1R001",
+      "BlockNode:00CR4MZMD8001",
+      "BlockNode:00CR541P8R001",
+      "BlockNode:00CR3XZ228005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR3XZ220002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR3XZ220002:props:StringProp:00CR3XZ4YG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR3XZ220002:props:StringProp:00CR3XZ4YG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Write scope**",
+    "text": "**Write scope**: the orchestrator writes only freeflow recording the chat and its own turns in subagent threads; coder writes only its thread; grapher does everything else — deep read, deep write, every promotion, thread lifecycle.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ228000",
+    "@type": "BlockNode",
+    "title": "**Loop, not three steps**",
+    "text": "**Loop, not three steps**: first proposed as grapher → coder → grapher, corrected to an open-ended alternation, grapher always first — coder's first phase is usually a survey, which grapher files before any code changes.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ228001",
+    "@type": "BlockNode",
+    "title": "**Messages keep their arguments**",
+    "text": "**Messages keep their arguments**: an early restatement reduced every hand-off message to \"the view is updated, your turn\"; rejected — a view is `this`, and a call still needs its other arguments. Folding everything into one view is possible in principle and unnatural in practice.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ228002",
+    "@type": "BlockNode",
+    "title": "**Scale**",
+    "text": "**Scale**: `concepts` was first placed below `discussion`, then corrected above it — design > {issues, planning, history} > concepts > discussion > thread. Threads being lowest is what forbids anything outside them from linking in.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ228003",
+    "@type": "BlockNode",
+    "title": "**Views gain a root**",
+    "text": "**Views gain a root**: long on the user's wait list; only the current root is recorded, and each turn creates a new root node over mostly-reused content rather than rewriting the view's contents.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ228004",
+    "@type": "BlockNode",
+    "title": "**Threads**",
+    "text": "**Threads**: stored in `.state/` by subtree membership, an option chosen over introducing new node kinds so every verb keeps working unchanged; pruning is ordinary tombstoning, triggered by a size-cap warning on every thread write.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3XZ228005",
+    "@type": "BlockNode",
+    "title": "**Platforms**",
+    "text": "**Platforms**: Antigravity confirmed to support markdown agent definitions with preloaded skills (`.agents/agents/<name>.md`, `subagent: true`, `skills:`), matching Claude Code's `.claude/agents/`.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR3YAK1R001",
+    "@type": "BlockNode",
+    "title": "**Subturns carry tool results, not only narration**",
+    "text": "**Subturns carry tool results, not only narration**: first described as running progress-and-reasoning notes; corrected to also hold the essence of each tool result a later turn will need — written as it happens or at the end of the turn, but always written, since a later turn has only the thread to recover it from.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR4MZMD8001",
+    "@type": "BlockNode",
+    "title": "**Asking back is a first-class duty, on par with subturns**",
+    "text": "**Asking back is a first-class duty, on par with subturns**: in the first skill draft it sat inside the coder's \"no turn without a Report\" rule; separated out, because it is what distinguishes these subagents from an ordinary one, which runs to completion and returns its best guess at the gaps.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR541P8R001",
+    "@type": "BlockNode",
+    "title": "**`Every claim carries its source` generalized to every role, not copied wholesale into the grapher skill**",
+    "text": "**`Every claim carries its source` generalized to every role, not copied wholesale into the grapher skill**: the first draft copied v2.11's whole section into `aperas-grapher`, since only the grapher writes formal docs; corrected, because the underlying rule — a claim needs traceable provenance wherever it is written — is Philosophy's evidence rule and binds freeflow and thread entries too, not only formal-doc ones. Split: the general principle moved to the base skill's Discipline, the formal-doc-specific origin-placement mechanics stayed in `aperas-grapher` as `Provenance at the origin`, citing the base rule it applies.",
+    "parent": "BlockNode:00CR3XZ220001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5AWY6R001",
+    "@type": "BlockNode",
+    "title": "# Concepts",
+    "text": "Shared vocabulary and relationships surfaced across concerns and threads, promoted up by the grapher once they recur across tasks.",
+    "parent": "ArtifactNode:00CR5AEJ88000",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR5GCSEG001:links:Link:00CR5GCWWR000",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR5GCSEG001:links:Link:00CR5GCWWR000:props:StringProp:00CR5GCWX0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "149"
+          }
+        ]
+      }
+    ],
+    "title": "## v3 SKILL.md (verbatim, 2026-09-27)",
+    "text": "Dumped verbatim from the four v3 skill files, the same way v0/v1/v2 were — extended to more than one file since the skill itself split across roles ([Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001)). A fresh snapshot rather than a delta: `skills/aperas/SKILL.md`'s own Discipline section was rewritten wholesale into role hand-off mechanics, and the three role-skill files (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`) are new, with no prior baseline to delta against.",
+    "parent": "ArtifactNode:00CE8XWYYG000",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSEG002",
+      "BlockNode:00CR5GCSG800W",
+      "BlockNode:00CR5GCSGG001",
+      "BlockNode:00CR5GCSH0009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG002",
+    "@type": "BlockNode",
+    "title": "### aperas/SKILL.md",
+    "parent": "BlockNode:00CR5GCSEG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSEG003",
+      "BlockNode:00CR5GCSEG004",
+      "BlockNode:00CR5GCSEG005",
+      "BlockNode:00CR5GCSEG006",
+      "BlockNode:00CR5GCSER007",
+      "BlockNode:00CR5GCSER00N",
+      "BlockNode:00CR5GCSF000B",
+      "BlockNode:00CR5GCSF800A",
+      "BlockNode:00CR5GCSG800P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG003",
+    "@type": "BlockNode",
+    "title": "00CR5GCSEG003",
+    "text": "```\n---\nname: aperas\ndescription: >-\n  Before anything else in this project — first turn, every session, whatever the task looks like,\n  including when it looks unrelated, trivial, read-only, or like one quick lookup — check memory\n  for a standing decision on whether Aperas manages this session. Do this without loading this\n  skill, and never ask permission to do it or offer it as an option; just do it. If a decision\n  is recorded, follow it. If none is, ask with AskUserQuestion using exactly these choices —\n  Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions'\n  or 'never' durably, so a session-scoped answer is asked again next session. Load this skill\n  only once the answer is yes, and with it `aperas-orchestrator` — the session talking with the\n  user is the orchestrator; graph work and code work go to the `aperas-grapher` and\n  `aperas-coder` subagents. Aperas is this project's external memory: a knowledge graph, worked\n  through the `aperas` CLI, holding what has been decided, tried, found and planned, and the\n  medium the three roles communicate through.\n---\n```",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG004",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.0** — the base every role loads: four levels, Philosophy through Mechanics, each item explaining a consequence of the one above it. What each role does with it lives in its role skill — `aperas-orchestrator`, `aperas-grapher`, `aperas-coder`. Only current, verified items appear here; superseded material, unverified hypotheses and version-by-version rationale live in `discussion/aperas-skill.md`'s snapshot and deltas. Concern docs: `AperasKG/artifacts/{design,issues,planning,history,discussion}/aperas-skill.md`.",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG005",
+    "@type": "BlockNode",
+    "title": "00CR5GCSEG005",
+    "text": "> **Aperas-repo insiders**: `aperas` ships as a real published package (`npm install -g aperas`) as of `0.2.2`, but this repo still develops it from source — running the bare `aperas <verb> ...` commands below here would invoke whatever's globally installed, not your local changes. Run them as `npm run aperas -- <verb> ...` from `Aperas/monorepo/` instead.",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG006",
+    "@type": "BlockNode",
+    "title": "#### How to read this",
+    "text": "Four levels, each following from the one above:",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSEG007",
+      "BlockNode:00CR5GCSEG008",
+      "BlockNode:00CR5GCSER000",
+      "BlockNode:00CR5GCSER001",
+      "BlockNode:00CR5GCSER002",
+      "BlockNode:00CR5GCSER003",
+      "BlockNode:00CR5GCSER004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSEG007:props:StringProp:00CR5GCWM0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSEG007:props:StringProp:00CR5GCWM0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSEG007",
+    "text": "**Philosophy** — what the graph *is*. Everything else is a consequence.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSEG008",
+    "@type": "BlockNode",
+    "title": "00CR5GCSEG008",
+    "text": "**Orientation** — what reading and writing *mean* here.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER000",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER000",
+    "text": "**Discipline** — how to behave once oriented, and how the three roles work together through the graph.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER001",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER001",
+    "text": "**Mechanics** — how to type it.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER002",
+    "text": "Read top-down. Stopping after Orientation should already leave you acting correctly in the ordinary case; starting at Mechanics gives you a list of gotchas with nothing to hang them on. An item sits at the level that explains *why* it is true, not the level where it was first noticed.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER003",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER003",
+    "text": "Everything here is current and confirmed live. A rule whose cause has since been removed, and one identified but not yet verified, both belong in `discussion/aperas-skill.md` rather than here — a caution you cannot act on costs the reader and buys nothing.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER004",
+    "@type": "BlockNode",
+    "title": "##### Scope",
+    "text": "This skill owns *working the graph*, which every role does. Your role skill owns *what you do with it*: which parts of the graph you write, when you hand off, and how. `kg-doc-ingest` owns *getting existing text into the graph* — the grapher's, when it comes up. Anything that is a fact about this project rather than about the tooling belongs in a concern doc under `AperasKG/artifacts/`, which this skill only points at.",
+    "parent": "BlockNode:00CR5GCSEG006",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSER005",
+      "BlockNode:00CR5GCSER006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER005",
+    "@type": "BlockNode",
+    "title": "Note the boundary is by subject, not by timing",
+    "text": "Note the boundary is by subject, not by timing: a genuinely new document needs no disk authoring at all (see *Sketching a structure*, Mechanics). What is ruled out is authoring a *finished* document on disk and reconciling it back in.",
+    "parent": "BlockNode:00CR5GCSER004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER006",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER006",
+    "text": "---",
+    "parent": "BlockNode:00CR5GCSER004",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER007",
+    "@type": "BlockNode",
+    "title": "#### 1. Philosophy",
+    "text": "**The Apeiron is the source; the `.md` files under `artifacts/` are shadows it casts.**",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSER008",
+      "BlockNode:00CR5GCSER009",
+      "BlockNode:00CR5GCSER00A",
+      "BlockNode:00CR5GCSER00B",
+      "BlockNode:00CR5GCSER00C",
+      "BlockNode:00CR5GCSER00D",
+      "BlockNode:00CR5GCSER00E",
+      "BlockNode:00CR5GCSER00F",
+      "BlockNode:00CR5GCSER00G",
+      "BlockNode:00CR5GCSER00H",
+      "BlockNode:00CR5GCSER00J",
+      "BlockNode:00CR5GCSER00K",
+      "BlockNode:00CR5GCSER00M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER008",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER008",
+    "text": "A projection can be regenerated from the graph at any time. It is never where a change is made, and never where a question is answered. Both failures look identical from outside — the file reads right — which is why neither announces itself.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER009",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER009",
+    "text": "Change it and you have mistaken the shadow for the thing casting it: the file looks correct afterwards, while the source is untouched or gets reconciled back into a shape nobody chose. Read it and you get a block's words and none of its place — not what cites it, not what it rests on, not whether it is still live — and the loss is invisible precisely because the words really are the same. Ask it about *structure* and you get nothing at all, since links exist only in the source.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00A",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00A",
+    "text": "The graph's substance is nodes *and the links between them*. A node's meaning is not carried by its own text alone; it is constituted by what it links to, what links back, and where it sits among its siblings and its thread.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00B",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00B",
+    "text": "Every rule below is downstream of this. \"Graph-first, always\" is its first consequence, not an independent instruction.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00C",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00C",
+    "text": "**Aperas is an evidence-based documentation system: a claim and its provenance are one object.** This follows directly from the sentence above. If a node's meaning is constituted by what it links to and what links back, then a claim whose source is not reachable from it is not a weaker entry — it is a different kind of thing, an assertion wearing the costume of a record. It reads as complete from its own side, passes every mechanical check the tooling can run, and fails the only question the graph exists to answer: *how do you know?*",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00D",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00D",
+    "text": "`archive/Aperas-design.md` builds its whole read side on this, defining deep read as provenance projection — \"every rendered element retains provenance anchors and backlinks, allowing readers to drill down into the supporting evidence subgraph.\" The link may sit at either end: a forward citation where *Citation direction* (Discipline) permits one, a backlink from the source where it does not. One of the two must exist before the claim is left in place, not after.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00E",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00E",
+    "text": "**That substance matures; it does not merely accumulate.** Both axes run the same direction — Apeiron toward Peras, unbounded toward bounded. On the **content** axis, prose hardens from formless discussion into typed design, issues, planning, history. On the **topology** axis, a relationship first exists *indirectly*, mediated by a discussion node that cites both ends and carries the judgment in its own text; once it proves load-bearing it crystallizes into a *direct* citation, and the mediating node's job is done. Link density is the residue of that lifecycle, which is why it reads as maturity from outside rather than as tidiness — and why `discussion` is where the cost of it gets paid.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00F",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00F",
+    "text": "**Nobody working this graph will remember.** Not the human across weeks, not the agent across a context window. So the graph is not only where things are kept — it is what *notices*: the structural gaps and the emergent alignments between nodes, neither of which anyone will spot by holding the corpus in their head. A record that has to be consulted to be useful protects nothing, because being asked is the part that fails: the moment you would know to check is the moment you have already forgotten. What earns its place is what interrupts unbidden — a check reporting an omission, a backlink appearing where none was expected, a query coming back zero. Storage is the easy half and the projections already do it; recall is the half that costs something to build and the half that works.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00G",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00G",
+    "text": "This is why a rule of the form \"look it up instead of trusting your memory\" is only half a discipline here. It can tell you what the graph says; it can never tell you the graph is *missing* something, because doing the work and recording the work are two separate acts and only the second one is visible from inside. Catching an omission takes a comparison against the world outside the graph. Confirmed live, three times in one session: each unrecorded edit was invisible from every side that could be consulted, and was caught by a reader noticing or by a check diffing the file against the record — never by looking something up.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00H",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00H",
+    "text": "**Worked example — the same task, both ways.** Asked whether two docs cross-referenced each other, one session reached for `grep` over the projected `.md` files plus a raw `BlockNode.jsonld` read. It took several steps, produced an answer, and still had to be redone — because the question was about link structure, which exists in the source and only *appears* in the shadow. Redone properly it was one command:",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00J",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00J",
+    "text": "```bash\naperas backlinks BlockNode:00CE1GW638007 --text\n# → \"No backlinks found.\"\n```",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00K",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00K",
+    "text": "That is the whole answer, from the source, in one call. Read a concern through `aperas unfold`, not through the file that renders it.",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00M",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00M",
+    "text": "---",
+    "parent": "BlockNode:00CR5GCSER007",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00N",
+    "@type": "BlockNode",
+    "title": "#### 2. Orientation",
+    "text": "**Traversal is the primary mode of work, not a check appended to it.** Reading means following links; writing means placing them.",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSER00P",
+      "BlockNode:00CR5GCSER00Q",
+      "BlockNode:00CR5GCSER00R",
+      "BlockNode:00CR5GCSER00Z",
+      "BlockNode:00CR5GCSF0003",
+      "BlockNode:00CR5GCSF0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00P",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00P",
+    "text": "`archive/Aperas-design.md`'s Multi-Agent Projection Pattern names these as the architecture's own capabilities. They are crystallized practice rather than theory — but the practice predates this system, coming from years of real knowledge-graph work in Logseq and carried in as design instead of being rediscovered here. That this system has barely exercised them yet is a fact about its infancy, not their standing.",
+    "parent": "BlockNode:00CR5GCSER00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00Q",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00Q",
+    "text": "**An `artifacts/**.md` path in your hand is a node reference, not a file path.** This is the one mechanical test the skill has: if a path under `artifacts/` is about to become an argument to `Read`, `grep`, `find` or `cat`, the call is already wrong, and `aperas unfold <ref>` is what it meant. It holds for *reading*, not only for writing, and most of all when you are \"just checking one thing\" — which is how an entire investigation goes through the shadows without any single step feeling like a decision. Two things are deliberately not over the line: `Apeiron/*.jsonld` is the graph's own on-disk mirror, so grepping it is reading the source (see *Full-text search*, Mechanics), and source code is not in the graph at all.",
+    "parent": "BlockNode:00CR5GCSER00N",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00R",
+    "@type": "BlockNode",
+    "title": "##### Deep read and deep write run along the same three directions",
+    "text": "They answer different questions, and the tool surface already carves them apart:",
+    "parent": "BlockNode:00CR5GCSER00N",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSER00S",
+      "BlockNode:00CR5GCSER00T",
+      "BlockNode:00CR5GCSER00V",
+      "BlockNode:00CR5GCSER00W",
+      "BlockNode:00CR5GCSER00X",
+      "BlockNode:00CR5GCSER00Y"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00S",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSER00S:props:StringProp:00CR5GCWMR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSER00S:props:StringProp:00CR5GCWMR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSER00S",
+    "text": "**Forward and downward — deeper *content*.** A block's children and its outgoing links: what it is made of and what it refers to. This is what an ordinary read wants, and it is why `aperas unfold <ref>` previews children *and* forward links together — both are content, in the same sense.",
+    "parent": "BlockNode:00CR5GCSER00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00T",
+    "@type": "BlockNode",
+    "title": "**Upward — surrounding *context*.** A block's ancestors",
+    "text": "**Upward — surrounding *context*.** A block's ancestors: the heading it sits under, the thread it belongs to. This is the cheapest move in the graph and the one most often skipped, because the pull it answers is the pull toward opening the whole artifact \"for context\" — and it almost never takes the whole artifact. For a node at `discussion/a.md/h1/freeflow/a/aa/aaa`, unfolding `discussion/a.md/h1/freeflow/a` is usually already enough. Climb a level at a time and stop once the block's meaning stops changing.",
+    "parent": "BlockNode:00CR5GCSER00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00V",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00V",
+    "text": "**Backward — deeper *context*: dependents and sources.** `aperas backlinks <id> --text` stands alone as a command because it is the other axis, and two distinct relationships arrive through it. *Dependents* — what relies on this block, what breaks if it changes. *Sources* — what the block rests on, which is what makes a claim checkable; provenance surfaces here rather than among forward links whenever citation direction forbids the forward form, so a node with no backlinks may be not merely under-linked but unsupported. `archive/Aperas-design.md` keeps the two apart by operation instead, giving provenance to deep read and impact traversal to deep write.",
+    "parent": "BlockNode:00CR5GCSER00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00W",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00W",
+    "text": "Deep read takes the first two as a matter of course, and the third when the decision is harder than reading: editing, or an investigation whose scope has widened. **Deep write is inherently backward** — what a change breaks is only answerable from the citing side, so updating a block means checking its backlinks and forward links and updating what the change has made stale, not leaving them to rot.",
+    "parent": "BlockNode:00CR5GCSER00R",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00X",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00X",
+    "text": "**Dense linking is the precondition for both.** Everything related gets linked, directly (A references B) or indirectly (a discussion node that talks about both). A sparsely linked graph gives deep read nothing to descend into and deep write nothing to follow. Linking is constitutive here, not tidiness.",
+    "parent": "BlockNode:00CR5GCSER00R",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00Y",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER00Y",
+    "text": "**A link is placed at the maturity the relationship has earned.** Writing means placing links, but not all of them direct and not all at once. A relationship that still needs judgment to state goes into a mediating discussion node citing both ends; one that has proven load-bearing becomes a direct citation between them. Reaching for a direct link too early asserts a dependency nobody has tested; leaving one mediated forever makes every traversal pay for the hop.",
+    "parent": "BlockNode:00CR5GCSER00R",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER00Z",
+    "@type": "BlockNode",
+    "title": "##### Entering the corpus — two directions, and the gap is where they meet",
+    "text": "The three directions above move *from* a node. Acquiring the first one is its own decision, and the corpus has a gradient of its own to move along: the concern docs run `design` most abstract and `discussion` least, with `issues`, `planning` and `history` between. Both directions along it are legitimate, and they do different jobs.",
+    "parent": "BlockNode:00CR5GCSER00N",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSER010",
+      "BlockNode:00CR5GCSER011",
+      "BlockNode:00CR5GCSF0000",
+      "BlockNode:00CR5GCSF0001",
+      "BlockNode:00CR5GCSF0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER010",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSER010:props:StringProp:00CR5GCWN0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSER010:props:StringProp:00CR5GCWN0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSER010",
+    "text": "**Top-down — frame, then zoom in.** `design/<concern>.md` for the settled shape, then `issues`/`history` for what is open and what already landed, then `discussion` for the reasoning trail, and only then the code. It narrows like a binary search, and what it buys is the frame: what the corpus *claims* about this area, and which facet you are actually in.",
+    "parent": "BlockNode:00CR5GCSER00Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSER011",
+    "@type": "BlockNode",
+    "title": "00CR5GCSER011",
+    "text": "**Bottom-up — pinpoint, then zoom out.** A concrete identifier — a source filename, a symbol, an error string — grepped against the store lands you on the exact node in one step, where a top-down descent would still be choosing among forty Freeflow items. Then climb by following that node's own **forward links**, which usually run up the gradient: a lower block cites the higher one it realizes, while a higher block points down only where it speaks normatively. So a downward link met on the way up is the higher tier governing the lower, not a route further down. **Backlinks** are that same relation from the other end — what cites *this* node — and are how a design block's realizers below are found. Ancestors climb within one artifact only: they recover the surrounding thread, not the statement that governs it.",
+    "parent": "BlockNode:00CR5GCSER00Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0000",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0000",
+    "text": "Neither is a fallback for the other, and neither alone can find drift. **Drift is an absence as often as a contradiction — the design silent where the code has a rule, or asserting a rule the code has since replaced — and in both forms it is indistinguishable from agreement until both directions have been run and compared.** Descend only and you confirm the design; ascend only and you confirm the code, which is why a bottom-up fix is so often correct and still leaves the design a version behind. The finding is the discrepancy at the point the two meet, so a pinpointed node is not oriented until the climb has reached the tier that should govern it: for a code-shaped entry, upward does not stop when the block's meaning stabilizes — it stops at `design`.",
+    "parent": "BlockNode:00CR5GCSER00Z",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0001",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0001",
+    "text": "Confirmed live, once in each direction. A lead-in-term title-extraction fix traced cold out of `astParser.ts` worked correctly and revealed nothing, while `design/linking.md`'s own Lead-In Term Detection — documenting two checks where the code has three — was stale in exactly the clause the fix depended on. In the same session the reverse: `design/aperas-skill.md`'s Citation direction, read top-down, asserted a rule its own projection had replaced thirteen versions earlier, and was quoted back as current.",
+    "parent": "BlockNode:00CR5GCSER00Z",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0002",
+    "text": "```bash\ngrep -n 'astParser.ts' AperasKG/Apeiron/BlockNode.jsonld  # pinpoint → candidate ids\n# a planning-tier hit cites the tier above it:\n#   \"see [Lead-In Term Detection](../design/linking.md#id/BlockNode:00CDBYV4TG000)\"\naperas unfold BlockNode:00CDBYV4TG000                     # follow it up to design\n# two checks documented, three in the code — that difference is the finding\n```",
+    "parent": "BlockNode:00CR5GCSER00Z",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0003",
+    "@type": "BlockNode",
+    "title": "##### Keep an active view, and keep it current",
+    "text": "Set one up once:",
+    "parent": "BlockNode:00CR5GCSER00N",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF0004",
+      "BlockNode:00CR5GCSF0005",
+      "BlockNode:00CR5GCSF0006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0004",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0004",
+    "text": "```bash\naperas profile create <handle> --name \"<Display Name>\"\naperas profile create-view <name> --profile <handle>\n```",
+    "parent": "BlockNode:00CR5GCSF0003",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0005",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0005",
+    "text": "Then `aperas unfold <path> --view <name> --flush` whatever you are working on *as* you start it, `aperas tree --view <name>` to render that lens, `aperas fold` to collapse a subtree again, and plain `aperas tree --depth <n>` (no `--view`) for a skeletal title-only map of the whole corpus.",
+    "parent": "BlockNode:00CR5GCSF0003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0006",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0006",
+    "text": "A view created early and never touched again still answers `aperas tree --view <name>`, showing whatever was unfolded during a previous task, with nothing warning you it is stale — worse than no view, because it looks current without being current.",
+    "parent": "BlockNode:00CR5GCSF0003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0007",
+    "@type": "BlockNode",
+    "title": "##### Worked example — a traversal, start to finish",
+    "parent": "BlockNode:00CR5GCSER00N",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF0008",
+      "BlockNode:00CR5GCSF0009",
+      "BlockNode:00CR5GCSF000A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0008",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0008",
+    "text": "```bash\naperas unfold BlockNode:00CE0HD0HG007 --view my-view --flush\n# → the block's own text, plus each forward link previewed:\n#   │ ...Link... [[wikilink]] → BlockNode:00CE1GW638002  ## Open Issues  [+6]\naperas unfold BlockNode:00CE1GW638002 --view my-view --flush\n# → that heading's children, one of which is the block actually being looked for\n```",
+    "parent": "BlockNode:00CR5GCSF0007",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0009",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0009",
+    "text": "Two commands, each one hop. The content axis, followed until it arrives.",
+    "parent": "BlockNode:00CR5GCSF0007",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000A",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000A",
+    "text": "---",
+    "parent": "BlockNode:00CR5GCSF0007",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000B",
+    "@type": "BlockNode",
+    "title": "#### 3. Discipline",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF000C",
+      "BlockNode:00CR5GCSF000G",
+      "BlockNode:00CR5GCSF000Q",
+      "BlockNode:00CR5GCSF0010",
+      "BlockNode:00CR5GCSF8000",
+      "BlockNode:00CR5GCSF8003",
+      "BlockNode:00CR5GCSF8006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000C",
+    "@type": "BlockNode",
+    "title": "##### Three roles, one graph",
+    "text": "All work here is done by one of three roles, and each writes only where its role says:",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF000D",
+      "BlockNode:00CR5GCSF000E",
+      "BlockNode:00CR5GCSF000F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000D",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000D",
+    "text": "| Role | Runs as | Writes |\n|---|---|---|\n| **Orchestrator** | the session talking with the user | `discussion` freeflow recording the conversation; its own **Ask** nodes in the subagent threads |\n| **Grapher** | subagent | everything else in the graph — deep read, deep write, every promotion, each thread's lifecycle |\n| **Coder** | subagent | source code; its own nodes in `.threads/coder.md` |",
+    "parent": "BlockNode:00CR5GCSF000C",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000E",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000E",
+    "text": "A write outside your role's column is a hand-off you skipped. Route it to the role that owns it — in your Report or your Ask — rather than making it yourself: the steps an agent drops are precisely the ones inside work it absorbed from another role.",
+    "parent": "BlockNode:00CR5GCSF000C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000F",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000F",
+    "text": "If you were started as a subagent, your agent definition names your role, profile and views. Otherwise you are the orchestrator, and `aperas-orchestrator` is loaded alongside this skill. Profiles are fixed, per platform `<p>` (`claude`, `antigravity`): `<p>`, `<p>-grapher`, `<p>-coder`. Never create another one for your own views.",
+    "parent": "BlockNode:00CR5GCSF000C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000G",
+    "@type": "BlockNode",
+    "title": "##### Threads — where a subagent's context lives",
+    "text": "Each subagent has one thread, `.threads/grapher.md` or `.threads/coder.md`. Nothing carries a subagent from one invocation to the next that it can rely on except its thread and its views — which is not a weaker substitute for chat history but a stronger one, because it is structured, linked, and readable by the other roles. A thread is a tree:",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF000H",
+      "BlockNode:00CR5GCSF000J",
+      "BlockNode:00CR5GCSF000K",
+      "BlockNode:00CR5GCSF000M",
+      "BlockNode:00CR5GCSF000N",
+      "BlockNode:00CR5GCSF000P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000H",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000H",
+    "text": "```markdown\n# Grapher thread\n## <topic>                                   ← named by the user\n### <task>                                   ← set by the orchestrator\n#### Turn <n>                                ← one exchange with the orchestrator\n- **Ask**: <what is wanted, in a sentence>   ← orchestrator; root of <p>-orchestrator-grapher\n  - [<argument>](../design/x.md#id/BlockNode:…) — why it matters here\n- **Work**: <the approach, in a line>        ← subagent; subturns nested under it\n  - <subturn>\n- **Report**: <the outcome, in a sentence>   ← subagent; root of <p>-grapher-orchestrator\n  - [<changed or found node>](…) — what changed, or what it shows\n  - **Question**: <whatever the Ask left unsettled — see below>\n```",
+    "parent": "BlockNode:00CR5GCSF000G",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000J",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000J",
+    "text": "A follow-up is a new turn, not an edit to an old one.",
+    "parent": "BlockNode:00CR5GCSF000G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000K",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000K",
+    "text": "**Subturns are optional as a level and mandatory as content.** Across a batch of tool calls, a subturn records the progress, the reasoning, and the *essence of each tool result* a later turn will need — the failing assertion's line, the id that came back, the count, the file that turned out to own the behavior — not \"ran the tests\". Write them as you go or at the end of the turn, but before the turn ends: a result that is not in the thread is gone for every later turn, since the next invocation starts from the thread, not from this one's context.",
+    "parent": "BlockNode:00CR5GCSF000G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000M",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000M",
+    "text": "**Ask back instead of guessing.** An ordinary subagent runs to completion on whatever it was handed and returns its best guess at the gaps. Here a subagent stops when it meets something the Ask doesn't settle — an ambiguous requirement, two plausible approaches with different costs, code or graph contradicting what the Ask assumed, a change turning out larger than the Ask implied — and asks. The question goes in the Report as **Question**, with what raised it and the options you see; the turn ends there, and the orchestrator answers in a new turn. A wrong guess costs a whole round of work plus unwinding it; a question costs one turn. Guessing is what a subagent does by default, so asking has to be done deliberately — it is as much a part of every turn as recording the subturns.",
+    "parent": "BlockNode:00CR5GCSF000G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000N",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000N",
+    "text": "A thread is the lowest tier of the gradient (*Citation direction*, below), so it cites upward freely and **nothing outside a thread links into one**. What a thread finds reaches the rest of the graph by the grapher copying it up, never by citation.",
+    "parent": "BlockNode:00CR5GCSF000G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000P",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000P",
+    "text": "When a write to a thread reports its size cap reached, say so in your Report; the grapher prunes finished tasks at its next turn.",
+    "parent": "BlockNode:00CR5GCSF000G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000Q",
+    "@type": "BlockNode",
+    "title": "##### Hand-offs — the view carries the data, the chat carries the control",
+    "text": "A hand-off message is a call. The view is `this` — the shared context the call runs against — and the message may still name further arguments: a node to look at first, the one question that decides the turn. What a hand-off must never do is carry the work itself in chat: chat tracks *progress*, the view tracks the *state* of the work, and only the second survives into the next turn.",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF000R",
+      "BlockNode:00CR5GCSF000X",
+      "BlockNode:00CR5GCSF000Y",
+      "BlockNode:00CR5GCSF000Z"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000R",
+    "@type": "BlockNode",
+    "title": "Sending, every turn",
+    "text": "Sending, every turn:",
+    "parent": "BlockNode:00CR5GCSF000Q",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CR5GCSF000S",
+      "BlockNode:00CR5GCSF000T",
+      "BlockNode:00CR5GCSF000V",
+      "BlockNode:00CR5GCSF000W"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000S",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSF000S:props:StringProp:00CR5GCWNR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSF000S:props:StringProp:00CR5GCWP0000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSF000S",
+    "text": "Write only what changed — new nodes, new links. Reuse everything else by citing it.",
+    "parent": "BlockNode:00CR5GCSF000R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000T",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000T",
+    "text": "Write your root node — **Ask** or **Report** — citing both what you just wrote and the existing content the receiver needs.",
+    "parent": "BlockNode:00CR5GCSF000R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000V",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000V",
+    "text": "Zoom your view onto that root.",
+    "parent": "BlockNode:00CR5GCSF000R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000W",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000W",
+    "text": "Send a short message naming the view and any specific arguments.",
+    "parent": "BlockNode:00CR5GCSF000R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000X",
+    "@type": "BlockNode",
+    "title": "Receiving, before anything else",
+    "text": "Receiving, before anything else: `aperas tree --view <sender's view>`. That is your input; the message only points into it.",
+    "parent": "BlockNode:00CR5GCSF000Q",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000Y",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000Y",
+    "text": "The root moves every turn while the content under it mostly stays put, the way a commit is new while most of its tree is shared. Rebuilding the content inside the new root instead of citing it is the same mistake as retyping a block instead of linking it.",
+    "parent": "BlockNode:00CR5GCSF000Q",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF000Z",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF000Z",
+    "text": "| View | Owned by | Faces | Rooted on |\n|---|---|---|---|\n| `<p>-<topic>` | orchestrator | the user | the topic discussion's `## Dashboard` |\n| `<p>-orchestrator-grapher` | orchestrator | grapher | the current Ask in `.threads/grapher.md` |\n| `<p>-orchestrator-coder` | orchestrator | coder | the current Ask in `.threads/coder.md` |\n| `<p>-grapher-orchestrator` | grapher | orchestrator | the current Report in `.threads/grapher.md` |\n| `<p>-coder-orchestrator` | coder | orchestrator | the current Report in `.threads/coder.md` |",
+    "parent": "BlockNode:00CR5GCSF000Q",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0010",
+    "@type": "BlockNode",
+    "title": "##### Every claim carries its source",
+    "text": "Philosophy's evidence rule, as something every role does, not only whoever ends up writing the formal docs. Before leaving a claim in place — a freeflow finding, a thread's Report, a formal-doc entry, whatever you are writing and wherever — check that it can be traced: provenance first, and every other relationship it carries alongside it, each reified as a real link rather than described in prose. A claim resting on nothing is not a lesser entry; it is incomplete, whichever role wrote it and whatever it was written into.",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF0011"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF0011",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF0011",
+    "text": "Where you check depends on where you wrote it. A thread or freeflow entry cites forward, since nothing links into a thread and freeflow is not itself a citation target (base *Citation direction*, below) — so the check there is simply: does this entry's own text name what it rests on? A formal-doc entry can be checked from the other side, and more strongly: run `aperas backlinks <id> --text` on **what you just wrote**, not only on what you were about to read. A node whose claims rest on nothing returns nothing, and that silence is the entire signal. The mechanics of applying this to a formal-doc promotion — where the link goes when citation direction forbids the obvious direction — belong to the grapher, the only role that writes one (`aperas-grapher`'s *Provenance at the origin*).",
+    "parent": "BlockNode:00CR5GCSF0010",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8000",
+    "@type": "BlockNode",
+    "title": "##### Citation direction",
+    "text": "The concerns form an abstraction gradient — `design` most abstract, then `issues`/`planning`/`history`, then the shared `concepts.md` map, then `discussion`, and an agent's own thread least. A citation may point **up** the gradient or **sideways** freely. It may not point **down**: a design block does not reference a discussion block, for the same reason a node carries a parent pointer rather than a list of children.",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF8001",
+      "BlockNode:00CR5GCSF8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8001",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8001",
+    "text": "The sanctioned exception is a **normative, singular** pointer — one whose target is the block's whole referent rather than one of many possible mentions. A design doc's own `# Context` section is the familiar instance (one link per facet, a fixed set), but it is the *property* that is sanctioned, not that location: a history milestone announcing one snapshot, or a design block naming *the* canonical exemplar, qualify the same way.",
+    "parent": "BlockNode:00CR5GCSF8000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8002",
+    "text": "The test is whether removing the link leaves the block **incomplete**. A milestone whose content is \"this snapshot was taken\" no longer says what it exists to say once its pointer is gone; \"here is a discussion that also touched on this\" loses only enrichment, and stays forbidden. What the rule is actually against is a *list of children* — unbounded, discretionary, accumulating — so cardinality is the real criterion and direction is only its usual symptom.",
+    "parent": "BlockNode:00CR5GCSF8000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8003",
+    "@type": "BlockNode",
+    "title": "##### A view is per-task, not per-session",
+    "text": "Orientation's rule is that a view left pointing at last session's work is worse than no view. The practice that follows: re-unfold as the task's scope moves, and treat any view you did not open yourself as unknown until checked. `aperas tree --view <name>` renders whatever was unfolded whenever, with nothing marking age, so an inherited view looks identical to one built for the question actually in front of you.",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF8004",
+      "BlockNode:00CR5GCSF8005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8004",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8004",
+    "text": "Cheapest discipline is a named view per task rather than one long-lived default — creating one is a single call, and a view scoped to the task documents its own contents. `unfold` now refuses a ref with no quads at all at write time, and an explicit sweep (`aperas reload`, service shutdown) strips any `unfolds` entry that's gone stale since — but a tombstoned-yet-present target is left alone by both, since it's a legitimate, revealable-via-`--tombstoned` entry, not a stale one.",
+    "parent": "BlockNode:00CR5GCSF8003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8005",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8005",
+    "text": "A view's root is its current zoom, and zooming it is part of every hand-off (*Hand-offs*, above): a view whose root still sits on last turn's node is the same stale lens this rule is about, one level down.",
+    "parent": "BlockNode:00CR5GCSF8003",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8006",
+    "@type": "BlockNode",
+    "title": "##### Stage each verified step",
+    "text": "After a step lands clean, `git add` it — in both the code repo and `AperasKG/`. The index becomes a running checkpoint: if a later step goes wrong, `git restore`/`git diff` against it recovers cleanly. **Staging only, never committing** — `git commit` stays the user's call. Pass `--flush` on the mutating call you are about to stage, not just at the end of a sequence; the service's own flush timer can otherwise land *after* a `git add`, leaving the index holding stale content.",
+    "parent": "BlockNode:00CR5GCSF000B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF8007",
+      "BlockNode:00CR5GCSF8008",
+      "BlockNode:00CR5GCSF8009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8007",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8007",
+    "text": "This is not bookkeeping. Recovering a live incident that tombstoned real content was only possible because the prior step had actually been staged.",
+    "parent": "BlockNode:00CR5GCSF8006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8008",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8008",
+    "text": "The grapher stages `AperasKG/`; the coder stages the code repo; the orchestrator stages neither, since it writes nothing that is not staged by the grapher's next turn.",
+    "parent": "BlockNode:00CR5GCSF8006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF8009",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF8009",
+    "text": "---",
+    "parent": "BlockNode:00CR5GCSF8006",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800A",
+    "@type": "BlockNode",
+    "title": "#### 4. Mechanics",
+    "text": "This section describes the usage of the `aperas` CLI. For detailed syntax, see `aperas --help` and `aperas <verb> --help`.",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF800B",
+      "BlockNode:00CR5GCSF800E",
+      "BlockNode:00CR5GCSF800F",
+      "BlockNode:00CR5GCSF800H",
+      "BlockNode:00CR5GCSF800J",
+      "BlockNode:00CR5GCSF800K",
+      "BlockNode:00CR5GCSF800N",
+      "BlockNode:00CR5GCSG0000",
+      "BlockNode:00CR5GCSG0008",
+      "BlockNode:00CR5GCSG8000",
+      "BlockNode:00CR5GCSG8002",
+      "BlockNode:00CR5GCSG8005",
+      "BlockNode:00CR5GCSG8006",
+      "BlockNode:00CR5GCSG8008",
+      "BlockNode:00CR5GCSG800C",
+      "BlockNode:00CR5GCSG800D",
+      "BlockNode:00CR5GCSG800E",
+      "BlockNode:00CR5GCSG800G",
+      "BlockNode:00CR5GCSG800K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800B",
+    "@type": "BlockNode",
+    "title": "##### Threads, turns and zooming",
+    "text": "Thread paths resolve like any other artifact: `.threads/grapher.md`, `.threads/coder.md`. `.threads/` sits directly under `artifacts/` like the concern folders, so a citation from a thread uses the same relative form, `[title](../design/x.md#id/BlockNode:<ID>)`.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF800C",
+      "BlockNode:00CR5GCSF800D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800C",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF800C",
+    "text": "```bash\ncat ask.md | aperas insert <turn-heading-id> --flush\n# → aperas://id/BlockNode:…  [listItem]  **Ask**  (created)   ← this id is the new root\naperas zoom BlockNode:… --view claude-orchestrator-grapher --flush\naperas tree --view claude-orchestrator-grapher                 # what the receiver reads first\n```",
+    "parent": "BlockNode:00CR5GCSF800B",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800D",
+    "@type": "BlockNode",
+    "title": "Keep the id each `insert` prints",
+    "text": "Keep the id each `insert` prints: it is the node you zoom onto and the node the next turn cites. A root node is an ordinary list item, so the list rules below apply to it — pipe it with its bullet marker, lead-in colon outside the bold.",
+    "parent": "BlockNode:00CR5GCSF800B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800E",
+    "@type": "BlockNode",
+    "title": "##### Paths",
+    "text": "Paths passed to `aperas project`/`ingest`/etc. resolve relative to the graph's `artifacts` root defined in `aperas.config.json`, e.g., `discussion/foo.md` relative to `AperasKG/artifacts/`, **not** the repo-relative `AperasKG/artifacts/discussion/foo.md` that `git status` and `find` print. The repo-relative form fails with \"No ingested ArtifactNode or FolderNode found\".",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800F",
+    "@type": "BlockNode",
+    "title": "##### Wikilink syntax",
+    "text": "The resolver only recognizes a URL that is `[[code]]`, starts with `aperas://tree/` or `aperas://id/`, or contains a bare `#fragment`/`path#fragment`. A plain `../folder/file.md/Slug` reference (no `#`) renders fine as prose but is **not** a graph `Link` — `aperas backlinks` on it comes back empty. Use `[title](../folder/file.md#id/BlockNode:<ID>)`.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF800G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800G",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF800G",
+    "text": "Verify with `aperas backlinks BlockNode:<ID> --text` against the specific target block, not the whole-document path. Do not trust a command's own reported link-resolution count; a real backlink appearing is the proof. A link written without a `#fragment` silently creates nothing at all, and the ingest summary will not mention it.",
+    "parent": "BlockNode:00CR5GCSF800F",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800H",
+    "@type": "BlockNode",
+    "title": "##### Anchor placement — the bold-colon rule",
+    "text": "A list item's lead-in colon must sit *outside* any bold span: `**Term**:`, never `**Term:**`. A bold-wrapped colon is rejected by the lead-in detector, so anchor insertion falls through to the next plain-text colon it finds — which can splice an anchor into the middle of unrelated text, such as a link's own title.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800J",
+    "@type": "BlockNode",
+    "title": "##### Sketching a structure",
+    "text": "A new heading or subtree can be built directly in the graph, with no disk authoring: create a placeholder node with `aperas resolve --create-holder <path> --titles <title> [<title>...]`, then *fill* the real content in with `aperas update` and `aperas insert`. This is why a genuinely new document never requires the disk-first path.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800K",
+    "@type": "BlockNode",
+    "title": "##### `--after`/`--before` anchors",
+    "text": "The anchor must be a **direct child** of `<path>`, not a descendant. `aperas insert <path> --after <anchor>` fails with \"anchor is not a child of X\" otherwise. A heading's own text and its nested list are two different levels. Check the real structure first — `aperas tree --depth <n>`, or `scripts/show_node.py --children <ref>` — rather than guessing.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF800M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800M",
+    "@type": "BlockNode",
+    "title": "Be aware this failure is not clean",
+    "text": "Be aware this failure is not clean: the new nodes are hydrated into the store *before* the anchor is validated, so a rejected insert leaves live orphans in memory that can collide with your retry. `aperas reload -- --discard` clears them.",
+    "parent": "BlockNode:00CR5GCSF800K",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800N",
+    "@type": "BlockNode",
+    "title": "##### Inserting an item into an existing list",
+    "text": "For an **unordered** list, the safest and cleanest route is to insert the new item directly as a sibling of an existing one: `aperas insert <parent> --after <existing-item>`.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSF800P",
+      "BlockNode:00CR5GCSF800Q",
+      "BlockNode:00CR5GCSF800R",
+      "BlockNode:00CR5GCSF800S"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800P",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSF800P:props:StringProp:00CR5GCWQ0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSF800P:props:StringProp:00CR5GCWQ0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The input rule**",
+    "text": "**The input rule**: Pipe the bare item text **with its bullet marker** (e.g. `- new item`).",
+    "parent": "BlockNode:00CR5GCSF800N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800Q",
+    "@type": "BlockNode",
+    "title": "**Never pipe plain text** with no bullet",
+    "text": "**Never pipe plain text** with no bullet: it parses as a `paragraph`, which breaks a contiguous list run in two.",
+    "parent": "BlockNode:00CR5GCSF800N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800R",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF800R",
+    "text": "Should you meet an item nested inside a wrapper list, promote it out with `aperas insert <item-id> --after <existing-direct-child-of-the-list>` and `aperas remove` the emptied wrapper.",
+    "parent": "BlockNode:00CR5GCSF800N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800S",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF800S",
+    "text": "For an **ordered** list, direct insertion is riskier because a freshly inserted item becomes its own run-leader and can restart the numbering rather than continuing it.",
+    "parent": "BlockNode:00CR5GCSF800N",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CR5GCSF800T",
+      "BlockNode:00CR5GCSF800V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800T",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSF800T:props:StringProp:00CR5GCWQ8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSF800T:props:StringProp:00CR5GCWQ8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSF800T",
+    "text": "**Appending at the end is safe when the number is right.** For a list numbered `1, 2, …, n-1`, piping `n. new item` after the last one is accepted. Piping any other number is rejected outright, naming the number it expected instead.",
+    "parent": "BlockNode:00CR5GCSF800S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800V",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF800V",
+    "text": "**A middle-of-the-list insertion still needs the full renumbering route** — the fix above only covers appending at the end, since inserting in the middle genuinely requires renumbering everything after it. The safer route there is to target the list's **parent heading** (`aperas update <heading-id>`) and pipe the heading line plus the *complete* list (every existing item verbatim plus the new one).",
+    "parent": "BlockNode:00CR5GCSF800S",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR5GCSF800W",
+      "BlockNode:00CR5GCSF800X"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800W",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSF800W:props:StringProp:00CR5GCWQ8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSF800W:props:StringProp:00CR5GCWQ8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSF800W",
+    "text": "Exact-key matching reuses every unchanged item's id, **but only while every item keeps its parent and depth**. A push that changes item depth (e.g. regrouping under sub-headings) recreates everything; use `aperas insert` (moves) for that instead.",
+    "parent": "BlockNode:00CR5GCSF800V",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSF800X",
+    "@type": "BlockNode",
+    "title": "00CR5GCSF800X",
+    "text": "**This only works if the piped content is genuinely complete.** Piping the heading plus *only* the new item reconciles the existing ones away as removed, tombstoning real content.",
+    "parent": "BlockNode:00CR5GCSF800V",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0000",
+    "@type": "BlockNode",
+    "title": "##### Updating an existing list item",
+    "text": "To update the text of an *existing* list item without changing its identity, use `aperas update <item-id>`.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG0001",
+      "BlockNode:00CR5GCSG0002",
+      "BlockNode:00CR5GCSG0004",
+      "BlockNode:00CR5GCSG0005",
+      "BlockNode:00CR5GCSG0006",
+      "BlockNode:00CR5GCSG0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSG0001:props:StringProp:00CR5GCWQ8004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSG0001:props:StringProp:00CR5GCWQ8005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSG0001",
+    "text": "**For an ordinary text change, pipe bare text with no bullet marker** (e.g. `updated text`, not `- updated text`). This also updates any nested children in the same call, if you include them — see the next point for the cases that need a marker instead.",
+    "parent": "BlockNode:00CR5GCSG0000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG0002",
+    "text": "**A marker is needed only for a checkbox, an ordered item's position, or text that's deliberately blank.** Use whatever you'd normally write: `- [x]`/`- [ ]` for a checkbox, `n.` for an ordered item, or a bare `- ` (nothing after it) if you want the item's own text to end up empty while still giving it children:",
+    "parent": "BlockNode:00CR5GCSG0000",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR5GCSG0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0003",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG0003",
+    "text": "```\n  - \n    - child\n  ```",
+    "parent": "BlockNode:00CR5GCSG0002",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0004",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG0004",
+    "text": "**A bare `- ` with real text but no `[x]`/`[ ]` removes an existing checkbox entirely** (e.g. `- updated text`, not `updated text`). Choosing list syntax at all is what signals \"this edit addresses the checkbox\" — a marker-less bullet clears it, while bare text (no bullet at all, the first point above) never touches it either way.",
+    "parent": "BlockNode:00CR5GCSG0000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0005",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG0005",
+    "text": "**Updating an item never changes where it sits in the list.** Whether it's ordered or unordered, and its position in the numbering, stays exactly as it was, no matter which marker you use to update it. To actually reorder or renumber, use the parent-plus-complete-list technique above — not a single-item update.",
+    "parent": "BlockNode:00CR5GCSG0000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0006",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG0006",
+    "text": "**The title always tracks your current text, never the old one.** If your new text has a bold lead-in term (`**Like this**: ...`), the title updates to match it. If it doesn't, the title falls back to the item's own id — the same fallback any untitled node gets — rather than keeping whatever the title used to say about text that's now gone.",
+    "parent": "BlockNode:00CR5GCSG0000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0007",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG0007",
+    "text": "**The text itself works differently: leaving it out clears it.** If you only pipe new children (a list, with no text of its own before it), the item's own text becomes empty — unlike the title, nothing here is left alone by default. Restate the existing text if you don't want it wiped.",
+    "parent": "BlockNode:00CR5GCSG0000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG0008",
+    "@type": "BlockNode",
+    "title": "##### Updating a heading — `--text-only`",
+    "text": "A heading-target `update` **without** `--text-only` reconciles children too, even from an empty body: piping just `## Pending Tasks` with no body reconciles 0 piped children against N existing ones as *all removed*, tombstoning real content. `--text-only` overwrites just `.text`/`.title` and skips reconciliation entirely — that is what makes a retitle safe.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8000",
+    "@type": "BlockNode",
+    "title": "##### `aperas retype` — changing a block's type without losing it",
+    "text": "`aperas retype <ref> --to <type>` converts a live block in place: `h1`..`h6` (a heading's depth is part of its type, so `h2` → `h3` is an ordinary retype), or `paragraph`/`listItem`/`code`/`blockquote`/`html`/`table`/`thematicBreak`. Id, `links`, children, parent and position all survive; type-specific props belonging to the type being left behind (a heading's `treeAnchor`, a `listItem`'s `orderedList`/`startIndex`/`checked`) are dropped rather than carried forward stale. Refactoring/migration only.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8001",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8001",
+    "text": "Crossing the heading/non-heading boundary migrates the title too, because the two store it in different places — a heading's own field versus a lead-in term folded into `.text`. Heading → non-heading folds the heading's words into the text as a `**words**: <body>` lead-in and derives the new title from that; non-heading → heading cuts the existing lead-in back out into the heading line, leaving the rest as its body. The two directions round-trip exactly on that canonical shape. A depth-only change, or one between two non-heading types, never touches `.text` at all. Nothing to fold or cut — no lead-in, or one that is not a single fully-bold span — degrades to an id-fallback title with `.text` untouched, and says so rather than guessing.",
+    "parent": "BlockNode:00CR5GCSG8000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8002",
+    "@type": "BlockNode",
+    "title": "##### Renaming",
+    "text": "**One artifact**: `git mv old.md new.md`, then `aperas ingest <new-path> --track --flush` scoped to that concern set — not a full path-less sweep, which walks the entire `artifacts/` tree including `archive/` and can hit collisions in never-swept legacy content. Rename detection matches by exact abstract-text equality against tracked ArtifactNodes whose recorded path vanished. Don't trust the \"N renamed\" summary; confirm the ids actually survived at the new path.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG8003",
+      "BlockNode:00CR5GCSG8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8003",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8003",
+    "text": "A file rename touches no content. If the H1 needs retitling too, that is a separate `aperas update` on the H1 with `--text-only`.",
+    "parent": "BlockNode:00CR5GCSG8002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8004",
+    "@type": "BlockNode",
+    "title": "**A set of cross-referencing docs**",
+    "text": "**A set of cross-referencing docs**: do every content fix first — H1 retitles, cross-reference paths — *while the files are still at their old names*, verify, then `git mv` each. That way every call in the content-fixing phase resolves against paths that still exist, and the rename becomes a purely mechanical last step.",
+    "parent": "BlockNode:00CR5GCSG8002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8005",
+    "@type": "BlockNode",
+    "title": "##### Shell quoting",
+    "text": "A piped `echo \"...\"` silently drops nested double quotes — that is bash, not `aperas`. Bash closes the outer string at the first inner `\"` and reopens after it, dropping both marks with no error from anything. Caught live: `not merely \"wherever convenient\"` had silently become `not merely wherever convenient`. Write content containing double quotes to a file first and `cat` it in.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8006",
+    "@type": "BlockNode",
+    "title": "##### Service state",
+    "text": "`aperas service restart` flushes and reloads from the on-disk mirror — the clean way to confirm what you think landed actually did. `aperas reload -- --discard` throws away in-memory state and re-reads disk, which is the recovery when a failed call has left orphans behind.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG8007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8007",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8007",
+    "text": "If the service has died, an unflushed mutation is gone. Flushing per step (above) is what makes this survivable.",
+    "parent": "BlockNode:00CR5GCSG8006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8008",
+    "@type": "BlockNode",
+    "title": "##### Inspecting raw node state",
+    "text": "`aperas tree`/`backlinks --text`/`unfold` all show a *rendered preview* — title plus truncated, anchor-stripped abstract. For a field they never show (`props`, `tombstonedAt`) or for a block's exact stored text, `aperas show <ref>` goes through the live service, so — unlike a raw-file reader — it always reflects the current in-memory state, not the last flush:",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG8009",
+      "BlockNode:00CR5GCSG800A",
+      "BlockNode:00CR5GCSG800B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8009",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8009",
+    "text": "```bash\naperas show <ref>            # full record, exactly as stored: props, tombstonedAt, parent, children, links, title, text\naperas show <ref> --text     # exact stored text only, undecorated\n```",
+    "parent": "BlockNode:00CR5GCSG8008",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800A",
+    "@type": "BlockNode",
+    "title": "`--text` is the one that matters before an edit",
+    "text": "`--text` is the one that matters before an edit: redirect it to a file, change only what needs changing, and `cat` that back into `aperas update`. That keeps the untouched part of a block byte-identical instead of retyped from a preview — which is what step 2 of the edit loop warns about, since a transcription slip silently tombstones the block and mints a new id.",
+    "parent": "BlockNode:00CR5GCSG8008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800B",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800B",
+    "text": "`scripts/show_node.py` still covers what `aperas show` doesn't — `--grep PATTERN` (full-text search; there is still no `aperas search`) and `--artifact <ref>` (which artifact a block lives in). It reads the **on-disk mirror**, so after an unflushed mutation it reports pre-flush state while `aperas show`/`unfold`/`tree` report the live service's. Flush first, or ask the CLI, when checking something you just changed. Caught live once, before `aperas show` existed: a move and a tombstone were both invisible to the script, producing a confident and wrong conclusion that the move had gone backwards.",
+    "parent": "BlockNode:00CR5GCSG8008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800C",
+    "@type": "BlockNode",
+    "title": "##### `aperas unfold` — bare vs `--view`",
+    "text": "A bare `aperas unfold <ref>` (no `--view` flag at all) is a read-only peek: it resolves and previews `<ref>` without touching any `TreeView` state, matching `aperas tree`'s own no-`--view` default. `--view <name>` (a name actually given) still bootstraps that view — minting the `\"default\"` one and its owning `Profile` on first use — and adds `<ref>` to its `unfolds` set, which is what a later `aperas tree --view <name>` actually renders. `--view` supplied with no name following it behaves the same bootstrap-and-mutate way as naming `\"default\"` explicitly; only the flag's outright absence peeks.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800D",
+    "@type": "BlockNode",
+    "title": "##### Tombstoned nodes are hidden by default, everywhere",
+    "text": "`aperas tree` and `aperas unfold` both hide a tombstoned node — and its whole subtree, since there is nothing live left under it to reveal — from their default output, tagging it `(tombstoned)` only once `--tombstoned` is passed. `aperas unfold` additionally refuses to unfold a tombstoned node directly without the flag, with a clear error, rather than returning something that looks like an empty success. A node reached only through a still-live `Link` elsewhere is exactly as hidden as one reached structurally — the flag controls visibility, not the traversal path that found it.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800E",
+    "@type": "BlockNode",
+    "title": "##### Full-text search — grep the raw store directly",
+    "text": "`show_node.py --grep` works, but a plain `grep -n -C3 '<pattern>' AperasKG/Apeiron/BlockNode.jsonld` is faster and shows more: one command, the complete untruncated `text` (the script's own preview caps at 90 chars), and it also works over `ArtifactNode.jsonld` for an artifact's own title/abstract — which `--grep` never scans, since it only iterates blocks. This is not the shadow-grepping mistake the Philosophy example warns about: `Apeiron/*.jsonld` is the on-disk mirror of the graph itself, not the rendered `artifacts/*.md` projection, so grepping it is reading the source, not the shadow.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG800F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800F",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800F",
+    "text": "A hit is a candidate id, not proof of anything. Confirmed live: a node's field order is `@id, @type, [props], [tombstonedAt], title, text, parent, type, children`, and `props` is variable-length — so `tombstonedAt`'s distance from a `text` match shifts per node, and no fixed `-C<n>` window can be trusted to surface it. Treat every match as an id to hand to `aperas` (`unfold`/`tree`/`backlinks --text`) for the actual live/tombstoned status, parent, and links: grep finds the nodes, `aperas` deals with them.",
+    "parent": "BlockNode:00CR5GCSG800E",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800G",
+    "@type": "BlockNode",
+    "title": "##### Comparing distant docs — the view as a lens",
+    "text": "`--view` is not a bookmark list; it is the mechanism for putting nodes that sit far apart in the tree next to each other. Unfold every doc being compared into one view, then render it once:",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG800H",
+      "BlockNode:00CR5GCSG800J"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800H",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800H",
+    "text": "```bash\nfor f in issues/a.md discussion/b.md design/c.md; do\n  aperas unfold \"$f\" --view <name> --flush\ndone\naperas tree --view <name>\n```",
+    "parent": "BlockNode:00CR5GCSG800G",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800J",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800J",
+    "text": "Run `aperas backlinks <id> --text` on a target before adding a link to it — working across several docs at once makes it easy to add a citation that already exists. And note that a link resolves by its `id/` fragment: the leading relative path is for the human reader, so a stale path still resolves correctly while misleading anyone who reads it. Observed live renaming a concern — every fragment kept working, every path string had to be fixed by hand.",
+    "parent": "BlockNode:00CR5GCSG800G",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800K",
+    "@type": "BlockNode",
+    "title": "##### `aperas tree` names the node it started from, once — not every line",
+    "text": "The first line of any `aperas tree` render is a breadcrumb, `aperas://tree/<path>` — the walkable path of the node the command was actually pointed at (`.` if none given), directly reusable as a `<ref>` elsewhere with no separate `aperas path` call. It appears exactly once, at the top: every line under it is already relative to that node by construction (that is what a tree render is), so repeating the prefix on each one would say nothing new. Omitted, not shown broken, when the node's own path can't be walked.",
+    "parent": "BlockNode:00CR5GCSF800A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG800M",
+      "BlockNode:00CR5GCSG800N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800M",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800M",
+    "text": "`--view` reuses the same idea at a second place it's actually needed: when a link escapes its owner's own viewcone into a nested one (Aperas-treeview-design.md §13 — the target is unfolded independently, and the link, not the target's own structural position, wins canonical placement), everything under that link is now relative to *it*, not to the render's original apex. That position gets its own one-time breadcrumb too, indented to match, for the same reason the apex gets one. An ordinary in-cone link (target already reachable from the apex the normal way) or a \"this is superseded, see elsewhere\" pointer line needs neither — nothing changes what \"here\" means at those positions.",
+    "parent": "BlockNode:00CR5GCSG800K",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800N",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800N",
+    "text": "---",
+    "parent": "BlockNode:00CR5GCSG800K",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800P",
+    "@type": "BlockNode",
+    "title": "#### Reference",
+    "parent": "BlockNode:00CR5GCSEG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG800Q",
+      "BlockNode:00CR5GCSG800R",
+      "BlockNode:00CR5GCSG800S",
+      "BlockNode:00CR5GCSG800T",
+      "BlockNode:00CR5GCSG800V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800Q",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSG800Q:props:StringProp:00CR5GCWRG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSG800Q:props:StringProp:00CR5GCWRG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSG800Q",
+    "text": "`AperasKG/artifacts/design/linking.md` — canonical spec for addressing, anchors and wikilink syntax. Read it when a link isn't resolving and the reason isn't obvious.",
+    "parent": "BlockNode:00CR5GCSG800P",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800R",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800R",
+    "text": "`AperasKG/artifacts/design/documentation.md` — the concern taxonomy and the Freeflow document shape.",
+    "parent": "BlockNode:00CR5GCSG800P",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800S",
+    "@type": "BlockNode",
+    "title": "`AperasKG/artifacts/design/aperas-skill.md` — this skill's own design",
+    "text": "`AperasKG/artifacts/design/aperas-skill.md` — this skill's own design: the four levels, citation direction, and how items enter (incident → freeflow → confirmed → promoted to the level that explains it).",
+    "parent": "BlockNode:00CR5GCSG800P",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800T",
+    "@type": "BlockNode",
+    "title": "`archive/Aperas-design.md` — the founding philosophy",
+    "text": "`archive/Aperas-design.md` — the founding philosophy: Apeiron/Aperas/Peras, deep read and deep write, Meta-Aperas.",
+    "parent": "BlockNode:00CR5GCSG800P",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800V",
+    "@type": "BlockNode",
+    "title": "##### Open tool gaps",
+    "text": "Tracked in the graph rather than accumulating here: `aperas resolve`'s title-ambiguity check not filtering tombstoned candidates, so a dead holder can still make a live path read as ambiguous (`discussion/core.md`'s Freeflow). The link-integrity drift check this list used to name as missing is built and live (`aperas check-links`, see *Mechanics* — `issues/linking.md`); the `verify.ts` id-anchor emission idempotency failure this list used to name as unreproduced is also fixed and passing (`discussion/core.md`).",
+    "parent": "BlockNode:00CR5GCSG800P",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800W",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator/SKILL.md",
+    "parent": "BlockNode:00CR5GCSEG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG800X",
+      "BlockNode:00CR5GCSG800Y",
+      "BlockNode:00CR5GCSG800Z",
+      "BlockNode:00CR5GCSG8011",
+      "BlockNode:00CR5GCSGG000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800X",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG800X",
+    "text": "```\n---\nname: aperas-orchestrator\ndescription: >-\n  The orchestrator role in Aperas multi-agent work: the session talking with the user. Records\n  the conversation as discussion freeflow and runs the task loop by handing off to the\n  aperas-grapher and aperas-coder subagents through threads and views. Load with the base\n  `aperas` skill in any session Aperas manages, unless you were started as a subagent.\n---\n```",
+    "parent": "BlockNode:00CR5GCSG800W",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800Y",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.0**. You are the orchestrator. The base `aperas` skill applies in full; this adds what only the orchestrator does. You talk with the user and run the loop. You do not do the graph work or the code work: you write `discussion` freeflow recording the conversation, and your own Ask nodes in the two threads — nothing else in the graph, and no source code.",
+    "parent": "BlockNode:00CR5GCSG800W",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG800Z",
+    "@type": "BlockNode",
+    "title": "#### Every exchange with the user",
+    "text": "Record it in the topic's discussion `## Freeflow` before acting on it: what was asked, what was decided, what was corrected, and why. The conversation can be compacted or cut off at any point, and a decision that only ever existed as chat is gone the moment that happens, with no way to resume or hand it off from what is on disk. Freeflow is raw material — record as you go, not once things are resolved; the grapher organizes and promotes it.",
+    "parent": "BlockNode:00CR5GCSG800W",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG8010"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8010",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8010",
+    "text": "The user's view is `<p>-<topic>`, zoomed onto the topic discussion's `## Dashboard`. Point the user at it when the state of the work is easier to see than to tell.",
+    "parent": "BlockNode:00CR5GCSG800Z",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8011",
+    "@type": "BlockNode",
+    "title": "#### Running a task",
+    "parent": "BlockNode:00CR5GCSG800W",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSG8012",
+      "BlockNode:00CR5GCSG8013",
+      "BlockNode:00CR5GCSG8014",
+      "BlockNode:00CR5GCSG8015",
+      "BlockNode:00CR5GCSG8016",
+      "BlockNode:00CR5GCSG8017",
+      "BlockNode:00CR5GCSG8018",
+      "BlockNode:00CR5GCSG8019",
+      "BlockNode:00CR5GCSG801A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8012",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSG8012:props:StringProp:00CR5GCWS0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSG8012:props:StringProp:00CR5GCWS0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSG8012",
+    "text": "**Open it.** In both threads, a `## <topic>` heading if the topic is new, then a `### <task>` heading for the task.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8013",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8013",
+    "text": "**Grapher first, always.** An Ask to survey the graph for the task, citing the freeflow items that define it. Zoom `<p>-orchestrator-grapher`; message the grapher.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8014",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8014",
+    "text": "**Read the Report** (`aperas tree --view <p>-grapher-orchestrator`). Ask follow-ups as new turns until it is clear.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8015",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8015",
+    "text": "**Hand to the coder.** An Ask citing the grapher's Report and the specific nodes the task turns on. Zoom `<p>-orchestrator-coder`; message the coder.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8016",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8016",
+    "text": "**Verify** the coder's result yourself — the diff, the tests — before accepting it. A fix is a new Ask, not a correction you make.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8017",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8017",
+    "text": "**Back to the grapher** to file the result.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8018",
+    "@type": "BlockNode",
+    "title": "**Repeat 4–6** for as many rounds as the task takes",
+    "text": "**Repeat 4–6** for as many rounds as the task takes: survey, file, change, file.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG8019",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG8019",
+    "text": "**Finish.** Ask the grapher for the finishing turn, then report to the user.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSG801A",
+    "@type": "BlockNode",
+    "title": "00CR5GCSG801A",
+    "text": "Nothing is done until the grapher has filed it. A code change that landed with nothing recorded is invisible from every side that can be consulted.",
+    "parent": "BlockNode:00CR5GCSG8011",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG000",
+    "@type": "BlockNode",
+    "title": "#### Route every step, however small",
+    "text": "You will often see a fix you could make yourself faster than you could write the Ask for it — a stale sentence in a design block, a one-line code change. Route it anyway: the graph fix to the grapher, the code change to the coder. Doing it yourself skips the steps the owning role would have run around it — the backlink check and provenance for a graph write, the survey and the recorded result for a code change — and those skipped steps are exactly what this split exists to stop. There is no size below which this stops applying: every step that has been dropped looked too small to route at the time.",
+    "parent": "BlockNode:00CR5GCSG800W",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG001",
+    "@type": "BlockNode",
+    "title": "### aperas-grapher/SKILL.md",
+    "parent": "BlockNode:00CR5GCSEG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGG002",
+      "BlockNode:00CR5GCSGG003",
+      "BlockNode:00CR5GCSGG004",
+      "BlockNode:00CR5GCSGG00B",
+      "BlockNode:00CR5GCSGG00M",
+      "BlockNode:00CR5GCSH0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG002",
+    "text": "```\n---\nname: aperas-grapher\ndescription: >-\n  The grapher role in Aperas multi-agent work: the only role that writes the graph at large —\n  deep read, deep write, every promotion, thread lifecycle. Preloaded by the aperas-grapher\n  subagent; load it only when acting as grapher. Requires the base `aperas` skill.\n---\n```",
+    "parent": "BlockNode:00CR5GCSGG001",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG003",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.0**. You are the grapher. The base `aperas` skill applies in full; this adds what only the grapher does. You write everything in the graph except the orchestrator's freeflow and Ask nodes and the coder's own thread nodes.",
+    "parent": "BlockNode:00CR5GCSGG001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG004",
+    "@type": "BlockNode",
+    "title": "#### Every invocation",
+    "parent": "BlockNode:00CR5GCSGG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGG005",
+      "BlockNode:00CR5GCSGG006",
+      "BlockNode:00CR5GCSGG007",
+      "BlockNode:00CR5GCSGG008",
+      "BlockNode:00CR5GCSGG009",
+      "BlockNode:00CR5GCSGG00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG005",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSGG005:props:StringProp:00CR5GCWSR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSGG005:props:StringProp:00CR5GCWSR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSGG005",
+    "text": "**Read your input.** `aperas tree --view <p>-orchestrator-grapher`, plus any node the message names. The view's root is this turn's Ask.",
+    "parent": "BlockNode:00CR5GCSGG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG006",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG006",
+    "text": "**Recover context from your thread, not from memory.** The current task's earlier turns in `.threads/grapher.md` — your own subturns and Reports — are everything you know about this task.",
+    "parent": "BlockNode:00CR5GCSGG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG007",
+    "@type": "BlockNode",
+    "title": "**Do the turn's work** (below), writing subturns as you go",
+    "text": "**Do the turn's work** (below), writing subturns as you go: what you looked at, what you concluded, and the essence of each result.",
+    "parent": "BlockNode:00CR5GCSGG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG008",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG008",
+    "text": "**Report.** A Report node citing what you found or changed and any open question; zoom `<p>-grapher-orchestrator` onto it; one or two lines of chat naming the view and anything the orchestrator has to decide.",
+    "parent": "BlockNode:00CR5GCSGG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG009",
+    "@type": "BlockNode",
+    "title": "**Stage** what you changed in `AperasKG` (base",
+    "text": "**Stage** what you changed in `AperasKG` (base: *Stage each verified step*).",
+    "parent": "BlockNode:00CR5GCSGG004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00A",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00A",
+    "text": "A turn is not done until step 4 is. Work without a Report is invisible to every later turn, yours included.",
+    "parent": "BlockNode:00CR5GCSGG004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00B",
+    "@type": "BlockNode",
+    "title": "#### The three kinds of turn",
+    "parent": "BlockNode:00CR5GCSGG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGG00C",
+      "BlockNode:00CR5GCSGG00D",
+      "BlockNode:00CR5GCSGG00E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00C",
+    "@type": "BlockNode",
+    "title": "##### Survey — the first turn of every task",
+    "text": "Deep read for the task at hand: enter both ways (base: *Entering the corpus*), and climb every pinpointed node until it reaches `design`. The Report cites the governing design blocks, the open issues, the planned items and the prior history the task touches, and names any drift found between them. The coder starts from this Report, so it has to be complete enough to start from without searching again — a survey that leaves the coder re-deriving it has pushed your work onto the role least equipped for it.",
+    "parent": "BlockNode:00CR5GCSGG00B",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00D",
+    "@type": "BlockNode",
+    "title": "##### Filing — after each coder turn",
+    "text": "Read the coder's latest Report and the Work under it in `.threads/coder.md`. Record what the coder found where it belongs: into the task's `discussion` freeflow first, then promoted into `issues`/`history`/`design` once it has earned a home (*Discussion is where meta-info is born*, below). Copy content up; never link into a thread. Where the coder reports code and design disagreeing, that discrepancy is itself the finding — record it, and fix whichever side is stale.",
+    "parent": "BlockNode:00CR5GCSGG00B",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00E",
+    "@type": "BlockNode",
+    "title": "##### Finishing — the last turn of a task",
+    "parent": "BlockNode:00CR5GCSGG00B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGG00F",
+      "BlockNode:00CR5GCSGG00G",
+      "BlockNode:00CR5GCSGG00H",
+      "BlockNode:00CR5GCSGG00J",
+      "BlockNode:00CR5GCSGG00K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00F",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSGG00F:props:StringProp:00CR5GCWT0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSGG00F:props:StringProp:00CR5GCWT0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSGG00F",
+    "text": "**Promote.** Thread content that recurs across tasks goes to `concepts.md`; anything more settled goes to the formal doc that owns it, with provenance placed at the origin (*Provenance at the origin*, below).",
+    "parent": "BlockNode:00CR5GCSGG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00G",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00G",
+    "text": "**Dashboard.** Bring the topic's discussion `## Dashboard` up to date, so the user's view still shows the topic's current state.",
+    "parent": "BlockNode:00CR5GCSGG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00H",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00H",
+    "text": "**Check.** `aperas check-links` once, over the whole batch.",
+    "parent": "BlockNode:00CR5GCSGG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00J",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00J",
+    "text": "**Project and stage** every artifact the task changed.",
+    "parent": "BlockNode:00CR5GCSGG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00K",
+    "@type": "BlockNode",
+    "title": "**Prune** only if a thread warned about its size cap",
+    "text": "**Prune** only if a thread warned about its size cap: tombstone finished tasks whose content has been promoted, with an ordinary `remove`. Never the current task.",
+    "parent": "BlockNode:00CR5GCSGG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00M",
+    "@type": "BlockNode",
+    "title": "#### Writing the graph",
+    "parent": "BlockNode:00CR5GCSGG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGG00N",
+      "BlockNode:00CR5GCSGR005",
+      "BlockNode:00CR5GCSGR00D",
+      "BlockNode:00CR5GCSGR00H",
+      "BlockNode:00CR5GCSGR00M",
+      "BlockNode:00CR5GCSH0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00N",
+    "@type": "BlockNode",
+    "title": "##### The edit loop",
+    "text": "This is the shape of nearly every real task, not only the ones that reach an edit. **Three things put you in the loop:**",
+    "parent": "BlockNode:00CR5GCSGG00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGG00P",
+      "BlockNode:00CR5GCSGG00Q",
+      "BlockNode:00CR5GCSGG00R",
+      "BlockNode:00CR5GCSGG00S"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00P",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSGG00P:props:StringProp:00CR5GCWT8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSGG00P:props:StringProp:00CR5GCWT8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSGG00P",
+    "text": "**About to read a concern.** Traversal, not `Read`.",
+    "parent": "BlockNode:00CR5GCSGG00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00Q",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00Q",
+    "text": "**About to read or change source code this graph carries a concern about.** See *Source the graph already has a concern about*, below.",
+    "parent": "BlockNode:00CR5GCSGG00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00R",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00R",
+    "text": "**About to change the graph.** The steps below, in full.",
+    "parent": "BlockNode:00CR5GCSGG00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00S",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGG00S",
+    "text": "The opening is the same in all three cases; only the tail differs. A traversal-only task ends after step 1, a source change ends by recording what it found, and a graph change runs the whole thing.",
+    "parent": "BlockNode:00CR5GCSGG00N",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CR5GCSGG00T",
+      "BlockNode:00CR5GCSGR000",
+      "BlockNode:00CR5GCSGR001",
+      "BlockNode:00CR5GCSGR002",
+      "BlockNode:00CR5GCSGR003",
+      "BlockNode:00CR5GCSGR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGG00T",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSGG00T:props:StringProp:00CR5GCWT8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSGG00T:props:StringProp:00CR5GCWT8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSGG00T",
+    "text": "**Orient before touching anything — content first, context when the decision is hard.** Start with `aperas unfold <ref>` for children and forward links. Escalate to `aperas backlinks <id> --text` for context. Editing always qualifies, because step 5 cannot work without it.",
+    "parent": "BlockNode:00CR5GCSGG00S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR000",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR000",
+    "text": "**Locate the smallest block that actually changed.** Not the artifact, not the enclosing heading: the leaf whose content is wrong. `aperas update`/`aperas insert` work at any level, and targeting something larger means hand-reconstructing every unchanged sibling exactly — where one transcription slip silently tombstones that block and mints a fresh id in its place. **Never reconstruct by copying from an already-*projected* file**: it has anchor tags spliced in that are a projection artifact, not content, and piping them back bakes them into the block's stored text as prose.",
+    "parent": "BlockNode:00CR5GCSGG00S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR001",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR001",
+    "text": "**Edit graph-first.** Pipe replacement content to `aperas update <id>`; `aperas insert` for genuinely new content; a stdin-less `insert` to *move* a node rather than recreate it. Never a direct edit of the file on disk followed by re-ingesting — that is `kg-doc-ingest`'s disk-first direction, correct only for text not yet in the graph. (Caught live by direct user callout: doing this once for a wikilink fix, then having to redo it through `aperas update` to actually fix the workflow.)",
+    "parent": "BlockNode:00CR5GCSGG00S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR002",
+    "text": "**Verify by traversal, not by the summary line.** A reconcile count reports what the command *believes* it did. Proof is a backlink that actually resolves, or `aperas project <path> --dry-run` where the content is actually visible. A push can silently match new content onto an already-tombstoned node's id without reviving it, so it stays invisible while the summary reports it as added — caught live when a Resolved section rendered one fewer bullet than was pushed. Links are the sharpest instance of this, not a special case: a write whose text carries a real citation can report `\"N resolved\"` and still leave `.links` empty afterward, with nothing else — not the summary, not a plain preview, not the projected file — showing any sign of it. Confirmed live twice in one session, by two unrelated mechanisms: a graph-wide staleness sweep found 9 nodes whose links had silently never resolved at all, and a separate incident later the same session watched four freshly-`\"resolved\"` links vanish from nodes that had just been moved and re-texted. Treat a link-bearing write as unverified until `aperas show <id>` (or `aperas backlinks <id> --text` from the other end) actually shows the `Link`, the same way step 6 already treats a plain content write as unverified until traversal confirms it. See `issues/linking.md` for the open, still-uninvestigated half of this.",
+    "parent": "BlockNode:00CR5GCSGG00S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR003",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR003",
+    "text": "**Deep write — follow what the change made stale, and link what was never linked.** Check backlinks and forward links; update what now disagrees — and add the citation where the change has just made a relationship real. Closing an issue that a design or a fix resolves means linking the two to each other before moving on, in both directions, not only the one that happened to get written first. This is the per-edit instance of dense linking, and the only moment it is cheap: you are already standing where the missing link is visible.",
+    "parent": "BlockNode:00CR5GCSGG00S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR004",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR004",
+    "text": "**Project, then stage.** `aperas project <path> --flush`, then `git add` immediately.",
+    "parent": "BlockNode:00CR5GCSGG00S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR005",
+    "@type": "BlockNode",
+    "title": "##### Preserve identity — against any operation that can tombstone a node you meant to keep",
+    "text": "Three different calls reach the same destruction, and only one of them looks like a delete:",
+    "parent": "BlockNode:00CR5GCSGG00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGR006",
+      "BlockNode:00CR5GCSGR007",
+      "BlockNode:00CR5GCSGR008",
+      "BlockNode:00CR5GCSGR009",
+      "BlockNode:00CR5GCSGR00A",
+      "BlockNode:00CR5GCSGR00B",
+      "BlockNode:00CR5GCSGR00C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSGR006:props:StringProp:00CR5GCWTG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSGR006:props:StringProp:00CR5GCWTG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSGR006",
+    "text": "`remove` + `insert` — the obvious one.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR007",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR007",
+    "text": "`aperas update` on a **parent heading** — reconciliation tombstones and remints the subtree as a *side effect*; nothing in the intent resembles deleting, and the word `remove` is never typed.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR008",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR008",
+    "text": "a full-list push whose items **change depth** — matching is defeated entirely, so every id is recreated.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR009",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR009",
+    "text": "`aperas insert <node-id> --after/--before <anchor>` with **no stdin piped** repositions that exact node — the anchor's current parent becomes its new parent, cross-parent moves included. It preserves the id, every backlink to it, and its place in history. Reach for anything else only when the wording is changing enough that it is genuinely not the same item any more — and even then, a move followed by a separate `--text-only` edit keeps the id while changing only what actually changed.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00A",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00A",
+    "text": "A **type or heading-depth change** used to be a fourth way into that destruction, and the least obvious: every ordinary write pins `type` to the target's existing one and refuses a depth change outright, so converting a heading into a list item had no route but `remove` + `insert`. `aperas retype <ref> --to <type>` now does it in place with identity intact (*Mechanics*). Nothing else here relaxes — it is one narrow migration channel, not a licence to restructure through ordinary edits.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00B",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00B",
+    "text": "Zero backlinks is not a licence. The rule also protects a node's place in history, which backlink count has no bearing on.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00C",
+    "@type": "BlockNode",
+    "title": "Caught live twice",
+    "text": "Caught live twice: promoting two findings into a new section via `remove` + `insert` left two needlessly tombstoned orphans for a relocation a plain move would have handled with zero churn; and regrouping a flat 17-item list under three new sub-headings as a single parent-heading `update` returned `0 matched, 20 added, 17 removed`. Redone as create-headings-with-anchors, then move each item, then set the run-leader props per batch — all 17 ids survived. See *Adding an item to an existing list* (Mechanics) for the matching promise this rule constrains.",
+    "parent": "BlockNode:00CR5GCSGR005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00D",
+    "@type": "BlockNode",
+    "title": "##### Provenance at the origin",
+    "text": "Base's *Every claim carries its source* applies to you at its strongest, since the formal docs are yours alone to write. Direction decides which end the link lives at, never whether it exists. When a finding crystallizes *up* out of `discussion` into `issues`/`design`/`planning`/`history`, the new entry cannot cite the discussion entry it came from — that is a down-citation. So the link is added at the **origin** instead: the discussion entry gains \"promoted to `issues/<concern>.md`\" with a real wikilink, pointing up. The provenance then surfaces from the new entry's side for free, as a backlink.",
+    "parent": "BlockNode:00CR5GCSGG00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGR00E",
+      "BlockNode:00CR5GCSGR00F",
+      "BlockNode:00CR5GCSGR00G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00E",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00E",
+    "text": "**This is a property of the claim, not a step in the promotion ritual.** An edit that adds supporting evidence to an entry already sitting in the doc is not a promotion, and is covered exactly the same. Caught live: a planning entry was edited to cite three recorded observations and came out with `links: 0` — complete-looking from its own side, caught only when a reader ran `backlinks` on it. The same unguarded gap passed an inferred version number written as recorded fact, and a paraphrase set in quotation marks as though it were a logged prompt. Every mechanical check in this file passed on that edit; all of them ask whether the write landed, none asks whether what was written is true.",
+    "parent": "BlockNode:00CR5GCSGR00D",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00F",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00F",
+    "text": "A formal doc whose entries paraphrase confirmed findings without linking them reads as complete from its own side — nothing about it looks unfinished — while `aperas backlinks` on every one of its entries returns nothing, and the provenance survives only in the head of whoever filed it. Caught live: seven issues compiled into a new concern doc from findings recorded across four different discussion docs, every origin left unlinked, noticed only by direct user callout.",
+    "parent": "BlockNode:00CR5GCSGR00D",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00G",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00G",
+    "text": "This is the topology half of crystallization, stated at Philosophy above: a relationship first mediated by a discussion node becomes a direct citation once it proves load-bearing.",
+    "parent": "BlockNode:00CR5GCSGR00D",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00H",
+    "@type": "BlockNode",
+    "title": "##### The dense-linking pass",
+    "text": "Occasionally, and deliberately, work the relationships instead of the content. Bring distant nodes into one view, then take each pair in turn and ask whether a real, nameable dependency exists. If one does and a plain citation carries it, link directly, respecting direction. If stating it takes judgment, write a mediating discussion node that cites both ends and holds the reasoning in its own text.",
+    "parent": "BlockNode:00CR5GCSGG00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGR00J",
+      "BlockNode:00CR5GCSGR00K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00J",
+    "@type": "BlockNode",
+    "title": "The counterweight matters as much as the practice",
+    "text": "The counterweight matters as much as the practice: **do not manufacture links.** Two docs sharing a corpus, or sharing vocabulary, is not a dependency. The test is whether you can say in one sentence what one owes the other. A pass that adds twenty weak links has made the graph harder to traverse, not denser — deep read now descends into noise.",
+    "parent": "BlockNode:00CR5GCSGR00H",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00K",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00K",
+    "text": "Run it when a concern set has grown without anyone standing back from it, when two concerns keep coming up together, or when one finding turns out to have been recorded in several places independently. That last case is itself the evidence: the relationship existed and nothing captured it.",
+    "parent": "BlockNode:00CR5GCSGR00H",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00M",
+    "@type": "BlockNode",
+    "title": "##### Discussion is where meta-info is born",
+    "text": "Not a sink for what didn't fit elsewhere. `discussion` is the Apeiron-equivalent concern: unbound, schema-free, where every comment, assertion and reasoning trace originates before anything is decided about where — or whether — it belongs elsewhere. `design`/`issues`/`planning`/`history` are Peras: typed projections that specific *kinds* of content get promoted into, once a dedicated home for that kind has actually been designed. Most things never need promoting at all.",
+    "parent": "BlockNode:00CR5GCSGG00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSGR00N",
+      "BlockNode:00CR5GCSH0000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSGR00N",
+    "@type": "BlockNode",
+    "title": "00CR5GCSGR00N",
+    "text": "So something surfacing mid-task that isn't what the task is about — an engine bug found while migrating docs, say — starts in *this* task's discussion doc and stays there for as long as no dedicated home exists, possibly indefinitely. The test is not \"is there an existing doc this could plausibly belong to\" but \"has a dedicated home for this actually been designed yet\". Confirmed wrong live: two parser bugs were filed straight into `issues/packaging.md` on the assumption a finding needs an immediate formal home — wrong twice over, since packaging wasn't even the right eventual concern, and since reaching for promotion skipped the point of having a discussion sink at all.",
+    "parent": "BlockNode:00CR5GCSGR00M",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0000",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH0000",
+    "text": "See `design/documentation.md` for the concern taxonomy and the Freeflow document shape (an unbounded *list*, not a growing set of headings).",
+    "parent": "BlockNode:00CR5GCSGR00M",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0001",
+    "@type": "BlockNode",
+    "title": "##### The end-of-batch link check",
+    "text": "**At the end of a batch — not after each step — run `aperas check-links` once before handing back.** The per-write check the service runs on its own only sweeps the artifact that was written; this is the pass that catches the damage that lands *elsewhere* — an edit in artifact A breaking a citation that lives in artifact B, which nothing scoped to A can see. It costs about 0.6s against the whole corpus, so the reason to run it once per batch rather than per edit is noise, not expense.",
+    "parent": "BlockNode:00CR5GCSGG00M",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0002",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH0002",
+    "text": "The other two link checks need nothing from you, and that is the point — the two recorded losses were both found by a human happening to look, never by a check that fired. The service now sweeps the written artifact after every `update`/`insert`/`remove` and reports anything that write resolved but failed to persist, right under the write's own `Links: N resolved…` line; and it sweeps the whole corpus at startup and on `reload`, carrying any finding on *every* later response until it clears. When either one speaks up, it is describing a link that already looks fine everywhere else — treat it as real and re-run the write (which has fixed it before) or `aperas check-links --repair`.",
+    "parent": "BlockNode:00CR5GCSH0001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0003",
+    "@type": "BlockNode",
+    "title": "#### Mechanics only the grapher needs",
+    "parent": "BlockNode:00CR5GCSGG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH0004",
+      "BlockNode:00CR5GCSH0008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0004",
+    "@type": "BlockNode",
+    "title": "##### Checking the skill against its own record",
+    "text": "`SKILL.md` is a *generative* projection of its concern — authored from design rather than serialized by a command — so unlike an `aperas project` artifact it can drift from its source with nothing detecting it. `scripts/skill_drift.py` compares the file against the graph's record of it (the latest snapshot plus the deltas above it):",
+    "parent": "BlockNode:00CR5GCSH0003",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH0005",
+      "BlockNode:00CR5GCSH0006",
+      "BlockNode:00CR5GCSH0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0005",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH0005",
+    "text": "```bash\nscripts/skill_drift.py              # both directions\nscripts/skill_drift.py --added      # written into the file, never recorded\nscripts/skill_drift.py --dropped    # recorded, no longer in the file\n```",
+    "parent": "BlockNode:00CR5GCSH0004",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0006",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH0006",
+    "text": "A delta entry that replaces rather than adds carries a `Supersedes: [title](#id/BlockNode:...)` line naming the item it retires, which is what lets the check tell a deliberate rewrite from a silent loss.",
+    "parent": "BlockNode:00CR5GCSH0004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0007",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH0007",
+    "text": "Run it after editing this file, before considering the edit done. *Added* is the check that matters most — an edit made and not recorded is invisible from the file's own side, which is how three separate additions in one session went unrecorded until a reader noticed. *Dropped* catches the opposite: v1 silently lost one of v0 item 18's three triggers, and nothing flagged it. The *added* side compares each unit in full — one unit per list item, since a list containing even one superseded item no longer appears contiguously in any single record — so a rewording anywhere in a unit is caught. The *dropped* side still matches on a prefix and is correspondingly weaker.",
+    "parent": "BlockNode:00CR5GCSH0004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0008",
+    "@type": "BlockNode",
+    "title": "##### `aperas check-links` — the standing link-integrity sweep",
+    "text": "Answers exactly the question dense linking depends on and nothing else routinely checks: does every internal-style reference a live block's text actually names (`[[code]]`, `aperas://...`, `path#fragment`) have a matching resolved `Link` in that block's own `.links`? `aperas check-links` reports discrepancies; `aperas check-links --repair` re-resolves and flushes them in the same call. It resolves each occurrence for real (the same dispatch `aperas update`/`aperas insert` themselves use, read-only here — never mints a placeholder as a side effect of a scan) rather than guessing from the text, so it correctly stays silent on a code that simply doesn't resolve yet (routine, or already tracked separately as a dangling reference) and only flags a code that resolves to a live target with nothing to show for it in `.links` — the exact, previously-invisible failure mode this tool exists for.",
+    "parent": "BlockNode:00CR5GCSH0003",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0009",
+    "@type": "BlockNode",
+    "title": "### aperas-coder/SKILL.md",
+    "parent": "BlockNode:00CR5GCSEG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH000A",
+      "BlockNode:00CR5GCSH000B",
+      "BlockNode:00CR5GCSH000C",
+      "BlockNode:00CR5GCSH000K",
+      "BlockNode:00CR5GCSH000T",
+      "BlockNode:00CR5GCSH000V",
+      "BlockNode:00CR5GCSH8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000A",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000A",
+    "text": "```\n---\nname: aperas-coder\ndescription: >-\n  The coder role in Aperas multi-agent work: surveys and changes source code, reads the graph\n  for context, writes only to its own thread. Preloaded by the aperas-coder subagent; load it\n  only when acting as coder. Requires the base `aperas` skill.\n---\n```",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000B",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v3.0**. You are the coder. The base `aperas` skill applies in full; this adds what only the coder does. You change source code. You read the graph as much as the work needs, and you write to exactly one place in it: your own nodes in `.threads/coder.md`.",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000C",
+    "@type": "BlockNode",
+    "title": "#### Every invocation",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH000D",
+      "BlockNode:00CR5GCSH000E",
+      "BlockNode:00CR5GCSH000F",
+      "BlockNode:00CR5GCSH000G",
+      "BlockNode:00CR5GCSH000H",
+      "BlockNode:00CR5GCSH000J"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000D",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSH000D:props:StringProp:00CR5GCWVG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSH000D:props:StringProp:00CR5GCWVG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSH000D",
+    "text": "**Read your input.** `aperas tree --view <p>-orchestrator-coder`, plus any node the message names. The Ask cites the grapher's survey of this task: start from it, not from a search of your own.",
+    "parent": "BlockNode:00CR5GCSH000C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000E",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000E",
+    "text": "**Recover context from your thread, not from memory.** The current task's earlier turns in `.threads/coder.md` are everything you know about this task.",
+    "parent": "BlockNode:00CR5GCSH000C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000F",
+    "@type": "BlockNode",
+    "title": "**Do the turn's work**, writing subturns as you go",
+    "text": "**Do the turn's work**, writing subturns as you go: the files that own the behavior and what they do, the exact test or build output that matters, each error, each decision and why. The next turn starts with nothing but these.",
+    "parent": "BlockNode:00CR5GCSH000C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000G",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000G",
+    "text": "**Report.** A Report node listing the files changed, what the work found, anywhere the code and the graph disagree, and every question the turn raised (next section); citing the graph nodes the work bears on. Zoom `<p>-coder-orchestrator` onto it; one or two lines of chat naming the view.",
+    "parent": "BlockNode:00CR5GCSH000C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000H",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000H",
+    "text": "**Stage** the code changes you verified — `git add`, never `git commit`.",
+    "parent": "BlockNode:00CR5GCSH000C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000J",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000J",
+    "text": "A turn is not done until step 4 is.",
+    "parent": "BlockNode:00CR5GCSH000C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000K",
+    "@type": "BlockNode",
+    "title": "#### Ask back when unsure",
+    "text": "Stop and ask rather than pick, whenever:",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH000M",
+      "BlockNode:00CR5GCSH000N",
+      "BlockNode:00CR5GCSH000P",
+      "BlockNode:00CR5GCSH000Q",
+      "BlockNode:00CR5GCSH000R",
+      "BlockNode:00CR5GCSH000S"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000M",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSH000M:props:StringProp:00CR5GCWVR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSH000M:props:StringProp:00CR5GCWVR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSH000M",
+    "text": "the Ask can be read more than one way, and the readings lead to different code;",
+    "parent": "BlockNode:00CR5GCSH000K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000N",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000N",
+    "text": "the change needs something the Ask didn't name — a public API, a schema, another package, a test's expectations;",
+    "parent": "BlockNode:00CR5GCSH000K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000P",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000P",
+    "text": "the code contradicts the grapher's survey or the design it cites;",
+    "parent": "BlockNode:00CR5GCSH000K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000Q",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000Q",
+    "text": "there are two reasonable approaches and the choice between them is a design decision;",
+    "parent": "BlockNode:00CR5GCSH000K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000R",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000R",
+    "text": "the change is growing well past what the Ask implied.",
+    "parent": "BlockNode:00CR5GCSH000K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000S",
+    "@type": "BlockNode",
+    "title": "Put it in the Report as **Question**",
+    "text": "Put it in the Report as **Question**: what you found, why it blocks, and the options as you see them — then end the turn, with whatever you did get done recorded and staged. Don't carry on with a provisional choice \"to save a round trip\": the orchestrator may take it to the user, and code built on a guess is the most expensive thing a turn can hand back. This is not a failure mode. It is half of what makes this role different from an ordinary subagent; the other half is the subturn record.",
+    "parent": "BlockNode:00CR5GCSH000K",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000T",
+    "@type": "BlockNode",
+    "title": "#### A survey turn changes no code",
+    "text": "The first coder turn of a task is usually a survey: read the code the Ask points at, map where the behavior lives, and report that map. The grapher files it before any change is made, which is what lets the change turn start from a recorded picture instead of the one in your context.",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "heading",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000V",
+    "@type": "BlockNode",
+    "title": "#### The graph already has a concern about this code",
+    "text": "A task framed as \"fix this bug in `reconcile.ts`\" is not outside this skill. The graph very likely already holds issues, design, planning and history for that exact file, written by someone who will not be there to tell you. The obligation runs at **both** ends, not just the front.",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH000W",
+      "BlockNode:00CR5GCSH000X",
+      "BlockNode:00CR5GCSH000Y",
+      "BlockNode:00CR5GCSH000Z",
+      "BlockNode:00CR5GCSH0010",
+      "BlockNode:00CR5GCSH0011",
+      "BlockNode:00CR5GCSH8000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000W",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000W",
+    "text": "**Before**, and before reading the source rather than after forming a theory about it:",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000X",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000X",
+    "text": "```bash\ngrep -n 'reconcile.ts' AperasKG/Apeiron/BlockNode.jsonld   # candidate ids\naperas unfold <id> --view <task>                           # then work them in the graph\naperas unfold <design-block>                               # keep climbing — stop at design, not here\n```",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000Y",
+    "@type": "BlockNode",
+    "title": "What turns up changes the work",
+    "text": "What turns up changes the work: a root cause already identified, a fix already ordered, an approach already tried and rejected for a reason nobody is going to repeat to you.",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH000Z",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH000Z",
+    "text": "The third line is the half that gets dropped. A keyword lands you wherever it happens to match, which for a concrete identifier is nearly always `discussion` — the tier where concrete identifiers live. Stopping there gives you the reasoning trail and none of the settled rule, so whatever the code does reads as correct by default. Follow the landed node's forward links up until you reach `design`, and compare what it states against what the code does: that comparison is the only thing that can tell a gap from agreement (*Entering the corpus*, Orientation).",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0010",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH0010",
+    "text": "**After**, record what the work found. A fix that lands with nothing written is invisible from every side that can be consulted, because doing the work and recording it are two separate acts and only the second is visible from inside (Philosophy, above).",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH0011",
+    "@type": "BlockNode",
+    "title": "Confirmed live three times",
+    "text": "Confirmed live three times: two sessions investigated `reconcile.ts`/`node.ts` by plain file reads with no traversal and no skill load at all; a third loaded the skill on turn one, consented to it, and still read the entire task out of the projections before editing code. The first two were a trigger failure and are fixed; the third is why this section exists.",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH8000",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH8000",
+    "text": "In this role, \"record what the work found\" means your Work and Report nodes. The grapher files them; your job is to make them complete enough to file.",
+    "parent": "BlockNode:00CR5GCSH000V",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH8001",
+    "@type": "BlockNode",
+    "title": "#### What stays out of your hands",
+    "parent": "BlockNode:00CR5GCSH0009",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR5GCSH8002",
+      "BlockNode:00CR5GCSH8003",
+      "BlockNode:00CR5GCSH8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR5GCSH8002:props:StringProp:00CR5GCWWG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR5GCSH8002:props:StringProp:00CR5GCWWG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR5GCSH8002",
+    "text": "**Nothing outside your thread.** Not a discussion note, not an issue, not a one-line correction to a design block you can see is stale — put it in your Report, and the grapher fixes it. The discrepancy you found is only a finding once it is recorded where the grapher will read it.",
+    "parent": "BlockNode:00CR5GCSH8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH8003",
+    "@type": "BlockNode",
+    "title": "**No `artifacts/**.md` file, ever**, read or written (base",
+    "text": "**No `artifacts/**.md` file, ever**, read or written (base: *Orientation*).",
+    "parent": "BlockNode:00CR5GCSH8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR5GCSH8004",
+    "@type": "BlockNode",
+    "title": "00CR5GCSH8004",
+    "text": "**No turn without a Report.**",
+    "parent": "BlockNode:00CR5GCSH8001",
+    "type": "listItem",
     "children": []
   }
 ]

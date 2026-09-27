@@ -82,7 +82,7 @@ The signal for entry onto this path is repetition, which is a measurement rather
 
 ### Citation direction <a name='id/BlockNode:00CEA5Y5JG00G' class='aperas-anchor aperas-id'></a>
 
-The concerns form an abstraction gradient, `design` most abstract and `discussion` least, with `issues`, `planning` and `history` between. A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): "one link plus a brief, non-argumentative summary per doc") already states this same up-only citation shape for its own instance of that exception, independently of this rule.
+The concerns form an abstraction gradient: `design` most abstract, then `issues`, `planning` and `history`, then the shared `concepts` map, then `discussion`, with an agent's own `thread` least. Because nothing ranks below a thread, nothing outside one can cite into it ([threads](#id/BlockNode:00CR3X3N08004)). A citation may point up that gradient or sideways along it freely. It may not point down: a design block does not reference a discussion block, for the same reason a node carries a parent pointer and not a list of children. The concern taxonomy's own `# Context` convention ([documentation](../design/documentation.md#id/BlockNode:00CDD68E8000K): "one link plus a brief, non-argumentative summary per doc") already states this same up-only citation shape for its own instance of that exception, independently of this rule.
 
 The sanctioned exception is a **normative, singular** pointer — one whose target is the block's whole referent rather than one of many possible mentions. A design doc's own `# Context` section is the familiar instance, one link per facet over a fixed set, but it is the *property* that is sanctioned rather than that location: a history milestone announcing one snapshot, or a design block naming *the* canonical exemplar, qualify the same way. Reflects [v1.1](../discussion/aperas-skill.md#id/BlockNode:00CF5GK5BR003).
 
@@ -115,3 +115,37 @@ A **thread** wires each Philosophy and Orientation principle to the items that r
 A delta entry that *replaces* rather than adds carries a **`Supersedes:`** line naming the snapshot item it retires, as an ordinary wikilink. Without it, an item a minor version deliberately rewrote is indistinguishable from one silently dropped — which is the single judgement the whole arrangement exists to support, so leaving it to a reader's memory defeats the purpose. The marker is bookkeeping rather than skill text, and is excluded from the verbatim comparison on both sides.
 
 Drift between the file and this record is then mechanically checkable, which is the point: `scripts/skill_drift.py` reports text written into the file but never recorded, and recorded items absent from the file with no entry claiming to supersede them. Both defects had previously been caught only by a reader noticing, three times in one session for the first and once across a major version for the second.
+
+## Multi-agent working <a name='id/BlockNode:00CR3X3N00001' class='aperas-anchor aperas-id'></a>
+
+Three roles share one graph: an **orchestrator** that talks with the user, a **grapher** that works the graph, and a **coder** that works the code. One agent carrying the whole skill alone drops steps, because the loop has outgrown what a single context reliably keeps in hand, so the work is split by what each role writes. Every role loads the same base skill, since the graph is both the substrate of all the work and the medium the roles communicate through.
+
+### Roles and write scope <a name='id/BlockNode:00CR3X3N00002' class='aperas-anchor aperas-id'></a>
+
+- **Orchestrator**: <a name='id/BlockNode:00CR3X3N00003' class='aperas-anchor aperas-id'></a> records the conversation with the user as `discussion` freeflow, decides what happens next, and hands work to a subagent. It writes only freeflow and its own turns in the subagent threads.
+- **Grapher**: <a name='id/BlockNode:00CR3X3N00004' class='aperas-anchor aperas-id'></a> does every other graph operation — deep read to find what is relevant, deep write to update it, every promotion (thread to `concepts.md` or higher, discussion to the formal docs), and each thread's lifecycle. It is the only role that writes the graph at large.
+- **Coder**: <a name='id/BlockNode:00CR3X3N08000' class='aperas-anchor aperas-id'></a> surveys and changes source code. It reads the graph for context and writes only to its own thread.
+
+### The loop <a name='id/BlockNode:00CR3X3N08001' class='aperas-anchor aperas-id'></a>
+
+A task alternates between the two subagents, grapher always first: grapher surveys the graph, coder surveys the code, grapher files that survey, coder changes the code, grapher records the result — for as many rounds as the task takes. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.
+
+### Communication — views carry data, chat carries control <a name='id/BlockNode:00CR3X3N08002' class='aperas-anchor aperas-id'></a>
+
+A message between roles is a call: the view is its shared context, like `this`, and the message can still name specific nodes, links and questions as further arguments. Chat tracks progress; the view tracks the current state of the work. A subagent's continuity between turns is its thread plus its views rather than its chat history, so the design holds on a platform that does not keep a subagent alive between invocations.
+
+A dashboard is where a view is projected from. Between user and orchestrator it is the discussion doc's `## Dashboard`; between orchestrator and a subagent it is that subagent's thread. Each turn the sender adds only the nodes and links that changed, creates a new root node citing them alongside the content already there, and re-roots its view on it ([TreeView root](../design/treeview.md#id/BlockNode:00CR3WYBM8001)). The root moves every turn while the content beneath it is mostly reused.
+
+### Threads <a name='id/BlockNode:00CR3X3N08004' class='aperas-anchor aperas-id'></a>
+
+Each subagent has one thread, `artifacts/.threads/<role>.md` — `grapher.md`, `coder.md` — one per role while work is not parallel. A thread is a tree of topic (named by the user) > task (set by the orchestrator) > turn (one exchange with the orchestrator) > subturn. Subturn is optional as a level but not as content: across a batch of tool calls it records the progress and reasoning an agent narrates while it works and the essence of each tool result a later turn will need, written as it happens or at the end of the turn. A result left unrecorded is gone for every later turn, since the thread, not the chat, is what carries context forward. A topic is a concern the user names — usually one concern's artifact set, sometimes spanning concerns, or a batch of related tasks.
+
+Threads are the lowest tier of the [citation gradient](#id/BlockNode:00CEA5Y5JG00G), so nothing outside a thread links into one, and promotion copies content upward rather than citing it. Their graph content persists to the gitignored `.state/` mirror ([thread persistence](../design/treeview.md#id/BlockNode:00CR3WYRG8001)). Every write to a thread checks it against a size cap and warns once the cap is reached; grapher then prunes it with an ordinary `remove`.
+
+### Profiles and view naming <a name='id/BlockNode:00CR3X3N08006' class='aperas-anchor aperas-id'></a>
+
+Per platform `<p>` (`claude`, `antigravity`), three profiles: `<p>`, `<p>-grapher`, `<p>-coder`. Views facing the user are `<p>-<topic>`. The orchestrator's views facing each subagent are `<p>-orchestrator-grapher` and `<p>-orchestrator-coder`; each subagent's view facing the orchestrator is `<p>-grapher-orchestrator` or `<p>-coder-orchestrator`. Each thread therefore carries two views, one from each side.
+
+### Skill packaging <a name='id/BlockNode:00CR3X3N08007' class='aperas-anchor aperas-id'></a>
+
+One shared base skill — working the graph — loaded by every role, plus one role skill each for orchestrator, grapher and coder, stating only what that role writes, when it hands off, and how. Each subagent is an agent definition that preloads the base and its role skill: `.claude/agents/<name>.md` for Claude Code, `.agents/agents/<name>.md` for Antigravity, both shipped by `aperas skill install`.

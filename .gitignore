@@ -2,3 +2,4 @@
 *.tar.gz
 snapshots/
 Apeiron/.state/
+artifacts/.threads/

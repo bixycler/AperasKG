@@ -34,6 +34,7 @@ TreeView
   profile: One, reference -> Profile
   name:    One, xsd:string               -- stable, globally-unique addressable handle
   unfolds: Set, reference -> (TreeNode | Link)
+  root:    Optional, reference -> TreeNode  -- current zoom apex; only the current one is recorded
 ```
 
 A `TreeView` is a lens over the one real graph, not a parallel structure with its own copy of nodes — rendering walks the real `TreeNode`/`Link` graph directly, consulting a `TreeView`'s `unfolds` membership at each hop. `Profile > TreeView` is one-to-many via a backlink query on `TreeView.profile` (the same pattern every other one-to-many relationship in this graph resolves), not a stored `views` list on `Profile` — kind-agnostic for free, since a future non-`TreeView` view kind needs zero extra plumbing as long as it also stores a forward `profile` reference.
@@ -41,6 +42,8 @@ A `TreeView` is a lens over the one real graph, not a parallel structure with it
 Global uniqueness on `TreeView.name`, not per-profile: <a name='id/BlockNode:00CE1GW4Y800E' class='aperas-anchor aperas-id'></a> two different `Profile`s can never share a view name.
 
 `Profile` has no auth or permissions, matching this solo-local-dev tool's stance everywhere else (the ApeironNgn service assumes one trusted local caller).
+
+**`root` records the current zoom**: <a name='id/BlockNode:00CR3WYBM8001' class='aperas-anchor aperas-id'></a> a view's `root` is the apex `aperas tree --view` renders from when no apex is given, and every zoom — an agent re-rooting a view for a hand-off, or a human zooming in the webapp — overwrites it. Only the current root is recorded, not a history of past ones. Unset means the whole corpus, as before `root` existed. Rooting a view on a dashboard node is what turns a dashboard from a list of links into a working lens: the reader sees exactly the scope the author gathered under that node, reached through its children and links, with the unfold state on top of that deciding how deep each part opens.
 
 ## Rendering <a name='id/BlockNode:00CE1GW4Y800G' class='aperas-anchor aperas-id'></a>
 
@@ -73,6 +76,8 @@ A link pointing back up toward an ancestor of the current apex — an upward-poi
 ## Persistence <a name='id/BlockNode:00CE1GW4YG00C' class='aperas-anchor aperas-id'></a>
 
 `TreeView` is per-viewer UI state — genuinely ephemeral, churning on every expand/collapse — written to a gitignored `AperasKG/Apeiron/.state/TreeView.jsonld` on its own, independently-tunable flush interval, separate from the ordinary content-mirror cadence. `Profile` is stable identity and preferences that should survive a `git clone` and diff like any other tracked file (even though it's still "per-viewer" in the sense that each caller owns their own rows) — dehydrated to the ordinary tracked mirror (`Profile.jsonld`) alongside `BlockNode`/`ArtifactNode`/`FolderNode`, on the ordinary flush cadence. Whether a given repo actually commits `Profile.jsonld` is that repo's own `.gitignore` decision, not something the code enforces. Neither file is auto-staged by the `pre-commit` hook, which only reflects `aperas track`'s own rewrite of the three content-mirror files into the same commit as the `.md` change that triggered it — a `Profile.jsonld` change (from `aperas profile` or a direct edit) is a manual `git add`, like any other hand-edited settings file.
+
+**Threads persist to `.state/` by membership, not by class**: <a name='id/BlockNode:00CR3WYRG8001' class='aperas-anchor aperas-id'></a> every node inside an `artifacts/.threads/` artifact's subtree — the ArtifactNode, its BlockNodes and their links — is dehydrated into `.state/` beside `TreeView`, never into the tracked content mirror, because an agent's thread is working state as per-agent and as ephemeral as a view. They are ordinary `ArtifactNode`/`BlockNode`s otherwise, so every existing verb (`unfold`, `show`, `update`, `insert`, `remove`) works on them unchanged, and pruning is an ordinary `remove` under the existing tombstone mechanism, with no separate deletion path. Nothing outside a thread links into one, which is what makes the split safe: the tracked mirror never holds a reference into state it doesn't carry.
 
 ## Bootstrap <a name='id/BlockNode:00CE1GW4YG00D' class='aperas-anchor aperas-id'></a>
 

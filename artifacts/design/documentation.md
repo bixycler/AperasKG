@@ -20,6 +20,9 @@ To achieve pure Perata (clean projections for the reader), the storage layer mus
 4. **History/Status Docs:** What was implemented, when it was verified, and milestones.
 5. **Discussion Docs:** Rejected ideas, motivation, and theoretical context.
 
+- **Concepts Doc**: <a name='id/BlockNode:00CR3XH5DG000' class='aperas-anchor aperas-id'></a> `artifacts/concepts.md`, one concept map shared across every concern — the vocabulary and relationships the work keeps reusing, promoted up from discussion and from agent threads. It ranks above discussion and below the formal docs.
+- **Threads**: <a name='id/BlockNode:00CR3XJX5G001' class='aperas-anchor aperas-id'></a> `artifacts/.threads/<agent>.md`, each subagent's own linear working record, the least mature tier. Gitignored and persisted to `.state/`, and cited by nothing outside itself ([threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)).
+
 This guarantees that a reader parsing the "Design Doc" sees *only* the design, without needing complex transducers to strip out bug reports and history logs.
 
 ## Topology <a name='id/BlockNode:00CDD68E8000E' class='aperas-anchor aperas-id'></a>

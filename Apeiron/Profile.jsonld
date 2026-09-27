@@ -30,5 +30,33 @@
     "@type": "Profile",
     "handle": "dinhlx",
     "name": "Dinh Le"
+  },
+  {
+    "@id": "Profile:00CR5BC54R000",
+    "@type": "Profile",
+    "handle": "claude-grapher",
+    "name": "claude-grapher",
+    "kind": "agent"
+  },
+  {
+    "@id": "Profile:00CR5BCG20000",
+    "@type": "Profile",
+    "handle": "claude-coder",
+    "name": "claude-coder",
+    "kind": "agent"
+  },
+  {
+    "@id": "Profile:00CR5BCVQG000",
+    "@type": "Profile",
+    "handle": "antigravity-grapher",
+    "name": "antigravity-grapher",
+    "kind": "agent"
+  },
+  {
+    "@id": "Profile:00CR5BD6P8000",
+    "@type": "Profile",
+    "handle": "antigravity-coder",
+    "name": "antigravity-coder",
+    "kind": "agent"
   }
 ]

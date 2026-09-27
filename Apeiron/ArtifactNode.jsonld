@@ -143,11 +143,11 @@
       "BlockNode:00CDD68E80001"
     ],
     "path": "design/documentation.md",
-    "fileHash": "2bc2a0619adefd81422c875936a27009347439fd4b539d5131c1a7891a0e6d9c",
+    "fileHash": "076a565068508208b178a8c746593f169312934ea2ebee84c8555a89a3b5ab78",
     "lastTrackedAt": "2026-09-22T08:06:09.428Z",
-    "ingestedHash": "2bc2a0619adefd81422c875936a27009347439fd4b539d5131c1a7891a0e6d9c",
-    "lastIngestedAt": "2026-09-22T08:22:57.431Z",
-    "projectedHash": "2bc2a0619adefd81422c875936a27009347439fd4b539d5131c1a7891a0e6d9c"
+    "ingestedHash": "076a565068508208b178a8c746593f169312934ea2ebee84c8555a89a3b5ab78",
+    "lastIngestedAt": "2026-09-27T01:46:10.388Z",
+    "projectedHash": "076a565068508208b178a8c746593f169312934ea2ebee84c8555a89a3b5ab78"
   },
   {
     "@id": "ArtifactNode:00CDD68DSG000",
@@ -509,11 +509,11 @@
       "BlockNode:00CE1GW4Y8001"
     ],
     "path": "design/treeview.md",
-    "fileHash": "957889aced1836026e79796c443d5836920b50f5e7fa4cd2070e052aac4f9c5c",
+    "fileHash": "2c70e282a4411947c52c74faa4edbc737e5f4f38fbd4d4d581f8a5c218e812d5",
     "lastTrackedAt": "2026-09-22T03:15:04.357Z",
-    "ingestedHash": "957889aced1836026e79796c443d5836920b50f5e7fa4cd2070e052aac4f9c5c",
-    "lastIngestedAt": "2026-09-22T08:22:53.912Z",
-    "projectedHash": "957889aced1836026e79796c443d5836920b50f5e7fa4cd2070e052aac4f9c5c"
+    "ingestedHash": "2c70e282a4411947c52c74faa4edbc737e5f4f38fbd4d4d581f8a5c218e812d5",
+    "lastIngestedAt": "2026-09-27T01:46:08.967Z",
+    "projectedHash": "2c70e282a4411947c52c74faa4edbc737e5f4f38fbd4d4d581f8a5c218e812d5"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8000",
@@ -740,14 +740,15 @@
       "BlockNode:00CN7YEND0001",
       "BlockNode:00CN8K8JCR001",
       "BlockNode:00CNW4V5GG001",
-      "BlockNode:00CQYGPR50001"
+      "BlockNode:00CQYGPR50001",
+      "BlockNode:00CR5GCSEG001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "94465d12151ef2027ddd235271b9c7b7ce87fc62378005795e16a40203f816b8",
+    "fileHash": "f497579da8e2fb7186401d65e36cfc30b1731e9b18fd05388107c86e313347b0",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "94465d12151ef2027ddd235271b9c7b7ce87fc62378005795e16a40203f816b8",
-    "lastIngestedAt": "2026-09-26T17:37:56.925Z",
-    "projectedHash": "94465d12151ef2027ddd235271b9c7b7ce87fc62378005795e16a40203f816b8"
+    "ingestedHash": "f497579da8e2fb7186401d65e36cfc30b1731e9b18fd05388107c86e313347b0",
+    "lastIngestedAt": "2026-09-27T01:46:13.367Z",
+    "projectedHash": "f497579da8e2fb7186401d65e36cfc30b1731e9b18fd05388107c86e313347b0"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -793,11 +794,11 @@
       "BlockNode:00CEA5M6S8001"
     ],
     "path": "planning/aperas-skill.md",
-    "fileHash": "b3e77b174f0845a3d63c27b945e53b9ae22d0feeb3e1cb39e8bb05ece6bd0c0b",
+    "fileHash": "3a5817eab051845984bfe91b36f43f0b395d558cd355cb8dd5b369c42bbc1d94",
     "lastTrackedAt": "2026-09-22T08:07:43.768Z",
-    "ingestedHash": "b3e77b174f0845a3d63c27b945e53b9ae22d0feeb3e1cb39e8bb05ece6bd0c0b",
-    "lastIngestedAt": "2026-09-22T08:24:08.072Z",
-    "projectedHash": "b3e77b174f0845a3d63c27b945e53b9ae22d0feeb3e1cb39e8bb05ece6bd0c0b"
+    "ingestedHash": "3a5817eab051845984bfe91b36f43f0b395d558cd355cb8dd5b369c42bbc1d94",
+    "lastIngestedAt": "2026-09-27T01:46:11.617Z",
+    "projectedHash": "3a5817eab051845984bfe91b36f43f0b395d558cd355cb8dd5b369c42bbc1d94"
   },
   {
     "@id": "ArtifactNode:00CEA5MGZR000",
@@ -843,11 +844,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "8653179261ee4f69e5930d0d9705404c9ee10291bf7001c11ee188482dd86c97",
+    "fileHash": "060499bbc9ef0d6dc5157f1aecf1b4acfc59889a1b8dea2ae82cc307cfe12fd0",
     "lastTrackedAt": "2026-09-22T05:31:16.879Z",
-    "ingestedHash": "8653179261ee4f69e5930d0d9705404c9ee10291bf7001c11ee188482dd86c97",
-    "lastIngestedAt": "2026-09-22T12:46:03.110Z",
-    "projectedHash": "8653179261ee4f69e5930d0d9705404c9ee10291bf7001c11ee188482dd86c97"
+    "ingestedHash": "060499bbc9ef0d6dc5157f1aecf1b4acfc59889a1b8dea2ae82cc307cfe12fd0",
+    "lastIngestedAt": "2026-09-27T01:46:07.643Z",
+    "projectedHash": "060499bbc9ef0d6dc5157f1aecf1b4acfc59889a1b8dea2ae82cc307cfe12fd0"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
@@ -1069,11 +1070,11 @@
       "BlockNode:00CJ6TGSX8001"
     ],
     "path": "design/webapp.md",
-    "fileHash": "32d6a7190804502bd8f3bdf8c2fd84c782b7b435184520af78c6598e498e33dc",
+    "fileHash": "3e710a5a7f388b5687b9eab1af06916735303fa61810fc51f556c04b79f419a6",
     "lastTrackedAt": "2026-09-22T08:06:16.357Z",
-    "ingestedHash": "32d6a7190804502bd8f3bdf8c2fd84c782b7b435184520af78c6598e498e33dc",
-    "lastIngestedAt": "2026-09-22T08:23:02.165Z",
-    "projectedHash": "32d6a7190804502bd8f3bdf8c2fd84c782b7b435184520af78c6598e498e33dc"
+    "ingestedHash": "3e710a5a7f388b5687b9eab1af06916735303fa61810fc51f556c04b79f419a6",
+    "lastIngestedAt": "2026-09-27T02:24:50.484Z",
+    "projectedHash": "3e710a5a7f388b5687b9eab1af06916735303fa61810fc51f556c04b79f419a6"
   },
   {
     "@id": "ArtifactNode:00CJ6T137R000",
@@ -1306,5 +1307,16 @@
     "lastTrackedAt": "2026-09-23T13:02:53.652Z",
     "ingestedHash": "9cf7775dc9a84d298263897c2f1c559d9c69b07948ba5c288e8ff560a611cfaf",
     "lastIngestedAt": "2026-09-23T13:02:54.424Z"
+  },
+  {
+    "@id": "ArtifactNode:00CR5AEJ88000",
+    "@type": "ArtifactNode",
+    "title": "concepts.md",
+    "text": "Shared vocabulary and relationships surfaced across concerns and threads, promoted up by the grapher once they recur across tasks.",
+    "parent": "FolderNode:00CDBYV47G000",
+    "children": [
+      "BlockNode:00CR5AWY6R001"
+    ],
+    "path": "concepts.md"
   }
 ]
