@@ -468,11 +468,11 @@
       "BlockNode:00CE1DDF4G001"
     ],
     "path": "discussion/treeview.md",
-    "fileHash": "878a814db89e38ef07e0742c6382d0e3ae88161e335a659b355aa2852d930760",
+    "fileHash": "9902bd7a691deac33a5aeb6593819073c882efbea5f9042fc6ba5cb9b347050e",
     "lastTrackedAt": "2026-09-22T08:06:54.134Z",
-    "ingestedHash": "878a814db89e38ef07e0742c6382d0e3ae88161e335a659b355aa2852d930760",
-    "lastIngestedAt": "2026-09-22T08:23:17.074Z",
-    "projectedHash": "878a814db89e38ef07e0742c6382d0e3ae88161e335a659b355aa2852d930760"
+    "ingestedHash": "9902bd7a691deac33a5aeb6593819073c882efbea5f9042fc6ba5cb9b347050e",
+    "lastIngestedAt": "2026-09-27T07:20:03.969Z",
+    "projectedHash": "9902bd7a691deac33a5aeb6593819073c882efbea5f9042fc6ba5cb9b347050e"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B0000",
@@ -509,11 +509,11 @@
       "BlockNode:00CE1GW4Y8001"
     ],
     "path": "design/treeview.md",
-    "fileHash": "2c70e282a4411947c52c74faa4edbc737e5f4f38fbd4d4d581f8a5c218e812d5",
+    "fileHash": "1ecbd48b9c81e7c65af8822b2c454afa481b215b21df4b5687af42ef7297b947",
     "lastTrackedAt": "2026-09-22T03:15:04.357Z",
-    "ingestedHash": "2c70e282a4411947c52c74faa4edbc737e5f4f38fbd4d4d581f8a5c218e812d5",
-    "lastIngestedAt": "2026-09-27T01:46:08.967Z",
-    "projectedHash": "2c70e282a4411947c52c74faa4edbc737e5f4f38fbd4d4d581f8a5c218e812d5"
+    "ingestedHash": "1ecbd48b9c81e7c65af8822b2c454afa481b215b21df4b5687af42ef7297b947",
+    "lastIngestedAt": "2026-09-27T07:20:02.628Z",
+    "projectedHash": "1ecbd48b9c81e7c65af8822b2c454afa481b215b21df4b5687af42ef7297b947"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8000",
@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "680ee415e2ef59dfce74f33a47b278118449d84f49f37fd2e77e9bbf890adbcc",
+    "fileHash": "0ee97c7947769f0fcc787f01ff2311a6a0f4ee5ac07671018efcffcc51ad7904",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "680ee415e2ef59dfce74f33a47b278118449d84f49f37fd2e77e9bbf890adbcc",
-    "lastIngestedAt": "2026-09-27T06:20:33.802Z",
-    "projectedHash": "680ee415e2ef59dfce74f33a47b278118449d84f49f37fd2e77e9bbf890adbcc"
+    "ingestedHash": "0ee97c7947769f0fcc787f01ff2311a6a0f4ee5ac07671018efcffcc51ad7904",
+    "lastIngestedAt": "2026-09-27T06:39:57.608Z",
+    "projectedHash": "0ee97c7947769f0fcc787f01ff2311a6a0f4ee5ac07671018efcffcc51ad7904"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",

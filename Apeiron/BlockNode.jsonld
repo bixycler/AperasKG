@@ -9140,8 +9140,12 @@
       "BlockNode:00CR6BEFQG001",
       "BlockNode:00CR81SWZR001",
       "BlockNode:00CR81SDX8001",
+      "BlockNode:00CR9MCPXG001",
       "BlockNode:00CE1DDF58004",
-      "BlockNode:00CR98J7KR001"
+      "BlockNode:00CR98J7KR001",
+      "BlockNode:00CR9Y09Y0001",
+      "BlockNode:00CR9ZBSB0001",
+      "BlockNode:00CRA6CVJ0001"
     ]
   },
   {
@@ -9636,6 +9640,7 @@
     "type": "heading",
     "children": [
       "BlockNode:00CE1GW4YG000",
+      "BlockNode:00CRA8JPFR001",
       "BlockNode:00CE1GW4YG004",
       "BlockNode:00CE1GW4YG005",
       "BlockNode:00CE1GW4YG006",
@@ -38678,8 +38683,38 @@
   {
     "@id": "BlockNode:00CR7N8FM8005",
     "@type": "BlockNode",
-    "title": "**Open**",
-    "text": "**Open**: whether `long` shows the truncated preview the view render uses today, or full text.",
+    "links": [
+      {
+        "@id": "BlockNode:00CR7N8FM8005:links:Link:00CRA8VJV8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR9ZBSB0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR7N8FM8005:links:Link:00CRA8VJV8000:props:StringProp:00CRA8VJV8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "167"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR7N8FM8005:links:Link:00CRA8VJV8002",
+        "@type": "Link",
+        "target": "BlockNode:00CRA8JPFR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR7N8FM8005:links:Link:00CRA8VJV8002:props:StringProp:00CRA8VJV8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "321"
+          }
+        ]
+      }
+    ],
+    "title": "**Settled**",
+    "text": "**Settled**: whether `long` shows the truncated preview the view render uses today, or full text — full text, and there is no longer any other kind to choose between. [The cap-removal change](../discussion/treeview.md#id/BlockNode:00CR9ZBSB0001) removed length caps from every `aperas tree`/`aperas unfold` preview path ([now stated in design](../design/treeview.md#id/BlockNode:00CRA8JPFR001)), so `--detail long`, whenever it's built, has only full text available to show.",
     "parent": "BlockNode:00CR7N8FM8001",
     "type": "listItem",
     "children": []
@@ -39090,6 +39125,7 @@
       "BlockNode:00CR9D1WW0001",
       "BlockNode:00CR9D5Z60001",
       "BlockNode:00CR874TCG005",
+      "BlockNode:00CR9P6W40001",
       "BlockNode:00CR874TCG007",
       "BlockNode:00CR874TCG009",
       "BlockNode:00CR9D7DVR001",
@@ -41288,24 +41324,6 @@
     ]
   },
   {
-    "@id": "BlockNode:00CR98J7KR002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-27T06:08:50.861Z",
-    "title": "**Settles an open question**",
-    "text": "**Settles an open question**: in the reset `tree --detail` design, `long` shows full text rather than a truncated preview.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR98J7KR003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-09-27T06:08:50.861Z",
-    "title": "00CR98J7KR003",
-    "text": "**First task run under skill v3.1**, through the full loop.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR991CVG000",
     "@type": "BlockNode",
     "props": [
@@ -41344,7 +41362,9 @@
     "text": "**Friction — a text-only `aperas update` on a list item tombstones its children**: the orchestrator piped only the item's own text (from `aperas show --text`) to fix a lead-in, and the item's two children were tombstoned (`BlockNode:00CR98J7KR002`, `BlockNode:00CR98J7KR003`, since recreated). The base skill's *Updating an existing list item* says that leaving the text out clears it. It does not say that leaving the children out removes them, and \"this also updates any nested children in the same call, if you include them\" reads as if omitted children are left alone.",
     "parent": "BlockNode:00CR92ZRJ8001",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00CR9KFCN0001"
+    ]
   },
   {
     "@id": "BlockNode:00CR9D1WW0001",
@@ -41665,6 +41685,547 @@
     "text": "**Orchestrator verified the grapher's Turn 4**: `skill_drift.py --added` reports 0, `aperas check-links` is clean, and [design's Threads block](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) states the friction/tool-gap rule matching the staged code. First turn recorded under the new rule itself: the grapher's own tool gap (a symlinked `AperasKG/` rejecting `git add` from the code repo, worked around with `cd`) is in its Report, this being that same, already-known layout fact rather than a new bug.",
     "parent": "BlockNode:00CR81Y470001",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9KFCN0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9KFCN0001:links:Link:00CR9KFGBR002",
+        "@type": "Link",
+        "target": "BlockNode:00CR994X80001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9KFCN0001:links:Link:00CR9KFGBR002:props:StringProp:00CR9KM0YG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "81"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR9KFCN0001:props:StringProp:00CR9KFGBR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9KFCN0001:props:StringProp:00CR9KFGBR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Decided — fix the misleading \"if you include them\" clause**",
+    "text": "**Decided — fix the misleading \"if you include them\" clause**: User, 2026-09-27. [the update-tombstones-children friction](../discussion/aperas-skill.md#id/BlockNode:00CR994X80001) read as if omitting children left them alone; the CLI's own `--help` and the actual behavior say otherwise. Fixed in the base skill's *Updating an existing list item*: the text-change bullet now says a bare-text update replaces children too, and the text-clears bullet is rewritten as one symmetric rule — whichever side (text or children) you don't restate is wiped. The orchestrator edits the skill; the grapher records it.",
+    "parent": "BlockNode:00CR994X80001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR9PS008001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9MCPXG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9MCPXG001:links:Link:00CR9MCVB8000",
+        "@type": "Link",
+        "target": "BlockNode:00CR81SDX8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9MCPXG001:links:Link:00CR9MCVB8000:props:StringProp:00CR9MCVB8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "530"
+          }
+        ]
+      }
+    ],
+    "title": "**A tombstoned node stays listed in its parent's `children` array**",
+    "text": "**A tombstoned node stays listed in its parent's `children` array**: `ArtifactNode:00CR5ANC6G000` (`.threads/coder.md`'s holder) still lists `BlockNode:00CR6BXGTR001` as a child, though it was tombstoned during the September 27 thread reset. `tree`/`unfold` hide it correctly since both filter tombstoned nodes at render time, but `aperas show` on the parent exposes the stale reference, and a bare anchor-less `insert` after it would have needed a live anchor. Found 2026-09-27, not yet investigated further; possibly related to [the `.state` tombstone leak](../discussion/treeview.md#id/BlockNode:00CR81SDX8001), a different symptom of the same area of the code.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9P6W40001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9P6W40001:links:Link:00CR9P6ZTG000",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9P6W40001:links:Link:00CR9P6ZTG000:props:StringProp:00CR9P6ZTG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CR9P6W40001:links:Link:00CR9P6ZTG002",
+        "@type": "Link",
+        "target": "BlockNode:00CR5GCSG0007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9P6W40001:links:Link:00CR9P6ZTG002:props:StringProp:00CR9P6ZTG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "102"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Mechanics — Updating an existing list item, the misleading \"if you include them\" clause fixed",
+    "text": "Supersedes: [v3's text-change bullet in Updating an existing list item](#id/BlockNode:00CR5GCSG0001), [v3's text-clears bullet in Updating an existing list item](#id/BlockNode:00CR5GCSG0007)",
+    "parent": "BlockNode:00CR874TC8001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CR9P6W40002",
+      "BlockNode:00CR9P6W40003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9P6W40002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR9P6W40002:props:StringProp:00CR9P6ZT8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9P6W40002:props:StringProp:00CR9P6ZT8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR9P6W40002",
+    "text": "**For an ordinary text change, pipe bare text with no bullet marker** (e.g. `updated text`, not `- updated text`). This replaces the item's children too, not just its text — see the last point below for what that costs if you don't restate them. See the next point for the cases that need a marker instead.",
+    "parent": "BlockNode:00CR9P6W40001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9P6W40003",
+    "@type": "BlockNode",
+    "title": "00CR9P6W40003",
+    "text": "**The rule runs both ways: whichever piece you don't restate is wiped, not left alone.** Piping only new children (a list, with no text of its own before it) clears the item's own text — unlike the title, nothing here is left alone by default. Piping only text with no children after it tombstones any existing children the same way, since the call reconciles them against what was piped, which was none. Confirmed live: fixing a lead-in term by piping the item's corrected text alone, with no children, cost it two children that had to be reinserted. Restate whichever side you're not touching.",
+    "parent": "BlockNode:00CR9P6W40001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9PS008001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9PS008001:links:Link:00CR9PS44G002",
+        "@type": "Link",
+        "target": "BlockNode:00CR9P6W40001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9PS008001:links:Link:00CR9PS44G002:props:StringProp:00CR9PS44G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "27"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR9PS008001:props:StringProp:00CR9PS44G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9PS008001:props:StringProp:00CR9PS44G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: [aperas — Mechanics — Updating an existing list item, the misleading \"if you include them\" clause fixed](../discussion/aperas-skill.md#id/BlockNode:00CR9P6W40001) records this fix as a v3.1 delta entry. `design/aperas-skill.md` has no mention of the old wording to correct.",
+    "parent": "BlockNode:00CR9KFCN0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR9S6080001:props:StringProp:00CR9S63W0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9S6080001:props:StringProp:00CR9S63W0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Work**",
+    "text": "**Work**: record the staged base-skill fix as a v3.1 delta entry beside the earlier ones, confirm design has nothing to correct, then check-links and project",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR9S6080002",
+      "BlockNode:00CR9S6080003",
+      "BlockNode:00CR9S6080004",
+      "BlockNode:00CR9S6080005",
+      "BlockNode:00CR9S6080006",
+      "BlockNode:00CR9S6080007",
+      "BlockNode:00CR9S6080008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9S6080002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CR9S6080002:props:StringProp:00CR9S63W0002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9S6080002:props:StringProp:00CR9S63W0003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Oriented",
+    "text": "Oriented: confirmed the staged diff (`git diff --cached skills/`) matches the Ask exactly — both bullets in *Updating an existing list item* rewritten (the text-change bullet now says children are replaced too, not just left alone; the text-clears bullet rewritten as one symmetric rule). Grepped `AperasKG/Apeiron/BlockNode.jsonld` for the old sentences to find the v3-snapshot ids to supersede: `BlockNode:00CR5GCSG0001` (text-change bullet) and `BlockNode:00CR5GCSG0007` (text-clears bullet), both children of the *Updating an existing list item* heading `BlockNode:00CR5GCSG0000`. An older, already-distinct duplicate of the first sentence also exists at `BlockNode:00CNWKA6Q0002` under a different, earlier parent — not the one to supersede, since the v3.1 delta chains off the v3 snapshot only.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080003",
+    "@type": "BlockNode",
+    "title": "Design",
+    "text": "Design: grepped `design/aperas-skill.md` for \"if you include them\", \"list item\" and children/tombstone wording — zero hits. Design says nothing at all about this mechanic, so nothing there needed correcting.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080004",
+    "@type": "BlockNode",
+    "title": "Delta",
+    "text": "Delta: inserted one new `###` heading, `BlockNode:00CR9P6W40001` (\"aperas — Mechanics — Updating an existing list item, the misleading \\\"if you include them\\\" clause fixed\"), as a child of the v3.1 delta heading `BlockNode:00CR874TC8001` — after the last aperas-base entry (*Stage each verified step*, `BlockNode:00CR874TCG005`) and before the first aperas-orchestrator entry, matching file order since this Mechanics-section fix follows every already-recorded Discipline-section entry. Two `Supersedes:` links plus the two corrected bullets verbatim as children. Insert reported 2 links resolved; confirmed both via `aperas backlinks` on `00CR5GCSG0001` and `00CR5GCSG0007`.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080005",
+    "@type": "BlockNode",
+    "title": "Provenance",
+    "text": "Provenance: added a **Recorded and promoted** child under the decision node `BlockNode:00CR9KFCN0001`, pointing up at the new delta entry (an up-citation from discussion to itself-in-discussion is fine; the delta entry is the promotion target). `aperas backlinks` on the delta id confirms the link landed.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080006",
+    "@type": "BlockNode",
+    "title": "Drift check",
+    "text": "Drift check: `skill_drift.py --added` → 0 (nothing unrecorded). The plain `skill_drift.py` also shows 1 pre-existing \"DROPPED, unaccounted\" entry, `BlockNode:00CR9D1WW0001` (the Report template's Tool-gap line) — unrelated to this edit. It's a drift-script matching weakness: the recorded unit is one line lifted out of a much larger single `code` block in the live file (the whole thread-template example under *Threads*), and the script compares whole code blocks as one unit, so a substring match doesn't register even though the line is present verbatim in the file. Not fixed here — a pre-existing tool gap, not part of this Ask.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080007",
+    "@type": "BlockNode",
+    "title": "Checks",
+    "text": "Checks: `aperas check-links` clean (2262 live blocks, 598 with link text). Projected `discussion/aperas-skill.md` and staged.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6080008",
+    "@type": "BlockNode",
+    "title": "**Tool gap**",
+    "text": "**Tool gap**: `aperas project discussion/aperas-skill.md --flush` refused with \"has changed on disk since this artifact/folder's last known content... Overwrite anyway?\", though nothing had actually hand-edited the file — the graph's own last-known-content record was just stale from an earlier turn's edits that were never re-projected (same situation Turn 2 already hit and noted). Confirmed safe via `git status`/`git diff` on the file (both empty against HEAD) before passing `--force --flush`. This interactive-confirmation behavior isn't documented anywhere in the skill's Mechanics section.",
+    "parent": "BlockNode:00CR9S6080001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6088000",
+    "@type": "BlockNode",
+    "title": "**Report**",
+    "text": "**Report**: the misleading \"if you include them\" clause fix is now recorded in the v3.1 delta; `design/aperas-skill.md` had nothing to correct.",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR9S6088001",
+      "BlockNode:00CR9S6088002",
+      "BlockNode:00CR9S6088003",
+      "BlockNode:00CR9S6088004",
+      "BlockNode:00CR9S6088005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9S6088001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9S6088001:links:Link:00CR9S63WG001",
+        "@type": "Link",
+        "target": "BlockNode:00CR9P6W40001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9S6088001:links:Link:00CR9S63WG001:props:StringProp:00CR9S63WR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR9S6088001:props:StringProp:00CR9S63W8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9S6088001:props:StringProp:00CR9S63WG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CR9S6088001",
+    "text": "[aperas — Mechanics — Updating an existing list item, the misleading \"if you include them\" clause fixed](../discussion/aperas-skill.md#id/BlockNode:00CR9P6W40001) — new delta entry, supersedes the v3 snapshot's two affected bullets.",
+    "parent": "BlockNode:00CR9S6088000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6088002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9S6088002:links:Link:00CR9S63WR001",
+        "@type": "Link",
+        "target": "BlockNode:00CR9PS008001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9S6088002:links:Link:00CR9S63WR001:props:StringProp:00CR9S63WR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "title": "00CR9S6088002",
+    "text": "[Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR9PS008001) — the provenance marker under your decision node, pointing up at the delta entry.",
+    "parent": "BlockNode:00CR9S6088000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6088003",
+    "@type": "BlockNode",
+    "title": "`skill_drift.py --added`",
+    "text": "`skill_drift.py --added`: 0. `check-links`: 0 discrepancies across 2262 blocks. `AperasKG/` staged.",
+    "parent": "BlockNode:00CR9S6088000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6088004",
+    "@type": "BlockNode",
+    "title": "**Tool gap**",
+    "text": "**Tool gap**: `aperas project discussion/aperas-skill.md` refused as stale-on-disk even though `git diff` showed nothing changed — a prior turn's edits had never been re-projected. Worked around with `--force` after confirming via git that nothing was actually different; see the Work subturn.",
+    "parent": "BlockNode:00CR9S6088000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9S6088005",
+    "@type": "BlockNode",
+    "title": "**Observation**",
+    "text": "**Observation**: `skill_drift.py`'s standing 1 \"dropped, unaccounted\" entry (the Tool-gap template line) is a pre-existing whole-code-block matching limitation, not caused by this edit — the recorded unit is a substring of a larger live code block. Worth a fix if the drift script is touched again, not part of this task.",
+    "parent": "BlockNode:00CR9S6088000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9Y09Y0001",
+    "@type": "BlockNode",
+    "title": "00CR9Y09Y0001",
+    "text": "**Orchestrator verified the coder's Turn 1 survey** (the coder's Turn 1 Report in `.threads/coder.md`): `packages/web/src/Inline.tsx:106-107`'s link-hover popover reads `node.abstract` with no fallback — confirmed by reading the file, matching the coder's caution against uncapping at the render-tree source. `packages/web/src/FolderDiv.tsx:342,553,609` each already write `n.text ?? n.abstract` (or `l().text ?? l().abstract`) — confirmed, so the print-side fallback is a precedented pattern already live in the webapp, not a new one. `kgUnfold.ts`'s `previewChildren` (lines 102-117) does call the capped `previewText` per child/link, matching the coder's additional finding beyond the Ask's literal scope.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9ZBSB0001",
+    "@type": "BlockNode",
+    "title": "00CR9ZBSB0001",
+    "text": "**Coder's Turn 1 survey filed: the cap removal is a print-side fix in `toText()`, plus one further site found beyond the Ask's scope**",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CR9ZBSB0002",
+      "BlockNode:00CR9ZBSB0003",
+      "BlockNode:00CR9ZBSB0004",
+      "BlockNode:00CR9ZBSB0005",
+      "BlockNode:00CR9ZBSB0006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CR9ZBSB0002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CR9ZBSB0002:links:Link:00CRA8PMP0000",
+        "@type": "Link",
+        "target": "BlockNode:00CRA8JPFR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CR9ZBSB0002:links:Link:00CRA8PMP0000:props:StringProp:00CRA8PMP0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "389"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CR9ZBSB0002:props:StringProp:00CR9ZBXH0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CR9ZBSB0002:props:StringProp:00CR9ZBXH0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The fix**",
+    "text": "**The fix**: `toText()` in `packages/core/src/apeironNgn/node.ts` picks the capped `item.abstract` over the already-present uncapped `item.text` at two print sites — `:1943` for node rows, `:1956` for link rows. Swapping to `item.text ?? item.abstract` at both is the entire change; `buildNodeItem`/`buildLinkItem` (`:1813`/`:1874`) keep computing `abstract` exactly as today. Promoted to [design/treeview.md's Rendering section](../design/treeview.md#id/BlockNode:00CRA8JPFR001).",
+    "parent": "BlockNode:00CR9ZBSB0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9ZBSB0003",
+    "@type": "BlockNode",
+    "title": "**Why print-side, not source-side**",
+    "text": "**Why print-side, not source-side**: `packages/web/src/Inline.tsx:106-107`'s link-hover popover reads `node.abstract` directly with no fallback, deliberately wanting a short preview in a tooltip. Uncapping `abstract`'s computation inside `buildNodeItem`/`buildLinkItem` would silently uncap that popover too. The print-side fallback is also not a new pattern: `packages/web/src/FolderDiv.tsx:342,553,609` already write `n.text ?? n.abstract` (or `l().text ?? l().abstract`) for the same `RenderItem` shape.",
+    "parent": "BlockNode:00CR9ZBSB0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9ZBSB0004",
+    "@type": "BlockNode",
+    "title": "**Nothing else reads `abstract`**",
+    "text": "**Nothing else reads `abstract`**: `hiddenCount` comes from `treeChildren.length`/`links.length` deltas, `truncated` from `opts.maxDepth` vs `depth`, and the `[+N]` fold tag reads `hiddenCount` — all three are depth/count mechanisms independent of text length.",
+    "parent": "BlockNode:00CR9ZBSB0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9ZBSB0005",
+    "@type": "BlockNode",
+    "title": "**Beyond the Ask's literal scope**",
+    "text": "**Beyond the Ask's literal scope**: `kgUnfold.ts`'s `previewChildren()` (lines 102-117) still calls `previewText()` with no `{full: true}` for every child/link preview line, even though the unfolded target's own top line already passes `{full: true}` (lines 155/161). `kgBacklinks.ts:43` calls the identical non-full branch of `nodeAbstract()` — the same mechanism, not a separate cap.",
+    "parent": "BlockNode:00CR9ZBSB0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CR9ZBSB0006",
+    "@type": "BlockNode",
+    "title": "00CR9ZBSB0006",
+    "text": "**Scope resolved**, from the user's own wording (\"remove all output length cap (tree & unfold)\"): the print-side fix in `toText()` is in scope; `kgUnfold.ts`'s `previewChildren` loses its cap too, since it's part of unfold's own output; `kgBacklinks.ts` stays capped, since the user named `tree`/`unfold` and not `backlinks`, and an uncapped backlinks list multiplies output in a way a single `tree`/`unfold` reveal doesn't.",
+    "parent": "BlockNode:00CR9ZBSB0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRA6CVJ0001",
+    "@type": "BlockNode",
+    "title": "**Orchestrator verified the coder's Turn 2 change**",
+    "text": "**Orchestrator verified the coder's Turn 2 change**: read the diff directly (`node.ts`'s `toText()`, `kgUnfold.ts`'s `previewChildren`), confirmed `tsc --noEmit` clean on both packages, and independently re-ran the coder's own checks against a fresh view — `aperas unfold`/`aperas tree` on `BlockNode:00CN1PKAQG001` (3509 chars) now print full text with no truncation hint, in both the node-row and link-row paths; `aperas backlinks --text` on `BlockNode:00CEA5Y5JG00C` still truncates, confirming `kgBacklinks.ts` was correctly left out of scope.",
+    "parent": "BlockNode:00CE1DDF58003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CRA6CVJ0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CRA6CVJ0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CRA6CVJ0002:props:StringProp:00CRA6CZK0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CRA6CVJ0002:props:StringProp:00CRA6CZK0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**One correction to the coder's Report**",
+    "text": "**One correction to the coder's Report**: its one-line summary said `aperas unfold BlockNode:00CF1WZE18004` was itself \"a 3486-char structural child\" — that id is the `## Freeflow` heading being unfolded, not the long child. The Work subturns are precise (the long node is its child, `BlockNode:00CN1PKAQG001`); only the Report's compressed summary conflated the two, and cost a first failed verification attempt (`show --text` on the heading returned nothing) before rereading the Work.",
+    "parent": "BlockNode:00CRA6CVJ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRA8HFPR001",
+    "@type": "BlockNode",
+    "title": "**The tiers show a node's full text, not a capped preview**",
+    "text": "**The tiers show a node's full text, not a capped preview**: `abstract` in the tier list above is the node's complete stored text — `aperas tree` and `aperas unfold` never truncate it, at any tier. Only `aperas backlinks --text` still returns a length-capped preview line.",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CRA8JPFR001",
+    "@type": "BlockNode",
+    "title": "**The tiers show a node's full text, not a capped preview**",
+    "text": "**The tiers show a node's full text, not a capped preview**: `abstract` in the tier list above is the node's complete stored text — `aperas tree` and `aperas unfold` never truncate it, at any tier. Only `aperas backlinks --text` still returns a length-capped preview line.",
+    "parent": "BlockNode:00CE1GW4Y800G",
+    "type": "paragraph",
     "children": []
   }
 ]
