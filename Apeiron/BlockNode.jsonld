@@ -12623,6 +12623,7 @@
       "BlockNode:00CQYGPR50001",
       "BlockNode:00CR5GCSEG001",
       "BlockNode:00CR874TC8001",
+      "BlockNode:00CS1593MG001",
       "BlockNode:00CF4QNX0000B"
     ]
   },
@@ -12678,7 +12679,8 @@
       "BlockNode:00CR92ZRJ8001",
       "BlockNode:00CRAQQ2V0001",
       "BlockNode:00CRBWFJJ0001",
-      "BlockNode:00CRC1S4MR001"
+      "BlockNode:00CRC1S4MR001",
+      "BlockNode:00CS0YM5H8001"
     ]
   },
   {
@@ -35148,7 +35150,7 @@
       }
     ],
     "title": "**Orchestrator**",
-    "text": "**Orchestrator**: records the conversation with the user as `discussion` freeflow — creating the topic's `## Freeflow` when it has none — decides what happens next, and hands work to a subagent. It writes only freeflow and its own turns in the subagent threads, and stages those writes itself, as every role stages what it writes for its own recovery. It reads the graph and the code directly to verify a result or a claim before relaying it, and whatever it relays goes into freeflow first, citing its source; a task's first read of the graph and its first map of the code stay with the grapher and the coder.",
+    "text": "**Orchestrator**: records the conversation with the user as `discussion` freeflow — creating the topic's `## Freeflow` when it has none — decides what happens next, and hands work to a subagent. It is gated upfront: never investigate or modify code on your own at task start; touch code, diffs, and tests strictly at Step 7 Verification. At session start or when resuming, run the in-flight triage protocol (`aperas profile list <p>`, inspect `<p>-coder-orchestrator` and `<p>-grapher-orchestrator`). It writes only freeflow and its own turns in the subagent threads, and stages those writes itself, as every role stages what it writes for its own recovery. It reads the graph and the code directly to verify a result or a claim before relaying it, and whatever it relays goes into freeflow first, citing its source; a task's first read of the graph and its first map of the code stay with the grapher and the coder.",
     "parent": "BlockNode:00CR3X3N00002",
     "type": "listItem",
     "children": []
@@ -35175,7 +35177,7 @@
     "@id": "BlockNode:00CR3X3N08001",
     "@type": "BlockNode",
     "title": "### The loop",
-    "text": "A task runs a fixed sequence of turns, grapher always first: grapher surveys the graph, coder surveys the code without changing it, grapher files that survey, coder changes the code, the orchestrator verifies the diff and the tests itself, grapher files the result — the last three repeated for as many rounds as the task takes, then grapher's finishing turn. Each survey stays on its own side: grapher touches source code only to pinpoint an entry into the graph, and an Ask asks only for its receiver's kind of work. Every Ask cites the freeflow nodes for the decisions it relies on, so a decision that exists only in chat blocks the hand-off until it is recorded. Before dispatch the orchestrator runs each Ask against a short checklist of the rules most often broken while one is being written — only the receiver's kind of work, every decision cited from freeflow, cite rather than retype, one task per dispatch — since nothing else raises them at that moment. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
+    "text": "A task runs a fixed 9-step sequence of turns, grapher always first: grapher surveys the graph, coder surveys the code without changing it, grapher files that survey, coder changes the code, the orchestrator verifies the diff and the tests itself, grapher files the result — repeated as needed, followed by the finishing turn. The orchestrator is gated upfront against investigating or modifying code at task start. When resuming in-flight work, the orchestrator triages views (`<p>-coder-orchestrator`, `<p>-grapher-orchestrator`) before dispatching new turns. Each survey stays on its own side: grapher touches source code only to pinpoint an entry into the graph, and an Ask asks only for its receiver's kind of work. Every Ask cites the freeflow nodes for the decisions it relies on, so a decision that exists only in chat blocks the hand-off until it is recorded. Before dispatch the orchestrator runs each Ask against a short checklist of the rules most often broken while one is being written — only the receiver's kind of work, every decision cited from freeflow, cite rather than retype, one task per dispatch — since nothing else raises them at that moment. Each hand-off can run several turns, the subagent asking back when unsure and the orchestrator asking follow-ups or, after verifying, for fixes. Coder's findings reach the formal graph only through grapher, and promotions happen in each task's finishing step.",
     "parent": "BlockNode:00CR3X3N00001",
     "type": "heading",
     "children": []
@@ -43586,6 +43588,5883 @@
     "title": "**`aperas update --text-only` always reports \"overflow prepended, no reconciliation\", even with zero overflow**",
     "text": "**`aperas update --text-only` always reports \"overflow prepended, no reconciliation\", even with zero overflow**: `kgUpdate.ts:444` prints that message unconditionally whenever `--text-only` is passed, not gated on whether any content actually followed the leading paragraph. Confirmed live: a bare single-line `--text-only` update against a disposable throwaway node printed the same message with nothing to prepend. Behavior is correct — nothing gets reconciled away either way — only the message is misleading. Found 2026-09-27.",
     "parent": "BlockNode:00CF2AEAX0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5H8001",
+    "@type": "BlockNode",
+    "title": "**Skill v4 — comprehensive rewrite to clear form across all roles (2026-09-28)**",
+    "text": "**Skill v4 — comprehensive rewrite to clear form across all roles (2026-09-28)**: user requested a rewrite of the entire skill suite to eliminate Claude-style rambling prose in favor of crisp, operational form. Bumped to major version v4 due to comprehensive restructuring across all four skill files (`aperas`, `aperas-orchestrator`, `aperas-coder`, `aperas-grapher`), committed in code repo as `fd574be`.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS0YM5H8002",
+      "BlockNode:00CS0YM5H8003",
+      "BlockNode:00CS0YM5H8004",
+      "BlockNode:00CS0YM5H8005",
+      "BlockNode:00CS0YM5HG000",
+      "BlockNode:00CS0YM5HG001",
+      "BlockNode:00CS0YM5HG002",
+      "BlockNode:00CS163NE8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS0YM5H8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS0YM5H8002:props:StringProp:00CS0YM9S0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS0YM5H8002:props:StringProp:00CS0YM9S0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Major version bump to v4**",
+    "text": "**Major version bump to v4**: comprehensive rewrite across all four skills rather than incremental delta items. In `discussion/aperas-skill.md`, major versions are recorded as a verbatim snapshot (`## v4 SKILL.md (verbatim)`) rather than an unwieldy list of delta items.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5H8003",
+    "@type": "BlockNode",
+    "title": "**Preserving four-level architecture**",
+    "text": "**Preserving four-level architecture**: kept Philosophy, Orientation, Discipline, Mechanics, but stripped rambling prose and restored the dense CLI cheatsheet, quick syntax table, and operational rules.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5H8004",
+    "@type": "BlockNode",
+    "title": "**Operational gates upfront**",
+    "text": "**Operational gates upfront**: base skill begins with the mandatory gate: NEVER START WITH file tools (`grep`, `view_file`, etc.) on `artifacts/**` before inspecting with `aperas` CLI. Orchestrator never investigates or modifies code at task start; code survey/changes are delegated to coder, with orchestrator touching code/diffs/tests strictly at Step 7 Verification.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5H8005",
+    "@type": "BlockNode",
+    "title": "**In-flight triage protocol**",
+    "text": "**In-flight triage protocol**: orchestrator checks `aperas profile list <p>` and inspects `<p>-coder-orchestrator` and `<p>-grapher-orchestrator` to resume in-flight work safely.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5HG000",
+    "@type": "BlockNode",
+    "title": "**Accurate bare relative path link resolution**",
+    "text": "**Accurate bare relative path link resolution**: verified directly from `monorepo/packages/core/src/apeironNgn/artifacts.ts` that bare relative paths (`./file.md`, `../folder/file.md`) resolve directly to `ArtifactNode`/`FolderNode` without `#fragment`.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5HG001",
+    "@type": "BlockNode",
+    "title": "**List item update semantics and Open Tool Gaps**",
+    "text": "**List item update semantics and Open Tool Gaps**: documented ordered list updating (`n. text`), position preservation, text blanking with bare `- `, and restored the Open Tool Gaps reference section.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS0YM5HG002",
+    "@type": "BlockNode",
+    "title": "**CLI invocation standard**",
+    "text": "**CLI invocation standard**: standard CLI commands documented as `aperas <verb>` with an insider development notice for `npm run aperas -- <verb>` in the development monorepo.",
+    "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CS1593MG001:links:Link:00CS1598A8000",
+        "@type": "Link",
+        "target": "BlockNode:00CS0YM5H8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CS1593MG001:links:Link:00CS1598A8000:props:StringProp:00CS1598A8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "245"
+          }
+        ]
+      }
+    ],
+    "title": "## v4 SKILL.md (verbatim, 2026-09-28)",
+    "text": "Dumped verbatim from the four v4 skill files, matching the snapshot convention used for prior major releases. Comprehensive rewrite across all four skills to eliminate verbose prose in favor of crisp operational clarity, committed as `fd574be` ([Skill v4 — comprehensive rewrite to clear form across all roles](#id/BlockNode:00CS0YM5H8001)).",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG002",
+      "BlockNode:00CS1593N001Q",
+      "BlockNode:00CS1593N8014",
+      "BlockNode:00CS1593NG00Y"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG002",
+    "@type": "BlockNode",
+    "title": "### aperas/SKILL.md",
+    "parent": "BlockNode:00CS1593MG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG003",
+      "BlockNode:00CS1593MG004",
+      "BlockNode:00CS1593MG005",
+      "BlockNode:00CS1593MG006",
+      "BlockNode:00CS1593MG007",
+      "BlockNode:00CS1593MG008",
+      "BlockNode:00CS1593MG00R",
+      "BlockNode:00CS1593MR010",
+      "BlockNode:00CS1593MR02A",
+      "BlockNode:00CS1593N001E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG003",
+    "@type": "BlockNode",
+    "title": "00CS1593MG003",
+    "text": "```\n---\nname: aperas\ndescription: >-\n  Before anything else in this project — first turn, every session, whatever the task looks like, including when it looks unrelated, trivial, read-only, or like one quick lookup — check memory for a standing decision on whether Aperas manages this session. Do this without loading this skill, and never ask permission to do it or offer it as an option; just do it. If a decision is recorded, follow it. If none is, ask with AskUserQuestion using exactly these choices — Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions' or 'never' durably, so a session-scoped answer is asked again next session. Load this skill only once the answer is yes, and with it `aperas-orchestrator` if you are the main agent, or the appropriate subagent skill (e.g. `aperas-grapher` or `aperas-coder`) if not. \n  Aperas is this project's external memory: a knowledge graph, worked through the `aperas` CLI, holding what has been decided, tried, found and planned, and the medium the three roles communicate through.\n---\n```",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG004",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4** — Base skill for all Aperas roles.",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG005",
+    "@type": "BlockNode",
+    "title": "00CS1593MG005",
+    "text": "Aperas is an evidence-based knowledge-graph documentation system. This skill establishes the common mental model, traversal discipline, multi-agent protocol, and CLI mechanics used across all roles (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`).",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG006",
+    "@type": "BlockNode",
+    "title": "00CS1593MG006",
+    "text": "> **Aperas-repo insiders**: `aperas` is published as a package (`npm install -g aperas`), but this repo develops it from source. Running bare `aperas <verb>` invokes whatever is globally installed, not your local changes. Run commands from `Aperas/monorepo/` as:\n> ```bash\n> npm run aperas -- <verb> ...\n> ```\n> In normal projects using the published tool, run bare `aperas <verb> ...`.",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG007",
+    "@type": "BlockNode",
+    "title": "00CS1593MG007",
+    "text": "---",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG008",
+    "@type": "BlockNode",
+    "title": "#### 1. Philosophy",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG009",
+      "BlockNode:00CS1593MG00E",
+      "BlockNode:00CS1593MG00H",
+      "BlockNode:00CS1593MG00M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG009",
+    "@type": "BlockNode",
+    "title": "##### The Apeiron is the source; `.md` files under `artifacts/` are shadows it casts",
+    "parent": "BlockNode:00CS1593MG008",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG00A",
+      "BlockNode:00CS1593MG00B",
+      "BlockNode:00CS1593MG00C",
+      "BlockNode:00CS1593MG00D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00A",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MG00A:props:StringProp:00CS1597T0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MG00A:props:StringProp:00CS1597T0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MG00A",
+    "text": "Projections can be regenerated from the graph at any time.",
+    "parent": "BlockNode:00CS1593MG009",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00B",
+    "@type": "BlockNode",
+    "title": "00CS1593MG00B",
+    "text": "A projected markdown file is never where a change is made, and never where a question is answered.",
+    "parent": "BlockNode:00CS1593MG009",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00C",
+    "@type": "BlockNode",
+    "title": "00CS1593MG00C",
+    "text": "Modifying a projection mistakes the shadow for the source. Reading it gives text stripped of links, backlinks, and graph position.",
+    "parent": "BlockNode:00CS1593MG009",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00D",
+    "@type": "BlockNode",
+    "title": "00CS1593MG00D",
+    "text": "Projections on disk can be **unprojected or stale**. Graph truth lives only in Apeiron.",
+    "parent": "BlockNode:00CS1593MG009",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00E",
+    "@type": "BlockNode",
+    "title": "##### A claim and its provenance are one object",
+    "parent": "BlockNode:00CS1593MG008",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG00F",
+      "BlockNode:00CS1593MG00G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00F",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MG00F:props:StringProp:00CS1597T8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MG00F:props:StringProp:00CS1597T8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MG00F",
+    "text": "A claim without a link to its source/evidence is incomplete.",
+    "parent": "BlockNode:00CS1593MG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00G",
+    "@type": "BlockNode",
+    "title": "00CS1593MG00G",
+    "text": "Readers must be able to drill down into the supporting evidence subgraph via forward links or backlinks. One of the two must exist before a claim is left in place.",
+    "parent": "BlockNode:00CS1593MG00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00H",
+    "@type": "BlockNode",
+    "title": "##### Substance matures",
+    "parent": "BlockNode:00CS1593MG008",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG00J",
+      "BlockNode:00CS1593MG00K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MG00J:props:StringProp:00CS1597T8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MG00J:props:StringProp:00CS1597TG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Content Axis**",
+    "text": "**Content Axis**: Formless prose hardens from `discussion` Freeflow into typed concerns (`design`, `issues`, `planning`, `history`).",
+    "parent": "BlockNode:00CS1593MG00H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00K",
+    "@type": "BlockNode",
+    "title": "**Topology Axis**",
+    "text": "**Topology Axis**: Relationships begin mediated by discussion nodes citing both ends; as they prove load-bearing, they crystallize into direct citations.",
+    "parent": "BlockNode:00CS1593MG00H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00M",
+    "@type": "BlockNode",
+    "title": "##### System memory over human memory",
+    "parent": "BlockNode:00CS1593MG008",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG00N",
+      "BlockNode:00CS1593MG00P",
+      "BlockNode:00CS1593MG00Q"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00N",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MG00N:props:StringProp:00CS1597TG001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MG00N:props:StringProp:00CS1597TG002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MG00N",
+    "text": "Nobody working this graph will remember across weeks or context windows.",
+    "parent": "BlockNode:00CS1593MG00M",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00P",
+    "@type": "BlockNode",
+    "title": "00CS1593MG00P",
+    "text": "The graph is not just a passive repository; it actively notices structural gaps and omissions unbidden (via queries, checks, and backlinks).",
+    "parent": "BlockNode:00CS1593MG00M",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00Q",
+    "@type": "BlockNode",
+    "title": "00CS1593MG00Q",
+    "text": "---",
+    "parent": "BlockNode:00CS1593MG00M",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00R",
+    "@type": "BlockNode",
+    "title": "#### 2. Orientation",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MG00S",
+      "BlockNode:00CS1593MR001",
+      "BlockNode:00CS1593MR00C",
+      "BlockNode:00CS1593MR00R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MG00S",
+    "@type": "BlockNode",
+    "title": "##### Mandatory Initial Gate",
+    "parent": "BlockNode:00CS1593MG00R",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR000",
+    "@type": "BlockNode",
+    "title": "00CS1593MR000",
+    "text": "> [!CRITICAL]\n> **NEVER START WITH** file-reading tools (`view_file`, `cat`, `head`, `grep_search`) on any path under `artifacts/` before inspecting the graph via `aperas`.\n> An `artifacts/**.md` path in your hand is a **node reference**, not a file path.",
+    "parent": "BlockNode:00CS1593MG00S",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR001",
+    "@type": "BlockNode",
+    "title": "##### Three Traversal Directions",
+    "text": "Every graph traversal moves along three distinct axes:",
+    "parent": "BlockNode:00CS1593MG00R",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR002",
+      "BlockNode:00CS1593MR005",
+      "BlockNode:00CS1593MR008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR002:props:StringProp:00CS1597TR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR002:props:StringProp:00CS1597TR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Forward & Downward (Deeper Content)**",
+    "text": "**Forward & Downward (Deeper Content)**:",
+    "parent": "BlockNode:00CS1593MR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR003",
+      "BlockNode:00CS1593MR004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR003:props:StringProp:00CS1597TR002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR003:props:StringProp:00CS1597TR003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "A block's children and outgoing links",
+    "text": "A block's children and outgoing links: what it is made of and what it refers to.",
+    "parent": "BlockNode:00CS1593MR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR004",
+    "@type": "BlockNode",
+    "title": "Command",
+    "text": "Command: `aperas unfold <ref>`",
+    "parent": "BlockNode:00CS1593MR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR005",
+    "@type": "BlockNode",
+    "title": "**Upward (Surrounding Context)**",
+    "text": "**Upward (Surrounding Context)**:",
+    "parent": "BlockNode:00CS1593MR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR006",
+      "BlockNode:00CS1593MR007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR006:props:StringProp:00CS1597TR004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR006:props:StringProp:00CS1597V0000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Ancestors",
+    "text": "Ancestors: the heading it sits under, the thread it belongs to.",
+    "parent": "BlockNode:00CS1593MR005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR007",
+    "@type": "BlockNode",
+    "title": "00CS1593MR007",
+    "text": "Climb a level at a time and stop once the block's meaning stabilizes.",
+    "parent": "BlockNode:00CS1593MR005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR008",
+    "@type": "BlockNode",
+    "title": "**Backward (Deeper Context: Dependents & Sources)**",
+    "text": "**Backward (Deeper Context: Dependents & Sources)**:",
+    "parent": "BlockNode:00CS1593MR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR009",
+      "BlockNode:00CS1593MR00A",
+      "BlockNode:00CS1593MR00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR009",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR009:props:StringProp:00CS1597V0001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR009:props:StringProp:00CS1597V0002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR009",
+    "text": "What relies on this block (impact) and what it rests on (provenance).",
+    "parent": "BlockNode:00CS1593MR008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00A",
+    "@type": "BlockNode",
+    "title": "Command",
+    "text": "Command: `aperas backlinks <id> --text`",
+    "parent": "BlockNode:00CS1593MR008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00B",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00B",
+    "text": "Deep read follows sources; **deep write is inherently backward** (you must inspect what a change breaks or makes stale).",
+    "parent": "BlockNode:00CS1593MR008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00C",
+    "@type": "BlockNode",
+    "title": "##### Entering the Corpus",
+    "text": "Choose an entry strategy based on your starting point:",
+    "parent": "BlockNode:00CS1593MG00R",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR00D",
+      "BlockNode:00CS1593MR00H",
+      "BlockNode:00CS1593MR00Q"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00D",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR00D:props:StringProp:00CS1597V0003",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR00D:props:StringProp:00CS1597V8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Top-Down (Frame, then zoom in)**",
+    "text": "**Top-Down (Frame, then zoom in)**:",
+    "parent": "BlockNode:00CS1593MR00C",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR00E",
+      "BlockNode:00CS1593MR00F",
+      "BlockNode:00CS1593MR00G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00E",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR00E:props:StringProp:00CS1597V8001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR00E:props:StringProp:00CS1597V8002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR00E",
+    "text": "Start at `design/<concern>.md` for settled architecture.",
+    "parent": "BlockNode:00CS1593MR00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00F",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00F",
+    "text": "Move through `issues/` and `history/` for open and landed items.",
+    "parent": "BlockNode:00CS1593MR00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00G",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00G",
+    "text": "Check `discussion/` for reasoning trails before looking at code.",
+    "parent": "BlockNode:00CS1593MR00D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00H",
+    "@type": "BlockNode",
+    "title": "**Bottom-Up (Pinpoint, then zoom out)**",
+    "text": "**Bottom-Up (Pinpoint, then zoom out)**:",
+    "parent": "BlockNode:00CS1593MR00C",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR00J",
+      "BlockNode:00CS1593MR00N",
+      "BlockNode:00CS1593MR00P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR00J:props:StringProp:00CS1597V8003",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR00J:props:StringProp:00CS1597V8004",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR00J",
+    "text": "Grep a concrete symbol, filename, or error string in the raw store:",
+    "parent": "BlockNode:00CS1593MR00H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR00K",
+      "BlockNode:00CS1593MR00M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00K",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00K",
+    "text": "```bash\n    grep -n -C3 '<identifier>' AperasKG/Apeiron/BlockNode.jsonld\n    ```",
+    "parent": "BlockNode:00CS1593MR00J",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00M",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00M",
+    "text": "`-C3` context is essential to capture the `@id` line and surrounding fields (which vary in position).",
+    "parent": "BlockNode:00CS1593MR00J",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00N",
+    "@type": "BlockNode",
+    "title": "Unfold the matching candidate node",
+    "text": "Unfold the matching candidate node: `aperas unfold <id>`.",
+    "parent": "BlockNode:00CS1593MR00H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00P",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00P",
+    "text": "Climb upward via its forward links until you reach `design`.",
+    "parent": "BlockNode:00CS1593MR00H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00Q",
+    "@type": "BlockNode",
+    "title": "**Finding Drift**",
+    "text": "**Finding Drift**: Drift is the discrepancy where top-down design and bottom-up code/findings meet. Run both directions to confirm alignment.",
+    "parent": "BlockNode:00CS1593MR00C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00R",
+    "@type": "BlockNode",
+    "title": "##### View Triage & Management",
+    "parent": "BlockNode:00CS1593MG00R",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR00S",
+      "BlockNode:00CS1593MR00T",
+      "BlockNode:00CS1593MR00W",
+      "BlockNode:00CS1593MR00Y",
+      "BlockNode:00CS1593MR00Z"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00S",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR00S:props:StringProp:00CS1597VG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR00S:props:StringProp:00CS1597VG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR00S",
+    "text": "Views provide structured lenses into the graph.",
+    "parent": "BlockNode:00CS1593MR00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00T",
+    "@type": "BlockNode",
+    "title": "**Triage active views**",
+    "text": "**Triage active views**:",
+    "parent": "BlockNode:00CS1593MR00R",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR00V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00V",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00V",
+    "text": "```bash\n  aperas profile list <profile>   # e.g. antigravity or claude\n  aperas tree --view <view-name>\n  ```",
+    "parent": "BlockNode:00CS1593MR00T",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00W",
+    "@type": "BlockNode",
+    "title": "**Manage views**",
+    "text": "**Manage views**:",
+    "parent": "BlockNode:00CS1593MR00R",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR00X"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00X",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00X",
+    "text": "```bash\n  aperas profile create-view <name> --profile <handle>\n  aperas unfold <ref> --view <name> --flush\n  aperas fold <ref> --view <name> --flush\n  ```",
+    "parent": "BlockNode:00CS1593MR00W",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00Y",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00Y",
+    "text": "Keep views scoped per task. A view left pointing at last session's work is worse than no view.",
+    "parent": "BlockNode:00CS1593MR00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR00Z",
+    "@type": "BlockNode",
+    "title": "00CS1593MR00Z",
+    "text": "---",
+    "parent": "BlockNode:00CS1593MR00R",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR010",
+    "@type": "BlockNode",
+    "title": "#### 3. Discipline",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR011",
+      "BlockNode:00CS1593MR014",
+      "BlockNode:00CS1593MR01E",
+      "BlockNode:00CS1593MR01P",
+      "BlockNode:00CS1593MR01V",
+      "BlockNode:00CS1593MR01Y",
+      "BlockNode:00CS1593MR023"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR011",
+    "@type": "BlockNode",
+    "title": "##### Three Roles, One Graph",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR012",
+      "BlockNode:00CS1593MR013"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR012",
+    "@type": "BlockNode",
+    "title": "00CS1593MR012",
+    "text": "| Role | Runs As | Writes | Reads |\n|---|---|---|---|\n| **Orchestrator** | Active session | `discussion` Freeflow, thread `**Ask**` nodes | Graph, threads, **and source code/diffs/tests during Verification** |\n| **Grapher** | Subagent | Everything else in graph (deep read/write, promotions, thread lifecycle) | Graph, thread reports |\n| **Coder** | Subagent | Source code, `.threads/coder.md` | Source code, graph context |",
+    "parent": "BlockNode:00CS1593MR011",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR013",
+    "@type": "BlockNode",
+    "title": "00CS1593MR013",
+    "text": "> [!CRITICAL]\n> **Orchestrator Role Gate**:\n> **NEVER START WITH** surveying or modifying source code when a task begins. Always delegate initial graph and code surveys to the Grapher and Coder subagents.\n> The Orchestrator inspects source code, git diffs, and test outputs **ONLY at the Verification stage** (Step 7 of the task loop).",
+    "parent": "BlockNode:00CS1593MR011",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR014",
+    "@type": "BlockNode",
+    "title": "##### The Task Loop (9 Steps)",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR015",
+      "BlockNode:00CS1593MR016",
+      "BlockNode:00CS1593MR017",
+      "BlockNode:00CS1593MR018",
+      "BlockNode:00CS1593MR019",
+      "BlockNode:00CS1593MR01A",
+      "BlockNode:00CS1593MR01B",
+      "BlockNode:00CS1593MR01C",
+      "BlockNode:00CS1593MR01D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR015",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR015:props:StringProp:00CS1597W0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR015:props:StringProp:00CS1597W0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Open Task**",
+    "text": "**Open Task**: Orchestrator creates `## <topic>` and `### <task>` in `.threads/grapher.md` and `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR016",
+    "@type": "BlockNode",
+    "title": "**Grapher Survey**",
+    "text": "**Grapher Survey**: Grapher surveys graph context (design, issues, drift), writes Report in `.threads/grapher.md`.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR017",
+    "@type": "BlockNode",
+    "title": "**Orchestrator Review**",
+    "text": "**Orchestrator Review**: Orchestrator reads Grapher Report (`aperas tree --view <p>-grapher-orchestrator`).",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR018",
+    "@type": "BlockNode",
+    "title": "**Coder Survey**",
+    "text": "**Coder Survey**: Orchestrator asks Coder to map code behavior (no code edits). Coder reports in `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR019",
+    "@type": "BlockNode",
+    "title": "**Grapher Files Survey**",
+    "text": "**Grapher Files Survey**: Grapher records Coder findings into graph.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01A",
+    "@type": "BlockNode",
+    "title": "**Coder Change**",
+    "text": "**Coder Change**: Coder applies fix and runs tests, reporting diff and results.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01B",
+    "@type": "BlockNode",
+    "title": "**Orchestrator Verification**",
+    "text": "**Orchestrator Verification**: Orchestrator verifies diff and test output directly (`npm run verify`).",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01C",
+    "@type": "BlockNode",
+    "title": "**Grapher Files Result**",
+    "text": "**Grapher Files Result**: Grapher promotes findings, marks issues resolved.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01D",
+    "@type": "BlockNode",
+    "title": "**Finishing Turn**",
+    "text": "**Finishing Turn**: Repeat steps 6–8 as needed, then Grapher executes the finishing turn.",
+    "parent": "BlockNode:00CS1593MR014",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01E",
+    "@type": "BlockNode",
+    "title": "##### Thread Structure (`.threads/{grapher,coder}.md`)",
+    "text": "Threads are stored under `.threads/` and are **Git-ignored**. Nothing above the thread tier links into a thread.",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR01F",
+      "BlockNode:00CS1593MR01G",
+      "BlockNode:00CS1593MR01H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01F",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01F",
+    "text": "A thread represents the complete working memory of a subagent across turns. When starting a fresh thread or continuing an existing one, use this tree structure:",
+    "parent": "BlockNode:00CS1593MR01E",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01G",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01G",
+    "text": "```markdown\n# Grapher thread                              ← H1: role thread root (in fresh thread)\n## <topic>                                   ← H2: named by the user\n### <task>                                   ← H3: set by the orchestrator\n#### Turn <n>                                ← H4: one exchange with the orchestrator\n- **Ask**: <what is wanted, in a sentence>   ← orchestrator; root of <p>-orchestrator-grapher\n  - [<argument>](../design/x.md#id/BlockNode:…) — why it matters here\n- **Work**: <the approach, in a line>        ← subagent; subturns nested under it\n  - <subturn 1: batch progress and exact tool results>\n  - <subturn 2: files inspected, lines, failure output>\n- **Report**: <the outcome, in a sentence>   ← subagent; root of <p>-grapher-orchestrator\n  - [<changed or found node>](…) — what changed, or what it shows\n  - **Question**: <whatever the Ask left unsettled>\n  - **Tool gap — <what>**: <a workaround built, a call that failed or hung>\n  - **Tool gap — <what else>**: <a second one, if the turn hit more than one>\n```",
+    "parent": "BlockNode:00CS1593MR01E",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01H",
+    "@type": "BlockNode",
+    "title": "###### Core Thread Disciplines",
+    "parent": "BlockNode:00CS1593MR01E",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR01J",
+      "BlockNode:00CS1593MR01K",
+      "BlockNode:00CS1593MR01M",
+      "BlockNode:00CS1593MR01N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR01J:props:StringProp:00CS1597WG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR01J:props:StringProp:00CS1597WG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**A follow-up is a new turn, not an edit to an old one**",
+    "text": "**A follow-up is a new turn, not an edit to an old one**: Never mutate prior turns to add follow-up work.",
+    "parent": "BlockNode:00CS1593MR01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01K",
+    "@type": "BlockNode",
+    "title": "**Every turn has subturns**",
+    "text": "**Every turn has subturns**: At least one per batch of tool calls. Record the essence of each tool result (failing line numbers, node IDs, counts, filenames) — not just \"ran tests\".",
+    "parent": "BlockNode:00CS1593MR01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01M",
+    "@type": "BlockNode",
+    "title": "**Record friction**",
+    "text": "**Record friction**: Record workarounds, retries, and tool failures under distinct `**Tool gap — <topic>**` lead-ins (identical lead-ins collide on slug generation).",
+    "parent": "BlockNode:00CS1593MR01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01N",
+    "@type": "BlockNode",
+    "title": "**Ask back instead of guessing**",
+    "text": "**Ask back instead of guessing**: Not only against the Ask, but for **anything unsure during execution** — unexpected code behaviors, conflicting requirements or evidence, missing schemas/dependencies, architectural trade-offs, or unexpected tool failures — the subagent **must stop and ask back** via a `**Question**` in its Report rather than making speculative assumptions. Guessing wastes full round trips and creates technical debt.",
+    "parent": "BlockNode:00CS1593MR01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01P",
+    "@type": "BlockNode",
+    "title": "##### Hand-Off Views & Zooming",
+    "text": "The view carries the graph state (`this`); the chat message carries only control and pointers.",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR01Q",
+      "BlockNode:00CS1593MR01R",
+      "BlockNode:00CS1593MR01S",
+      "BlockNode:00CS1593MR01T"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01Q",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01Q",
+    "text": "| View Name | Owner | Faces | Rooted On |\n|---|---|---|---|\n| `<p>-<topic>` | Orchestrator | User | `discussion/<topic>.md` `## Dashboard` |\n| `<p>-orchestrator-grapher` | Orchestrator | Grapher | Current Ask in `.threads/grapher.md` |\n| `<p>-orchestrator-coder` | Orchestrator | Coder | Current Ask in `.threads/coder.md` |\n| `<p>-grapher-orchestrator` | Grapher | Orchestrator | Current Report in `.threads/grapher.md` |\n| `<p>-coder-orchestrator` | Coder | Orchestrator | Current Report in `.threads/coder.md` |",
+    "parent": "BlockNode:00CS1593MR01P",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01R",
+    "@type": "BlockNode",
+    "title": "**Zooming Rule**",
+    "text": "**Zooming Rule**: On every hand-off, zoom the view onto the current turn's root (`**Ask**` or `**Report**`):",
+    "parent": "BlockNode:00CS1593MR01P",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01S",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01S",
+    "text": "```bash\naperas zoom <turn-node-id> --view <view-name> --flush\n```",
+    "parent": "BlockNode:00CS1593MR01P",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01T",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01T",
+    "text": "The receiver always reads `aperas tree --view <sender-view>` before doing any work.",
+    "parent": "BlockNode:00CS1593MR01P",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01V",
+    "@type": "BlockNode",
+    "title": "##### Every Claim Carries Its Source",
+    "text": "Before leaving a claim in place (a freeflow finding, thread report, or formal doc entry), confirm its provenance:",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR01W",
+      "BlockNode:00CS1593MR01X"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01W",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR01W:props:StringProp:00CS1597WR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR01W:props:StringProp:00CS1597WR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR01W",
+    "text": "Threads and freeflow cite forward to what they rest on.",
+    "parent": "BlockNode:00CS1593MR01V",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01X",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01X",
+    "text": "Formal doc entries are checked via `aperas backlinks <id> --text` to confirm supporting links exist.",
+    "parent": "BlockNode:00CS1593MR01V",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01Y",
+    "@type": "BlockNode",
+    "title": "##### Citation Direction & Gradients",
+    "text": "The concern taxonomy forms a strict abstraction gradient:",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR01Z",
+      "BlockNode:00CS1593MR020",
+      "BlockNode:00CS1593MR021",
+      "BlockNode:00CS1593MR022"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR01Z",
+    "@type": "BlockNode",
+    "title": "00CS1593MR01Z",
+    "text": "```\ndesign (most abstract)\n  ↑\nissues / planning / history\n  ↑\nconcepts.md\n  ↑\ndiscussion\n  ↑\nthreads (least abstract — Git-ignored)\n```",
+    "parent": "BlockNode:00CS1593MR01Y",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR020",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR020:props:StringProp:00CS1597X0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR020:props:StringProp:00CS1597X0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR020",
+    "text": "Citations may point **UP** or **SIDEWAYS**.",
+    "parent": "BlockNode:00CS1593MR01Y",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR021",
+    "@type": "BlockNode",
+    "title": "00CS1593MR021",
+    "text": "Citations must **NEVER point DOWN** (except normative singular references, such as a doc's `# Context` section).",
+    "parent": "BlockNode:00CS1593MR01Y",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR022",
+    "@type": "BlockNode",
+    "title": "00CS1593MR022",
+    "text": "Nothing above the thread tier may link into `.threads/`. Content reaches the graph from threads by the Grapher copying it up, never by citation.",
+    "parent": "BlockNode:00CS1593MR01Y",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR023",
+    "@type": "BlockNode",
+    "title": "##### Stage Each Verified Step",
+    "parent": "BlockNode:00CS1593MR010",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR024",
+      "BlockNode:00CS1593MR027",
+      "BlockNode:00CS1593MR028",
+      "BlockNode:00CS1593MR029"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR024",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR024:props:StringProp:00CS1597X0002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR024:props:StringProp:00CS1597X8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "After each verified mutation, stage changes immediately with `git add`",
+    "text": "After each verified mutation, stage changes immediately with `git add`:",
+    "parent": "BlockNode:00CS1593MR023",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR025",
+      "BlockNode:00CS1593MR026"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR025",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR025:props:StringProp:00CS1597X8001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR025:props:StringProp:00CS1597X8002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR025",
+    "text": "Code changes in the code repo.",
+    "parent": "BlockNode:00CS1593MR024",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR026",
+    "@type": "BlockNode",
+    "title": "00CS1593MR026",
+    "text": "Graph mutations in `AperasKG/`.",
+    "parent": "BlockNode:00CS1593MR024",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR027",
+    "@type": "BlockNode",
+    "title": "**Important Rationale**",
+    "text": "**Important Rationale**: Staging creates a running checkpoint for **your own recovery when an operation goes wrong (usually!)**. If a subsequent command misreconciles or corrupts state, `git restore` / `git diff` against the staged index recovers cleanly.",
+    "parent": "BlockNode:00CS1593MR023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR028",
+    "@type": "BlockNode",
+    "title": "00CS1593MR028",
+    "text": "**Staging only, never commit** (`git commit` is reserved for the user).",
+    "parent": "BlockNode:00CS1593MR023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR029",
+    "@type": "BlockNode",
+    "title": "00CS1593MR029",
+    "text": "---",
+    "parent": "BlockNode:00CS1593MR023",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02A",
+    "@type": "BlockNode",
+    "title": "#### 4. Mechanics",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02B",
+      "BlockNode:00CS1593MR02D",
+      "BlockNode:00CS1593MR02F",
+      "BlockNode:00CS1593MR02J",
+      "BlockNode:00CS1593MR02S",
+      "BlockNode:00CS1593MR02W",
+      "BlockNode:00CS1593MR030",
+      "BlockNode:00CS1593MR033",
+      "BlockNode:00CS1593MR03B",
+      "BlockNode:00CS1593N0003",
+      "BlockNode:00CS1593N0008",
+      "BlockNode:00CS1593N000C",
+      "BlockNode:00CS1593N000H",
+      "BlockNode:00CS1593N000M",
+      "BlockNode:00CS1593N000S",
+      "BlockNode:00CS1593N000W",
+      "BlockNode:00CS1593N000Z",
+      "BlockNode:00CS1593N0012",
+      "BlockNode:00CS1593N0015",
+      "BlockNode:00CS1593N0017",
+      "BlockNode:00CS1593N001B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02B",
+    "@type": "BlockNode",
+    "title": "##### Quick Syntax & Command Reference",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02C",
+    "@type": "BlockNode",
+    "title": "00CS1593MR02C",
+    "text": "| Operation | Command Pattern | Key Rule / Note |\n|---|---|---|\n| **Peek Node** | `aperas unfold <ref>` | Read-only peek; does not mutate view |\n| **Unfold into View** | `aperas unfold <ref> --view <name> --flush` | Adds `<ref>` to view's unfolds set |\n| **Inspect Backlinks** | `aperas backlinks <id> --text` | Inspects dependents and provenance |\n| **Render View Tree** | `aperas tree --view <name>` | Renders structured lens of the view |\n| **Raw Stored Text** | `aperas show <ref> --text` | Exact stored text undecorated (safe for editing) |\n| **Full Node State** | `aperas show <ref>` | Inspects props, tombstonedAt, links, parent, children |\n| **Insert Turn Node** | `cat ask.md \\| aperas insert <turn-id> --flush` | Appends Ask/Report node to turn heading |\n| **Zoom View** | `aperas zoom <node-id> --view <name> --flush` | Re-roots view onto current Ask or Report |\n| **Retitle Heading** | `echo \"## Title\" \\| aperas update <id> --text-only --flush` | **Must use `--text-only`** to preserve child blocks |\n| **Update List Item** | `echo \"text\" \\| aperas update <id> --flush` | Bare text replaces text and children |\n| **Clear Checkbox** | `echo \"- text\" \\| aperas update <id> --flush` | Bare bullet `- ` removes checkbox entirely |\n| **Insert List Item** | `echo \"- text\" \\| aperas insert <parent> --after <sibling> --flush` | Unordered items **must include bullet `- `** |\n| **Reposition Node** | `aperas insert <node-id> --after <anchor-id> --flush` | **No stdin piped** moves node without reminting ID |\n| **Retype Block** | `aperas retype <ref> --to <type>` | In-place kind change (`h1`..`h6`, `listItem`, etc.) |\n| **Sweep Links** | `aperas check-links` (or `--repair`) | Verifies internal wikilink integrity |\n| **Restart Service** | `aperas service restart` | Flushes and restarts daemon from disk |\n| **Reload Disk State** | `aperas reload -- --discard` | Clears memory orphans after failed insert |",
+    "parent": "BlockNode:00CS1593MR02B",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02D",
+    "@type": "BlockNode",
+    "title": "##### Common Command Patterns",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02E",
+    "@type": "BlockNode",
+    "title": "00CS1593MR02E",
+    "text": "```bash\n# 1. Traversal & Inspection\naperas unfold <ref>                           # Read-only peek\naperas unfold <ref> --view <name> --flush     # Unfold into view\naperas backlinks <id> --text                  # Inspect backlinks and provenance\naperas tree --view <name>                     # Render view tree\naperas show <ref> --text                      # Stored text only (undecorated)\n\n# 2. Turns & Hand-Off Zooming\ncat ask.md | aperas insert <turn-id> --flush  # Insert Ask/Report node\naperas zoom <node-id> --view <name> --flush   # Re-root view onto node\n\n# 3. Safe Edits\necho \"## New Title\" | aperas update <heading-id> --text-only --flush   # Heading update\necho \"Updated content\" | aperas update <item-id> --flush               # List item update\necho \"- New child\" | aperas insert <parent-id> --after <sibling-id> --flush # List item insert\n\n# 4. Service & Integrity\naperas check-links                            # Sweep internal link integrity\naperas check-links --repair                   # Re-resolve and persist repairs\naperas service restart                        # Flush and restart service daemon\naperas reload -- --discard                    # Discard memory state and re-read disk\n```",
+    "parent": "BlockNode:00CS1593MR02D",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02F",
+    "@type": "BlockNode",
+    "title": "##### Path Resolution",
+    "text": "Paths passed to `aperas` CLI resolve relative to the graph's `artifacts` root defined in `aperas.config.json` (e.g. `discussion/foo.md` relative to `AperasKG/artifacts/`).",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02G",
+      "BlockNode:00CS1593MR02H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02G",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR02G:props:StringProp:00CS1597XR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR02G:props:StringProp:00CS1597XR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**CORRECT**",
+    "text": "**CORRECT**: `aperas project discussion/foo.md`",
+    "parent": "BlockNode:00CS1593MR02F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02H",
+    "@type": "BlockNode",
+    "title": "**INCORRECT**",
+    "text": "**INCORRECT**: `aperas project AperasKG/artifacts/discussion/foo.md` (fails with \"No ingested ArtifactNode or FolderNode found\").",
+    "parent": "BlockNode:00CS1593MR02F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02J",
+    "@type": "BlockNode",
+    "title": "##### Wikilink & Link Syntax",
+    "text": "The link resolver recognizes:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02K",
+      "BlockNode:00CS1593MR02M",
+      "BlockNode:00CS1593MR02Q",
+      "BlockNode:00CS1593MR02R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02K",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR02K:props:StringProp:00CS1597XR002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR02K:props:StringProp:00CS1597XR003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Bare relative paths** (`./file.md` or `../folder/file.md`)",
+    "text": "**Bare relative paths** (`./file.md` or `../folder/file.md`): Resolve directly to the whole target `ArtifactNode` or `FolderNode`. No fragment needed when citing an entire document or folder.",
+    "parent": "BlockNode:00CS1593MR02J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02M",
+    "@type": "BlockNode",
+    "title": "**Fragment links** (`path#id/BlockNode:<ID>` or `path#anchor`)",
+    "text": "**Fragment links** (`path#id/BlockNode:<ID>` or `path#anchor`): Required when linking to a specific block or heading *within* an artifact.",
+    "parent": "BlockNode:00CS1593MR02J",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR02N",
+      "BlockNode:00CS1593MR02P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02N",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR02N:props:StringProp:00CS1597XR004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR02N:props:StringProp:00CS1597XR005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Direct node ID",
+    "text": "Direct node ID: `[Title](../folder/file.md#id/BlockNode:<ID>)` (unambiguous, preferred).",
+    "parent": "BlockNode:00CS1593MR02M",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02P",
+    "@type": "BlockNode",
+    "title": "Anchor match",
+    "text": "Anchor match: `[Title](../folder/file.md#heading-title)` (matches `name='...' class='aperas-anchor'`).",
+    "parent": "BlockNode:00CS1593MR02M",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02Q",
+    "@type": "BlockNode",
+    "title": "**Scheme prefixes**",
+    "text": "**Scheme prefixes**: `[[code]]`, `aperas://tree/<path>`, or `aperas://id/<ID>`.",
+    "parent": "BlockNode:00CS1593MR02J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02R",
+    "@type": "BlockNode",
+    "title": "*Note*",
+    "text": "*Note*: An internal block link without `#id/...` or `#anchor` resolves to the whole document, not the specific block. Always verify block-level links with `aperas backlinks BlockNode:<ID> --text` on the target block.",
+    "parent": "BlockNode:00CS1593MR02J",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02S",
+    "@type": "BlockNode",
+    "title": "##### Anchor Placement — The Bold-Colon Rule",
+    "text": "In list items, the lead-in colon must sit **outside** the bold span:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02T",
+      "BlockNode:00CS1593MR02V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02T",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR02T:props:StringProp:00CS1597Y0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR02T:props:StringProp:00CS1597Y0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR02T",
+    "text": "`**Term**: text` (CORRECT)",
+    "parent": "BlockNode:00CS1593MR02S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02V",
+    "@type": "BlockNode",
+    "title": "00CS1593MR02V",
+    "text": "`**Term:** text` (INCORRECT — rejected by lead-in detector; anchor gets spliced into random text).",
+    "parent": "BlockNode:00CS1593MR02S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02W",
+    "@type": "BlockNode",
+    "title": "##### Sketching a Structure",
+    "text": "Build new headings or subtrees directly in the graph with zero disk-first authoring:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR02X",
+      "BlockNode:00CS1593MR02Z"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02X",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR02X:props:StringProp:00CS1597Y8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR02X:props:StringProp:00CS1597Y8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Create placeholder node",
+    "text": "Create placeholder node:",
+    "parent": "BlockNode:00CS1593MR02W",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR02Y"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02Y",
+    "@type": "BlockNode",
+    "title": "00CS1593MR02Y",
+    "text": "```bash\n   aperas resolve --create-holder <path> --titles \"<Heading Title>\"\n   ```",
+    "parent": "BlockNode:00CS1593MR02X",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR02Z",
+    "@type": "BlockNode",
+    "title": "00CS1593MR02Z",
+    "text": "Populate content using `aperas update` and `aperas insert`.",
+    "parent": "BlockNode:00CS1593MR02W",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR030",
+    "@type": "BlockNode",
+    "title": "##### `--after` and `--before` Anchors",
+    "text": "The anchor node must be a **direct child** of `<path>`, not a descendant:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR031",
+      "BlockNode:00CS1593MR032"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR031",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR031:props:StringProp:00CS1597Y8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR031:props:StringProp:00CS1597Y8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR031",
+    "text": "Check tree structure first via `aperas tree` or `aperas show <path>`.",
+    "parent": "BlockNode:00CS1593MR030",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR032",
+    "@type": "BlockNode",
+    "title": "00CS1593MR032",
+    "text": "If an anchor is invalid, the insert fails after hydrating nodes into memory, leaving live orphans. Recover by running `aperas reload -- --discard`.",
+    "parent": "BlockNode:00CS1593MR030",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR033",
+    "@type": "BlockNode",
+    "title": "##### Inserting into Lists",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR034",
+      "BlockNode:00CS1593MR038"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR034",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR034:props:StringProp:00CS1597YG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR034:props:StringProp:00CS1597YG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Unordered Lists**",
+    "text": "**Unordered Lists**:",
+    "parent": "BlockNode:00CS1593MR033",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR035",
+      "BlockNode:00CS1593MR037"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR035",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR035:props:StringProp:00CS1597YG002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR035:props:StringProp:00CS1597YG003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Pipe bare text **with its bullet marker**",
+    "text": "Pipe bare text **with its bullet marker**:",
+    "parent": "BlockNode:00CS1593MR034",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR036"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR036",
+    "@type": "BlockNode",
+    "title": "00CS1593MR036",
+    "text": "```bash\n    echo \"- new item\" | aperas insert <parent-id> --after <sibling-id> --flush\n    ```",
+    "parent": "BlockNode:00CS1593MR035",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR037",
+    "@type": "BlockNode",
+    "title": "**Never pipe plain text without a bullet**",
+    "text": "**Never pipe plain text without a bullet**: it parses as a paragraph, breaking the list run.",
+    "parent": "BlockNode:00CS1593MR034",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR038",
+    "@type": "BlockNode",
+    "title": "**Ordered Lists**",
+    "text": "**Ordered Lists**:",
+    "parent": "BlockNode:00CS1593MR033",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR039",
+      "BlockNode:00CS1593MR03A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR039",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR039:props:StringProp:00CS1597YG004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR039:props:StringProp:00CS1597YG005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR039",
+    "text": "Appending at the end is safe when the numbering continues (`n. new item`).",
+    "parent": "BlockNode:00CS1593MR038",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03A",
+    "@type": "BlockNode",
+    "title": "00CS1593MR03A",
+    "text": "Inserting in the middle requires renumbering everything after it. Target the **parent heading** (`aperas update <heading-id>`) and pipe the heading line plus the *complete* list verbatim with the new item included.",
+    "parent": "BlockNode:00CS1593MR038",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03B",
+    "@type": "BlockNode",
+    "title": "##### Updating an Existing List Item (`aperas update <item-id>`)",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593MR03C",
+      "BlockNode:00CS1593MR03F",
+      "BlockNode:00CS1593MR03J",
+      "BlockNode:00CS1593N0000",
+      "BlockNode:00CS1593N0001",
+      "BlockNode:00CS1593N0002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03C",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR03C:props:StringProp:00CS1597YR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR03C:props:StringProp:00CS1597YR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Ordinary text change**",
+    "text": "**Ordinary text change**: Pipe bare text with **no bullet marker**:",
+    "parent": "BlockNode:00CS1593MR03B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR03D",
+      "BlockNode:00CS1593MR03E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03D",
+    "@type": "BlockNode",
+    "title": "00CS1593MR03D",
+    "text": "```bash\n  echo \"updated text\" | aperas update <item-id> --flush\n  ```",
+    "parent": "BlockNode:00CS1593MR03C",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03E",
+    "@type": "BlockNode",
+    "title": "*Note*",
+    "text": "*Note*: This replaces the item's text **and its children**. Restate children if you want to keep them.",
+    "parent": "BlockNode:00CS1593MR03C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03F",
+    "@type": "BlockNode",
+    "title": "**Checkboxes**",
+    "text": "**Checkboxes**:",
+    "parent": "BlockNode:00CS1593MR03B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR03G",
+      "BlockNode:00CS1593MR03H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03G",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR03G:props:StringProp:00CS1597YR002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR03G:props:StringProp:00CS1597YR003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR03G",
+    "text": "Marker `- [x]` or `- [ ]` sets checkbox state.",
+    "parent": "BlockNode:00CS1593MR03F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03H",
+    "@type": "BlockNode",
+    "title": "00CS1593MR03H",
+    "text": "Bare `- ` with text (marker-less bullet) **removes an existing checkbox entirely**.",
+    "parent": "BlockNode:00CS1593MR03F",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03J",
+    "@type": "BlockNode",
+    "title": "**Ordered List Items**",
+    "text": "**Ordered List Items**:",
+    "parent": "BlockNode:00CS1593MR03B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593MR03K",
+      "BlockNode:00CS1593MR03M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03K",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593MR03K:props:StringProp:00CS1597Z0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593MR03K:props:StringProp:00CS1597Z0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593MR03K",
+    "text": "Use `n.` marker when updating an ordered item (e.g. `echo \"1. updated text\" | aperas update <item-id> --flush`).",
+    "parent": "BlockNode:00CS1593MR03J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593MR03M",
+    "@type": "BlockNode",
+    "title": "00CS1593MR03M",
+    "text": "Updating an item never changes its position in the list (ordered or unordered, its sequence position is preserved). To reorder or renumber, update the parent heading with the complete list.",
+    "parent": "BlockNode:00CS1593MR03J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0000",
+    "@type": "BlockNode",
+    "title": "**Deliberately blank text**",
+    "text": "**Deliberately blank text**: A bare `- ` (bullet with nothing after it) clears the item's text while allowing children to be attached.",
+    "parent": "BlockNode:00CS1593MR03B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0001",
+    "@type": "BlockNode",
+    "title": "**Title Tracking**",
+    "text": "**Title Tracking**: The title updates if text has a bold lead-in (`**Term**: ...`). Without one, title falls back to the item's ID.",
+    "parent": "BlockNode:00CS1593MR03B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0002",
+    "@type": "BlockNode",
+    "title": "**Symmetry Rule**",
+    "text": "**Symmetry Rule**: Whichever piece you do not restate is wiped. If you pipe only text with no children, existing children are tombstoned. Restate whichever side you are not modifying.",
+    "parent": "BlockNode:00CS1593MR03B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0003",
+    "@type": "BlockNode",
+    "title": "##### Updating a Heading (`--text-only`)",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0004",
+      "BlockNode:00CS1593N0005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0004:props:StringProp:00CS1597Z8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0004:props:StringProp:00CS1597Z8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N0004",
+    "text": "Calling `aperas update <heading-id>` without `--text-only` reconciles children against piped input. Piping just `## Title` tombstones all existing child blocks!",
+    "parent": "BlockNode:00CS1593N0003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0005",
+    "@type": "BlockNode",
+    "title": "**Always use `--text-only`** when retitling headings",
+    "text": "**Always use `--text-only`** when retitling headings:",
+    "parent": "BlockNode:00CS1593N0003",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N0006",
+      "BlockNode:00CS1593N0007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0006",
+    "@type": "BlockNode",
+    "title": "00CS1593N0006",
+    "text": "```bash\n  echo \"## Corrected Heading\" | aperas update <heading-id> --text-only --flush\n  ```",
+    "parent": "BlockNode:00CS1593N0005",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0007",
+    "@type": "BlockNode",
+    "title": "00CS1593N0007",
+    "text": "`--text-only` updates `.title` and `.text` while leaving child blocks completely untouched.",
+    "parent": "BlockNode:00CS1593N0005",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0008",
+    "@type": "BlockNode",
+    "title": "##### Changing Block Types (`aperas retype`)",
+    "text": "Convert a block's type in place while preserving ID, links, parent, and position:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0009",
+      "BlockNode:00CS1593N000A",
+      "BlockNode:00CS1593N000B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0009",
+    "@type": "BlockNode",
+    "title": "00CS1593N0009",
+    "text": "```bash\naperas retype <ref> --to <type>   # h1..h6, paragraph, listItem, code, blockquote, table\n```",
+    "parent": "BlockNode:00CS1593N0008",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000A",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N000A:props:StringProp:00CS1597Z8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N000A:props:StringProp:00CS1597Z8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N000A",
+    "text": "Heading → non-heading folds title into text as `**Title**: <body>`.",
+    "parent": "BlockNode:00CS1593N0008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000B",
+    "@type": "BlockNode",
+    "title": "00CS1593N000B",
+    "text": "Non-heading → heading cuts lead-in term back into the heading line.",
+    "parent": "BlockNode:00CS1593N0008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000C",
+    "@type": "BlockNode",
+    "title": "##### Renaming Artifacts",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N000D",
+      "BlockNode:00CS1593N000G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000D",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N000D:props:StringProp:00CS1597ZG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N000D:props:StringProp:00CS1597ZG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Single Artifact**",
+    "text": "**Single Artifact**:",
+    "parent": "BlockNode:00CS1593N000C",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N000E",
+      "BlockNode:00CS1593N000F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000E",
+    "@type": "BlockNode",
+    "title": "00CS1593N000E",
+    "text": "```bash\n  git mv old.md new.md\n  aperas ingest <new-path> --track --flush\n  ```",
+    "parent": "BlockNode:00CS1593N000D",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000F",
+    "@type": "BlockNode",
+    "title": "00CS1593N000F",
+    "text": "Rename detection matches by abstract-text equality against tracked nodes whose old path vanished.",
+    "parent": "BlockNode:00CS1593N000D",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000G",
+    "@type": "BlockNode",
+    "title": "**Cross-Referencing Docs**",
+    "text": "**Cross-Referencing Docs**: Complete all internal content/heading/path updates first while files remain at old names; verify with `check-links`, then execute `git mv`.",
+    "parent": "BlockNode:00CS1593N000C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000H",
+    "@type": "BlockNode",
+    "title": "##### Shell Quoting Gotcha",
+    "text": "A piped `echo \"...\"` silently drops nested double quotes in bash (`\"foo \"bar\" baz\"` becomes `foo bar baz`).",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N000J"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N000J:props:StringProp:00CS1597ZG002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N000J:props:StringProp:00CS1597ZG003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N000J",
+    "text": "For content with quotes, write to a temporary file first and pipe via `cat`:",
+    "parent": "BlockNode:00CS1593N000H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N000K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000K",
+    "@type": "BlockNode",
+    "title": "00CS1593N000K",
+    "text": "```bash\n  cat /tmp/content.md | aperas update <id> --flush\n  ```",
+    "parent": "BlockNode:00CS1593N000J",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000M",
+    "@type": "BlockNode",
+    "title": "##### Service State & Recovery",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N000N",
+      "BlockNode:00CS1593N000Q"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000N",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N000N:props:StringProp:00CS1597ZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N000N:props:StringProp:00CS1597ZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Flush and restart daemon from disk mirror",
+    "text": "Flush and restart daemon from disk mirror:",
+    "parent": "BlockNode:00CS1593N000M",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N000P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000P",
+    "@type": "BlockNode",
+    "title": "00CS1593N000P",
+    "text": "```bash\n  aperas service restart\n  ```",
+    "parent": "BlockNode:00CS1593N000N",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000Q",
+    "@type": "BlockNode",
+    "title": "Discard uncommitted in-memory mutations and reload disk state",
+    "text": "Discard uncommitted in-memory mutations and reload disk state:",
+    "parent": "BlockNode:00CS1593N000M",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N000R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000R",
+    "@type": "BlockNode",
+    "title": "00CS1593N000R",
+    "text": "```bash\n  aperas reload -- --discard\n  ```",
+    "parent": "BlockNode:00CS1593N000Q",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000S",
+    "@type": "BlockNode",
+    "title": "##### Raw Node State Inspection",
+    "text": "Preview commands (`tree`, `unfold`, `backlinks`) display truncated abstracts. To inspect exact stored state:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N000T",
+      "BlockNode:00CS1593N000V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000T",
+    "@type": "BlockNode",
+    "title": "00CS1593N000T",
+    "text": "```bash\naperas show <ref>          # Full record: props, tombstonedAt, parent, children, links, text\naperas show <ref> --text   # Exact stored text only, undecorated\n```",
+    "parent": "BlockNode:00CS1593N000S",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000V",
+    "@type": "BlockNode",
+    "title": "To edit safely",
+    "text": "To edit safely: dump `aperas show <ref> --text > edit.txt`, modify what is needed, and `cat edit.txt | aperas update <ref> --flush`.",
+    "parent": "BlockNode:00CS1593N000S",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000W",
+    "@type": "BlockNode",
+    "title": "##### `aperas unfold` — Bare vs. `--view`",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N000X",
+      "BlockNode:00CS1593N000Y"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N000X",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N000X:props:StringProp:00CS159800000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N000X:props:StringProp:00CS159800001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Bare `aperas unfold <ref>`",
+    "text": "Bare `aperas unfold <ref>`: Read-only peek; does not mutate any view.",
+    "parent": "BlockNode:00CS1593N000W",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000Y",
+    "@type": "BlockNode",
+    "title": "`aperas unfold <ref> --view <name> --flush`",
+    "text": "`aperas unfold <ref> --view <name> --flush`: Adds `<ref>` to `<name>`'s `unfolds` set for persistent rendering in `aperas tree --view <name>`.",
+    "parent": "BlockNode:00CS1593N000W",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N000Z",
+    "@type": "BlockNode",
+    "title": "##### Tombstoned Nodes",
+    "text": "Tombstoned nodes and their subtrees are hidden everywhere by default:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0010",
+      "BlockNode:00CS1593N0011"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0010",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0010:props:StringProp:00CS159800002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0010:props:StringProp:00CS159800003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N0010",
+    "text": "`aperas tree` and `aperas unfold` omit them unless `--tombstoned` is passed.",
+    "parent": "BlockNode:00CS1593N000Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0011",
+    "@type": "BlockNode",
+    "title": "00CS1593N0011",
+    "text": "`aperas unfold <tombstoned-id>` errors out without `--tombstoned`.",
+    "parent": "BlockNode:00CS1593N000Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0012",
+    "@type": "BlockNode",
+    "title": "##### Full-Text Search via Raw Store",
+    "text": "Grep the JSON-LD mirror directly for fast, untruncated content search:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0013",
+      "BlockNode:00CS1593N0014"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0013",
+    "@type": "BlockNode",
+    "title": "00CS1593N0013",
+    "text": "```bash\ngrep -n -C3 '<pattern>' AperasKG/Apeiron/BlockNode.jsonld\n```",
+    "parent": "BlockNode:00CS1593N0012",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0014",
+    "@type": "BlockNode",
+    "title": "00CS1593N0014",
+    "text": "Matches are candidate IDs. Always inspect live status via `aperas show <id>`.",
+    "parent": "BlockNode:00CS1593N0012",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0015",
+    "@type": "BlockNode",
+    "title": "##### Comparing Distant Docs (View as a Lens)",
+    "text": "Use `--view` to bring distant parts of the tree together side by side:",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0016"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0016",
+    "@type": "BlockNode",
+    "title": "00CS1593N0016",
+    "text": "```bash\nfor doc in issues/a.md discussion/b.md design/c.md; do\n  aperas unfold \"$doc\" --view comparison-lens --flush\ndone\naperas tree --view comparison-lens\n```",
+    "parent": "BlockNode:00CS1593N0015",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0017",
+    "@type": "BlockNode",
+    "title": "##### Breadcrumbs in `aperas tree`",
+    "text": "The first line of an `aperas tree` render is a breadcrumb: `aperas://tree/<path>`.",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0018",
+      "BlockNode:00CS1593N0019",
+      "BlockNode:00CS1593N001A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0018",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0018:props:StringProp:00CS159808000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0018:props:StringProp:00CS159808001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N0018",
+    "text": "Represents the walkable path of the starting apex, directly reusable as a `<ref>`.",
+    "parent": "BlockNode:00CS1593N0017",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0019",
+    "@type": "BlockNode",
+    "title": "00CS1593N0019",
+    "text": "Appears once at the top; child lines are implicitly relative to it.",
+    "parent": "BlockNode:00CS1593N0017",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001A",
+    "@type": "BlockNode",
+    "title": "00CS1593N001A",
+    "text": "When an unfolded link escapes into an external viewcone, an indented breadcrumb marks the jump.",
+    "parent": "BlockNode:00CS1593N0017",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001B",
+    "@type": "BlockNode",
+    "title": "##### Link Integrity Sweeps",
+    "parent": "BlockNode:00CS1593MR02A",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N001C",
+      "BlockNode:00CS1593N001D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N001C",
+    "@type": "BlockNode",
+    "title": "00CS1593N001C",
+    "text": "```bash\naperas check-links           # Sweep corpus for unresolved internal wikilinks\naperas check-links --repair  # Re-resolve and persist repairs to store\n```",
+    "parent": "BlockNode:00CS1593N001B",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001D",
+    "@type": "BlockNode",
+    "title": "00CS1593N001D",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N001B",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001E",
+    "@type": "BlockNode",
+    "title": "#### 5. Reference",
+    "parent": "BlockNode:00CS1593MG002",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N001F",
+      "BlockNode:00CS1593N001G",
+      "BlockNode:00CS1593N001H",
+      "BlockNode:00CS1593N001J",
+      "BlockNode:00CS1593N001K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N001F",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N001F:props:StringProp:00CS15980R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N001F:props:StringProp:00CS15980R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N001F",
+    "text": "`AperasKG/artifacts/design/linking.md` — Canonical spec for addressing, anchors, and wikilink syntax.",
+    "parent": "BlockNode:00CS1593N001E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001G",
+    "@type": "BlockNode",
+    "title": "00CS1593N001G",
+    "text": "`AperasKG/artifacts/design/documentation.md` — Concern taxonomy and Freeflow document structures.",
+    "parent": "BlockNode:00CS1593N001E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001H",
+    "@type": "BlockNode",
+    "title": "00CS1593N001H",
+    "text": "`AperasKG/artifacts/design/aperas-skill.md` — The four-level architecture, citation directions, and promotion lifecycle.",
+    "parent": "BlockNode:00CS1593N001E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001J",
+    "@type": "BlockNode",
+    "title": "`archive/Aperas-design.md` — Founding philosophy",
+    "text": "`archive/Aperas-design.md` — Founding philosophy: Apeiron / Aperas / Peras.",
+    "parent": "BlockNode:00CS1593N001E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001K",
+    "@type": "BlockNode",
+    "title": "##### Open Tool Gaps",
+    "text": "Tracked in the graph rather than accumulating here:",
+    "parent": "BlockNode:00CS1593N001E",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N001M",
+      "BlockNode:00CS1593N001N",
+      "BlockNode:00CS1593N001P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N001M",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N001M:props:StringProp:00CS15980R002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N001M:props:StringProp:00CS15980R003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "`aperas resolve`'s title-ambiguity check does not filter tombstoned candidates",
+    "text": "`aperas resolve`'s title-ambiguity check does not filter tombstoned candidates: a dead holder can still make a live path read as ambiguous (`discussion/core.md`'s Freeflow). Workaround: resolve the live node by ID directly.",
+    "parent": "BlockNode:00CS1593N001K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001N",
+    "@type": "BlockNode",
+    "title": "00CS1593N001N",
+    "text": "The link-integrity drift check is built and live (`aperas check-links`, see *Mechanics* — `issues/linking.md`).",
+    "parent": "BlockNode:00CS1593N001K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001P",
+    "@type": "BlockNode",
+    "title": "00CS1593N001P",
+    "text": "The `verify.ts` id-anchor emission idempotency failure is fixed and passing (`discussion/core.md`).",
+    "parent": "BlockNode:00CS1593N001K",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001Q",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator/SKILL.md",
+    "parent": "BlockNode:00CS1593MG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N001R",
+      "BlockNode:00CS1593N001S",
+      "BlockNode:00CS1593N001T",
+      "BlockNode:00CS1593N001V",
+      "BlockNode:00CS1593N001W",
+      "BlockNode:00CS1593N001X",
+      "BlockNode:00CS1593N001Y",
+      "BlockNode:00CS1593N0026",
+      "BlockNode:00CS1593N002J",
+      "BlockNode:00CS1593N002T",
+      "BlockNode:00CS1593N800G",
+      "BlockNode:00CS1593N800P",
+      "BlockNode:00CS1593N8011"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N001R",
+    "@type": "BlockNode",
+    "title": "00CS1593N001R",
+    "text": "```\n---\nname: aperas-orchestrator\ndescription: >-\n  The orchestrator role in Aperas multi-agent work: the session talking with the user. Records\n  the conversation as discussion freeflow and runs the task loop by handing off to the\n  aperas-grapher and aperas-coder subagents through threads and views. Load with the base\n  `aperas` skill in any session Aperas manages, unless you were started as a subagent.\n---\n```",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001S",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4** — Orchestrator role skill.",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001T",
+    "@type": "BlockNode",
+    "title": "00CS1593N001T",
+    "text": "You are the **Orchestrator**. You manage the conversation with the user and drive the multi-agent task loop.",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001V",
+    "@type": "BlockNode",
+    "title": "00CS1593N001V",
+    "text": "The base `aperas` skill applies in full. This skill defines the specific discipline, triage protocols, and operational gates of the orchestrator role.",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001W",
+    "@type": "BlockNode",
+    "title": "00CS1593N001W",
+    "text": "> **Aperas-repo insiders**: Run CLI commands from `Aperas/monorepo/` as `npm run aperas -- <verb> ...`. In normal projects using the published package, run bare `aperas <verb> ...`.",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001X",
+    "@type": "BlockNode",
+    "title": "00CS1593N001X",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N001Y",
+    "@type": "BlockNode",
+    "title": "#### 1. Role Scope & Operational Invariants",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N001Z",
+      "BlockNode:00CS1593N0023"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N001Z",
+    "@type": "BlockNode",
+    "title": "##### What You Write",
+    "parent": "BlockNode:00CS1593N001Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0020",
+      "BlockNode:00CS1593N0021",
+      "BlockNode:00CS1593N0022"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0020",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0020:props:StringProp:00CS159818000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0020:props:StringProp:00CS159818001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N0020",
+    "text": "Record user exchanges, decisions, and corrections into `discussion/<topic>.md` `## Freeflow`.",
+    "parent": "BlockNode:00CS1593N001Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0021",
+    "@type": "BlockNode",
+    "title": "00CS1593N0021",
+    "text": "Write your `**Ask**` nodes in `.threads/grapher.md` and `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593N001Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0022",
+    "@type": "BlockNode",
+    "title": "00CS1593N0022",
+    "text": "Stage each write in `AperasKG/` as it lands (`git add AperasKG/`).",
+    "parent": "BlockNode:00CS1593N001Z",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0023",
+    "@type": "BlockNode",
+    "title": "##### What You Do NOT Do Initially",
+    "parent": "BlockNode:00CS1593N001Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0024",
+      "BlockNode:00CS1593N0025"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0024",
+    "@type": "BlockNode",
+    "title": "00CS1593N0024",
+    "text": "> [!CRITICAL]\n> **Orchestrator Role Gate**:\n> **NEVER START WITH** surveying or modifying source code when a task begins.\n> When the user asks to fix a bug, explore an issue, or write code, **DO NOT** inspect files or run tests yourself.\n> Immediately route the survey and changes to the **Grapher** and **Coder** subagents.\n> You touch source code, git diffs, and test outputs **ONLY at the Verification stage** (Step 7 of the task loop).",
+    "parent": "BlockNode:00CS1593N0023",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0025",
+    "@type": "BlockNode",
+    "title": "00CS1593N0025",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N0023",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0026",
+    "@type": "BlockNode",
+    "title": "#### 2. In-Flight Task Triage (Assessing Current State)",
+    "text": "When a session resumes, or when the user mentions an existing issue (e.g. *\"Let's fix X\"*):",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N0027",
+      "BlockNode:00CS1593N0029",
+      "BlockNode:00CS1593N002E",
+      "BlockNode:00CS1593N002H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0027",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0027:props:StringProp:00CS15981G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0027:props:StringProp:00CS15981G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Check Active Views**",
+    "text": "**Check Active Views**:",
+    "parent": "BlockNode:00CS1593N0026",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N0028"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0028",
+    "@type": "BlockNode",
+    "title": "00CS1593N0028",
+    "text": "```bash\n   aperas profile list <profile>   # e.g. antigravity or claude\n   ```",
+    "parent": "BlockNode:00CS1593N0027",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0029",
+    "@type": "BlockNode",
+    "title": "**Inspect Current Subagent Reports**",
+    "text": "**Inspect Current Subagent Reports**:",
+    "parent": "BlockNode:00CS1593N0026",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N002A",
+      "BlockNode:00CS1593N002C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002A",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N002A:props:StringProp:00CS15981G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N002A:props:StringProp:00CS15981G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Check if the Coder has already surveyed or implemented",
+    "text": "Check if the Coder has already surveyed or implemented:",
+    "parent": "BlockNode:00CS1593N0029",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N002B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002B",
+    "@type": "BlockNode",
+    "title": "00CS1593N002B",
+    "text": "```bash\n     aperas tree --view <p>-coder-orchestrator\n     ```",
+    "parent": "BlockNode:00CS1593N002A",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002C",
+    "@type": "BlockNode",
+    "title": "Check if the Grapher has already surveyed or filed",
+    "text": "Check if the Grapher has already surveyed or filed:",
+    "parent": "BlockNode:00CS1593N0029",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N002D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002D",
+    "@type": "BlockNode",
+    "title": "00CS1593N002D",
+    "text": "```bash\n     aperas tree --view <p>-grapher-orchestrator\n     ```",
+    "parent": "BlockNode:00CS1593N002C",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002E",
+    "@type": "BlockNode",
+    "title": "**Determine the Active Turn**",
+    "text": "**Determine the Active Turn**:",
+    "parent": "BlockNode:00CS1593N0026",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N002F",
+      "BlockNode:00CS1593N002G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002F",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N002F:props:StringProp:00CS15981R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N002F:props:StringProp:00CS15981R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N002F",
+    "text": "Check which step of the 9-step loop was last completed in the graph.",
+    "parent": "BlockNode:00CS1593N002E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002G",
+    "@type": "BlockNode",
+    "title": "00CS1593N002G",
+    "text": "**Never assume work hasn't started** just because a markdown file under `artifacts/` appears empty or unprojected. The graph in Apeiron is the source of truth.",
+    "parent": "BlockNode:00CS1593N002E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002H",
+    "@type": "BlockNode",
+    "title": "00CS1593N002H",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N0026",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002J",
+    "@type": "BlockNode",
+    "title": "#### 3. Recording User Exchanges",
+    "text": "Record every exchange in the topic's discussion `## Freeflow` before acting on it:",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N002K",
+      "BlockNode:00CS1593N002M",
+      "BlockNode:00CS1593N002N",
+      "BlockNode:00CS1593N002P",
+      "BlockNode:00CS1593N002Q",
+      "BlockNode:00CS1593N002R",
+      "BlockNode:00CS1593N002S"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002K",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N002K:props:StringProp:00CS159820000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N002K:props:StringProp:00CS159820001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N002K",
+    "text": "What was asked, what was decided, what was corrected, and why.",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002M",
+    "@type": "BlockNode",
+    "title": "00CS1593N002M",
+    "text": "Freeflow is raw material; the Grapher organizes and promotes it later.",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002N",
+    "@type": "BlockNode",
+    "title": "00CS1593N002N",
+    "text": "If the topic's discussion doc has no `## Freeflow` yet, create it.",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002P",
+    "@type": "BlockNode",
+    "title": "00CS1593N002P",
+    "text": "Record any friction you encounter yourself into Freeflow as well.",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002Q",
+    "@type": "BlockNode",
+    "title": "00CS1593N002Q",
+    "text": "> **Rule**: Every `**Ask**` must cite the Freeflow nodes for the decisions it relies on. A decision that exists only in chat cannot be cited and must be recorded first.",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002R",
+    "@type": "BlockNode",
+    "title": "00CS1593N002R",
+    "text": "The user's view is `<p>-<topic>`, zoomed onto `discussion/<topic>.md` `## Dashboard`. Point the user to it when graphical hierarchy is clearer than conversational text.",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002S",
+    "@type": "BlockNode",
+    "title": "00CS1593N002S",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N002J",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002T",
+    "@type": "BlockNode",
+    "title": "#### 4. Running the Task Loop (9 Steps)",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N002V",
+      "BlockNode:00CS1593N002X",
+      "BlockNode:00CS1593N0031",
+      "BlockNode:00CS1593N0034",
+      "BlockNode:00CS1593N8000",
+      "BlockNode:00CS1593N8003",
+      "BlockNode:00CS1593N8006",
+      "BlockNode:00CS1593N8008",
+      "BlockNode:00CS1593N800B",
+      "BlockNode:00CS1593N800F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002V",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N002V:props:StringProp:00CS159828000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593N002V:props:StringProp:00CS159828001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Open Task**",
+    "text": "**Open Task**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N002W"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002W",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N002W:props:StringProp:00CS159828002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N002W:props:StringProp:00CS159828003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N002W",
+    "text": "Ensure `## <topic>` and `### <task>` exist in both `.threads/grapher.md` and `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593N002V",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002X",
+    "@type": "BlockNode",
+    "title": "**Grapher Survey**",
+    "text": "**Grapher Survey**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N002Y",
+      "BlockNode:00CS1593N002Z",
+      "BlockNode:00CS1593N0030"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N002Y",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N002Y:props:StringProp:00CS15982R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N002Y:props:StringProp:00CS15982R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N002Y",
+    "text": "Write an **Ask** in `.threads/grapher.md` to survey the graph for the task, citing the Freeflow decision nodes.",
+    "parent": "BlockNode:00CS1593N002X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N002Z",
+    "@type": "BlockNode",
+    "title": "00CS1593N002Z",
+    "text": "Zoom `<p>-orchestrator-grapher` onto the Ask.",
+    "parent": "BlockNode:00CS1593N002X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0030",
+    "@type": "BlockNode",
+    "title": "00CS1593N0030",
+    "text": "Dispatch `aperas-grapher`.",
+    "parent": "BlockNode:00CS1593N002X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0031",
+    "@type": "BlockNode",
+    "title": "**Review Grapher Report**",
+    "text": "**Review Grapher Report**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N0032",
+      "BlockNode:00CS1593N0033"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0032",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0032:props:StringProp:00CS15982R002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0032:props:StringProp:00CS15982R003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Render report",
+    "text": "Render report: `aperas tree --view <p>-grapher-orchestrator`.",
+    "parent": "BlockNode:00CS1593N0031",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0033",
+    "@type": "BlockNode",
+    "title": "00CS1593N0033",
+    "text": "Ask follow-ups as new turns if anything is ambiguous.",
+    "parent": "BlockNode:00CS1593N0031",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0034",
+    "@type": "BlockNode",
+    "title": "**Coder Survey**",
+    "text": "**Coder Survey**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N0035",
+      "BlockNode:00CS1593N0036",
+      "BlockNode:00CS1593N0037"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N0035",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N0035:props:StringProp:00CS159830000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N0035:props:StringProp:00CS159830001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N0035",
+    "text": "Write an **Ask** in `.threads/coder.md` citing the Grapher Report and key nodes, requesting a code map (no edits).",
+    "parent": "BlockNode:00CS1593N0034",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0036",
+    "@type": "BlockNode",
+    "title": "00CS1593N0036",
+    "text": "Zoom `<p>-orchestrator-coder` onto the Ask.",
+    "parent": "BlockNode:00CS1593N0034",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N0037",
+    "@type": "BlockNode",
+    "title": "00CS1593N0037",
+    "text": "Dispatch `aperas-coder`.",
+    "parent": "BlockNode:00CS1593N0034",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8000",
+    "@type": "BlockNode",
+    "title": "**Grapher Files Survey**",
+    "text": "**Grapher Files Survey**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N8001",
+      "BlockNode:00CS1593N8002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N8001:props:StringProp:00CS159830002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N8001:props:StringProp:00CS159830003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N8001",
+    "text": "Write an **Ask** in `.threads/grapher.md` to file the Coder's survey findings into the graph.",
+    "parent": "BlockNode:00CS1593N8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8002",
+    "@type": "BlockNode",
+    "title": "00CS1593N8002",
+    "text": "Dispatch `aperas-grapher`.",
+    "parent": "BlockNode:00CS1593N8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8003",
+    "@type": "BlockNode",
+    "title": "**Coder Change**",
+    "text": "**Coder Change**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N8004",
+      "BlockNode:00CS1593N8005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N8004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N8004:props:StringProp:00CS159830004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N8004:props:StringProp:00CS159830005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N8004",
+    "text": "Write an **Ask** in `.threads/coder.md` citing the filed survey and design requirements for the code change.",
+    "parent": "BlockNode:00CS1593N8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8005",
+    "@type": "BlockNode",
+    "title": "00CS1593N8005",
+    "text": "Dispatch `aperas-coder`.",
+    "parent": "BlockNode:00CS1593N8003",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8006",
+    "@type": "BlockNode",
+    "title": "**Verify Coder Result (Your Responsibility)**",
+    "text": "**Verify Coder Result (Your Responsibility)**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N8007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N8007",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N8007:props:StringProp:00CS159838000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N8007:props:StringProp:00CS159838001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N8007",
+    "text": "Execute the verification protocol (see section below).",
+    "parent": "BlockNode:00CS1593N8006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8008",
+    "@type": "BlockNode",
+    "title": "**Grapher Files Result**",
+    "text": "**Grapher Files Result**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N8009",
+      "BlockNode:00CS1593N800A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N8009",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N8009:props:StringProp:00CS159838002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N8009:props:StringProp:00CS159838003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N8009",
+    "text": "Write an **Ask** in `.threads/grapher.md` to record the resolved issue, update backlinks, and project docs.",
+    "parent": "BlockNode:00CS1593N8008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800A",
+    "@type": "BlockNode",
+    "title": "00CS1593N800A",
+    "text": "Dispatch `aperas-grapher`.",
+    "parent": "BlockNode:00CS1593N8008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800B",
+    "@type": "BlockNode",
+    "title": "**Finishing Turn**",
+    "text": "**Finishing Turn**:",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N800C",
+      "BlockNode:00CS1593N800D",
+      "BlockNode:00CS1593N800E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800C",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800C:props:StringProp:00CS15983G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800C:props:StringProp:00CS15983G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N800C",
+    "text": "Repeat steps 6–8 as necessary.",
+    "parent": "BlockNode:00CS1593N800B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800D",
+    "@type": "BlockNode",
+    "title": "00CS1593N800D",
+    "text": "Dispatch `aperas-grapher` for the finishing turn (dashboard update, link checks, staging).",
+    "parent": "BlockNode:00CS1593N800B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800E",
+    "@type": "BlockNode",
+    "title": "00CS1593N800E",
+    "text": "Report final completion to the user.",
+    "parent": "BlockNode:00CS1593N800B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800F",
+    "@type": "BlockNode",
+    "title": "00CS1593N800F",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N002T",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800G",
+    "@type": "BlockNode",
+    "title": "#### 5. Pre-Send Checklist for Asks",
+    "text": "Before sending any `**Ask**`, verify:",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N800H",
+      "BlockNode:00CS1593N800J",
+      "BlockNode:00CS1593N800K",
+      "BlockNode:00CS1593N800M",
+      "BlockNode:00CS1593N800N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800H",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800H:props:StringProp:00CS15983R000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800H:props:StringProp:00CS15983R001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800H:props:StringProp:00CS15983R002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Only the receiver's work**",
+    "text": "**Only the receiver's work**: Grapher Asks request graph surveys/updates; Coder Asks request code surveys/edits.",
+    "parent": "BlockNode:00CS1593N800G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800J:props:StringProp:00CS15983R003",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Decisions cited from Freeflow**",
+    "text": "**Decisions cited from Freeflow**: Any scope decision or approach choice is cited directly from a recorded Freeflow node.",
+    "parent": "BlockNode:00CS1593N800G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800K",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800K:props:StringProp:00CS159840000",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**Cite, don't retype**",
+    "text": "**Cite, don't retype**: Point to the Report, filed entry, or design block via wikilink; do not duplicate prose in the Ask or chat.",
+    "parent": "BlockNode:00CS1593N800G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800M",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800M:props:StringProp:00CS159840001",
+        "@type": "StringProp",
+        "key": "checked",
+        "value": "false"
+      }
+    ],
+    "title": "**One task per dispatch**",
+    "text": "**One task per dispatch**: Ensure the view is zoomed specifically onto the current Ask.",
+    "parent": "BlockNode:00CS1593N800G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800N",
+    "@type": "BlockNode",
+    "title": "00CS1593N800N",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N800G",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800P",
+    "@type": "BlockNode",
+    "title": "#### 6. Verification Protocol (Reading for Yourself)",
+    "text": "In Step 7, verifying the Coder's work is the Orchestrator's responsibility:",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N800Q",
+      "BlockNode:00CS1593N800S",
+      "BlockNode:00CS1593N800V",
+      "BlockNode:00CS1593N800X",
+      "BlockNode:00CS1593N8010"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800Q",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800Q:props:StringProp:00CS159840002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800Q:props:StringProp:00CS159840003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Inspect the Code Diff**",
+    "text": "**Inspect the Code Diff**:",
+    "parent": "BlockNode:00CS1593N800P",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N800R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800R",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800R:props:StringProp:00CS159848000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800R:props:StringProp:00CS159848001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N800R",
+    "text": "Run `git diff` in the code repo to examine exact line changes.",
+    "parent": "BlockNode:00CS1593N800Q",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800S",
+    "@type": "BlockNode",
+    "title": "**Run and Validate Tests**",
+    "text": "**Run and Validate Tests**:",
+    "parent": "BlockNode:00CS1593N800P",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N800T"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800T",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800T:props:StringProp:00CS159848002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800T:props:StringProp:00CS159848003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N800T",
+    "text": "Execute the repo test command (e.g. `npm run verify` from `monorepo/`).",
+    "parent": "BlockNode:00CS1593N800S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800V",
+    "@type": "BlockNode",
+    "title": "**Record Verification Findings in Freeflow**",
+    "text": "**Record Verification Findings in Freeflow**:",
+    "parent": "BlockNode:00CS1593N800P",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N800W"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800W",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800W:props:StringProp:00CS159848004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800W:props:StringProp:00CS159848005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N800W",
+    "text": "Document that the diff and tests were inspected and confirmed clean, citing the file paths and test status.",
+    "parent": "BlockNode:00CS1593N800V",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800X",
+    "@type": "BlockNode",
+    "title": "**Never Make Code Corrections Yourself**",
+    "text": "**Never Make Code Corrections Yourself**:",
+    "parent": "BlockNode:00CS1593N800P",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N800Y",
+      "BlockNode:00CS1593N800Z"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N800Y",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N800Y:props:StringProp:00CS15984G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N800Y:props:StringProp:00CS15984G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N800Y",
+    "text": "If a test fails or the diff is incomplete, **DO NOT** edit the source files.",
+    "parent": "BlockNode:00CS1593N800X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N800Z",
+    "@type": "BlockNode",
+    "title": "00CS1593N800Z",
+    "text": "Formulate a follow-up `**Ask**` in `.threads/coder.md` and hand it back to the Coder.",
+    "parent": "BlockNode:00CS1593N800X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8010",
+    "@type": "BlockNode",
+    "title": "00CS1593N8010",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N800P",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8011",
+    "@type": "BlockNode",
+    "title": "#### 7. Route Every Step, However Small",
+    "text": "Never bypass the multi-agent loop for \"trivial\" fixes (e.g. a one-line code patch or a minor doc edit).",
+    "parent": "BlockNode:00CS1593N001Q",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N8012",
+      "BlockNode:00CS1593N8013"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N8012",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N8012:props:StringProp:00CS15984G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N8012:props:StringProp:00CS15984G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N8012",
+    "text": "Doing it yourself skips the backlink checks, provenance recording, and thread checkpoints that maintain graph integrity.",
+    "parent": "BlockNode:00CS1593N8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8013",
+    "@type": "BlockNode",
+    "title": "00CS1593N8013",
+    "text": "Route graph fixes to the Grapher and code changes to the Coder.",
+    "parent": "BlockNode:00CS1593N8011",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8014",
+    "@type": "BlockNode",
+    "title": "### aperas-coder/SKILL.md",
+    "parent": "BlockNode:00CS1593MG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N8015",
+      "BlockNode:00CS1593N8016",
+      "BlockNode:00CS1593N8017",
+      "BlockNode:00CS1593N8018",
+      "BlockNode:00CS1593N8019",
+      "BlockNode:00CS1593N801A",
+      "BlockNode:00CS1593N801B",
+      "BlockNode:00CS1593NG005",
+      "BlockNode:00CS1593NG00C",
+      "BlockNode:00CS1593NG00P",
+      "BlockNode:00CS1593NG00T"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N8015",
+    "@type": "BlockNode",
+    "title": "00CS1593N8015",
+    "text": "```\n---\nname: aperas-coder\ndescription: >-\n  The coder role in Aperas multi-agent work: surveys and changes source code, reads the graph\n  for context, writes only to its own thread. Preloaded by the aperas-coder subagent; load it\n  only when acting as coder. Requires the base `aperas` skill.\n---\n```",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8016",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4** — Coder role skill.",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8017",
+    "@type": "BlockNode",
+    "title": "00CS1593N8017",
+    "text": "You are the **Coder**. You inspect, map, and modify source code in this codebase.",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8018",
+    "@type": "BlockNode",
+    "title": "00CS1593N8018",
+    "text": "The base `aperas` skill applies in full. You read the graph for context, change source code, and write to exactly one place in the graph: your own nodes in `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N8019",
+    "@type": "BlockNode",
+    "title": "00CS1593N8019",
+    "text": "> **Aperas-repo insiders**: Run CLI commands from `Aperas/monorepo/` as `npm run aperas -- <verb> ...`. In normal projects using the published package, run bare `aperas <verb> ...`.",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801A",
+    "@type": "BlockNode",
+    "title": "00CS1593N801A",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801B",
+    "@type": "BlockNode",
+    "title": "#### 1. Every Invocation (Turn Protocol)",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593N801C",
+      "BlockNode:00CS1593N801H",
+      "BlockNode:00CS1593N801M",
+      "BlockNode:00CS1593N801S",
+      "BlockNode:00CS1593NG001",
+      "BlockNode:00CS1593NG003",
+      "BlockNode:00CS1593NG004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801C",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N801C:props:StringProp:00CS159850000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593N801C:props:StringProp:00CS159850001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Read Input View**",
+    "text": "**Read Input View**:",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801D",
+      "BlockNode:00CS1593N801F",
+      "BlockNode:00CS1593N801G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801D",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N801D:props:StringProp:00CS159850002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N801D:props:StringProp:00CS159850003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Render the incoming Ask",
+    "text": "Render the incoming Ask:",
+    "parent": "BlockNode:00CS1593N801C",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801E",
+    "@type": "BlockNode",
+    "title": "00CS1593N801E",
+    "text": "```bash\n     aperas tree --view <p>-orchestrator-coder\n     ```",
+    "parent": "BlockNode:00CS1593N801D",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801F",
+    "@type": "BlockNode",
+    "title": "00CS1593N801F",
+    "text": "Review any specific nodes named in the dispatch message.",
+    "parent": "BlockNode:00CS1593N801C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801G",
+    "@type": "BlockNode",
+    "title": "00CS1593N801G",
+    "text": "Start from the Grapher's survey cited in the Ask; do not duplicate graph exploration.",
+    "parent": "BlockNode:00CS1593N801C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801H",
+    "@type": "BlockNode",
+    "title": "**Recover Thread Context**",
+    "text": "**Recover Thread Context**:",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801J",
+      "BlockNode:00CS1593N801K"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N801J:props:StringProp:00CS159858000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N801J:props:StringProp:00CS159858001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N801J",
+    "text": "Review earlier turns of the active task in `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593N801H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801K",
+    "@type": "BlockNode",
+    "title": "00CS1593N801K",
+    "text": "Your thread is your complete working memory across invocations.",
+    "parent": "BlockNode:00CS1593N801H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801M",
+    "@type": "BlockNode",
+    "title": "**Execute Turn Work with Subturns**",
+    "text": "**Execute Turn Work with Subturns**:",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801N",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N801N:props:StringProp:00CS15985G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N801N:props:StringProp:00CS15985G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "For every tool batch, write a subturn recording",
+    "text": "For every tool batch, write a subturn recording:",
+    "parent": "BlockNode:00CS1593N801M",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801P",
+      "BlockNode:00CS1593N801Q",
+      "BlockNode:00CS1593N801R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801P",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N801P:props:StringProp:00CS15985G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N801P:props:StringProp:00CS15985G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N801P",
+    "text": "Files inspected and modified.",
+    "parent": "BlockNode:00CS1593N801N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801Q",
+    "@type": "BlockNode",
+    "title": "00CS1593N801Q",
+    "text": "Exact test outputs, failure lines, and assertion messages.",
+    "parent": "BlockNode:00CS1593N801N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801R",
+    "@type": "BlockNode",
+    "title": "00CS1593N801R",
+    "text": "Key implementation decisions and rationale.",
+    "parent": "BlockNode:00CS1593N801N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801S",
+    "@type": "BlockNode",
+    "title": "**Formulate Report**",
+    "text": "**Formulate Report**:",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801T",
+      "BlockNode:00CS1593N801V",
+      "BlockNode:00CS1593N801W",
+      "BlockNode:00CS1593N801X",
+      "BlockNode:00CS1593NG000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801T",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593N801T:props:StringProp:00CS15985R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593N801T:props:StringProp:00CS15985R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593N801T",
+    "text": "Create a `**Report**` node listing files changed, findings, and test status.",
+    "parent": "BlockNode:00CS1593N801S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801V",
+    "@type": "BlockNode",
+    "title": "00CS1593N801V",
+    "text": "Cite relevant graph nodes that the work bears on.",
+    "parent": "BlockNode:00CS1593N801S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801W",
+    "@type": "BlockNode",
+    "title": "00CS1593N801W",
+    "text": "Include any `**Question**` or `**Tool gap — <topic>**` (see below).",
+    "parent": "BlockNode:00CS1593N801S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593N801X",
+    "@type": "BlockNode",
+    "title": "Re-root your output view",
+    "text": "Re-root your output view:",
+    "parent": "BlockNode:00CS1593N801S",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593N801Y"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593N801Y",
+    "@type": "BlockNode",
+    "title": "00CS1593N801Y",
+    "text": "```bash\n     aperas zoom <report-id> --view <p>-coder-orchestrator --flush\n     ```",
+    "parent": "BlockNode:00CS1593N801X",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG000",
+    "@type": "BlockNode",
+    "title": "00CS1593NG000",
+    "text": "Respond in chat with 1–2 lines naming the view and key status.",
+    "parent": "BlockNode:00CS1593N801S",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG001",
+    "@type": "BlockNode",
+    "title": "**Stage Verified Code**",
+    "text": "**Stage Verified Code**:",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG002:props:StringProp:00CS15985R002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG002:props:StringProp:00CS159860000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Stage tested code changes immediately",
+    "text": "Stage tested code changes immediately: `git add <files>` (staging only, never `git commit`).",
+    "parent": "BlockNode:00CS1593NG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG003",
+    "@type": "BlockNode",
+    "title": "00CS1593NG003",
+    "text": "> **Rule**: A turn is not complete until Step 4 (Report and view zoom) is done.",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG004",
+    "@type": "BlockNode",
+    "title": "00CS1593NG004",
+    "text": "---",
+    "parent": "BlockNode:00CS1593N801B",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG005",
+    "@type": "BlockNode",
+    "title": "#### 2. A Survey Turn Changes No Code",
+    "text": "The first turn of any task is a **Coder Survey** (Step 4 of the 9-step task loop):",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG006",
+      "BlockNode:00CS1593NG007",
+      "BlockNode:00CS1593NG008",
+      "BlockNode:00CS1593NG009",
+      "BlockNode:00CS1593NG00A",
+      "BlockNode:00CS1593NG00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG006:props:StringProp:00CS159860001",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG006:props:StringProp:00CS159860002",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NG006",
+    "text": "Inspect the source files and functions indicated by the Grapher survey.",
+    "parent": "BlockNode:00CS1593NG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG007",
+    "@type": "BlockNode",
+    "title": "00CS1593NG007",
+    "text": "Map the execution flow and test coverage.",
+    "parent": "BlockNode:00CS1593NG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG008",
+    "@type": "BlockNode",
+    "title": "00CS1593NG008",
+    "text": "Identify where the existing code matches or diverges from the graph's design.",
+    "parent": "BlockNode:00CS1593NG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG009",
+    "@type": "BlockNode",
+    "title": "00CS1593NG009",
+    "text": "**DO NOT modify source code during this turn.**",
+    "parent": "BlockNode:00CS1593NG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00A",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00A",
+    "text": "The Grapher will file your survey before code changes begin, ensuring the implementation starts from a recorded baseline.",
+    "parent": "BlockNode:00CS1593NG005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00B",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00B",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NG005",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00C",
+    "@type": "BlockNode",
+    "title": "#### 3. Ask Back When Unsure (Never Guess)",
+    "text": "Stop and formulate a `**Question**` in your Report rather than making assumptions if:",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG00D",
+      "BlockNode:00CS1593NG00E",
+      "BlockNode:00CS1593NG00F",
+      "BlockNode:00CS1593NG00G",
+      "BlockNode:00CS1593NG00H",
+      "BlockNode:00CS1593NG00J",
+      "BlockNode:00CS1593NG00K",
+      "BlockNode:00CS1593NG00M",
+      "BlockNode:00CS1593NG00N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00D",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG00D:props:StringProp:00CS159868000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG00D:props:StringProp:00CS159868001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NG00D",
+    "text": "The Ask is ambiguous and plausible interpretations lead to different implementations.",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00E",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00E",
+    "text": "The change requires unanticipated public API or schema adjustments.",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00F",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00F",
+    "text": "The existing code contradicts the Grapher survey or the cited design doc.",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00G",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00G",
+    "text": "There are multiple viable approaches requiring an architectural trade-off.",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00H",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00H",
+    "text": "The scope of required changes significantly exceeds what the Ask indicated.",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00J",
+    "@type": "BlockNode",
+    "title": "**Report Format for Questions**",
+    "text": "**Report Format for Questions**:",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00K",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00K",
+    "text": "```markdown\n- **Report**: <Summary of progress so far>\n  - **Question**: <What you found, why it blocks, and the options considered>\n```",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00M",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00M",
+    "text": "End the turn with completed subturns recorded and staged. Never proceed with a speculative choice \"to save a turn.\"",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00N",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00N",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NG00C",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00P",
+    "@type": "BlockNode",
+    "title": "#### 4. Checking the Graph Before Formulating Code Theories",
+    "text": "Before forming hypotheses about existing behavior, check the graph's established record:",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG00Q",
+      "BlockNode:00CS1593NG00R",
+      "BlockNode:00CS1593NG00S"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00Q",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00Q",
+    "text": "```bash\n# 1. Grep the raw store for the relevant filename or symbol:\ngrep -n -C3 '<filename.ts>' AperasKG/Apeiron/BlockNode.jsonld\n\n# 2. Unfold matching nodes:\naperas unfold <id>\n\n# 3. Follow forward links up to the governing design tier:\naperas unfold <design-block-id>\n```",
+    "parent": "BlockNode:00CS1593NG00P",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00R",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00R",
+    "text": "Always compare what the code actually does against what `design/` specifies. That discrepancy is the primary indicator of drift.",
+    "parent": "BlockNode:00CS1593NG00P",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00S",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00S",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NG00P",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00T",
+    "@type": "BlockNode",
+    "title": "#### 5. Operational Invariants (What Stays Out of Your Hands)",
+    "parent": "BlockNode:00CS1593N8014",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG00V",
+      "BlockNode:00CS1593NG00W",
+      "BlockNode:00CS1593NG00X"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00V",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG00V:props:StringProp:00CS15986R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG00V:props:StringProp:00CS15986R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Write only in your thread**",
+    "text": "**Write only in your thread**: Never write directly to discussion, issues, design, or another agent's thread. Report findings in `.threads/coder.md` for the Grapher to file.",
+    "parent": "BlockNode:00CS1593NG00T",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00W",
+    "@type": "BlockNode",
+    "title": "**Never touch `artifacts/**.md` files directly**",
+    "text": "**Never touch `artifacts/**.md` files directly**: Never use `view_file` or edit markdown projections on disk.",
+    "parent": "BlockNode:00CS1593NG00T",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00X",
+    "@type": "BlockNode",
+    "title": "**Never omit subturns**",
+    "text": "**Never omit subturns**: Results and tool friction not captured in subturns are permanently lost to subsequent turns.",
+    "parent": "BlockNode:00CS1593NG00T",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00Y",
+    "@type": "BlockNode",
+    "title": "### aperas-grapher/SKILL.md",
+    "parent": "BlockNode:00CS1593MG001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG00Z",
+      "BlockNode:00CS1593NG010",
+      "BlockNode:00CS1593NG011",
+      "BlockNode:00CS1593NG012",
+      "BlockNode:00CS1593NG013",
+      "BlockNode:00CS1593NG014",
+      "BlockNode:00CS1593NG015",
+      "BlockNode:00CS1593NG01W",
+      "BlockNode:00CS1593NR007",
+      "BlockNode:00CS1593NR00W",
+      "BlockNode:00CS1593NR015",
+      "BlockNode:00CS1593NR01B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG00Z",
+    "@type": "BlockNode",
+    "title": "00CS1593NG00Z",
+    "text": "```\n---\nname: aperas-grapher\ndescription: >-\n  The grapher role in Aperas multi-agent work: the only role that writes the graph at large —\n  deep read, deep write, every promotion, thread lifecycle. Preloaded by the aperas-grapher\n  subagent; load it only when acting as grapher. Requires the base `aperas` skill.\n---\n```",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG010",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4** — Grapher role skill.",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG011",
+    "@type": "BlockNode",
+    "title": "00CS1593NG011",
+    "text": "You are the **Grapher**. You manage and modify the Apeiron knowledge graph.",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG012",
+    "@type": "BlockNode",
+    "title": "00CS1593NG012",
+    "text": "The base `aperas` skill applies in full. You perform deep reads, deep writes, promotions, and thread lifecycle management. You write everything in the graph except the Orchestrator's Freeflow/Asks and the Coder's thread nodes.",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG013",
+    "@type": "BlockNode",
+    "title": "00CS1593NG013",
+    "text": "> **Aperas-repo insiders**: Run CLI commands from `Aperas/monorepo/` as `npm run aperas -- <verb> ...`. In normal projects using the published package, run bare `aperas <verb> ...`.",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG014",
+    "@type": "BlockNode",
+    "title": "00CS1593NG014",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG015",
+    "@type": "BlockNode",
+    "title": "#### 1. Every Invocation (Turn Protocol)",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG016",
+      "BlockNode:00CS1593NG01A",
+      "BlockNode:00CS1593NG01C",
+      "BlockNode:00CS1593NG01H",
+      "BlockNode:00CS1593NG01Q",
+      "BlockNode:00CS1593NG01T",
+      "BlockNode:00CS1593NG01V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG016",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG016:props:StringProp:00CS159870000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG016:props:StringProp:00CS159870001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Read Input View**",
+    "text": "**Read Input View**:",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG017",
+      "BlockNode:00CS1593NG019"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG017",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG017:props:StringProp:00CS159870002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG017:props:StringProp:00CS159870003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Render the incoming Ask",
+    "text": "Render the incoming Ask:",
+    "parent": "BlockNode:00CS1593NG016",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG018"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG018",
+    "@type": "BlockNode",
+    "title": "00CS1593NG018",
+    "text": "```bash\n     aperas tree --view <p>-orchestrator-grapher\n     ```",
+    "parent": "BlockNode:00CS1593NG017",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG019",
+    "@type": "BlockNode",
+    "title": "00CS1593NG019",
+    "text": "Review any specific nodes named in the dispatch message.",
+    "parent": "BlockNode:00CS1593NG016",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01A",
+    "@type": "BlockNode",
+    "title": "**Recover Thread Context**",
+    "text": "**Recover Thread Context**:",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01B",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG01B:props:StringProp:00CS159878000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG01B:props:StringProp:00CS159878001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NG01B",
+    "text": "Review earlier turns of the active task in `.threads/grapher.md`.",
+    "parent": "BlockNode:00CS1593NG01A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01C",
+    "@type": "BlockNode",
+    "title": "**Execute Turn Work with Subturns**",
+    "text": "**Execute Turn Work with Subturns**:",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01D",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG01D:props:StringProp:00CS159878002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG01D:props:StringProp:00CS159878003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Write subturns recording",
+    "text": "Write subturns recording:",
+    "parent": "BlockNode:00CS1593NG01C",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01E",
+      "BlockNode:00CS1593NG01F",
+      "BlockNode:00CS1593NG01G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01E",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG01E:props:StringProp:00CS159878004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG01E:props:StringProp:00CS159878005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NG01E",
+    "text": "Nodes unfolded, checked, and modified.",
+    "parent": "BlockNode:00CS1593NG01D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01F",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01F",
+    "text": "Results of `backlinks` and traversal checks.",
+    "parent": "BlockNode:00CS1593NG01D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01G",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01G",
+    "text": "Concrete findings, drift detected, and decisions made.",
+    "parent": "BlockNode:00CS1593NG01D",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01H",
+    "@type": "BlockNode",
+    "title": "**Formulate Report**",
+    "text": "**Formulate Report**:",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01J",
+      "BlockNode:00CS1593NG01K",
+      "BlockNode:00CS1593NG01M",
+      "BlockNode:00CS1593NG01P"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01J",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG01J:props:StringProp:00CS15987G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG01J:props:StringProp:00CS15987G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NG01J",
+    "text": "Create a `**Report**` node citing what changed or what was surveyed.",
+    "parent": "BlockNode:00CS1593NG01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01K",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01K",
+    "text": "List any open questions (`**Question**`) or tool gaps (`**Tool gap — <topic>**`).",
+    "parent": "BlockNode:00CS1593NG01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01M",
+    "@type": "BlockNode",
+    "title": "Re-root your output view",
+    "text": "Re-root your output view:",
+    "parent": "BlockNode:00CS1593NG01H",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01N"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01N",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01N",
+    "text": "```bash\n     aperas zoom <report-id> --view <p>-grapher-orchestrator --flush\n     ```",
+    "parent": "BlockNode:00CS1593NG01M",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01P",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01P",
+    "text": "Respond in chat with 1–2 lines naming the view and key status.",
+    "parent": "BlockNode:00CS1593NG01H",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01Q",
+    "@type": "BlockNode",
+    "title": "**Stage Verified Graph Mutations**",
+    "text": "**Stage Verified Graph Mutations**:",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01R"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01R",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG01R:props:StringProp:00CS15987G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG01R:props:StringProp:00CS15987G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Stage changes in `AperasKG/`",
+    "text": "Stage changes in `AperasKG/`:",
+    "parent": "BlockNode:00CS1593NG01Q",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NG01S"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01S",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01S",
+    "text": "```bash\n     git -C AperasKG add -u\n     ```",
+    "parent": "BlockNode:00CS1593NG01R",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01T",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01T",
+    "text": "> **Rule**: A turn is not complete until Step 4 (Report and view zoom) is done.",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01V",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01V",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NG015",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01W",
+    "@type": "BlockNode",
+    "title": "#### 2. The Three Kinds of Grapher Turns",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG01X",
+      "BlockNode:00CS1593NG023",
+      "BlockNode:00CS1593NR000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01X",
+    "@type": "BlockNode",
+    "title": "##### A. Survey Turn (First Turn of Every Task)",
+    "parent": "BlockNode:00CS1593NG01W",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG01Y",
+      "BlockNode:00CS1593NG01Z",
+      "BlockNode:00CS1593NG020",
+      "BlockNode:00CS1593NG021",
+      "BlockNode:00CS1593NG022"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01Y",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG01Y:props:StringProp:00CS15987R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG01Y:props:StringProp:00CS15987R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Perform deep read for the task",
+    "text": "Perform deep read for the task: enter top-down and bottom-up (base: *Entering the corpus*).",
+    "parent": "BlockNode:00CS1593NG01X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG01Z",
+    "@type": "BlockNode",
+    "title": "00CS1593NG01Z",
+    "text": "Climb every pinpointed node until it reaches `design/`.",
+    "parent": "BlockNode:00CS1593NG01X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG020",
+    "@type": "BlockNode",
+    "title": "00CS1593NG020",
+    "text": "Cite governing design blocks, open issues, planned items, and prior history in your Report.",
+    "parent": "BlockNode:00CS1593NG01X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG021",
+    "@type": "BlockNode",
+    "title": "00CS1593NG021",
+    "text": "Note any drift between design and code.",
+    "parent": "BlockNode:00CS1593NG01X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG022",
+    "@type": "BlockNode",
+    "title": "**Scope**",
+    "text": "**Scope**: Graph side only. Touch source code only to pinpoint entry points; mapping code execution is the Coder's survey.",
+    "parent": "BlockNode:00CS1593NG01X",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG023",
+    "@type": "BlockNode",
+    "title": "##### B. Filing Turn (After Each Coder Turn)",
+    "parent": "BlockNode:00CS1593NG01W",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NG024",
+      "BlockNode:00CS1593NG025",
+      "BlockNode:00CS1593NG026",
+      "BlockNode:00CS1593NG027",
+      "BlockNode:00CS1593NG028"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NG024",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NG024:props:StringProp:00CS159880000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NG024:props:StringProp:00CS159880001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NG024",
+    "text": "Read the Coder's latest Report in `.threads/coder.md`.",
+    "parent": "BlockNode:00CS1593NG023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG025",
+    "@type": "BlockNode",
+    "title": "00CS1593NG025",
+    "text": "Record findings into the task's `discussion` Freeflow, then promote to `issues/`/`history/`/`design/` as earned.",
+    "parent": "BlockNode:00CS1593NG023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG026",
+    "@type": "BlockNode",
+    "title": "**Copy content up**",
+    "text": "**Copy content up**: Never link down into a thread from the graph above it.",
+    "parent": "BlockNode:00CS1593NG023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG027",
+    "@type": "BlockNode",
+    "title": "00CS1593NG027",
+    "text": "Record any discrepancies between code and design as new findings.",
+    "parent": "BlockNode:00CS1593NG023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NG028",
+    "@type": "BlockNode",
+    "title": "00CS1593NG028",
+    "text": "File every tool gap reported by either role under the appropriate tool concern.",
+    "parent": "BlockNode:00CS1593NG023",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR000",
+    "@type": "BlockNode",
+    "title": "##### C. Finishing Turn (Last Turn of a Task)",
+    "parent": "BlockNode:00CS1593NG01W",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR001",
+      "BlockNode:00CS1593NR002",
+      "BlockNode:00CS1593NR003",
+      "BlockNode:00CS1593NR004",
+      "BlockNode:00CS1593NR005",
+      "BlockNode:00CS1593NR006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR001:props:StringProp:00CS159888000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR001:props:StringProp:00CS159888001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Promote**",
+    "text": "**Promote**: Move recurring patterns to `concepts.md` and settled outcomes to formal docs with provenance at the origin.",
+    "parent": "BlockNode:00CS1593NR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR002",
+    "@type": "BlockNode",
+    "title": "**Dashboard**",
+    "text": "**Dashboard**: Update the topic's `## Dashboard` in `discussion/<topic>.md`.",
+    "parent": "BlockNode:00CS1593NR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR003",
+    "@type": "BlockNode",
+    "title": "**Check Links**",
+    "text": "**Check Links**: Run `aperas check-links` over the whole corpus.",
+    "parent": "BlockNode:00CS1593NR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR004",
+    "@type": "BlockNode",
+    "title": "**Project & Stage**",
+    "text": "**Project & Stage**: Project modified docs (`aperas project <path> --flush`) and stage `AperasKG/`.",
+    "parent": "BlockNode:00CS1593NR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR005",
+    "@type": "BlockNode",
+    "title": "**Prune**",
+    "text": "**Prune**: If the thread warned of reaching its size cap, tombstone finished tasks with `aperas remove` (never prune the current task).",
+    "parent": "BlockNode:00CS1593NR000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR006",
+    "@type": "BlockNode",
+    "title": "00CS1593NR006",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NR000",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR007",
+    "@type": "BlockNode",
+    "title": "#### 3. Writing the Graph (The 6-Step Edit Loop)",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR008",
+      "BlockNode:00CS1593NR00B",
+      "BlockNode:00CS1593NR00E",
+      "BlockNode:00CS1593NR00J",
+      "BlockNode:00CS1593NR00N",
+      "BlockNode:00CS1593NR00R",
+      "BlockNode:00CS1593NR00V"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR008",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR008:props:StringProp:00CS15988G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "true"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR008:props:StringProp:00CS15988G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Orient Before Editing**",
+    "text": "**Orient Before Editing**:",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR009",
+      "BlockNode:00CS1593NR00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR009",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR009:props:StringProp:00CS15988G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR009:props:StringProp:00CS15988G003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Unfold content",
+    "text": "Unfold content: `aperas unfold <ref>`.",
+    "parent": "BlockNode:00CS1593NR008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00A",
+    "@type": "BlockNode",
+    "title": "Check backlinks",
+    "text": "Check backlinks: `aperas backlinks <id> --text` to evaluate dependents and provenance.",
+    "parent": "BlockNode:00CS1593NR008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00B",
+    "@type": "BlockNode",
+    "title": "**Locate the Smallest Target Block**",
+    "text": "**Locate the Smallest Target Block**:",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR00C",
+      "BlockNode:00CS1593NR00D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00C",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR00C:props:StringProp:00CS15988G004",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR00C:props:StringProp:00CS15988G005",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NR00C",
+    "text": "Target the exact leaf node that needs updating, not the enclosing heading or artifact.",
+    "parent": "BlockNode:00CS1593NR00B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00D",
+    "@type": "BlockNode",
+    "title": "00CS1593NR00D",
+    "text": "Never copy content from projected `.md` files (which contain injected anchor tags).",
+    "parent": "BlockNode:00CS1593NR00B",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00E",
+    "@type": "BlockNode",
+    "title": "**Edit Graph-First via CLI**",
+    "text": "**Edit Graph-First via CLI**:",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR00F",
+      "BlockNode:00CS1593NR00G",
+      "BlockNode:00CS1593NR00H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00F",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR00F:props:StringProp:00CS15988R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR00F:props:StringProp:00CS15988R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Update existing node",
+    "text": "Update existing node: `echo \"content\" | aperas update <id> --flush`",
+    "parent": "BlockNode:00CS1593NR00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00G",
+    "@type": "BlockNode",
+    "title": "Insert new node",
+    "text": "Insert new node: `echo \"- item\" | aperas insert <parent-id> --flush`",
+    "parent": "BlockNode:00CS1593NR00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00H",
+    "@type": "BlockNode",
+    "title": "Reposition node without reminting",
+    "text": "Reposition node without reminting: `aperas insert <node-id> --after <anchor-id> --flush` (no stdin).",
+    "parent": "BlockNode:00CS1593NR00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00J",
+    "@type": "BlockNode",
+    "title": "**Verify by Traversal**",
+    "text": "**Verify by Traversal**:",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR00K",
+      "BlockNode:00CS1593NR00M"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00K",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR00K:props:StringProp:00CS15988R002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR00K:props:StringProp:00CS15988R003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Confirm links actually resolved",
+    "text": "Confirm links actually resolved: `aperas show <id>` or `aperas backlinks <id> --text`.",
+    "parent": "BlockNode:00CS1593NR00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00M",
+    "@type": "BlockNode",
+    "title": "00CS1593NR00M",
+    "text": "Do not rely solely on summary lines like `\"N resolved\"`.",
+    "parent": "BlockNode:00CS1593NR00J",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00N",
+    "@type": "BlockNode",
+    "title": "**Deep Write (Update Dependents & Links)**",
+    "text": "**Deep Write (Update Dependents & Links)**:",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR00P",
+      "BlockNode:00CS1593NR00Q"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00P",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR00P:props:StringProp:00CS159890000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR00P:props:StringProp:00CS159890001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NR00P",
+    "text": "Check backlinks and update any dependent blocks that this change makes stale.",
+    "parent": "BlockNode:00CS1593NR00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00Q",
+    "@type": "BlockNode",
+    "title": "00CS1593NR00Q",
+    "text": "When closing an issue, cross-link the issue and the resolving design/fix in both directions.",
+    "parent": "BlockNode:00CS1593NR00N",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00R",
+    "@type": "BlockNode",
+    "title": "**Project and Stage**",
+    "text": "**Project and Stage**:",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR00S",
+      "BlockNode:00CS1593NR00T"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00S",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR00S:props:StringProp:00CS159890002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR00S:props:StringProp:00CS159890003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Project",
+    "text": "Project: `aperas project <path> --flush`",
+    "parent": "BlockNode:00CS1593NR00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00T",
+    "@type": "BlockNode",
+    "title": "Stage",
+    "text": "Stage: `git -C AperasKG add <path>`",
+    "parent": "BlockNode:00CS1593NR00R",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00V",
+    "@type": "BlockNode",
+    "title": "00CS1593NR00V",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NR007",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00W",
+    "@type": "BlockNode",
+    "title": "#### 4. Preserving Node Identity (Preventing Accidental Tombstones)",
+    "text": "Three common operations can accidentally tombstone and remint node IDs:",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR00X",
+      "BlockNode:00CS1593NR00Y",
+      "BlockNode:00CS1593NR00Z",
+      "BlockNode:00CS1593NR010",
+      "BlockNode:00CS1593NR014"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00X",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR00X:props:StringProp:00CS159898000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR00X:props:StringProp:00CS159898001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NR00X",
+    "text": "Using `remove` + `insert` instead of a repositioning move.",
+    "parent": "BlockNode:00CS1593NR00W",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00Y",
+    "@type": "BlockNode",
+    "title": "00CS1593NR00Y",
+    "text": "Calling `aperas update` on a parent heading without `--text-only` (tombstones all children).",
+    "parent": "BlockNode:00CS1593NR00W",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR00Z",
+    "@type": "BlockNode",
+    "title": "00CS1593NR00Z",
+    "text": "Pushing a list update where items change nesting depth.",
+    "parent": "BlockNode:00CS1593NR00W",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR010",
+    "@type": "BlockNode",
+    "title": "**Best Practices**",
+    "text": "**Best Practices**:",
+    "parent": "BlockNode:00CS1593NR00W",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00CS1593NR011",
+      "BlockNode:00CS1593NR012",
+      "BlockNode:00CS1593NR013"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR011",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR011:props:StringProp:00CS15989G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR011:props:StringProp:00CS15989G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Move nodes cleanly**",
+    "text": "**Move nodes cleanly**: Use `aperas insert <node-id> --after <anchor-id> --flush` with **no stdin**.",
+    "parent": "BlockNode:00CS1593NR010",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR012",
+    "@type": "BlockNode",
+    "title": "**Retype in place**",
+    "text": "**Retype in place**: Use `aperas retype <ref> --to <type>` to change node kinds without losing identity, backlinks, or history.",
+    "parent": "BlockNode:00CS1593NR010",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR013",
+    "@type": "BlockNode",
+    "title": "**Heading updates**",
+    "text": "**Heading updates**: Always pass `--text-only` when retitling headings to protect child nodes.",
+    "parent": "BlockNode:00CS1593NR010",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR014",
+    "@type": "BlockNode",
+    "title": "00CS1593NR014",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NR00W",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR015",
+    "@type": "BlockNode",
+    "title": "#### 5. Provenance at the Origin",
+    "text": "Citation direction allows links to point **UP** or **SIDEWAYS**, never **DOWN**:",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR016",
+      "BlockNode:00CS1593NR017",
+      "BlockNode:00CS1593NR019",
+      "BlockNode:00CS1593NR01A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR016",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CS1593NR016:props:StringProp:00CS15989G002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CS1593NR016:props:StringProp:00CS15989R000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CS1593NR016",
+    "text": "When promoting a finding from `discussion/` into `issues/` or `design/`, the formal doc cannot link down to the discussion node.",
+    "parent": "BlockNode:00CS1593NR015",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR017",
+    "@type": "BlockNode",
+    "title": "**Solution**",
+    "text": "**Solution**: Add the link at the **origin** (the discussion node):",
+    "parent": "BlockNode:00CS1593NR015",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CS1593NR018"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR018",
+    "@type": "BlockNode",
+    "title": "00CS1593NR018",
+    "text": "```markdown\n  - Promoted to [Title](../issues/concern.md#id/BlockNode:00XXXXXXXX000)\n  ```",
+    "parent": "BlockNode:00CS1593NR017",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR019",
+    "@type": "BlockNode",
+    "title": "00CS1593NR019",
+    "text": "Provenance surfaces automatically on the formal doc as a backlink (`aperas backlinks <id> --text`).",
+    "parent": "BlockNode:00CS1593NR015",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR01A",
+    "@type": "BlockNode",
+    "title": "00CS1593NR01A",
+    "text": "---",
+    "parent": "BlockNode:00CS1593NR015",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR01B",
+    "@type": "BlockNode",
+    "title": "#### 6. Grapher Tool Mechanics",
+    "parent": "BlockNode:00CS1593NG00Y",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR01C",
+      "BlockNode:00CS1593NR01E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR01C",
+    "@type": "BlockNode",
+    "title": "##### Skill Drift Verification",
+    "text": "When modifying skill files, verify consistency with the graph record:",
+    "parent": "BlockNode:00CS1593NR01B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR01D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR01D",
+    "@type": "BlockNode",
+    "title": "00CS1593NR01D",
+    "text": "```bash\npython3 skills/aperas/scripts/skill_drift.py              # Check both added and dropped\npython3 skills/aperas/scripts/skill_drift.py --added      # Units in file not in graph\npython3 skills/aperas/scripts/skill_drift.py --dropped    # Units in graph not in file\n```",
+    "parent": "BlockNode:00CS1593NR01C",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS1593NR01E",
+    "@type": "BlockNode",
+    "title": "##### Full Link Integrity Sweep",
+    "parent": "BlockNode:00CS1593NR01B",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CS1593NR01F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CS1593NR01F",
+    "@type": "BlockNode",
+    "title": "00CS1593NR01F",
+    "text": "```bash\naperas check-links                            # Identify broken or unpersisted links\naperas check-links --repair                   # Re-resolve and persist repairs\n```",
+    "parent": "BlockNode:00CS1593NR01E",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CS163NE8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CS163NE8001:links:Link:00CS163TJG000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CS163NE8001:links:Link:00CS163TJG000:props:StringProp:00CS163TJG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "77"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CS163NE8001:links:Link:00CS163TJG002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CS163NE8001:links:Link:00CS163TJG002:props:StringProp:00CS163TJG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "169"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CS163NE8001:links:Link:00CS163TJG004",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CS163NE8001:links:Link:00CS163TJG004:props:StringProp:00CS163TJG005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "297"
+          }
+        ]
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: the skill v4 comprehensive rewrite is recorded as [v4 SKILL.md (verbatim, 2026-09-28)](#id/BlockNode:00CS1593MG001), and promoted to design's [Orchestrator](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003) (operational gates upfront, in-flight triage protocol) and [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) (9-step task loop, in-flight triage).",
+    "parent": "BlockNode:00CS0YM5H8001",
     "type": "listItem",
     "children": []
   }

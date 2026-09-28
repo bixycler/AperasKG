@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "c5f55d7e71b5d4967e42edbe720989ef867fd0ac6a2b287b23ab0ee82287c9fd",
+    "fileHash": "8a2f11dd0bf2f46e85a29152e080040eeecd03f4f89baf75672b854b384b1bf7",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "c5f55d7e71b5d4967e42edbe720989ef867fd0ac6a2b287b23ab0ee82287c9fd",
-    "lastIngestedAt": "2026-09-27T09:18:06.094Z",
-    "projectedHash": "c5f55d7e71b5d4967e42edbe720989ef867fd0ac6a2b287b23ab0ee82287c9fd"
+    "ingestedHash": "8a2f11dd0bf2f46e85a29152e080040eeecd03f4f89baf75672b854b384b1bf7",
+    "lastIngestedAt": "2026-09-28T10:02:54.860Z",
+    "projectedHash": "8a2f11dd0bf2f46e85a29152e080040eeecd03f4f89baf75672b854b384b1bf7"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -834,11 +834,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "258f149533f9fbf015e46a3c0abb18c37d8833d0bbe1042a0f9c495ea5ffa9cc",
+    "fileHash": "aabbf68ca51b57b385d329113e2f08732370260a87c9de49ccd7f68162bf801d",
     "lastTrackedAt": "2026-09-22T05:31:16.879Z",
-    "ingestedHash": "258f149533f9fbf015e46a3c0abb18c37d8833d0bbe1042a0f9c495ea5ffa9cc",
-    "lastIngestedAt": "2026-09-27T09:18:07.783Z",
-    "projectedHash": "258f149533f9fbf015e46a3c0abb18c37d8833d0bbe1042a0f9c495ea5ffa9cc"
+    "ingestedHash": "aabbf68ca51b57b385d329113e2f08732370260a87c9de49ccd7f68162bf801d",
+    "lastIngestedAt": "2026-09-28T10:02:56.791Z",
+    "projectedHash": "aabbf68ca51b57b385d329113e2f08732370260a87c9de49ccd7f68162bf801d"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",
