@@ -1,6 +1,4 @@
 ---
-danglingRef: ../aperas/references/mechanics.md
-danglingRef: #4-mechanics
 description: Open questions and freeflow notes behind the skill's four-level design — including whether an indirect-edge relationship deserves its own linking convention.
 ---
 
@@ -374,6 +372,21 @@ description: Open questions and freeflow notes behind the skill's four-level des
     - Retain Section 1 Philosophy, Section 2 Orientation, Section 3 Discipline (roles, 9-step task loop, thread rules), and a concise command cheatsheet in a lean core `SKILL.md` (~250–300 lines, ~3,000 tokens).
     - Move Section 4's deep CLI syntax, AST piping rules, anchor placement, list item update subtleties, and troubleshooting into an on-demand reference document: `skills/aperas/references/mechanics.md`.
     - Subagents load the lean core skill by default, and only consult `references/mechanics.md` when executing non-trivial graph mutations.
+
+### Aperas-repo insiders CWD configuration across all three agent roles <a name='id/BlockNode:00CV3WG2C0001' class='aperas-anchor aperas-id'></a>
+
+- **Finding — 100% reproduction of initial package.json ENOENT failure**: <a name='id/BlockNode:00CV3WG2C0002' class='aperas-anchor aperas-id'></a> In every subagent trace across all roles (Grapher Turn 1, Coder Turn 1, Grapher Turn 2), the subagent's very first tool call failed with Exit Code 254 (`npm ERR! code ENOENT: open /home/will/source/Aperas/package.json`). Subagents inherit the workspace root (`/home/will/source/Aperas`), whereas `package.json` and the CLI package live in `monorepo/`. Subagents waste 1–2 turns discovering `monorepo/` and switching working directories.
+- **Decision — Update "Aperas-repo insiders" callout across all 3 agent skills**: <a name='id/BlockNode:00CV3WG2C0003' class='aperas-anchor aperas-id'></a>
+  
+  - Add explicit working directory instructions to the `> **Aperas-repo insiders**:` callout at the top of all 3 role skills (`skills/aperas-orchestrator/SKILL.md`, `skills/aperas-coder/SKILL.md`, `skills/aperas-grapher/SKILL.md`), and the base skill (`skills/aperas/SKILL.md`):
+    
+    - Specify that any `npm run aperas -- <verb>` tool call must set its working directory to `Aperas/monorepo/` (`/home/will/source/Aperas/monorepo`).
+    - Specify that repo-level scripts (e.g. `python3 skills/aperas/scripts/skill_drift.py`) and git operations run from `Aperas/` (code repo root).
+  - In Orchestrator dispatch templates, explicitly include `(run with Cwd: /home/will/source/Aperas/monorepo)` next to CLI command recipes.
+- **Related findings to address**: <a name='id/BlockNode:00CV3WG2C0008' class='aperas-anchor aperas-id'></a>
+  
+  - **Unique Lead-in Rule**: <a name='id/BlockNode:00CV3WG2C0009' class='aperas-anchor aperas-id'></a> Prevent AST slug collisions by requiring distinct bold lead-ins for sibling items under the same heading (document in `skills/aperas/references/mechanics.md`).
+  - **Shell quoting in one-liners**: <a name='id/BlockNode:00CV3WG2C000A' class='aperas-anchor aperas-id'></a> Recommend scratch scripts in harness scratch directory over complex inline bash `-c` python scripts.
 
 ## v0 SKILL.md (verbatim, 2026-09-12) <a name='id/BlockNode:00CE95MVP8001' class='aperas-anchor aperas-id'></a>
 
