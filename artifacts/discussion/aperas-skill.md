@@ -349,6 +349,29 @@ description: Open questions and freeflow notes behind the skill's four-level des
     - *Universal rule*: <a name='id/BlockNode:00CTYF5W48006' class='aperas-anchor aperas-id'></a> Always dispatch a fresh subagent instance for every turn; subagents in Aperas are stateless workers. Never carry conversation history across turns.
     - *Tool mappings*: <a name='id/BlockNode:00CTYF5W48007' class='aperas-anchor aperas-id'></a> In Antigravity, call `invoke_subagent` (never `send_message` across distinct turns); in Claude Code, call `Task`.
     - *Context restoration*: <a name='id/BlockNode:00CTYF5W48008' class='aperas-anchor aperas-id'></a> Every turn recovers state cleanly through the view (`aperas tree --view <p>-orchestrator-<role>`) and the thread (`.threads/<role>.md`).
+- **Verification command scope — `npm run verify` is code-only (2026-10-01)**: <a name='id/BlockNode:00CTZJE8C8001' class='aperas-anchor aperas-id'></a> `npm run verify` (even with `verify:slow` separated) is a heavy test suite reserved strictly for code/engine changes. It must never be executed during skill-only tasks. Skill-only verification relies solely on `python3 skills/aperas/scripts/skill_drift.py` and `npm run aperas -- check-links`. Running `verify` for skill edits causes unnecessary hangs, compute waste, and test timeouts.
+- **Mistaking shadows for the source — root causes of `.threads/` disk access and elevating "node reference, not file path" to Philosophy #1 (2026-10-01)**: <a name='id/BlockNode:00CTZJGWW0001' class='aperas-anchor aperas-id'></a> Detailed analysis of why orchestrators and subagents repeatedly attempt to access `.threads/` using filesystem tools (`ls`, `cat`, `view_file`) in `Aperas/`:
+  
+  - **Root Cause 1 — The File Mirage (POSIX and Git vocabulary)**: <a name='id/BlockNode:00CTZQR3SG002' class='aperas-anchor aperas-id'></a> The notation `.threads/` (leading dot = hidden directory), `.md` extension, description as "Git-ignored" (which applies only to disk files), and phrasing like "creates in `.threads/grapher.md`" strongly trigger the LLM's filesystem schema rather than the graph-node schema.
+  - **Root Cause 2 — The Step 1 CLI Tool Void**: <a name='id/BlockNode:00CTZQR3SR000' class='aperas-anchor aperas-id'></a> Step 1 instructs Orchestrators to "create `## <topic>` and `### <task>` in `.threads/grapher.md`", but provides zero CLI recipes for resolving thread root IDs or inserting headings without file access. Lacking a graph recipe, agents fall back to `ls` and `cat`.
+  - **Root Cause 3 — Two-repo CWD conflation**: <a name='id/BlockNode:00CTZQR3SR001' class='aperas-anchor aperas-id'></a> Terminal execution is anchored in `$CWD` (`Aperas/`), while graph artifacts are rooted in `AperasKG/artifacts/`. Agents mistakenly resolve relative thread paths against `$CWD`.
+  - **Symptom & philosophical breach — violating Philosophy #1 ("No inspection of the shadows")**: <a name='id/BlockNode:00CTZQR3SR002' class='aperas-anchor aperas-id'></a> Direct file access inspects projected shadows stripped of graph state, backlinks, and view hierarchy.
+  - **Promoting "Node Reference, Not File Path" to Section 1 Philosophy**: <a name='id/BlockNode:00CTZQR3SR003' class='aperas-anchor aperas-id'></a> In v4, "An `artifacts/**.md` path in your hand is a node reference, not a file path" was placed in Section 2 as an operational gate. It must be elevated to a core bullet point in Section 1 Philosophy (*The Apeiron is the source*) to govern the entire skill.
+  - **Structural resolution across discipline and CLI runbooks**: <a name='id/BlockNode:00CTZQR3SR004' class='aperas-anchor aperas-id'></a>
+    
+    - Reject creating symlinks in `Aperas/` (which merely codifies and facilitates the bad reflex).
+    - Provide explicit CLI recipes for Step 1 thread initialization (`aperas show .threads/grapher.md`, `aperas tree .threads/grapher.md`, piping heading inserts).
+    - Enforce graph-first traversal via views (`aperas tree --view`) and CLI inspection (`aperas show`, `aperas unfold`).
+- **Skill size audit — Claude Code 5,000-token compaction threshold and progressive disclosure refactor (2026-10-01)**: <a name='id/BlockNode:00CV2ZRHWR001' class='aperas-anchor aperas-id'></a> Detailed analysis of base skill growth (497 lines, 30.6 KB, ~5,800 tokens) against harness thresholds, identifying compaction truncation in Claude Code and defining the progressive disclosure refactoring architecture:
+  
+  - **Current file metrics**: <a name='id/BlockNode:00CV2ZRHWR002' class='aperas-anchor aperas-id'></a> `skills/aperas/SKILL.md` has expanded to 497 lines and 30,572 bytes (~5,500–6,000 tokens), sitting at 99.4% of the 500-line recommended ceiling and exceeding the 5,000-token budget.
+  - **Compaction truncation risk in Claude Code**: <a name='id/BlockNode:00CV2ZRHWR003' class='aperas-anchor aperas-id'></a> In Claude Code, skills are loaded into context upon trigger. When conversation context approaches limits, Claude Code executes context compaction. Skills that exceed the 5,000-token threshold are subject to aggressive truncation and summarization during compaction. This drops detailed CLI syntax rules, anchor constraints, and operational gates mid-session, causing subagents to make blind edits or read engine source code.
+  - **Antigravity tool bounds vs. self-truncation**: <a name='id/BlockNode:00CV2ZRHWR004' class='aperas-anchor aperas-id'></a> Antigravity's `view_file` tool supports up to 800 lines and 46 KB, so `SKILL.md` fits in a single view call. However, subagents self-truncate reads (e.g. requesting lines 1–100 or 1–250). While the restored Table of Contents mitigates initial discovery, long files remain vulnerable to incomplete context loading.
+  - **Refactoring architecture (Progressive Disclosure)**: <a name='id/BlockNode:00CV2ZRHWR005' class='aperas-anchor aperas-id'></a>
+    
+    - Retain Section 1 Philosophy, Section 2 Orientation, Section 3 Discipline (roles, 9-step task loop, thread rules), and a concise command cheatsheet in a lean core `SKILL.md` (~250–300 lines, ~3,000 tokens).
+    - Move Section 4's deep CLI syntax, AST piping rules, anchor placement, list item update subtleties, and troubleshooting into an on-demand reference document: `skills/aperas/references/mechanics.md`.
+    - Subagents load the lean core skill by default, and only consult `references/mechanics.md` when executing non-trivial graph mutations.
 
 ## v0 SKILL.md (verbatim, 2026-09-12) <a name='id/BlockNode:00CE95MVP8001' class='aperas-anchor aperas-id'></a>
 
@@ -3463,3 +3486,322 @@ Supersedes: [v4 View Triage intro](#id/BlockNode:00CS1593MR00S)
 ### aperas-orchestrator — Route Every Step — tracked skill and agent changes routed to Coder <a name='id/BlockNode:00CTTGC79R001' class='aperas-anchor aperas-id'></a>
 
 - Skill and agent configuration changes in tracked directories (`skills/`, `.agents/`) are code changes and must be routed to the Coder.
+
+### aperas — Structure & Philosophy — Table of Contents and Philosophy #1 Elevation <a name='id/BlockNode:00CV2CFX6R001' class='aperas-anchor aperas-id'></a>
+
+- [1. Philosophy](#1-philosophy) — Foundational principles (Apeiron as source, substance maturity, provenance)
+- [2. Orientation](#2-orientation) — Initial gates, view triage, entering the corpus, traversal directions
+- [3. Discipline](#3-discipline) — Three roles, 9-step task loop, thread structure, zooming, citation gradients
+- [4. Mechanics](#4-mechanics) — Command references, CLI piping recipes, node editing, service lifecycle, link checks
+- [5. Reference](#5-reference) — Canonical specifications and open tool gaps
+
+**Node reference, not file path**: <a name='id/BlockNode:00CV2CFX70004' class='aperas-anchor aperas-id'></a> Any `.md` mentioned in Aperas skills or given to you is a node reference, not a file path. Any attempt to access, list, or inspect it with filesystem tools (`view_file`, `cat`, `ls`) mistakes the shadow for the source.
+
+### aperas — Orientation & Mechanics — Full-Text Search via Raw Store and Symlinks <a name='id/BlockNode:00CV2CFX70005' class='aperas-anchor aperas-id'></a>
+
+Grep a concrete symbol, filename, or error string in the raw store:
+
+```bash
+grep -n -C3 '<identifier>' AperasKG/Apeiron/BlockNode.jsonld
+```
+
+`-C3` context is essential to capture the `@id` line and surrounding fields (which vary in position).
+
+> [!WARNING]
+> **Grep on symlinks (`git grep` and `grep -r` skip `AperasKG`)**:
+> `git grep` and standard `grep -r` (lowercase `-r`) do **not** follow symlinks and will silently skip `AperasKG` when run from the code repo root! Always use `grep -R` (uppercase `-R`) to follow symlinks when searching across repos, or target `AperasKG/Apeiron/BlockNode.jsonld` directly. When running commands from `monorepo/`, target `../AperasKG/Apeiron/BlockNode.jsonld`.
+
+> [!WARNING]
+> `git grep` and `grep -r` skip symlinked directories like `AperasKG -> ../AperasKG`. Always use `grep -R` to follow symlinks, or specify the path directly (e.g. `grep -n -C3 '<pattern>' AperasKG/Apeiron/BlockNode.jsonld` from repo root, or `../AperasKG/Apeiron/BlockNode.jsonld` from `monorepo/`).
+
+### aperas — Discipline — Task Loop Step 1 Recipes and Graph Pathing <a name='id/BlockNode:00CV2CFX7000A' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Open Task](#id/BlockNode:00CS1593MR015) [v4 Thread initialization](#id/BlockNode:00CS1593N002W) [v4 Orchestrator Verification](#id/BlockNode:00CS1593MR01B) [v4 Git-ignored threads](#id/BlockNode:00CS1593MR01E)
+
+- **Open Task**: <a name='id/BlockNode:00CV2CFX7000B' class='aperas-anchor aperas-id'></a> Orchestrator creates `## <topic>` and `### <task>` in `.threads/grapher.md` and `.threads/coder.md` via graph CLI recipes (see [Step 1 Thread Initialization CLI Recipes](#step-1-thread-initialization-cli-recipes)). Never inspect or touch `.threads/` with filesystem tools.
+- **Orchestrator Verification**: <a name='id/BlockNode:00CV2CFX7000C' class='aperas-anchor aperas-id'></a> Orchestrator verifies diff and test output directly (`npm run verify` for code/engine changes; for skill-only tasks, strictly run `python3 skills/aperas/scripts/skill_drift.py` and `npm run aperas -- check-links` — never run `npm run verify` on skill tasks).
+
+> [!IMPORTANT]
+> **`.threads/` is a graph path, not a local directory**:
+> `.threads/` is a graph node path rooted under `artifacts/.threads/` in `AperasKG/`. Projections under `artifacts/.threads/` are Git-ignored in `AperasKG`.
+> There is no `.threads/` directory in the `Aperas/` code repository. Never run `ls .threads/` or `cat .threads/...`. Access threads strictly through graph commands (`npm run aperas -- tree .threads/grapher.md`, `npm run aperas -- show .threads/grapher.md`).
+
+When opening a task in Step 1 of the task loop, use these graph CLI commands without touching the disk:
+
+```bash
+# 1. Inspect existing thread tree to locate the topic or root ID:
+npm run aperas -- tree .threads/grapher.md
+# (To resolve the ArtifactNode ID if starting fresh: npm run aperas -- show .threads/grapher.md)
+
+# 2. Insert ## <topic> heading if it does not yet exist:
+echo "## <topic-name>" | npm run aperas -- insert <thread-root-id> --flush
+
+# 3. Insert ### <task> heading under the topic:
+echo "### <task-name>" | npm run aperas -- insert <topic-heading-id> --flush
+
+# 4. Insert #### Turn 1 heading under the task:
+echo "#### Turn 1" | npm run aperas -- insert <task-heading-id> --flush
+
+# 5. Insert initial **Ask** with Freeflow citation under the turn heading:
+cat << 'EOF' | npm run aperas -- insert <turn-heading-id> --flush
+- **Ask**: Survey graph context for <task-name>
+  - [<Freeflow decision>](../discussion/<topic>.md#id/BlockNode:<ID>) — why it matters here
+EOF
+
+# 6. Repeat for .threads/coder.md when opening coder turns.
+```
+
+### aperas — Mechanics — Path Resolution & Two-Repo Architecture <a name='id/BlockNode:00CV2CFX7000G' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Path Resolution](#id/BlockNode:00CS1593MR02F) [v4 Path Resolution Correct](#id/BlockNode:00CS1593MR02G) [v4 Path Resolution Incorrect](#id/BlockNode:00CS1593MR02H)
+
+The Aperas workspace is split across two sibling git repositories: <a name='id/BlockNode:00CV2CFX7000H' class='aperas-anchor aperas-id'></a>
+
+- `Aperas/`: <a name='id/BlockNode:00CV2CFX7000J' class='aperas-anchor aperas-id'></a> The code repository containing `monorepo/`, packages, and skills.
+- `AperasKG/`: <a name='id/BlockNode:00CV2CFX7000K' class='aperas-anchor aperas-id'></a> The knowledge graph repository containing `Apeiron/` (the raw store mirror) and `artifacts/` (projected markdown docs).
+
+Within `Aperas/`, a tracked symlink points to the graph repository: <a name='id/BlockNode:00CV2CFX7000M' class='aperas-anchor aperas-id'></a>
+
+```
+Aperas/AperasKG -> ../AperasKG
+```
+
+**Resolution Rule**: <a name='id/BlockNode:00CV2CFX7000P' class='aperas-anchor aperas-id'></a>
+Paths passed to the `aperas` CLI always resolve relative to the graph's `artifacts` root defined in `aperas.config.json` (i.e. `AperasKG/artifacts/`), **never** against the filesystem `$CWD` or code repository root.
+
+#### Artifact Path Examples <a name='id/BlockNode:00CV2CV6K8006' class='aperas-anchor aperas-id'></a>
+
+- **CORRECT**: <a name='id/BlockNode:00CV2CV6K8007' class='aperas-anchor aperas-id'></a> `npm run aperas -- project discussion/foo.md`
+- **INCORRECT**: <a name='id/BlockNode:00CV2CV6K8008' class='aperas-anchor aperas-id'></a> `npm run aperas -- project AperasKG/artifacts/discussion/foo.md` (fails with "No ingested ArtifactNode or FolderNode found").
+
+#### Thread Path Examples <a name='id/BlockNode:00CV2CV6K8009' class='aperas-anchor aperas-id'></a>
+
+- **CORRECT**: <a name='id/BlockNode:00CV2CV6K800A' class='aperas-anchor aperas-id'></a> `npm run aperas -- tree .threads/coder.md`
+- **INCORRECT**: <a name='id/BlockNode:00CV2CV6K800B' class='aperas-anchor aperas-id'></a> Resolving `.threads/` against `$CWD` (`Aperas/.threads/` does not exist on disk).
+
+### aperas — Mechanics — Multi-Node Tree Piping, Anchors, List Updates, and Verification Scope <a name='id/BlockNode:00CV2CFX78003' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Anchor child constraint](#id/BlockNode:00CS1593MR030) [v4 Tree structure check](#id/BlockNode:00CS1593MR031) [v4 Ordinary text change](#id/BlockNode:00CS1593MR03C) [v4 Text and children replacement](#id/BlockNode:00CS1593MR03E) [v4 Symmetry rule](#id/BlockNode:00CS1593N0002)
+
+| Operation | Command Pattern | Key Rule / Note |
+|---|---|---|
+| **Peek Node** | `aperas unfold <ref>` | Read-only peek; does not mutate view |
+| **Unfold into View** | `aperas unfold <ref> --view <name> --flush` | Adds `<ref>` to view's unfolds set |
+| **Inspect Backlinks** | `aperas backlinks <id> --text` | Inspects dependents and provenance |
+| **Render View Tree** | `aperas tree --view <name>` | Renders structured lens of the view |
+| **Raw Stored Text** | `aperas show <ref> --text` | Exact stored text undecorated (safe for editing) |
+| **Full Node State** | `aperas show <ref>` | Inspects props, tombstonedAt, links, parent, children |
+| **Insert Turn Node** | `cat turn.md \| aperas insert <turn-id> --after <ask-id> --flush` | Pipes markdown subtree; appends or positions `--after` anchor |
+| **Zoom View** | `aperas zoom <node-id> --view <name> --flush` | Re-roots view onto current Ask or Report |
+| **Retitle Heading** | `echo "## Title" \| aperas update <id> --text-only --flush` | **Must use `--text-only`** to preserve child blocks |
+| **Update List Item** | `echo "text" \| aperas update <id> --text-only --flush` | Bare text updates text/title while **preserving children** |
+| **Replace List Item** | `echo "text" \| aperas update <id> --flush` | Bare text replaces text and **tombstones unstated children** |
+| **Clear Checkbox** | `echo "- text" \| aperas update <id> --flush` | Bare bullet `- ` removes checkbox entirely |
+| **Insert List Item** | `echo "- text" \| aperas insert <parent> --after <sibling> --flush` | Unordered items **must include bullet `- `** |
+| **Reposition Node** | `aperas insert <node-id> --after <anchor-id> --flush` | **No stdin piped** moves node without reminting ID |
+| **Retype Block** | `aperas retype <ref> --to <type>` | In-place kind change (`h1`..`h6`, `listItem`, etc.) |
+| **Sweep Links** | `aperas check-links` (or `--repair`) | Verifies internal wikilink integrity |
+| **Restart Service** | `aperas service restart` | Flushes and restarts daemon from disk |
+| **Reload Disk State** | `aperas reload -- --discard` | Clears memory orphans after failed insert |
+
+```bash
+# 2. Turns & Hand-Off Zooming
+cat turn.md | aperas insert <turn-id> --after <ask-id> --flush # Insert Work + Report tree after Ask
+aperas zoom <node-id> --view <name> --flush   # Re-root view onto node
+
+# 3. Safe Edits
+echo "## New Title" | aperas update <heading-id> --text-only --flush   # Heading update (preserves children)
+echo "Updated text" | aperas update <item-id> --text-only --flush      # List item update (preserves children)
+echo "Replaced item" | aperas update <item-id> --flush                 # Replaces text AND tombstones children
+echo "- New child" | aperas insert <parent-id> --after <sibling-id> --flush # List item insert
+```
+
+Markdown piped into `aperas insert <parent-id> [--after <anchor-id>]` parses into an AST and inserts the entire subtree:
+
+- **Multi-node piping**: <a name='id/BlockNode:00CV2CFX78007' class='aperas-anchor aperas-id'></a> You can pipe multiple top-level list items or paragraphs in a single command (e.g. piping `- **Work**: ...` and `- **Report**: ...` together). All piped root items are inserted as direct children under `<parent-id>`.
+- **Hierarchical nesting**: <a name='id/BlockNode:00CV2CFX78008' class='aperas-anchor aperas-id'></a> Nested sub-bullets beneath piped items parse into child BlockNodes cleanly attached to their parent items.
+- **Anchor positioning**: <a name='id/BlockNode:00CV2CFX78009' class='aperas-anchor aperas-id'></a> The `--after <anchor-id>` flag positions the inserted batch directly after the specified anchor child (e.g. inserting Work and Report after the turn's `**Ask**` node).
+- **Anchor constraint**: <a name='id/BlockNode:00CV2CFX7800A' class='aperas-anchor aperas-id'></a> The anchor node must be a **direct child** of `<parent-id>`, not a descendant. Check tree structure first via `aperas tree` or `aperas show <parent-id>`. If an anchor is invalid, the insert fails after hydrating nodes into memory, leaving live orphans. Recover by running `aperas reload -- --discard`.
+- **Preserving Children with `--text-only`**: <a name='id/BlockNode:00CV2CFX7800B' class='aperas-anchor aperas-id'></a>
+  
+  ```bash
+  echo "updated text" | aperas update <item-id> --text-only --flush
+  ```
+  
+  `--text-only` updates the item's `.text` (and `.title` if a lead-in exists) while leaving all existing child blocks completely untouched.
+- **Ordinary text change without `--text-only`**: <a name='id/BlockNode:00CV2CFX7800E' class='aperas-anchor aperas-id'></a>
+    Pipe bare text with **no bullet marker**:
+  
+  ```bash
+  echo "updated text" | aperas update <item-id> --flush
+  ```
+  
+  *Note*: <a name='id/BlockNode:00CV2CFX7800G' class='aperas-anchor aperas-id'></a> Without `--text-only`, this replaces the item's text **and reconciles its children** (tombstoning any unstated child blocks).
+- **Symmetry Rule**: <a name='id/BlockNode:00CV2CFX7800H' class='aperas-anchor aperas-id'></a> Whichever piece you do not restate without `--text-only` is wiped. If you pipe only text with no children and no `--text-only`, existing children are tombstoned. Restate whichever side you are not modifying, or use `--text-only`.
+- **Code/Engine changes**: <a name='id/BlockNode:00CV2CFX7800J' class='aperas-anchor aperas-id'></a> Run `npm run verify` (from `monorepo/`) to execute build, lint, and engine tests.
+- **Skill-only changes**: <a name='id/BlockNode:00CV2CFX7800K' class='aperas-anchor aperas-id'></a> Strictly **NEVER** run `npm run verify`! Running full test suites on skill edits causes unnecessary hangs, compute waste, and test timeouts. For skill-only changes, verify using:
+  
+  ```bash
+  python3 skills/aperas/scripts/skill_drift.py
+  npm run aperas -- check-links
+  ```
+
+### aperas-orchestrator — Stateless Subagent Dispatch and Verification Scope <a name='id/BlockNode:00CV2CFX7800N' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Run and Validate Tests](#id/BlockNode:00CS1593N800S) [v4 Repo test command](#id/BlockNode:00CS1593N800T) [v4 Verification documentation](#id/BlockNode:00CS1593N800W)
+
+- Ensure `## <topic>` and `### <task>` exist in both `.threads/grapher.md` and `.threads/coder.md` using graph CLI insert commands (see base skill *Step 1 Thread Initialization CLI Recipes*). Never access `.threads/` with filesystem tools.
+
+> [!CRITICAL]
+> **Universal Dispatch Discipline**:
+> Subagents in Aperas are **stateless workers**. Always dispatch a fresh subagent instance for every turn.
+> **NEVER carry conversation history across turns.**
+
+- **Aperas Memory Model**: <a name='id/BlockNode:00CV2CFX7800R' class='aperas-anchor aperas-id'></a> The Apeiron graph and `.threads/{role}.md` are the working memory, not the LLM's conversation history. Context is recovered cleanly at the start of each turn through the view (`npm run aperas -- tree --view <p>-orchestrator-<role>`) and the thread.
+- **Preventing Transcript Bloat**: <a name='id/BlockNode:00CV2CFX7800S' class='aperas-anchor aperas-id'></a> Reusing subagent conversation sessions (e.g. via `send_message` in Antigravity) appends turns together, resulting in bloated transcripts (200+ steps, 250+ KB) dragging stale logs, failed tool attempts, and degraded reasoning into subsequent turns.
+- **Antigravity**: <a name='id/BlockNode:00CV2CFX7800T' class='aperas-anchor aperas-id'></a> Call `invoke_subagent` for every turn. **NEVER** use `send_message` across distinct turns.
+- **Claude Code**: <a name='id/BlockNode:00CV2CFX7800V' class='aperas-anchor aperas-id'></a> Call `Task` for every turn (inherently ephemeral and stateless).
+- **Run and Validate Tests (Strict Scope Separation)**: <a name='id/BlockNode:00CV2CFX7800W' class='aperas-anchor aperas-id'></a>
+  
+  - **For Code/Engine changes**: <a name='id/BlockNode:00CV2CFX7800X' class='aperas-anchor aperas-id'></a> Execute the repo test command (`npm run verify` from `monorepo/`).
+  - **For Skill-only changes**: <a name='id/BlockNode:00CV2CFX7800Y' class='aperas-anchor aperas-id'></a> Strictly **DO NOT** run `npm run verify`. Instead, run:
+    
+    ```bash
+    python3 skills/aperas/scripts/skill_drift.py
+    npm run aperas -- check-links
+    ```
+    
+    Running `npm run verify` on skill modifications is a severe process violation that leads to test timeouts and compute waste.
+- Document that the diff and tests/drift checks were inspected and confirmed clean, citing the file paths and test status.
+
+### aperas-coder — 6-Step Turn Execution Template and Mechanics Reference <a name='id/BlockNode:00CV2CFX78012' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Coder step 1 view tree](#id/BlockNode:00CS1593N801E) [v4 Coder step 1 dispatch msg](#id/BlockNode:00CS1593N801F) [v4 Coder step 2 thread context](#id/BlockNode:00CS1593N801H) [v4 Coder step 2 review earlier turns](#id/BlockNode:00CS1593N801J) [v4 Coder step 2 working memory](#id/BlockNode:00CS1593N801K) [v4 Coder step 3 subturns](#id/BlockNode:00CS1593N801M) [v4 Coder step 3 tool batch](#id/BlockNode:00CS1593N801N) [v4 Coder step 3 files inspected](#id/BlockNode:00CS1593N801P) [v4 Coder step 3 exact test outputs](#id/BlockNode:00CS1593N801Q) [v4 Coder step 3 decisions](#id/BlockNode:00CS1593N801R) [v4 Coder step 4 report](#id/BlockNode:00CS1593N801S) [v4 Coder step 4 report node](#id/BlockNode:00CS1593N801T) [v4 Coder step 4 cite graph nodes](#id/BlockNode:00CS1593N801V) [v4 Coder step 4 question tool gap](#id/BlockNode:00CS1593N801W) [v4 Coder step 4 reroot view](#id/BlockNode:00CS1593N801X) [v4 Coder step 4 zoom command](#id/BlockNode:00CS1593N801Y) [v4 Coder step 4 chat response](#id/BlockNode:00CS1593NG000) [v4 Coder step 5 stage code](#id/BlockNode:00CS1593NG001) [v4 Coder step 5 git add](#id/BlockNode:00CS1593NG002) [v4 Coder step 4 rule](#id/BlockNode:00CS1593NG003)
+
+Every coder turn follows this strict 6-step lifecycle: <a name='id/BlockNode:00CV2CFX78013' class='aperas-anchor aperas-id'></a>
+
+1. **Read Input View**: <a name='id/BlockNode:00CV2CFX78014' class='aperas-anchor aperas-id'></a>
+   
+   - Render the incoming Ask: <a name='id/BlockNode:00CV2CFX78015' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     npm run aperas -- tree --view <p>-orchestrator-coder
+     ```
+   - Review any specific nodes named in the dispatch message or Ask.
+   - Start from the Grapher's survey cited in the Ask; do not duplicate graph exploration.
+   - Recover context from earlier turns in `.threads/coder.md` if continuing an active task.
+2. **Execute Work**: <a name='id/BlockNode:00CV2CFX7801A' class='aperas-anchor aperas-id'></a>
+   
+   - Perform code inspection or edits according to the turn's scope (survey vs implementation).
+   - Run tests or verification commands.
+   - Keep detailed notes for subturns (files inspected/modified, command outputs, line numbers, test results).
+3. **Record Work and Report in a Single Insert**: <a name='id/BlockNode:00CV2CFX7801E' class='aperas-anchor aperas-id'></a>
+   
+   - Pipe both `- **Work**` and `- **Report**` in a single `insert` command positioned `--after <ask-id>`: <a name='id/BlockNode:00CV2CFX7801F' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     cat << 'EOF' | npm run aperas -- insert <turn-id> --after <ask-id> --flush
+     - **Work**: <approach in a sentence>
+       - Subturn 1 (<focus>): <exact details, files inspected/changed, commands run, failure lines, results>
+       - Subturn 2 (<focus>): <details>
+     - **Report**: <outcome in a sentence>
+       - [<node or file ref>](...) — <what changed, or what it shows>
+       - **Question**: <whatever the Ask left unsettled or unexpected code behaviors>
+       - **Tool gap — <what>**: <workaround built, call that failed or hung>
+     EOF
+     ```
+   - *Note*: <a name='id/BlockNode:00CV2CFX7801H' class='aperas-anchor aperas-id'></a> Writing Work and Report in a single piped AST insertion guarantees atomic recording and avoids orphan nodes.
+4. **Zoom Output View**: <a name='id/BlockNode:00CV2CFX7801J' class='aperas-anchor aperas-id'></a>
+   
+   - Re-root your output view onto the newly inserted Report node ID:
+     
+     ```bash
+     npm run aperas -- zoom <report-id> --view <p>-coder-orchestrator --flush
+     ```
+5. **Project Thread Shadow**: <a name='id/BlockNode:00CV2CFX7801N' class='aperas-anchor aperas-id'></a>
+   
+   - Project the updated thread back to the disk mirror (pipe `echo yes` to handle any overwrite prompts):
+     
+     ```bash
+     echo yes | npm run aperas -- project .threads/coder.md --flush
+     ```
+6. **Verify View & Respond**: <a name='id/BlockNode:00CV2CFX7801R' class='aperas-anchor aperas-id'></a>
+   
+   - Verify that your output view renders correctly: <a name='id/BlockNode:00CV2CFX7801S' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     npm run aperas -- tree --view <p>-coder-orchestrator
+     ```
+   - Stage verified code changes immediately: <a name='id/BlockNode:00CV2CFX7801V' class='aperas-anchor aperas-id'></a> `git add <files>` (staging only, never `git commit`).
+   - Respond to the Orchestrator in chat with 1–2 lines naming the view and key status.
+
+> **Rule**: A turn is not complete until Step 6 (verified view and reply) is done.
+
+For complete CLI syntax, anchor rules, list insertion mechanics, `--after` positioning, `--text-only` updates, or troubleshooting, refer directly to **Section 4 (Mechanics)** of the base skill (`skills/aperas/SKILL.md`).
+
+### aperas-grapher — 6-Step Turn Execution Template and Mechanics Reference <a name='id/BlockNode:00CV2CFX7801Z' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Grapher step 1 view tree](#id/BlockNode:00CS1593NG018) [v4 Grapher step 1 dispatch msg](#id/BlockNode:00CS1593NG019) [v4 Grapher step 2 thread context](#id/BlockNode:00CS1593NG01A) [v4 Grapher step 2 review earlier turns](#id/BlockNode:00CS1593NG01B) [v4 Grapher step 3 subturns](#id/BlockNode:00CS1593NG01C) [v4 Grapher step 3 subturns list](#id/BlockNode:00CS1593NG01D) [v4 Grapher step 3 nodes unfolded](#id/BlockNode:00CS1593NG01E) [v4 Grapher step 3 backlinks check](#id/BlockNode:00CS1593NG01F) [v4 Grapher step 3 concrete findings](#id/BlockNode:00CS1593NG01G) [v4 Grapher step 4 report](#id/BlockNode:00CS1593NG01H) [v4 Grapher step 4 report node](#id/BlockNode:00CS1593NG01J) [v4 Grapher step 4 question tool gap](#id/BlockNode:00CS1593NG01K) [v4 Grapher step 4 reroot view](#id/BlockNode:00CS1593NG01M) [v4 Grapher step 4 zoom command](#id/BlockNode:00CS1593NG01N) [v4 Grapher step 4 chat response](#id/BlockNode:00CS1593NG01P) [v4 Grapher step 5 stage mutations](#id/BlockNode:00CS1593NG01Q) [v4 Grapher step 5 git add](#id/BlockNode:00CS1593NG01R) [v4 Grapher step 4 rule](#id/BlockNode:00CS1593NG01T)
+
+Every grapher turn follows this strict 6-step lifecycle: <a name='id/BlockNode:00CV2CFX78020' class='aperas-anchor aperas-id'></a>
+
+1. **Read Input View**: <a name='id/BlockNode:00CV2CFX78021' class='aperas-anchor aperas-id'></a>
+   
+   - Render the incoming Ask: <a name='id/BlockNode:00CV2CFX78022' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     npm run aperas -- tree --view <p>-orchestrator-grapher
+     ```
+   - Review any specific nodes named in the dispatch message or Ask.
+   - Recover context from earlier turns in `.threads/grapher.md` if continuing an active task.
+2. **Execute Work**: <a name='id/BlockNode:00CV2CFX78026' class='aperas-anchor aperas-id'></a>
+   
+   - Perform graph surveys, deep reads, deep writes, promotions, or thread lifecycle updates.
+   - Keep detailed notes for subturns (nodes unfolded, checked, modified, backlinks verified, decisions made).
+3. **Record Work and Report in a Single Insert**: <a name='id/BlockNode:00CV2CFX78029' class='aperas-anchor aperas-id'></a>
+   
+   - Pipe both `- **Work**` and `- **Report**` in a single `insert` command positioned `--after <ask-id>`: <a name='id/BlockNode:00CV2CFX7802A' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     cat << 'EOF' | npm run aperas -- insert <turn-id> --after <ask-id> --flush
+     - **Work**: <approach in a sentence>
+       - Subturn 1 (<focus>): <exact details, nodes unfolded/modified, traversal checks, results>
+       - Subturn 2 (<focus>): <details>
+     - **Report**: <outcome in a sentence>
+       - [<node or doc ref>](...) — <what changed, or what it shows>
+       - **Question**: <whatever the Ask left unsettled or unexpected graph state>
+       - **Tool gap — <what>**: <workaround built, call that failed or hung>
+     EOF
+     ```
+   - *Note*: <a name='id/BlockNode:00CV2CFX7802C' class='aperas-anchor aperas-id'></a> Writing Work and Report in a single piped AST insertion guarantees atomic recording and avoids orphan nodes.
+4. **Zoom Output View**: <a name='id/BlockNode:00CV2CFX7802D' class='aperas-anchor aperas-id'></a>
+   
+   - Re-root your output view onto the newly inserted Report node ID:
+     
+     ```bash
+     npm run aperas -- zoom <report-id> --view <p>-grapher-orchestrator --flush
+     ```
+5. **Project Thread Shadow**: <a name='id/BlockNode:00CV2CFX7802G' class='aperas-anchor aperas-id'></a>
+   
+   - Project the updated thread back to the disk mirror (pipe `echo yes` to handle any overwrite prompts):
+     
+     ```bash
+     echo yes | npm run aperas -- project .threads/grapher.md --flush
+     ```
+6. **Verify View & Respond**: <a name='id/BlockNode:00CV2CFX7802K' class='aperas-anchor aperas-id'></a>
+   
+   - Verify that your output view renders correctly: <a name='id/BlockNode:00CV2CFX7802M' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     npm run aperas -- tree --view <p>-grapher-orchestrator
+     ```
+   - Stage verified graph mutations in `AperasKG/`: <a name='id/BlockNode:00CV2CFX7802P' class='aperas-anchor aperas-id'></a>
+     
+     ```bash
+     git -C AperasKG add -u
+     ```
+   - Respond to the Orchestrator in chat with 1–2 lines naming the view and key status.
+
+> **Rule**: A turn is not complete until Step 6 (verified view and reply) is done.
+
+For complete CLI syntax, anchor rules, list insertion mechanics, `--after` positioning, `--text-only` updates, or troubleshooting, refer directly to **Section 4 (Mechanics)** of the base skill (`skills/aperas/SKILL.md`).
