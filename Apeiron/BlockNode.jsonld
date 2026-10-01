@@ -12625,6 +12625,7 @@
       "BlockNode:00CR874TC8001",
       "BlockNode:00CS1593MG001",
       "BlockNode:00CTTFFW08001",
+      "BlockNode:00CV3K19NR001",
       "BlockNode:00CF4QNX0000B"
     ]
   },
@@ -53088,6 +53089,1717 @@
     "text": "Subagents load the lean core skill by default, and only consult `references/mechanics.md` when executing non-trivial graph mutations.",
     "parent": "BlockNode:00CV2ZRHWR005",
     "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19NR001:links:Link:00CV3K1HBR000",
+        "@type": "Link",
+        "target": "BlockNode:00CV2ZRHWR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19NR001:links:Link:00CV3K1HBR000:props:StringProp:00CV3K1HBR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "343"
+          }
+        ]
+      }
+    ],
+    "title": "## v4.2 additions — delta on the v4 snapshot",
+    "text": "Records the v4.2 progressive disclosure refactor (extracting deep Section 4 mechanics to standalone on-demand reference manual `skills/aperas/references/mechanics.md`, reducing core `skills/aperas/SKILL.md` to lean cheatsheet <300 lines, and bumping skill versions to v4.2 with dual reference pointers across all roles), planned and agreed in [Skill size audit & progressive disclosure refactor](#id/BlockNode:00CV2ZRHWR001).",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19NR002",
+      "BlockNode:00CV3K19NR004",
+      "BlockNode:00CV3K19NR006",
+      "BlockNode:00CV3K19NR008",
+      "BlockNode:00CV3K19P0000",
+      "BlockNode:00CV3K19P0002",
+      "BlockNode:00CV3K19P000B",
+      "BlockNode:00CV3K19P000D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19NR002:links:Link:00CV3K1HBR002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MG004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19NR002:links:Link:00CV3K1HBR002:props:StringProp:00CV3K1HBR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Status v4.2",
+    "text": "Supersedes: [v4 Base Status](#id/BlockNode:00CS1593MG004)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19NR003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR003",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.2** — Base skill for all Aperas roles.",
+    "parent": "BlockNode:00CV3K19NR002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19NR004:links:Link:00CV3K1HBR004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N001S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19NR004:links:Link:00CV3K1HBR004:props:StringProp:00CV3K1HBR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-orchestrator — Status v4.2",
+    "text": "Supersedes: [v4 Orchestrator Status](#id/BlockNode:00CS1593N001S)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19NR005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR005",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.2** — Orchestrator role skill.",
+    "parent": "BlockNode:00CV3K19NR004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19NR006:links:Link:00CV3K1HBR006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N8016",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19NR006:links:Link:00CV3K1HBR006:props:StringProp:00CV3K1HBR007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-coder — Status v4.2",
+    "text": "Supersedes: [v4 Coder Status](#id/BlockNode:00CS1593N8016)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19NR007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR007",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.2** — Coder role skill.",
+    "parent": "BlockNode:00CV3K19NR006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR008",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19NR008:links:Link:00CV3K1HC0000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593NG010",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19NR008:links:Link:00CV3K1HC0000:props:StringProp:00CV3K1HC0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Status v4.2",
+    "text": "Supersedes: [v4 Grapher Status](#id/BlockNode:00CS1593NG010)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19NR009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19NR009",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.2** — Grapher role skill.",
+    "parent": "BlockNode:00CV3K19NR008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19P0000:links:Link:00CV3K1HC0002",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX70002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0000:links:Link:00CV3K1HC0002:props:StringProp:00CV3K1HC0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Table of Contents — Section 4 Cheatsheet and Manual Reference",
+    "text": "Supersedes: [v4.1 TOC Section 4](#id/BlockNode:00CV2CFX70002)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19P0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0001",
+    "@type": "BlockNode",
+    "title": "00CV3K19P0001",
+    "text": "[4. Mechanics](#4-mechanics) — Command cheatsheet, two-repo pathing, verification gates (see references/mechanics.md for full guide)",
+    "parent": "BlockNode:00CV3K19P0000",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8000:props:StringProp:00CV3K1HC8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02E",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8002:props:StringProp:00CV3K1HC8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "70"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8004",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX70009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8004:props:StringProp:00CV3K1HC8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "123"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8006",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7000H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8006:props:StringProp:00CV3K1HC8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "175"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8008",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7000J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC8008:props:StringProp:00CV3K1HC8009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "230"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC800A",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7000K",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HC800A:props:StringProp:00CV3K1HCG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "276"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG001",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7000M",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG001:props:StringProp:00CV3K1HCG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "320"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG003",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7000P",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG003:props:StringProp:00CV3K1HCG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "372"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG005",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CV6K8007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG005:props:StringProp:00CV3K1HCG006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "424"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG007",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CV6K8008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG007:props:StringProp:00CV3K1HCG008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "482"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG009",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CV6K800A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG009:props:StringProp:00CV3K1HCG00A",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "542"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG00B",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CV6K800B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG00B:props:StringProp:00CV3K1HCG00C",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "598"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG00D",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX78004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG00D:props:StringProp:00CV3K1HCG00E",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "656"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG00F",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX78005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCG00F:props:StringProp:00CV3K1HCG00G",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "709"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR000",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX78006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR000:props:StringProp:00CV3K1HCR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "761"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR002",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX78007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR002:props:StringProp:00CV3K1HCR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "824"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR004",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX78008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR004:props:StringProp:00CV3K1HCR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "878"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR006",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX78009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR006:props:StringProp:00CV3K1HCR007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "935"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR008",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR008:props:StringProp:00CV3K1HCR009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "990"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR00A",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HCR00A:props:StringProp:00CV3K1HCR00B",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1044"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0000",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0000:props:StringProp:00CV3K1HD0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1100"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0002",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0002:props:StringProp:00CV3K1HD0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1154"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0004",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800E",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0004:props:StringProp:00CV3K1HD0005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1205"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0006",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800F",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0006:props:StringProp:00CV3K1HD0007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1262"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0008",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD0008:props:StringProp:00CV3K1HD0009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1316"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD000A",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD000A:props:StringProp:00CV3K1HD000B",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1376"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD000C",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7800J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P0002:links:Link:00CV3K1HD000C:props:StringProp:00CV3K1HD000D",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1426"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Section 4 Mechanics Cheatsheet & Two-Repo Pathing",
+    "text": "Supersedes: [v4 Command Reference Table](#id/BlockNode:00CS1593MR02C) [v4 Traversal Commands](#id/BlockNode:00CS1593MR02E) [v4.1 Symlink Warning](#id/BlockNode:00CV2CFX70009) [v4.1 Two-Repo Workspace](#id/BlockNode:00CV2CFX7000H) [v4.1 Code Repo](#id/BlockNode:00CV2CFX7000J) [v4.1 KG Repo](#id/BlockNode:00CV2CFX7000K) [v4.1 Tracked Symlink](#id/BlockNode:00CV2CFX7000M) [v4.1 Resolution Rule](#id/BlockNode:00CV2CFX7000P) [v4.1 Artifact Path Correct](#id/BlockNode:00CV2CV6K8007) [v4.1 Artifact Path Incorrect](#id/BlockNode:00CV2CV6K8008) [v4.1 Thread Path Correct](#id/BlockNode:00CV2CV6K800A) [v4.1 Thread Path Incorrect](#id/BlockNode:00CV2CV6K800B) [v4.1 Cheatsheet Table](#id/BlockNode:00CV2CFX78004) [v4.1 Command Recipes](#id/BlockNode:00CV2CFX78005) [v4.1 Piped Markdown AST Parsing](#id/BlockNode:00CV2CFX78006) [v4.1 Multi-Node Piping](#id/BlockNode:00CV2CFX78007) [v4.1 Hierarchical Nesting](#id/BlockNode:00CV2CFX78008) [v4.1 Anchor Positioning](#id/BlockNode:00CV2CFX78009) [v4.1 Anchor Constraint](#id/BlockNode:00CV2CFX7800A) [v4.1 Preserving Children](#id/BlockNode:00CV2CFX7800B) [v4.1 Text-Only Command](#id/BlockNode:00CV2CFX7800C) [v4.1 Text-Only Note](#id/BlockNode:00CV2CFX7800D) [v4.1 Ordinary Text Change](#id/BlockNode:00CV2CFX7800E) [v4.1 Bare Text Command](#id/BlockNode:00CV2CFX7800F) [v4.1 Restating Children Note](#id/BlockNode:00CV2CFX7800G) [v4.1 Symmetry Rule](#id/BlockNode:00CV2CFX7800H) [v4.1 Code Engine Changes](#id/BlockNode:00CV2CFX7800J)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19P0003",
+      "BlockNode:00CV3K19P0004",
+      "BlockNode:00CV3K19P0005",
+      "BlockNode:00CV3K19P0006",
+      "BlockNode:00CV3K19P0007",
+      "BlockNode:00CV3K19P0008",
+      "BlockNode:00CV3K19P0009",
+      "BlockNode:00CV3K19P000A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0003",
+    "@type": "BlockNode",
+    "title": "00CV3K19P0003",
+    "text": "High-level cheatsheet for daily CLI use. For the exhaustive reference manual — AST tree parsing, `--after` anchor placement constraints, list mutation subtleties, heading child preservation, block retyping, artifact renames, shell quoting, service recovery, and link sweeps — consult [`references/mechanics.md`](references/mechanics.md).",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0004",
+    "@type": "BlockNode",
+    "title": "00CV3K19P0004",
+    "text": "| Operation | Command Pattern | Key Rule / Note |\n|---|---|---|\n| **Peek / View** | `aperas unfold <ref> [--view <n>]` / `tree` | Peek node or render structured view lens |\n| **Inspect State** | `aperas show <ref> [--text]` / `backlinks` | Exact stored text, full record, or dependents |\n| **Insert Turn** | `cat turn.md \\| aperas insert <id> --after <a>`| Pipes markdown AST subtree after anchor child |\n| **Zoom View** | `aperas zoom <id> --view <name> --flush` | Re-roots view onto current Ask or Report |\n| **Update Node** | `echo \"text\" \\| aperas update <id> [--text-only]`| `--text-only` preserves kids; bare tombstones |\n| **Insert / Reposition**| `aperas insert <par> [--after <sib>]` | Bullet `- ` inserts; no stdin moves node |\n| **Sweep / Service** | `aperas check-links` / `service restart` | Sweeps internal links; restarts daemon |",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0005",
+    "@type": "BlockNode",
+    "title": "00CV3K19P0005",
+    "text": "```bash\naperas unfold <ref> [--view <name>]                          # Peek node or unfold into view\naperas tree --view <name>                                    # Render structured lens of view\ncat turn.md | aperas insert <turn-id> --after <ask> --flush  # Insert Work + Report tree\naperas zoom <id> --view <name> --flush                       # Re-root view onto Ask/Report\necho \"text\" | aperas update <id> --text-only --flush         # Update node (preserves kids)\necho \"- text\" | aperas insert <par> --after <sib> --flush    # Insert list item (needs bullet)\naperas check-links [--repair]                                # Sweep / repair link integrity\n```",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CV3K19P0006:props:StringProp:00CV3K1HB0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CV3K19P0006:props:StringProp:00CV3K1HB8000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Two sibling repos",
+    "text": "Two sibling repos: `Aperas/` (code/skills; symlink `Aperas/AperasKG -> ../AperasKG`) and `AperasKG/` (graph `Apeiron/`, markdown `artifacts/`).",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0007",
+    "@type": "BlockNode",
+    "title": "Resolution Rule",
+    "text": "Resolution Rule: CLI paths resolve relative to `artifacts/` in `AperasKG/`, never against `$CWD` or code root (`npm run aperas -- project discussion/foo.md` is correct; resolving `.threads/` against `$CWD` fails).",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0008",
+    "@type": "BlockNode",
+    "title": "**Code/Engine changes**",
+    "text": "**Code/Engine changes**: Run `npm run verify` (from `monorepo/`) to execute build, lint, and tests.",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P0009",
+    "@type": "BlockNode",
+    "title": "**Skill-only changes**",
+    "text": "**Skill-only changes**: Strictly **NEVER** run `npm run verify`! Running full test suites on skill edits causes unnecessary hangs, compute waste, and test timeouts. Verify using: `python3 skills/aperas/scripts/skill_drift.py && npm run aperas -- check-links`.",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P000A",
+    "@type": "BlockNode",
+    "title": "00CV3K19P000A",
+    "text": "---",
+    "parent": "BlockNode:00CV3K19P0002",
+    "type": "thematicBreak",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P000B",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19P000B:links:Link:00CV3K1HF0000",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7801Y",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000B:links:Link:00CV3K1HF0000:props:StringProp:00CV3K1HF0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000B:links:Link:00CV3K1HF0002",
+        "@type": "Link",
+        "target": "BlockNode:00CV2CFX7802T",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000B:links:Link:00CV3K1HF0002:props:StringProp:00CV3K1HF0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "72"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-coder & aperas-grapher — Dual CLI Reference Pointers",
+    "text": "Supersedes: [v4.1 Coder Reference Pointer](#id/BlockNode:00CV2CFX7801Y) [v4.1 Grapher Reference Pointer](#id/BlockNode:00CV2CFX7802T)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CV3K19P000C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CV3K19P000C",
+    "@type": "BlockNode",
+    "title": "00CV3K19P000C",
+    "text": "For everyday CLI commands, consult the **Section 4 (Mechanics)** cheatsheet in the base skill (`skills/aperas/SKILL.md`). For comprehensive syntax rules, anchor constraints, AST tree piping, list mutation subtleties, recovery, and troubleshooting, refer to [`skills/aperas/references/mechanics.md`](../aperas/references/mechanics.md).",
+    "parent": "BlockNode:00CV3K19P000B",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CV3K19P000D",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG000:props:StringProp:00CV3K1HFG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02K",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG002:props:StringProp:00CV3K1HFG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "62"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02M",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG004:props:StringProp:00CV3K1HFG005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "116"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02N",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG006:props:StringProp:00CV3K1HFG007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "165"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02P",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG008:props:StringProp:00CV3K1HFG009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "214"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG00A",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02Q",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HFG00A:props:StringProp:00CV3K1HG0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "261"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG0001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02R",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG0001:props:StringProp:00CV3K1HG0002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "311"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG0003",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG0003:props:StringProp:00CV3K1HG0004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "355"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG0005",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02T",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG0005:props:StringProp:00CV3K1HG8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "411"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02V",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8001:props:StringProp:00CV3K1HG8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "470"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8003",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02W",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8003:props:StringProp:00CV3K1HG8004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "531"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8005",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02X",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8005:props:StringProp:00CV3K1HG8006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "587"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8007",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02Y",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8007:props:StringProp:00CV3K1HG8008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "638"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8009",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR02Z",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG8009:props:StringProp:00CV3K1HG800A",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "692"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800B",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR032",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800B:props:StringProp:00CV3K1HG800C",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "747"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800D",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR034",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800D:props:StringProp:00CV3K1HG800E",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "802"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800F",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR035",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800F:props:StringProp:00CV3K1HG800G",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "852"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800H",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR036",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HG800H:props:StringProp:00CV3K1HG800J",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "910"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR037",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG000:props:StringProp:00CV3K1HGG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "969"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR038",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG002:props:StringProp:00CV3K1HGG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1032"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR039",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG004:props:StringProp:00CV3K1HGG005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1080"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG006:props:StringProp:00CV3K1HGG007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1134"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG008:props:StringProp:00CV3K1HGG009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1192"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG00A",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03F",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG00A:props:StringProp:00CV3K1HGG00B",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1246"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG00C",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG00C:props:StringProp:00CV3K1HGG00D",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1291"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG00E",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGG00E:props:StringProp:00CV3K1HGG00F",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1347"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR000:props:StringProp:00CV3K1HGR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1408"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03K",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR002:props:StringProp:00CV3K1HGR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1461"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR03M",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR004:props:StringProp:00CV3K1HGR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1517"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR006:props:StringProp:00CV3K1HGR007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1581"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR008:props:StringProp:00CV3K1HGR009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1626"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR00A",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HGR00A:props:StringProp:00CV3K1HGR00B",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1675"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0000:props:StringProp:00CV3K1HH0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1736"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0006",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0002:props:StringProp:00CV3K1HH0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1798"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0007",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0004:props:StringProp:00CV3K1HH0005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1858"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0008",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0006:props:StringProp:00CV3K1HH0007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1915"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH0008:props:StringProp:00CV3K1HH0009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1970"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH000A",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH000A:props:StringProp:00CV3K1HH000B",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2019"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000B",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8000:props:StringProp:00CV3K1HH8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2083"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000D",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8002:props:StringProp:00CV3K1HH8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2147"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000E",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8004:props:StringProp:00CV3K1HH8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2206"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000F",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8006:props:StringProp:00CV3K1HH8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2264"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000G",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH8008:props:StringProp:00CV3K1HH8009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2326"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH800A",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HH800A:props:StringProp:00CV3K1HHG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2387"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000J",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG001:props:StringProp:00CV3K1HHG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2442"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG003",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000K",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG003:props:StringProp:00CV3K1HHG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2506"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG005",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000N",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG005:props:StringProp:00CV3K1HHG006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2562"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG007",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000P",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG007:props:StringProp:00CV3K1HHG008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2618"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG009",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000Q",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHG009:props:StringProp:00CV3K1HHR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2682"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000R",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR001:props:StringProp:00CV3K1HHR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2739"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR003",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR003:props:StringProp:00CV3K1HHR004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2804"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR005",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000T",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR005:props:StringProp:00CV3K1HHR006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2858"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR007",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000V",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR007:props:StringProp:00CV3K1HHR008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2920"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR009",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000X",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HHR009:props:StringProp:00CV3K1HJ0000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "2973"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000Y",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0001:props:StringProp:00CV3K1HJ0002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3024"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0003",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N000Z",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0003:props:StringProp:00CV3K1HJ0004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3079"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0005",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0010",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0005:props:StringProp:00CV3K1HJ0006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3130"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0007",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0011",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ0007:props:StringProp:00CV3K1HJ0008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3184"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0012",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8000:props:StringProp:00CV3K1HJ8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3242"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0013",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8002:props:StringProp:00CV3K1HJ8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3293"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8004",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0014",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8004:props:StringProp:00CV3K1HJ8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3349"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8006",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0015",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8006:props:StringProp:00CV3K1HJ8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3414"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0016",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJ8008:props:StringProp:00CV3K1HJG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3471"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0017",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG001:props:StringProp:00CV3K1HJG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3535"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG003",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0018",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG003:props:StringProp:00CV3K1HJG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3589"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG005",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N0019",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG005:props:StringProp:00CV3K1HJG006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3645"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG007",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N001A",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG007:props:StringProp:00CV3K1HJG008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3706"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG009",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593N001C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CV3K19P000D:links:Link:00CV3K1HJG009:props:StringProp:00CV3K1HJR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "3770"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Mechanics — Standalone Reference Manual Extraction",
+    "text": "Supersedes: [v4 Wikilink Syntax](#id/BlockNode:00CS1593MR02J) [v4 Bare relative paths](#id/BlockNode:00CS1593MR02K) [v4 Fragment links](#id/BlockNode:00CS1593MR02M) [v4 Direct node ID](#id/BlockNode:00CS1593MR02N) [v4 Anchor match](#id/BlockNode:00CS1593MR02P) [v4 Scheme prefixes](#id/BlockNode:00CS1593MR02Q) [v4 Link Note](#id/BlockNode:00CS1593MR02R) [v4 Anchor Placement Rule](#id/BlockNode:00CS1593MR02S) [v4 Anchor Placement Correct](#id/BlockNode:00CS1593MR02T) [v4 Anchor Placement Incorrect](#id/BlockNode:00CS1593MR02V) [v4 Sketching a Structure](#id/BlockNode:00CS1593MR02W) [v4 Placeholder Node](#id/BlockNode:00CS1593MR02X) [v4 Placeholder Command](#id/BlockNode:00CS1593MR02Y) [v4 Populate Placeholder](#id/BlockNode:00CS1593MR02Z) [v4 Invalid Anchor Error](#id/BlockNode:00CS1593MR032) [v4 Unordered Lists](#id/BlockNode:00CS1593MR034) [v4 Unordered Bullet Marker](#id/BlockNode:00CS1593MR035) [v4 Unordered Bullet Command](#id/BlockNode:00CS1593MR036) [v4 Unordered Plain Text Warning](#id/BlockNode:00CS1593MR037) [v4 Ordered Lists](#id/BlockNode:00CS1593MR038) [v4 Ordered Append Safe](#id/BlockNode:00CS1593MR039) [v4 Ordered Renumber Middle](#id/BlockNode:00CS1593MR03A) [v4 Update Item Command](#id/BlockNode:00CS1593MR03D) [v4 Checkboxes](#id/BlockNode:00CS1593MR03F) [v4 Checkbox State Marker](#id/BlockNode:00CS1593MR03G) [v4 Checkbox Markerless Bullet](#id/BlockNode:00CS1593MR03H) [v4 Ordered List Items](#id/BlockNode:00CS1593MR03J) [v4 Ordered Marker Update](#id/BlockNode:00CS1593MR03K) [v4 Ordered Position Preservation](#id/BlockNode:00CS1593MR03M) [v4 Blank Text](#id/BlockNode:00CS1593N0000) [v4 Title Tracking](#id/BlockNode:00CS1593N0001) [v4 Heading Retitle Child Wipe](#id/BlockNode:00CS1593N0004) [v4 Retitling Heading Text-Only](#id/BlockNode:00CS1593N0005) [v4 Retitling Heading Command](#id/BlockNode:00CS1593N0006) [v4 Retitling Heading Note](#id/BlockNode:00CS1593N0007) [v4 Changing Block Types](#id/BlockNode:00CS1593N0008) [v4 Retype Command](#id/BlockNode:00CS1593N0009) [v4 Retype Heading to Non-Heading](#id/BlockNode:00CS1593N000A) [v4 Retype Non-Heading to Heading](#id/BlockNode:00CS1593N000B) [v4 Renaming Single Artifact](#id/BlockNode:00CS1593N000D) [v4 Renaming Single Command](#id/BlockNode:00CS1593N000E) [v4 Renaming Detection Equality](#id/BlockNode:00CS1593N000F) [v4 Renaming Cross Referencing](#id/BlockNode:00CS1593N000G) [v4 Shell Quoting Gotcha](#id/BlockNode:00CS1593N000H) [v4 Shell Quoting File Workaround](#id/BlockNode:00CS1593N000J) [v4 Shell Quoting Command](#id/BlockNode:00CS1593N000K) [v4 Service State Restart](#id/BlockNode:00CS1593N000N) [v4 Service State Restart Command](#id/BlockNode:00CS1593N000P) [v4 Service Reload Discard](#id/BlockNode:00CS1593N000Q) [v4 Service Reload Discard Command](#id/BlockNode:00CS1593N000R) [v4 Raw Node Inspection](#id/BlockNode:00CS1593N000S) [v4 Raw Node Inspection Command](#id/BlockNode:00CS1593N000T) [v4 Raw Node Safe Edit](#id/BlockNode:00CS1593N000V) [v4 Unfold Bare Peek](#id/BlockNode:00CS1593N000X) [v4 Unfold View Mutation](#id/BlockNode:00CS1593N000Y) [v4 Tombstoned Nodes](#id/BlockNode:00CS1593N000Z) [v4 Tombstoned Omission](#id/BlockNode:00CS1593N0010) [v4 Tombstoned Unfold Error](#id/BlockNode:00CS1593N0011) [v4 Full Text Search](#id/BlockNode:00CS1593N0012) [v4 Full Text Search Grep](#id/BlockNode:00CS1593N0013) [v4 Full Text Candidate Inspection](#id/BlockNode:00CS1593N0014) [v4 Comparing Distant Docs](#id/BlockNode:00CS1593N0015) [v4 Comparing Distant Docs Script](#id/BlockNode:00CS1593N0016) [v4 Breadcrumbs in Tree](#id/BlockNode:00CS1593N0017) [v4 Breadcrumbs Apex Path](#id/BlockNode:00CS1593N0018) [v4 Breadcrumbs Relative Scope](#id/BlockNode:00CS1593N0019) [v4 Breadcrumbs External Viewcone](#id/BlockNode:00CS1593N001A) [v4 Link Integrity Sweeps](#id/BlockNode:00CS1593N001C)",
+    "parent": "BlockNode:00CV3K19NR001",
+    "type": "heading",
     "children": []
   }
 ]

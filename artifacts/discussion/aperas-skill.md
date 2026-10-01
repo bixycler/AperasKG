@@ -1,4 +1,6 @@
 ---
+danglingRef: ../aperas/references/mechanics.md
+danglingRef: #4-mechanics
 description: Open questions and freeflow notes behind the skill's four-level design — including whether an indirect-edge relationship deserves its own linking convention.
 ---
 
@@ -3805,3 +3807,80 @@ Every grapher turn follows this strict 6-step lifecycle: <a name='id/BlockNode:0
 > **Rule**: A turn is not complete until Step 6 (verified view and reply) is done.
 
 For complete CLI syntax, anchor rules, list insertion mechanics, `--after` positioning, `--text-only` updates, or troubleshooting, refer directly to **Section 4 (Mechanics)** of the base skill (`skills/aperas/SKILL.md`).
+
+## v4.2 additions — delta on the v4 snapshot <a name='id/BlockNode:00CV3K19NR001' class='aperas-anchor aperas-id'></a>
+
+Records the v4.2 progressive disclosure refactor (extracting deep Section 4 mechanics to standalone on-demand reference manual `skills/aperas/references/mechanics.md`, reducing core `skills/aperas/SKILL.md` to lean cheatsheet <300 lines, and bumping skill versions to v4.2 with dual reference pointers across all roles), planned and agreed in [Skill size audit & progressive disclosure refactor](#id/BlockNode:00CV2ZRHWR001).
+
+### aperas — Status v4.2 <a name='id/BlockNode:00CV3K19NR002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Base Status](#id/BlockNode:00CS1593MG004)
+
+Status: <a name='id/BlockNode:00CV3K19NR003' class='aperas-anchor aperas-id'></a> **v4.2** — Base skill for all Aperas roles.
+
+### aperas-orchestrator — Status v4.2 <a name='id/BlockNode:00CV3K19NR004' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Orchestrator Status](#id/BlockNode:00CS1593N001S)
+
+Status: <a name='id/BlockNode:00CV3K19NR005' class='aperas-anchor aperas-id'></a> **v4.2** — Orchestrator role skill.
+
+### aperas-coder — Status v4.2 <a name='id/BlockNode:00CV3K19NR006' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Coder Status](#id/BlockNode:00CS1593N8016)
+
+Status: <a name='id/BlockNode:00CV3K19NR007' class='aperas-anchor aperas-id'></a> **v4.2** — Coder role skill.
+
+### aperas-grapher — Status v4.2 <a name='id/BlockNode:00CV3K19NR008' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Grapher Status](#id/BlockNode:00CS1593NG010)
+
+Status: <a name='id/BlockNode:00CV3K19NR009' class='aperas-anchor aperas-id'></a> **v4.2** — Grapher role skill.
+
+### aperas — Table of Contents — Section 4 Cheatsheet and Manual Reference <a name='id/BlockNode:00CV3K19P0000' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.1 TOC Section 4](#id/BlockNode:00CV2CFX70002)
+
+[4. Mechanics](#4-mechanics) — Command cheatsheet, two-repo pathing, verification gates (see references/mechanics.md for full guide)
+
+### aperas — Section 4 Mechanics Cheatsheet & Two-Repo Pathing <a name='id/BlockNode:00CV3K19P0002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Command Reference Table](#id/BlockNode:00CS1593MR02C) [v4 Traversal Commands](#id/BlockNode:00CS1593MR02E) [v4.1 Symlink Warning](#id/BlockNode:00CV2CFX70009) [v4.1 Two-Repo Workspace](#id/BlockNode:00CV2CFX7000H) [v4.1 Code Repo](#id/BlockNode:00CV2CFX7000J) [v4.1 KG Repo](#id/BlockNode:00CV2CFX7000K) [v4.1 Tracked Symlink](#id/BlockNode:00CV2CFX7000M) [v4.1 Resolution Rule](#id/BlockNode:00CV2CFX7000P) [v4.1 Artifact Path Correct](#id/BlockNode:00CV2CV6K8007) [v4.1 Artifact Path Incorrect](#id/BlockNode:00CV2CV6K8008) [v4.1 Thread Path Correct](#id/BlockNode:00CV2CV6K800A) [v4.1 Thread Path Incorrect](#id/BlockNode:00CV2CV6K800B) [v4.1 Cheatsheet Table](#id/BlockNode:00CV2CFX78004) [v4.1 Command Recipes](#id/BlockNode:00CV2CFX78005) [v4.1 Piped Markdown AST Parsing](#id/BlockNode:00CV2CFX78006) [v4.1 Multi-Node Piping](#id/BlockNode:00CV2CFX78007) [v4.1 Hierarchical Nesting](#id/BlockNode:00CV2CFX78008) [v4.1 Anchor Positioning](#id/BlockNode:00CV2CFX78009) [v4.1 Anchor Constraint](#id/BlockNode:00CV2CFX7800A) [v4.1 Preserving Children](#id/BlockNode:00CV2CFX7800B) [v4.1 Text-Only Command](#id/BlockNode:00CV2CFX7800C) [v4.1 Text-Only Note](#id/BlockNode:00CV2CFX7800D) [v4.1 Ordinary Text Change](#id/BlockNode:00CV2CFX7800E) [v4.1 Bare Text Command](#id/BlockNode:00CV2CFX7800F) [v4.1 Restating Children Note](#id/BlockNode:00CV2CFX7800G) [v4.1 Symmetry Rule](#id/BlockNode:00CV2CFX7800H) [v4.1 Code Engine Changes](#id/BlockNode:00CV2CFX7800J)
+
+High-level cheatsheet for daily CLI use. For the exhaustive reference manual — AST tree parsing, `--after` anchor placement constraints, list mutation subtleties, heading child preservation, block retyping, artifact renames, shell quoting, service recovery, and link sweeps — consult [`references/mechanics.md`](references/mechanics.md).
+
+| Operation | Command Pattern | Key Rule / Note |
+|---|---|---|
+| **Peek / View** | `aperas unfold <ref> [--view <n>]` / `tree` | Peek node or render structured view lens |
+| **Inspect State** | `aperas show <ref> [--text]` / `backlinks` | Exact stored text, full record, or dependents |
+| **Insert Turn** | `cat turn.md \| aperas insert <id> --after <a>`| Pipes markdown AST subtree after anchor child |
+| **Zoom View** | `aperas zoom <id> --view <name> --flush` | Re-roots view onto current Ask or Report |
+| **Update Node** | `echo "text" \| aperas update <id> [--text-only]`| `--text-only` preserves kids; bare tombstones |
+| **Insert / Reposition**| `aperas insert <par> [--after <sib>]` | Bullet `- ` inserts; no stdin moves node |
+| **Sweep / Service** | `aperas check-links` / `service restart` | Sweeps internal links; restarts daemon |
+
+```bash
+aperas unfold <ref> [--view <name>]                          # Peek node or unfold into view
+aperas tree --view <name>                                    # Render structured lens of view
+cat turn.md | aperas insert <turn-id> --after <ask> --flush  # Insert Work + Report tree
+aperas zoom <id> --view <name> --flush                       # Re-root view onto Ask/Report
+echo "text" | aperas update <id> --text-only --flush         # Update node (preserves kids)
+echo "- text" | aperas insert <par> --after <sib> --flush    # Insert list item (needs bullet)
+aperas check-links [--repair]                                # Sweep / repair link integrity
+```
+
+- Two sibling repos: <a name='id/BlockNode:00CV3K19P0006' class='aperas-anchor aperas-id'></a> `Aperas/` (code/skills; symlink `Aperas/AperasKG -> ../AperasKG`) and `AperasKG/` (graph `Apeiron/`, markdown `artifacts/`).
+- Resolution Rule: <a name='id/BlockNode:00CV3K19P0007' class='aperas-anchor aperas-id'></a> CLI paths resolve relative to `artifacts/` in `AperasKG/`, never against `$CWD` or code root (`npm run aperas -- project discussion/foo.md` is correct; resolving `.threads/` against `$CWD` fails).
+- **Code/Engine changes**: <a name='id/BlockNode:00CV3K19P0008' class='aperas-anchor aperas-id'></a> Run `npm run verify` (from `monorepo/`) to execute build, lint, and tests.
+- **Skill-only changes**: <a name='id/BlockNode:00CV3K19P0009' class='aperas-anchor aperas-id'></a> Strictly **NEVER** run `npm run verify`! Running full test suites on skill edits causes unnecessary hangs, compute waste, and test timeouts. Verify using: `python3 skills/aperas/scripts/skill_drift.py && npm run aperas -- check-links`.
+
+---
+
+### aperas-coder & aperas-grapher — Dual CLI Reference Pointers <a name='id/BlockNode:00CV3K19P000B' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.1 Coder Reference Pointer](#id/BlockNode:00CV2CFX7801Y) [v4.1 Grapher Reference Pointer](#id/BlockNode:00CV2CFX7802T)
+
+For everyday CLI commands, consult the **Section 4 (Mechanics)** cheatsheet in the base skill (`skills/aperas/SKILL.md`). For comprehensive syntax rules, anchor constraints, AST tree piping, list mutation subtleties, recovery, and troubleshooting, refer to [`skills/aperas/references/mechanics.md`](../aperas/references/mechanics.md).
+
+### aperas — Mechanics — Standalone Reference Manual Extraction <a name='id/BlockNode:00CV3K19P000D' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Wikilink Syntax](#id/BlockNode:00CS1593MR02J) [v4 Bare relative paths](#id/BlockNode:00CS1593MR02K) [v4 Fragment links](#id/BlockNode:00CS1593MR02M) [v4 Direct node ID](#id/BlockNode:00CS1593MR02N) [v4 Anchor match](#id/BlockNode:00CS1593MR02P) [v4 Scheme prefixes](#id/BlockNode:00CS1593MR02Q) [v4 Link Note](#id/BlockNode:00CS1593MR02R) [v4 Anchor Placement Rule](#id/BlockNode:00CS1593MR02S) [v4 Anchor Placement Correct](#id/BlockNode:00CS1593MR02T) [v4 Anchor Placement Incorrect](#id/BlockNode:00CS1593MR02V) [v4 Sketching a Structure](#id/BlockNode:00CS1593MR02W) [v4 Placeholder Node](#id/BlockNode:00CS1593MR02X) [v4 Placeholder Command](#id/BlockNode:00CS1593MR02Y) [v4 Populate Placeholder](#id/BlockNode:00CS1593MR02Z) [v4 Invalid Anchor Error](#id/BlockNode:00CS1593MR032) [v4 Unordered Lists](#id/BlockNode:00CS1593MR034) [v4 Unordered Bullet Marker](#id/BlockNode:00CS1593MR035) [v4 Unordered Bullet Command](#id/BlockNode:00CS1593MR036) [v4 Unordered Plain Text Warning](#id/BlockNode:00CS1593MR037) [v4 Ordered Lists](#id/BlockNode:00CS1593MR038) [v4 Ordered Append Safe](#id/BlockNode:00CS1593MR039) [v4 Ordered Renumber Middle](#id/BlockNode:00CS1593MR03A) [v4 Update Item Command](#id/BlockNode:00CS1593MR03D) [v4 Checkboxes](#id/BlockNode:00CS1593MR03F) [v4 Checkbox State Marker](#id/BlockNode:00CS1593MR03G) [v4 Checkbox Markerless Bullet](#id/BlockNode:00CS1593MR03H) [v4 Ordered List Items](#id/BlockNode:00CS1593MR03J) [v4 Ordered Marker Update](#id/BlockNode:00CS1593MR03K) [v4 Ordered Position Preservation](#id/BlockNode:00CS1593MR03M) [v4 Blank Text](#id/BlockNode:00CS1593N0000) [v4 Title Tracking](#id/BlockNode:00CS1593N0001) [v4 Heading Retitle Child Wipe](#id/BlockNode:00CS1593N0004) [v4 Retitling Heading Text-Only](#id/BlockNode:00CS1593N0005) [v4 Retitling Heading Command](#id/BlockNode:00CS1593N0006) [v4 Retitling Heading Note](#id/BlockNode:00CS1593N0007) [v4 Changing Block Types](#id/BlockNode:00CS1593N0008) [v4 Retype Command](#id/BlockNode:00CS1593N0009) [v4 Retype Heading to Non-Heading](#id/BlockNode:00CS1593N000A) [v4 Retype Non-Heading to Heading](#id/BlockNode:00CS1593N000B) [v4 Renaming Single Artifact](#id/BlockNode:00CS1593N000D) [v4 Renaming Single Command](#id/BlockNode:00CS1593N000E) [v4 Renaming Detection Equality](#id/BlockNode:00CS1593N000F) [v4 Renaming Cross Referencing](#id/BlockNode:00CS1593N000G) [v4 Shell Quoting Gotcha](#id/BlockNode:00CS1593N000H) [v4 Shell Quoting File Workaround](#id/BlockNode:00CS1593N000J) [v4 Shell Quoting Command](#id/BlockNode:00CS1593N000K) [v4 Service State Restart](#id/BlockNode:00CS1593N000N) [v4 Service State Restart Command](#id/BlockNode:00CS1593N000P) [v4 Service Reload Discard](#id/BlockNode:00CS1593N000Q) [v4 Service Reload Discard Command](#id/BlockNode:00CS1593N000R) [v4 Raw Node Inspection](#id/BlockNode:00CS1593N000S) [v4 Raw Node Inspection Command](#id/BlockNode:00CS1593N000T) [v4 Raw Node Safe Edit](#id/BlockNode:00CS1593N000V) [v4 Unfold Bare Peek](#id/BlockNode:00CS1593N000X) [v4 Unfold View Mutation](#id/BlockNode:00CS1593N000Y) [v4 Tombstoned Nodes](#id/BlockNode:00CS1593N000Z) [v4 Tombstoned Omission](#id/BlockNode:00CS1593N0010) [v4 Tombstoned Unfold Error](#id/BlockNode:00CS1593N0011) [v4 Full Text Search](#id/BlockNode:00CS1593N0012) [v4 Full Text Search Grep](#id/BlockNode:00CS1593N0013) [v4 Full Text Candidate Inspection](#id/BlockNode:00CS1593N0014) [v4 Comparing Distant Docs](#id/BlockNode:00CS1593N0015) [v4 Comparing Distant Docs Script](#id/BlockNode:00CS1593N0016) [v4 Breadcrumbs in Tree](#id/BlockNode:00CS1593N0017) [v4 Breadcrumbs Apex Path](#id/BlockNode:00CS1593N0018) [v4 Breadcrumbs Relative Scope](#id/BlockNode:00CS1593N0019) [v4 Breadcrumbs External Viewcone](#id/BlockNode:00CS1593N001A) [v4 Link Integrity Sweeps](#id/BlockNode:00CS1593N001C)

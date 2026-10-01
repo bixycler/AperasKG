@@ -724,6 +724,18 @@
         "@type": "StringProp",
         "key": "description",
         "value": "Open questions and freeflow notes behind the skill's four-level design — including whether an indirect-edge relationship deserves its own linking convention."
+      },
+      {
+        "@id": "ArtifactNode:00CE8XWYYG000:props:StringProp:00CV3K1HK8000",
+        "@type": "StringProp",
+        "key": "danglingRef",
+        "value": "#4-mechanics"
+      },
+      {
+        "@id": "ArtifactNode:00CE8XWYYG000:props:StringProp:00CV3K1HK8001",
+        "@type": "StringProp",
+        "key": "danglingRef",
+        "value": "../aperas/references/mechanics.md"
       }
     ],
     "title": "aperas-skill.md",
@@ -734,11 +746,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "e54337cea86b613fc2cee0e1282bf33fc9f59f50317181272d9a3a636c6a70b2",
+    "fileHash": "6e7fa542607f40bfc2294f327a771befd081958d49214e7c8e25b9f89f1d598d",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "e54337cea86b613fc2cee0e1282bf33fc9f59f50317181272d9a3a636c6a70b2",
-    "lastIngestedAt": "2026-10-01T14:41:02.726Z",
-    "projectedHash": "e54337cea86b613fc2cee0e1282bf33fc9f59f50317181272d9a3a636c6a70b2"
+    "ingestedHash": "6e7fa542607f40bfc2294f327a771befd081958d49214e7c8e25b9f89f1d598d",
+    "lastIngestedAt": "2026-10-01T15:23:06.090Z",
+    "projectedHash": "6e7fa542607f40bfc2294f327a771befd081958d49214e7c8e25b9f89f1d598d"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
