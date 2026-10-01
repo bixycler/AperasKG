@@ -21,7 +21,6 @@
       "FolderNode:00CDBYV4BR002",
       "FolderNode:00CDBYV4BR003",
       "FolderNode:00CDBYV4BR004",
-      "ArtifactNode:00CR5AEJ88000",
       "FolderNode:00CR5AN248000"
     ]
   },
@@ -138,7 +137,6 @@
     "path": "discussion",
     "children": [
       "BlockNode:00CN4ZQA8G001",
-      "ArtifactNode:00CNWSJNMR000",
       "ArtifactNode:00CE8XWYYG000",
       "ArtifactNode:00CE01XZ8R000",
       "ArtifactNode:00CF2AEKZG000",

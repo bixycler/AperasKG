@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "8a2f11dd0bf2f46e85a29152e080040eeecd03f4f89baf75672b854b384b1bf7",
+    "fileHash": "cada3453ca532060f267a5c944c9a8be6fdfb6fa43fb39c8beae28885415ac97",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "8a2f11dd0bf2f46e85a29152e080040eeecd03f4f89baf75672b854b384b1bf7",
-    "lastIngestedAt": "2026-09-28T10:02:54.860Z",
-    "projectedHash": "8a2f11dd0bf2f46e85a29152e080040eeecd03f4f89baf75672b854b384b1bf7"
+    "ingestedHash": "cada3453ca532060f267a5c944c9a8be6fdfb6fa43fb39c8beae28885415ac97",
+    "lastIngestedAt": "2026-10-01T09:24:58.335Z",
+    "projectedHash": "cada3453ca532060f267a5c944c9a8be6fdfb6fa43fb39c8beae28885415ac97"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -759,11 +759,11 @@
       "BlockNode:00CEA5KW4G001"
     ],
     "path": "issues/aperas-skill.md",
-    "fileHash": "66cc0c430604c3dbd1ddda5f52b8f173233539ea0a8c2324deb1bdefd800fb1b",
+    "fileHash": "db255c39981d36bb6a682c16544200bcf6bfc2807b9f3c7f415261dc30aa4d2c",
     "lastTrackedAt": "2026-09-22T13:10:43.858Z",
-    "ingestedHash": "66cc0c430604c3dbd1ddda5f52b8f173233539ea0a8c2324deb1bdefd800fb1b",
-    "lastIngestedAt": "2026-09-23T13:19:59.320Z",
-    "projectedHash": "66cc0c430604c3dbd1ddda5f52b8f173233539ea0a8c2324deb1bdefd800fb1b"
+    "ingestedHash": "db255c39981d36bb6a682c16544200bcf6bfc2807b9f3c7f415261dc30aa4d2c",
+    "lastIngestedAt": "2026-10-01T06:50:23.961Z",
+    "projectedHash": "db255c39981d36bb6a682c16544200bcf6bfc2807b9f3c7f415261dc30aa4d2c"
   },
   {
     "@id": "ArtifactNode:00CEA5M69R000",
@@ -802,18 +802,18 @@
       }
     ],
     "title": "aperas-skill.md",
-    "text": "The restructure has landed and has been revised through v3.1 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, then a role split at v3 and v3.1's own first-run repair. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is now the base every role loads: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with what each role does with it living in its own file (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, and v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them. v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph; v2.1 through v2.11 followed as tool-and-discipline fixes on that baseline rather than a further restructure, detailed one by one below. v3 split the skill across three roles handing off through the graph, and v3.1 — the first live run under that split — moved the whole task loop into the base after failing on its own defects. Open Issues, once empty, now carries entries of its own, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
+    "text": "The restructure has landed and has been revised through v4.1 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "007d9f7a7e817b0e867a0250194f9d2b2d6f8188078d7a2753700ec2ae51eeae",
+    "fileHash": "263915f0070b95e40e0fa4e414457f1b2e2ac26bfd76911ce462e42de8c290a0",
     "lastTrackedAt": "2026-09-22T08:08:49.651Z",
-    "ingestedHash": "007d9f7a7e817b0e867a0250194f9d2b2d6f8188078d7a2753700ec2ae51eeae",
-    "lastIngestedAt": "2026-09-27T05:45:48.276Z",
-    "projectedHash": "007d9f7a7e817b0e867a0250194f9d2b2d6f8188078d7a2753700ec2ae51eeae"
+    "ingestedHash": "263915f0070b95e40e0fa4e414457f1b2e2ac26bfd76911ce462e42de8c290a0",
+    "lastIngestedAt": "2026-10-01T04:47:11.366Z",
+    "projectedHash": "263915f0070b95e40e0fa4e414457f1b2e2ac26bfd76911ce462e42de8c290a0"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -1284,26 +1284,10 @@
     "projectedHash": "ab8d596e09a1e26e640b03829cf861463968488806d42683d10765dff2851e9f"
   },
   {
-    "@id": "ArtifactNode:00CNWSJNMR000",
-    "@type": "ArtifactNode",
-    "tombstonedAt": "2026-09-23T13:17:47.349Z",
-    "title": "_scratch_test.md",
-    "text": "**Bold checkbox item**: original text with a real lead-in term.",
-    "parent": "FolderNode:00CDBYV4BR001",
-    "type": "root",
-    "children": [],
-    "path": "discussion/_scratch_test.md",
-    "fileHash": "9cf7775dc9a84d298263897c2f1c559d9c69b07948ba5c288e8ff560a611cfaf",
-    "lastTrackedAt": "2026-09-23T13:02:53.652Z",
-    "ingestedHash": "9cf7775dc9a84d298263897c2f1c559d9c69b07948ba5c288e8ff560a611cfaf",
-    "lastIngestedAt": "2026-09-23T13:02:54.424Z"
-  },
-  {
     "@id": "ArtifactNode:00CR5AEJ88000",
     "@type": "ArtifactNode",
     "title": "concepts.md",
     "text": "Shared vocabulary and relationships surfaced across concerns and threads, promoted up by the grapher once they recur across tasks.",
-    "parent": "FolderNode:00CDBYV47G000",
     "children": [
       "BlockNode:00CR5AWY6R001"
     ],

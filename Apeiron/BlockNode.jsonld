@@ -12624,6 +12624,7 @@
       "BlockNode:00CR5GCSEG001",
       "BlockNode:00CR874TC8001",
       "BlockNode:00CS1593MG001",
+      "BlockNode:00CTTFFW08001",
       "BlockNode:00CF4QNX0000B"
     ]
   },
@@ -12680,7 +12681,16 @@
       "BlockNode:00CRAQQ2V0001",
       "BlockNode:00CRBWFJJ0001",
       "BlockNode:00CRC1S4MR001",
-      "BlockNode:00CS0YM5H8001"
+      "BlockNode:00CS0YM5H8001",
+      "BlockNode:00CTT270YR001",
+      "BlockNode:00CTTBGC00001",
+      "BlockNode:00CTTBGC00002",
+      "BlockNode:00CTTECENR001",
+      "BlockNode:00CTVWQ9G0001",
+      "BlockNode:00CTWMKKH8001",
+      "BlockNode:00CTWMPE1G001",
+      "BlockNode:00CTX70TPR001",
+      "BlockNode:00CTYF5W48001"
     ]
   },
   {
@@ -13710,7 +13720,8 @@
       "BlockNode:00CGF7EZ4R001",
       "BlockNode:00CGF7EZ4R002",
       "BlockNode:00CGF7EZ4R003",
-      "BlockNode:00CGF7EZ4R004"
+      "BlockNode:00CGF7EZ4R004",
+      "BlockNode:00CTVZR8P0001"
     ]
   },
   {
@@ -13963,16 +13974,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5MHD8002:links:Link:00CGA5YE0R000:props:StringProp:00CR8WDE8R000",
+            "@id": "BlockNode:00CEA5MHD8002:links:Link:00CGA5YE0R000:props:StringProp:00CTTFR7QR000",
             "@type": "StringProp",
             "key": "position",
-            "value": "1507"
+            "value": "995"
           }
         ]
       }
     ],
     "title": "## Current Status",
-    "text": "The restructure has landed and has been revised through v3.1 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, then a role split at v3 and v3.1's own first-run repair. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is now the base every role loads: four levels — Philosophy, Orientation, Discipline, Mechanics — read top-down, with what each role does with it living in its own file (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v1.1 repaired the vertical thread between the levels, v1.2 grounded the recall machinery in the philosophy that makes it non-optional, v1.3 widened the scope from graph edits to the whole session while replacing the mechanical read-side gate with a remembered consent question, and v1.4 re-keyed rules to outcomes rather than to the verb or event that produces them. v2 retired the inline status vocabulary, raised reading the shadow to the same standing as writing to it, added the upward direction to traversal, and moved the document's own past into the graph; v2.1 through v2.11 followed as tool-and-discipline fixes on that baseline rather than a further restructure, detailed one by one below. v3 split the skill across three roles handing off through the graph, and v3.1 — the first live run under that split — moved the whole task loop into the base after failing on its own defects. Open Issues, once empty, now carries entries of its own, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
+    "text": "The restructure has landed and has been revised through v4.1 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "BlockNode:00CEA5MHD8001",
     "type": "heading",
     "children": [
@@ -14036,7 +14047,9 @@
       "BlockNode:00CR8W6F7G001",
       "BlockNode:00CR8W7200001",
       "BlockNode:00CR8MWVY8001",
-      "BlockNode:00CR8MWVYG000"
+      "BlockNode:00CR8MWVYG000",
+      "BlockNode:00CTTFT4HR001",
+      "BlockNode:00CTTFT4HR002"
     ]
   },
   {
@@ -49465,6 +49478,1060 @@
     "title": "**Recorded and promoted**",
     "text": "**Recorded and promoted**: the skill v4 comprehensive rewrite is recorded as [v4 SKILL.md (verbatim, 2026-09-28)](#id/BlockNode:00CS1593MG001), and promoted to design's [Orchestrator](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003) (operational gates upfront, in-flight triage protocol) and [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) (9-step task loop, in-flight triage).",
     "parent": "BlockNode:00CS0YM5H8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTT270YR001",
+    "@type": "BlockNode",
+    "title": "**Skill v4.1 refinements — dual memory/rules, positive behavioral bridges, native harness artifact scope, and orientation reordering (2026-10-01)**",
+    "text": "**Skill v4.1 refinements — dual memory/rules, positive behavioral bridges, native harness artifact scope, and orientation reordering (2026-10-01)**: analysis and user agreement on resolving operational gating failures. (1) Antigravity has no native \"memory\" tool or store; standing decisions must use dual \"memory/rules\" terminology, persisting to `.agents/rules/aperas.md` in Antigravity or harness memory in Claude, retiring legacy `.agents/aperas_memory.json`. (2) Native harness artifacts (e.g. Antigravity artifacts) are strictly restricted to user communication (proposals, discussion, visual alignment) and must never be used for implementation plans or execution tracking; all implementation and technical state tracking belong solely in Apeiron. (3) Meta-tasks: check if `.agents/` customizations are tracked by git or symlinked into the codebase; if tracked, they are code work owned exclusively by the Coder role. (4) Positive behavioral bridge: restructure Section 2 (Orientation) in `aperas/SKILL.md` to place View Triage & Management first, replacing passive negative paper gates with an imperative positive command to start with View Triage.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTTFHT2G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTBGC00001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZG000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZG000:props:StringProp:00CTTBGGZG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "980"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZG002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZG002:props:StringProp:00CTTBGGZG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1050"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZG004",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZG004:props:StringProp:00CTTBGGZR000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1129"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZR001",
+        "@type": "Link",
+        "target": "BlockNode:00CTT270YR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTBGC00001:links:Link:00CTTBGGZR001:props:StringProp:00CTTBGGZR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1211"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CTTBGC00001:props:StringProp:00CTTBGGZ8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTBGC00001:props:StringProp:00CTTBGGZ8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Coder Survey — concrete line mappings and verification for the 4 skill refinements (2026-10-01)**",
+    "text": "**Coder Survey — concrete line mappings and verification for the 4 skill refinements (2026-10-01)**: Mapped exact file lines and confirmed git tracking for the v4.1 refinements. (1) Dual memory/rules: `skills/aperas/SKILL.md` frontmatter description (lines 3-5), retiring legacy `.agents/aperas_memory.json` into `.agents/rules/aperas.md` (git-ignored via `.gitignore` line 9). (2) Native harness artifact demarcation: `skills/aperas/SKILL.md` Section 1 (lines 24-28) and `skills/aperas-orchestrator/SKILL.md` Section 1 (lines 24-28) strictly restrict harness artifacts to user communication. (3) Meta-task ownership: Coder exclusively owns git-tracked `.agents/` customizations, verified that `.agents/skills` is a symlink to repo-root `skills/`. (4) Positive behavioral bridge: `skills/aperas/SKILL.md` Section 2 (lines 44-96) reorders `View Triage & Management` ahead of traversal and gates, replacing passive paper warnings with an imperative view triage command. Promoted to [Architecture](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG003), [Roles and write scope](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003), [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001), and sideways to [Freeflow Decision](../discussion/aperas-skill.md#id/BlockNode:00CTT270YR001).",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTBGC00002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTBGC00002:links:Link:00CTVZWBVG000",
+        "@type": "Link",
+        "target": "BlockNode:00CTVZR8P0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTBGC00002:links:Link:00CTVZWBVG000:props:StringProp:00CTVZWBVG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "557"
+          }
+        ]
+      }
+    ],
+    "title": "**Tool gap — Antigravity subagent harness lacks bash/terminal CLI execution tools**",
+    "text": "**Tool gap — Antigravity subagent harness lacks bash/terminal CLI execution tools**: Antigravity subagents are invoked with read/search tools (`view_file`, `send_message`, etc.) but lack `run_command` or bash execution. As a result, Grapher subagents cannot directly execute `npm run aperas` CLI commands (e.g. `insert`, `zoom`, `check-links`) or `git add` from within the subagent environment, requiring the Orchestrator to execute graph mutations on their behalf. Recorded as a subagent harness configuration issue for multi-agent host setup. Promoted to [Antigravity subagent harness lacks terminal execution and file-write capabilities by default](../issues/aperas-skill.md#id/BlockNode:00CTVZR8P0001).",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTECENR001",
+    "@type": "BlockNode",
+    "title": "**Orchestrator Verification — v4.1 refinements diff and skill drift inspection (2026-10-01)**",
+    "text": "**Orchestrator Verification — v4.1 refinements diff and skill drift inspection (2026-10-01)**: inspected git diff across `skills/aperas/SKILL.md` (+17/-16), `skills/aperas-orchestrator/SKILL.md` (+6/-0), creation of `.agents/rules/aperas.md`, and removal of legacy `.agents/aperas_memory.json`. Verified via `python3 skills/aperas/scripts/skill_drift.py`: 6 added units accounted for across description, native artifact scope, view triage bridge, and meta-task checks; 1 dropped unit accounted for by reworded view triage intro. Confirmed clean, no engine code touched.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW08001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTFFW08001:links:Link:00CTTFG13G000",
+        "@type": "Link",
+        "target": "BlockNode:00CTT270YR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFFW08001:links:Link:00CTTFG13G000:props:StringProp:00CTTFG13G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "226"
+          }
+        ]
+      }
+    ],
+    "title": "## v4.1 additions — delta on the v4 snapshot",
+    "text": "Records the v4.1 skill edit, refining dual memory/rules, positive behavioral bridges in Section 2 (Orientation), native harness artifact demarcation, and codebase-tracked meta-task ownership, committed after user agreement in [Skill v4.1 refinements](#id/BlockNode:00CTT270YR001).",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTFFW08002",
+      "BlockNode:00CTTFFW0G000",
+      "BlockNode:00CTW7XHXR001",
+      "BlockNode:00CTTFFW0G002",
+      "BlockNode:00CTTFFW0G009",
+      "BlockNode:00CTTFFW0G00B",
+      "BlockNode:00CTTGC79R001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW08002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTFFW08002:links:Link:00CTTFG13R000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFFW08002:links:Link:00CTTFG13R000:props:StringProp:00CTTFG13R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Frontmatter — description, dual memory/rules",
+    "text": "Supersedes: [v4 SKILL.md frontmatter](#id/BlockNode:00CS1593MG003)",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTFFW08003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW08003",
+    "@type": "BlockNode",
+    "title": "00CTTFFW08003",
+    "text": "```\n---\nname: aperas\ndescription: >-\n  Before anything else in this project — first turn, every session, whatever the task looks like, including when it looks unrelated, trivial, read-only, or like one quick lookup — check memory/rules for a standing decision on whether Aperas manages this session (`.agents/rules/aperas.md` or harness memory). Do this without loading this skill, and never ask permission to do it or offer it as an option; just do it. If a decision is recorded, follow it. If none is, ask with AskUserQuestion using exactly these choices — Never / Not now / Yes, this session only / Yes, all sessions — and record only 'all sessions' or 'never' durably (into `.agents/rules/aperas.md` or harness memory), so a session-scoped answer is asked again next session. Load this skill only once the answer is yes, and with it `aperas-orchestrator` if you are the main agent, or the appropriate subagent skill (e.g. `aperas-grapher` or `aperas-coder`) if not. \n  Aperas is this project's external memory: a knowledge graph, worked through the `aperas` CLI, holding what has been decided, tried, found and planned, and the medium the three roles communicate through.\n---\n```",
+    "parent": "BlockNode:00CTTFFW08002",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G000",
+    "@type": "BlockNode",
+    "title": "### aperas — Philosophy — native harness artifacts are for human communication only",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTFFW0G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTTFFW0G001:props:StringProp:00CTTFG130000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTFFW0G001:props:StringProp:00CTTFG130001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Native harness artifacts are for human communication only**",
+    "text": "**Native harness artifacts are for human communication only**: Harness-native artifacts (e.g. Antigravity artifacts) exist solely for presenting proposals, alternatives, or visual designs to the human user. They are never a substrate for task planning, execution tracking, or agent coordination; all task state, implementation tracking, and working memory live exclusively in Apeiron and thread files.",
+    "parent": "BlockNode:00CTTFFW0G000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTFFW0G002:links:Link:00CTTFG13R002",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MR00S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFFW0G002:links:Link:00CTTFG13R002:props:StringProp:00CTTFG13R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Orientation — View Triage & Management placed first as imperative entry bridge",
+    "text": "Supersedes: [v4 View Triage intro](#id/BlockNode:00CS1593MR00S)",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTFFW0G003",
+      "BlockNode:00CTTFFW0G004",
+      "BlockNode:00CTTFFW0G006",
+      "BlockNode:00CTTFFW0G008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G003",
+    "@type": "BlockNode",
+    "title": "00CTTFFW0G003",
+    "text": "> [!IMPORTANT]\n> **Always begin with View Triage.** Before any inspection or file access, render the structured lens of active views:",
+    "parent": "BlockNode:00CTTFFW0G002",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G004",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTTFFW0G004:props:StringProp:00CTTFG138000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTFFW0G004:props:StringProp:00CTTFG138001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Triage active views**",
+    "text": "**Triage active views**:",
+    "parent": "BlockNode:00CTTFFW0G002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTTFFW0G005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G005",
+    "@type": "BlockNode",
+    "title": "00CTTFFW0G005",
+    "text": "```bash\n  aperas profile list <profile>   # e.g. antigravity or claude\n  aperas tree --view <view-name>\n  ```",
+    "parent": "BlockNode:00CTTFFW0G004",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G006",
+    "@type": "BlockNode",
+    "title": "**Manage views**",
+    "text": "**Manage views**:",
+    "parent": "BlockNode:00CTTFFW0G002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTTFFW0G007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G007",
+    "@type": "BlockNode",
+    "title": "00CTTFFW0G007",
+    "text": "```bash\n  aperas profile create-view <name> --profile <handle>\n  aperas unfold <ref> --view <name> --flush\n  aperas fold <ref> --view <name> --flush\n  ```",
+    "parent": "BlockNode:00CTTFFW0G006",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G008",
+    "@type": "BlockNode",
+    "title": "00CTTFFW0G008",
+    "text": "Keep views scoped per task. A view left pointing at last session's work is worse than no view.",
+    "parent": "BlockNode:00CTTFFW0G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G009",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator — Role Scope — native harness artifacts restricted to user communication",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTFFW0G00A"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G00A",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTTFFW0G00A:props:StringProp:00CTTFG138002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTFFW0G00A:props:StringProp:00CTTFG138003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Native harness artifacts (e.g. Antigravity artifacts)",
+    "text": "Native harness artifacts (e.g. Antigravity artifacts): Restricted solely to communicating proposals, discussion summaries, or visual alignment to the human user. Never use native harness artifacts for implementation tracking, execution task lists, or subagent dispatch — all task state lives in `.threads/` and Apeiron.",
+    "parent": "BlockNode:00CTTFFW0G009",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G00B",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator — Role Scope — codebase-tracked skill check for meta-tasks",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTFFW0G00C"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTFFW0G00C",
+    "@type": "BlockNode",
+    "title": "00CTTFFW0G00C",
+    "text": "> [!CRITICAL]\n> **Codebase-Tracked Skill Check (Meta-Tasks)**:\n> When a task involves modifying skills, agent definitions, or `.agents/` customizations, check if they are tracked by git or symlinked to codebase paths (`skills/`). If tracked or symlinked, they are code work owned exclusively by the Coder role. The Orchestrator must NEVER edit them directly.",
+    "parent": "BlockNode:00CTTFFW0G00B",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFHT2G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG0002",
+        "@type": "Link",
+        "target": "BlockNode:00CTTFFW08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG0002:props:StringProp:00CTTFHZG0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "56"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG8000",
+        "@type": "Link",
+        "target": "BlockNode:00CEA5Y5JG003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG8000:props:StringProp:00CTTFHZG8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "142"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG8002",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N00003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG8002:props:StringProp:00CTTFHZG8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "212"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG8004",
+        "@type": "Link",
+        "target": "BlockNode:00CR3X3N08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFHT2G001:links:Link:00CTTFHZG8004:props:StringProp:00CTTFHZG8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "295"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CTTFHT2G001:props:StringProp:00CTTFHZG0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTFHT2G001:props:StringProp:00CTTFHZG0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Recorded and promoted**",
+    "text": "**Recorded and promoted**: v4.1 refinements recorded as [v4.1 additions — delta on the v4 snapshot](#id/BlockNode:00CTTFFW08001), promoted to [Architecture](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG003), [Roles and write scope](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003), and [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001).",
+    "parent": "BlockNode:00CTT270YR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFT4HR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTFT4HR001:links:Link:00CTTFT9NG001",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593MG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFT4HR001:links:Link:00CTTFT9NG001:props:StringProp:00CTTFT9NG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "79"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00CTTFT4HR001:props:StringProp:00CTTFT9N8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTFT4HR001:props:StringProp:00CTTFT9NG000",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**v4 — comprehensive operational rewrite across all four skills**",
+    "text": "**v4 — comprehensive operational rewrite across all four skills**: recorded as [the v4 snapshot](../discussion/aperas-skill.md#id/BlockNode:00CS1593MG001). Eliminated verbose prose in favor of crisp operational clarity, upfront role gating for the orchestrator, and formalized in-flight view triage.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTFT4HR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTTFT4HR002:links:Link:00CTTFT9NG003",
+        "@type": "Link",
+        "target": "BlockNode:00CTTFFW08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTTFT4HR002:links:Link:00CTTFT9NG003:props:StringProp:00CTTFT9NG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "150"
+          }
+        ]
+      }
+    ],
+    "title": "**v4.1 — operational gating refinements: dual memory/rules, positive behavioral bridge, native artifact scope, and meta-task ownership**",
+    "text": "**v4.1 — operational gating refinements: dual memory/rules, positive behavioral bridge, native artifact scope, and meta-task ownership**: recorded as [the v4.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CTTFFW08001). Resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), restricting native harness artifacts strictly to user communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role.",
+    "parent": "BlockNode:00CEA5MHD8004",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTTGC79R001",
+    "@type": "BlockNode",
+    "title": "### aperas-orchestrator — Route Every Step — tracked skill and agent changes routed to Coder",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTTGC79R002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTTGC79R002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTTGC79R002:props:StringProp:00CTTGCCG0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTTGC79R002:props:StringProp:00CTTGCCG0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00CTTGC79R002",
+    "text": "Skill and agent configuration changes in tracked directories (`skills/`, `.agents/`) are code changes and must be routed to the Coder.",
+    "parent": "BlockNode:00CTTGC79R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTVWQ9G0001",
+    "@type": "BlockNode",
+    "title": "**Decision — promote and fix subagent tool gap and correct Orientation order (2026-10-01)**",
+    "text": "**Decision — promote and fix subagent tool gap and correct Orientation order (2026-10-01)**: User confirmed that subagent harness tool gap is a blocking issue that must be promoted to the graph and resolved immediately. Technical approach combines in-session runtime subagent definitions (`define_subagent` with `enable_write_tools: true`) to equip active subagents with file-writing and CLI execution tools, with persistent updates to `.agents/agents/*.md` for future sessions. Instead of a synthetic smoke test, `aperas-coder` executes real work: placing `Mandatory Initial Gate` first under `## 2. Orientation` in `skills/aperas/SKILL.md` with an imperative bridge pointing to View Triage, followed by `View Triage & Management`, `Entering the Corpus`, and `Three Traversal Directions`.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTVZR8P0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTVZR8P0001:links:Link:00CTVZREW0000",
+        "@type": "Link",
+        "target": "BlockNode:00CTTBGC00002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTVZR8P0001:links:Link:00CTVZREW0000:props:StringProp:00CTVZREW8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "350"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CTVZR8P0001:links:Link:00CTW7AQY8000",
+        "@type": "Link",
+        "target": "BlockNode:00CTW4S3KR003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTVZR8P0001:links:Link:00CTW7AQY8000:props:StringProp:00CTW7AQYG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "735"
+          }
+        ]
+      }
+    ],
+    "title": "**Antigravity subagent harness lacks terminal execution and file-write capabilities by default**",
+    "text": "**Antigravity subagent harness lacks terminal execution and file-write capabilities by default**: By default, Antigravity provisions subagents with read-only inspection tools. Grapher subagents cannot execute `npm run aperas` CLI commands to insert or project nodes, and Coder subagents cannot apply code diffs or run verification tests. Provenance: [BlockNode:00CTTBGC00002](../discussion/aperas-skill.md#id/BlockNode:00CTTBGC00002). **Resolved**: subagent runtime registration (`define_subagent` with `enable_write_tools: true`) enables write and terminal tools in active session; persistent frontmatter configuration declared in `.agents/agents/aperas-coder.md` and `.agents/agents/aperas-grapher.md`. Verified by `aperas-coder` in [Coder Report](../.threads/coder.md#id/BlockNode:00CTW4S3KR003).",
+    "parent": "BlockNode:00CEA5KW4G00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTW7XHXR001",
+    "@type": "BlockNode",
+    "title": "### aperas — Orientation — positive bridge inside Mandatory Initial Gate",
+    "parent": "BlockNode:00CTTFFW08001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00CTW7XHXR002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTW7XHXR002",
+    "@type": "BlockNode",
+    "title": "00CTW7XHXR002",
+    "text": "> [!IMPORTANT]\n> **Always begin with View Triage.** Before any inspection or file access, render the structured lens of active views (see [View Triage & Management](#view-triage--management)).",
+    "parent": "BlockNode:00CTW7XHXR001",
+    "type": "blockquote",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTWMKKH8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTWMKKH8001:links:Link:00CTWMKS8G000",
+        "@type": "Link",
+        "target": "BlockNode:00CTVWQ9G0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTWMKKH8001:links:Link:00CTWMKS8G000:props:StringProp:00CTWMKS8G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "146"
+          }
+        ]
+      }
+    ],
+    "title": "**Resolution — subagent tool gap resolved and Orientation subsections reordered (2026-10-01)**",
+    "text": "**Resolution — subagent tool gap resolved and Orientation subsections reordered (2026-10-01)**: Implemented and verified the decision recorded in [BlockNode:00CTVWQ9G0001](#id/BlockNode:00CTVWQ9G0001). Subagents are equipped with file-writing and CLI execution tools via runtime `define_subagent` (`enable_write_tools: true`) in active sessions and persistent frontmatter in `.agents/agents/aperas-coder.md` and `.agents/agents/aperas-grapher.md` across sessions. `aperas-coder` autonomously completed the real task of reordering `## 2. Orientation` in `skills/aperas/SKILL.md` (Mandatory Initial Gate first with positive bridge pointing to View Triage, followed by View Triage & Management, Entering the Corpus, and Three Traversal Directions). Verified cleanly via `skill_drift.py` (0 added, 0 dropped) and `check-links` (0 discrepancies).",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTWMPE1G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CTWMPE1G001:links:Link:00CTWMPKD0000",
+        "@type": "Link",
+        "target": "BlockNode:00CTVZR8P0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CTWMPE1G001:links:Link:00CTWMPKD0000:props:StringProp:00CTWMPKD0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "124"
+          }
+        ]
+      }
+    ],
+    "title": "**Defect — citation direction violations in resolved issue BlockNode:00CTVZR8P0001 (2026-10-01)**",
+    "text": "**Defect — citation direction violations in resolved issue BlockNode:00CTVZR8P0001 (2026-10-01)**: During issue resolution, [BlockNode:00CTVZR8P0001](../issues/aperas-skill.md#id/BlockNode:00CTVZR8P0001) in `issues/aperas-skill.md` was written with two illegal downward citations: (1) `Provenance: [BlockNode:00CTTBGC00002](#id/BlockNode:00CTTBGC00002)` (down-citation to `discussion/`), and (2) `Verified by ... [Coder Report]` (down-citation to `.threads/coder.md`). Both violate the abstraction gradient (`design` > `issues`/`history` > `concepts` > `discussion` > `.threads`), which permits citations only upwards or sideways, never downwards. Provenance from discussion must live strictly at the origin pointing up per *Provenance at the Origin*, and threads are ephemeral working memory into which formal docs must never link. Caused by Orchestrator asking for thread citation and Grapher executing without applying the citation direction gate. Formal graph fix deferred for a later pass while subagent roles stabilize.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTX70TPR001",
+    "@type": "BlockNode",
+    "title": "**Subagent execution bottlenecks — Grapher Opening Phase and Tool & CLI Phase investigation (2026-10-01)**",
+    "text": "**Subagent execution bottlenecks — Grapher Opening Phase and Tool & CLI Phase investigation (2026-10-01)**: Detailed trajectory analysis of subagent latencies in Turn 1 (Grapher ~8m, Coder ~9.5m), identifying root causes across the opening initialization and CLI execution phases.",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTX70TPR002",
+      "BlockNode:00CTX70TQ0001",
+      "BlockNode:00CTY63E98001",
+      "BlockNode:00CTY63E9G002"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTX70TPR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTX70TPR002:props:StringProp:00CTX710BR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTX70TPR002:props:StringProp:00CTX710BR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Grapher Opening Phase bottlenecks (~3m 10s, steps 1–56)**",
+    "text": "**Grapher Opening Phase bottlenecks (~3m 10s, steps 1–56)**:",
+    "parent": "BlockNode:00CTX70TPR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTX70TPR003",
+      "BlockNode:00CTX70TPR004",
+      "BlockNode:00CTX70TQ0000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTX70TPR003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTX70TPR003:props:StringProp:00CTX710C0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTX70TPR003:props:StringProp:00CTX710C0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**ApeironNgn service crash and restart recovery (~1m 15s, steps 19–32)**",
+    "text": "**ApeironNgn service crash and restart recovery (~1m 15s, steps 19–32)**: At Step 19, `npm run aperas -- unfold BlockNode:00CN7G6D0G001` abruptly failed with `[aperas] Failed: No ApeironNgn service running`. Grapher spent over a minute in an iterative recovery loop: `service status` (failed: only start/stop/restart exist), `service start` (reported already running with PID 33824), `service restart` (killed PID 33824, then timed out waiting for Apeiron store rehydration), `ps aux | grep aperas` (polling process rehydration), and finally `service start` until PID 35558 answered.",
+    "parent": "BlockNode:00CTX70TPR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTX70TPR004",
+    "@type": "BlockNode",
+    "title": "**Redundant skill self-reading (steps 3–5)**",
+    "text": "**Redundant skill self-reading (steps 3–5)**: Despite `aperas` and `aperas-grapher` skills being preloaded in its system prompt, Grapher immediately called `view_file` on both `skills/aperas-grapher/SKILL.md` and `skills/aperas/SKILL.md`, burning two full turn round-trips before reading the incoming Ask.",
+    "parent": "BlockNode:00CTX70TPR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTX70TQ0000",
+    "@type": "BlockNode",
+    "title": "**Exploratory JSON-LD grep scans for promotion syntax (steps 43–55)**",
+    "text": "**Exploratory JSON-LD grep scans for promotion syntax (steps 43–55)**: Lacking explicit formatting templates in the skill instructions, Grapher ran multiple greps over raw `AperasKG/Apeiron/BlockNode.jsonld` (`grep \"Promoted to\"`, `grep \"Origin:\"`, `grep \"provenance\"`) to deduce how past issue titles and provenance text were constructed.",
+    "parent": "BlockNode:00CTX70TPR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTX70TQ0001",
+    "@type": "BlockNode",
+    "title": "**Tool & CLI Phase bottlenecks (remaining 4–5.5 minutes across both subagents)**",
+    "text": "**Tool & CLI Phase bottlenecks (remaining 4–5.5 minutes across both subagents)**:",
+    "parent": "BlockNode:00CTX70TPR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTX70TQ0002",
+      "BlockNode:00CTX70TQ0003",
+      "BlockNode:00CTX70TQ0004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTX70TQ0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTX70TQ0002:props:StringProp:00CTX710C0002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTX70TQ0002:props:StringProp:00CTX710C0003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Sparse CLI `--help` and lack of AST piping recipes**",
+    "text": "**Sparse CLI `--help` and lack of AST piping recipes**: Neither `aperas insert --help` nor `aperas update --help` explains how piped markdown trees are parsed into node kinds, how list-item parentage works, or when child nodes are preserved vs. reconciled. The skill runbooks instruct agents to \"write subturns and Report\" into threads, but provide no canonical CLI recipes (e.g. `cat << 'EOF' | aperas insert <parent> --after <sibling>`).",
+    "parent": "BlockNode:00CTX70TQ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTX70TQ0003",
+    "@type": "BlockNode",
+    "title": "**Subagents reading engine source code (`kgInsert.ts` & `kgUpdate.ts`)**",
+    "text": "**Subagents reading engine source code (`kgInsert.ts` & `kgUpdate.ts`)**: Facing sparse help and knowing that Aperas's reconciler can silently drop or scramble child nodes if used incorrectly on list items (a known failure mode documented in `discussion/aperas-skill.md`), both subagents refused to guess. Grapher read lines 1–190 of `kgInsert.ts` and searched `kgUpdate.ts`. Coder, after applying its 16-second code edit, spent ~4.5 minutes reading 260 lines of `kgInsert.ts` and all 458 lines of `kgUpdate.ts` to verify the exact behavior of `--text-only` and child reconciliation before updating its Report node.",
+    "parent": "BlockNode:00CTX70TQ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTX70TQ0004",
+    "@type": "BlockNode",
+    "title": "**Interactive overwrite prompt hang in `aperas project` (Step 111)**",
+    "text": "**Interactive overwrite prompt hang in `aperas project` (Step 111)**: `aperas project` halted on an unhandled interactive prompt (`Overwrite ...? (yes/no)`) when target projected files had local uncommitted modifications. Running in a non-interactive subagent shell, the process hung in the background. Grapher lost ~45 seconds detecting the stall, yielding, and manually feeding `yes\\n` via `manage_task send_input`, later learning to pipe `echo yes | aperas project`.",
+    "parent": "BlockNode:00CTX70TQ0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E98001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTY63E98001:props:StringProp:00CTY63M3R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTY63E98001:props:StringProp:00CTY63M3R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Root causes for existing skill mechanics failure (v4 TOC removal, slice truncation, and reference gaps)**",
+    "text": "**Root causes for existing skill mechanics failure (v4 TOC removal, slice truncation, and reference gaps)**: Detailed analysis of why `SKILL.md` Section 4 failed to guide the subagents during Turn 1:",
+    "parent": "BlockNode:00CTX70TPR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTY63E98002",
+      "BlockNode:00CTY63E9G000",
+      "BlockNode:00CTY63E9G001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTY63E98002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTY63E98002:props:StringProp:00CTY63M40000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTY63E98002:props:StringProp:00CTY63M40001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Removal of Table of Contents in v4 rewrite**",
+    "text": "**Removal of Table of Contents in v4 rewrite**: In earlier versions of `SKILL.md`, a Table of Contents gave agents an immediate roadmap of the file within the first 50 lines. The v4 rewrite dropped the TOC, starting directly with Philosophy and Orientation. Because subagents do not see the document's structure up front, they cannot know that Section 4 (*Mechanics*) exists further down.",
+    "parent": "BlockNode:00CTY63E98001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G000",
+    "@type": "BlockNode",
+    "title": "**Agent-initiated slice truncation**",
+    "text": "**Agent-initiated slice truncation**: The `view_file` tool supports up to 800 lines and 46 KB per call, easily accommodating `SKILL.md` (422 lines, 24.5 KB) in full. However, subagents self-limited: Grapher explicitly requested `StartLine: 1 EndLine: 100`, while Coder requested `StartLine: 1 EndLine: 250`. Neither agent issued follow-up reads for the remainder of the file. Without a TOC or explicit section pointers, agents assumed the top 100–200 lines were complete and never loaded Section 4's list-handling rules into context.",
+    "parent": "BlockNode:00CTY63E98001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G001",
+    "@type": "BlockNode",
+    "title": "**Incomplete & misleading command references (`--after` omission and list-item `--text-only` vacuum)**",
+    "text": "**Incomplete & misleading command references (`--after` omission and list-item `--text-only` vacuum)**: Line 219 (`Insert Turn Node`) documented `cat ask.md | aperas insert <turn-id>`, omitting `--after <ask-id>` and failing to explain how multi-block Work + Report trees are parsed, which drove Coder to read `kgInsert.ts`. Line 222 and line 309 warned that updating a list item replaces its children, while lines 221 and 320 documented `--text-only` strictly for headings. Fearing that updating its Report node would tombstone its 4 subturn children, Coder read all 458 lines of `kgUpdate.ts` to verify that `req.textOnly` works on `listItem` targets.",
+    "parent": "BlockNode:00CTY63E98001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G002",
+    "@type": "BlockNode",
+    "title": "**Proposed solutions across base and role skills**",
+    "text": "**Proposed solutions across base and role skills**: Concrete structural remedies to eliminate subagent CLI hesitation and source-code reads:",
+    "parent": "BlockNode:00CTX70TPR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTY63E9G003",
+      "BlockNode:00CTY63E9G004",
+      "BlockNode:00CTY63E9G005",
+      "BlockNode:00CTY63E9G006"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTY63E9G003:props:StringProp:00CTY63M40002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTY63E9G003:props:StringProp:00CTY63M40003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Restore Table of Contents with stable heading anchors in base `skills/aperas/SKILL.md`**",
+    "text": "**Restore Table of Contents with stable heading anchors in base `skills/aperas/SKILL.md`**: Add a concise Table of Contents right after the preamble, mapping the 5 core sections (`## 1. Philosophy`, `## 2. Orientation`, `## 3. Discipline`, `## 4. Mechanics`, `## 5. Reference`) using stable section heading anchors. Avoid hardcoded line numbers which drift across edits; subagents can grep for line numbers if specific tool view ranges are needed.",
+    "parent": "BlockNode:00CTY63E9G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G004",
+    "@type": "BlockNode",
+    "title": "**Complete CLI reference in base `SKILL.md`**",
+    "text": "**Complete CLI reference in base `SKILL.md`**: Update `Insert Turn Node` to include `--after <anchor>` and explain multi-node tree piping; update `Updating an Existing List Item` to explicitly document `echo \"updated text\" | aperas update <id> --text-only --flush` for preserving child blocks.",
+    "parent": "BlockNode:00CTY63E9G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G005",
+    "@type": "BlockNode",
+    "title": "**Self-contained turn recipes in role skills**",
+    "text": "**Self-contained turn recipes in role skills**: Add ready-to-run turn insertion snippets (`cat << 'EOF' | npm run aperas -- insert <turn-id> --after <ask-id> --flush`) directly into `skills/aperas-coder/SKILL.md` and `skills/aperas-grapher/SKILL.md`.",
+    "parent": "BlockNode:00CTY63E9G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTY63E9G006",
+    "@type": "BlockNode",
+    "title": "**Explicit navigation pointers in role skills**",
+    "text": "**Explicit navigation pointers in role skills**: Add explicit pointers in role skills guiding subagents to Section 4 (*Mechanics*) of the base skill whenever they need syntax details beyond their turn recipe.",
+    "parent": "BlockNode:00CTY63E9G002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48001",
+    "@type": "BlockNode",
+    "title": "**Subagent dispatch mechanism — stateless per-turn invocation across harnesses (Antigravity `invoke_subagent` vs Claude Code `Task`) (2026-10-01)**",
+    "text": "**Subagent dispatch mechanism — stateless per-turn invocation across harnesses (Antigravity `invoke_subagent` vs Claude Code `Task`) (2026-10-01)**: Trajectory and architectural analysis establishing that subagent turns must always be dispatched as fresh, stateless invocations rather than stateful conversational continuations:",
+    "parent": "BlockNode:00CE8XWZK0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTYF5W48002",
+      "BlockNode:00CTYF5W48003",
+      "BlockNode:00CTYF5W48004",
+      "BlockNode:00CTYF5W48005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTYF5W48002:props:StringProp:00CTYF61A8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTYF5W48002:props:StringProp:00CTYF61A8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Incident — Grapher Turn 2 transcript bloat (220 steps, 278 KB)**",
+    "text": "**Incident — Grapher Turn 2 transcript bloat (220 steps, 278 KB)**: In Turn 2 of `### promote-and-fix-subagent-tool-gap`, Orchestrator dispatched Grapher via `send_message` targeting its Turn 1 conversation ID (`97ddc9af`). This appended Turn 2 into Turn 1's history rather than resetting context. By the end of Turn 2, Grapher's transcript reached 220 steps and ~278 KB, dragging along Turn 1's Apeiron service restart attempts, interactive prompt stalls, and 50-line JSON-LD grep dumps.",
+    "parent": "BlockNode:00CTYF5W48001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48003",
+    "@type": "BlockNode",
+    "title": "**Root cause — Antigravity built-in continuation heuristic vs Aperas memory model**",
+    "text": "**Root cause — Antigravity built-in continuation heuristic vs Aperas memory model**: Antigravity's generic harness prompt advises agents to send follow-up messages to existing subagents to \"conserve resources\" for natural continuations. This advice directly contradicts Aperas's core architectural principle: **The Apeiron graph and `.threads/{role}.md` are the working memory, not the LLM's conversation history.** Reusing subagents causes context rot, token bloat, and degrades multi-turn reasoning.",
+    "parent": "BlockNode:00CTYF5W48001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48004",
+    "@type": "BlockNode",
+    "title": "**Harness compatibility comparison — Claude Code `Task` vs Antigravity `invoke_subagent`**",
+    "text": "**Harness compatibility comparison — Claude Code `Task` vs Antigravity `invoke_subagent`**: In Claude Code, subagent delegation via the `Task` tool is inherently ephemeral and stateless: each `Task` invocation is a fresh instance with zero prior session history (Claude Code has no `send_message` equivalent). Antigravity supports both `invoke_subagent` (stateless fresh spawn) and `send_message` (stateful continuation). Mandating `invoke_subagent` per turn in Antigravity unifies behavior with Claude Code's native execution model.",
+    "parent": "BlockNode:00CTYF5W48001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48005",
+    "@type": "BlockNode",
+    "title": "**Orchestrator skill guidance & harness-agnostic wording**",
+    "text": "**Orchestrator skill guidance & harness-agnostic wording**: `skills/aperas-orchestrator/SKILL.md` must explicitly mandate stateless per-turn dispatch using universal discipline paired with harness tool mappings:",
+    "parent": "BlockNode:00CTYF5W48001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00CTYF5W48006",
+      "BlockNode:00CTYF5W48007",
+      "BlockNode:00CTYF5W48008"
+    ]
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48006",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00CTYF5W48006:props:StringProp:00CTYF61AG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00CTYF5W48006:props:StringProp:00CTYF61AG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "*Universal rule*",
+    "text": "*Universal rule*: Always dispatch a fresh subagent instance for every turn; subagents in Aperas are stateless workers. Never carry conversation history across turns.",
+    "parent": "BlockNode:00CTYF5W48005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48007",
+    "@type": "BlockNode",
+    "title": "*Tool mappings*",
+    "text": "*Tool mappings*: In Antigravity, call `invoke_subagent` (never `send_message` across distinct turns); in Claude Code, call `Task`.",
+    "parent": "BlockNode:00CTYF5W48005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00CTYF5W48008",
+    "@type": "BlockNode",
+    "title": "*Context restoration*",
+    "text": "*Context restoration*: Every turn recovers state cleanly through the view (`aperas tree --view <p>-orchestrator-<role>`) and the thread (`.threads/<role>.md`).",
+    "parent": "BlockNode:00CTYF5W48005",
     "type": "listItem",
     "children": []
   }
