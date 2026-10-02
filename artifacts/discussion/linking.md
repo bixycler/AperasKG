@@ -7,7 +7,7 @@ description: Why addressing needs two forms, not one: slug-paths for pre-ingesti
 ## Dashboard <a name='id/BlockNode:00CJ37GPRR000' class='aperas-anchor aperas-id'></a>
 
 - **Design**: <a name='id/BlockNode:00CJ37GPRR001' class='aperas-anchor aperas-id'></a> [Architecture](../design/linking.md#id/BlockNode:00CDBYV4T8002) — the addressing/resolution mechanics: slug-path vs node-ID, anchor syntax, and how a reference actually resolves.
-- **Issues**: <a name='id/BlockNode:00CJ37GPRR002' class='aperas-anchor aperas-id'></a> [Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002) — the one live investigation gap, plus a Resolved section of everything else found and fixed.
+- **Issues**: <a name='id/BlockNode:00CJ37GPRR002' class='aperas-anchor aperas-id'></a> [Open Issues](../issues/linking.md#id/BlockNode:00CDBYV5A8002) — the open linking defects, among them the canonical-address authoring gap (the compat to canon to compat conversion, designed and not built), plus a Resolved section of everything else found and fixed.
 - **Planning**: <a name='id/BlockNode:00CJ37GPRR003' class='aperas-anchor aperas-id'></a> [Task Breakdown](../planning/linking.md#id/BlockNode:00CDBZ77F0001) — the two landed implementation slices and the corpus-wide rollout still pending.
 - **History**: <a name='id/BlockNode:00CJ37GPRR004' class='aperas-anchor aperas-id'></a> [Milestones](../history/linking.md#id/BlockNode:00CDBZ7698003) — the TerminusDB-era and ApeironNgn-era conventions, and the current split between node-ID and slug-anchor addressing.
 

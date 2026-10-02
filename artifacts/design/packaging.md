@@ -46,6 +46,40 @@ The shared ApeironNgn service holds exactly one graph for its whole lifetime, ch
 
 See [Settled](../discussion/packaging.md#id/BlockNode:00CDWPCC3G001), [Resolved](../discussion/packaging.md#id/BlockNode:00CDXFWK3R001), and [Resolved: <a name='id/BlockNode:00CDY7T620002' class='aperas-anchor aperas-id'></a> two-path config](../discussion/packaging.md#id/BlockNode:00CDZM30JG001) for how this was arrived at and verified.
 
+## Dev environment setup <a name='id/BlockNode:00CVJH6930001' class='aperas-anchor aperas-id'></a>
+
+Developing Aperas from source means running the live TypeScript, not the published bundle. Inside `Aperas/monorepo/` that is `npm run aperas -- <verb> <args>` (see [Topology](#id/BlockNode:00CDGTZHSR001)); a global shim makes bare `aperas <verb> <args>` do the same from any directory, so a session whose working directory is a different project, or an agent harness that does not start in `monorepo/`, still drives the checkout's current source rather than whatever `npm install -g aperas` last installed.
+
+The shim is a three-line shell script, `~/.local/bin/aperas`: <a name='id/BlockNode:00CVJH6930002' class='aperas-anchor aperas-id'></a>
+
+```sh
+#!/bin/sh
+cd /home/will/source/Aperas/monorepo && exec env -u LD_LIBRARY_PATH node_modules/.bin/tsx packages/cli/src/aperas.ts "$@"
+```
+
+Replace the path with the checkout's own `monorepo/` directory. Each part has a job:
+
+- `cd <checkout>/monorepo` — `node_modules/.bin/tsx` and `packages/cli/src/aperas.ts` are relative paths into the workspace, so the shim has to stand in `monorepo/` before it can run either. It also fixes what `process.cwd()` means for the one command that reads it: `aperas service start` resolves its graph from there (see [Workflow](#id/BlockNode:00CDY7PGG0001)), so a service started through the shim always binds to this checkout's graph, whichever directory the shim was called from.
+- `exec` — replaces the shell with the node process instead of running it as a child, so stdin (the `insert`/`update` verbs read piped markdown), signals, and the exit status all pass straight through.
+- `env -u LD_LIBRARY_PATH` — unsets `LD_LIBRARY_PATH` for the node process only. Some hosts (Opcode, for one) export a path to their own bundled libraries, which node picks up in place of the system's and fails at startup with an OpenSSL error that looks like a broken install but is not one. Unsetting it costs nothing where it was never set.
+- `node_modules/.bin/tsx packages/cli/src/aperas.ts` — runs the CLI entry point's TypeScript source directly through the workspace's own `tsx`, so there is no build step and every edit to `core` or `cli` is live on the next call. A service already running holds the code it started with, so pick up an engine change with `aperas service restart`.
+- `"$@"` — forwards every argument unchanged, quoted so arguments containing spaces or shell metacharacters arrive intact.
+
+To install it: <a name='id/BlockNode:00CVJH6938007' class='aperas-anchor aperas-id'></a>
+
+1. Create the directory if it is missing and write the script: `mkdir -p ~/.local/bin`, then save the three lines above as `~/.local/bin/aperas`.
+2. Mark it executable: <a name='id/BlockNode:00CVJH6938009' class='aperas-anchor aperas-id'></a> `chmod +x ~/.local/bin/aperas`.
+3. Make sure `~/.local/bin` is on `PATH`. Most login shells add it when the directory exists; an environment that sets its own minimal `PATH` (for example `/usr/local/bin:/usr/bin:/bin`) will not find the shim, and needs the directory added or the shim placed in a directory already on its `PATH`.
+4. Dependencies must be installed in the workspace once (`npm install` in `monorepo/`), since the shim relies on its `node_modules/.bin/tsx`.
+
+A one-command check that it works from anywhere: <a name='id/BlockNode:00CVJH693800C' class='aperas-anchor aperas-id'></a>
+
+```sh
+cd /tmp && aperas profile list claude
+```
+
+It prints the profile's views from the source checkout. `aperas --help` from any directory confirms only that the shim launches, not that the graph is reachable.
+
 ## Distribution <a name='id/BlockNode:00CDW3R42G001' class='aperas-anchor aperas-id'></a>
 
 Publishing is a separate build step, not a second mode of the dev workspace's own `package.json`/`exports` (see [discussion](../discussion/packaging.md#id/BlockNode:00CDHJGZV0001)): `esbuild` bundles `packages/cli/src/aperas.ts` (pulling in `core` transitively) into one output file, `oxigraph` marked `--external` since it's WASM-backed and can't be inlined, with a `#!/usr/bin/env node` banner. The build also writes its own minimal `package.json` alongside the bundle — `name`/`version` synced from source, `bin` pointing at the bundle, `oxigraph` (and any other external) listed as a real `dependencies` entry — making the build output a self-contained publishable unit, never touching `packages/cli/package.json`'s own dev-mode `exports` (which keeps pointing at `.ts` source for the workspace, unaffected).
