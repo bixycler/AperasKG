@@ -1,0 +1,91 @@
+---
+description: How the repository's tests are organised and run so that a change is checked in seconds and a commit in under a minute: standalone scripts in groups, suites as compound scripts, tiers as suites, one process per file.
+---
+
+# Testing — Design <a name='id/BlockNode:00D1D5F63R001' class='aperas-anchor aperas-id'></a>
+
+## Context <a name='id/BlockNode:00D1D5F63R002' class='aperas-anchor aperas-id'></a>
+
+- **Discussion**: <a name='id/BlockNode:00D1DBFQER001' class='aperas-anchor aperas-id'></a> [Decision — the test redesign is settled](../discussion/aperas-skill.md#id/BlockNode:00D1D2MKVR001) — the decision this design records; the Freeflow it sits in holds the later verification of the build and the answers that settled the open points.
+
+- **Issues**: <a name='id/BlockNode:00D1D5F63R003' class='aperas-anchor aperas-id'></a> [Verify emergency](../issues/core.md#id/BlockNode:00D1BAT6Q0001) — the issue this design answers, resolved by the suites it describes: the earlier full `npm run verify` took about 24 minutes. [The earlier slowdown entry](../issues/core.md#id/BlockNode:00CJ0202MG001) and [its resolved "why" entry](../issues/core.md#id/BlockNode:00CJ0HX2Y0000) record the same cost at about 5 minutes.
+
+## Status of claims <a name='id/BlockNode:00D1D5F640000' class='aperas-anchor aperas-id'></a>
+
+Each claim below carries one of four marks.
+
+- **measured** — observed in a recorded run, with the number given. Every measurement is one sample unless stated; machine load was not controlled.
+- **read** — taken from reading code or from a reasoned reading of measurements; not tested directly.
+- **built** — exists in the source tree under `monorepo/packages/cli/src/tests/` and was read there. A built claim that also gives a number from a run carries *built, measured*, and the numbers keep the one-sample rule above.
+- **designed, not built** — decided, with no code yet.
+
+## The problem <a name='id/BlockNode:00D1D5F640004' class='aperas-anchor aperas-id'></a>
+
+The earlier suite, `verify.ts`, deleted, ran 26 numbered steps as one function in one process, against a store loaded with the real mirror (about 48,000 quads *(measured)*; a 5 MB `Apeiron/` directory *(read)*) *(the 26 steps: read from the step headers in the deleted file)*. One full run took 1,434 s, about 24 minutes at roughly 100% CPU; steps 7, 9c, 10 and 11 took 649, 203, 188 and 202 s *(measured; [Verify emergency, Symptom](../issues/core.md#id/BlockNode:00D1BAT6Q0003))*. A still earlier split into `verify.ts` and `verifyExtended.ts` brought the run to about 42 s, and it had grown again *(measured, then reported by the user; [Root cause](../issues/core.md#id/BlockNode:00D1BAT6Q8000))*.
+
+What is shown about the cause: <a name='id/BlockNode:00D1D5F640005' class='aperas-anchor aperas-id'></a>
+
+- **The steps are cheap; the process is not.** Copies of steps 1 to 5f and 8 to 9c on an empty scratch store ran in 232 ms of step time, steps 13 and 14 in 78 ms, and the link-refusal chain (5g and 13) as its own file on a tiny store in 0.70 s for the whole run *(measured)*. The same work inside `verify.ts` costs minutes, so the cost comes from running them in one long process against the real-size store, not from the steps *(read, from those measurements)*.
+- **The slow steps are repeated full garbage collections that free almost nothing.** In every slow step Mark-Compact time was 70 to 87% of the step time; 849 of 895 Mark-Compacts in one run and 1,041 of 1,088 in the other freed 5 MB or less from a heap of about 230 to 450 MB, each pause about 150 to 290 ms *(measured, two runs each cut at 180 s; max resident set 1.39 GB and 1.29 GB)*.
+- **A pause between steps stops it in some steps and not in others.** Step 5 took 17.0 s with no yield, 23.1 s with a bare `setImmediate`, and 1.6 s after a 50 ms timer; with `--trace-gc`, step 5d fell from 54.6 s to 1.9 s and step 5f from at least 34 s (cut off) to 9.5 s, while step 3 (13.6 s against 15.5 s) and step 5g (not finished in 125 s) did not improve *(measured, one sample per variant)*.
+- **The suspected trigger is external memory.** V8 starts a full collection when memory held outside its heap, here the WebAssembly memory of the store, has grown past a limit, and the collection cannot lower it because the wasm side is released by a later callback; a pause lets the callbacks run *(read, not tested; the earlier scan test showed `free()` on the quads leaves external memory flat)*.
+- **The same data costs about thirteen times more in a process that has already worked.** A copy of the real mirror (55,968 quads, 0 dangling references) rehydrated in 2.8 s in a fresh process, which then dehydrated it in 24.3 s; a second fresh process rehydrated the dehydrated directory in 2.9 s, and the same directory took 37.8 s to rehydrate in a process that had already rehydrated and dehydrated. The cost is state built up in the process, not the data; the dehydrate, which scans the store, leaves the wrappers that slow the next rehydrate *(measured, one run, for the times; read, for the wrappers)*.
+- **Not shown:** the cause of the cost in steps 3 and 5g; the cost of steps 7, 9c, 10 and 11 under the same tracing, which no run reached.
+
+The service holds the same store in one long-lived process and cannot be split by process. A remedy for it (a pause, or releasing the quads) is not part of this design *(open; see Open points)*.
+
+## Architecture <a name='id/BlockNode:00D1D5F64000C' class='aperas-anchor aperas-id'></a>
+
+### Scripts and groups <a name='id/BlockNode:00D1D5F64000D' class='aperas-anchor aperas-id'></a>
+
+- A test is a file `<name>.test.ts` that runs in its own process. A chain whose steps pass state to the next is one ordered file, such as `ingest/chain.test.ts`, `links/refusals.test.ts` and `store/dangling-unfolds.test.ts`. The numbered steps of the earlier suite, 1 to 22, are all standalone files in the groups below; a chain is split into self-contained cases only where it pays. *(built)*
+- A group is a subdirectory of `monorepo/packages/cli/src/tests/` other than `suites/` and `support/`; `--group <area>` runs the files in it, several groups may be given separated by commas, and with `--suite` the run holds the files in both. The groups are `parse`, `ingest`, `folder`, `store`, `gc`, `links`, `linking`, `corpus` and `runner`. *(built)*
+- `verifyLinkRefusals.ts` and `verifyDanglingUnfolds.ts` stay in `monorepo/packages/cli/src/` as functions of a store; `links/refusals.test.ts` and `store/dangling-unfolds.test.ts` call them on a tiny fixture store, `corpus/dangling-unfolds.test.ts` calls the second on a copy of the real mirror, and each can also be run on its own (the first on a scratch store, the second on a copy of a real `Apeiron/` directory). The earlier suite's files, `verify.ts`, `verifyExtended.ts` and `verifySupport.ts`, no longer exist. *(built)*
+
+### Suites and tiers <a name='id/BlockNode:00D1D5F64000H' class='aperas-anchor aperas-id'></a>
+
+- A suite is a small compound script, `suites/<name>.suite.mjs`, that lists test files and other suites and does nothing else: `export default defineSuite(import.meta.url, [paths], budgetSeconds?)`, the paths relative to the suite and the optional budget the wall time in seconds the suite promises to finish within; the reporter warns only past that budget, and a suite with no budget never warns. The runner imports a suite to get its list and never imports a member, because importing would put the members in one process and bring the build-up back; a suite run on its own (`node suites/commit.suite.mjs`) hands itself to the runner, which runs each member in its own process. A missing member or a cycle exits 2. There is no header line in a test file and no central manifest. *(built)*
+- A test file in no suite is a warning, not a failure: on every run the runner compares the test files on disk (outside `support/` and `suites/`) with the union of the files every suite resolves to, and prints one `warning:` line naming the files in no suite. There is no `all` suite file to keep in step. *(built)*
+- The tiers are suites. *(built)*
+  
+  - **Per change:** `npm run verify -- --group <area>` for the area touched, then `npm run verify -- --suite essential`; seconds. They are two runs, because `--group` with `--suite` selects the files in both. *(built)*
+  - **`essential`:** the few-seconds set for every change, with a budget of 5 s: the cheapest and most central file of each group, each on a tiny store or none. Its members are `parse/ast.test.ts`, `ingest/chain.test.ts`, `folder/folders.test.ts`, `store/fixture.test.ts`, `store/roundtrip.test.ts`, `gc/collection.test.ts`, `links/refusals.test.ts` and `linking/anchors.test.ts`: 27 cases in 8 files, about 3 s wall. *(built, measured; one run, 3.0 s, by the orchestrator)*
+  - **Per commit:** the `commit` suite, with a budget of 60 s, which lists `essential` and the other files that run on a tiny store (`runner/runner.test.ts`, `store/dangling-unfolds.test.ts`, `store/views.test.ts`, `links/backlinks.test.ts`, `linking/collisions.test.ts`, `linking/integrity.test.ts` and `linking/edits.test.ts`): 51 cases in 15 files, 8 to 20 s wall; the runner's own tests, `runner/runner.test.ts`, are the largest share of it, 15.1 s of 19.0 s in one run. *(built, measured; the range is the runs recorded, 8 s to 20 s, on a machine whose load was not controlled)*
+  - **On demand:** the `demand` suite, with no budget, which lists `commit` and then the four corpus files, `corpus/copy.test.ts` (the test of the copy helper itself), `corpus/dangling-unfolds.test.ts`, `corpus/link-integrity.test.ts` and `corpus/roundtrip.test.ts`, which run on a copy of the real mirror made by `makeCorpusCopy()`. The suite is 56 cases in 19 files and ran in 73 s and 74 s on two occasions, one by the orchestrator and one by the user. The corpus files alone take 3.4 s, 19 s, 22 s and about 43 s; the last runs the round trip as two fresh child processes, 2.8 s to rehydrate and 24.3 s to dehydrate in the first and 2.9 s to rehydrate in the second. *(built, measured; one run each of the corpus files, and the two runs of the suite)*
+- `npm run verify` with no flag runs `commit`. *(built, measured)*
+
+### Runner <a name='id/BlockNode:00D1D5F648003' class='aperas-anchor aperas-id'></a>
+
+- Node v22.22.1 has no type stripping, so TypeScript tests run as `node --import tsx --test <explicit globs>`; a directory argument fails. *(measured)*
+- Each file runs in its own child process (two files printed different pids and an 8 MB heap each); start-up costs 0.3 to 0.7 s a file on a tiny store. *(measured)*
+- Concurrency defaults to 2, and `--concurrency N` overrides it: <a name='id/BlockNode:00D1D5F648006' class='aperas-anchor aperas-id'></a> six copies of the heavier file took 3.62 s at 1, 2.56 s at 2 and 2.50 s at 3. *(measured; the default and the option are built)*
+- `--test-timeout` kills a stuck file, a synchronous spin and a live handle included; a per-test `{ timeout }` option alone does not. The runner sets a per-file `--test-timeout` from the suite: 900 s for a suite with no budget and 120 s for one with a budget; `--timeout MS` overrides it and 0 turns it off. A hung file and a file with a syntax error each give a `FAIL` line and exit 1. *(the kill: measured; the 900 s and 120 s defaults: built, chosen and not measured; the hung and broken file: reported by the Coder, not re-run)*
+- `--case <name>` is passed as a test-name pattern, and a pattern that matches no case exits 0 under `node --test`, so the runner reads the `SUMMARY ran=` line of the reporter and exits 1 with an error line when no case ran. *(built, measured: `--case zzz` exits 1)*
+- The runner takes `--suite <name|path>`, `--group <dir[,dir]>`, `--case <name>`, `--list`, `--concurrency N`, `--timeout MS` and `--help` (`-h`). `--list` prints the files the selection resolves to and runs nothing; it loads the suite scripts, which import no member, because `node --test` has no list mode. Exit codes: 0 all passed, and `--help`; 1 a failed case, a crashed or timed-out file, or a `--case` that matched nothing; 2 a bad invocation or a broken suite. *(built, measured: `--list --suite demand` prints the 19 files of `demand`)*
+- `--help` (`-h`) prints the usage, the options with their defaults, the suites with budget, file count and a description built from the first sentence of the suite's leading comment, the groups with their file counts, and examples, and exits 0. *(built, measured: `npm run verify -- --help` exits 0 and lists `commit` at 60 s and 15 files, `demand` with no budget and 19 files, `essential` at 5 s and 8 files, and nine groups)*
+- Every run except `--list` and `--help` prints a header line first, naming the suite or the group with its budget, the file count, the concurrency and the per-file timeout, and the case pattern when `--case` is given: `suite commit (budget 60 s) - 15 files, concurrency 2, timeout 120 s a file`. *(built, measured)*
+- A custom reporter module, `support/reporter.mjs`, prints one line per case and one per file with the time the file measured, a file's own output only when it failed, and a final line `SUMMARY suite=<name> ran=… passed=… failed=…` that names the suite (a bare `--group` run is named `group:<dirs>`). Once the run is past the budget of the running suite (`NT_BUDGET_S`, in seconds, set by the runner from the suite's declared budget), each case that ends prints one extra `WARN` line with the elapsed time and the case; a suite with no budget sets no `NT_BUDGET_S`, and the reporter prints no `WARN` line. *(built)*
+
+### Fixtures <a name='id/BlockNode:00D1D5F64800B' class='aperas-anchor aperas-id'></a>
+
+- Tests build tiny stores from one shared helper, `makeFixtureStore()` in `support/fixture.ts`: <a name='id/BlockNode:00D1D5F64800C' class='aperas-anchor aperas-id'></a> a temporary directory holding an empty, well-formed `Apeiron/` and `artifacts/`, with `APERAS_APEIRON_ROOT` and `APERAS_ARTIFACTS_ROOT` set for the process (each test file is its own process) and removed by `cleanup()`, which also runs on exit. The helper refuses to build when either root is, or lies inside, the real mirror (`AperasKG`), however it is spelled. *(built)*
+- Only the corpus checks use the real mirror's data, and they use a copy: `makeCorpusCopy()` in `support/corpus.ts` copies the real `Apeiron/` (the content mirror and `.state/`) into a fresh scratch directory, rehydrates it, and points `APERAS_APEIRON_ROOT` and `APERAS_ARTIFACTS_ROOT` at the copy and an empty artifacts directory, so no test reads or writes the real mirror in place, and the fixture helper keeps refusing the real roots. The copy is the mirror as it is on disk, which lags the service's memory by up to its flush interval. The helper has its own test, `corpus/copy.test.ts`, which comes first among the corpus files. The corpus checks stay in the on-demand tier; they keep the coverage at real size that the old suite gave by accident. *(built)*
+
+### No test run saturates the machine <a name='id/BlockNode:00D1D5F64800E' class='aperas-anchor aperas-id'></a>
+
+Concurrency defaults to 2 and a run is bounded by the per-file timeout, 900 s for a suite with no budget and 120 s otherwise; no tier is run with more parallelism than the machine can spare. *(built; the concurrency figures above are measured)*
+
+## Workflows <a name='id/BlockNode:00D1D5F64800F' class='aperas-anchor aperas-id'></a>
+
+Each workflow in this section carries its own mark.
+
+- **After an edit:** run `npm run verify -- --group <area>`, then `npm run verify -- --suite essential`. *(built)*
+- **Before a commit:** `npm run verify`, which runs `commit`; the run takes 8 to 20 s, and the reporter warns once it passes the 60 s budget. *(built, measured)*
+- **On demand:** `npm run verify -- --suite demand`, for the corpus checks on a copy of the real mirror; the suite has no budget and prints no warning, and its 56 cases in 19 files ran in 73 s and 74 s on two occasions, one by the orchestrator and one by the user. *(built, measured)*
+- **The legacy suite:** retired and deleted, with `verify:legacy` and `verify:legacy:slow`; `package.json` has only `verify`, and `monorepo/packages/cli/src/tests/legacy/` no longer exists. Its steps live on as the standalone files in the groups. `parse/ast.test.ts` does not carry the old "ids unique" line, which the old step only printed. *(built)*
+- **Migration:** complete. Steps 1 to 22 of the earlier suite are standalone files in the groups `parse`, `ingest`, `folder`, `store`, `gc`, `links`, `linking`, `corpus` and `runner`. The earlier suite of 26 steps that took 1,434 s is replaced by 51 cases that take 8 to 20 s in `commit`, plus the on-demand tier on a copy of the real mirror. The split of tests across tiers moves with measured time. *(built, measured)*
+- **The emergency flag:** the [Verify emergency](../issues/core.md#id/BlockNode:00D1BAT6Q0001) issue was the flag; no flag file exists or was read (`monorepo/verify-emergency.json` was never created) *(read)*. The emergency ended when the legacy suite was retired and `commit` ran under a minute; both hold *(built, measured)*, the issue is resolved and the flag is off.
+
+## Open points <a name='id/BlockNode:00D1D5F64800P' class='aperas-anchor aperas-id'></a>
+
+- The pause length for the service remedy, and the choice of that remedy, are not part of this design; the bare-engine pause experiment that would inform them has not been run.

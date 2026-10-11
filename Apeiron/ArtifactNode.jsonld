@@ -43,11 +43,11 @@
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "25e5207ee1ea28075416efbbba93137e6067d94de372c6ce9ec80b45ce35531d",
+    "fileHash": "7de915cc81cde24961a7b4615b0416aec1041ebf48c5916d50d8b412d094b8a7",
     "lastTrackedAt": "2026-09-22T08:07:16.888Z",
-    "ingestedHash": "25e5207ee1ea28075416efbbba93137e6067d94de372c6ce9ec80b45ce35531d",
-    "lastIngestedAt": "2026-10-11T06:38:25.699Z",
-    "projectedHash": "25e5207ee1ea28075416efbbba93137e6067d94de372c6ce9ec80b45ce35531d"
+    "ingestedHash": "7de915cc81cde24961a7b4615b0416aec1041ebf48c5916d50d8b412d094b8a7",
+    "lastIngestedAt": "2026-10-11T08:10:51.935Z",
+    "projectedHash": "7de915cc81cde24961a7b4615b0416aec1041ebf48c5916d50d8b412d094b8a7"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
@@ -534,11 +534,11 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "59b20014c6b374e6eba1536107b2a6266f934ef2178b280c1d4909e5d48d8815",
+    "fileHash": "405f3842a97dd412c54204bdf967406fa5d1a12add67d0b05965ae318d4569f2",
     "lastTrackedAt": "2026-09-22T08:07:36.316Z",
-    "ingestedHash": "59b20014c6b374e6eba1536107b2a6266f934ef2178b280c1d4909e5d48d8815",
-    "lastIngestedAt": "2026-10-11T06:38:30.058Z",
-    "projectedHash": "59b20014c6b374e6eba1536107b2a6266f934ef2178b280c1d4909e5d48d8815"
+    "ingestedHash": "405f3842a97dd412c54204bdf967406fa5d1a12add67d0b05965ae318d4569f2",
+    "lastIngestedAt": "2026-10-11T08:10:42.078Z",
+    "projectedHash": "405f3842a97dd412c54204bdf967406fa5d1a12add67d0b05965ae318d4569f2"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "919b93a49d5fc9a1d3f1e7e0950dc85015d359d689a88420fe4b5b1f9ab73fdc",
+    "fileHash": "9196748c14aeaed251ab998b9b9aca9f2dd9a3e03b5848ded64a04a0642bb8fa",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "919b93a49d5fc9a1d3f1e7e0950dc85015d359d689a88420fe4b5b1f9ab73fdc",
-    "lastIngestedAt": "2026-10-10T14:17:14.322Z",
-    "projectedHash": "919b93a49d5fc9a1d3f1e7e0950dc85015d359d689a88420fe4b5b1f9ab73fdc"
+    "ingestedHash": "9196748c14aeaed251ab998b9b9aca9f2dd9a3e03b5848ded64a04a0642bb8fa",
+    "lastIngestedAt": "2026-10-11T12:17:31.550Z",
+    "projectedHash": "9196748c14aeaed251ab998b9b9aca9f2dd9a3e03b5848ded64a04a0642bb8fa"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -802,18 +802,18 @@
       }
     ],
     "title": "aperas-skill.md",
-    "text": "The restructure has landed and has been revised through v4.3 — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001) and [v4.3](#id/BlockNode:00CVMPRD60002) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
+    "text": "The restructure has landed and has been revised through [v4.5](#id/BlockNode:00D1EDPP30001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001) and [v4.5](#id/BlockNode:00D1EDPP30001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, and v4.5 that text brought to the built suites. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "ab18941870a38440cf11ba25e402800cc77cf8110f8444807255bceacf668c1f",
+    "fileHash": "7b98aa689a5e92b7b9a4ecda5696a80c8c35084257abf3fe8c054db79c358bb0",
     "lastTrackedAt": "2026-09-22T08:08:49.651Z",
-    "ingestedHash": "ab18941870a38440cf11ba25e402800cc77cf8110f8444807255bceacf668c1f",
-    "lastIngestedAt": "2026-10-02T14:13:11.663Z",
-    "projectedHash": "ab18941870a38440cf11ba25e402800cc77cf8110f8444807255bceacf668c1f"
+    "ingestedHash": "7b98aa689a5e92b7b9a4ecda5696a80c8c35084257abf3fe8c054db79c358bb0",
+    "lastIngestedAt": "2026-10-11T12:22:46.097Z",
+    "projectedHash": "7b98aa689a5e92b7b9a4ecda5696a80c8c35084257abf3fe8c054db79c358bb0"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -862,7 +862,7 @@
       }
     ],
     "title": "core.md",
-    "text": "**`npm run verify` costs ~5 minutes, dominated by a process-lifetime slowdown neither store-freshness nor heap size explains** — instrumented per-step (a `console.log`-wrapping timer keyed on each step's own `\"N. Testing...\"` header, printing a sorted breakdown even on failure) and found the same operation (`checkLinkIntegrity`'s corpus sweep, and separately `parseMarkdownTree`-driven ingestion in Linking Slice steps 13-18) costs low hundreds of ms freshly isolated, but 12-55 *seconds* run as `verify.ts`'s own later steps — steps 3-6 doing the identical kind of parsing work stay fast, steps 7-12 in between do no heavy parsing at all, then 13 onward is uniformly slow. Two credible causes ruled out by direct experiment, not by inspection: (1) oxigraph's own WASM memory footprint (`external`, ~850MB-1GB by that point vs ~50MB fresh) looked causal, but compacting the store mid-run (dehydrate a scratch dir, rehydrate a brand-new `Store` with the identical live content) made the same sweep *slower*, not faster — ruling out \"this one store instance is bloated.\" (2) V8 heap-size tuning (`--max-old-space-size=8192 --max-semi-space-size=128`) changed nothing measurably.",
+    "text": "**Confirmed at real production scale, 2026-09-20**: a corpus-wide re-ingestion left the entire service unresponsive for 40 minutes straight, not merely slow. `kg:migrate-frontmatter` (the [frontmatter-as-props redesign](../discussion/core.md#id/BlockNode:00CKE4FFF0001)'s one-time pass, re-running `ingestFromDisk` against every live `ArtifactNode` with `bypassUnchangedCheck: true`) started 2026-09-20T05:14:39Z, ran continuously with the service process pinned at 150-280% CPU (confirmed still doing real work, never idle), and was still running with no end in sight when killed at approximately 2026-09-20T05:55Z, roughly 40 minutes in — for a corpus on the order of 50 artifacts, this is the same \"12-55 seconds per operation, compounding the longer the process has been alive\" pathology the entry above already names, stretched by scale from seconds into most of an hour. Root cause of the unresponsiveness, confirmed by reading `service.ts` directly rather than guessing: its migration loop calls `ingestArtifact` → `ingestFromDisk` → `reconcileTree` synchronously per artifact with no `await`/yield point anywhere in that path, and Node's single-threaded event loop cannot service *anything else* — a timer, a new socket connection, another CLI command — while a synchronous call is still on the stack. `service.ts`'s own 10-second auto-flush (`setInterval(() => enqueue(() => flushIfDirty()), 10_000)`, line 401-403) never got a single chance to fire for the whole run, confirmed directly: the JSON-LD mirror's own mtime never moved once during those 40 minutes. Independently corroborated live: a plain `aperas show <id>` issued from a separate terminal while the migration was still running failed with \"No ApeironNgn service running\" — not a crash, the event loop was simply never free to accept or process that new connection. Killed for an unrelated reason — a separate `reconcile.ts` bug this same run surfaced (`carryForwardFields` not re-syncing a fallback-titled block's `title` when it carries the *old* `blockId` forward, since `astParser.ts`'s own fallback sets `title` to a block's *fresh* scratch `blockId` when no real lead-in exists), not yet filed as its own entry — not because the operation had actually stalled.",
     "parent": "FolderNode:00CDBYV4BR003",
     "type": "root",
     "children": [
@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "3f50510527ffae589b4091f468f6576015d9e7838ad452efc30ce8b2ba068a95",
+    "fileHash": "e922071bc6343213699cde58d5bd41b991bcc5f4189f9d237bb311200259f34b",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "3f50510527ffae589b4091f468f6576015d9e7838ad452efc30ce8b2ba068a95",
-    "lastIngestedAt": "2026-10-11T06:38:28.004Z",
-    "projectedHash": "3f50510527ffae589b4091f468f6576015d9e7838ad452efc30ce8b2ba068a95"
+    "ingestedHash": "e922071bc6343213699cde58d5bd41b991bcc5f4189f9d237bb311200259f34b",
+    "lastIngestedAt": "2026-10-11T12:28:50.813Z",
+    "projectedHash": "e922071bc6343213699cde58d5bd41b991bcc5f4189f9d237bb311200259f34b"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -1292,5 +1292,30 @@
       "BlockNode:00CR5AWY6R001"
     ],
     "path": "concepts.md"
+  },
+  {
+    "@id": "ArtifactNode:00D1D5F2SR000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00D1D5F2SR000:props:StringProp:00D1D5FK30000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "How the repository's tests are organised and run so that a change is checked in seconds and a commit in under a minute: standalone scripts in groups, suites as compound scripts, tiers as suites, one process per file."
+      }
+    ],
+    "title": "testing.md",
+    "text": "**Discussion**: [Decision — the test redesign is settled](../discussion/aperas-skill.md#id/BlockNode:00D1D2MKVR001) — the decision this design records; the Freeflow it sits in holds the later verification of the build and the answers that settled the open points.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00D1D5F63R001"
+    ],
+    "path": "design/testing.md",
+    "fileHash": "1f6fdae19de7f96489862265e71000ffe8512f41b80bb163dc641d1a447c4754",
+    "lastTrackedAt": "2026-10-11T10:13:55.688Z",
+    "ingestedHash": "1f6fdae19de7f96489862265e71000ffe8512f41b80bb163dc641d1a447c4754",
+    "lastIngestedAt": "2026-10-11T12:28:48.387Z",
+    "projectedHash": "1f6fdae19de7f96489862265e71000ffe8512f41b80bb163dc641d1a447c4754"
   }
 ]
