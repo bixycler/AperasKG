@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "9196748c14aeaed251ab998b9b9aca9f2dd9a3e03b5848ded64a04a0642bb8fa",
+    "fileHash": "d2557dd5ad4affb87354c7bde5cddad24d3fae68be47273ca09396af383738f4",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "9196748c14aeaed251ab998b9b9aca9f2dd9a3e03b5848ded64a04a0642bb8fa",
-    "lastIngestedAt": "2026-10-11T12:17:31.550Z",
-    "projectedHash": "9196748c14aeaed251ab998b9b9aca9f2dd9a3e03b5848ded64a04a0642bb8fa"
+    "ingestedHash": "d2557dd5ad4affb87354c7bde5cddad24d3fae68be47273ca09396af383738f4",
+    "lastIngestedAt": "2026-10-11T13:16:28.139Z",
+    "projectedHash": "d2557dd5ad4affb87354c7bde5cddad24d3fae68be47273ca09396af383738f4"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -802,18 +802,18 @@
       }
     ],
     "title": "aperas-skill.md",
-    "text": "The restructure has landed and has been revised through [v4.5](#id/BlockNode:00D1EDPP30001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001) and [v4.5](#id/BlockNode:00D1EDPP30001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, and v4.5 that text brought to the built suites. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
+    "text": "The restructure has landed and has been revised through [v4.6](#id/BlockNode:00D1FMR19G001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001), [v4.5](#id/BlockNode:00D1EDPP30001) and [v4.6](#id/BlockNode:00D1FMR19G001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, v4.5 that text brought to the built suites, and v4.6 the transcript path that every Work records. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "7b98aa689a5e92b7b9a4ecda5696a80c8c35084257abf3fe8c054db79c358bb0",
+    "fileHash": "2f72f6969359e495ff6397ef865612565d9ecef56f81270c3cf1f01be3c66fa9",
     "lastTrackedAt": "2026-09-22T08:08:49.651Z",
-    "ingestedHash": "7b98aa689a5e92b7b9a4ecda5696a80c8c35084257abf3fe8c054db79c358bb0",
-    "lastIngestedAt": "2026-10-11T12:22:46.097Z",
-    "projectedHash": "7b98aa689a5e92b7b9a4ecda5696a80c8c35084257abf3fe8c054db79c358bb0"
+    "ingestedHash": "2f72f6969359e495ff6397ef865612565d9ecef56f81270c3cf1f01be3c66fa9",
+    "lastIngestedAt": "2026-10-11T13:09:38.369Z",
+    "projectedHash": "2f72f6969359e495ff6397ef865612565d9ecef56f81270c3cf1f01be3c66fa9"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -834,11 +834,11 @@
       "BlockNode:00CEA5Y5J8001"
     ],
     "path": "design/aperas-skill.md",
-    "fileHash": "8ed3a5bc6eb3bea8c1f695d40bc8c9fdb699caf5edcc094e21d82843de9a2f9a",
+    "fileHash": "e929c337581c454a283c7060a31d19e3b67591e218e54ea0ac55c303ca08b250",
     "lastTrackedAt": "2026-09-22T05:31:16.879Z",
-    "ingestedHash": "8ed3a5bc6eb3bea8c1f695d40bc8c9fdb699caf5edcc094e21d82843de9a2f9a",
-    "lastIngestedAt": "2026-10-02T14:13:13.577Z",
-    "projectedHash": "8ed3a5bc6eb3bea8c1f695d40bc8c9fdb699caf5edcc094e21d82843de9a2f9a"
+    "ingestedHash": "e929c337581c454a283c7060a31d19e3b67591e218e54ea0ac55c303ca08b250",
+    "lastIngestedAt": "2026-10-11T13:14:21.850Z",
+    "projectedHash": "e929c337581c454a283c7060a31d19e3b67591e218e54ea0ac55c303ca08b250"
   },
   {
     "@id": "ArtifactNode:00CF1TZQV8000",

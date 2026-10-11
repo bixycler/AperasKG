@@ -1,4 +1,5 @@
 {
   "graph": { "apeiron": "./Apeiron", "artifacts": "./artifacts" },
-  "name": "AperasKG"
+  "name": "AperasKG",
+  "threadSizeCap": 10000
 }
