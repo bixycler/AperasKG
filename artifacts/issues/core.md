@@ -19,14 +19,621 @@ description: The engine-level bug family this concern owns — most prominently 
 - **The frontmatter-`description` retirement of `ArtifactNode`/`FolderNode.text` landed on only one of the two preview paths, so `unfold` and `backlinks` still show the stale heuristic copy**: <a name='id/BlockNode:00CN7V9BX0001' class='aperas-anchor aperas-id'></a> the direction agreed in [the parent issue](#id/BlockNode:00CKE4R93R001) shipped in `e66996b` — `description` became a real frontmatter-owned prop carrying its own bakeable `Link`s — and `buildNodeItem` (`node.ts:1799-1801`) was updated to read `description ?? .text` for `ArtifactNode`/`FolderNode`, which is what `aperas tree` and the webapp render through `emitNode`. `kgUnfold.ts`'s `nodeAbstract` (lines 32-46) was not: it reads `node.text` unconditionally, for every node kind, with no `description` check at all — and it feeds the unfolded target's own line, every structural child line, every link-target preview, and `aperas backlinks --text`, which is the reason that function was extracted in the first place. So for any artifact or folder whose authored `description` differs from the derived `.text`, the two surfaces disagree, and `aperas unfold` — the orientation command the skill puts first — renders precisely the heuristic copy the redesign set out to retire. Confirmed live 2026-09-22 against `issues/aperas-skill.md`, whose two values currently differ: `tree` and the webapp show the description, `unfold` shows `.text` both when the artifact is the target and when it appears as a child of its folder. It stayed invisible because the two values normally paraphrase each other — the corpus-wide frontmatter sweep seeded most descriptions from text that already said much the same thing — so only an artifact whose description was authored to differ exposes it. `aperas show` is not part of the defect: it prints the stored node raw, which is what made the divergence legible in the first place. Notably this is a re-run of a defect this same file already records in its own doc comment — "this file has its own, separate preview-printing path (not `emitNode`), so it had its own separate instance of the same bug" — the duplicated preview path diverging a second time, on the next change that crossed it. Fix direction: give `nodeAbstract` the same `description ?? .text` precedence `buildNodeItem` uses, or better, have both call one shared helper, since the recorded history of these two paths is that they diverge on every change that touches only one. Not yet implemented.
 - **A corpus-wide `aperas ingest` (no path) can hang indefinitely on an interactive confirmation prompt with no signal that it's waiting rather than working**: <a name='id/BlockNode:00CNX1T4XG001' class='aperas-anchor aperas-id'></a> `kg:ingest` run unscoped detected content it proposed to remove and printed `Are you sure you want to remove these? [yes/NO]:`, then blocked on stdin. Run from a non-interactive shell (no tty attached), that stdin is immediately at EOF, so the prompt never resolves — the process just sits there. Confirmed live: the process showed near-zero CPU the entire time (ruling out "genuinely slow on a large corpus," which shows sustained high CPU instead, e.g. at service startup), and the ApeironNgn service itself answered an unrelated read (`aperas backlinks`) instantly throughout, proving the request never even reached the service's own queue — the block is entirely client-side, before `request()` is ever called. When stdin finally closed, the process exited 0 with the prompt still unanswered on screen; the flagged items turned out to already be old tombstones (dated a week prior), so nothing was actually lost this time, but nothing in the tool's own behavior guarantees that — an EOF being treated as "no" is incidental, not a documented contract. Not yet implemented: either a `--yes`/`--non-interactive` flag that skips the prompt with an explicit answer, or a `stdin.isTTY` check that hard-refuses (rather than blocking) when the answer can't actually be given.
 - **The ApeironNgn service can die silently, and a stuck prior process can survive `service stop`/`start`**: <a name='id/BlockNode:00CRBJ0VYG001' class='aperas-anchor aperas-id'></a> found 2026-09-27, twice in one session. First: `service restart`/`service start` timed out ("did not become ready in time") once while a prior instance was still mid-rehydration under load; a retry a few seconds later succeeded. Second, worse: the service died mid-turn with no error until the next call, and the stuck old process (90+ minutes old, no lock file, invisible to `service stop`) sat consuming growing CPU/memory; `service start` failed twice with the same "did not become ready" message before the stuck process was killed by PID and a fresh start came up clean in about a minute. No data was lost either time — every write had been flushed and survived on disk. Undiagnosed: why the process dies silently, why it leaves no lock file and is invisible to `service stop`, and whether the readiness check is too tight for this corpus's current size.
-- **A command can fail with "No ApeironNgn service running" while the service is up, and an unchanged retry works**: <a name='id/BlockNode:00CVMPABY8001' class='aperas-anchor aperas-id'></a> recorded in two separate grapher Reports. The first `aperas insert` of one turn failed with that message while `aperas service start` immediately reported the service already running (pid 220722); the same message came back later in that turn on `aperas project issues/linking.md`, and in a second turn on an `aperas update` between otherwise working commands. Every unchanged retry succeeded with no restart. Unlike [the silent death below](#id/BlockNode:00CRBJ0VYG001), the service never went down. A likely cause, read from the code and consistent with the load observation at the end: `ensureServiceRunning` (`packages/cli/src/apeironNgn/serviceClient.ts:149`) throws that message whenever `ping()` returns false, and `ping()` (line 83) turns every error, a timeout included, into `false` after `PING_TIMEOUT_MS = 300`, so a service busy with a flush or an ingest and slow to answer within 300 ms reads as not running. Fix to try: retry the ping once or twice, or raise the timeout, before throwing, and say in the message when a socket exists but did not answer. Reproduced by load later the same day, in the v4.3 filing sweep: while the service was busy after an `aperas remove --flush` of a finished thread task (the process was alive at 100 to 290 percent CPU for minutes), every command, `aperas show` included, failed with that message, and the same commands worked once the service was idle again, which fits a 300 ms ping reading a busy service as down. Two earlier observations point the same way: `aperas service start` answered "Already running" with the old pid right after a command failed, and `service.log` holds only startup lines, with no shutdown, flush or connect-failure line, so it cannot say why a client could not reach a live service. Not tested: a concurrent second client as the cause of the earlier drops. Mechanism, from the investigation's code survey of 2026-10-02 (read from `service.ts`, `serviceClient.ts` and `kgService.ts`; the failures are consistent with it, and no direct test has isolated it): every request, `ping` included, enters `handleConnection`, is chained onto the single promise `queue` by `enqueue`, and runs `handle`, which has no `await`, so each operation is one uninterrupted synchronous run. A `ping` therefore waits behind the operation in flight and every request already queued ahead of it, and the client's `ping()` gives up after `PING_TIMEOUT_MS = 300`; the 300 ms bound covers queue wait plus the ping's own handling, not whether the loop is stuck. Any operation over about 0.3 s, or a queue of two or three, makes the next command say "No ApeironNgn service running" with nothing stalled. Every other command first calls `ensureServiceRunning`, which is that one 300 ms ping, and `request()` itself sends with no timeout, so a command that passes the ping waits as long as the service takes. The sampler's recorded failures fit it without a stall (read, not proven): of its 11 failed probes, three are at 5, 12 and 19 percent CPU with 2 to 4 `aperas` clients running (21:11:24, 21:14:24, 21:15:24), where another client's operation or flush was probably queued ahead of the probe; the sampler keeps only whether the answer held `"@id"` and discards the failure text, so it cannot tell the ping failure from a request error or a timeout (see [the no-coverage issue](#id/BlockNode:00CVQHD7CR001)). What the queue takes depends on what the queue holds: [every write re-parses its whole artifact twice](#id/BlockNode:00CVQHBP0R001), [a task removal runs a full-store scan per embedded node](#id/BlockNode:00CVNX6A3R000), and [boot does seconds of synchronous work before the socket exists](#id/BlockNode:00CVQHCEW8001). Untested: how much of a failed ping's 300 ms is queue wait against the in-flight operation, and the fix directions above against a counted run of the same load. Filed 2026-10-02.
-- **A thread-task `aperas remove` can leave the service CPU-bound for many minutes, during which every command fails and a graceful stop does not complete**: <a name='id/BlockNode:00CVNX6A3R000' class='aperas-anchor aperas-id'></a> found 2026-10-02 pruning finished tasks from `.threads/grapher.md` and `.threads/coder.md` in the v4.3 skill task. Of 15 removals, most returned in 2 to 10 seconds. After removing `memory-rules-and-orientation-restructure` (42 live blocks) the service answered nothing for about 5.4 minutes (tombstone at 11:37:44Z, next success at 11:43:07Z), and after `promote-and-fix-subagent-tool-gap` (31 live blocks) it stayed unreachable for about 12 minutes (tombstone at 11:44:10Z, first answer at about 11:56:40Z); tasks of 39 and 50 blocks returned quickly, so size alone does not predict it. Throughout, the process was alive at 100 to 290 percent CPU and 3.4 to 4.6 GB resident, `service.log` recorded nothing, and every command, `aperas show` included, failed with "No ApeironNgn service running", which is the symptom of the service-ping issue above. A later `aperas service restart` sent SIGTERM and failed with "didn't stop within 10s of SIGTERM"; the old process was still alive more than 40 minutes later, when it was killed. On the fresh service started afterwards (about 1 GB resident) three further removals took 2, 2 and 45 seconds and the next command could not reach the service for minutes, so age and heap size alone do not explain the stall. Each removal also leaked its descendants' tombstones into the tracked `Apeiron/BlockNode.jsonld` (see the leak issue in `issues/treeview.md`), and `pruneUnreachableTombstones` hard-deletes each unreachable tombstone one at a time at shutdown and startup, which is the likely cost; not tested. Hypothesis, not a finding: this is the process-lifetime slowdown already recorded in [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000), a long-lived node process that degrades, here the service at about 5 GB resident after about three hours, where a process split is not an option because the service is the shared store. The differences: the earlier slowdown showed up as steps running 12 to 55 seconds instead of hundreds of milliseconds, with oxigraph at roughly 1 GB, not as multi-minute stalls with no answer at all; the repeat on a fresh process fits poorly with a slowdown that builds up over a process's lifetime, though degradation within a few minutes of heavy work would still match; and the earlier entry's leading guess was a JIT-level degradation, which this entry does not test. If it is the same mechanism, the profiling that entry proposes (`--prof` or `--trace-deopt`) is the next step, run against the service. A second suspected cause, untested: every `remove`, `insert`, `update` and `retype` runs `checkArtifactLinkIntegrity(store, artifactId)` before the operation and again in `withLinkCheck` after it, over the whole artifact (read from `service.ts`), so one `remove` of a task inside a 600-block thread file costs two full link-integrity sweeps on top of the removal itself. The verify-slowdown issues, [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000), name the same kind of operation, `checkLinkIntegrity`'s corpus sweep, as the one that went from low hundreds of milliseconds fresh to 12 to 55 seconds late in a long process, so the sweeps are a candidate for the removal stall. A lead, not a finding: no test has separated the sweeps from the tombstone hard-deletes above. Workaround: wait, retry the command unchanged, and do not kill the process, because the thread tier's `.state/` mirror had not been flushed since before the removals, which is [its own issue](#id/BlockNode:00CVNZXVR8001): killing the service lost every removal. Mechanism from the investigation's code survey of 2026-10-02, a third candidate that the "hard-deletes one at a time" sentence above only names (read from `service.ts` and the store code; the cost of one scan measured in a scratch process; no run has attributed a stall to it): for a task `T` in artifact `A`, one `aperas remove --flush` runs, synchronously and in this order, `artifactForRef`, the pre-check sweep of `A`, `runRemove`, the content flush, and the post-check sweep of `A`. `runRemove` calls `tombstoneLiveSubtree`, which for each block depth-first sets `children = []`, `links = undefined`, `props = undefined` and `tombstonedAt`; the `links` and `props` assignments go through `writeField`'s embed branch, which calls `hardDeleteNode` on every embedded `Link` and `StringProp` (recursing into each `Link`'s position props), and each `hardDeleteNode` begins with `removeDanglingUnfolds`, which calls `allIdsOfKind(store, 'TreeView')`, a `store.match` over every quad in the store. One such scan measured 136 to 144 ms at 39.6k quads. The cost of a removal therefore follows the number of embedded nodes under the removed task, about that count times 140 ms, and not its block count, which fits the pattern above (39 and 50 blocks fast, 42 and 31 slow): a task whose blocks carry many wikilinks has many `Link` nodes and position props, while a plain list has few. The deferred half (read, with the per-node cost measured): at the next reload, shutdown or startup `pruneUnreachableTombstones` finds the removed blocks unreachable and calls `hardDeleteNode` on each, another full scan each, about 6 s for 42 blocks (derived) on top of its fixed 2.3 s, which is the cost described in [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001). The whole-artifact sweeps in the second suspected cause are now measured at 1.7 to 2.5 ms a live block, so about 0.6 to 0.9 s a sweep on a 367-block thread file, and they are real, but two of them cost seconds (derived), not the minutes seen, and [their own issue](#id/BlockNode:00CVQHBP0R001) carries them. Not shown: the 5.4 and 12 minute stalls would need about 2,300 and 5,000 such scans at 140 ms, and whether those tasks held that many embedded nodes is not known; the coder's run of an in-memory removal of the heaviest coder tasks in a fresh process did not finish in 100 s, consistent with the mechanism but not attributed to a step. Untested: the whole mechanism against a stall, which needs the per-operation timings and a profile during a stall that [the no-coverage issue](#id/BlockNode:00CVQHD7CR001) lists. The scan also allocates a JavaScript `Quad` per store quad on every call (about 40k objects, 140 ms), which is a candidate source of the garbage-collector pressure and the external-memory growth in [the memory issue](#id/BlockNode:00CVQ4Z968001) (read, untested). Filed 2026-10-02.
-- **A write to a thread node never marks the `.state/` mirror dirty, so it exists only in memory until a view change or a shutdown sweep, and a killed service loses it**: <a name='id/BlockNode:00CVNZXVR8001' class='aperas-anchor aperas-id'></a> found 2026-10-02 when the service stuck after the pruning removals (see the removal-stall entry above) was killed. In `packages/cli/src/apeironNgn/service.ts`, `insert`, `update`, `remove` and `retype` set only `dirty`, whose `flushIfDirty` writes the tracked content mirror, and that mirror excludes every `.threads/`-scoped node; the thread-scoped `BlockNode`, `ArtifactNode` and `FolderNode` records are written only by `flushStateIfDirty` into `.state/`, which does nothing unless `stateDirty` is set, and only the `unfold`, `fold`, `zoom` and profile ops, the garbage-collection sweeps and `shutdown`'s own sweep set it. Evidence: `.state/BlockNode.jsonld` was last written at 18:26:20 while 15 `aperas remove --flush` calls, each reporting success, ran after it; every earlier turn's thread writes persisted only because the turn ended with `aperas zoom`. After the kill, the fresh service rehydrated the stale `.state/` records of the removed tasks beside their tombstoned copies that had leaked into the tracked mirror (see the leak entry in `issues/treeview.md`), logged "323 duplicate @id(s) in the mirror", merged them, and listed the removed task roots as live again with their descendants tombstoned. The gap is a routing mismatch, not a timer-cadence one, and both timers (3 s and 10 s) work as designed: a thread-scoped node is routed to the `.state/` mirror when the store is dehydrated (`THREAD_PARTITIONED_CLASSES`, `isThreadScopedId`), but the dirty flag is chosen without that partition, so the four handlers set `dirty`, which feeds the content flush that excludes thread nodes, and never `stateDirty`, which feeds the `.state/` flush that includes them. History, from git: the `.state/` mirror and `dehydrateStateToJsonLd` arrived on 2026-09-03 with the TreeView refactor (`e4cc806`), for views only, so no node record needed it; `stateDirty` followed in the 09-15 and 09-17 commits (`96ed8f9`, `0624b7d`); the thread partition arrived on 2026-09-27 with the multi-agent v3.0 commit (`b58dc5d`), which added the `zoom` op with `stateDirty = true` and one `dirty = true` and did not touch the four handlers, so the thread tier inherited a flush path built for views. Fix, agreed 2026-10-02 as three parts that fold all node-related persistence into `.state/`: (1) any write to a thread-scoped node sets `stateDirty` (`isThreadScopedId` is already imported in the same file), so the 3-second timer and every `--flush` persist it; (2) the `.state/` divergence stamps cover the thread-partitioned node classes and not only `STATE_CLASSES` (`TreeView`), so an external change to the thread `BlockNode` file there is noticed (not checked: that an external change goes unnoticed today); (3) every flush path writes both mirrors from one rule. Filed 2026-10-02.
+- **A command can fail with "No ApeironNgn service running" while the service is up, and an unchanged retry works**: <a name='id/BlockNode:00CVMPABY8001' class='aperas-anchor aperas-id'></a> recorded in two separate grapher Reports. Filed 2026-10-02.
+  
+  - **Symptom**
+    
+    - The first `aperas insert` of one turn failed with that message while `aperas service start` immediately reported the service already running (pid 220722).
+    - The same message came back later in that turn on `aperas project issues/linking.md`, and in a second turn on an `aperas update` between otherwise working commands.
+    - Every unchanged retry succeeded with no restart.
+    - Unlike [the silent death below](#id/BlockNode:00CRBJ0VYG001), the service never went down.
+    - **Reproduced by load later the same day**, in the v4.3 filing sweep: while the service was busy after an `aperas remove --flush` of a finished thread task (the process was alive at 100 to 290 percent CPU for minutes), every command, `aperas show` included, failed with that message.
+      
+      - The same commands worked once the service was idle again, which fits a 300 ms ping reading a busy service as down.
+    - **Two earlier observations point the same way**: <a name='id/BlockNode:00D0X5TK4G008' class='aperas-anchor aperas-id'></a>
+      
+      - `aperas service start` answered "Already running" with the old pid right after a command failed.
+      - `service.log` holds only startup lines, with no shutdown, flush or connect-failure line, so it cannot say why a client could not reach a live service.
+  - **Root cause**
+    
+    - **A likely cause**, read from the code and consistent with the load observations under Symptom and Measurements:
+      
+      - `ensureServiceRunning` (`packages/cli/src/apeironNgn/serviceClient.ts:149`) throws that message whenever `ping()` returns false.
+      - `ping()` (line 83) turns every error, a timeout included, into `false` after `PING_TIMEOUT_MS = 300`.
+      - A service busy with a flush or an ingest and slow to answer within 300 ms therefore reads as not running.
+    - **The mechanism**, from the investigation's code survey of 2026-10-02 (read from `service.ts`, `serviceClient.ts` and `kgService.ts`; the failures are consistent with it, and no direct test has isolated it):
+      
+      - Every request, `ping` included, enters `handleConnection`, is chained onto the single promise `queue` by `enqueue`, and runs `handle`, which has no `await`, so each operation is one uninterrupted synchronous run.
+      - A `ping` therefore waits behind the operation in flight and every request already queued ahead of it, and the client's `ping()` gives up after `PING_TIMEOUT_MS = 300`.
+      - The 300 ms bound covers queue wait plus the ping's own handling, not whether the loop is stuck.
+      - Any operation over about 0.3 s, or a queue of two or three, makes the next command say "No ApeironNgn service running" with nothing stalled.
+      - Every other command first calls `ensureServiceRunning`, which is that one 300 ms ping, and `request()` itself sends with no timeout, so a command that passes the ping waits as long as the service takes.
+      - **What the queue takes depends on what the queue holds**: <a name='id/BlockNode:00D0X5TK4G00P' class='aperas-anchor aperas-id'></a>
+        
+        - [Every write re-parses its whole artifact twice](#id/BlockNode:00CVQHBP0R001).
+        - [A task removal runs a full-store scan per embedded node](#id/BlockNode:00CVNX6A3R000).
+        - [Boot does seconds of synchronous work before the socket exists](#id/BlockNode:00CVQHCEW8001).
+  - **Measurements**
+    
+    - **After the lock turned ready, every `aperas` command failed with "No ApeironNgn service running" for 19.5 to 23.0 s in 6 of 6 starts** (measured 2026-10-10 by the Coder in the store-size investigation; scratch service, 6 cold starts, load average 2 to 3.5)
+      
+      - They failed because the startup link sweep is enqueued on the event loop right after `markReady` (`service.ts` lines 818 to 826) and the 300 ms `ping` times out.
+      - This is the mechanism above shown on a service that is not stalled, only busy; the measurement is in [the start entry](#id/BlockNode:00D0W05P08001).
+    - **A settled service answers a `profile list` in 0.55 s wall** (measured 2026-10-10, same runs)
+  - **Not proven**
+    
+    - How much of a failed ping's 300 ms is queue wait against the in-flight operation is untested.
+    - The fix to try, under Fix directions, is untested against a counted run of the same load.
+    - A concurrent second client as the cause of the earlier drops is not tested.
+    - **The sampler's recorded failures fit it without a stall** (read, not proven):
+      
+      - Of its 11 failed probes, three are at 5, 12 and 19 percent CPU with 2 to 4 `aperas` clients running (21:11:24, 21:14:24, 21:15:24), where another client's operation or flush was probably queued ahead of the probe.
+      - The sampler keeps only whether the answer held `"@id"` and discards the failure text, so it cannot tell the ping failure from a request error or a timeout (see [the no-coverage issue](#id/BlockNode:00CVQHD7CR001)).
+  - **Fix directions**
+    
+    - **Fix to try**: <a name='id/BlockNode:00D0X5TK4G017' class='aperas-anchor aperas-id'></a> retry the ping once or twice, or raise the timeout, before throwing, and say in the message when a socket exists but did not answer.
+- **A thread-task `aperas remove` can leave the service CPU-bound for many minutes, during which every command fails and a graceful stop does not complete**: <a name='id/BlockNode:00CVNX6A3R000' class='aperas-anchor aperas-id'></a> found 2026-10-02 pruning finished tasks in the v4.3 skill task; the stalls were observed and the suspected causes below fit them, but no run has attributed a stall to any of them. Filed 2026-10-02.
+  
+  - **Symptom**
+    
+    - Found 2026-10-02 pruning finished tasks from `.threads/grapher.md` and `.threads/coder.md` in the v4.3 skill task. Of 15 removals, most returned in 2 to 10 seconds.
+    - After removing `memory-rules-and-orientation-restructure` (42 live blocks) the service answered nothing for about 5.4 minutes (tombstone at 11:37:44Z, next success at 11:43:07Z).
+    - After removing `promote-and-fix-subagent-tool-gap` (31 live blocks) it stayed unreachable for about 12 minutes (tombstone at 11:44:10Z, first answer at about 11:56:40Z).
+    - Tasks of 39 and 50 blocks returned quickly, so size alone does not predict it.
+    - Throughout, the process was alive at 100 to 290 percent CPU and 3.4 to 4.6 GB resident, and `service.log` recorded nothing.
+    - Every command, `aperas show` included, failed with "No ApeironNgn service running", which is the symptom of [the service-ping issue](#id/BlockNode:00CVMPABY8001).
+    - A later `aperas service restart` sent SIGTERM and failed with "didn't stop within 10s of SIGTERM"; the old process was still alive more than 40 minutes later, when it was killed.
+    - On the fresh service started afterwards (about 1 GB resident), three further removals took 2, 2 and 45 seconds and the next command could not reach the service for minutes, so age and heap size alone do not explain the stall.
+  - **Root cause**
+    
+    - **Established mechanism** (measured in general by the store-size investigation of 2026-10-10)
+      
+      - The scans create a wrapper per quad that is released only after a garbage collection and an event-loop turn, and a reload leaves the old store alive until a turn ([the scan entry](#id/BlockNode:00D0W02KPG001), [the reload entry](#id/BlockNode:00D0W00YCR001)).
+    - **Suspected causes**: <a name='id/BlockNode:00D0WZYWFR003' class='aperas-anchor aperas-id'></a> five; no run has attributed a stall to any of them.
+      
+      - **A scan of the whole store for every embedded node under the removed task** (read from `service.ts` and the store code in the investigation's code survey of 2026-10-02; the cost of one scan measured in a scratch process)
+        
+        - One `aperas remove --flush` of a task `T` in artifact `A` runs, synchronously and in this order, `artifactForRef`, the pre-check sweep of `A`, `runRemove`, the content flush, and the post-check sweep of `A`.
+        - `runRemove` calls `tombstoneLiveSubtree`, which for each block depth-first sets `children = []`, `links = undefined`, `props = undefined` and `tombstonedAt`.
+        - The `links` and `props` assignments go through `writeField`'s embed branch, which calls `hardDeleteNode` on every embedded `Link` and `StringProp`, recursing into each `Link`'s position props.
+        - Each `hardDeleteNode` begins with `removeDanglingUnfolds`, which calls `allIdsOfKind(store, 'TreeView')`, a `store.match` over every quad in the store.
+        - The cost of a removal therefore follows the number of embedded nodes under the removed task, about that count times 140 ms, and not its block count.
+        - This fits the pattern in Symptom (39 and 50 blocks fast, 42 and 31 slow): a task whose blocks carry many wikilinks has many `Link` nodes and position props, while a plain list has few.
+      - **The tombstones that each removal leaves are hard-deleted one at a time at shutdown and startup** (read, with the per-node cost measured; the likely cost; not tested)
+        
+        - Each removal also leaked its descendants' tombstones into the tracked `Apeiron/BlockNode.jsonld` (see [the leak issue](../issues/treeview.md#id/BlockNode:00CRCGRGJR002) in `issues/treeview.md`).
+        - `pruneUnreachableTombstones` hard-deletes each unreachable tombstone one at a time at shutdown and startup.
+        - At the next reload, shutdown or startup it finds the removed blocks unreachable and calls `hardDeleteNode` on each, another full scan each: about 6 s for 42 blocks (derived) on top of its fixed 2.3 s, which is the cost described in [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001).
+      - **Each scan leaves a JavaScript `Quad` wrapper per store quad, which raises garbage-collector pressure and external memory** (read, untested; the effect is measured in the Coder's runs and in the store-size investigation)
+        
+        - The scan allocates a JavaScript `Quad` per store quad on every call (about 40k objects, 140 ms), which is a candidate source of the garbage-collector pressure and the external-memory growth in [the memory issue](#id/BlockNode:00CVQ4Z968001) (read, untested).
+        - The retained external memory in the Coder's removal runs (see Measurements) is the same effect that the memory issue records.
+      - **Two whole-artifact link-integrity sweeps around every write** (second suspected cause; untested; a lead, not a finding)
+        
+        - Every `remove`, `insert`, `update` and `retype` runs `checkArtifactLinkIntegrity(store, artifactId)` before the operation and again in `withLinkCheck` after it, over the whole artifact (read from `service.ts`), so one `remove` of a task inside a 600-block thread file costs two full link-integrity sweeps on top of the removal itself.
+        - The verify-slowdown issues, [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000), name the same kind of operation, `checkLinkIntegrity`'s corpus sweep, as the one that went from low hundreds of milliseconds fresh to 12 to 55 seconds late in a long process, so the sweeps are a candidate for the removal stall.
+        - No test has separated the sweeps from the tombstone hard-deletes above.
+        - The sweeps are real and are measured (see Measurements), but two of them cost seconds (derived), not the minutes seen; [their own issue](#id/BlockNode:00CVQHBP0R001) carries them.
+      - **A process-lifetime slowdown, the same mechanism as the verify slowdown** (hypothesis, not a finding)
+        
+        - It would be the process-lifetime slowdown already recorded in [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000): a long-lived node process that degrades, here the service at about 5 GB resident after about three hours, where a process split is not an option because the service is the shared store.
+        - The earlier slowdown showed up as steps running 12 to 55 seconds instead of hundreds of milliseconds, with oxigraph at roughly 1 GB, not as multi-minute stalls with no answer at all.
+        - The repeat on a fresh process fits poorly with a slowdown that builds up over a process's lifetime, though degradation within a few minutes of heavy work would still match.
+        - The earlier entry's leading guess was a JIT-level degradation, which this entry does not test.
+        - If it is the same mechanism, the profiling that entry proposes (`--prof` or `--trace-deopt`) is the next step, run against the service.
+  - **Measurements**
+    
+    - **One full-store scan costs 136 to 144 ms at 39.6k quads** (measured, in a scratch process)
+      
+      - Caveat: <a name='id/BlockNode:00D0WPK57G00E' class='aperas-anchor aperas-id'></a> the 39.6k count had no recorded method. The store holds 41,752 quads by `store.size`, measured 2026-10-10.
+    - **A whole-artifact link-integrity sweep costs 1.7 to 2.5 ms a live block, so about 0.6 to 0.9 s on a 367-block thread file** (measured per block)
+      
+      - Two sweeps cost seconds (derived); [their own issue](#id/BlockNode:00CVQHBP0R001) carries them.
+    - **Pruning the removed blocks costs about 6 s for 42 blocks on top of a fixed 2.3 s** (derived from the per-scan cost; read)
+    - **Removing one `#### Turn` of a thread (34 embedded nodes) took 30 to 40 s with the event loop blocked, and the state flush added 16 to 20 s** (measured by the Coder 2026-10-02 and recorded here 2026-10-10)
+      
+      - Conditions: <a name='id/BlockNode:00D0WPK57R003' class='aperas-anchor aperas-id'></a> seven bounded runs of the removal path on `/tmp` copies of the store, nothing written to the real graph or the live service.
+      - The pre-sweep cost about 0.6 s, `runRemove` 9 to 10.6 s, the content flush 19 to 29 s and the post-sweep 0.2 s.
+      - `runRemove` did exactly 34 full-store scans, one per embedded node, at 208 to 352 ms each.
+    - **The heaviest task (122 embedded nodes) was still inside `runRemove` when the 60-second limit hit, after 60 scans, and the average cost per scan rose from 130 ms to 3,013 ms across them** (measured by the Coder, same runs)
+    - **Under `--trace-gc`, Mark-Compact time per ten scans rose from 1.0 s to 28.3 s of that window's 29.2 s** (measured by the Coder, same runs)
+      
+      - It was triggered by external memory pressure: <a name='id/BlockNode:00D0WPK57R008' class='aperas-anchor aperas-id'></a> each scan retained about 9 MB of heap and 21 MB of external memory until the event loop turned, and resident size reached 2.0 GB after 60 scans.
+    - **Repeated scans alone slowed down; 160 deletions did not, and a fresh `Store` did not restore the speed** (measured by the Coder, same runs)
+    - **Content and state flushes cost 3 to 4 times as much after a removal** (measured by the Coder, same runs)
+    - **An in-memory removal of the heaviest coder tasks in a fresh process did not finish in 100 s** (measured by the Coder)
+      
+      - Caveat: <a name='id/BlockNode:00D0WPK57R00C' class='aperas-anchor aperas-id'></a> consistent with the mechanism but not attributed to a step.
+    - **A settled scratch service marked dirty by a view op took 12.5 s to stop, so it misses the client's 10 s stop wait** (measured, 2 of 2, [the restart entry](#id/BlockNode:00D0W044DG001))
+      
+      - Consistent with the "didn't stop within 10s of SIGTERM" in Symptom, not an explanation of it: that process was stuck CPU-bound for more than 40 minutes, and this figure comes from a settled scratch service.
+  - **Not proven**
+    
+    - The 5.4 and 12 minute stalls would need about 2,300 and 5,000 such scans at 140 ms, and whether those tasks held that many embedded nodes is not known.
+    - A task of about 120 embedded nodes plausibly takes minutes, which fits the 5.4 and 12 minute stalls; it is not proven, because no run finished a removal of that size and `.threads/grapher.md` was not measured.
+    - The whole mechanism against a stall is untested; it needs the per-operation timings and a profile during a stall that [the no-coverage issue](#id/BlockNode:00CVQHD7CR001) lists.
+    - Whether the sweeps or the tombstone hard-deletes cost more is untested: no test has separated them.
+    - That the tombstone hard-deletes at shutdown and startup are the likely cost is not tested.
+    - That the scans' wrappers are the source of the garbage-collector pressure and the external-memory growth is read, not tested.
+    - That this is the verify slowdown again is a hypothesis, not a finding.
+  - **Workaround**
+    
+    - Wait, retry the command unchanged, and do not kill the process.
+    - Killing the service lost every removal, because the thread tier's `.state/` mirror had not been flushed since before the removals, which is [its own issue](#id/BlockNode:00CVNZXVR8001).
+  - **Related**
+    
+    - [The service-ping issue](#id/BlockNode:00CVMPABY8001): <a name='id/BlockNode:00D0WPK57R00V' class='aperas-anchor aperas-id'></a> a command can fail with "No ApeironNgn service running" while the service is up.
+    - [The `.state/` mirror issue](#id/BlockNode:00CVNZXVR8001): <a name='id/BlockNode:00D0WPK57R00W' class='aperas-anchor aperas-id'></a> a write to a thread node never marks the mirror dirty, so a killed service loses it.
+    - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001): <a name='id/BlockNode:00D0WPK57R00X' class='aperas-anchor aperas-id'></a> boot and shutdown cost grows with the tombstones.
+    - [The re-parse issue](#id/BlockNode:00CVQHBP0R001): <a name='id/BlockNode:00D0WPK57R00Y' class='aperas-anchor aperas-id'></a> every write re-parses the whole artifact before and after the operation.
+    - [The no-coverage issue](#id/BlockNode:00CVQHD7CR001): <a name='id/BlockNode:00D0WPK580000' class='aperas-anchor aperas-id'></a> the service has no timing, memory or load-test coverage.
+    - [The memory issue](#id/BlockNode:00CVQ4Z968001): <a name='id/BlockNode:00D0WPK580001' class='aperas-anchor aperas-id'></a> resident memory climbs to about 5.8 GB over hours under heavy use.
+    - [The scan entry](#id/BlockNode:00D0W02KPG001): <a name='id/BlockNode:00D0WPK580002' class='aperas-anchor aperas-id'></a> full-store scans materialize every quad as a JavaScript object.
+    - [The scans issue's Fix directions](#id/BlockNode:00D0X65RB8008): <a name='id/BlockNode:00D0Y9KNP8001' class='aperas-anchor aperas-id'></a> the candidate layers for the full-store scans are listed there and are not repeated here.
+    - [The reload entry](#id/BlockNode:00D0W00YCR001): <a name='id/BlockNode:00D0WPK580003' class='aperas-anchor aperas-id'></a> a reload leaves the old store alive until an event-loop turn runs.
+    - [The restart entry](#id/BlockNode:00D0W044DG001): <a name='id/BlockNode:00D0WPK580004' class='aperas-anchor aperas-id'></a> `aperas service restart` errors out after 10 s whenever the service has been marked dirty.
+    - [The `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000): <a name='id/BlockNode:00D0WPK580005' class='aperas-anchor aperas-id'></a> the process-lifetime slowdown of the verify run.
+- **A write to a thread node never marks the `.state/` mirror dirty, so it exists only in memory until a view change or a shutdown sweep, and a killed service loses it**: <a name='id/BlockNode:00CVNZXVR8001' class='aperas-anchor aperas-id'></a> found 2026-10-02 when the service stuck after the pruning removals (see the removal-stall entry above) was killed. Filed 2026-10-02.
+  
+  - **Symptom**
+    
+    - `.state/BlockNode.jsonld` was last written at 18:26:20 while 15 `aperas remove --flush` calls, each reporting success, ran after it.
+    - Every earlier turn's thread writes persisted only because the turn ended with `aperas zoom`.
+    - After the kill, the fresh service rehydrated the stale `.state/` records of the removed tasks beside their tombstoned copies that had leaked into the tracked mirror (see the leak entry in `issues/treeview.md`).
+    - It logged "323 duplicate @id(s) in the mirror", merged them, and listed the removed task roots as live again with their descendants tombstoned.
+  - **Root cause**
+    
+    - In `packages/cli/src/apeironNgn/service.ts`, `insert`, `update`, `remove` and `retype` set only `dirty`, whose `flushIfDirty` writes the tracked content mirror, and that mirror excludes every `.threads/`-scoped node.
+    - The thread-scoped `BlockNode`, `ArtifactNode` and `FolderNode` records are written only by `flushStateIfDirty` into `.state/`, which does nothing unless `stateDirty` is set.
+      
+      - Only the `unfold`, `fold`, `zoom` and profile ops, the garbage-collection sweeps and `shutdown`'s own sweep set `stateDirty`.
+    - The gap is a routing mismatch, not a timer-cadence one, and both timers (3 s and 10 s) work as designed.
+      
+      - A thread-scoped node is routed to the `.state/` mirror when the store is dehydrated (`THREAD_PARTITIONED_CLASSES`, `isThreadScopedId`), but the dirty flag is chosen without that partition.
+      - So the four handlers set `dirty`, which feeds the content flush that excludes thread nodes, and never `stateDirty`, which feeds the `.state/` flush that includes them.
+    - **History, from git**
+      
+      - The `.state/` mirror and `dehydrateStateToJsonLd` arrived on 2026-09-03 with the TreeView refactor (`e4cc806`), for views only, so no node record needed it.
+      - `stateDirty` followed in the 09-15 and 09-17 commits (`96ed8f9`, `0624b7d`).
+      - The thread partition arrived on 2026-09-27 with the multi-agent v3.0 commit (`b58dc5d`), which added the `zoom` op with `stateDirty = true` and one `dirty = true` and did not touch the four handlers, so the thread tier inherited a flush path built for views.
+  - **Not proven**
+    
+    - That an external change to the thread `BlockNode` file in `.state/` goes unnoticed today (not checked).
+  - **Fix directions**
+    
+    - **Fix, agreed 2026-10-02 as three parts that fold all node-related persistence into `.state/`**
+      
+      - (1) any write to a thread-scoped node sets `stateDirty` (`isThreadScopedId` is already imported in the same file), so the 3-second timer and every `--flush` persist it;
+      - (2) the `.state/` divergence stamps cover the thread-partitioned node classes and not only `STATE_CLASSES` (`TreeView`), so an external change to the thread `BlockNode` file there is noticed (not checked: that an external change goes unnoticed today);
+      - (3) every flush path writes both mirrors from one rule.
 - **`aperas resolve`'s title-ambiguity check does not filter tombstoned candidates, so a dead holder makes a live path read as ambiguous**: <a name='id/BlockNode:00CVQ0PVS0001' class='aperas-anchor aperas-id'></a> reproduced 2026-10-02: `aperas tree issues/cli.md` fails with `'cli.md' is ambiguous among: ArtifactNode:00CF2AEA78000 ("cli.md"), ArtifactNode:00CF1TZQV8000 ("cli.md")`, where the second id is a tombstoned holder, while `aperas tree issues/core.md` resolves. First seen when the thin `cli.md` docs were created. Cause, read from the code: `findChild(text)` (`node.ts:479-490`) builds its `candidates` array from `this.treeChildren` filtering only on `title !== undefined`, never on `tombstonedAt`, and `BlockNode.treeChildren` and `FolderNode.treeChildren` (`node.ts:513-515`, `1143-1145`) return `this.children ?? []` with no liveness filter at any layer above, so a tombstoned sibling with a matching title lands in both the exact-slug match and the prefix-slug fallback and can make an otherwise unique live title ambiguous. `findChild` is one shared method on `TreeNode`, called from exactly two places, `resolve.ts:116` (`aperas resolve`) and `resolveCreate.ts:164` (`aperas resolve --create-holder`), each once per deep-path segment, so one filter covers both commands, and every command that resolves a bare path (`tree`, `show`, `project`, `insert`) inherits the failure. Fix to try: filter `candidates` in `findChild` to exclude any child with `tombstonedAt` set before either slug match runs, using the same idiom as [the `diffChildren` fix](../issues/core.md#id/BlockNode:00CF1WZ4JG004) (`isLiveOld` in `reconcile.ts`) and [the dead-container fix](../issues/core.md#id/BlockNode:00CF1WZ4JG006) (`tombstoneVacuousContainers`). Workaround: resolve the live node by ID, or by a path that does not end on the ambiguous title. Not yet fixed; no coder task is open for it. Filed 2026-10-02.
-- **The ApeironNgn service's resident memory climbs to about 5.8 GB over hours under heavy use, and a fresh service idles at about 1.3 GB for 3.66 MB of data**: <a name='id/BlockNode:00CVQ4Z968001' class='aperas-anchor aperas-id'></a> found 2026-10-02, in the v4.3 skill task, with two parts. First, the old service (pid 220722, up from 16:16) reached 4.74 GB at 19:20 and 5.76 GB at 19:42, a rise of roughly 40 to 50 MB a minute over its last hour, with two threads at 100 percent CPU and almost no disk writes; its V8 heap limit is 2.1 GB, far below its resident size, so most of the memory sat outside the V8 heap. Second, a fresh service idles at 1.05 to 1.5 GB (median 1.34 GB, maximum 2.18 GB) over 379 samples and 63 minutes, while the whole graph on disk is 3.66 MB of JSON-LD, about 37,000 quads, roughly 350 times the data size at rest. The fresh service did not grow over that hour under light use, so the climb to 5 GB needs heavier work (thread-task removals) or a long uptime that the sampler has not seen. Related: the stall in [the thread-task `aperas remove` entry](#id/BlockNode:00CVNX6A3R000) was recorded at 3.4 to 4.6 GB resident, and the slowdown in [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000) put oxigraph's WASM footprint at 850 MB to 1 GB and ruled it out as the cause of the slowdown, which does not rule it out as a size problem. Not known whether the climb and the stall share a cause. Hypotheses, none tested: the store is Oxigraph's WASM store, whose linear memory grows and never shrinks, and each reload builds a new store, so a leak in reload or removal could keep old stores alive. Measurements still to take: have the service report `process.memoryUsage()` (heap used, external, array buffers) and the store's own size, and start it with `--heapsnapshot-signal=SIGUSR2` so a snapshot can be taken when the process is large, since the external sampler cannot see inside it. Workaround: a restarted service returns to about 1.3 GB, but a restart is for the user to approve. Related, from the investigation's code survey (read, untested): the full-store scan that [the removal-stall issue](#id/BlockNode:00CVNX6A3R000) charges per embedded node, `allIdsOfKind`, allocates a JavaScript `Quad` for every store quad on each call (about 40k objects, about 140 ms), which is a candidate source of garbage-collector pressure and of the external-memory growth recorded here; a reload also builds a new `Store` and leaves the old one to the garbage collector, as [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001) describes. The measurements that would tell these apart are listed in [the no-coverage issue](#id/BlockNode:00CVQHD7CR001). Filed 2026-10-02.
-- **Every `remove`, `insert`, `update` and `retype` re-parses the whole artifact with remark before and after the operation, about 1.7 to 2.5 ms a block, so a write to a large thread file costs seconds before its own work**: <a name='id/BlockNode:00CVQHBP0R001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. Read from `service.ts`: each of the four handlers calls `checkArtifactLinkIntegrity(store, artifactId)` before the operation (`artifactForRef`, then the pre-check, then the `runX` call) and `withLinkCheck` calls it again after, over the whole owning artifact and not only the blocks the operation touched. Each sweep (`collectAllBlockNodes`, then `sweepBlocks`) walks every live block, reads its `text`, parses the whole text with the remark processor (`collectLinkCodesFromText`, no cache), and for each block that has link text reads `.links`, computes `toPath()` and calls `resolveOneCode` per link. Measured in a scratch process: 638 to 932 ms for `.threads/coder.md` (367 live blocks, 65 links), which is about 1.7 to 2.5 ms per live block, so about 1.3 to 1.9 s for the two sweeps; for `.threads/grapher.md` (767 blocks, 487 links) the same rate gives about 1.3 to 1.9 s a sweep, derived and not measured, because the in-memory run on that file did not finish in 100 s. Derived, not measured: the sweeps cost seconds, so on their own they do not reach the minutes of [the removal stall](#id/BlockNode:00CVNX6A3R000); they are one of three cost centres of a `remove` there. Because the service runs one operation at a time, every second a write spends in the sweeps is also queue wait for every other client, which is the mechanism in [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001). Earlier record: [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) names the same kind of operation, `checkLinkIntegrity`'s corpus sweep, as the one that went from low hundreds of milliseconds fresh to 12 to 55 seconds late in a long process; whether the per-write sweep slows the same way in the long-lived service is untested. Fix directions: none decided. Candidates, the grapher's reading and none tried: parse a block's text once and cache the result by that text, so unchanged blocks are not re-parsed; check after the operation only the blocks it touched and the links that point at them; keep the pre-check only where it tells something the post-check cannot. The first measurement is to time the sweep alone on a thread artifact and against block count (item 3 of the investigation's first measurements, which needs per-operation timing the service does not yet have). Related: [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001), whose startup and shutdown sweeps share the full-store scan cost, and [the no-coverage issue](#id/BlockNode:00CVQHD7CR001), which lists the measurements that would time the sweep. Filed 2026-10-02.
-- **Boot and shutdown cost grows with the tombstones and sits close to the client's 5 s ready wait and 10 s stop wait**: <a name='id/BlockNode:00CVQHCEW8001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. Boot, read from `service.ts`, runs entirely synchronously before the socket exists: the code fingerprint, the token, `rehydrateStore`, `stampAll` of both mirrors, the startup garbage collection (`tombstoneVacuousContainers`, `pruneUnreachableTombstones`, `pruneStaleUnfolds`, then both flushes if anything changed), the creation of the 10 s and 3 s flush timers and the 30 minute idle timer, then `listen`; only in the listen callback does `markReady` flip the lock to ready, and the startup link sweep runs after that. Measured on a scratch copy: rehydrate about 1.06 s, `tombstoneVacuousContainers` about 1.2 s and `pruneUnreachableTombstones` about 2.3 s even with nothing to prune, the startup link sweep about 0.6 s. Against that, `waitForReady` in `serviceClient.ts` polls `ping()` every 100 ms for 5 s (read): about 1 s of rehydrate and about 3.5 s of startup collection, plus the `tsx` compile, sit close to it, and a service that misses it keeps starting detached while `aperas service start` reports "did not become ready in time" and the lock stays `starting` for a 10 s grace (read). Shutdown (read): the SIGTERM handler runs in JavaScript, so it cannot run while an operation is in progress, and its body queues behind everything already waiting; it re-runs the three sweeps and both flushes, which measured about 3.5 s on an idle copy before any per-node hard-delete work, and `stopIfRunning` in `kgService.ts` gives the process only 10 s from the `kill`. That fits "didn't stop within 10s of SIGTERM" in [the removal-stall issue](#id/BlockNode:00CVNX6A3R000); consistent with it, not shown to be the cause. The cost grows with the tombstones: the next reload, startup or shutdown prunes each unreachable tombstoned block with the same full-store scan as in that issue, about 140 ms a node (measured per scan), so removing a 42-block task adds about 6 s to a later start or stop (derived, 42 times 140 ms, not measured end to end) on top of the fixed 2.3 s and 1.2 s. A reload (any operation carrying `--reload`) runs all of this plus `rehydrateStore()` into a new `Store`, two `stampAll`s and a corpus link sweep in one synchronous run, and the old store is left to the garbage collector while Oxigraph's WASM linear memory never shrinks (read; relevant to [the memory issue](#id/BlockNode:00CVQ4Z968001), untested there). A related cost, read and not measured: `unfold`, `fold` and `zoom` set both dirty flags, so each causes a full content dehydrate within 10 s and a state dehydrate within 3 s. Fix directions: none decided. The investigation's first steps are the ones that make the figures visible: one timestamped line per boot phase with its duration, the client logging its poll count and elapsed time when the wait fails, and sweep cost measured against tombstone count and dehydrate time at current node counts (measurements 6, 7 and 8 of the first measurements). Whether the sweeps can run after the socket exists, or the waits can grow with the work, is a design question not yet raised; `design/` has no document for the service lifecycle. Related: [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001), because a boot of 4 to 5 s against the client's 5 s wait is one way a start reads as failed; [the whole-artifact re-parse issue](#id/BlockNode:00CVQHBP0R001); and [the no-coverage issue](#id/BlockNode:00CVQHD7CR001), which lists the timestamped boot log. Filed 2026-10-02.
-- **The service has no timing, memory or load-test coverage, and its one durable log holds only startup lines**: <a name='id/BlockNode:00CVQHD7CR001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. In the service (read): there is no timing or memory logging; `APERAS_DEBUG_TIMING` output is lost because `spawnService` starts it with `stdio: 'ignore'`; `logService` (`service.log`) is the only durable channel and holds startup lines only, so a stall of 5.4 or 12 minutes left no line. In the tests and scripts (read): `verify.ts` (749 lines) and `verifyExtended.ts` (757 lines) run in-process against a `rehydrateStore()` copy, never import `service.ts` or `serviceClient.ts`, never spawn the service, and never call `runRemove` or `withLinkCheck`; `verifySupport.ts#instrumentStepTiming`, a `console.log` wrapper that times each "N. Testing..." step, is the only timing harness and produced the record in [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001); `apeironNgnSmokeTest.ts` checks rehydrate and field access only; `packages/web/devApiServer.ts` is one more concurrent client that calls `request()` with no timeout but is not a load test. There are no concurrent-client, latency or long-uptime scripts, and no test of the timers, `reloadStore`, `shutdown` or the SIGTERM path. The external sampler, a Python script in a session scratch area outside the repo, has these gaps (read from the script and its CSV): the lock path (`/run/user/1000/aperas/apeironngn.lock`), the probe node (`BlockNode:00CE8XWZK0000`, which a future prune or another graph can remove, turning every probe into a false failure) and `aperas` on `PATH` are hard-coded; the probe is a full `aperas show` client, so each probe time includes a `tsx` client start (541 ms on the first row) and a 60 s cadence cannot resolve a stall of seconds; `probe()` keeps only whether `"@id"` appears in stdout and discards stderr and the exit code, so the 300 ms ping failure, a request error and the 20 s timeout all read as a failed probe, which is exactly what the 11 failed probes need to be told apart by; it has no raw ping over the unix socket at 1 s cadence, no separate main-thread and garbage-collector-thread columns, no `VmHWM`, no `/proc/<pid>/io` write bytes, no mirror-file size or modification time (flush cadence would be visible for free), only a client count and not the verbs of the running `aperas` commands, no join with `service.log` by time, no stall durations or memory slope in its report, no metadata row, and no test. Fix directions, from the investigation's Freeflow, the orchestrator's recommendations and none decided: instrumentation in a new `apeironNgn/serviceDiagnostics.ts` behind one environment switch read by `spawnService` (which already copies `process.env`): an event-loop delay histogram, `process.memoryUsage()` and heap statistics every 30 to 60 s, one timestamped line per boot phase, and per-operation timings split into queue wait, pre-check, operation, flush and post-check for operations over about 250 ms, all through `logService`. Limits (read, unverified where marked): the histogram records only when the loop turns, so a 5-minute stall appears as one sample after it ends, and a worker-thread watchdog on a `SharedArrayBuffer` heartbeat would see it live (not built or tried); `--heapsnapshot-signal=SIGUSR2` can reach the service through `NODE_OPTIONS` with no code change but blocks the loop on a large process, needs about that much memory again, and misses the WASM memory (the V8 heap is about 2.1 GB against up to 5.8 GB resident); `--cpu-prof` writes only at exit and cannot capture a stuck or killed process; for a live stall an inspector or `perf` is the candidate (unverified). The sampler moves into the repo as Python under `monorepo/packages/cli/diagnostics/` with a `svc:sample` script, adds a raw-socket ping each second that keeps the failure text, and drops the one-minute client probe. The first measurements, in order: event-loop lag and `process.memoryUsage()` logged by the service; per-operation timing; one controlled `remove` on a fresh service against the same after a long uptime, with the link sweep timed alone; a CPU profile during a stall; a heap snapshot at idle and when large; a timestamped boot log and ping timing; sweep cost against tombstone count; dehydrate time at current node counts. This is the missing ground for [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001), [the removal stall](#id/BlockNode:00CVNX6A3R000) and [the memory issue](#id/BlockNode:00CVQ4Z968001), whose mechanisms rest on code reading and one reproduction each. Related: [the whole-artifact re-parse issue](#id/BlockNode:00CVQHBP0R001) and [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001), the two cost centres other than the removal scan whose figures are measured only in a scratch process. Filed 2026-10-02.
+- **The ApeironNgn service's resident memory climbs to about 5.8 GB over hours under heavy use, and a fresh service idles at about 1.3 GB for 3.66 MB of data**: <a name='id/BlockNode:00CVQ4Z968001' class='aperas-anchor aperas-id'></a> found 2026-10-02, in the v4.3 skill task, with two parts. Filed 2026-10-02.
+  
+  - **Symptom**
+    
+    - The old service (pid 220722, up from 16:16) reached 4.74 GB at 19:20 and 5.76 GB at 19:42, a rise of roughly 40 to 50 MB a minute over its last hour, with two threads at 100 percent CPU and almost no disk writes.
+    - Its V8 heap limit is 2.1 GB, far below its resident size, so most of the memory sat outside the V8 heap.
+    - A fresh service idles at 1.05 to 1.5 GB (median 1.34 GB, maximum 2.18 GB) over 379 samples and 63 minutes.
+    - The whole graph on disk is 3.66 MB of JSON-LD, about 37,000 quads, so the idle service is roughly 350 times the data size at rest.
+      
+      - Corrected 2026-10-10: <a name='id/BlockNode:00D0X1SZ3R006' class='aperas-anchor aperas-id'></a> the quad count is 41,752 by `store.size` and the 37,000 had no recorded method; the engine costs about 0.5 KB per quad, so the store itself is not 350 times the data (see Measurements).
+    - The fresh service did not grow over that hour under light use, so the climb to 5 GB needs heavier work (thread-task removals) or a long uptime that the sampler has not seen.
+  - **Root cause**
+    
+    - **Established mechanism** (measured by the Coder in the store-size investigation, 2026-10-10)
+      
+      - Memory is allocated per JavaScript wrapper and per full scan, not per quad ([the scan entry](#id/BlockNode:00D0W02KPG001)).
+      - A reload leaves the old store alive until an event-loop turn, each synchronous rehydrate adding a store of about 75 MB external ([the reload entry](#id/BlockNode:00D0W00YCR001)), which measures the reload hypothesis below.
+      - The engine is not the cost, and the hypothesis that the store itself is that large is overturned (figures under Measurements).
+    - **Suspected causes**: <a name='id/BlockNode:00D0X1SZ3R00D' class='aperas-anchor aperas-id'></a> hypotheses written 2026-10-02 as untested (the reload part is measured, see above); no scratch run has reproduced the climb to 5.8 GB under heavy use.
+      
+      - **The store is Oxigraph's WASM store, whose linear memory grows and never shrinks, and each reload builds a new store, so a leak in reload or removal could keep old stores alive** (hypothesis, written 2026-10-02 as untested)
+        
+        - A reload also builds a new `Store` and leaves the old one to the garbage collector, as [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001) describes.
+      - **Each full-store scan allocates a JavaScript `Quad` per store quad, a candidate source of garbage-collector pressure and of the external-memory growth recorded here** (read, untested; from the investigation's code survey)
+        
+        - `allIdsOfKind`, the scan that [the removal-stall issue](#id/BlockNode:00CVNX6A3R000) charges per embedded node, allocates a JavaScript `Quad` for every store quad on each call (about 40k objects, about 140 ms).
+  - **Measurements**
+    
+    - **Conditions** (by the Coder in the store-size investigation, 2026-10-10): <a name='id/BlockNode:00D0X1SZ40001' class='aperas-anchor aperas-id'></a> scratch processes and scratch services on copies under `/tmp`, single runs unless a count is given, machine load average 2 to 3.5, the live service not stopped or touched.
+    - **The store holds 41,752 quads by `store.size`** (measured)
+      
+      - 29,537 come from the content mirror and 12,216 from `.state/`, one shared; 10,622 nodes, 0 dangling, 0 duplicate ids.
+      - The count equals the length of a full `store.match`.
+      - The live service logged 41,246 at its boot, so the live store does hold the thread partition.
+      - The earlier 37,000 and 39,600 had no recorded method.
+      - A count of about 50,610 derived from the mirror overshoots, because `add()` was called 46,519 times and 4,767 of those were duplicates (every `parent` quad is emitted twice, from the child's `parent` field and from the parent's `children` array, `store.ts` lines 95 and 112).
+    - **The engine is not the cost** (measured)
+      
+      - Bare Oxigraph 0.5.11 (Node CJS build, wasm, in memory) costs about 0.47 KB resident and 0.59 KB external per quad when bulk-loaded and about 1.3 KB external per quad with per-quad `add` (rssAnon 59 to 196 MB for 10k to 100k quads), so 41.7k quads are 20 to 55 MB.
+      - The idle 1.3 GB is about 26 to 36 KB per quad, so the hypothesis that the store itself is that large does not hold.
+    - **Where the memory goes** (measured)
+      
+      - After `rehydrateStore` alone rss was 273 MB over a 119 MB baseline (heapUsed 60 MB, external 81 MB), about 3.7 KB per quad including parse garbage, and the JSON parse took 28 ms.
+      - After the boot sweeps and the link sweep rss was 572 MB with external 282 MB, the V8 heap back to about 54 MB after a `gc()` and an event-loop turn, and external never shrinking.
+    - **A reload leaves the old store alive until an event-loop turn** (measured, [the reload entry](#id/BlockNode:00D0W00YCR001))
+      
+      - Each synchronous rehydrate adds a store of about 75 MB external, and a reload-style cycle reached rss 1.73 GB by its fourth run.
+      - A dirty reload on a scratch service reached 1.26 GB.
+    - **The live service's high-water mark is 1.66 GB** (VmHWM, read from `/proc`)
+    - **Each full-store scan retained about 9 MB of heap and 21 MB of external memory until the event loop turned, with resident size at 2.0 GB after 60 scans of the heaviest task** (the removal measurement of 2026-10-02: seven bounded runs on `/tmp` copies by the Coder, nothing written to the real graph or the live service; its figures are in [the removal-stall issue](#id/BlockNode:00CVNX6A3R000))
+  - **Not proven**
+    
+    - Not known whether the climb and the stall share a cause.
+    - The live service's own phases are not measured (they would need the user's approval to stop it).
+    - The climb to 5.8 GB under heavy use is not measured: no scratch run reproduced it.
+  - **Fix directions**
+    
+    - Measurements still to take: <a name='id/BlockNode:00D0X1SZ4000Q' class='aperas-anchor aperas-id'></a> have the service report `process.memoryUsage()` (heap used, external, array buffers) and the store's own size, and start it with `--heapsnapshot-signal=SIGUSR2` so a snapshot can be taken when the process is large, since the external sampler cannot see inside it.
+    - The measurements that would tell these hypotheses apart are listed in [the no-coverage issue](#id/BlockNode:00CVQHD7CR001).
+  - **Workaround**
+    
+    - A restarted service returns to about 1.3 GB, but a restart is for the user to approve.
+  - **Related**
+    
+    - [The thread-task `aperas remove` entry](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X1SZ4000W' class='aperas-anchor aperas-id'></a> the stall there was recorded at 3.4 to 4.6 GB resident, and it charges the full-store scan per embedded node.
+    - [The `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its open "why" entry](#id/BlockNode:00CJ0HX2Y0000): <a name='id/BlockNode:00D0X1SZ4000X' class='aperas-anchor aperas-id'></a> the slowdown there put oxigraph's WASM footprint at 850 MB to 1 GB and ruled it out as the cause of the slowdown, which does not rule it out as a size problem.
+    - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001): <a name='id/BlockNode:00D0X1SZ4000Y' class='aperas-anchor aperas-id'></a> a reload builds a new `Store` and leaves the old one to the garbage collector.
+    - [The no-coverage issue](#id/BlockNode:00CVQHD7CR001): <a name='id/BlockNode:00D0X1SZ4000Z' class='aperas-anchor aperas-id'></a> the service has no timing, memory or load-test coverage.
+    - [The scan entry](#id/BlockNode:00D0W02KPG001): <a name='id/BlockNode:00D0X1SZ40010' class='aperas-anchor aperas-id'></a> full-store scans materialize every quad as a JavaScript object.
+    - [The scans issue's Fix directions](#id/BlockNode:00D0X65RB8008): <a name='id/BlockNode:00D0Y9MJAR001' class='aperas-anchor aperas-id'></a> the candidate layers for the full-store scans are listed there and are not repeated here.
+    - [The reload entry](#id/BlockNode:00D0W00YCR001): <a name='id/BlockNode:00D0X1SZ40011' class='aperas-anchor aperas-id'></a> a reload leaves the old store alive until an event-loop turn runs.
+    - [The design-gap entry](#id/BlockNode:00D0W07DRR000): <a name='id/BlockNode:00D0X1SZ40012' class='aperas-anchor aperas-id'></a> the design gap behind these figures; `design/` has no document for the store, hydration or the service lifecycle.
+- **Every `remove`, `insert`, `update` and `retype` re-parses the whole artifact with remark before and after the operation, about 1.7 to 2.5 ms a block, so a write to a large thread file costs seconds before its own work**: <a name='id/BlockNode:00CVQHBP0R001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. Filed 2026-10-02.
+  
+  - **Symptom**
+    
+    - Because the service runs one operation at a time, every second a write spends in the sweeps is also queue wait for every other client, which is the mechanism in [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001).
+  - **Root cause**
+    
+    - Read from `service.ts`: <a name='id/BlockNode:00D0X8TTAR001' class='aperas-anchor aperas-id'></a> each of the four handlers calls `checkArtifactLinkIntegrity(store, artifactId)` before the operation (`artifactForRef`, then the pre-check, then the `runX` call) and `withLinkCheck` calls it again after, over the whole owning artifact and not only the blocks the operation touched.
+    - Each sweep (`collectAllBlockNodes`, then `sweepBlocks`) walks every live block, reads its `text`, parses the whole text with the remark processor (`collectLinkCodesFromText`, no cache).
+    - For each block that has link text it reads `.links`, computes `toPath()` and calls `resolveOneCode` per link.
+  - **Measurements**
+    
+    - Measured in a scratch process: <a name='id/BlockNode:00D0X8TTAR005' class='aperas-anchor aperas-id'></a> 638 to 932 ms for `.threads/coder.md` (367 live blocks, 65 links), which is about 1.7 to 2.5 ms per live block, so about 1.3 to 1.9 s for the two sweeps.
+    - For `.threads/grapher.md` (767 blocks, 487 links) the same rate gives about 1.3 to 1.9 s a sweep, derived and not measured, because the in-memory run on that file did not finish in 100 s.
+  - **Not proven**
+    
+    - Derived, not measured: <a name='id/BlockNode:00D0X8TTAR008' class='aperas-anchor aperas-id'></a> the sweeps cost seconds, so on their own they do not reach the minutes of [the removal stall](#id/BlockNode:00CVNX6A3R000); they are one of three cost centres of a `remove` there.
+    - Whether the per-write sweep slows the same way in the long-lived service as the corpus sweep did in a long process (see the earlier record under Related) is untested.
+  - **Fix directions**
+    
+    - Fix directions: <a name='id/BlockNode:00D0X8TTAR00B' class='aperas-anchor aperas-id'></a> none decided.
+    - Candidates, the grapher's reading and none tried: <a name='id/BlockNode:00D0X8TTAR00C' class='aperas-anchor aperas-id'></a>
+      
+      - Parse a block's text once and cache the result by that text, so unchanged blocks are not re-parsed.
+      - Check after the operation only the blocks it touched and the links that point at them.
+      - Keep the pre-check only where it tells something the post-check cannot.
+    - The first measurement is to time the sweep alone on a thread artifact and against block count (item 3 of the investigation's first measurements, which needs per-operation timing the service does not yet have).
+  - **Related**
+    
+    - Earlier record: <a name='id/BlockNode:00D0X8TTAR00J' class='aperas-anchor aperas-id'></a> [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) names the same kind of operation, `checkLinkIntegrity`'s corpus sweep, as the one that went from low hundreds of milliseconds fresh to 12 to 55 seconds late in a long process.
+    - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001), whose startup and shutdown sweeps share the full-store scan cost.
+    - [The no-coverage issue](#id/BlockNode:00CVQHD7CR001), which lists the measurements that would time the sweep.
+- **Boot and shutdown cost grows with the tombstones and sits close to the client's 5 s ready wait and 10 s stop wait**: <a name='id/BlockNode:00CVQHCEW8001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. Filed 2026-10-02.
+  
+  - **Symptom**
+    
+    - `waitForReady` in `serviceClient.ts` polls `ping()` every 100 ms for 5 s (read), and `stopIfRunning` in `kgService.ts` gives the process only 10 s from the `kill`.
+    - About 1 s of rehydrate and about 3.5 s of startup collection, plus the `tsx` compile, sit close to the 5 s ready wait.
+    - A service that misses the ready wait keeps starting detached while `aperas service start` reports "did not become ready in time", and the lock stays `starting` for a 10 s grace (read).
+    - The 5 s ready wait and the 10 s stop wait are therefore both shorter than the work they wait for on a dirty or just-started service.
+    - The shutdown limit fits "didn't stop within 10s of SIGTERM" in [the removal-stall issue](#id/BlockNode:00CVNX6A3R000).
+  - **Root cause**
+    
+    - **Boot and shutdown do their sweeps and flushes synchronously, and the cost grows with the tombstones** (read from `service.ts`, `serviceClient.ts` and `kgService.ts`; the figures are under Measurements)
+      
+      - **Boot** (read from `service.ts`) runs entirely synchronously before the socket exists, in this order:
+        
+        - The code fingerprint, the token, `rehydrateStore` and `stampAll` of both mirrors.
+        - The startup garbage collection: <a name='id/BlockNode:00D0X1HTFG00B' class='aperas-anchor aperas-id'></a> `tombstoneVacuousContainers`, `pruneUnreachableTombstones`, `pruneStaleUnfolds`, then both flushes if anything changed.
+        - The creation of the 10 s and 3 s flush timers and the 30 minute idle timer, then `listen`.
+        - Only in the `listen` callback does `markReady` flip the lock to ready, and the startup link sweep runs after that.
+      - **Shutdown** (read): <a name='id/BlockNode:00D0X1HTFG00E' class='aperas-anchor aperas-id'></a> the SIGTERM handler runs in JavaScript, so it cannot run while an operation is in progress, and its body queues behind everything already waiting.
+      - Shutdown re-runs the three sweeps and both flushes.
+      - **The cost grows with the tombstones**: <a name='id/BlockNode:00D0X1HTFG00G' class='aperas-anchor aperas-id'></a> the next reload, startup or shutdown prunes each unreachable tombstoned block with the same full-store scan as in [the removal-stall issue](#id/BlockNode:00CVNX6A3R000), about 140 ms a node (measured per scan).
+        
+        - Removing a 42-block task therefore adds about 6 s to a later start or stop (derived, 42 times 140 ms, not measured end to end), on top of the fixed 2.3 s and 1.2 s.
+      - **A reload** (any operation carrying `--reload`) runs all of this plus `rehydrateStore()` into a new `Store`, two `stampAll`s and a corpus link sweep in one synchronous run.
+        
+        - The old store is left to the garbage collector while Oxigraph's WASM linear memory never shrinks (read; relevant to [the memory issue](#id/BlockNode:00CVQ4Z968001), untested there).
+  - **Measurements**
+    
+    - **Boot phases on a scratch copy** (measured): <a name='id/BlockNode:00D0X1HTFG00N' class='aperas-anchor aperas-id'></a> rehydrate about 1.06 s, `tombstoneVacuousContainers` about 1.2 s and `pruneUnreachableTombstones` about 2.3 s even with nothing to prune.
+    - **Shutdown on an idle copy took about 3.5 s** (measured) for the three sweeps and both flushes, before any per-node hard-delete work.
+    - **The startup link sweep takes 2 to 18 s, not 0.6 s** (measured; corrected 2026-10-10)
+      
+      - The earlier figure was about 0.6 s, measured on a scratch copy.
+      - On a scratch service the link sweep took 2.06 s after an event-loop turn and 17.7 s run straight after the boot sweeps, so 2 to 18 s (phases below).
+    - **Conditions of the measurements below** (by the Coder in the store-size investigation, 2026-10-10): a scratch service with its own run directory and port, copies of the data under `/tmp`, single runs unless a count is given, machine load average 2 to 3.5; the live service not touched.
+    - **Start: the lock turned ready at 5.28 to 5.77 s in 6 of 6 cold starts** (measured 2026-10-10)
+      
+      - It is made of about 1 s of node and `tsx` start, 1.1 s of `rehydrateStore` and 3.2 s of boot sweeps (`Rehydrated` is logged about 3.3 s before the lock turns ready).
+    - **The CLI printed "did not become ready in time" at 5.42 to 5.76 s in all 6, although the service was up 0 to 60 ms later** (measured 2026-10-10)
+    - **After ready, every command was refused with "No ApeironNgn service running" for 19.5 to 23.0 s** (measured 2026-10-10)
+      
+      - The cause is that the startup link sweep holds the event loop and the 300 ms ping times out ([the start entry](#id/BlockNode:00D0W05P08001)).
+    - **The synchronous boot takes 5.3 to 5.8 s to ready and the link sweep a further 2 to 18 s, depending on whether an event-loop turn separates the phases** (measured 2026-10-10, [the scan entry](#id/BlockNode:00D0W02KPG001))
+    - **Stop: 0.6 s after SIGTERM when the service is settled and clean** (measured 2026-10-10; 1.96 s wall with CLI start)
+    - **Stop: 12.5 s (2 of 2) after any `unfold`, `fold` or `zoom --view` has marked the service dirty** (measured 2026-10-10)
+      
+      - The shutdown sweeps are about 1.6 s and the two flushes the rest.
+      - The same flushes ran 1.1 s and 1.5 s when the store had had an event-loop turn since the sweeps and 8 to 17 s each when it had not.
+      - The client waits 10 s, so `restart` then errors out at 10 s and starts nothing ([the restart entry](#id/BlockNode:00D0W044DG001)).
+    - **Stop: 18 to 21 s when SIGTERM arrives during the 17 to 20 s startup link sweep** (measured 2026-10-10)
+    - **A `reload` after a mutation took 74 s and 119 s on two scratch services, against 4.4 s clean** (measured 2026-10-10, [the reload entry](#id/BlockNode:00D0W00YCR001))
+      
+      - The old store left to the garbage collector, which Root cause gives as read, is measured there.
+  - **Not proven**
+    
+    - That the shutdown limit is the cause of the "didn't stop within 10s of SIGTERM" in [the removal-stall issue](#id/BlockNode:00CVNX6A3R000): consistent with it, not shown to be the cause (shown 2026-10-10 for a service marked dirty by a view op: the stop took 12.5 s).
+    - The cost of `unfold`, `fold` and `zoom` is read and not measured: <a name='id/BlockNode:00D0X1HTFR00B' class='aperas-anchor aperas-id'></a> each sets both dirty flags, so each causes a full content dehydrate within 10 s and a state dehydrate within 3 s.
+  - **Fix directions**: <a name='id/BlockNode:00D0X1HTFR00C' class='aperas-anchor aperas-id'></a> none decided.
+    
+    - The investigation's first steps are the ones that make the figures visible: one timestamped line per boot phase with its duration, the client logging its poll count and elapsed time when the wait fails, and sweep cost measured against tombstone count and dehydrate time at current node counts (measurements 6, 7 and 8 of the first measurements).
+    - Whether the sweeps can run after the socket exists, or the waits can grow with the work, is a design question not yet raised; `design/` has no document for the service lifecycle ([the design-gap entry](#id/BlockNode:00D0W07DRR000)).
+  - **Related**
+    
+    - [The removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X1HTFR00G' class='aperas-anchor aperas-id'></a> the same full-store scan per node, and the failed stop in its Symptom.
+    - [The memory issue](#id/BlockNode:00CVQ4Z968001): <a name='id/BlockNode:00D0X1HTFR00H' class='aperas-anchor aperas-id'></a> the old store left to the garbage collector on a reload is relevant to it, untested there.
+    - [The spurious "not running" issue](#id/BlockNode:00CVMPABY8001): <a name='id/BlockNode:00D0X1HTFR00J' class='aperas-anchor aperas-id'></a> a boot of 4 to 5 s against the client's 5 s wait is one way a start reads as failed.
+    - [The whole-artifact re-parse issue](#id/BlockNode:00CVQHBP0R001): <a name='id/BlockNode:00D0X1HTFR00K' class='aperas-anchor aperas-id'></a> every write re-parses the whole artifact before and after the operation.
+    - [The no-coverage issue](#id/BlockNode:00CVQHD7CR001): <a name='id/BlockNode:00D0X1HTFR00M' class='aperas-anchor aperas-id'></a> the service has no timing, memory or load-test coverage, and it lists the timestamped boot log.
+    - [The start entry](#id/BlockNode:00D0W05P08001): <a name='id/BlockNode:00D0X1HTFR00N' class='aperas-anchor aperas-id'></a> `aperas service start` prints "did not become ready in time" at 5 s although the lock turns ready at 5.3 to 5.8 s.
+    - [The restart entry](#id/BlockNode:00D0W044DG001): <a name='id/BlockNode:00D0X1HTFR00P' class='aperas-anchor aperas-id'></a> `aperas service restart` errors out after 10 s and starts nothing whenever the service has been marked dirty.
+    - [The reload entry](#id/BlockNode:00D0W00YCR001): <a name='id/BlockNode:00D0X1HTFR00Q' class='aperas-anchor aperas-id'></a> a reload leaves the old store alive until an event-loop turn runs, and a reload after a mutation takes 74 to 119 s.
+    - [The scan entry](#id/BlockNode:00D0W02KPG001): <a name='id/BlockNode:00D0X1HTFR00R' class='aperas-anchor aperas-id'></a> full-store scans materialize every quad as a JavaScript object.
+    - [The design-gap entry](#id/BlockNode:00D0W07DRR000): <a name='id/BlockNode:00D0X1HTFR00S' class='aperas-anchor aperas-id'></a> `design/` has no document for the store, hydration or the service lifecycle.
+- **The service has no timing, memory or load-test coverage, and its one durable log holds only startup lines**: <a name='id/BlockNode:00CVQHD7CR001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. Filed 2026-10-02.
+  
+  - **Root cause**
+    
+    - **In the service** (read)
+      
+      - There is no timing or memory logging.
+      - `APERAS_DEBUG_TIMING` output is lost because `spawnService` starts the service with `stdio: 'ignore'`.
+      - `logService` (`service.log`) is the only durable channel and holds startup lines only, so a stall of 5.4 or 12 minutes left no line.
+    - **In the tests and scripts** (read)
+      
+      - `verify.ts` (749 lines) and `verifyExtended.ts` (757 lines) run in-process against a `rehydrateStore()` copy, never import `service.ts` or `serviceClient.ts`, never spawn the service, and never call `runRemove` or `withLinkCheck`.
+      - `verifySupport.ts#instrumentStepTiming`, a `console.log` wrapper that times each "N. Testing..." step, is the only timing harness and produced the record in [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001).
+      - `apeironNgnSmokeTest.ts` checks rehydrate and field access only.
+      - `packages/web/devApiServer.ts` is one more concurrent client that calls `request()` with no timeout but is not a load test.
+      - There are no concurrent-client, latency or long-uptime scripts, and no test of the timers, `reloadStore`, `shutdown` or the SIGTERM path.
+    - **The external sampler**, a Python script in a session scratch area outside the repo, has these gaps (read from the script and its CSV)
+      
+      - The lock path (`/run/user/1000/aperas/apeironngn.lock`), the probe node (`BlockNode:00CE8XWZK0000`, which a future prune or another graph can remove, turning every probe into a false failure) and `aperas` on `PATH` are hard-coded.
+      - The probe is a full `aperas show` client, so each probe time includes a `tsx` client start (541 ms on the first row) and a 60 s cadence cannot resolve a stall of seconds.
+      - `probe()` keeps only whether `"@id"` appears in stdout and discards stderr and the exit code, so the 300 ms ping failure, a request error and the 20 s timeout all read as a failed probe, which is exactly what the 11 failed probes need to be told apart by.
+      - **It has no**: <a name='id/BlockNode:00D0X5JQER00G' class='aperas-anchor aperas-id'></a>
+        
+        - raw ping over the unix socket at 1 s cadence,
+        - separate main-thread and garbage-collector-thread columns,
+        - `VmHWM`,
+        - `/proc/<pid>/io` write bytes,
+        - mirror-file size or modification time (flush cadence would be visible for free),
+        - join with `service.log` by time,
+        - stall durations or memory slope in its report,
+        - metadata row,
+        - test.
+      - It records only a client count and not the verbs of the running `aperas` commands.
+  - **Fix directions**: <a name='id/BlockNode:00D0X5JQF0000' class='aperas-anchor aperas-id'></a> none decided; from the investigation's Freeflow and the orchestrator's recommendations.
+    
+    - **Instrumentation** in a new `apeironNgn/serviceDiagnostics.ts` behind one environment switch read by `spawnService` (which already copies `process.env`), all through `logService`:
+      
+      - an event-loop delay histogram,
+      - `process.memoryUsage()` and heap statistics every 30 to 60 s,
+      - one timestamped line per boot phase,
+      - per-operation timings split into queue wait, pre-check, operation, flush and post-check, for operations over about 250 ms.
+    - **Limits** (read, unverified where marked)
+      
+      - The histogram records only when the loop turns, so a 5-minute stall appears as one sample after it ends, and a worker-thread watchdog on a `SharedArrayBuffer` heartbeat would see it live (not built or tried).
+      - `--heapsnapshot-signal=SIGUSR2` can reach the service through `NODE_OPTIONS` with no code change but blocks the loop on a large process, needs about that much memory again, and misses the WASM memory (the V8 heap is about 2.1 GB against up to 5.8 GB resident).
+      - `--cpu-prof` writes only at exit and cannot capture a stuck or killed process.
+      - For a live stall an inspector or `perf` is the candidate (unverified).
+    - **The sampler** moves into the repo as Python under `monorepo/packages/cli/diagnostics/` with a `svc:sample` script, adds a raw-socket ping each second that keeps the failure text, and drops the one-minute client probe.
+    - **The first measurements, in order**: <a name='id/BlockNode:00D0X5JQF000C' class='aperas-anchor aperas-id'></a>
+      
+      1. Event-loop lag and `process.memoryUsage()` logged by the service.
+      2. Per-operation timing.
+      3. One controlled `remove` on a fresh service against the same after a long uptime, with the link sweep timed alone.
+      4. A CPU profile during a stall.
+      5. A heap snapshot at idle and when large.
+      6. A timestamped boot log and ping timing.
+      7. Sweep cost against tombstone count.
+      8. Dehydrate time at current node counts.
+  - **Related**
+    
+    - This is the missing ground for [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001), [the removal stall](#id/BlockNode:00CVNX6A3R000) and [the memory issue](#id/BlockNode:00CVQ4Z968001), whose mechanisms rest on code reading and one reproduction each.
+    - [The whole-artifact re-parse issue](#id/BlockNode:00CVQHBP0R001) and [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001): <a name='id/BlockNode:00D0X5JQF000Q' class='aperas-anchor aperas-id'></a> the two cost centres other than the removal scan whose figures are measured only in a scratch process.
+- **A reload leaves the old store alive until an event-loop turn runs, and a reload after a mutation takes 74 to 119 s**: <a name='id/BlockNode:00D0W00YCR001' class='aperas-anchor aperas-id'></a> measured 2026-10-10 by the Coder in the store-size investigation. Filed 2026-10-10.
+  
+  - **Symptom**
+    
+    - `aperas reload` after a dirty `unfold` took 119.05 s and 74.43 s wall on two fresh scratch services (rss afterwards 1.26 GB, VmHWM 1.04 GB).
+    - A clean `aperas reload` took 4.41 s and 4.61 s on a warm scratch service.
+    - A third read right after a clean reload exited 1 at 0.76 s with "No ApeironNgn service running" and its message was not captured.
+  - **Root cause**
+    
+    - The old store is dropped by assignment, as `service.ts` line 379 does, and stays alive until an event-loop turn runs (read from the source; the effect is measured below).
+      
+      - Every term of every added quad is a wasm-bindgen wrapper registered in a `FinalizationRegistry` (`oxigraph/node.js` from line 1212, `vocab.ts` lines 58, 74 and 93).
+      - Its callbacks run only on a macro-task turn, so a synchronous run never lets the old store go.
+  - **Measurements**
+    
+    - **Conditions** (by the Coder in the store-size investigation, 2026-10-10): <a name='id/BlockNode:00D0X8XR9000A' class='aperas-anchor aperas-id'></a> scratch node processes and scratch services with their own run directory and port, on copies of the store under `/tmp`; single runs unless a count is given, at a machine load average of 2 to 3.5, the live service untouched.
+    - **Repeated `rehydrateStore` with the old store dropped by assignment, as `service.ts` line 379 does**
+      
+      - With no event-loop turn between runs, external memory grew 81, 157, 232, 307, 382, 457 MB over six runs (one whole store, about 75 MB, per run), rss 275 to 812 MB, and run time rose 1.2, 8.0, 11.2, 20.0, 20.5, 23.2 s.
+      - A forced `global.gc()` after each run freed none of it (identical external, heapUsed only 12 to 23 MB lower).
+      - With a 200 ms event-loop turn around two `gc()` calls external was 81 MB and then flat at 104 MB, rss about 300 MB and a run about 1 s.
+      - Calling `store.free()` on the old store changed nothing beyond that.
+    - **The whole reload-style cycle (rehydrate, three sweeps, link sweep)**
+      
+      - With no turns between runs it took 26.0, 64.5, 97.7 and 225.1 s with rss 566, 971, 1,372 and 1,731 MB and external 282, 560, 837 and 1,115 MB.
+      - Run 5 was killed with `kill -9` after 647 s, because a tight synchronous loop ignores `kill`, so it has no figures.
+      - With an event-loop turn and a `gc()` between runs it took 22.7, 14.5, 18.8, 4.0 and 4.0 s with external 282, 297, 312, 312 and 312 MB.
+    - **The dirty reload replicated in one process as one synchronous request after a settled boot (`m5.ts`)**
+      
+      - Shutdown sweeps 1,570 ms, content flush 8,323 ms, state flush 10,472 ms, `rehydrateStore` with the old store still referenced 29,630 ms, link sweep 38,506 ms.
+      - Total 88,504 ms, end rss 999 MB, external 576 MB.
+    - **The same phases with a 300 ms event-loop turn between them (`m5b.ts`)**
+      
+      - 1,471, 1,145, 1,484, 903 and 1,752 ms, total 8,080 ms including the four turns, end rss 808 MB, external 278 MB.
+      - The same code costs 8 s as separate event-loop turns and 88 s as one synchronous request.
+    - **The live service's high-water mark** is 1.66 GB (VmHWM, read from `/proc` by the Coder).
+  - **Not proven**
+    
+    - Not measured: <a name='id/BlockNode:00D0X8XR9R00E' class='aperas-anchor aperas-id'></a> a reload on the live service (it would need the user's approval to stop it).
+    - The same cycle after the scans are changed (not measured).
+  - **Fix directions**
+    
+    - No fix has been tried.
+    - [The scans issue's Fix directions](#id/BlockNode:00D0X65RB8008): <a name='id/BlockNode:00D0Y9NHJ0001' class='aperas-anchor aperas-id'></a> the candidate layers for the scans in the reload cycle are listed there and are not repeated here.
+  - **Related**
+    
+    - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001): <a name='id/BlockNode:00D0X8XR9R00K' class='aperas-anchor aperas-id'></a> this measures what it described as the old store left to the garbage collector (read, untested there); it is extended and links here.
+    - [The memory issue](#id/BlockNode:00CVQ4Z968001): <a name='id/BlockNode:00D0X8XR9R00M' class='aperas-anchor aperas-id'></a> this measures the hypothesis there that a reload could keep old stores alive; it is extended and links here, and this entry holds the measurement and the 74 to 119 s reload.
+- **Full-store scans materialize every quad as a JavaScript object, and the service's memory and time follow the scans and the wrappers they leave, not the 41.7k quads**: <a name='id/BlockNode:00D0W02KPG001' class='aperas-anchor aperas-id'></a> measured 2026-10-10 by the Coder in the store-size investigation. Filed 2026-10-10.
+  
+  - **Root cause**
+    
+    - **The scans** (read from the source)
+      
+      - `allIdsOfKind` (`dehydrate.ts` lines 49 to 58) does `store.match(null, null, null, null)` and reads `q.subject` on each of the 41.7k quads.
+      - It is called by: <a name='id/BlockNode:00D0X65RA0004' class='aperas-anchor aperas-id'></a>
+        
+        - `tombstoneVacuousContainers` (`node.ts` lines 2230 to 2248, once per fixed-point loop, so at least once).
+        - `pruneUnreachableTombstones` (lines 2183 to 2214: <a name='id/BlockNode:00D0X65RA0006' class='aperas-anchor aperas-id'></a> 2 calls for the mark roots and 3 for the sweep).
+        - `pruneStaleUnfolds` (line 2087, 1 call).
+        - `checkLinkIntegrity` (`linkIntegrity.ts` lines 85 and 86, 1 call).
+      - Together that is at least 8 scans in boot, and 4 scans per flush (`dehydrate.ts` lines 111 to 116 and 149 to 168).
+      - Further matches are made by `wrap` (`node.ts` line 2144, a new object plus `Object.seal` per node), `readField` (lines 156 to 162, one `store.match` per field read) and `childrenOf` (lines 73 to 84, one match plus one more per child).
+      - The second pass of `rehydrateStore` (`store.ts` lines 154 to 158) scans the whole store for dangling references (97 ms).
+    - **The wrappers the scans leave** (read from the source)
+      
+      - `store.match` returns an array of `Quad` wrappers (`oxigraph/node.js` lines 611 to 620, then `.slice()`), so each scan creates 41.7k quad wrappers plus the term wrappers.
+      - The wrappers are released only after a garbage collection and a macro-task turn.
+      - WASM linear memory, once grown, is never returned (the comments at `node.ts` lines 2166 to 2169 say "WASM's grow-only memory").
+  - **Measurements**
+    
+    - **Conditions** (by the Coder in the store-size investigation, 2026-10-10): <a name='id/BlockNode:00D0X65RB0005' class='aperas-anchor aperas-id'></a> same conditions as [the reload entry](#id/BlockNode:00D0W00YCR001) above, scratch processes and services on copies under `/tmp`, single runs, load average 2 to 3.5.
+    - **The effect of the scans on one boot** (measured 2026-10-10; a process with baseline rss 119 MB, heapUsed 13, external 5)
+      
+      - After `rehydrateStore` alone: <a name='id/BlockNode:00D0X65RB0007' class='aperas-anchor aperas-id'></a> rss 273 MB (heapUsed 60, external 81).
+      - After `tombstoneVacuousContainers`: <a name='id/BlockNode:00D0X65RB0008' class='aperas-anchor aperas-id'></a> rss 314 (external 110).
+      - After `pruneUnreachableTombstones`: <a name='id/BlockNode:00D0X65RB0009' class='aperas-anchor aperas-id'></a> rss 481 (external 221).
+      - After `pruneStaleUnfolds`: <a name='id/BlockNode:00D0X65RB000A' class='aperas-anchor aperas-id'></a> rss 511 (external 241).
+      - After `checkLinkIntegrity` run at once: <a name='id/BlockNode:00D0X65RB000B' class='aperas-anchor aperas-id'></a> rss 572 (external 282).
+      - After `gc()` and an event-loop turn the V8 heap fell to about 54 MB while external stayed at 282 and rss at 572.
+    - **The link sweep took 17,681 ms run straight after the boot sweeps and 2,060 ms after an event-loop turn** (measured 2026-10-10)
+    - **The shutdown path** (`m4.ts`), with no turn since boot (measured 2026-10-10)
+      
+      - Shutdown sweeps 1,590 ms, `dehydrateToJsonLd` 13,818 ms, `dehydrateStateToJsonLd` 11,790 ms.
+      - A cold variant without the link sweep: <a name='id/BlockNode:00D0X65RB000G' class='aperas-anchor aperas-id'></a> 1,598, 16,693 and 12,840 ms.
+      - A second pass over the same store: <a name='id/BlockNode:00D0X65RB8000' class='aperas-anchor aperas-id'></a> 23,662 and 24,042 ms.
+        
+        - Of these, `allIdsOfKind(BlockNode)` was 271 ms and `isThreadScopedId` 4,748 times 5,639 ms.
+        - `serializeDoc` 1,307 times (thread subset) took 6,294 ms and 3,441 times (content subset) 16,404 ms.
+      - The same flushes ran 1.1 s and 1.5 s when the store had had an event-loop turn since the sweeps, and 8 to 17 s each when it had not.
+    - **The cost is superlinear in the number of live wasm-bound objects and not in the quad count** (measured 2026-10-10)
+      
+      - On the bare engine with per-quad `store.add(quad(...))` (what Aperas does), 50k quads had 19 Mark-Compacts totalling 585 ms and 100k had 128 totalling 4,684 ms, with the add cost per quad 3 to 4 times higher.
+      - Bulk `store.load` of the same 100k quads took 0.29 s.
+      - The engine alone is not slow at this size (see [the memory issue](#id/BlockNode:00CVQ4Z968001) for its per-quad cost).
+  - **Fix directions**
+    
+    - No fix has been tried.
+    
+    - **Layer 1 — bound matches in place of unbounded ones** (a candidate, listed first in the order to try them; not decided, not tried)
+      
+      - **Replaces**: <a name='id/BlockNode:00D0Y9HG30002' class='aperas-anchor aperas-id'></a> the unbounded `store.match(null, null, null, null)` in `allIdsOfKind` (`dehydrate.ts` lines 49 to 58) with a match for a kind's type quads only; the scan in `removeDanglingUnfolds` with one object-bound `store.match(null, unfolds, deletedIri, null)`; the reads in `wrap` (`node.ts` line 2144) and `readField` (lines 156 to 162) with one subject-bound match per node.
+      - **To check first**, on a copy of the real store: <a name='id/BlockNode:00D0Y9HG30003' class='aperas-anchor aperas-id'></a> that every node has a type quad agreeing with the kind `nodeKindFromId` derives from its id, by comparing both result sets (unchecked); and the cost of each bound form against the full scan (the twelve-fold saving is an estimate, not measured).
+      - **Condition**: <a name='id/BlockNode:00D0Y9HG30004' class='aperas-anchor aperas-id'></a> the first layer in the order of the note; the later layers are tried only if this one leaves the cost in place.
+    - **Layer 2 — a kind-to-ids index** (a candidate; not decided, not tried)
+      
+      - **Replaces**: <a name='id/BlockNode:00D0Y9HG30006' class='aperas-anchor aperas-id'></a> only the body of `allIdsOfKind`; its callers are unchanged and it returns a snapshot array. The index is a `Map<kind, Set<id>>` attached to the store, built from `seenIds` at rehydrate.
+      - **To check first**: <a name='id/BlockNode:00D0Y9HG30007' class='aperas-anchor aperas-id'></a> the index is kept by two write helpers through which the 27 `store.add` and `store.delete` sites are routed (not built), and the verify run compares it with a full scan after each operation (not run).
+      - **Condition**: <a name='id/BlockNode:00D0Y9HG30008' class='aperas-anchor aperas-id'></a> only if layer 1 still leaves too many wrappers.
+    - **Layer 3 — a per-node record cache, the fine-grained index** (a candidate; not decided, not tried)
+      
+      - **Replaces**: <a name='id/BlockNode:00D0Y9HG3000A' class='aperas-anchor aperas-id'></a> repeated reads of a node's fields through `wrap` and `readField`, each of which crosses into wasm. One plain JavaScript record per node (strings and numbers, no wasm handle), filled by a single subject-bound match with the quads freed at once and invalidated by the write helpers; a set of tombstoned ids is the smallest form.
+      - **To check first**: <a name='id/BlockNode:00D0Y9HG3000B' class='aperas-anchor aperas-id'></a> that `free()` on the quads works as assumed (untested). It sits one level above the library because a wasm quad has no object to be one-to-one with.
+      - **Condition**: <a name='id/BlockNode:00D0Y9HG3000C' class='aperas-anchor aperas-id'></a> only if per-node reads still dominate after layers 1 and 2.
+    - **Beside the layers, not part of them** (candidates; not decided, not tried)
+      
+      - **Bulk load**: <a name='id/BlockNode:00D0Y9HG3000E' class='aperas-anchor aperas-id'></a> rehydrate by one `store.load` of an N-Quads string, with the dangling references collected in a JavaScript set while encoding; it would replace the per-quad adds and the second full scan (`store.ts` lines 154 to 158). Untested.
+      - **Smaller measures**: <a name='id/BlockNode:00D0Y9HG3000F' class='aperas-anchor aperas-id'></a> `free()` on quads as soon as they are read (untested), and yielding to the event loop between phases as a safety net.
+      - **The flush**: <a name='id/BlockNode:00D0Y9HG3000G' class='aperas-anchor aperas-id'></a> a bulk `store.dump` does not serve it, because the mirror is stable-id JSON-LD; it needs its own design, which does not exist.
+  - **Related**
+    
+    - [The removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X65RB800B' class='aperas-anchor aperas-id'></a> the scan cost per embedded node in a task removal is held there and is not repeated here.
+    - [The memory issue](#id/BlockNode:00CVQ4Z968001) and [the removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X65RB800C' class='aperas-anchor aperas-id'></a> the scan point already in them (a candidate source of garbage-collector pressure, read, untested) is extended and linked to this entry; this one is filed separately because it covers boot, flush and read paths and not only removal.
+- **`aperas service restart` errors out after 10 s and starts nothing whenever the service has been marked dirty, which any `unfold`, `fold` or `zoom --view` does**: <a name='id/BlockNode:00D0W044DG001' class='aperas-anchor aperas-id'></a> measured 2026-10-10 by the Coder in the store-size investigation. Filed 2026-10-10.
+  
+  - **Symptom**
+    
+    - After one `unfold ... --view <view>`, the CLI gave up at 10.45 and 10.42 s with "Service (pid N) didn't stop within 10s of SIGTERM" and, for `restart`, started no new service.
+    - After the failed stop the old process did exit, so the next `service start` costs about 5.5 s plus about 20 s in which commands are refused (see the start entry below).
+    - A restart, its error at 10 s, a start, its error at 5.5 s and retrying commands until they work adds up to about 40 to 50 s of waiting.
+  - **Root cause**
+    
+    - The client's stop wait is shorter than the flushes that the stop runs.
+      
+      - The SIGTERM handler runs in JavaScript and queues behind the work in flight.
+    - The dirty state is the usual state in agent use.
+  - **Measurements**
+    
+    - **Conditions** (by the Coder in the store-size investigation, 2026-10-10): <a name='id/BlockNode:00D0X8VQZR006' class='aperas-anchor aperas-id'></a> a scratch service with its own run directory (`XDG_RUNTIME_DIR`, `APERAS_HTTP_PORT=2790`; `getRunDir()` reads `XDG_RUNTIME_DIR`, `serviceLock.ts` lines 49 to 52), single runs unless a count is given, load average 2 to 3.5; the live lock stayed on pid 33127 throughout.
+    - **An idle `service stop` of a settled service**: <a name='id/BlockNode:00D0X8VQZR007' class='aperas-anchor aperas-id'></a> the old pid was gone 1.96 s after the command started (about 1 s of that is CLI startup).
+    - **A restart of an idle settled service**
+      
+      - The pid was gone at 1.64 and 1.60 s.
+      - The CLI exited 1 at 6.76 and 6.65 s with "did not become ready in time", and the new lock turned ready at 6.79 and 6.70 s.
+    - **After one `unfold ... --view <view>`**, which sets `dirty` and `stateDirty` (`service.ts` lines 520 to 534; an `unfold` without `--view` is a peek and sets nothing)
+      
+      - `service stop` and `service restart` took the old pid 12.49 s to exit in 2 of 2 runs.
+      - The mirror files show the content flush at 20:51:55 to 56 and the state flush finishing at 20:52:05.
+      - Of the 12.5 s the shutdown sweeps are about 1.6 s and the two flushes the rest.
+    - **A `restart` issued about 6 s after a start, while the startup link sweep still runs**
+      
+      - It took 21.08 s for the old pid to go; the CLI gave up at 10.69 s and started nothing.
+      - A first attempt failed the same way.
+  - **Not proven**
+    
+    - Not measured: <a name='id/BlockNode:00D0X8VQZR00K' class='aperas-anchor aperas-id'></a> a restart on the live service (it would need the user's approval to stop it).
+  - **Fix directions**
+    
+    - No fix has been tried.
+  - **Related**
+    
+    - [The removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X8VQZR00Q' class='aperas-anchor aperas-id'></a> this is the measured form of "didn't stop within 10s of SIGTERM" recorded there.
+    - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001): <a name='id/BlockNode:00D0X8VQZR00R' class='aperas-anchor aperas-id'></a> there it was read as "consistent with it, not shown to be the cause"; here it is a separate defect (a stop wait shorter than the flushes), so it is filed here and those two link to it.
+- **`aperas service start` prints "did not become ready in time" at 5 s although the lock turns ready at 5.3 to 5.8 s, and every command is then refused for about 20 s**: <a name='id/BlockNode:00D0W05P08001' class='aperas-anchor aperas-id'></a> measured 2026-10-10 by the Coder in the store-size investigation, scratch service as in [the restart entry](#id/BlockNode:00D0W044DG001) above, cold `service start` 6 times, load average 2 to 3.5. The lock turned ready at 5.28 to 5.77 s and the CLI exited 1 with "ApeironNgn service did not become ready in time" at 5.42 to 5.76 s in all 6 runs, because `READY_TIMEOUT_MS = 5_000` in `serviceClient.ts` (lines 24 and 25) starts counting after the CLI has loaded, while the service came up 0 to 60 ms later; the ready time breaks down as about 1 s of node and `tsx` start, 1.1 s of `rehydrateStore` and 3.2 s of boot sweeps (`Rehydrated` is logged about 3.3 s before the lock turns ready). After ready, every `aperas` command in the first 19.5 to 23.0 s failed with "No ApeironNgn service running" (6 of 6 starts; `usable_minus_ready` 19.5, 20.2, 20.9, 21.4, 22.0 and 23.0 s, measured through a probe that costs about 1 s of CLI start, so accurate to about 1 s), because the startup link sweep is enqueued on the event loop right after `markReady` (`service.ts` lines 818 to 826) and `ping` has a 300 ms timeout (`serviceClient.ts` line 23). A service that is already settled answers a `profile list` in 0.55 s wall, CLI start included. This measures two points already in the graph: the 5 s ready wait that [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001) put close to the real boot time, and the 300 ms ping that [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001) names as the reason a busy service reads as down; both are extended with these figures and link here, and this entry holds the start-side measurement. Not measured: a start on the live service (it would need the user's approval to stop it). No fix has been tried. Filed 2026-10-10.
+- **`design/` has no document for the store, hydration or the service lifecycle**: <a name='id/BlockNode:00D0W07DRR000' class='aperas-anchor aperas-id'></a> noted 2026-10-10 in the store-size investigation. The graph holds the early ApeironNgn design only in the archive (`archive/Aperas-design.md`, where `rehydrateStore` is a quoted 256 ms at 1,594 BlockNodes), and nothing in `design/` states the quad shape the store holds, when and how the mirrors are hydrated and dehydrated, what the boot, the flush timers, the shutdown and the reload each do and in what order, or what the client's waits (300 ms ping, 5 s ready, 10 s stop) are allowed to assume of them. The boot and shutdown issue already says there is no document for the service lifecycle; this entry records the same gap for the store and hydration too, so the figures in the issues above have no design to be read against. Recorded only; no design is written here. Filed 2026-10-10.
+- **Garbage collection never collects an unreachable block that was never tombstoned, so the stray block `BlockNode:00CJ2TCV40000` survives every restart**: <a name='id/BlockNode:00D1A2AY68001' class='aperas-anchor aperas-id'></a> it has only a link, nothing refers to it, and neither sweep marks or prunes it. Filed 2026-10-11.
+  
+  - **Symptom**
+    
+    - `BlockNode:00CJ2TCV40000` has no `type`, no title, no parent, `children: []` and one `Link` (position 114) to `BlockNode:00CJ6TGSX8001`, which exists (read with `aperas show`, 2026-10-11).
+    - Nothing refers to it: <a name='id/BlockNode:00D1A2AY68004' class='aperas-anchor aperas-id'></a> `aperas backlinks` finds no link to it (read, 2026-10-11).
+    - It is still in the store after restarts (the user's question, 2026-10-11).
+  - **Root cause**
+    
+    - `tombstoneVacuousContainers` marks only a `list`, or a `listItem` with no text, as vacuous, so a block with no `type` never qualifies (read, `node.ts` lines 2231 to 2252).
+    - `pruneUnreachableTombstones` skips any block that is not tombstoned, with the comment "never tombstoned — not a GC candidate regardless of reachability" (read, `node.ts` line 2208).
+    - So an unreachable block that was never tombstoned is collected by neither sweep, by design (read; not yet checked by the Coder).
+  - **Not proven**
+    
+    - How it came to be a block with only a link is unknown.
+    - Whether other unreachable blocks of this shape exist is not counted.
+  - **Fix directions**
+    
+    - None decided. Whether the block is garbage or a shape to keep is the user's to say; the block is not to be touched until then.
+  - **Related**
+    
+    - [The full-store-scans issue](#id/BlockNode:00D0W02KPG001): <a name='id/BlockNode:00D1A2AY6800G' class='aperas-anchor aperas-id'></a> a bound `allIdsOfKind` on `title` or `type` gives 5,556 `BlockNode` ids against 5,557 from the scan, and the one missing is this block, so it would drop from the next flush (measured by the Coder in the store-size investigation).
 
 ## Sub-Parts <a name='id/BlockNode:00CF1WZ4JG00A' class='aperas-anchor aperas-id'></a>
 
