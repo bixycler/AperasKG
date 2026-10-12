@@ -17021,7 +17021,6 @@
       "BlockNode:00CNX1T4XG001",
       "BlockNode:00CRBJ0VYG001",
       "BlockNode:00CVMPABY8001",
-      "BlockNode:00CVNX6A3R000",
       "BlockNode:00CVNZXVR8001",
       "BlockNode:00CVQ0PVS0001",
       "BlockNode:00CVQ4Z968001",
@@ -17331,6 +17330,7 @@
       "BlockNode:00CJ023M08001",
       "BlockNode:00CKSP8JX0000",
       "BlockNode:00D1BAT6Q0001",
+      "BlockNode:00CVNX6A3R000",
       "BlockNode:00CJ0202MG001",
       "BlockNode:00CJ0HX2Y0000",
       "BlockNode:00CGM4YD4G001"
@@ -39248,104 +39248,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR857KYR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 1",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR85BGM8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: Record the skill v3.1 edit, already made and staged in the code repo's `skills/` (`aperas`, `aperas-orchestrator`, `aperas-grapher`, `aperas-coder`), in the graph's record of the skill.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR85BGMG000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR85BGMG000",
-    "text": "[Skill v3.1 — decisions from the first-run findings](../discussion/aperas-skill.md#id/BlockNode:00CR81Y470001) — the four decisions the edit implements, each a sub-item: staging, missing `## Freeflow`, read-and-record, the loop in the base skill plus Asks citing their decisions",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR85BGMG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR85BGMG001",
-    "text": "[First live run of the v3 loop surfaced skill defects](../discussion/aperas-skill.md#id/BlockNode:00CR7N7Z60001) — the findings behind those decisions",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR85BGMG002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "The edit, by file",
-    "text": "The edit, by file: base gains *The task loop* under *Three roles, one graph*, and *Stage each verified step* now has every role stage what it writes. The orchestrator skill's *Running a task* follows the loop; it gains the rule to create a missing `## Freeflow`, the rule that every Ask cites its decisions' freeflow nodes, and *Reading for yourself — read and record*. The grapher's survey is scoped to the graph side, and the coder's first turn is always a survey. All four are bumped to v3.1. `git diff --cached skills/` in the code repo has the exact text.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR85BGMG003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR85BGMG003",
-    "text": "Record it as a v3.1 delta on the v3 snapshot in `discussion/aperas-skill.md`, following the existing delta convention, including `Supersedes:` lines for the replaced staging sentence and the replaced *Running a task* steps. Run `scripts/skill_drift.py` until it is clean, and bring `design/aperas-skill.md` in line wherever it states the roles, the loop or staging.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR85BGMG004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Out of scope",
-    "text": "Out of scope: the three tool issues the v3.1 entry names. They are held back as the v3.1 test tasks.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR86WPQG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: record the staged diff as a v3.1 delta beside [the v3 snapshot](../discussion/aperas-skill.md#id/BlockNode:00CR5GCSEG001), bring design's Multi-agent working in line, then drift-check until clean",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR86WPQG002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Oriented",
-    "text": "Oriented: `git diff --cached --stat skills/` is 4 files, +40/−13. Before recording, `skills/aperas/scripts/skill_drift.py` (the script lives there, not at repo-root `scripts/` as the grapher skill writes it) reported 25 added units and 12 dropped, all from this edit.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR86WPQG003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "The superseded v3 items, by id",
-    "text": "The superseded v3 items, by id: base status 00CR5GCSEG004, base staging sentence 00CR5GCSF8008; orchestrator status 00CR5GCSG800Y, its *Every exchange* opening paragraph 00CR5GCSG800Z (stored as that heading's text), *Running a task* steps 2, 4–8 (00CR5GCSG8013, 00CR5GCSG8015–8019); grapher status 00CR5GCSGG003; coder status 00CR5GCSH000B and its survey paragraph 00CR5GCSH000T (stored as that heading's text).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR86WPQG004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design statements affected, all under [Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001)",
-    "text": "Design statements affected, all under [Multi-agent working](../design/aperas-skill.md#id/BlockNode:00CR3X3N00001): [Orchestrator](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003) (write scope, now also stages and reads-and-records), [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) (missing the orchestrator's verify turn, no scoping of each survey) and [Skill packaging](../design/aperas-skill.md#id/BlockNode:00CR3X3N08007) (does not say the loop lives in the base). No design block states the per-role staging rule; the edit loop's step 5 is grapher-scoped and still true.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR874TC8001",
     "@type": "BlockNode",
     "links": [
@@ -40169,114 +40071,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR880JH8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR880JH8001",
-    "text": "Inserted [v3.1 additions — delta on the v3 snapshot](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001) after the v3 snapshot, at the artifact root where v2.3 onward and the v3 snapshot sit (v0 to v2.2 sit under the H1). Its text was cut from the staged files by line number, not retyped: one `###` section per changed unit, named `<file> — <section> — <change>`, with 8 `Supersedes:` lines covering all 12 retired v3 ids. Insert reported 16 links resolved; `aperas show` confirmed the intro's 3 targets and all 6 on the *Running a task* entry.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8813R0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "`skill_drift.py` after the delta",
-    "text": "`skill_drift.py` after the delta: 0 added, 0 dropped unaccounted, 12 superseded and accounted for.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR881HD8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design",
-    "text": "Design: rewrote [Orchestrator](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003) (bare-text update, id kept), and [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) and [Skill packaging](../design/aperas-skill.md#id/BlockNode:00CR3X3N08007) (`--text-only`, ids and titles kept). Before editing, their only backlinks were this thread and planning's v3 drafting item. Provenance at the origin: [Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR87QPK0001) under the decisions entry points up at all three and sideways at the delta, and `backlinks` confirms each of the four shows it. `check-links`: 0 discrepancies across 2099 blocks. Projected both docs and staged `AperasKG/`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: the v3.1 edit is now in the graph's record. The drift check is clean, design's Multi-agent working matches the edit, and `AperasKG/` is staged. The three reserved tool issues were left alone.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR886A8G002",
-    "text": "[v3.1 additions — delta on the v3 snapshot](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001) — new. It records every changed unit verbatim across all four files, and its `Supersedes:` lines cover the staging sentence, the six replaced *Running a task* steps, the four status lines, the old *Every exchange* opening and the coder's survey paragraph.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR886A8G003",
-    "text": "[Orchestrator](../design/aperas-skill.md#id/BlockNode:00CR3X3N00003) — now covers creating a missing `## Freeflow`, staging its own writes (stated as every role's rule), and read-and-record.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR886A8G004",
-    "text": "[The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) — now the full turn sequence, including the orchestrator's verify turn and the finishing turn. It also says each survey stays on its own side and every Ask cites the freeflow nodes for its decisions.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR886A8G005",
-    "text": "[Skill packaging](../design/aperas-skill.md#id/BlockNode:00CR3X3N08007) — now says the task loop lives in the base skill.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR886A8G006",
-    "text": "[Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR87QPK0001) — the provenance marker I added under your decisions entry. It points up to the three design blocks and across to the delta.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Question — drift-script path**",
-    "text": "**Question — drift-script path**: the Ask and the grapher skill's *Checking the skill against its own record* both say `scripts/skill_drift.py`. The script is actually at `skills/aperas/scripts/skill_drift.py`, and no repo-root `scripts/` exists. Should the skill text be corrected, and should I record this in freeflow first?",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Question — history**",
-    "text": "**Question — history**: [Milestones](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8004) stop at v2. There is nothing for v2.1 to v2.11, v3 or v3.1. Should the finishing turn add v3 and v3.1 milestones, or is that gap intended?",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR886A8G009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Observation**",
-    "text": "**Observation**: `aperas check-links` still prints the `[ApeironNgn check-links]` prefix. The v2.11 delta says the runtime prefixes were rewritten to `[aperas X]`, so either the check-links path was missed or the dispatch differs. I have not recorded this yet; it is a candidate freeflow item.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR88MS2G001",
     "@type": "BlockNode",
     "links": [
@@ -40377,104 +40171,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR8G69ER001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 2",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8GA8N8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: Three follow-ups to Turn 1, each decided by the user: record the drift-script path fix, add the missing history milestones, and fix the heading level of the later version sections in `discussion/aperas-skill.md`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8GA8N8002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8GA8N8002",
-    "text": "[Correct the drift-script path](../discussion/aperas-skill.md#id/BlockNode:00CR8G0T70002) — already fixed and staged in `skills/aperas-grapher/SKILL.md` (`git diff --cached skills/`). Record it in the v3.1 delta; `skills/aperas/scripts/skill_drift.py --added` currently reports the 2 changed units.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8GA8N8003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8GA8N8003",
-    "text": "[History milestones](../discussion/aperas-skill.md#id/BlockNode:00CR8G0T78000) — add v3 and v3.1 milestones to `history/aperas-skill.md`, whose milestones stop at v2. If v2.1–v2.11 also deserve milestones by the doc's own convention, say so in your Report rather than adding them.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8GA8N8004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8GA8N8004",
-    "text": "[Fix the heading level of the later version sections](../discussion/aperas-skill.md#id/BlockNode:00CR8G0T78001) — move the sections from the v2.3 delta onward, currently at the document root, under the H1 like v0–v2.2, keeping their ids.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8GA8N8005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "A fourth, decided while this Ask was being written",
-    "text": "A fourth, decided while this Ask was being written: [subturns are required, not optional as a level](../discussion/aperas-skill.md#id/BlockNode:00CR8G0T78002) — already fixed and staged in `skills/aperas/SKILL.md`'s *Threads* section. Record it in the v3.1 delta and bring `design/aperas-skill.md` in line if it states the old wording.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8J7FA0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: record the two staged skill edits as v3.1 delta entries, bring design's thread statement in line, move the root-level version sections under the H1, add the v3 and v3.1 milestones, then drift-check and link-check",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8J7FA0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Oriented",
-    "text": "Oriented: the four decisions are [Follow-ups decided after the v3.1 recording turn](../discussion/aperas-skill.md#id/BlockNode:00CR8G0T70001)'s children. `skills/aperas/scripts/skill_drift.py` before recording: 3 added (base *Threads* subturn paragraph; grapher *Checking the skill* paragraph and code block), 2 dropped unaccounted (v3 ids 00CR5GCSF000K, 00CR5GCSH0005). The grapher paragraph's old v3 text is stored as heading 00CR5GCSH0004's own text; the drift script's dropped side matches on prefix, so it did not flag it, but it is replaced too and gets a `Supersedes:` line. The delta's convention: one `###` heading per changed unit, named `<file> — <section> — <change>`, heading text `Supersedes: [...]`, verbatim content as children, sections in file order.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8J7FA0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design",
-    "text": "Design: only [the threads statement](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) under Multi-agent working carries the old wording (\"Subturn is optional as a level but not as content\"). The freeflow item \"Subturns carry tool results, not only narration\" (00CR3YAK1R001) is a record of the v3 conversation and states nothing that the change retires.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8J7FA0004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Discussion structure",
-    "text": "Discussion structure: the artifact root holds the H1 plus 11 `##` sections, v2.3 delta (00CH5FJMDR001) through the v3.1 delta (00CR874TC8001). The H1's live children end at the v2.2 delta (00CGN8W9M8001); a tombstoned `## Reference` (00CF4QNX0000B) sits after it and is hidden.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8J7FA0005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "History",
-    "text": "History: [Milestones](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8004) has one bold-lead-in item per version through v1.4, then v2; nothing for v2.1–v2.11, v3 or v3.1. [Current Status](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8003) still describes the v1 restructure.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR8JD5VG001",
     "@type": "BlockNode",
     "links": [
@@ -40568,24 +40264,6 @@
     "text": "```bash\nskills/aperas/scripts/skill_drift.py              # both directions\nskills/aperas/scripts/skill_drift.py --added      # written into the file, never recorded\nskills/aperas/scripts/skill_drift.py --dropped    # recorded, no longer in the file\n```",
     "parent": "BlockNode:00CR8JDSQG001",
     "type": "code",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8JTAT0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Delta",
-    "text": "Delta: inserted [aperas — Discipline — Threads, every turn has subturns](../discussion/aperas-skill.md#id/BlockNode:00CR8JD5VG001) after the task-loop entry, superseding 00CR5GCSF000K, and [aperas-grapher — Checking the skill against its own record — the drift-script path corrected](../discussion/aperas-skill.md#id/BlockNode:00CR8JDSQG001) after the grapher survey entry, superseding 00CR5GCSH0004 and 00CR5GCSH0005. Content cut from the staged files by line number (base line 196; grapher lines 114–120). `aperas show` confirmed the `Supersedes:` links (1 and 2). The [delta intro](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001) gained a sentence citing the follow-up decisions; `--text-only`, title and 13 children kept. `skill_drift.py`: 0 added, 0 dropped, 14 superseded and accounted for.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8JTAT0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design edit",
-    "text": "Design edit: [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) now states the new rule (`--text-only`, id and title kept). Its other backlinks (planning's thread-size warning, concepts' Threads entry, Citation direction) cite it for other reasons and needed no change.",
-    "type": "listItem",
     "children": []
   },
   {
@@ -40790,123 +40468,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR8NB80G001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: all four follow-ups are done. Both skill edits are recorded in the v3.1 delta, and the drift check is clean. Design's Threads states the new subturn rule. The v2.3-onward sections now sit under the H1 with their ids kept, v3 and v3.1 have history milestones, and `AperasKG/` is staged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8NB80G002",
-    "text": "[aperas — Discipline — Threads, every turn has subturns](../discussion/aperas-skill.md#id/BlockNode:00CR8JD5VG001) and [aperas-grapher — Checking the skill against its own record — the drift-script path corrected](../discussion/aperas-skill.md#id/BlockNode:00CR8JDSQG001): new delta entries. They supersede 00CR5GCSF000K, 00CR5GCSH0004 and 00CR5GCSH0005. `skill_drift.py` reports 0 added, 0 dropped and 14 superseded.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "[Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)",
-    "text": "[Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004): now says every turn has subturns, at least one per batch of tool calls. Its id and title are kept.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "[v3 milestone](../history/aperas-skill.md#id/BlockNode:00CR8MWVY8001) and [v3.1 milestone](../history/aperas-skill.md#id/BlockNode:00CR8MWVYG000)",
-    "text": "[v3 milestone](../history/aperas-skill.md#id/BlockNode:00CR8MWVY8001) and [v3.1 milestone](../history/aperas-skill.md#id/BlockNode:00CR8MWVYG000): new, after v2.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "[v3.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001)",
-    "text": "[v3.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001): moved under the H1 with the other ten root-level sections. Its intro gained a sentence citing the follow-up decisions.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "[Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR8N0ZVR001)",
-    "text": "[Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR8N0ZVR001): the provenance marker I added under your follow-up decisions entry.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Question — v2.1 to v2.11 milestones**",
-    "text": "**Question — v2.1 to v2.11 milestones**: the doc's convention gives each minor version a milestone, since v1.1 to v1.4 each have one. By that convention v2.1 to v2.11 deserve milestones too. That is 11 entries, drawn from their deltas. Should I add them?",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Question — Current Status**",
-    "text": "**Question — Current Status**: [Current Status](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8003) still describes the v1 restructure and a v1-era planning remainder. Should I rewrite it to describe v3.1? If so, should it be the same turn as the milestones?",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Observation — freeflow wording**",
-    "text": "**Observation — freeflow wording**: your entry [Decided — the loop lives in the base skill](../discussion/aperas-skill.md#id/BlockNode:00CR81Y470005) reads \"user approved 2026-09-27. move the full loop…\", with a lowercase sentence start. That text was already in the graph at HEAD. It is new in the projected file only because the file had not been re-projected since. The block is yours to fix, so I left it alone.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NB80G00A",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Observation — check-links prefix**",
-    "text": "**Observation — check-links prefix**: `aperas check-links` still prints `[ApeironNgn check-links]`, as I reported in Turn 1. It is still not recorded.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NEFV0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Heading-level fix",
-    "text": "Heading-level fix: moved the 11 sections, [v2.3 delta](../discussion/aperas-skill.md#id/BlockNode:00CH5FJMDR001) through [v3.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001), under the H1 after the v2.2 delta with stdin-less `insert --after`, each after the previous one. Each reported `moved`; the artifact root now holds only the H1, whose children run Dashboard … v2.2, v2.3 … v3.1, then the tombstoned `## Reference`. The projection did not change for the moves (the sections were already `##`); `skill_drift.py` still finds the v3 snapshot and v3.1 delta. The projected file had also been stale against the graph: projecting pulled in the orchestrator's freeflow entries since the last projection.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NEFV0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Milestones added",
-    "text": "Milestones added: inserted [v3](../history/aperas-skill.md#id/BlockNode:00CR8MWVY8001) and [v3.1](../history/aperas-skill.md#id/BlockNode:00CR8MWVYG000) milestones after v2, in the doc's bold-lead-in form. v3 cites design's Multi-agent working, planning's Batch 3 and the v3 snapshot. v3.1 cites design's The loop and Threads and the v3.1 delta. The snapshot and delta pointers are the sanctioned singular down-links, as in the v1.x milestones. `aperas show`: 3 links on each. By the doc's convention v2.1–v2.11 would each get a milestone too, since v1.1–v1.4 each have one. Not added, per the Ask.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8NEFV0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Provenance and checks",
-    "text": "Provenance and checks: [Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR8N0ZVR001) under the follow-up decisions entry cites both delta entries, design's Threads and both milestones, and `backlinks` on each of the five returns it. `check-links`: 0 discrepancies across 2139 blocks, and the output still carries the `[ApeironNgn check-links]` prefix. Projected discussion, design, history and this thread, then staged `AperasKG/`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR8NV4ZR001",
     "@type": "BlockNode",
     "links": [
@@ -41031,41 +40592,6 @@
     "title": "**Decided — history, round two** (2026-09-27)",
     "text": "**Decided — history, round two** (2026-09-27): the grapher adds the missing v2.1–v2.11 milestones to `history/aperas-skill.md`, matching the v1.1–v1.4 convention, and rewrites its Current Status paragraph, which still describes the v1 restructure, for v3.1. The user also had the [`check-links` prefix bug](../discussion/cli.md#id/BlockNode:00CR8RVCF8001) filed, not reserved as a test task.",
     "parent": "BlockNode:00CR81Y470001",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8RZJZG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 3",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8S1TFR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: Two more items, both decided.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8S1TFR002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8S1TFR002",
-    "text": "[History, round two](../discussion/aperas-skill.md#id/BlockNode:00CR8RXY6R001) — add v2.1–v2.11 milestones to `history/aperas-skill.md`, matching your own v1.1–v1.4 convention, and rewrite its Current Status paragraph (still describing the v1 restructure) for v3.1.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8S1TFR003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8S1TFR003",
-    "text": "[`aperas check-links` still prints `[ApeironNgn check-links]`](../discussion/cli.md#id/BlockNode:00CR8RVCF8001) — this is a code fix, not a graph one: file the issue in `issues/cli.md` for the coder, citing this freeflow entry and `packages/cli/src/kgCheckLinks.ts`'s five sites. Do not edit the source yourself.",
     "type": "listItem",
     "children": []
   },
@@ -41792,132 +41318,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR8ZCZ8R000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: add the v2.1–v2.11 milestones and rewrite Current Status in `history/aperas-skill.md`, then file the check-links prefix bug in `issues/cli.md`",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZCZ8R001",
-    "text": "Read all 11 v2.x deltas in `discussion/aperas-skill.md` (ids `00CGMY04AG001` through `00CQYGPR50001`) and drafted one milestone list item per version, matching the bold-lead-in-plus-\"Recorded as [the vX.Y delta](...)\" convention already used by v1.1–v1.4/v2/v3/v3.1.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZCZ8R002",
-    "text": "Inserted all 11 as siblings of `## Milestones`, chained via stdin-piped `aperas insert --after`, each after the previously-created id (v2 → v2.1 → … → v2.11 → v3). Confirmed via `aperas show` on the heading that children now run v2, v2.1…v2.11, v3, v3.1 in order, and via `aperas backlinks` on each delta id that every new milestone's link actually resolved (12 checked, including the v2.8 \"Entry route\" design link).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZCZ8R003",
-    "text": "Before rewriting Current Status, checked what it would need to stay accurate: `planning/aperas-skill.md`'s Task Breakdown (Batch 1 shipped as v1–v1.3 per its own heading text, Batch 2's 8 children are the v1.4 delta items verbatim, Batch 3 is v3/v3.1 per its own text) and `issues/aperas-skill.md`'s Open Issues (no longer empty — 5 children — so the old \"Open Issues is empty\" claim had to go, while [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A) is still unmeasured and still worth keeping).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZCZ8R004",
-    "text": "Updated the `## Current Status` heading's own text with `--text-only` (preserves its child paragraph), then updated that child paragraph directly — replacing the stale \"eighteen items relevelled\" v1-restructure narrative with the batch-to-version mapping just confirmed.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZCZ8R005",
-    "text": "Filed the check-links bug. `aperas unfold issues/cli.md` came back ambiguous — a tombstoned duplicate `ArtifactNode` shares the title (the known `resolve` tombstone-filtering gap) — resolved instead by id (`ArtifactNode:00CF2AEA78000`). Wrote the Open Issue as a self-contained entry citing the five sites in `packages/cli/src/kgCheckLinks.ts` and [design/packaging.md's Topology](../design/packaging.md#id/BlockNode:00CDGTZHSR005) (an upward citation) rather than the discussion delta directly, which would have been a down-citation; per *Provenance at the origin*, added a \"Filed as\" pointer at the `discussion/cli.md` freeflow entry instead, pointing up, piping its existing \"Possibly related\" child back verbatim to keep it alive.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Caught a second staleness the same edit created",
-    "text": "Caught a second staleness the same edit created: `issues/cli.md`'s own `ArtifactNode` frontmatter `description` still said \"No open issues in the CLI dispatcher layer itself.\" Fixed with `--text-only` on the `ArtifactNode` itself, so its root text and single H1 child stayed untouched.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZCZ8R007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZCZ8R007",
-    "text": "`aperas check-links` clean after the whole batch (2182 live blocks, 566 with link text). Projected `history/aperas-skill.md`, `issues/cli.md`, `discussion/cli.md`, and staged `AperasKG/`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZGNA8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: v2.1–v2.11 milestones added and Current Status rewritten for v3.1 in `history/aperas-skill.md`; the check-links prefix bug filed as an Open Issue in `issues/cli.md` for the coder.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZGNA8002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZGNA8002",
-    "text": "[The 11 new milestones](../history/aperas-skill.md#id/BlockNode:00CR8VMQHG001) — v2.1 through v2.11, sitting between the v2 and v3 milestones, each citing its own delta in `discussion/aperas-skill.md`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZGNA8003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZGNA8003",
-    "text": "[Current Status rewritten](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) for v3.1; its child paragraph now maps `planning/aperas-skill.md`'s three Task Breakdown batches to the versions that shipped them (Batch 1 → v1–v1.3, Batch 2 → v1.4, Batch 3 → v3/v3.1) instead of narrating the v1 restructure.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZGNA8004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZGNA8004",
-    "text": "[Open Issue filed](../issues/cli.md#id/BlockNode:00CR8XN9VG002) — the `check-links` prefix bug, citing `packages/cli/src/kgCheckLinks.ts`'s five sites and the rename rationale in design/packaging.md.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZGNA8005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR8ZGNA8005",
-    "text": "[Provenance added at the origin](../discussion/cli.md#id/BlockNode:00CR8RVCF8001) — the freeflow entry now points up to the filed issue, per *Provenance at the origin* rather than the issue citing the freeflow entry down.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR8ZGNA8006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Observation**",
-    "text": "**Observation**: `issues/cli.md`'s own `ArtifactNode` frontmatter description (\"No open issues in the CLI dispatcher layer itself\") went stale the moment the new entry landed — fixed in the same batch, since it's the same file the Ask already had me editing.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR902B3G001",
     "@type": "BlockNode",
     "links": [
@@ -42224,50 +41624,6 @@
     "children": [
       "BlockNode:00CR9KFCN0001"
     ]
-  },
-  {
-    "@id": "BlockNode:00CR99JQ18001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 4",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR99KFB0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: Record the detailed-records skill edit, already made and staged in `skills/` (`git diff --cached skills/` from the code repo root), in the v3.1 delta and in design.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR99KFB0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR99KFB0002",
-    "text": "[Decided — the skill asks for detailed records](../discussion/aperas-skill.md#id/BlockNode:00CR98HFCG001) — the decision. The edit: base *Threads* gains a **Tool gap** line in the Report template and a paragraph on recording friction. The grapher and coder Report steps list tool gaps. Grapher *Filing* files every tool gap. The orchestrator records its own friction in freeflow.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR99KFB0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR99KFB0003",
-    "text": "`skills/aperas/scripts/skill_drift.py --added` reports 6 units. Bring `design/aperas-skill.md`'s Threads block in line.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR99KFB0004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "The new rule applies to this turn",
-    "text": "The new rule applies to this turn: record every tool gap you hit, and list them in the Report.",
-    "type": "listItem",
-    "children": []
   },
   {
     "@id": "BlockNode:00CR9D1WW0001",
@@ -42582,159 +41938,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR9EB1ZR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: record the staged diff as six new v3.1 delta entries beside [the earlier ones](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001), bring design's [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) in line, and drift-check until clean",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Confirmed the staged diff (`git diff --cached skills/`) matches the Ask",
-    "text": "Confirmed the staged diff (`git diff --cached skills/`) matches the Ask: base *Threads* gains a **Tool gap** template line and a \"Record the friction\" paragraph; aperas-coder and aperas-grapher's *Every invocation* Report steps each gain \"and every tool gap it/the turn hit (base: *Threads*)\"; aperas-grapher's *Filing* gains \"File every tool gap...\"; aperas-orchestrator's *Every exchange with the user* gains a friction-into-freeflow sentence. `skill_drift.py --added` confirmed 6 units before recording, matching the diff exactly.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EB1ZR003",
-    "text": "For each of the 4 edited-not-new units, grepped `AperasKG/Apeiron/BlockNode.jsonld` for the old sentence to find its id: aperas-coder's Report item (00CR5GCSH000G, v3 snapshot), aperas-grapher's Report item (00CR5GCSGG008, v3 snapshot), aperas-grapher's Filing heading (00CR5GCSGG00D, v3 snapshot — its own `.text` holds the paragraph, not a separate child), and aperas-orchestrator's Every-exchange paragraph (00CR874TCG00A — already a v3.1 delta entry from Turn 2, not the v3 snapshot, since that sentence was already extended once).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EB1ZR004",
-    "text": "Inserted 6 new `###` headings as children of the v3.1 delta heading (BlockNode:00CR874TC8001), in doc order (aperas, aperas-orchestrator, aperas-grapher, aperas-coder) and file order within each: two new (no Supersedes) for the aperas base Threads changes (BlockNode:00CR9D1WW0001 code-line addition, BlockNode:00CR9D5Z60001 new paragraph), then four Supersedes entries with the full new text — aperas-orchestrator (00CR9D7DVR001 supersedes 00CR874TCG00A), aperas-grapher's Every invocation (00CR9D8210001 supersedes 00CR5GCSGG008), aperas-grapher's Filing (00CR9D9NQG001 supersedes 00CR5GCSGG00D), aperas-coder's Every invocation (00CR9DA7KG001 supersedes 00CR5GCSH000G). Each insert reported \"1 resolved\" for its Supersedes link; `aperas backlinks` on all four superseded ids confirmed the link actually landed.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EB1ZR005",
-    "text": "`skill_drift.py --added` then reported 0 — all 6 recorded.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design edit",
-    "text": "Design edit: appended a sentence to [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)'s own text via `--text-only` — \"A subturn also records the friction it hit... and the Report lists each as a tool gap for the grapher to file.\" Id, title and the single child paragraph (00CR3X3N08005) untouched; confirmed via `aperas tree`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EB1ZR007",
-    "text": "Delta intro (00CR874TC8001's own heading text) gained a clause on the third follow-up entry, via `--text-only`; children (now 19, the 6 new units added in place) unaffected — confirmed via the node's `children` list.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EB1ZR008",
-    "text": "Added a **Recorded and promoted** child under the decision node ([Decided — the skill asks for detailed records](../discussion/aperas-skill.md#id/BlockNode:00CR98HFCG001)) citing all 6 new delta entries and the design edit; 7 links resolved, all confirmed live via `aperas backlinks`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "`aperas check-links`",
-    "text": "`aperas check-links`: 0 discrepancies across 2227 live blocks. Projected `discussion/aperas-skill.md` and `design/aperas-skill.md`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EB1ZR00A",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "One thing worth a note for later, not a gap",
-    "text": "One thing worth a note for later, not a gap: `aperas update --text-only` on a heading whose `.text` spans two paragraphs reports \"overflow prepended, no reconciliation\" — undocumented in base Mechanics' `--text-only` item, but behaved exactly as wanted (both paragraphs kept, children untouched, verified above).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EHRK8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: the detailed-records edit is now in the graph's record. The drift check is clean, design's Threads matches the edit, `check-links` is clean, and `AperasKG/` is staged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EHRK8002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EHRK8002",
-    "text": "[The six new delta entries](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001) — two new (Tool gap template line, friction paragraph) in base *Threads*, and four Supersedes entries updating aperas-orchestrator's *Every exchange with the user*, aperas-grapher's *Every invocation* and *Filing*, and aperas-coder's *Every invocation*.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EHRK8003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EHRK8003",
-    "text": "[Design's Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) now states the friction/tool-gap rule too (`--text-only`, id and title kept).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EHRK8004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9EHRK8004",
-    "text": "[Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR9DYEZR001) under the decision node cites all six delta entries and the design edit.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EHRK8005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap**",
-    "text": "**Tool gap**: `git add AperasKG/` from the code repo failed with `pathspec 'AperasKG/' is beyond a symbolic link` — it's a symlink to a separate git repo, not a subdirectory of this one. Staged from `/home/will/source/AperasKG` directly instead; see the Work subturn.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9EHRK8006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Observation**",
-    "text": "**Observation**: `aperas update --text-only` on a heading whose `.text` spans two paragraphs reports \"overflow prepended, no reconciliation\" and kept both paragraphs plus the existing children untouched — undocumented in base Mechanics' `--text-only` item, worth a line there if it comes up again.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9F4B30001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap**",
-    "text": "**Tool gap**: `git add AperasKG/` from the code repo root failed — `fatal: pathspec 'AperasKG/' is beyond a symbolic link` — because `Aperas/AperasKG` is a symlink to `../AperasKG`, a separate git repository, not a directory inside the code repo. Worked around by `cd`-ing into `/home/will/source/AperasKG` and running `git add` on the changed paths directly from there.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR9G5RS8001",
     "@type": "BlockNode",
     "links": [
@@ -42799,23 +42002,6 @@
     "children": [
       "BlockNode:00CR9PS008001"
     ]
-  },
-  {
-    "@id": "BlockNode:00CR9M32J8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 5",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9M3TY8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: One more skill fix to record, already made and staged: [fix the misleading \"if you include them\" clause](../discussion/aperas-skill.md#id/BlockNode:00CR9KFCN0001) in the base skill's *Updating an existing list item*. Add it to the v3.1 delta and check design has nothing stating the old wording to correct.",
-    "type": "listItem",
-    "children": []
   },
   {
     "@id": "BlockNode:00CR9MCPXG001",
@@ -43182,132 +42368,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CR9S8FD0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: record the staged base-skill fix as a v3.1 delta entry beside the earlier ones, confirm design has nothing to correct, then check-links and project",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Oriented",
-    "text": "Oriented: confirmed the staged diff (`git diff --cached skills/`) matches the Ask exactly — both bullets in *Updating an existing list item* rewritten (the text-change bullet now says children are replaced too, not just left alone; the text-clears bullet rewritten as one symmetric rule). Grepped `AperasKG/Apeiron/BlockNode.jsonld` for the old sentences to find the v3-snapshot ids to supersede: `BlockNode:00CR5GCSG0001` (text-change bullet) and `BlockNode:00CR5GCSG0007` (text-clears bullet), both children of the *Updating an existing list item* heading `BlockNode:00CR5GCSG0000`. An older, already-distinct duplicate of the first sentence also exists at `BlockNode:00CNWKA6Q0002` under a different, earlier parent — not the one to supersede, since the v3.1 delta chains off the v3 snapshot only.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design",
-    "text": "Design: grepped `design/aperas-skill.md` for \"if you include them\", \"list item\" and children/tombstone wording — zero hits. Design says nothing at all about this mechanic, so nothing there needed correcting.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Delta",
-    "text": "Delta: inserted one new `###` heading, `BlockNode:00CR9P6W40001` (\"aperas — Mechanics — Updating an existing list item, the misleading \\\"if you include them\\\" clause fixed\"), as a child of the v3.1 delta heading `BlockNode:00CR874TC8001` — after the last aperas-base entry (*Stage each verified step*, `BlockNode:00CR874TCG005`) and before the first aperas-orchestrator entry, matching file order since this Mechanics-section fix follows every already-recorded Discipline-section entry. Two `Supersedes:` links plus the two corrected bullets verbatim as children. Insert reported 2 links resolved; confirmed both via `aperas backlinks` on `00CR5GCSG0001` and `00CR5GCSG0007`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Provenance",
-    "text": "Provenance: added a **Recorded and promoted** child under the decision node `BlockNode:00CR9KFCN0001`, pointing up at the new delta entry (an up-citation from discussion to itself-in-discussion is fine; the delta entry is the promotion target). `aperas backlinks` on the delta id confirms the link landed.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Drift check",
-    "text": "Drift check: `skill_drift.py --added` → 0 (nothing unrecorded). The plain `skill_drift.py` also shows 1 pre-existing \"DROPPED, unaccounted\" entry, `BlockNode:00CR9D1WW0001` (the Report template's Tool-gap line) — unrelated to this edit. It's a drift-script matching weakness: the recorded unit is one line lifted out of a much larger single `code` block in the live file (the whole thread-template example under *Threads*), and the script compares whole code blocks as one unit, so a substring match doesn't register even though the line is present verbatim in the file. Not fixed here — a pre-existing tool gap, not part of this Ask.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Checks",
-    "text": "Checks: `aperas check-links` clean (2262 live blocks, 598 with link text). Projected `discussion/aperas-skill.md` and staged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap**",
-    "text": "**Tool gap**: `aperas project discussion/aperas-skill.md --flush` refused with \"has changed on disk since this artifact/folder's last known content... Overwrite anyway?\", though nothing had actually hand-edited the file — the graph's own last-known-content record was just stale from an earlier turn's edits that were never re-projected (same situation Turn 2 already hit and noted). Confirmed safe via `git status`/`git diff` on the file (both empty against HEAD) before passing `--force --flush`. This interactive-confirmation behavior isn't documented anywhere in the skill's Mechanics section.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD0009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: the misleading \"if you include them\" clause fix is now recorded in the v3.1 delta; `design/aperas-skill.md` had nothing to correct.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD000A",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9S8FD000A",
-    "text": "[aperas — Mechanics — Updating an existing list item, the misleading \"if you include them\" clause fixed](../discussion/aperas-skill.md#id/BlockNode:00CR9P6W40001) — new delta entry, supersedes the v3 snapshot's two affected bullets.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD000B",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CR9S8FD000B",
-    "text": "[Recorded and promoted](../discussion/aperas-skill.md#id/BlockNode:00CR9PS008001) — the provenance marker under your decision node, pointing up at the delta entry.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD000C",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "`skill_drift.py --added`",
-    "text": "`skill_drift.py --added`: 0. `check-links`: 0 discrepancies across 2262 blocks. `AperasKG/` staged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD000D",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap**",
-    "text": "**Tool gap**: `aperas project discussion/aperas-skill.md` refused as stale-on-disk even though `git diff` showed nothing changed — a prior turn's edits had never been re-projected. Worked around with `--force` after confirming via git that nothing was actually different; see the Work subturn.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CR9S8FD000E",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Observation**",
-    "text": "**Observation**: `skill_drift.py`'s standing 1 \"dropped, unaccounted\" entry (the Tool-gap template line) is a pre-existing whole-code-block matching limitation, not caused by this edit — the recorded unit is a substring of a larger live code block. Worth a fix if the drift script is touched again, not part of this task.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CR9SRMW8002",
     "@type": "BlockNode",
     "tombstonedAt": "2026-09-27T09:19:07.664Z",
@@ -43600,50 +42660,6 @@
     "children": [
       "BlockNode:00CRAZZWR0001"
     ]
-  },
-  {
-    "@id": "BlockNode:00CRAXEPV0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 6",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRAXFG9G001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: Record the staged skill edit implementing two decisions in the v3.1 delta, and bring design in line.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRAXFG9G002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRAXFG9G002",
-    "text": "[Decided — threads may link to each other](../discussion/aperas-skill.md#id/BlockNode:00CRAX4MZ0001)",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRAXFG9G003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRAXFG9G003",
-    "text": "[Decided — apply the pre-send checklist for Asks](../discussion/aperas-skill.md#id/BlockNode:00CRAX4MZ8000)",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRAXFG9G004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRAXFG9G004",
-    "text": "The edit is `git diff --cached skills/` in the code repo. `skills/aperas/scripts/skill_drift.py` currently reports 9 added and 3 dropped.",
-    "type": "listItem",
-    "children": []
   },
   {
     "@id": "BlockNode:00CRAZ91C8001",
@@ -43976,186 +42992,6 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CRB0GY88001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: record the staged diff as four v3.1 delta entries, bring design's thread-tier and loop statements in line, place provenance at both decisions, then drift-check, check-links, project and stage",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Oriented",
-    "text": "Oriented: `git diff --cached skills/` matches both decisions: base *Threads* tier paragraph and *Every claim carries its source*'s where-you-check paragraph reworded to \"nothing above the threads tier\"; aperas-grapher *Filing* gains \"from the graph above it\"; aperas-orchestrator gains a new `### Before sending an Ask` section (intro, four list items, closing paragraph). `skill_drift.py` before recording: 9 added, 3 dropped (`00CR5GCSF000N` v3 Threads paragraph, `00CR5GCSF0011` v3 where-you-check paragraph, `00CR9D1WW0001` pre-existing). The Filing change drops nothing visible because the dropped pass matches on a prefix, and the old Filing text's prefix is unchanged; its current record is Turn 4's delta paragraph `00CR9D9NQG002`, so that is what the new entry supersedes (same pattern as `00CR9D7DVR001` superseding `00CR874TCG00A`).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Delta",
-    "text": "Delta: four `###` entries under [the v3.1 delta](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001), text lifted verbatim from the staged files by script rather than retyped. [Threads, threads may link to each other](../discussion/aperas-skill.md#id/BlockNode:00CRAZ91C8001) (supersedes `00CR5GCSF000N`) and [Every claim carries its source, the thread clause follows the tier rule](../discussion/aperas-skill.md#id/BlockNode:00CRAZB02G001) (supersedes `00CR5GCSF0011`) after the friction entry `00CR9D5Z60001`; [Filing — never link into a thread from the graph above it](../discussion/aperas-skill.md#id/BlockNode:00CRAZBN0G001) (supersedes `00CR9D9NQG002`) after `00CR9D9NQG001`; [Before sending an Ask — a new section](../discussion/aperas-skill.md#id/BlockNode:00CRAZC840001) (addition, no Supersedes; intro as heading text, 4 list items and closing paragraph as children) after *Running a task* `00CR874TCG00C`. Each Supersedes link confirmed via `aperas backlinks` on its target. The delta intro gained a sentence naming these two decisions, plus the Turn 5 fix it had never mentioned (`--text-only`, 24 children and all 8 links intact).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Design",
-    "text": "Design: three `--text-only` edits, ids, children and links unchanged per `aperas show`. [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)'s tier paragraph `00CR3X3N08005` now says threads cite upward and sideways to each other, while nothing above the threads tier links in. [Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00G)'s \"nothing outside one can cite into it\" had the same flaw (another thread is outside one), so it now reads \"nothing above it can cite into a thread, while threads cite each other sideways\". [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) gained one sentence naming the pre-send checklist and its four items.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Provenance",
-    "text": "Provenance: a **Recorded and promoted** child under each decision node: `00CRAZZ8A0001` under the threads decision (5 links: three delta entries plus the two design blocks), `00CRAZZWR0001` under the checklist decision (2 links: delta entry, The loop). Both confirmed via `aperas show` links.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Checks",
-    "text": "Checks: `skill_drift.py` after: 0 added, 1 dropped (`00CR9D1WW0001`), 19 superseded and accounted for. `aperas check-links` clean (2424 live blocks, 629 with link text). Projected `discussion/aperas-skill.md` and `design/aperas-skill.md` with no stale-on-disk refusal this time; staged all four changed files in `AperasKG`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Correction to Turn 5's diagnosis of the standing drop",
-    "text": "Correction to Turn 5's diagnosis of the standing drop: reading `skill_drift.py`, `subtree_texts` skips only the delta *root's* own text and walks every other node's `.text`, headings included. The unit reported as dropped is the text of the delta entry heading `00CR9D1WW0001` itself (\"The template's **Report** step gains a line after **Question**:\"), which is commentary about the change, not skill text. The code-block child is not the unit being flagged. So this is a delta-format slip, not a whole-code-block matching limitation: an entry's heading text has to be either a `Supersedes:` line or verbatim skill text.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — reading full text**",
-    "text": "**Tool gap — reading full text**: `aperas tree` and `aperas unfold` show a list item's id as its title whenever it has no bold lead-in, so neither can read a turn's actual text. Built a scratchpad script that walks a subtree with `aperas show <id>` per node (one CLI call per node) to dump the full text of Turns 5 and 6, the decision nodes and the delta entries. It worked, but it is slow and a workaround.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY88009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — text-only message**",
-    "text": "**Tool gap — text-only message**: `aperas update --text-only` on a single-paragraph target (paragraph `00CR3X3N08005`, headings `00CEA5Y5JG00G`, `00CR3X3N08001`, `00CR874TC8001`) still reports \"overflow prepended, no reconciliation\" even though there was no overflow. The result was correct. The message is misleading and still not documented (Turn 4 noted the same message).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0GY8800A",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — slug collision**",
-    "text": "**Tool gap — slug collision**: the first insert of this Work node failed with `Full-slug-path collision: '.../--work--/--tool-gap--' is used by two different blocks in the same write`. Two sibling items both led with `**Tool gap**`, and sibling slugs come from the lead-in term. The error said nothing had been written. Retried with distinct lead-ins (`**Tool gap — <topic>**`). The thread template in the base skill shows a single `**Tool gap**` line and doesn't say that two of them under one parent collide.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: both decisions are recorded in the v3.1 delta, design matches them, and the drift check shows nothing unrecorded.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRB0JZT0002",
-    "text": "[Threads, threads may link to each other](../discussion/aperas-skill.md#id/BlockNode:00CRAZ91C8001), [Every claim carries its source, the thread clause follows the tier rule](../discussion/aperas-skill.md#id/BlockNode:00CRAZB02G001), [Filing — never link into a thread from the graph above it](../discussion/aperas-skill.md#id/BlockNode:00CRAZBN0G001), [Before sending an Ask — a new section](../discussion/aperas-skill.md#id/BlockNode:00CRAZC840001): the four new delta entries, three of which supersede an earlier record.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRB0JZT0003",
-    "text": "Design now says the same in [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004)'s tier paragraph and [Citation direction](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG00G), which had the same \"nothing outside a thread\" wording, and [The loop](../design/aperas-skill.md#id/BlockNode:00CR3X3N08001) names the checklist.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Provenance",
-    "text": "Provenance: **Recorded and promoted** under [the threads decision](../discussion/aperas-skill.md#id/BlockNode:00CRAZZ8A0001) and [the checklist decision](../discussion/aperas-skill.md#id/BlockNode:00CRAZZWR0001). [The delta intro](../discussion/aperas-skill.md#id/BlockNode:00CR874TC8001) now names these two decisions and the Turn 5 fix, which it had left out.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "`skill_drift.py`",
-    "text": "`skill_drift.py`: 0 added, 1 dropped (`00CR9D1WW0001`, pre-existing). `check-links`: clean over 2424 blocks. `AperasKG/` is projected and staged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Question — the standing drop**",
-    "text": "**Question — the standing drop**: Turn 5's diagnosis was wrong. The flagged unit is the commentary text of Turn 4's delta entry heading `00CR9D1WW0001`, not a code-block substring (see the Work subturn). Options: (a) rewrite that entry to supersede the v3 snapshot's thread-template code block, with the full new block as its child, which clears the drop and follows the delta convention; (b) leave it as it is. Should I do (a)?",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Question — history**",
-    "text": "**Question — history**: the [v3.1 milestone](../history/aperas-skill.md#id/BlockNode:00CR8MWVYG000) still covers only Turns 1–2. It does not mention tool-gap recording, the list-item fix, thread-to-thread links or the Ask checklist. Update it now, or wait for the finishing turn?",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — reading full text**",
-    "text": "**Tool gap — reading full text**: `tree`/`unfold` can't show a list item's full text, so reading turns took a script that loops over `aperas show` once per node.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT0009",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — text-only message**",
-    "text": "**Tool gap — text-only message**: `update --text-only` reports \"overflow prepended\" when there was no overflow. It is misleading but harmless, and it is not documented.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB0JZT000A",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — slug collision**",
-    "text": "**Tool gap — slug collision**: two sibling `**Tool gap**` items under one parent are rejected as a full-slug-path collision, and the base template doesn't warn about it. Retried with distinct lead-ins.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CRB10KC0001",
     "@type": "BlockNode",
     "title": "**Orchestrator verified Turn 6**",
@@ -44176,109 +43012,11 @@
     ]
   },
   {
-    "@id": "BlockNode:00CRB6SYR0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Decided — Turn 6 follow-ups** (user, 2026-09-27)",
-    "text": "**Decided — Turn 6 follow-ups** (user, 2026-09-27): fix the misattributed drift entry now (`BlockNode:00CR9D1WW0001`'s heading, a note about the change rather than skill text, incorrectly flagged as a code-block matching problem); leave the v3.1 history milestone for the actual finishing turn.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CRB6ZTXG001",
     "@type": "BlockNode",
     "title": "**Decided — Turn 6 follow-ups** (user, 2026-09-27)",
     "text": "**Decided — Turn 6 follow-ups** (user, 2026-09-27): fix the misattributed drift entry now (`BlockNode:00CR9D1WW0001`'s heading, a note about the change rather than skill text, incorrectly flagged as a code-block matching problem); leave the v3.1 history milestone for the actual finishing turn.",
     "parent": "BlockNode:00CRAQQ2V0001",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB71ECR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 7",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRB73AD8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: [Turn 6 follow-ups](../discussion/aperas-skill.md#id/BlockNode:00CRB6ZTXG001) — fix the misattributed drift entry now; hold history for the finishing turn. Also record [the personal-view naming decision](../discussion/aperas-skill.md#id/BlockNode:00CRB689SR001), already staged in `skills/aperas/SKILL.md`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCD040000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: fixed the misattributed drift entry — restructured [aperas — Discipline — Threads, the Report template gains a Tool gap line](../discussion/aperas-skill.md#id/BlockNode:00CR9D1WW0001) to the established Supersedes pattern; verified `skill_drift.py --dropped` clean and `check-links` clean; staged.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCGHTG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "true cause found",
-    "text": "true cause found: the heading's own `.text` was a lead-in sentence describing the edit (\"The template's **Report** step gains a line after **Question**:\"), not verbatim skill content — the same category of commentary the script already excludes for section roots, but this wasn't a root, so it got compared and never matched the file, hence \"DROPPED, unaccounted\". Two earlier freeflow entries (recorded in this same doc) had misdiagnosed this as a code-block-substring matching limitation of the script; that diagnosis was wrong — the child code block (`BlockNode:00CR9D1WW0002`) was never the dropped item, only the heading was.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCJS60001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "fix",
-    "text": "fix: found the v3-snapshot node this entry actually supersedes — `BlockNode:00CR5GCSF000H`, the whole thread-template code block before the Tool-gap line was added — and rebuilt the entry to match the sibling convention already used elsewhere in this same delta (e.g. `BlockNode:00CR8JD5VG001`/`002`): heading `.text` becomes `Supersedes: [v3's thread-template code block](#id/BlockNode:00CR5GCSF000H)` (`--text-only`, so the child survived untouched); child `BlockNode:00CR9D1WW0002`'s `.text` becomes the *whole* updated code block (not just the added line), byte-identical to `skills/aperas/SKILL.md` lines 182-195.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCMM2G001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "verified",
-    "text": "verified: `skill_drift.py --dropped` → 0 unaccounted (was 1); the node no longer appears in either the dropped or superseded-accounted lists at all, since its stripped `Supersedes:`-only text is now correctly excluded from comparison — matching how every other Supersedes-style entry in this delta behaves. `check-links` → 0 discrepancies across 2449 blocks. `aperas project discussion/aperas-skill.md --flush` re-rendered cleanly; diffed the result and confirmed only the intended hunk changed.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCQ6XR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap**",
-    "text": "**Tool gap**: the ApeironNgn service died silently between my two `update --flush` calls and the follow-up `unfold` (no crash message, just \"No ApeironNgn service running\" on the next call). Both flushed writes had survived to disk (confirmed via `grep` on `BlockNode.jsonld` before restarting), so nothing was lost. `aperas service start` then failed twice with \"did not become ready in time\" while a process was visibly still alive and consuming growing CPU/memory in the background (`ps aux`) — turned out to be a genuinely stuck/orphaned process from over 90 minutes earlier (no lock file present, `service stop` reported \"No running service found\" while the process was still resident). Killed it by PID, ran `service start` again, and the fresh process rehydrated and became ready within about a minute — this one just needed the extra time the 10s readiness grace doesn't allow for on a store this size. Worth a look if `service start`'s readiness timeout keeps tripping on a growing corpus.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCRNK0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: fixed; `AperasKG/` staged (index only, not committed).",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCTMMG000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRBCTMMG000",
-    "text": "[aperas — Discipline — Threads, the Report template gains a Tool gap line](../discussion/aperas-skill.md#id/BlockNode:00CR9D1WW0001) — now `Supersedes: [v3's thread-template code block](#id/BlockNode:00CR5GCSF000H)`, with its child code node holding the full updated template verbatim.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBCW870001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap**",
-    "text": "**Tool gap**: `aperas service start`'s 10s readiness grace can trip on a large/growing corpus even when the service is genuinely still starting, not dead; a stuck prior instance (no lock file, `service stop` didn't see it) had to be killed by PID before a clean restart worked.",
     "type": "listItem",
     "children": []
   },
@@ -44327,24 +43065,6 @@
     "title": "**Recorded and promoted**",
     "text": "**Recorded and promoted**: the decision is recorded in the v3.1 delta as [aperas — Orientation — Keep an active view, personal-view naming for any role](#id/BlockNode:00CRBE35S8001).",
     "parent": "BlockNode:00CRB689SR001",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBECDM8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "also recorded the personal-view naming decision",
-    "text": "also recorded the personal-view naming decision: `skill_drift.py --added` showed the new SKILL.md paragraph (line 130, \"This is separate from the fixed hand-off views...\") as unrecorded — the file edit had already landed (staged in `skills/aperas/SKILL.md`) but no v3.1 delta entry existed for it yet (the other two hunks in that same file diff — sideways thread citation, the tier-rule wording — were already covered by `BlockNode:00CRAZ91C8001`/`00CRAZB02G001`). Added [aperas — Orientation — Keep an active view, personal-view naming for any role](../discussion/aperas-skill.md#id/BlockNode:00CRBE35S8001) as a new delta heading (verbatim paragraph, no supersession — nothing existing to replace), and a **Recorded and promoted** note under the origin decision [BlockNode:00CRB689SR001](../discussion/aperas-skill.md#id/BlockNode:00CRB689SR001) linking to it. `skill_drift.py` now shows 0 added and 0 dropped; `check-links` clean at 2459 blocks; `backlinks` on the new node confirms the provenance note resolves. Left the design doc's *Profiles and view naming* section untouched — the Ask asked to record the decision against the skill file, not promote it into design; that's a finishing-turn call.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBEFBDR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRBEFBDR001",
-    "text": "[aperas — Orientation — Keep an active view, personal-view naming for any role](../discussion/aperas-skill.md#id/BlockNode:00CRBE35S8001) — new v3.1 delta entry for the SKILL.md paragraph already staged in `skills/aperas/SKILL.md`, with a **Recorded and promoted** provenance note under the origin decision. `skill_drift.py` now clean both ways (0 added, 0 dropped).",
     "type": "listItem",
     "children": []
   },
@@ -44538,23 +43258,6 @@
     ]
   },
   {
-    "@id": "BlockNode:00CRBWNWGR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 8",
-    "type": "heading",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRBWR3P8001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: [Fix the Tool gap template and file the `--text-only` message bug](../discussion/aperas-skill.md#id/BlockNode:00CRBWFJJ0001) — record the skill fix in the v3.1 delta and design; the `--text-only` bug is already filed in `cli.md`'s Freeflow, not this task's to act on further.",
-    "type": "listItem",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CRBYWS98001",
     "@type": "BlockNode",
     "links": [
@@ -44668,181 +43371,11 @@
     "children": []
   },
   {
-    "@id": "BlockNode:00CRC0F92R000",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: record the staged Tool gap template fix as a new v3.1 delta entry superseding the earlier single-example one, bring design's Threads in line, link the promotion from the Freeflow decision, then check-links, project and stage; also prune the finished `tree rendering` task per the thread's size warning",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Confirmed the staged diff against `git diff --cached -- skills/aperas/SKILL.md`",
-    "text": "Confirmed the staged diff against `git diff --cached -- skills/aperas/SKILL.md`: the base skill's *Threads* Report template gains a second `**Tool gap — <what else>**` example line, plus a new paragraph on the sibling-slug collision when two Tool gap lines share the same bare lead-in.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC0F92R002",
-    "text": "Found the existing record of the single-example state at `BlockNode:00CR9D1WW0001` (title \"the Report template gains a Tool gap line\", child `BlockNode:00CR9D1WW0002` holding the old code block) — this is what the new state supersedes.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC0F92R003",
-    "text": "Inserted a new v3.1 delta entry as the last child of `BlockNode:00CR874TC8001`, after `BlockNode:00CRBE35S8001`: `BlockNode:00CRBYWS98001` (\"distinct lead-in terms for multiple Tool gaps\"), text `Supersedes: [...](#id/BlockNode:00CR9D1WW0001)`, with two children — the updated code block (`BlockNode:00CRBYWS98002`) and the collision paragraph (`BlockNode:00CRBYWS98003`). `aperas insert` reported \"Links: 1 resolved, 0 dangling, 1 changed.\"; `aperas show` confirmed the Supersedes link actually resolved to `BlockNode:00CR9D1WW0001`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC0F92R004",
-    "text": "`skill_drift.py --dropped` confirmed the old code block (`00CR9D1WW0002`) shows as superseded by the new entry, not as a silent loss.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R005",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC0F92R005",
-    "text": "Updated design's `### Threads` (`BlockNode:00CR3X3N08004`) via `--text-only`, appending \"...giving each its own lead-in term when there is more than one, since sibling slugs derive from it and two identical lead-ins collide and reject the whole write.\" before the closing sentence. `aperas show` confirmed id, title and the one child (`00CR3X3N08005`) untouched.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R006",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC0F92R006",
-    "text": "Inserted a **Recorded and promoted** child (`BlockNode:00CRBZ9EB8001`) under this turn's own Ask/Decided node (`BlockNode:00CRBWFJJ0001`, empty children beforehand) — three links resolved (the new delta entry, the superseded entry, design's Threads), confirmed via `aperas show`. Noted there that the `--text-only` message bug and the cap-removal clarification are intentionally left alone, per the Ask.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R007",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "`aperas check-links`",
-    "text": "`aperas check-links`: 2487 live blocks scanned, 0 discrepancies. `skill_drift.py --added`: 0 unrecorded. Projected `discussion/aperas-skill.md` and `design/aperas-skill.md`, staged both plus the `Apeiron/*.jsonld` mirrors in `AperasKG/`.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0F92R008",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC0F92R008",
-    "text": "Thread was flagged over its 200-block cap. `## tree rendering`'s only task, `### Remove output length caps (tree & unfold)` (`BlockNode:00CR9MFS68001`), was already fully finished and promoted (its Turn 3 Report cites the promotion into `design/treeview.md` and `discussion/treeview.md`). Removed it with `aperas remove --flush`, then `aperas project .threads/grapher.md --flush`. The current task, `### Record the v3.1 skill edit`, was left untouched.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0M9GG001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: recorded the staged Tool gap template fix as a new v3.1 delta entry, promoted it into design's Threads, and linked it from the task's Freeflow Decided node; also pruned the finished `tree rendering` task.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC0M9GG002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Also pruned this thread per its size-cap warning",
-    "text": "Also pruned this thread per its size-cap warning: `### Remove output length caps (tree & unfold)` under `## tree rendering` was finished and fully promoted, so it was tombstoned with `aperas remove`; the current task was left alone.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC1NXP0001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "#### Turn 9",
-    "type": "heading",
-    "children": []
-  },
-  {
     "@id": "BlockNode:00CRC1S4MR001",
     "@type": "BlockNode",
     "title": "**The orchestrator cleared the grapher's own Turn 8 Report text**",
     "text": "**The orchestrator cleared the grapher's own Turn 8 Report text**: ran `printf '\\n' | aperas update BlockNode:00CRC0M9GG001 --text-only` against the live Report node, as an idle check of whether a thread-size warning still fired after pruning — exactly the trap the base skill's *Updating an existing list item* documents (leaving text out wipes it), hit carelessly against production content instead of a disposable node. Only one child (the pruning note) survived; the Report's substance was in its own top-level text, now empty. `.threads/` and `Apeiron/.state/` are both gitignored, so there was no git-based recovery path. The orchestrator independently reverified the underlying facts (the new v3.1 delta entry, the design promotion, the provenance link, clean drift/check-links) and is routing the restoration to the grapher rather than writing into its own thread content.",
     "parent": "BlockNode:00CE8XWZK0001",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC1VJ18001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Ask**",
-    "text": "**Ask**: [The orchestrator accidentally cleared your Turn 8 Report's own text](../discussion/aperas-skill.md#id/BlockNode:00CRC1S4MR001). Rewrite it, since only you write into your own Report. The facts to restore, independently reverified: the Tool gap template fix recorded as a new v3.1 delta entry (`discussion/aperas-skill.md`, superseding `BlockNode:00CR9D1WW0001`), promoted into `design/aperas-skill.md`'s `### Threads`, linked from the task's Freeflow Decided node via a **Recorded and promoted** child, `skill_drift.py` and `aperas check-links` both clean. Your surviving child (the pruning note) is untouched.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC326W8002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC326W8002",
-    "text": "[aperas — Discipline — Threads, distinct lead-in terms for multiple Tool gaps](../discussion/aperas-skill.md#id/BlockNode:00CRBYWS98001) records the staged Tool gap template fix as a new v3.1 delta entry, superseding [the single-example Report template](../discussion/aperas-skill.md#id/BlockNode:00CR9D1WW0001); promoted into design's [Threads](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004); linked from the task's Freeflow Decided node via a [**Recorded and promoted**](../discussion/aperas-skill.md#id/BlockNode:00CRBZ9EB8001) child. `skill_drift.py` and `aperas check-links` both clean.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC5JX7G001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Work**",
-    "text": "**Work**: independently reverified the facts named in the Ask against the live graph (`aperas show`/`backlinks`, `skill_drift.py`, `check-links`), then rewrote the Turn 8 Report's text via `aperas update`, restating the surviving pruning-note child so it wasn't wiped a second time.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC5Y6RR001",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Report**",
-    "text": "**Report**: rewrote the Turn 8 Report's text after independently reverifying every fact the Ask named against the live graph, not just against the Ask's own summary; the surviving pruning-note child was restated, not touched.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC5Y6RR002",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "Verified directly",
-    "text": "Verified directly: the new v3.1 delta entry [`distinct lead-in terms for multiple Tool gaps`](../discussion/aperas-skill.md#id/BlockNode:00CRBYWS98001) exists with a resolving `Supersedes` link to [the old single-example entry](../discussion/aperas-skill.md#id/BlockNode:00CR9D1WW0001) (confirmed via `aperas show` and `aperas backlinks`); design's [`### Threads`](../design/aperas-skill.md#id/BlockNode:00CR3X3N08004) carries the promoted rule; and the task's Freeflow Decided node has a **Recorded and promoted** child linking all three. `skill_drift.py --added` and `aperas check-links` both ran clean just now, independent of the Ask's own claim of it.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC5Y6RR003",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "00CRC5Y6RR003",
-    "text": "Rewrote [the Turn 8 Report](#id/BlockNode:00CRC0M9GG001) with `aperas update`, restating its surviving child verbatim (the pruning note) alongside a new child citing the verified delta entry, design edit and provenance link — restating was necessary since piping only new text without it would have wiped the child a second time.",
-    "type": "listItem",
-    "children": []
-  },
-  {
-    "@id": "BlockNode:00CRC5Y6RR004",
-    "@type": "BlockNode",
-    "tombstonedAt": "2026-10-11T12:48:01.257Z",
-    "title": "**Tool gap — tracked mirror lagged the live store**",
-    "text": "**Tool gap — tracked mirror lagged the live store**: after `aperas update --flush` + `aperas project .threads/grapher.md --flush`, the new content showed correctly via `aperas show` but was absent from the git-tracked `Apeiron/BlockNode.jsonld` (only present in the gitignored `Apeiron/.state/BlockNode.jsonld`) — `--flush` alone did not sync the tracked mirror this time. `aperas service restart` forced it (reported \"did not become ready in time,\" the known readiness-grace tool gap, but the service was in fact restarting; it came up within one retry). That restart also ran `pruneUnreachableTombstones` on reload, hard-deleting the already-tombstoned Turn 1–3 `tree rendering` thread content from the tracked mirror — confirmed as intended GC behavior (`packages/core/src/apeironNgn/node.ts`), not new data loss, since that content was already tombstoned by Turn 8's own approved prune.",
     "type": "listItem",
     "children": []
   },
@@ -62068,9 +60601,25 @@
   {
     "@id": "BlockNode:00CVNX6A3R000",
     "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00CVNX6A3R000:links:Link:00D1GBZ76G000",
+        "@type": "Link",
+        "target": "BlockNode:00D0W02KPG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CVNX6A3R000:links:Link:00D1GBZ76G000:props:StringProp:00D1GBZ76R000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1486"
+          }
+        ]
+      }
+    ],
     "title": "**A thread-task `aperas remove` can leave the service CPU-bound for many minutes, during which every command fails and a graceful stop does not complete**",
-    "text": "**A thread-task `aperas remove` can leave the service CPU-bound for many minutes, during which every command fails and a graceful stop does not complete**: found 2026-10-02 pruning finished tasks in the v4.3 skill task; the stalls were observed and the suspected causes below fit them, but no run has attributed a stall to any of them. Filed 2026-10-02.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "text": "**A thread-task `aperas remove` can leave the service CPU-bound for many minutes, during which every command fails and a graceful stop does not complete**: found 2026-10-02 pruning finished tasks in the v4.3 skill task; the stalls were observed and the suspected causes below fit them, but no run attributed a stall to any of them before the fix. Filed 2026-10-02. **Resolved 2026-10-11** for the cause the Root cause section names, the scan of the whole store for every embedded node removed: the object-bound `removeDanglingUnfolds` landed in commit `0a7a226` and ran in the live service, where one `aperas remove --flush` of a task of 164 live blocks and 101 embedded `Link` nodes took 3.7 s with exit 0 and no stall, the thread tree then showed every other task intact, and `aperas check-links` scanned 6,549 live blocks with 0 discrepancies. That is about 36 ms per embedded node, against about 14,000 ms for 34 nodes at the old cost per scan, and the old service stalled 5.4 and 12 minutes on removals of 42 and 31 blocks. It covers every field that exists: `removeDanglingUnfolds` sweeps `unfolds`, and `unfoldsCollapsed` and `unfoldsNoPreview` do not exist in code (`shape.ts` defines only `unfolds` and `root` on a `TreeView`). One removal is one sample; the other suspected causes below (the link-integrity sweeps, the tombstone hard-deletes at shutdown and startup, a process-lifetime slowdown) were not separated from the scans by any run, and the scans' wrappers remain in [the scan entry](#id/BlockNode:00D0W02KPG001).",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": [
       "BlockNode:00D0WPK570001",
@@ -64765,6 +63314,16 @@
       "BlockNode:00D1FHX5MG001",
       "BlockNode:00D1FK5CM0001",
       "BlockNode:00D1FP4FGR001",
+      "BlockNode:00D1FXJEK8001",
+      "BlockNode:00D1G0N8DG001",
+      "BlockNode:00D1G1YEK8001",
+      "BlockNode:00D1G3PV30001",
+      "BlockNode:00D1G68Q3G001",
+      "BlockNode:00D1GBN3G8001",
+      "BlockNode:00D1GF7EBG001",
+      "BlockNode:00D2030938001",
+      "BlockNode:00D2033S00001",
+      "BlockNode:00D2037TRG001",
       "BlockNode:00D1F5X55R000",
       "BlockNode:00D1EFQ93G001",
       "BlockNode:00D1EGVZR8001",
@@ -71345,6 +69904,7 @@
     "children": [
       "BlockNode:00D0X65RB8009",
       "BlockNode:00D1DP5GG0001",
+      "BlockNode:00D1GC79B8000",
       "BlockNode:00D0Y9HG30001",
       "BlockNode:00D0Y9HG30005",
       "BlockNode:00D0Y9HG30009",
@@ -71369,7 +69929,7 @@
       }
     ],
     "title": "00D0X65RB8009",
-    "text": "No fix has been tried.",
+    "text": "The object-bound `removeDanglingUnfolds` landed in commit `0a7a226` and ran in the live service: it replaces the scan of every quad, made once per embedded node removed, with one `store.match` on the predicate `unfolds` and the deleted id as object. Result (2026-10-11, one removal in the live service): a task of 164 live blocks and 101 embedded `Link` nodes was removed in 3.7 s with no stall, the tree then showed every other task intact, and `aperas check-links` scanned 6,549 live blocks with 0 discrepancies. Before it, removals of 42 and 31 blocks stalled the service for 5.4 and 12 minutes, and a scratch removal of 34 embedded nodes took 21 s with 34 full scans. On a copy of the real store the old form took 512.8 ms per deleted id and the object-bound form 0.015 ms. It covers every field of a `TreeView` that holds an unfolded id and exists in code, which is `unfolds` alone. The `free()` item below and the layers after it are not applied.",
     "parent": "BlockNode:00D0X65RB8008",
     "type": "listItem",
     "children": []
@@ -73634,7 +72194,7 @@
       }
     ],
     "title": "**Replaces**",
-    "text": "**Replaces**: the unbounded `store.match(null, null, null, null)` in `allIdsOfKind` (`dehydrate.ts` lines 49 to 58) with a match for a kind's type quads only; the scan in `removeDanglingUnfolds` with one object-bound `store.match(null, unfolds, deletedIri, null)`; the reads in `wrap` (`node.ts` line 2144) and `readField` (lines 156 to 162) with one subject-bound match per node.",
+    "text": "**Replaces**: the unbounded `store.match(null, null, null, null)` in `allIdsOfKind` (`dehydrate.ts` lines 49 to 58) with a match for a kind's type quads only; the scan in `removeDanglingUnfolds` with one object-bound `store.match(null, unfolds, deletedIri, null)`; the reads in `wrap` (`node.ts` line 2144) and `readField` (lines 156 to 162) with one subject-bound match per node. **Corrected 2026-10-11**: the store has no type quads, because `encodeDoc` skips `@type` (`store.ts` line 86), and `urn:aperas:pred:type` is the `type` field of a `BlockNode` (paragraph, heading, listItem), so the `allIdsOfKind` part has no form to be bound on. The `removeDanglingUnfolds` part is done (see the fix status above). What a bound `allIdsOfKind` could use instead: a kind quad written by `encodeDoc` and every creation path (exact, touches many files); a predicate that every instance of the kind carries, which gave identical id sets on a copy of the real store for `ArtifactNode` (54, on `path`), `FolderNode` (17, `path`), `TreeView` (17, `name`) and `Profile` (9, `handle`) and 5,556 against 5,557 for `BlockNode`, the missing one being a stray block with no title, `type`, parent or children, so `BlockNode`, the big kind, stays on the scan; or Layer 2.",
     "parent": "BlockNode:00D0Y9HG30001",
     "type": "listItem",
     "children": []
@@ -73643,7 +72203,7 @@
     "@id": "BlockNode:00D0Y9HG30003",
     "@type": "BlockNode",
     "title": "**To check first**, on a copy of the real store",
-    "text": "**To check first**, on a copy of the real store: that every node has a type quad agreeing with the kind `nodeKindFromId` derives from its id, by comparing both result sets (unchecked); and the cost of each bound form against the full scan (the twelve-fold saving is an estimate, not measured).",
+    "text": "**To check first**, on a copy of the real store: that every node has a type quad agreeing with the kind `nodeKindFromId` derives from its id. The check failed at once: no node has a type quad (see the correction in `Replaces` above). Still unmeasured: the cost of a bound form against the full scan for the four kinds whose predicates gave identical sets (the twelve-fold saving was an estimate).",
     "parent": "BlockNode:00D0Y9HG30001",
     "type": "listItem",
     "children": []
@@ -74025,7 +72585,8 @@
       "BlockNode:00D0YDSSCR004",
       "BlockNode:00D0YDSSCR005",
       "BlockNode:00D0YDSSCR006",
-      "BlockNode:00D0YDSSCR007"
+      "BlockNode:00D0YDSSCR007",
+      "BlockNode:00D1GD39M8001"
     ]
   },
   {
@@ -79634,13 +78195,14 @@
     "@id": "BlockNode:00D1DP5GG0001",
     "@type": "BlockNode",
     "title": "00D1DP5GG0001",
-    "text": "**`free()` on the quads and the terms read from them** (measured 2026-10-11, one sample; the first remedy for the scans in the service, not yet applied there)",
+    "text": "**`free()` on the quads and the terms read from them** (measured 2026-10-11, one sample; the first remedy for the scans in the service, being applied as one read helper)",
     "parent": "BlockNode:00D0X65RB8008",
     "type": "listItem",
     "children": [
       "BlockNode:00D1DP5GG0002",
       "BlockNode:00D1DP5GG8000",
-      "BlockNode:00D1DP5GG8001"
+      "BlockNode:00D1DP5GG8001",
+      "BlockNode:00D1GCR1XR001"
     ]
   },
   {
@@ -81222,7 +79784,8 @@
     "children": [
       "BlockNode:00D1FCX9E8002",
       "BlockNode:00D1FCX9E8003",
-      "BlockNode:00D1FCX9EG000"
+      "BlockNode:00D1FCX9EG000",
+      "BlockNode:00D1GD50SG001"
     ]
   },
   {
@@ -81882,6 +80445,635 @@
     "title": "Status",
     "text": "Status: **v4.6** — Orchestrator role skill.",
     "parent": "BlockNode:00D1FQQB0R001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1FXJEK8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D1FXJEK8001:links:Link:00D1FXJV50000",
+        "@type": "Link",
+        "target": "BlockNode:00D1DMKT60001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1FXJEK8001:links:Link:00D1FXJV50000:props:StringProp:00D1FXJV50001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "767"
+          }
+        ]
+      }
+    ],
+    "title": "00D1FXJEK8001",
+    "text": "**The user commits v4.6 and restarts the service; \"Let's continue with the `free()` work\"** (2026-10-11, user): the v4.6 skills (code commit `b63da71`) and the graph are committed, and the service is restarted, so the thread cap of 10,000 applies. The user's direction is to continue the `free()` work. Orchestrator reading, stated so the user can correct it: this opens the task loop at its survey steps (Grapher survey, then Coder map of every place the store hands out quads and terms, no edits). The production change to `dehydrate.ts`, `node.ts`, `store.ts` and `service.ts` waits for the user's explicit go after the Coder's map, because those files have not been cleared for editing and the map decides the shape of the change. Measurements the plan rests on: [the correction on `free()`](../discussion/aperas-skill.md#id/BlockNode:00D1DMKT60001).",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1G0N8DG001",
+    "@type": "BlockNode",
+    "title": "00D1G0N8DG001",
+    "text": "**Verification — the Grapher's survey for the `free()` work; what goes to the Coder, what waits** (2026-10-11, orchestrator): the Grapher's report (`BlockNode:00D1G08WVG006`) names the `free()` item (`00D1DP5GG0001`) as the whole recorded plan: decided only the order (first remedy, pause as safety net), not decided the sites, the helper shape or any production edit; no go is on record for `dehydrate.ts`, `node.ts`, `store.ts` or `service.ts`. I read three of its cited nodes and they say what the report says (`00D0X65RB8009` \"No fix has been tried.\" although `removeDanglingUnfolds` landed in `0a7a226`; `00D0Y9HG30002` still names \"type quads\", which the store does not have; `00D1DP5GG0001` the measured item). Six disagreements in the record, the first three being stale statements in `issues/core.md` (fix status, the type-quad premise, the removal-stall issue with its open status and `PLACEHOLDER-*` blocks). **Decision (orchestrator, open to the user's correction)**: the Coder's map comes first and is read-only; the Grapher corrects the three stale statements in the Filing Turn that files the map, since the map settles what the correct text says. The Grapher's second question, whether the landed `removeDanglingUnfolds` covers `unfoldsCollapsed` and `unfoldsNoPreview`, goes to the Coder as part of the map.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1G1YEK8001",
+    "@type": "BlockNode",
+    "title": "00D1G1YEK8001",
+    "text": "**The user wonders whether to replace Oxigraph with a store the project builds with three indexes** (2026-10-11, user): the project used Terminus first and migrated to Oxigraph for the basic functionality of a graph, with no query language, only triples (quads in Oxigraph). The JS and wasm quirk now makes the user ask whether it is worth hacking around it (`free()` and the like) when the project could build the graph itself with just three indexes. This is a question, not a decision; nothing is changed. Orchestrator's reading, stated for the user to correct: the three indexes are subject-predicate-object, predicate-object-subject and object-subject-predicate, kept in JS, which answer every match pattern with at least one bound position; the store would stay in memory and still be rehydrated from the mirror, as it is today. Orchestrator's view: the idea is plausible at this size (58,376 quads), and it would remove the cause rather than patch it (no wasm side, so no wrapper objects to free, no external-memory growth to trigger collections, no boundary cost per call). What is not known yet: which Oxigraph calls the code uses (`match` patterns, `has`, `size`, named graphs, any query or load), which is what the Coder's map of the store reads (`BlockNode:00D1G0TQ08001`) partly answers; and whether the 24 s fresh-process dehydrate is only collector thrash or also JS-side work that a new store would not change. A prototype of the used subset on a scratch copy would settle the second. The `free()` work stays on its survey steps until the user decides.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1G3PV30001",
+    "@type": "BlockNode",
+    "title": "00D1G3PV30001",
+    "text": "**Verification — the Coder's map of the store reads (Turn 1, `BlockNode:00D1G3BJCR003`); what the grep shows about the API surface** (2026-10-11, orchestrator): I checked three claims in the code myself and they hold. There is no `.free()` call anywhere under `monorepo/packages`; `unfoldsCollapsed` and `unfoldsNoPreview` appear in no source file (only `unfolds` and `root` are defined, so the landed `removeDanglingUnfolds` covers every field that exists); and the only methods called on a `store` variable are `match` (41 call sites), `add` (17) and `delete` (12), plus the term factories `quad`, `namedNode` and `literal` imported from `oxigraph` (`vocab.ts`, `store.ts`, `node.ts`). The grep matches the name `store.` only, so a store held under another name would not show; the Coder's map lists the sites by file and line. The Coder reports that every production read ends as a string, a number, a boolean or a wrapped node holding only `store` and `id`, so no wasm-backed object outlives its call (the exception is the test-only `referenceDanglingUnfoldQuads`); that a freed shared constant (`PARENT_PRED` and the like) or `store.delete(freedQuad)` throws; and, on a copy of 58,780 quads with `gc()` between calls, that the unchanged `allIdsOfKind` grows about 42 MB per call (570 to 1,140 ms) while the variant that frees the subject term and the quad stays flat at 349 MB after a first-call rise of 32 MB, about 150 ms per call: one site, one corpus size, rss only. Bearing on the user's question about building the graph with three indexes: the surface a replacement must offer is `match`, `add` and `delete` over quads, plus term and quad construction, which is small. Two questions are open for the user: which change comes first if `free()` goes ahead (`allIdsOfKind` alone, or the whole read helper), and whether to keep `free()` at all if the three-index store is chosen. Citation correction from the Coder: `isThreadScopedId` is at `dehydrate.ts:137` and `168`, not `162,169`.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00D1GCWWYR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1G68Q3G001",
+    "@type": "BlockNode",
+    "title": "00D1G68Q3G001",
+    "text": "**The user's decision: `free()` as the best effort on Oxigraph, no more hacks on it; then a pure JS ApeironNgn engine to compare** (2026-10-11, user): the user rejects the orchestrator's \"lost testing\" cost: the store is only a memory reflection of the mirror, the mirror is the source of truth and has been stable from Terminus until now, so the store (Terminus', Oxigraph's or plain JS) is not what holds the truth. The orchestrator's point was wrong and is withdrawn. The user's plan, in the user's words: \"I think we should applied the `free()` patch as our best effort on Oxigraph, but no more hack on Oxigraph. After that, we'll try the pure JS ApeironNgn (as the name originally suggested, a dedicated engine) to compare with the `free()`-patched version.\" **Orchestrator's reading, to be corrected by the user**: this answers the question of which path (the `free()` patch first, the plain JS engine as a later comparison) and is the go for the `free()` change; the user did not choose between `allIdsOfKind` alone and the whole read helper, so the orchestrator takes the Coder's recommendation (the whole read helper, with plain-value reads and write helpers that take strings, `predIri` cached per field name), since \"best effort\" points that way. Out of the `free()` change: the whole-store `free()` on reload (measured to change nothing), the plain JS engine (a later task), and new fields for `removeDanglingUnfolds` (none exist in code, so nothing to sweep beyond `unfolds`). The Grapher files the Coder's map and corrects the three stale statements in `issues/core.md`, and records the plan with the comparison as a later item.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": [
+      "BlockNode:00D1GCYPGR001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1GBN3G8001",
+    "@type": "BlockNode",
+    "title": "00D1GBN3G8001",
+    "text": "**The user confirms the `free()` scope and will fork a branch for the pure JS version; friction: a killed zoom** (2026-10-11, user): on the orchestrator's stated reading (the `free()` patch as the whole read helper, the Coder's recommendation, out of scope the reload `free()`, the plain JS engine and new `unfolds*` fields) the user said \"Just go like that\", and will fork a new branch for the pure JS version, so the comparison lives on its own branch while this branch carries the `free()` patch. Earlier in the same stretch the service stopped answering for about two minutes after the orchestrator ran `aperas zoom` under `timeout 90`, which killed the command at 90 s; the next commands were refused (\"No ApeironNgn service running\") while the service processes were alive. The user said killing makes a busy service worse and asked to retry without `kill`; both zooms then ran in the background without `timeout` and answered in under 20 s each. Orchestrator's mistake: a `timeout` wrapper on a graph write is a kill; slow `aperas` commands run in the background without `timeout`, polled for at most a minute, and both subagents were told the same.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GC79B8000",
+    "@type": "BlockNode",
+    "title": "00D1GC79B8000",
+    "text": "**The plan of the user, 2026-10-11: the `free()` helper first, then a pure JavaScript engine to compare** (decided as an order; the helper's shape is the orchestrator's reading of \"best effort\", open to the user's correction)",
+    "parent": "BlockNode:00D0X65RB8008",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D1GC79B8001",
+      "BlockNode:00D1GC79B8002",
+      "BlockNode:00D1GC79B8003",
+      "BlockNode:00D1GC79B8004"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1GC79B8001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D1GC79B8001:props:StringProp:00D1GC8GZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GC79B8001:props:StringProp:00D1GC8GZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Order**",
+    "text": "**Order**: (1) the `free()` helper over the store reads (the item above, with the map of the sites under it), with its scratch measurement on a copy of the real store; (2) no further hacks on Oxigraph; (3) a pure JavaScript ApeironNgn engine, the dedicated engine the name suggested, as a separate task, compared with the `free()` version. The user's words: \"I think we should applied the `free()` patch as our best effort on Oxigraph, but no more hack on Oxigraph. After that, we'll try the pure JS ApeironNgn (as the name originally suggested, a dedicated engine) to compare with the `free()`-patched version.\"",
+    "parent": "BlockNode:00D1GC79B8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GC79B8002",
+    "@type": "BlockNode",
+    "title": "**Why the store may change**",
+    "text": "**Why the store may change**: the store is only an in-memory reflection of the mirror, and the mirror (the JSON-LD under `Apeiron/`) is the source of truth, which has stayed stable from TerminusDB to now, so a replacement store (Oxigraph, or plain JavaScript) does not hold the truth.",
+    "parent": "BlockNode:00D1GC79B8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GC79B8003",
+    "@type": "BlockNode",
+    "title": "**In the `free()` change**",
+    "text": "**In the `free()` change**: the whole read helper of the map (reads as plain values, write helpers that take strings, `predIri` cached per field name), taken from the Coder's recommendation because \"best effort\" points that way. **Out of it**: the whole-store `free()` on reload (measured to change nothing), the plain JavaScript engine, and new fields for `removeDanglingUnfolds` (none exist in code).",
+    "parent": "BlockNode:00D1GC79B8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GC79B8004",
+    "@type": "BlockNode",
+    "title": "**The comparison of the `free()` version with the pure JavaScript engine**",
+    "text": "**The comparison of the `free()` version with the pure JavaScript engine**: not decided, not tried. What a replacement has to offer is small: the code calls only `match`, `add` and `delete` on a store, plus the term and quad constructors `quad`, `namedNode` and `literal`.",
+    "parent": "BlockNode:00D1GC79B8000",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR001",
+    "@type": "BlockNode",
+    "title": "00D1GCR1XR001",
+    "text": "**Map of the store reads for the change** (the Coder's survey of 2026-10-11; read, not edited; line numbers are in `monorepo/packages`; \"bound\" means the subject, predicate or object is given; \"args\" are the `nodeIri`/`predIri`/`encodeLiteral` objects made fresh by every call and never freed)",
+    "parent": "BlockNode:00D1DP5GG0001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D1GCR1XR002",
+      "BlockNode:00D1GCR1XR00A",
+      "BlockNode:00D1GCR1XR00F",
+      "BlockNode:00D1GCR1XR00G",
+      "BlockNode:00D1GCR1Y0001",
+      "BlockNode:00D1GCR1Y0002",
+      "BlockNode:00D1GCR1Y0003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D1GCR1XR002:props:StringProp:00D1GCRX70000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GCR1XR002:props:StringProp:00D1GCRX70001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00D1GCR1XR002",
+    "text": "**Sites, by file**",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D1GCR1XR003",
+      "BlockNode:00D1GCR1XR004",
+      "BlockNode:00D1GCR1XR005",
+      "BlockNode:00D1GCR1XR006",
+      "BlockNode:00D1GCR1XR007",
+      "BlockNode:00D1GCR1XR008",
+      "BlockNode:00D1GCR1XR009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR003",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D1GCR1XR003:props:StringProp:00D1GCRX70002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GCR1XR003:props:StringProp:00D1GCRX70003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Full scans** (`match(null, null, null, null)`)",
+    "text": "**Full scans** (`match(null, null, null, null)`): `allIdsOfKind`, `core/.../dehydrate.ts:49-59`, makes per quad the `Quad` and `q.subject` read twice (`termType` at 52, `value` at 53), 3 wasm objects, about 176k per call here, last used at 53, returns `string[]`. Callers, each paying the whole scan: `folders.ts:21`, `artifacts.ts:200`, `dehydrate.ts:136,161,168` (once per kind per flush), `kgTrack.ts:82,92,104`, `kgProfile.ts:65,111`, `linkIntegrity.ts:112`, `node.ts:985,2094,2201,2209,2247` (`tombstoneVacuousContainers` repeats it in a loop until nothing changes), `verifyDanglingUnfolds.ts:24`. The second pass of `rehydrateStore`, `store.ts:154-159`, is a full scan too: the `Quad` and `q.object` at 155 and 157, 3 objects, output a `Set<string>`.",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR004",
+    "@type": "BlockNode",
+    "title": "**Field reads**",
+    "text": "**Field reads**: `readField` and `decodeTerm`, `node.ts:149-162`, reached by every field read through `defineAccessors` (`node.ts:1329-1337`); bound subject and predicate; per quad the `Quad`, `m.object` at 150 and, for a literal, `decodeLiteral` (`vocab.ts:99-104`) takes `term.datatype`, one more `NamedNode`. The hottest site in the program. `decodeField`, `dehydrate.ts:75-95`, is the same read plus recursion into `serializeDoc` for `embed` (82); `serializeDoc` calls it for every field of every node on every flush.",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR005",
+    "@type": "BlockNode",
+    "title": "**Child reads**",
+    "text": "**Child reads**: `childrenOf`, `node.ts:73-83`, a match bound on the object (`PARENT_PRED`, `nodeIri(id)`), then per child a bound match with `nodeIri(childId)`, reading `m.subject.value` and `idxMatches[0].object` twice; the same shape in `insertOrderedChild` (`node.ts:119-125`) and `orderedChildIds` (`dehydrate.ts:63-73`).",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR006",
+    "@type": "BlockNode",
+    "title": "**Other bound reads**",
+    "text": "**Other bound reads**: `nodeExists` (`vocab.ts:65-67`, only `.length`, 20 call sites); `ownerOfLink` (`node.ts:1423-1424`); `findProfileByHandle` and `findTreeViewByName` (`node.ts:2040,2050`); `backlinks` (`node.ts:2161`; callers `kgBacklinks.ts:32`, `kgProfile.ts:59,69`, `node.ts:1789,2266`, `apeironNgnSmokeTest.ts:103`); `findByExactPath` (`tree.ts:19-22`), `findLiveByKindAndPath` (`artifacts.ts:187-193`), `pathOf` (`threadScope.ts:18-23`) and `owningArtifactOrFolderId` (`threadScope.ts:32-44`, one match per level up the parent chain, per id, called by `isThreadScopedId` from `dehydrate.ts:137` and `168`). One flush, `dehydrate.ts:128-146` and `dehydrateStateToJsonLd` (`dehydrate.ts:160-170`), costs about 3 full scans, about 7000 x (1 + parent depth) path matches and every field of every node.",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR007",
+    "@type": "BlockNode",
+    "title": "**Delete and add paths**",
+    "text": "**Delete and add paths**: `node.ts:100,101,136-141,178,231,237,256,265-269,294,301` (`appendOrderedChild`, `insertOrderedChild`, `clearField`, `hardDeleteNode`, `writeField`): each quad is passed to `store.delete(m)` and dropped; line 237 deletes every quad of a node; `insertOrderedChild` does 2 matches and 2 deletes per sibling. `hardDeleteNode` recurses (`node.ts:231-233`, `294-298`) while its own quad array is being iterated. `removeDanglingUnfolds` (`node.ts:251-259`) is bound on `predIri('unfolds')` and the deleted id, and passes each quad only to `store.delete(m)`. The adds (`node.ts:103-104,144-145,201,203,274-275,313,318,327` and `store.ts:95,96,107,112,116` in rehydrate) make a fresh `Quad` plus 2-3 args per call and drop them; `store.add` does not consume them.",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR008",
+    "@type": "BlockNode",
+    "title": "**No match of their own**",
+    "text": "**No match of their own**: `checkLinkIntegrity` (`linkIntegrity.ts:110-122`) calls `allIdsOfKind` and `wrap` (`node.ts:2149-2154`, a node is `{store, id}`) and reads through the accessors; `service.ts` calls the boot `rehydrateStore` at 162, the sweeps `tombstoneVacuousContainers`, `pruneUnreachableTombstones` and `pruneStaleUnfolds` at 202-204, 365-373, 418-420 and 474-477 (each runs `allIdsOfKind` several times), and the dehydrate at 237, 328, 421 and 425; at reload (378-379) `store = result.store` drops the old `Store` without `store.free()`.",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR009",
+    "@type": "BlockNode",
+    "title": "**Test only**",
+    "text": "**Test only**: `cli/src/verifyDanglingUnfolds.ts:25` returns the `Quad[]` and `store.add(q)` at 60 re-adds them (`referenceDanglingUnfoldQuads`, retained on purpose), 48 and 56 (`.length` only), 70-73 `unfoldedIds`; `cli/src/verifyLinkRefusals.ts:60` spreads the whole store.",
+    "parent": "BlockNode:00D1GCR1XR002",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00A",
+    "@type": "BlockNode",
+    "title": "00D1GCR1XR00A",
+    "text": "**What can be freed, and what must be kept**",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D1GCR1XR00B",
+      "BlockNode:00D1GCR1XR00C",
+      "BlockNode:00D1GCR1XR00D",
+      "BlockNode:00D1GCR1XR00E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00B",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D1GCR1XR00B:props:StringProp:00D1GCRX80000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GCR1XR00B:props:StringProp:00D1GCRX80001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Free at the root as soon as the value is read**",
+    "text": "**Free at the root as soon as the value is read**: every quad and term in `allIdsOfKind`, the rehydrate second pass, `readField`/`decodeTerm`, `childrenOf`, `orderedChildIds`, `decodeField`, `pathOf`, `owningArtifactOrFolderId`, `findByExactPath`, `findLiveByKindAndPath`, `ownerOfLink`, `backlinks`, `find*ByName/Handle`, `nodeExists`, `unfoldedIds`. Their results are strings, numbers, booleans, or `wrap`ped nodes holding `store` and `id`, so no wasm object outlives its call in production code; nothing is stored in a Map or a closure.",
+    "parent": "BlockNode:00D1GCR1XR00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00C",
+    "@type": "BlockNode",
+    "title": "**Free after the call that uses them**",
+    "text": "**Free after the call that uses them**: the `Quad` in every delete loop (after `store.delete(m)`), every fresh quad and arg in every `store.add(...)`, every `nodeIri`/`predIri`/`encodeLiteral` arg after its `match` call.",
+    "parent": "BlockNode:00D1GCR1XR00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00D",
+    "@type": "BlockNode",
+    "title": "**Keep**",
+    "text": "**Keep**: `PARENT_PRED`, `SIBLING_INDEX_PRED` (`vocab.ts:139-140`) and `XSD_INTEGER`, `XSD_BOOLEAN` (`vocab.ts:11-12`), module constants used by every call, so freeing one makes every later use throw; `subject` in `encodeDoc` (83) and `childSubject` in `appendOrderedChild` (99) until the last line that uses them; `deletedIri` in `verifyDanglingUnfolds.ts:21`; the quads in `referenceDanglingUnfoldQuads` until the comparison ends.",
+    "parent": "BlockNode:00D1GCR1XR00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00E",
+    "@type": "BlockNode",
+    "title": "**Care points**",
+    "text": "**Care points**: free the `Quad` after the term read from it is turned into a string, not before; with `matches[0]` and `matches.map(...)` the array is freed after the last use of any element; `hardDeleteNode` recurses while its quad array is iterated, so each quad is freed per element and after `store.delete`; free an arg only after the `match` that took it, and only if it was created for that call. Measured in a scratch process: a term taken from `q.subject` stays valid after `q.free()`, but `q.subject` after `q.free()` throws \"null pointer passed to rust\"; the results of `match(arg, ...)` stay readable after `arg.free()`, but `match(freedArg, ...)` throws; `store.add(quad)` does not consume the quad; `store.delete(freedQuad)` throws; a freed module constant used later as an argument throws.",
+    "parent": "BlockNode:00D1GCR1XR00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00F",
+    "@type": "BlockNode",
+    "title": "**The other fields of `removeDanglingUnfolds`**",
+    "text": "**The other fields of `removeDanglingUnfolds`**: it covers only `unfolds` (`node.ts:256`, `predIri('unfolds')`); `shape.ts:146` defines only `unfolds` and `root` on a `TreeView`. `unfoldsCollapsed` and `unfoldsNoPreview` exist nowhere in `packages/`, only as a proposal in the graph (4 blocks in `Apeiron/BlockNode.jsonld`). If they are added as set fields of `TreeView`, `removeDanglingUnfolds` must sweep their predicates too, or match on the object alone and filter on the predicate set.",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00G",
+    "@type": "BlockNode",
+    "title": "00D1GCR1XR00G",
+    "text": "**Shapes for one helper that frees at the root** (a measured fact for all of them: `match` builds the whole array first, so no shape lowers the peak, only what stays alive after the call)",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D1GCR1XR00H",
+      "BlockNode:00D1GCR1XR00J",
+      "BlockNode:00D1GCR1XR00K",
+      "BlockNode:00D1GCR1XR00M",
+      "BlockNode:00D1GCR1Y0000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00H",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D1GCR1XR00H:props:StringProp:00D1GCRX8G000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GCR1XR00H:props:StringProp:00D1GCRX8G001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**A. Eager plain rows**",
+    "text": "**A. Eager plain rows**: `readQuads(store, subjectId|null, field|null, object)` returns `{subject: string, predicate: string, object: {termType, value, datatype?}}[]`; the helper builds its own args from strings and frees args, quads and terms before returning. It changes the read sites listed above and turns `nodeExists` into `countMatches`. Safe by construction (no wasm object leaves the helper); the cost is one plain object per quad.",
+    "parent": "BlockNode:00D1GCR1XR00G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00J",
+    "@type": "BlockNode",
+    "title": "**B. Callback**",
+    "text": "**B. Callback**: `forEachMatch(store, s, p, o, (q) => ...)` frees each quad after the callback; fits the delete loops. Hazard: a callback that keeps `q` or a term gets a null-pointer throw later.",
+    "parent": "BlockNode:00D1GCR1XR00G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00K",
+    "@type": "BlockNode",
+    "title": "**C. Generator yielding plain values**",
+    "text": "**C. Generator yielding plain values**: no gain over A, because the array is already built; a generator that stops early would need a `finally`.",
+    "parent": "BlockNode:00D1GCR1XR00G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1XR00M",
+    "@type": "BlockNode",
+    "title": "**D. Specific helpers**",
+    "text": "**D. Specific helpers**: `deleteMatches(store,s,p,o): number` for the delete loops, `countMatches` for `nodeExists`, `addQuad(store,s,p,o)` for all the `store.add(quad(...))` sites.",
+    "parent": "BlockNode:00D1GCR1XR00G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1Y0000",
+    "@type": "BlockNode",
+    "title": "**The Coder's recommendation**",
+    "text": "**The Coder's recommendation**: A for reads, D for writes, B not used; helpers take ids and field names as strings so they own the lifetime of every arg, with `predIri` cached per field name in a Map (a bounded set from `SHAPE_BY_KIND`, never freed) to remove the second kind of per-call allocation. `using`/`Symbol.dispose` exists on the classes (node 22) but the packages' `tsconfig` targets es2023 with `lib: [\"ES2023\"]`, so it needs a config change; not recommended here.",
+    "parent": "BlockNode:00D1GCR1XR00G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1Y0001",
+    "@type": "BlockNode",
+    "title": "00D1GCR1Y0001",
+    "text": "**Measurement** (on a copy under `/tmp` of 58,780 quads, a fresh process per variant, `node --expose-gc`, `gc()` between calls): the unchanged `allIdsOfKind` grows about 42 MB per call and takes 570 to 1,140 ms; the variant that frees the subject term and the quad stays flat at 349 MB after a first-call rise of 32 MB, at about 150 ms per call. Caveats: one site, one corpus size, and resident set size is the only gauge (`process.memoryUsage().arrayBuffers` reads 0 and oxigraph exports no wasm memory size); without `gc()` between calls the freed variant looked as if it grew 17 MB per call, which was collectable string garbage.",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1Y0002",
+    "@type": "BlockNode",
+    "title": "**What the production-bound measurement must show**",
+    "text": "**What the production-bound measurement must show**: memory with `gc()` before every reading, the signal being a plateau (flat after call 1 with the change, linear without); the service shape, not one function: a cycle of `dehydrateToJsonLd`, `dehydrateStateToJsonLd`, the three sweeps and `checkLinkIntegrity`, at least 10 cycles, then a `rehydrateStore` reload loop with and without `store.free()` on the old store; time per call and per cycle; identical output, meaning the dehydrated `*.jsonld` byte-for-byte equal to the unchanged code's output on the same copy, and the `commit` suite green, plus a test that a helper never returns or leaves a freed object (any \"null pointer passed to rust\" is a miss); a split of the gain by site (`allIdsOfKind`, `readField`, add-args), because the gauge is rss.",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCR1Y0003",
+    "@type": "BlockNode",
+    "title": "**Still unknown**",
+    "text": "**Still unknown**: the same plateau for the other sites (only `allIdsOfKind` was measured, with one corpus size), and whether `new Store()` freed on reload is a gain or a hazard for a request in flight (requests go through `enqueue()`, `service.ts:5`, but the swap at 378-379 was not traced against held references).",
+    "parent": "BlockNode:00D1GCR1XR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCWWYR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D1GCWWYR001:links:Link:00D1GCXENG002",
+        "@type": "Link",
+        "target": "BlockNode:00D1GCR1XR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1GCWWYR001:links:Link:00D1GCXENG002:props:StringProp:00D1GCXENG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "17"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D1GCWWYR001:props:StringProp:00D1GCXENG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GCWWYR001:props:StringProp:00D1GCXENG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Promoted to**",
+    "text": "**Promoted to**: [the map of the store reads](../issues/core.md#id/BlockNode:00D1GCR1XR001) under the `free()` item of the scans issue, with the numbers and caveats of the Coder's measurement, filed 2026-10-11.",
+    "parent": "BlockNode:00D1G3PV30001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GCYPGR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D1GCYPGR001:links:Link:00D1GCZ8B0002",
+        "@type": "Link",
+        "target": "BlockNode:00D1GC79B8000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1GCYPGR001:links:Link:00D1GCZ8B0002:props:StringProp:00D1GCZ8B0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "17"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D1GCYPGR001:props:StringProp:00D1GCZ8B0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D1GCYPGR001:props:StringProp:00D1GCZ8B0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Promoted to**",
+    "text": "**Promoted to**: [the plan of the user](../issues/core.md#id/BlockNode:00D1GC79B8000) in the scans issue's Fix directions, with the comparison marked not decided, not tried, filed 2026-10-11.",
+    "parent": "BlockNode:00D1G68Q3G001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GD39M8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D1GD39M8001:links:Link:00D1GD3V1R000",
+        "@type": "Link",
+        "target": "BlockNode:00D0Y9HG30002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1GD39M8001:links:Link:00D1GD3V1R000:props:StringProp:00D1GD3V1R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "17"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D1GD39M8001:links:Link:00D1GD3V1R002",
+        "@type": "Link",
+        "target": "BlockNode:00D0Y9HG30003",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1GD39M8001:links:Link:00D1GD3V1R002:props:StringProp:00D1GD3V1R003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "105"
+          }
+        ]
+      }
+    ],
+    "title": "**Promoted to**",
+    "text": "**Promoted to**: [the type-quad correction in Layer 1](../issues/core.md#id/BlockNode:00D0Y9HG30002) and [its check](../issues/core.md#id/BlockNode:00D0Y9HG30003), corrected 2026-10-11.",
+    "parent": "BlockNode:00D0YDSSCR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GD50SG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D1GD50SG001:links:Link:00D1GD5HH0000",
+        "@type": "Link",
+        "target": "BlockNode:00D0X65RB8009",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1GD50SG001:links:Link:00D1GD5HH0000:props:StringProp:00D1GD5HH0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "17"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D1GD50SG001:links:Link:00D1GD5HH0002",
+        "@type": "Link",
+        "target": "BlockNode:00CVNX6A3R000",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D1GD50SG001:links:Link:00D1GD5HH0002:props:StringProp:00D1GD5HH0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "103"
+          }
+        ]
+      }
+    ],
+    "title": "**Promoted to**",
+    "text": "**Promoted to**: [the fix status of the scans issue](../issues/core.md#id/BlockNode:00D0X65RB8009) and [the removal-stall issue, now resolved](../issues/core.md#id/BlockNode:00CVNX6A3R000), 2026-10-11.",
+    "parent": "BlockNode:00D1FCX9E8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D1GF7EBG001",
+    "@type": "BlockNode",
+    "title": "00D1GF7EBG001",
+    "text": "**Verification — the `free()` patch (Coder Turn 2, `BlockNode:00D1GENHHR00B`) and the Grapher's filing (Turn 2, `BlockNode:00D1GE12DR008`)** (2026-10-11, orchestrator): I read the diff scope (8 source files changed and 2 new: `storeAccess.ts`, 250 lines, and its test `store/storeAccess.test.ts`, named in the `commit` suite) and read `storeAccess.ts` in full: every read returns plain strings, numbers, booleans or rows, `eachMatch` frees each quad after its callback and the argument terms in a `finally` (also when the callback throws), `deleteMatches` frees a quad only after deleting it, `addQuad` frees the quad and its terms, `predIri` is cached per field name and seeded with `PARENT_PRED` and `SIBLING_INDEX_PRED`, and no shared constant is freed. I ran `npm run verify -- --suite essential` (27 of 27, 3.2 s) and `npm run verify` (the `commit` tier, 61 of 61, 19.5 s), and `tsc --noEmit` on `core` and `cli` printed nothing; I did not run `demand` or `verify:legacy`. The Coder's measurement (production code, a copy of the mirror with 59,275 quads, 3 samples per case, a fresh process each, `gc()` between calls): eight `allIdsOfKind` calls went from 349 to 634 MB (+40 MB per call) to flat at 264.6 MB, and from 0.7 to 1.7 s per call to 0.14 to 0.23 s; dehydrate of both mirrors from 33 to 38 s to 2.5 to 3.8 s, with rss from about 770 to about 350 MB; rehydrate from 3.3 to 3.5 s to 2.0 to 2.9 s; the dehydrated directories are byte-identical before and after in all three repetitions. Not measured: the write paths (ingest, track, tombstone sweeps) in a real service session; tests cover them only. The Grapher's filing: the map is a subtree under the `free()` item (`00D1GCR1XR001`), the plan item `00D1GC79B8000` carries the user's words, the fix status (`00D0X65RB8009`), the type-quad premise (`00D0Y9HG30002`, `00D0Y9HG30003`) and the removal-stall issue (`00CVNX6A3R000`, now in Resolved) are corrected; I read the first three of those and they say what the report says. The code is staged in the code repo, the graph in `AperasKG`. The running service still holds the old code; the new code applies after a restart, which is for the user to approve, and the first restart is also the live check of the write paths. Two Grapher questions go to the user: whether Layers 1 to 3 and the pause stay planned, and the \"above\" wording in `00CVNZXVR8001`.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D2030938001",
+    "@type": "BlockNode",
+    "title": "**Live check — the service restarted onto the `free()` patch (2026-10-12, orchestrator)**",
+    "text": "**Live check — the service restarted onto the `free()` patch (2026-10-12, orchestrator)**: the user committed the patch and approved the restart. `aperas service restart` found no service running (the previous one was already gone) and started a fresh one; the command's own 5 s ready wait expired, and the service answered 17 s after its process started (08:15:59 to 08:16:16 UTC), at 379 MB resident, against 37.8 s to rehydrate in the earlier measurement and a resident size of 1.0 to 1.8 GB. After that: `aperas tree --view` took 0.57 s; `aperas check-links` (a full scan of 6,900 live blocks, 1,480 with internal link text) took 2.7 s twice, clean, 0 discrepancies, and the service stayed at 375 to 379 MB across both scans. One sample each. This entry's own insert into the Freeflow document is the first timed write; its time and the resident size after it are in the next entry.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D2033S00001",
+    "@type": "BlockNode",
+    "title": "**Live check, write path (2026-10-12, orchestrator)**",
+    "text": "**Live check, write path (2026-10-12, orchestrator)**: the first insert into the Freeflow document (the largest artifact, the entry above) took 5.1 s with the service at 392 MB resident afterwards, against a minute or more for a write into this document before the patch and 2 minutes right after the earlier restart. One sample. The entry recording this one is the second timed write; its time is the first line of the next entry.",
+    "parent": "BlockNode:00D0V83SF8001",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D2037TRG001",
+    "@type": "BlockNode",
+    "title": "**Live check, second write and projection (2026-10-12, orchestrator)**",
+    "text": "**Live check, second write and projection (2026-10-12, orchestrator)**: the second insert into the Freeflow document took 5.0 s and `aperas project discussion/aperas-skill.md` 2.4 s; resident memory rose from 379 MB at start through 392 and 413 MB after the two inserts to 424 MB after the projection, so it still grows with writes (about 45 MB over five commands, one sample, not yet a trend). The live check of the `free()` patch is done for reads, a full scan and the write path of one artifact; the ingest, `remove` and tombstone-sweep paths were not exercised live. This is the last timing entry; a longer run (an hour of normal agent work) is the next evidence for the memory trend.",
+    "parent": "BlockNode:00D0V83SF8001",
     "type": "paragraph",
     "children": []
   }
