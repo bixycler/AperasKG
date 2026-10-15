@@ -32,7 +32,7 @@ What is shown about the cause: <a name='id/BlockNode:00D1D5F640005' class='apera
 - **The same data costs about thirteen times more in a process that has already worked.** A copy of the real mirror (55,968 quads, 0 dangling references) rehydrated in 2.8 s in a fresh process, which then dehydrated it in 24.3 s; a second fresh process rehydrated the dehydrated directory in 2.9 s, and the same directory took 37.8 s to rehydrate in a process that had already rehydrated and dehydrated. The cost is state built up in the process, not the data; the dehydrate, which scans the store, leaves the wrappers that slow the next rehydrate *(measured, one run, for the times; read, for the wrappers)*.
 - **Not shown:** the cause of the cost in steps 3 and 5g; the cost of steps 7, 9c, 10 and 11 under the same tracing, which no run reached.
 
-The service holds the same store in one long-lived process and cannot be split by process. A remedy for it (a pause, or releasing the quads) is not part of this design *(open; see Open points)*.
+The service holds the same store in one long-lived process and cannot be split by process. The remedy that landed is releasing the quads: every read of the store frees its wasm objects at the root as soon as the value is read (commit `d794060`; see [the landing, with its measurements and its live check](../issues/core.md#id/BlockNode:00D216W8Z0001)) *(built, measured: on a copy of the mirror a dehydrate of both mirrors fell from 33 to 38 s to 2.5 to 3.8 s, 3 samples; the live service answered 17 s after its start at 379 MB resident, one sample)*. That the service's memory stays flat over a long run is not shown, and a pause is not part of this design *(open; see Open points)*.
 
 ## Architecture <a name='id/BlockNode:00D1D5F64000C' class='aperas-anchor aperas-id'></a>
 
@@ -88,4 +88,4 @@ Each workflow in this section carries its own mark.
 
 ## Open points <a name='id/BlockNode:00D1D5F64800P' class='aperas-anchor aperas-id'></a>
 
-- The pause length for the service remedy, and the choice of that remedy, are not part of this design; the bare-engine pause experiment that would inform them has not been run.
+- The pause for the service, and whether the service needs it beyond the release of the quads that landed, are not part of this design; the bare-engine pause experiment that would inform them has not been run.

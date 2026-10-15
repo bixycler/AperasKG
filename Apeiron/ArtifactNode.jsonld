@@ -43,11 +43,11 @@
       "BlockNode:00CDBYV5A8001"
     ],
     "path": "issues/linking.md",
-    "fileHash": "7de915cc81cde24961a7b4615b0416aec1041ebf48c5916d50d8b412d094b8a7",
+    "fileHash": "d740aa469607e8664c27d6cfdb7a401462f60de9b0e7223b3c7a4023d3d6360d",
     "lastTrackedAt": "2026-09-22T08:07:16.888Z",
-    "ingestedHash": "7de915cc81cde24961a7b4615b0416aec1041ebf48c5916d50d8b412d094b8a7",
-    "lastIngestedAt": "2026-10-11T08:10:51.935Z",
-    "projectedHash": "7de915cc81cde24961a7b4615b0416aec1041ebf48c5916d50d8b412d094b8a7"
+    "ingestedHash": "d740aa469607e8664c27d6cfdb7a401462f60de9b0e7223b3c7a4023d3d6360d",
+    "lastIngestedAt": "2026-10-12T11:40:59.037Z",
+    "projectedHash": "d740aa469607e8664c27d6cfdb7a401462f60de9b0e7223b3c7a4023d3d6360d"
   },
   {
     "@id": "ArtifactNode:00CDBYV46G000",
@@ -534,11 +534,11 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "405f3842a97dd412c54204bdf967406fa5d1a12add67d0b05965ae318d4569f2",
+    "fileHash": "2b2f7df6f4f2fb6f5a39669d51ef355a19149d27a70b29855daef420897dd7f6",
     "lastTrackedAt": "2026-09-22T08:07:36.316Z",
-    "ingestedHash": "405f3842a97dd412c54204bdf967406fa5d1a12add67d0b05965ae318d4569f2",
-    "lastIngestedAt": "2026-10-11T08:10:42.078Z",
-    "projectedHash": "405f3842a97dd412c54204bdf967406fa5d1a12add67d0b05965ae318d4569f2"
+    "ingestedHash": "2b2f7df6f4f2fb6f5a39669d51ef355a19149d27a70b29855daef420897dd7f6",
+    "lastIngestedAt": "2026-10-12T10:03:36.360Z",
+    "projectedHash": "2b2f7df6f4f2fb6f5a39669d51ef355a19149d27a70b29855daef420897dd7f6"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "b7b030989d763e56dbc884ee86684f3cab763b1163935202eb6f21ca3914a7bd",
+    "fileHash": "efd1ab54af6f0c4d87847b34c64af585cd3a153855c220966ac7bc61785eb0ac",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "b7b030989d763e56dbc884ee86684f3cab763b1163935202eb6f21ca3914a7bd",
-    "lastIngestedAt": "2026-10-12T08:17:03.722Z",
-    "projectedHash": "b7b030989d763e56dbc884ee86684f3cab763b1163935202eb6f21ca3914a7bd"
+    "ingestedHash": "efd1ab54af6f0c4d87847b34c64af585cd3a153855c220966ac7bc61785eb0ac",
+    "lastIngestedAt": "2026-10-15T07:25:53.754Z",
+    "projectedHash": "efd1ab54af6f0c4d87847b34c64af585cd3a153855c220966ac7bc61785eb0ac"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "3c75039c0445e9faa01bf5704ffd21a18be109d37d5f989939aa8b5541cec995",
+    "fileHash": "3c6d6b5c600ebb171bbe56dc878f7c638b609597edb082fb0355d950fe746f5e",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "3c75039c0445e9faa01bf5704ffd21a18be109d37d5f989939aa8b5541cec995",
-    "lastIngestedAt": "2026-10-11T14:00:35.539Z",
-    "projectedHash": "3c75039c0445e9faa01bf5704ffd21a18be109d37d5f989939aa8b5541cec995"
+    "ingestedHash": "3c6d6b5c600ebb171bbe56dc878f7c638b609597edb082fb0355d950fe746f5e",
+    "lastIngestedAt": "2026-10-15T07:25:45.993Z",
+    "projectedHash": "3c6d6b5c600ebb171bbe56dc878f7c638b609597edb082fb0355d950fe746f5e"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,11 +896,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "f071a2800841c7d7b2b0866e1fe847be0180f4541e8287228c9ad8aeea62bc65",
+    "fileHash": "6450a634d55635f11a839142d5864461adc19142e5bdfa213faba9722532dd6b",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "f071a2800841c7d7b2b0866e1fe847be0180f4541e8287228c9ad8aeea62bc65",
-    "lastIngestedAt": "2026-10-02T14:03:27.769Z",
-    "projectedHash": "f071a2800841c7d7b2b0866e1fe847be0180f4541e8287228c9ad8aeea62bc65"
+    "ingestedHash": "6450a634d55635f11a839142d5864461adc19142e5bdfa213faba9722532dd6b",
+    "lastIngestedAt": "2026-10-15T07:25:50.655Z",
+    "projectedHash": "6450a634d55635f11a839142d5864461adc19142e5bdfa213faba9722532dd6b"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -1312,10 +1312,60 @@
       "BlockNode:00D1D5F63R001"
     ],
     "path": "design/testing.md",
-    "fileHash": "1f6fdae19de7f96489862265e71000ffe8512f41b80bb163dc641d1a447c4754",
+    "fileHash": "84615505739772b03d8be7de4f425cbf6a045a7eaca5f129175ec023366e5e46",
     "lastTrackedAt": "2026-10-11T10:13:55.688Z",
-    "ingestedHash": "1f6fdae19de7f96489862265e71000ffe8512f41b80bb163dc641d1a447c4754",
-    "lastIngestedAt": "2026-10-11T12:28:48.387Z",
-    "projectedHash": "1f6fdae19de7f96489862265e71000ffe8512f41b80bb163dc641d1a447c4754"
+    "ingestedHash": "84615505739772b03d8be7de4f425cbf6a045a7eaca5f129175ec023366e5e46",
+    "lastIngestedAt": "2026-10-12T09:39:15.978Z",
+    "projectedHash": "84615505739772b03d8be7de4f425cbf6a045a7eaca5f129175ec023366e5e46"
+  },
+  {
+    "@id": "ArtifactNode:00D21FP1XR000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00D21FP1XR000:props:StringProp:00D21FPK80000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "What has landed in the core's store performance work (the object-bound removal sweep, the `free()` read helper, the branch split) and what was measured, each at its strength."
+      }
+    ],
+    "title": "core.md",
+    "text": "As of 2026-10-12 two commits of store performance work have landed on branch `oxigraph`, and both branches (`oxigraph` and `js-apeironngn`) point at the second one, `d794060`.",
+    "parent": "FolderNode:00CDBYV4BR002",
+    "type": "root",
+    "children": [
+      "BlockNode:00D21FP4Z0001"
+    ],
+    "path": "history/core.md",
+    "fileHash": "3100166c4a47bacec93abb16299850d1b9404f36ff8af87b2be2be8a08791b74",
+    "lastTrackedAt": "2026-10-12T09:54:21.047Z",
+    "ingestedHash": "3100166c4a47bacec93abb16299850d1b9404f36ff8af87b2be2be8a08791b74",
+    "lastIngestedAt": "2026-10-15T07:25:48.281Z",
+    "projectedHash": "3100166c4a47bacec93abb16299850d1b9404f36ff8af87b2be2be8a08791b74"
+  },
+  {
+    "@id": "ArtifactNode:00D24N84NR000",
+    "@type": "ArtifactNode",
+    "props": [
+      {
+        "@id": "ArtifactNode:00D24N84NR000:props:StringProp:00D24N8N2G000",
+        "@type": "StringProp",
+        "key": "description",
+        "value": "The design of the ApeironNgn engine, the in-memory graph the service holds as a reflection of the mirror: its closed vocabulary of fields, its index, its ordering, its identity rules, the mirror format and the interface callers use."
+      }
+    ],
+    "title": "core.md",
+    "text": "**Discussion**: [Core — Discussion](../discussion/core.md#id/BlockNode:00CF1WZE10001) — the freeflow record of the core engine: its scope and the sequencing of its issues, design and history.",
+    "parent": "FolderNode:00CDBYV4BR000",
+    "type": "root",
+    "children": [
+      "BlockNode:00D24N87SR001"
+    ],
+    "path": "design/core.md",
+    "fileHash": "a13f036c5f0f0953ba417e41dc35d8e89b104cc377f625ab2d6ad7edbf93c33f",
+    "lastTrackedAt": "2026-10-12T13:36:13.399Z",
+    "ingestedHash": "a13f036c5f0f0953ba417e41dc35d8e89b104cc377f625ab2d6ad7edbf93c33f",
+    "lastIngestedAt": "2026-10-15T07:25:43.341Z",
+    "projectedHash": "a13f036c5f0f0953ba417e41dc35d8e89b104cc377f625ab2d6ad7edbf93c33f"
   }
 ]

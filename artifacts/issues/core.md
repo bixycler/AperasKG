@@ -68,6 +68,12 @@ description: The engine-level bug family this concern owns — most prominently 
   - **Fix directions**
     
     - **Fix to try**: <a name='id/BlockNode:00D0X5TK4G017' class='aperas-anchor aperas-id'></a> retry the ping once or twice, or raise the timeout, before throwing, and say in the message when a socket exists but did not answer.
+  - **Since measured (2026-10-12), the mechanism refined, not resolved**: <a name='id/BlockNode:00D22Z4RF0001' class='aperas-anchor aperas-id'></a> the Coder's profile of one insert ([the cost-of-a-write issue](#id/BlockNode:00D22Z1HJ8001)) tested the mechanism under Root cause on an instrumented scratch service, with a pinger sending a ping every 50 ms (the client's own timeout is 300 ms).
+    
+    - **Measured**: <a name='id/BlockNode:00D22Z4RF0002' class='aperas-anchor aperas-id'></a> in the two runs whose events were logged (12 tasks over 1 s) no request's `data` event was logged inside any task window; a ping sent in a window was logged as received 0 to 60 ms after the window ended and answered 0.4 to 2.2 ms after receipt. In all six runs (3 on a big artifact, 3 on a small one) the pinger saw exactly one slow ping per busy window, of 1.3 to 4.7 s.
+    - **What it shows**: <a name='id/BlockNode:00D22Z4RF0003' class='aperas-anchor aperas-id'></a> a request is refused while the service is busy not because of the queue but because the work is synchronous. `runInsert`, `checkArtifactLinkIntegrity` and `dehydrateToJsonLd` never yield to the event loop, so the socket is not read at all while one runs, and a ping never reaches the queue. The queue would add ordering only if the handlers yielded, and they do not. This answers the first item under Not proven: a ping does not wait in the queue for part of its 300 ms, it is not read until the work ends.
+    - **Windows in which the service is unreachable to a ping**: <a name='id/BlockNode:00D22Z4RF0004' class='aperas-anchor aperas-id'></a> the whole handler of an insert (1.6 s on a small artifact, 3.2 s on a 5,200-line one), and again the timer's dehydrate (1.4 s) at a point set by the 10 s timer within 10 s of any write. The orchestrator's refused `aperas flush` 0.7 s after an insert (a stall test, one sample) fits such a window.
+    - **Not shown**: <a name='id/BlockNode:00D22Z4RF0005' class='aperas-anchor aperas-id'></a> the mechanism was shown for an insert and the timer flush on scratch services; the other verbs and the live service were not measured. Whether the retry of the "Fix to try" below would have to outlast a window of 1.4 to 3.2 s to help is a reading, not tested.
 - **A write to a thread node never marks the `.state/` mirror dirty, so it exists only in memory until a view change or a shutdown sweep, and a killed service loses it**: <a name='id/BlockNode:00CVNZXVR8001' class='aperas-anchor aperas-id'></a> found 2026-10-02 when the service stuck after the pruning removals (see the removal-stall entry above) was killed. Filed 2026-10-02.
   
   - **Symptom**
@@ -101,6 +107,7 @@ description: The engine-level bug family this concern owns — most prominently 
       - (1) any write to a thread-scoped node sets `stateDirty` (`isThreadScopedId` is already imported in the same file), so the 3-second timer and every `--flush` persist it;
       - (2) the `.state/` divergence stamps cover the thread-partitioned node classes and not only `STATE_CLASSES` (`TreeView`), so an external change to the thread `BlockNode` file there is noticed (not checked: that an external change goes unnoticed today);
       - (3) every flush path writes both mirrors from one rule.
+  - **Since sampled (2026-10-12), one sample, the gap is present on the current code**: <a name='id/BlockNode:00D22ZC858001' class='aperas-anchor aperas-id'></a> the Coder, while profiling an insert, used a plain scratch service on a copy of the mirror and ran `echo text | aperas insert BlockNode:00CR9ME608000 --flush` under a heading of `.threads/coder.md`, then `aperas flush`. `.state/BlockNode.jsonld` and `BlockNode.jsonld` were both unchanged (the string was in neither file after 6 s), although `aperas show` returned the new text. So neither `--flush` nor `aperas flush` wrote the thread node to `.state/`, which the agreed fix would make them do (part 1 above). The code reading agrees with Root cause: `insert` sets only `dirty`, `flushIfDirty` excludes thread-scoped nodes, and `flushStateIfDirty` runs only when `stateDirty` is set, which `unfold`, `fold`, `zoom` and the sweeps set. The sample was not repeated, and no other verb or thread file was tried.
 - **`aperas resolve`'s title-ambiguity check does not filter tombstoned candidates, so a dead holder makes a live path read as ambiguous**: <a name='id/BlockNode:00CVQ0PVS0001' class='aperas-anchor aperas-id'></a> reproduced 2026-10-02: `aperas tree issues/cli.md` fails with `'cli.md' is ambiguous among: ArtifactNode:00CF2AEA78000 ("cli.md"), ArtifactNode:00CF1TZQV8000 ("cli.md")`, where the second id is a tombstoned holder, while `aperas tree issues/core.md` resolves. First seen when the thin `cli.md` docs were created. Cause, read from the code: `findChild(text)` (`node.ts:479-490`) builds its `candidates` array from `this.treeChildren` filtering only on `title !== undefined`, never on `tombstonedAt`, and `BlockNode.treeChildren` and `FolderNode.treeChildren` (`node.ts:513-515`, `1143-1145`) return `this.children ?? []` with no liveness filter at any layer above, so a tombstoned sibling with a matching title lands in both the exact-slug match and the prefix-slug fallback and can make an otherwise unique live title ambiguous. `findChild` is one shared method on `TreeNode`, called from exactly two places, `resolve.ts:116` (`aperas resolve`) and `resolveCreate.ts:164` (`aperas resolve --create-holder`), each once per deep-path segment, so one filter covers both commands, and every command that resolves a bare path (`tree`, `show`, `project`, `insert`) inherits the failure. Fix to try: filter `candidates` in `findChild` to exclude any child with `tombstonedAt` set before either slug match runs, using the same idiom as [the `diffChildren` fix](../issues/core.md#id/BlockNode:00CF1WZ4JG004) (`isLiveOld` in `reconcile.ts`) and [the dead-container fix](../issues/core.md#id/BlockNode:00CF1WZ4JG006) (`tombstoneVacuousContainers`). Workaround: resolve the live node by ID, or by a path that does not end on the ambiguous title. Not yet fixed; no coder task is open for it. Filed 2026-10-02.
 - **The ApeironNgn service's resident memory climbs to about 5.8 GB over hours under heavy use, and a fresh service idles at about 1.3 GB for 3.66 MB of data**: <a name='id/BlockNode:00CVQ4Z968001' class='aperas-anchor aperas-id'></a> found 2026-10-02, in the v4.3 skill task, with two parts. Filed 2026-10-02.
   
@@ -122,7 +129,7 @@ description: The engine-level bug family this concern owns — most prominently 
       - The engine is not the cost, and the hypothesis that the store itself is that large is overturned (figures under Measurements).
     - **Suspected causes**: <a name='id/BlockNode:00D0X1SZ3R00D' class='aperas-anchor aperas-id'></a> hypotheses written 2026-10-02 as untested (the reload part is measured, see above); no scratch run has reproduced the climb to 5.8 GB under heavy use.
       
-      - **The store is Oxigraph's WASM store, whose linear memory grows and never shrinks, and each reload builds a new store, so a leak in reload or removal could keep old stores alive** (hypothesis, written 2026-10-02 as untested)
+      - **The store is Oxigraph's WASM store, whose linear memory grows and never shrinks, and each reload builds a new store, so a leak in reload or removal could keep old stores alive** (hypothesis, written 2026-10-02 as untested; measured in part since: the reload keeps the old store alive until an event-loop turn (2026-10-10), and external memory added by the boot sweeps was seen never to shrink; no leak in reload or removal was shown. After [the `free()` landing](../history/core.md#id/BlockNode:00D21FP4ZG003) of 2026-10-12 the old `Store` is still left to the garbage collector at reload, because the whole-store `free()` on reload was left out. The growth that followed the unfreed wrappers of the scans stopped in a scratch process, where eight scans stay flat at about 265 MB, and a fresh service answered at 379 MB resident where a fresh service had idled at 1.05 to 1.5 GB, one sample; the removal scan is replaced by the object-bound form of commit `0a7a226`. Whether resident memory still grows over a longer run is not shown)
         
         - A reload also builds a new `Store` and leaves the old one to the garbage collector, as [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001) describes.
       - **Each full-store scan allocates a JavaScript `Quad` per store quad, a candidate source of garbage-collector pressure and of the external-memory growth recorded here** (read, untested; from the investigation's code survey)
@@ -138,6 +145,9 @@ description: The engine-level bug family this concern owns — most prominently 
       - The live service logged 41,246 at its boot, so the live store does hold the thread partition.
       - The earlier 37,000 and 39,600 had no recorded method.
       - A count of about 50,610 derived from the mirror overshoots, because `add()` was called 46,519 times and 4,767 of those were duplicates (every `parent` quad is emitted twice, from the child's `parent` field and from the parent's `children` array, `store.ts` lines 95 and 112).
+      - **The other counts in the record are other moments, or other quantities, not corrections of this one** (reconciled 2026-10-12 against the entries themselves): the store grows with every write, mostly thread blocks and their links, so each figure belongs to its date. On 2026-10-02 the memory entry's 37,000 and 39,600 had no recorded method. On 2026-10-10 the store held 41,752 by `store.size`, and the live service logged 41,246 at its boot; the scans entry's 41.7k is this count. On 2026-10-11 a fresh copy of the real store held 47,836 (the Coder's comparison of the id sets by kind with the full scan; the testing design's "about 48,000" agrees with it), and the service had logged 50,055 at its previous start; two corpus copies of that day held 55,714 and 55,968 (the round-trip measurements, and the testing design's 55,968); the service logged 58,376 at its start that day (12:32 UTC); the Coder's copies for the `free()` item held 58,780 and, for its patch, 59,275. The 46,519 and the 50,610 are not store sizes: 46,519 is the number of `add()` calls of one rehydrate, 4,767 of them duplicates (46,519 less 4,767 is the 41,752), and 50,610 is a count derived from the mirror that overshoots for the same reason. Whether a count includes `.state/` is stated only where it is split (29,537 and 12,216 on 2026-10-10); the others are counts of a full store.
+        
+        - **Data size on disk follows the same rule**: <a name='id/BlockNode:00D217Y2N8002' class='aperas-anchor aperas-id'></a> the 3.66 MB of the memory entry's title is the mirror when the entry was filed (2026-10-02), the testing design's "a 5 MB `Apeiron/` directory" was read on 2026-10-11, and `du -sb` on `Apeiron/` measured 6.27 MB on 2026-10-12, with `.state/` inside it; whether the earlier figures included `.state/` is not recorded.
     - **The engine is not the cost** (measured)
       
       - Bare Oxigraph 0.5.11 (Node CJS build, wasm, in memory) costs about 0.47 KB resident and 0.59 KB external per quad when bulk-loaded and about 1.3 KB external per quad with per-quad `add` (rssAnon 59 to 196 MB for 10k to 100k quads), so 41.7k quads are 20 to 55 MB.
@@ -206,6 +216,7 @@ description: The engine-level bug family this concern owns — most prominently 
     - Earlier record: <a name='id/BlockNode:00D0X8TTAR00J' class='aperas-anchor aperas-id'></a> [the `npm run verify` entry](#id/BlockNode:00CJ0202MG001) names the same kind of operation, `checkLinkIntegrity`'s corpus sweep, as the one that went from low hundreds of milliseconds fresh to 12 to 55 seconds late in a long process.
     - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001), whose startup and shutdown sweeps share the full-store scan cost.
     - [The no-coverage issue](#id/BlockNode:00CVQHD7CR001), which lists the measurements that would time the sweep.
+  - **Since measured (2026-10-12)**: <a name='id/BlockNode:00D22ZD780001' class='aperas-anchor aperas-id'></a> the two sweeps cost 831 ms before and 780 ms after one insert into the 5,200-line `discussion/aperas-skill.md` (a copy of the mirror; medians of 6 inserts in 3 fresh processes), and 24 and 18 ms for a 37-line artifact. The remark parse of every block's text (`collectLinkCodesFromText`) is 1,070 ms of the 1,574 ms the profile attributes to them. The measurement and the other cost centres of one write (a path index over all live blocks, the timed dehydrate) are in [the cost-of-a-write issue](#id/BlockNode:00D22Z1HJ8001).
 - **Boot and shutdown cost grows with the tombstones and sits close to the client's 5 s ready wait and 10 s stop wait**: <a name='id/BlockNode:00CVQHCEW8001' class='aperas-anchor aperas-id'></a> found 2026-10-02 in the slow-service investigation's code survey of the service. Filed 2026-10-02.
   
   - **Symptom**
@@ -439,12 +450,12 @@ description: The engine-level bug family this concern owns — most prominently 
       - The engine alone is not slow at this size (see [the memory issue](#id/BlockNode:00CVQ4Z968001) for its per-quad cost).
   - **Fix directions**
     
-    - The object-bound `removeDanglingUnfolds` landed in commit `0a7a226` and ran in the live service: it replaces the scan of every quad, made once per embedded node removed, with one `store.match` on the predicate `unfolds` and the deleted id as object. Result (2026-10-11, one removal in the live service): a task of 164 live blocks and 101 embedded `Link` nodes was removed in 3.7 s with no stall, the tree then showed every other task intact, and `aperas check-links` scanned 6,549 live blocks with 0 discrepancies. Before it, removals of 42 and 31 blocks stalled the service for 5.4 and 12 minutes, and a scratch removal of 34 embedded nodes took 21 s with 34 full scans. On a copy of the real store the old form took 512.8 ms per deleted id and the object-bound form 0.015 ms. It covers every field of a `TreeView` that holds an unfolded id and exists in code, which is `unfolds` alone. The `free()` item below and the layers after it are not applied.
-    - **`free()` on the quads and the terms read from them** (measured 2026-10-11, one sample; the first remedy for the scans in the service, being applied as one read helper)
+    - The object-bound `removeDanglingUnfolds` landed in commit `0a7a226` and ran in the live service: it replaces the scan of every quad, made once per embedded node removed, with one `store.match` on the predicate `unfolds` and the deleted id as object. Result (2026-10-11, one removal in the live service): a task of 164 live blocks and 101 embedded `Link` nodes was removed in 3.7 s with no stall, the tree then showed every other task intact, and `aperas check-links` scanned 6,549 live blocks with 0 discrepancies. Before it, removals of 42 and 31 blocks stalled the service for 5.4 and 12 minutes, and a scratch removal of 34 embedded nodes took 21 s with 34 full scans. On a copy of the real store the old form took 512.8 ms per deleted id and the object-bound form 0.015 ms. It covers every field of a `TreeView` that holds an unfolded id and exists in code, which is `unfolds` alone. The `free()` item below landed as commit `d794060` on branch `oxigraph`, with its measurements and its live check recorded in that item; Layers 1 to 3 and the pause are not decided and not tried, and are parked until the comparison with a JavaScript engine.
+    - **`free()` on the quads and the terms read from them** (measured 2026-10-11, one sample; the first remedy for the scans in the service; landed 2026-10-12 as commit `d794060` on branch `oxigraph`, as one read helper that frees at the root)
       
       - **Measured**: <a name='id/BlockNode:00D1DP5GG0002' class='aperas-anchor aperas-id'></a> ten full-store scans in one tick, baseline external memory 90.7 MB. Left to the finalizer: 223 ms a scan and 253.9 MB external. `q.free()` on each quad: 162 ms a scan and 115.8 MB external. `q.free()` plus the subject term freed: 109 ms a scan and 101.3 MB external, with no growth after the first scan. Resident set size across the three variants: 499, 351 and 289 MB. What had no effect was a forced `gc()` without a turn, not `free()`.
       - **Caveats**: <a name='id/BlockNode:00D1DP5GG8000' class='aperas-anchor aperas-id'></a> one sample, ten scans in one tick; the first scan's +10.6 MB of wasm memory is never returned; a term read from a quad (`q.subject`) is a separate object with its own handle that must be freed too; `allIdsOfKind` reads the subject twice per quad.
-      - **Plan**: <a name='id/BlockNode:00D1DP5GG8001' class='aperas-anchor aperas-id'></a> `free()` is the first remedy for the scans in the service, before Layer 1 (bound matches), Layer 2 (the index) and the pause, which stays the safety net. It is not decided and not tried in the service, and a sample of one is not yet a measurement of the service.
+      - **Plan**: <a name='id/BlockNode:00D1DP5GG8001' class='aperas-anchor aperas-id'></a> `free()` was the first remedy for the scans in the service, before Layer 1 (bound matches), Layer 2 (the index) and the pause, which stays the safety net. It landed as commit `d794060` (see **Landed** at the end of this item). Layers 1 to 3 and the pause are not decided and not tried, and are parked until the comparison with a JavaScript engine (the user's plan, the next entry in Fix directions); a sample of one was not a measurement of the service, and the measurements in **Landed** are the ones that count.
       - **Map of the store reads for the change** (the Coder's survey of 2026-10-11; read, not edited; line numbers are in `monorepo/packages`; "bound" means the subject, predicate or object is given; "args" are the `nodeIri`/`predIri`/`encodeLiteral` objects made fresh by every call and never freed)
         
         - **Sites, by file**
@@ -472,7 +483,14 @@ description: The engine-level bug family this concern owns — most prominently 
           - **The Coder's recommendation**: <a name='id/BlockNode:00D1GCR1Y0000' class='aperas-anchor aperas-id'></a> A for reads, D for writes, B not used; helpers take ids and field names as strings so they own the lifetime of every arg, with `predIri` cached per field name in a Map (a bounded set from `SHAPE_BY_KIND`, never freed) to remove the second kind of per-call allocation. `using`/`Symbol.dispose` exists on the classes (node 22) but the packages' `tsconfig` targets es2023 with `lib: ["ES2023"]`, so it needs a config change; not recommended here.
         - **Measurement** (on a copy under `/tmp` of 58,780 quads, a fresh process per variant, `node --expose-gc`, `gc()` between calls): the unchanged `allIdsOfKind` grows about 42 MB per call and takes 570 to 1,140 ms; the variant that frees the subject term and the quad stays flat at 349 MB after a first-call rise of 32 MB, at about 150 ms per call. Caveats: one site, one corpus size, and resident set size is the only gauge (`process.memoryUsage().arrayBuffers` reads 0 and oxigraph exports no wasm memory size); without `gc()` between calls the freed variant looked as if it grew 17 MB per call, which was collectable string garbage.
         - **What the production-bound measurement must show**: <a name='id/BlockNode:00D1GCR1Y0002' class='aperas-anchor aperas-id'></a> memory with `gc()` before every reading, the signal being a plateau (flat after call 1 with the change, linear without); the service shape, not one function: a cycle of `dehydrateToJsonLd`, `dehydrateStateToJsonLd`, the three sweeps and `checkLinkIntegrity`, at least 10 cycles, then a `rehydrateStore` reload loop with and without `store.free()` on the old store; time per call and per cycle; identical output, meaning the dehydrated `*.jsonld` byte-for-byte equal to the unchanged code's output on the same copy, and the `commit` suite green, plus a test that a helper never returns or leaves a freed object (any "null pointer passed to rust" is a miss); a split of the gain by site (`allIdsOfKind`, `readField`, add-args), because the gauge is rss.
-        - **Still unknown**: <a name='id/BlockNode:00D1GCR1Y0003' class='aperas-anchor aperas-id'></a> the same plateau for the other sites (only `allIdsOfKind` was measured, with one corpus size), and whether `new Store()` freed on reload is a gain or a hazard for a request in flight (requests go through `enqueue()`, `service.ts:5`, but the swap at 378-379 was not traced against held references).
+        - **Still unknown** when the survey was made (2026-10-11): <a name='id/BlockNode:00D1GCR1Y0003' class='aperas-anchor aperas-id'></a> the same plateau for the other sites (only `allIdsOfKind` was measured, with one corpus size), and whether `new Store()` freed on reload is a gain or a hazard for a request in flight (requests go through `enqueue()`, `service.ts:5`, but the swap at 378-379 was not traced against held references). Since the landing, [the Landed entry](#id/BlockNode:00D216W8Z0001) records the plateau on production code for `allIdsOfKind`, the dehydrate and the rehydrate, on one corpus size (59,275 quads); the gain split by site is not shown, and whether releasing the old `Store` on reload is a gain or a hazard stays unknown, because the whole-store `free()` on reload was left out of the change.
+      - **Landed** (2026-10-12): <a name='id/BlockNode:00D216W8Z0001' class='aperas-anchor aperas-id'></a> the patch is commit `d794060`, "Fix core performance 2", on branch `oxigraph`: the read helper of the map above, in the form the Coder recommended (plain-value reads, write helpers that take strings, `predIri` cached per field name), with the two rules that every wasm object is freed at the root as soon as its value is read and that no shared constant is freed. The whole-store `free()` on reload, the plain JavaScript engine and new `TreeView` fields stay out, as the user's plan says.
+        
+        - **What changed**: <a name='id/BlockNode:00D216W8Z0002' class='aperas-anchor aperas-id'></a> ten files, two of them new: `storeAccess.ts` in `core` (250 lines) and its test `store/storeAccess.test.ts`, named in the `commit` suite; the converted sites are in `node.ts`, `dehydrate.ts`, `store.ts`, `tree.ts`, `threadScope.ts`, `artifacts.ts` and `vocab.ts`. Every read returns plain strings, numbers, booleans or rows; `eachMatch` frees each quad after its callback and the argument terms in a `finally`; `deleteMatches` frees a quad only after deleting it; `addQuad` frees the quad and its terms. `decodeLiteral` also frees the datatype term it made.
+        - **Checked by the orchestrator**: <a name='id/BlockNode:00D216W8Z8000' class='aperas-anchor aperas-id'></a> the diff scope and `storeAccess.ts` read in full; `npm run verify -- --suite essential` 27 of 27 in 3.2 s and `npm run verify` (the `commit` suite) 61 of 61 in 19.5 s; `tsc --noEmit` on `core` and `cli` printed nothing. The `demand` suite and the legacy suite were not run.
+        - **Measured on a copy of the mirror** (the Coder; production code, 59,275 quads, 3 samples per case, a fresh process each, `gc()` between calls): eight `allIdsOfKind` calls went from 349 to 634 MB (+40 MB a call) to flat at about 265 MB (264.6 to 264.7), and from 0.7 to 1.7 s a call to 0.14 to 0.23 s; a dehydrate of both mirrors went from 33 to 38 s to 2.5 to 3.8 s, with resident size from about 770 to about 350 MB; a rehydrate went from 3.3 to 3.5 s to 2.0 to 2.9 s, with resident size from about 300 to about 258 MB. The dehydrated directories are byte-identical before and after in all three repetitions.
+        - **Live check** (2026-10-12, the orchestrator; one sample each): <a name='id/BlockNode:00D216W8Z8002' class='aperas-anchor aperas-id'></a> `aperas service restart` found no service running and started one; the service answered 17 s after its process started (08:15:59 to 08:16:16 UTC) at 379 MB resident, where a fresh service had idled at 1.05 to 1.5 GB. `aperas tree --view` took 0.57 s; `aperas check-links` over 6,900 live blocks took 2.7 s twice, clean, with the service at 375 to 379 MB across both scans. The second insert into the Freeflow document took 5.0 s and a projection of that document 2.4 s; resident size went from 379 MB at start through 392 and 413 MB after the two inserts to 424 MB after the projection.
+        - **Not shown**: <a name='id/BlockNode:00D216W8Z8003' class='aperas-anchor aperas-id'></a> the trend of resident memory over a longer run (the rise of about 45 MB over five commands is one sample, not a trend); the write paths of ingest, `remove` and the tombstone sweeps, which tests cover but no measurement or live run exercised; the gain split by site; and whether releasing the old `Store` on reload is a gain or a hazard. The test-only reads in `verifyDanglingUnfolds.ts` and `verifyLinkRefusals.ts` still read raw quads without `free()`.
     - **The plan of the user, 2026-10-11: the `free()` helper first, then a pure JavaScript engine to compare** (decided as an order; the helper's shape is the orchestrator's reading of "best effort", open to the user's correction)
       
       - **Order**: <a name='id/BlockNode:00D1GC79B8001' class='aperas-anchor aperas-id'></a> (1) the `free()` helper over the store reads (the item above, with the map of the sites under it), with its scratch measurement on a copy of the real store; (2) no further hacks on Oxigraph; (3) a pure JavaScript ApeironNgn engine, the dedicated engine the name suggested, as a separate task, compared with the `free()` version. The user's words: "I think we should applied the `free()` patch as our best effort on Oxigraph, but no more hack on Oxigraph. After that, we'll try the pure JS ApeironNgn (as the name originally suggested, a dedicated engine) to compare with the `free()`-patched version."
@@ -488,12 +506,12 @@ description: The engine-level bug family this concern owns — most prominently 
     - **Layer 2 — a kind-to-ids index** (a candidate; not decided, not tried)
       
       - **Replaces**: <a name='id/BlockNode:00D0Y9HG30006' class='aperas-anchor aperas-id'></a> only the body of `allIdsOfKind`; its callers are unchanged and it returns a snapshot array. The index is a `Map<kind, Set<id>>` attached to the store, built from `seenIds` at rehydrate.
-      - **To check first**: <a name='id/BlockNode:00D0Y9HG30007' class='aperas-anchor aperas-id'></a> the index is kept by two write helpers through which the 27 `store.add` and `store.delete` sites are routed (not built), and the verify run compares it with a full scan after each operation (not run).
+      - **To check first**: <a name='id/BlockNode:00D0Y9HG30007' class='aperas-anchor aperas-id'></a> the index is kept by the two write helpers `addQuad` and `deleteMatches`, through which the store's `add` and `delete` sites are now routed (commit `d794060`); they keep no index, so the index is not built, and the verify run compares it with a full scan after each operation (not run).
       - **Condition**: <a name='id/BlockNode:00D0Y9HG30008' class='aperas-anchor aperas-id'></a> only if layer 1 still leaves too many wrappers.
     - **Layer 3 — a per-node record cache, the fine-grained index** (a candidate; not decided, not tried)
       
       - **Replaces**: <a name='id/BlockNode:00D0Y9HG3000A' class='aperas-anchor aperas-id'></a> repeated reads of a node's fields through `wrap` and `readField`, each of which crosses into wasm. One plain JavaScript record per node (strings and numbers, no wasm handle), filled by a single subject-bound match with the quads freed at once and invalidated by the write helpers; a set of tombstoned ids is the smallest form.
-      - **To check first**: <a name='id/BlockNode:00D0Y9HG3000B' class='aperas-anchor aperas-id'></a> nothing about `free()` itself, which is measured, as one sample, in the `free()` item before Layer 1; the record cache and its invalidation by the write helpers are unchecked. It sits one level above the library because a wasm quad has no object to be one-to-one with.
+      - **To check first**: <a name='id/BlockNode:00D0Y9HG3000B' class='aperas-anchor aperas-id'></a> nothing about `free()` itself, which landed on 2026-10-12 and is measured on production code (3 samples per case, one corpus size) in [the Landed entry of the `free()` item](#id/BlockNode:00D216W8Z0001); the write helpers through which a cache would be invalidated exist now, as `addQuad` and `deleteMatches` in `storeAccess.ts`, but they free quads and keep no index, so the record cache and its invalidation by those helpers are unchecked. It sits one level above the library because a wasm quad has no object to be one-to-one with.
       - **Condition**: <a name='id/BlockNode:00D0Y9HG3000C' class='aperas-anchor aperas-id'></a> only if per-node reads still dominate after layers 1 and 2.
     - **Beside the layers, not part of them** (candidates; not decided, not tried)
       
@@ -504,6 +522,21 @@ description: The engine-level bug family this concern owns — most prominently 
     
     - [The removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X65RB800B' class='aperas-anchor aperas-id'></a> the scan cost per embedded node in a task removal is held there and is not repeated here.
     - [The memory issue](#id/BlockNode:00CVQ4Z968001) and [the removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X65RB800C' class='aperas-anchor aperas-id'></a> the scan point already in them (a candidate source of garbage-collector pressure, read, untested) is extended and linked to this entry; this one is filed separately because it covers boot, flush and read paths and not only removal.
+  - **Found again 2026-10-12, in the fact-check of the draft `design/core.md`**: <a name='id/BlockNode:00D253J400001' class='aperas-anchor aperas-id'></a>  the Coder counted the scans behind `allIdsOfKind` against the rule of [The index](../design/core.md#id/BlockNode:00D24N87SR015) (lookups answered from three structures, the whole store traversed only for the check at load).
+    
+    - **Root cause** (read from the code)
+      
+      - `allSubjectIds` (`storeAccess.ts` lines 204 to 210) is a scan of every quad, and it is what `allIdsOfKind` calls (`dehydrate.ts` line 39): every call to `allIdsOfKind` pays one whole scan, as the entry above records for its callers.
+      - Callers counted: <a name='id/BlockNode:00D253J400004' class='aperas-anchor aperas-id'></a> 8 scans per flush of both mirrors (4 kinds tracked, 1 + 3 of the thread scope), `pruneUnreachableTombstones` (5 calls over the kinds), `tombstoneVacuousContainers` (once per round), `buildLiveSlugPathIndex`, `checkLinkIntegrity`, `kgTrack`, the lists of live artifacts and live folders, and `pruneStaleUnfolds`.
+      - `allObjectRefIds`, which lists the ids referenced and never defined, is a full scan too and is called once per load.
+      - Every other production lookup binds the subject, or the field and the value; these two scans are the exceptions to the rule of the design, and the rule is a goal of the new engine and not a description of today.
+    - **Not proven**
+      
+      - The cost of the extra scans is the one measured above; the Coder did not measure the effect of the set of ids per kind that the design describes.
+      - Which callers of "all ids of kind K" drop the tombstoned ids afterwards: the draft design stated that most of them do, a few want the tombstoned ones, and the write of the mirror takes all; no list of the callers by what they keep is recorded. It decides whether [a set of live ids](../design/core.md#id/BlockNode:00D24N87T000X) is worth keeping beside the collection of each kind.
+    - **Fix directions**
+      
+      - None decided. The design's set of ids for each kind would answer `allIdsOfKind` without a scan.
 - **`aperas service restart` errors out after 10 s and starts nothing whenever the service has been marked dirty, which any `unfold`, `fold` or `zoom --view` does**: <a name='id/BlockNode:00D0W044DG001' class='aperas-anchor aperas-id'></a> measured 2026-10-10 by the Coder in the store-size investigation. Filed 2026-10-10.
   
   - **Symptom**
@@ -545,7 +578,6 @@ description: The engine-level bug family this concern owns — most prominently 
     - [The removal-stall issue](#id/BlockNode:00CVNX6A3R000): <a name='id/BlockNode:00D0X8VQZR00Q' class='aperas-anchor aperas-id'></a> this is the measured form of "didn't stop within 10s of SIGTERM" recorded there.
     - [The boot and shutdown issue](#id/BlockNode:00CVQHCEW8001): <a name='id/BlockNode:00D0X8VQZR00R' class='aperas-anchor aperas-id'></a> there it was read as "consistent with it, not shown to be the cause"; here it is a separate defect (a stop wait shorter than the flushes), so it is filed here and those two link to it.
 - **`aperas service start` prints "did not become ready in time" at 5 s although the lock turns ready at 5.3 to 5.8 s, and every command is then refused for about 20 s**: <a name='id/BlockNode:00D0W05P08001' class='aperas-anchor aperas-id'></a> measured 2026-10-10 by the Coder in the store-size investigation, scratch service as in [the restart entry](#id/BlockNode:00D0W044DG001) above, cold `service start` 6 times, load average 2 to 3.5. The lock turned ready at 5.28 to 5.77 s and the CLI exited 1 with "ApeironNgn service did not become ready in time" at 5.42 to 5.76 s in all 6 runs, because `READY_TIMEOUT_MS = 5_000` in `serviceClient.ts` (lines 24 and 25) starts counting after the CLI has loaded, while the service came up 0 to 60 ms later; the ready time breaks down as about 1 s of node and `tsx` start, 1.1 s of `rehydrateStore` and 3.2 s of boot sweeps (`Rehydrated` is logged about 3.3 s before the lock turns ready). After ready, every `aperas` command in the first 19.5 to 23.0 s failed with "No ApeironNgn service running" (6 of 6 starts; `usable_minus_ready` 19.5, 20.2, 20.9, 21.4, 22.0 and 23.0 s, measured through a probe that costs about 1 s of CLI start, so accurate to about 1 s), because the startup link sweep is enqueued on the event loop right after `markReady` (`service.ts` lines 818 to 826) and `ping` has a 300 ms timeout (`serviceClient.ts` line 23). A service that is already settled answers a `profile list` in 0.55 s wall, CLI start included. This measures two points already in the graph: the 5 s ready wait that [the boot and shutdown issue](#id/BlockNode:00CVQHCEW8001) put close to the real boot time, and the 300 ms ping that [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001) names as the reason a busy service reads as down; both are extended with these figures and link here, and this entry holds the start-side measurement. Not measured: a start on the live service (it would need the user's approval to stop it). No fix has been tried. Filed 2026-10-10.
-- **`design/` has no document for the store, hydration or the service lifecycle**: <a name='id/BlockNode:00D0W07DRR000' class='aperas-anchor aperas-id'></a> noted 2026-10-10 in the store-size investigation. The graph holds the early ApeironNgn design only in the archive (`archive/Aperas-design.md`, where `rehydrateStore` is a quoted 256 ms at 1,594 BlockNodes), and nothing in `design/` states the quad shape the store holds, when and how the mirrors are hydrated and dehydrated, what the boot, the flush timers, the shutdown and the reload each do and in what order, or what the client's waits (300 ms ping, 5 s ready, 10 s stop) are allowed to assume of them. The boot and shutdown issue already says there is no document for the service lifecycle; this entry records the same gap for the store and hydration too, so the figures in the issues above have no design to be read against. Recorded only; no design is written here. Filed 2026-10-10.
 - **Garbage collection never collects an unreachable block that was never tombstoned**: <a name='id/BlockNode:00D1A2AY68001' class='aperas-anchor aperas-id'></a> it has only a link, nothing refers to it, and neither sweep marks or prunes it. Filed 2026-10-11.
   
   - **Symptom**
@@ -572,6 +604,449 @@ description: The engine-level bug family this concern owns — most prominently 
     
     - The stray block `BlockNode:00CJ2TCV40000` was removed offline in the mirror sweep of 2026-10-11, by the user's decision: records went from 5,972 to 5,971, and `aperas show` says the node is not found after the service started.
     - The issue stays open for the collector's blind spot itself: <a name='id/BlockNode:00D1BBPCKG003' class='aperas-anchor aperas-id'></a> an unreachable block that was never tombstoned is collected by no sweep. No fix is decided.
+- **One `insert` blocks the service for 1.6 to 3.2 s before its reply and for 1.4 s more after it, and none of it is the parse, the write or the dehydrate on `--flush`: it is a path index rebuilt over every live block, two link sweeps of the target artifact, and the timed dehydrate of all four content classes**: <a name='id/BlockNode:00D22Z1HJ8001' class='aperas-anchor aperas-id'></a> profiled 2026-10-12 by the Coder (`write-cost-profile`, Turn 1) on a scratch copy of the mirror, after the `free()` patch (commit `d794060`). Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - One inserted paragraph of about 600 characters, no `--flush`, on a copy of the mirror of 7,433 live blocks and 62,792 quads. The handler wall time before the reply was a median of 3,234 ms (3,096 to 3,295) on the 5,200-line `discussion/aperas-skill.md` and 1,572 ms (1,519 to 1,755) on the 37-line `planning/core.md`, with CPU of 3,849 and 1,697 ms. The CLI process wall was 3.79 s and 2.10 s, so the client's own start, stdin, ping, connect and print take about 0.55 s of it. Cells: 6 inserts in 3 fresh processes for the big artifact, 6 in 3 for the small one.
+    - The single sample of the stall test (3.84 s wall, 4.36 s of service CPU) reproduces: 3.52 to 3.63 s unprofiled and 3.71 to 3.76 s profiled, 2 inserts per cell, one process per cell.
+    - The reply is sent only after the second link sweep, because the handler defers nothing; the reply is 167 bytes.
+    - After the reply the 10 s timer finds the store dirty and runs `dehydrateToJsonLd`: 1,401 ms wall (1,367 to 1,469, 6 flushes after big inserts), 1,383 ms after small inserts and 1,399 ms after inserts with a link. It comes 0 to 10 s after the write, by the timer's phase. Service CPU over the 14 s after an insert was 158 to 218 ticks (median 177; 19 inserts in 11 processes unprofiled), which is this flush.
+  - **Root cause** (profile and counts of the Coder; line numbers are declaration lines in the source, because the profiler reports line 1 or 2 for TypeScript run through `tsx`)
+    
+    - **The path index follows the store, not the artifact**: <a name='id/BlockNode:00D22Z1HJG004' class='aperas-anchor aperas-id'></a> `rejectSlugPathCollisions` (`node.ts:986`) calls `buildLiveSlugPathIndex` (`node.ts:957`), which the code itself documents as a fresh full scan, on every write. It took a median of 1,556 ms on the big artifact and 1,527 ms on the small one. Inside it: `liveBlockNames` 1,247 ms, `toPath` (`node.ts:430`) 1,125 ms, which walks the `parent` chain of each block up to its artifact with no cache (about 8.7 `parent` reads per live block), and `allIdsOfKind` 144 ms. Counts for one insert: one full scan (62,792 quads materialised), about 170 thousand bound `store.match` lookups at about 9 microseconds each, and 91,224 `wrap` calls on the big artifact (72,088 on the small one).
+    - **The path check recomputes shared ancestors** (added 2026-10-14, read in the code by the orchestrator): `toPath` climbs from each block to its artifact on its own, so the slug path of an ancestor shared by many blocks is recomputed once for every block below it, within the one rebuild of the index that each write makes.
+    - **The two link sweeps follow the artifact, not the store**: <a name='id/BlockNode:00D22Z1HJG005' class='aperas-anchor aperas-id'></a> `checkArtifactLinkIntegrity` (`linkIntegrity.ts:131`) ran 831 ms before and 780 ms after the operation on the big artifact, and 24 and 18 ms on the small one. About 1,070 ms of the 1,574 ms in the profile is `collectLinkCodesFromText` (`astParser.ts:517`): the remark parse of every block's text, run for every block of the artifact twice, with no cache. This is the cost the [per-write re-parse issue](#id/BlockNode:00CVQHBP0R001) names.
+    - **The timed flush follows the store**: <a name='id/BlockNode:00D22Z1HJG006' class='aperas-anchor aperas-id'></a> 1.4 s for both artifacts. In the 14 s window after an insert (3 profiles, 42 s sampled) 88.7 percent of the samples were idle and `flushIfDirty` was 3,988 ms inclusive, i.e. nothing else; inside it `allIdsOfKind` 1,651 ms (4 full scans, 334,075 quads materialised), `serializeDoc` 1,331 ms and `isThreadScopedId` 847 ms (per block `owningArtifactOrFolderId` and `firstRefIriOf`). It dehydrates all four content classes after an insert, which changes `BlockNode` and at most `ArtifactNode`.
+    - The parse of the new text, the hydration, `resolveBlockLinks`, the placement and the line numbering cost 0 to 3 ms each; a link in the text adds 1 to 2 ms. The `setInterval` of 3 s (`flushStateIfDirty`) does nothing after an insert, as an insert sets only `dirty` (see [the thread-write issue](#id/BlockNode:00CVNZXVR8001)).
+    - Garbage collection is 3 to 5 percent of the wall time (156 collections in an insert on the big artifact, 114 ms of pause); the CPU time above the wall time is V8's helper threads.
+  - **What it is not**
+    
+    - The `free()` patch is not the cause: <a name='id/BlockNode:00D22Z1HJG00A' class='aperas-anchor aperas-id'></a> `freeWasm` costs 98 ms of the 3,034 ms handler (3.2 percent). With `freeWasm` made a no-op, the first insert in a fresh process was about the same (3,566 to 3,635 ms big, 1,840 to 1,953 ms small), but the second insert in the same process took 31.5 to 33.3 s on the big artifact (up to 12 s on the small one) after 180 to 195 major collections, with 1.12 to 1.29 GB resident against 432 to 462 MB with the patch, and the timer flush after it 19 to 25 s. So the patch holds the cost at the level above and what is left is the access pattern it cannot touch: one `store.match` and one new wasm term for every field read, repeated about 170 thousand times, plus 7,433 uncached ancestor walks.
+    - The timer flush is not the cost of the write, but a second block of its own that falls within 10 s of it.
+  - **Not proven**
+    
+    - That the index build is linear in the store: <a name='id/BlockNode:00D22Z1HJG00D' class='aperas-anchor aperas-id'></a> the store size was not varied, so the claim is read from the code (one `wrap` and one ancestor walk per live block).
+    - The 0.55 s of the CLI process was not split further (one sample set; an earlier read of 0.6 s agrees).
+    - The live service was not profiled: <a name='id/BlockNode:00D22Z1HJR000' class='aperas-anchor aperas-id'></a> it reported "Running code is stale" and the Coder did not touch it. Its resident size after a day near 450 MB (patched) or above 1 GB would show which code it runs.
+    - Only `insert` was profiled. `update`, `remove` and `retype` share the two sweeps, and whether they share the path index was not measured.
+    - Counters and timers added about 6 percent to the wall time, the profiler about 4 percent.
+  - **Fix directions**
+    
+    - None decided. The Coder's proposals, each of which changes behaviour, listed as candidates and none tried:
+      
+      - Do not rebuild the index on every write: <a name='id/BlockNode:00D22Z1HJR005' class='aperas-anchor aperas-id'></a> look up the candidate names of the new subtree directly (an index query by path), or keep the index across writes and invalidate it on the write itself. The name set is the path plus embedded anchors, and whether anchors are global, which decides whether a per-artifact index is enough, could not be told from the code.
+      - Make `toPath` cheap in bulk: <a name='id/BlockNode:00D22Z1HJR006' class='aperas-anchor aperas-id'></a> memoise the ancestor title chain, or compute the index in one top-down walk instead of one bottom-up walk per block.
+      - For the link sweeps: <a name='id/BlockNode:00D22Z1HJR007' class='aperas-anchor aperas-id'></a> sweep only the written subtree, or cache `collectLinkCodesFromText` per block text, since the before and after sweeps parse the same unchanged text twice.
+      - Do not run `dehydrateToJsonLd` on the loop in one piece: <a name='id/BlockNode:00D22Z1HJR008' class='aperas-anchor aperas-id'></a> write only the class files a write changed, or chunk it so the loop can answer; and let `ping` answer while the service is busy (see the refusal measured under [the spurious "not running" issue](#id/BlockNode:00CVMPABY8001)).
+      - If none of that is wanted, log the per-task timing; the Coder's instrumented `enqueue` is a model of 15 lines. This is the coverage gap of [the no-coverage issue](#id/BlockNode:00CVQHD7CR001).
+  - **Related**
+    
+    - [The full-store-scans issue](#id/BlockNode:00D0W02KPG001), whose `free()` landing this profile measures; [the start issue](#id/BlockNode:00D0W05P08001), whose startup link sweep costs 3.0 s wall and 4.4 s CPU once per start (3,057, 3,102 and 2,924 ms in three starts).
+    - The Coder's question whether the per-field probes should be cheap (a table per predicate) or whether "all fields of one subject" is the unit to optimise, which the census counts support (7,274 of 7,276 `holder` probes and 5,769 of 7,276 `links` probes at a flush found nothing), belongs to the design of the store and is not decided here.
+- **The tree view lists a block's links newest first, not in the order of their `position` in the text, so the displayed order is the store's match order**: <a name='id/BlockNode:00D22ZK7C8001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the orchestrator while checking which reads depend on the engine's order; confirmed by the user's reading of the output. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - Tested on `BlockNode:00CDBZ7698002`, whose text names its three link targets in the order `00CDBYV4T8002`, `00CDBYV4T8007`, `00CDBYV5A8002`. `aperas unfold` lists the three `Link` nodes in the reverse order of the text (the newest link first); the stored mirror (`BlockNode.jsonld`) lists them oldest first.
+    - One block and one view were checked. The projected markdown and the web view were not.
+  - **Root cause**
+    
+    - Read from the code: <a name='id/BlockNode:00D22ZK7C8006' class='aperas-anchor aperas-id'></a> `links` is read with `readField`, which returns the quads in the store's match order, and the tree and unfold rendering print them in that order (`node.ts` near lines 1745 and 1882, `kgUnfold.ts` near lines 109 to 115). Every wikilink carries a `position` prop, the offset of its occurrence in the text, which would give the text order; the renderer does not read it.
+    - The same match order is what other readers get, and where it shows (the Coder's census, item 7): the rendering of `links` (above), `toReconcileShape` (`node.ts:527`), `kgLink.ts:54` (which writes the list back in the order it read it), the order of `view.unfolds` in `buildRenderTree` and in `kgProfile.ts:115`, the printed `backlinks` (`kgBacklinks.ts:32`, `kgProfile.ts:69`), and the comparison of a `Link`'s `position` props with the freshly computed list (`positionsEqual`), where a different order only causes a rewrite of the props and never a wrong value. The census counted four `Link`s in the mirror with two positions.
+    - The order of the printed `backlinks` carries no meaning (nothing reads it); only the display of a block's own links has an order the text defines.
+  - **Not proven**
+    
+    - Which other views show the same reversal, and whether the reversal holds for every block with several links or only for the one tested.
+    - The user's decision of 2026-10-12 is that the engine keeps JavaScript's natural oldest-first order, and the engine will support a reverse view of a field in general; under that order this display would flip to the text order by accident of the engine and not by a rule of the renderer. Where the order of the display is only cosmetic that may be accepted; where a reader's choice depends on it (the case in [the first-match issue](#id/BlockNode:00D22ZMTKG001)) it may not.
+    - Whether the render's choice of the one canonical place of a node reached through several unfolded links follows the order of the unfolded ids, which the mirror lists only by id; if it does, the rendered tree depends on that order. Raised 2026-10-12 with the user's decisions on the order, not checked since; the design keeps it as [The canonical-render order check](../design/core.md#id/BlockNode:00D24N87T000Q).
+  - **Fix directions**
+    
+    - None decided.
+- **`findByExactPath` takes the first node found at a path, and a path can be held by a tombstoned and a live node, so it returns the live one only because the store lists the newest first**: <a name='id/BlockNode:00D22ZMTKG001' class='aperas-anchor aperas-id'></a> a latent defect, found 2026-10-12 by the orchestrator in the check of order-sensitive reads (the Coder's census, item 7) and called a bug by the user if it would return the removed one. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - No wrong result is visible today. The real mirror has exactly one path held twice, `issues/cli.md`: a tombstoned `ArtifactNode:00CF1TZQV8000` and a live, newer `ArtifactNode:00CF2AEA78000`. A removed node keeps its `path`, so `path` is unique only among live nodes.
+    - `findByExactPath` (`tree.ts:20`) is `firstSubjectWhere(store, 'path', ...)`: <a name='id/BlockNode:00D22ZMTKR000' class='aperas-anchor aperas-id'></a> it takes the first match and does not look at `tombstonedAt`. Today the first match is the newer, live artifact because the store returns the newest first; under oldest-first it would be the old removed one, and nothing in the lookup says that the answer depends on the order.
+  - **Root cause**
+    
+    - The lookup relies on the engine's match order for a choice of node. Its sibling `findLiveByKindAndPath` (`artifacts.ts:188`) filters out the tombstoned and is correct. Callers of the plain one found by `grep`: `resolve.ts:69`, `resolveCreate.ts:98` (both for the root, `.`), `linkIntegrity.ts:323` and `kgProject.ts:46` (an artifact path from the command line), and some verify scripts. Which of them can meet a tombstoned duplicate was not checked for each.
+    - The same first-match lookups exist on other fields: <a name='id/BlockNode:00D22ZMTKR003' class='aperas-anchor aperas-id'></a> `findProfileByHandle` (`node.ts:2012`), `findTreeViewByName` (`node.ts:2021`) and the owner of a link. `handle` and `name` are unique by design (the code refuses a duplicate view name) and the real mirror has no duplicate (17 views, none repeated; no repeated handle), so they are not a defect today.
+  - **Not proven**
+    
+    - Which caller of `findByExactPath` could receive the tombstoned node, and what would then happen to it; the check of 2026-10-12 was of the lookup, not of each caller.
+  - **Fix directions**
+    
+    - None decided. The orchestrator's reading of the case: <a name='id/BlockNode:00D22ZMTKR007' class='aperas-anchor aperas-id'></a> the lookup needs a live-first rule (or an explicit order) before the engine's order changes.
+  - **Related**
+    
+    - [The title-ambiguity issue](#id/BlockNode:00CVQ0PVS0001), where `aperas resolve` does not filter tombstoned candidates and a dead holder makes a live path read as ambiguous: the same shape, in the title check of the resolver instead of the path lookup.
+    - [The display-order issue](#id/BlockNode:00D22ZK7C8001), which is the order-sensitive read whose effect is only on the screen.
+- **`apeironNgnSmokeTest.ts` is referenced by no script, suite or import, and asks for a predicate that no longer exists**: <a name='id/BlockNode:00D22ZV0FG001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the census of the store's predicates and access patterns (item 2). Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - `cli/src/apeironNgnSmokeTest.ts` (lines 99 to 106) calls `backlinks(store, artifact['@id'], '__parent')` and compares the result with `artifact.children`. `__parent` was renamed `parent`, so the call asks for a predicate that no node carries.
+    - Nothing runs the file: <a name='id/BlockNode:00D22ZV0FR000' class='aperas-anchor aperas-id'></a> no script, suite or import names it (checked by `grep` over `monorepo/packages`; only the compiler's `tsconfig.tsbuildinfo` lists it). Whether it passes or fails today was not run.
+  - **Root cause**
+    
+    - The rename of `__parent` to `parent` did not reach a file that nothing runs, so no test or build step noticed. [The no-coverage issue](#id/BlockNode:00CVQHD7CR001) records that this script checks rehydrate and field access only.
+  - **Not proven**
+    
+    - Whether the script, run now, would fail at that line or elsewhere; the Coder did not touch it.
+  - **Fix directions**
+    
+    - None decided. The Coder's question, left open for the design of the store: leave the file out of the design's contract, or fix it when the design lands.
+- **`encodeDoc` and `mintEmbedded` write any key they are given as a predicate, so the closed predicate vocabulary of the store is not enforced at the two paths that take keys from outside the shape**: <a name='id/BlockNode:00D22ZWZMR001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the census of the store's predicates (item 2); latent, as neither produces a foreign predicate with today's data. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - None today. The mirror holds 27 predicates and 60,810 quads, every predicate a shape field or one of the two structural ones (`parent`, `__siblingIndex`), and no predicate outside `SHAPE_BY_KIND` and those two (checked for every subject; 0 foreign IRIs). In production code every field name comes from a shape key or is one of nine literals (`parent`, `__siblingIndex`, `path`, `links`, `handle`, `name`, `unfolds`, `target`, `profile`).
+  - **Root cause** (read from the code)
+    
+    - `encodeDoc` (`store.ts:70`) writes every key of a mirror document except `@id` and `@type` as a quad, whether or not the shape has it. A key outside the shape lives in memory, and the dehydrate would later drop it, since `serializeDoc` (`dehydrate.ts:73`) walks only the shape's fields: it would survive until the next flush and then vanish from the mirror.
+    - `mintEmbedded` (`node.ts:165`) writes every string, number or boolean key of an embedded entry, apart from `@type`, `@id` and `id`, with no check against the shape of the embedded kind.
+    - In the tests, `storeAccess.test.ts` writes made-up predicates `count` and `flag` on scratch stores, and one quad with a foreign subject IRI to prove that `subjectsWhere` throws and `deleteMatches` still works, on purpose; no test or fixture writes any other predicate outside the shape.
+  - **Not proven**
+    
+    - That any real input reaches either path with an unknown key; the census found none and did not try to build one.
+  - **Fix directions**
+    
+    - None decided.
+- **Tombstoning does not empty the node at every site: 52 of the 207 tombstoned nodes in the mirror still hold `children`, `links` or `props`**: <a name='id/BlockNode:00D252W7VG001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, re-counted by the orchestrator on the real files. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - Counted on the real mirror (the tracked files and `Apeiron/.state/`): <a name='id/BlockNode:00D252W7VG003' class='aperas-anchor aperas-id'></a> of 207 tombstoned nodes, 52 still hold `children` (4), `links` (7) or `props` (45, the `orderedList` and `startIndex` of lists); the draft rule in [Tombstones](../design/core.md#id/BlockNode:00D24N87SR01V) says a removed node is emptied of all three.
+    - 40 of the 52 are `list` and `listItem` nodes tombstoned on 2026-09-11, which is what `tombstoneVacuousContainers` leaves.
+    - The other 12 come from one call at 2026-10-02T12:44:35.641Z, all in `.state/BlockNode.jsonld`: 1 `heading` and 11 `listItem` of a thread's Ask, Work and Report (ids `00CS0ZEPH8002` to `00CS0ZEPH8004`, `00CS179PR8001`, `00CS179PR8002`, `00CS179PRG000` to `00CS179PRG002` and `00CS179PRG006` to `00CS179PRG009`).
+  - **Root cause** (read from the code)
+    
+    - `applyTombstone` (`node.ts` near line 850), `tombstoneLiveSubtree` (near line 870, used by `aperas remove` and by the artifact removal at `artifacts.ts` near line 272) and the folder removal (`folders.ts` lines 154 to 159) clear `children`, `links` and `props`.
+    - `tombstoneVacuousContainers` (`node.ts` near line 2221, run at service start, at reload, at clobber and at shutdown) sets `tombstonedAt` alone, so the 40 nodes above keep their `props`.
+    - Tested by the Coder on a scratch store (`/tmp/tomb.mts`): <a name='id/BlockNode:00D252W7VG009' class='aperas-anchor aperas-id'></a> `tombstoneLiveSubtree` leaves `children`, `links` and `props` of the removed nodes empty and also removes the `parent` of every descendant, so a subtree removed by `aperas remove` leaves the removed root in its container's `children` and detaches the rest.
+  - **Not proven**
+    
+    - What produced the 12 nodes of 2026-10-02. They carry text, so the sweep above would skip them (it skips a `listItem` with text, and any `heading`) and does not explain them, and the other sites clear all three. The command is not in the git history of the mirror, because `.state/` is ignored; what would decide is the thread or the user's account of that day.
+  - **Fix directions**
+    
+    - None decided. Whether a removed node is emptied at all is an Open point of the design (a removed node among its container's `children`), so a fix waits for that decision.
+  - **Related**
+    
+    - [Tombstones](../design/core.md#id/BlockNode:00D24N87SR01V) in the design, which states the rule.
+- **Sibling indexes are not kept dense: a move to another parent leaves a gap in the old parent and the next append there can repeat an index**: <a name='id/BlockNode:00D252Y7WR001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, tested on a scratch store. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - Tested by the Coder on a scratch store (`/tmp/cont.mts`): <a name='id/BlockNode:00D252Y7WR003' class='aperas-anchor aperas-id'></a> children at indexes 0, 1, 2 under one parent; the one at 1 moved to another parent with `insertChild` or `appendChild` (what `aperas insert` with no stdin does); the old parent's others stay at 0 and 2; then `appendChild` on the old parent gave the new child index 2, the same as the last one.
+    - The real mirror never shows it: <a name='id/BlockNode:00D252Y7WR004' class='aperas-anchor aperas-id'></a> the file writes the array order, and a reload renumbers.
+  - **Root cause** (read from the code)
+    
+    - No code removes a child and renumbers the rest. A move deletes the child's `parent` and index (`node.ts` lines 87 to 127) and leaves the others as they were.
+    - `countMatches` (line 90) gives the next index as the number of children and assumes the indexes are dense.
+    - Two children with the same index come out of `orderedChildIds` (`storeAccess.ts` lines 188 to 196) in the store's match order, with no tie-break by id.
+  - **Not proven**
+    
+    - **Question — a moved child with no sibling index**: <a name='id/BlockNode:00D252Y7WR00A' class='aperas-anchor aperas-id'></a> reading `writeField` (`node.ts` lines 242 to 250) suggests that when a reconcile moves a block from an old parent to a new one, and the new parent's `children` is written first, the old parent's later `children` write deletes the child's sibling index (line 244 deletes the indexes of every child it detaches, by subject), and the child stays under the new parent with no index, sorted as 0. The Coder did not run a reconcile with a move. What would decide: a scratch ingest of a document in which a block moves between two headings, then reading the indexes.
+  - **Fix directions**
+    
+    - None decided. Whether the indexes are dense is an Open point of the design (the density of sibling indexes).
+  - **Related**
+    
+    - [Containment](../design/core.md#id/BlockNode:00D24N87SR00Z) in the design.
+- **A child can end with two `parent` pairs: writing `children` detaches only the children the container already has**: <a name='id/BlockNode:00D2532JJR001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, tested on a scratch store. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - Tested by the Coder on a scratch store (`/tmp/cont.mts`): <a name='id/BlockNode:00D2532JJR003' class='aperas-anchor aperas-id'></a> a child written into the `children` of a second container ends with two `parent` quads (the parents of the child read back as both containers).
+    - The real mirror has none: <a name='id/BlockNode:00D2532JJR004' class='aperas-anchor aperas-id'></a> 0 children listed by two containers, 0 children undefined, and every listed child carries a `parent` equal to its lister (7,829 `parent` quads and as many `__siblingIndex` quads).
+  - **Root cause** (read from the code)
+    
+    - `writeField` for `children` (`node.ts` lines 238 to 251) detaches only the children that the container being written already holds, so nothing removes the child from the container that held it before.
+    - `parent` is declared an optional reference, so the shape does not refuse a second value either.
+  - **Not proven**
+    
+    - Whether any production path writes a child into a second container without first taking it out; the Coder tested the primitive and did not look for such a path.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [Containment](../design/core.md#id/BlockNode:00D24N87SR00Z) in the design, which says a tree node has at most one parent.
+- **The kind of an id is read from the `props` and `links` segments only, and an id-like string in a field aborts the load or loads as a reference to a node that does not exist**: <a name='id/BlockNode:00D2534RSG001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, the second part tested on a scratch store. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - Tested by the Coder on a scratch store (`/tmp/mini.mts`): <a name='id/BlockNode:00D2534RSG003' class='aperas-anchor aperas-id'></a> a title "BlockNode: hello" makes the load throw `Invalid IRI code point ' '`; a title "BlockNode:zzz" loads as a reference to a node that does not exist (reported as dangling); a title equal to a real id reads back as a node, not as a string.
+    - The real mirror has no such string (0), and no `preferences` embed (0 of 9 profiles), so neither part shows in the data today.
+  - **Root cause** (read from the code)
+    
+    - **The kind of an embedded id**: <a name='id/BlockNode:00D2534RSR001' class='aperas-anchor aperas-id'></a> `nodeKindFromId` (`vocab.ts` lines 47 to 52) matches only the fields `props` and `links`, so an id such as `Profile:x:preferences:StringProp:y` (the form `mintEmbedded` builds, `node.ts` line 167) is read as `Profile`. The design reads the kind from the last `field:Kind:` segment.
+    - **What counts as an id in a value**: <a name='id/BlockNode:00D2534RSR002' class='aperas-anchor aperas-id'></a> `encodeDoc` (`store.ts` lines 100 to 104) with `isNodeRef` (`vocab.ts` lines 38 to 40) tests only the prefix `BlockNode:`, `ArtifactNode:`, `FolderNode:`, `Profile:` or `TreeView:` on every string value of every field. The two resolvers (`resolve.ts` lines 35 to 41 and `resolveCreate.ts` lines 45 to 49) are stricter: a valid snowflake must follow `Kind:`, and only for BlockNode, ArtifactNode and FolderNode.
+  - **Not proven**
+    
+    - Whether a real title or text can reach the load with such a prefix; the mirror has none today. The `text` of a block is a field of the same kind and goes through the same test, which the Coder did not try.
+  - **Fix directions**
+    
+    - None decided. What an id-like string does at load is an Open point of the design.
+  - **Related**
+    
+    - [Ids](../design/core.md#id/BlockNode:00D24N87SR01N) in the design.
+- **The store is read directly in places outside the helpers: `nodeExists`, the size, and the dev tools and tests**: <a name='id/BlockNode:00D2536E1R001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - The design's interface section says callers ask for a fixed list of reads and writes and nothing else; the code departs from it in three places, none of which gives a wrong result today.
+  - **Root cause** (read from the code)
+    
+    - `nodeExists` is in `vocab.ts` (lines 65 to 77) and calls `store.match` itself, not a helper of `storeAccess.ts`.
+    - The quad count is read as `store.size` in `store.ts` (line 147).
+    - The dev tools `verifyDanglingUnfolds.ts`, `verifyLinkRefusals.ts` and `apeironNgnSmokeTest.ts`, and the tests, call `store.match`, `add` and `delete` directly. The production code does not otherwise.
+    - The wasm objects of these direct reads are freed by the helpers of `storeAccess.ts` for the production code; the dev tools and tests hold quads. `vocab.nodeExists` frees its own.
+  - **Not proven**
+    
+    - Whether the dev tools and tests should count as callers of the interface, or only the production code; the design does not say.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [The engine's interface](../design/core.md#id/BlockNode:00D24N87T0003) in the design.
+    - [The smoke-test issue](#id/BlockNode:00D22ZV0FG001), which is one of the direct callers.
+- **The loader writes a node's `parent` from the `parent` pair in the file, not from the container that lists it, so a file whose `parent` and `children` disagree loads as it stands**: <a name='id/BlockNode:00D2538VKR001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - None in the data: <a name='id/BlockNode:00D2538VKR003' class='aperas-anchor aperas-id'></a> the real mirror has 0 mismatches in either direction between a child's `parent` and the container that lists it, and the live blocks without a `parent` are listed by no container, as expected (42 or 43 of them; the Coder gave both figures).
+    - A file with a `parent` that no container lists would load as a child sorted at index 0 (read from the code, not run).
+  - **Root cause** (read from the code)
+    
+    - `encodeDoc` (`store.ts`) reads `parent` as its own predicate in its generic branch, and writes the containment again through `children`; `serializeDoc` (`dehydrate.ts` lines 70 to 82) writes `parent` from the store's own `parent` quad, not from a container's list.
+    - The README of the mirror and the design draft both say `parent` is derived from the container's `children`; that is true as an invariant of the data and false as a description of the code.
+  - **Not proven**
+    
+    - What a load does with a `parent` that names a container which does not list the child, or a child listed by a container that is not its `parent`; neither was run.
+  - **Fix directions**
+    
+    - None decided. Whether `parent` is the lister's fact or a pair of its own is an Open point of the design.
+  - **Related**
+    
+    - [Containment in the file](../design/core.md#id/BlockNode:00D24N87T0000) in the design.
+- **Ingested artifacts without a `type`: 9 of 57 `ArtifactNode` documents carry none, 7 of them with an `ingestedHash` and a `lastIngestedAt`**: <a name='id/BlockNode:00D253D680001' class='aperas-anchor aperas-id'></a>  found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - Counted by the Coder on the real mirror: <a name='id/BlockNode:00D253D680003' class='aperas-anchor aperas-id'></a> 48 of 57 artifacts have `type` (`root`), 9 do not. Seven of the 9 have an `ingestedHash` and a `lastIngestedAt`: `history/packaging.md`, `discussion/webapp.md`, `design/webapp.md`, `planning/webapp.md`, `history/webapp.md`, `.threads/grapher.md` and `.threads/coder.md`.
+    - The other two of the 9 are the tombstoned `issues/cli.md` and the live `concepts.md` (which has no `ingestedHash` either). The orchestrator's count of 6 and the Coder's of 7 are two sets of this: the 6 are the live artifacts without a `type` in the tracked `ArtifactNode.jsonld` (the 5 above that are not threads, and `concepts.md`), the 7 are the artifacts without a `type` that carry an `ingestedHash`, with the two thread artifacts of `Apeiron/.state/` (re-counted on both files by the grapher on 2026-10-12).
+    - These seven have been through an ingest and have no `type`, which an ingest sets on an artifact (see Root cause).
+  - **Root cause**
+    
+    - Not found. `hydrateFromParsed` (`node.ts` line 574) sets `type` on every ingest, so a node with children and hashes and no `type` was not produced by that path in its present form.
+  - **Not proven**
+    
+    - **Question — which command or code version produced them**: <a name='id/BlockNode:00D253D680009' class='aperas-anchor aperas-id'></a> what would decide is `git log -p` on `Apeiron/ArtifactNode.jsonld` for one of the seven, or a re-ingest on a copy.
+  - **Fix directions**
+    
+    - None decided. The design either states the exception or this issue is resolved by finding the cause.
+  - **Related**
+    
+    - [ArtifactNode](../design/core.md#id/BlockNode:00D24N87SR00R) in the design.
+- **The load computes `danglingRefs` and the service never reads it, so nobody is told at run time of an id that is referenced and never defined**: <a name='id/BlockNode:00D258W098001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, among the findings the orchestrator asked to file. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - None in the data: <a name='id/BlockNode:00D258W098003' class='aperas-anchor aperas-id'></a> the real mirror has 0 dangling references (the Coder's boot measurement of the whole store, 10,622 nodes, gave 0 as well).
+    - Were one to appear, a reference to a node that does not exist, the service would not say so. The Coder's scratch store showed a title "BlockNode:zzz" loading as a reference to a node that does not exist and reported as dangling in the result of the load, which is the only place the list reaches.
+  - **Root cause** (read from the code)
+    
+    - `rehydrateStore` (`store.ts` lines 142 to 147) scans the store for object references (`allObjectRefIds`) and returns `danglingRefs`, sorted, in its result. A search of `monorepo/packages` finds readers of the field only in `apeironNgnSmokeTest.ts` (lines 50 to 55), in the corpus support (`tests/support/corpus.ts`, `roundtripChild.ts`) and in the two round-trip tests. `service.ts` reads `duplicateIds` from the same result (lines 162 and 390) and logs it; it names `danglingRefs` nowhere.
+    - The design says the load lists the ids that are referenced and never defined and returns the list to its caller, and that what is done with it belongs to the service lifecycle, which has no design yet.
+  - **Not proven**
+    
+    - What the service should do with the list (log it as it does a repeated id, refuse, or leave it to a check on demand); the design does not say.
+    - Whether the 97 ms second pass that builds the list is worth keeping if nothing reads it at run time; it is a part of the cost listed under the scans issue.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [Embedded nodes have ids and are removed outright](../design/core.md#id/BlockNode:00D24N87SR013) in the design, which states what the load returns.
+    - [The service lifecycle](../design/core.md#id/BlockNode:00D24N87T000W), an Open point of the design.
+    - [The full-store scans issue](#id/BlockNode:00D0W02KPG001), where the second pass is one of the scans.
+    - [The duplicate-id entry](#id/BlockNode:00CHXSZ56R001), resolved: <a name='id/BlockNode:00D258W09G002' class='aperas-anchor aperas-id'></a> the repeated id is the case the service does read from the same result.
+- **The thread-scope test sits in `core/apeironNgn`, inside the engine's directory, and not in the layer above it that the design says it belongs to**: <a name='id/BlockNode:00D2590B2R001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, among the findings the orchestrator asked to file. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - No wrong result: <a name='id/BlockNode:00D2590B2R003' class='aperas-anchor aperas-id'></a> the split by scope is stable on the real mirror (the Coder's round trip gave 4,818 + 2,988 blocks, 55 + 2 artifacts and 16 + 1 folders, content mirror and `.state/`).
+    - The design says the scope test belongs to the layer above the engine and that the engine supplies the ids of each kind. In the code the test is `isThreadScopedId` of `threadScope.ts` in `monorepo/packages/core/src/apeironNgn/`, called by the engine's own write-back (`dehydrate.ts` lines 104 and 136) and by the service (`service.ts` line 313, the thread size cap).
+  - **Root cause** (read from the code)
+    
+    - The header of `threadScope.ts` says why the module sits there: <a name='id/BlockNode:00D2590B30002' class='aperas-anchor aperas-id'></a> it is a raw-quad twin of the owner walk of `linkIntegrity.ts`, and it must stay importable from `dehydrate.ts`, which `node.ts` and `linkIntegrity.ts` already import, so that nothing cycles. It depends only on `vocab.ts` and the helpers of `storeAccess.ts`.
+    - The rule it applies: <a name='id/BlockNode:00D2590B30003' class='aperas-anchor aperas-id'></a> an artifact or a folder is in scope when its own `path` is `.threads` or begins with `.threads/`; a block is in scope when the artifact or folder found by climbing its `parent` chain is; a block with no `parent` is never in scope; `Profile`, `Link`, `StringProp` and `TreeView` never are.
+    - `firstLiteralOf` and `firstRefIriOf` of the helpers have no other caller than this module (the Coder's reading of the interface).
+  - **Not proven**
+    
+    - What moving it would touch: <a name='id/BlockNode:00D2590B30006' class='aperas-anchor aperas-id'></a> `dehydrate.ts` would have to receive the test or the two sets of ids from outside, and the design does not say in which form the layer above hands it back.
+    - Whether the design's sentence is a target for the code or the sentence should say that the test lives with the write-back; neither was tried.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [Written by kind and scope](../design/core.md#id/BlockNode:00D24N87SR01Y) in the design, which states the placement.
+- **`ownerOfLink` takes the first node whose `links` names a link, and nothing checks that there is only one**: <a name='id/BlockNode:00D2593220001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, named there in passing under the first-match lookup; the orchestrator asked for its own entry. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - None visible. A `Link` is an embedded node with one owner, and the real mirror holds 2,687 `Link`s, each found by its owner through this lookup. The case of a `Link` listed in the `links` of two nodes was not counted.
+  - **Root cause** (read from the code)
+    
+    - `ownerOfLink` (`node.ts` lines 1396 to 1398) is `firstSubjectWhere(store, 'links', { ref: linkId })`, the first match of the reverse lookup; its comment calls the result "the one `TreeNode` a `Link` belongs to".
+    - Its callers: <a name='id/BlockNode:00D2593220006' class='aperas-anchor aperas-id'></a> `kgBacklinks.ts` (line 35, the owner shown for each backlink) and `buildRenderTree` in `node.ts` (line 1982, the owner of each unfolded `Link` entry of a view). With two owners the answer would be the one the store lists first, which is the dependence on the engine's order that the design rules out.
+  - **Not proven**
+    
+    - Whether any `Link` has two owners in the mirror or can get them through a write; the Coder named the lookup as first-match and did not look for a second owner.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [The first-match path lookup](#id/BlockNode:00D22ZMTKG001), which names the owner of a link among the other first-match lookups that are not defects today; this entry is the one for that lookup.
+    - [A lookup does not depend on first match](../design/core.md#id/BlockNode:00D24N87SR01H) in the design.
+- **A repeated `@id` is detected and logged, then the load goes on and merges the quads of every occurrence onto one subject; the design says only that the load names the repeat**: <a name='id/BlockNode:00D2595QAG001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, among the findings the orchestrator asked to file. Filed 2026-10-12.
+  
+  - **Symptom**
+    
+    - None in the data: <a name='id/BlockNode:00D2595QAG003' class='aperas-anchor aperas-id'></a> the real mirror has 0 repeated ids among 16,614 documents.
+    - Once it happened: <a name='id/BlockNode:00D2595QAR000' class='aperas-anchor aperas-id'></a> two `Profile` documents under one `@id` were merged, and one of them vanished at the next write (the resolved entry linked below). The service now logs a warning at start and at reload that names the ids and says at most one document per id survives the next write-back; no command replies with it.
+  - **Root cause** (read from the code)
+    
+    - `encodeDoc` (`store.ts` lines 70 to 75) pushes an id seen before onto `duplicateIds` and then goes on to add every field of the document as quads, so the quads of every occurrence land on one subject. `rehydrateStore` returns the ids, sorted and without repeats (line 147). The doc comment of the result says the repeat is surfaced and never resolved, because picking a winner would be a quieter way to lose the same data.
+    - Readers of `duplicateIds`: <a name='id/BlockNode:00D2595QAR003' class='aperas-anchor aperas-id'></a> `service.ts` (lines 162 to 167 and 390 to 394), which logs the warning and nothing more.
+    - The design (`An @id names one document`) says only that the load names a repeated id to its caller and the service logs it; it does not say whether the load should go on.
+  - **Not proven**
+    
+    - What the engine holds for a field that is single-valued by shape when two occurrences give it two values; the Coder did not run it.
+    - Whether a refusal to load, or a load that goes on and tells the client, is the better rule; the design lists no Open point for it.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [The duplicate-id entry](#id/BlockNode:00CHXSZ56R001), resolved: <a name='id/BlockNode:00D2595QAR00B' class='aperas-anchor aperas-id'></a> the collapse of two profiles, which added the list of repeated ids and the warning.
+    - [An `@id` names one document](../design/core.md#id/BlockNode:00D24N87SR01P) in the design.
+- **A stopped service and a busy one give the same refusal, "No ApeironNgn service running", so an agent reports a crash or waits for a service that is not there**: <a name='id/BlockNode:00D2PCFDBR001' class='aperas-anchor aperas-id'></a> found 2026-10-13 by the orchestrator in the check of the Coder's stalled turn of 2026-10-12, on the user's explanation that the service stops itself after an idle time. Filed 2026-10-13.
+  
+  - **Symptom**
+    
+    - After the service stops, by the idle shutdown of 30 minutes or by any other stop, every command is refused with "No ApeironNgn service running. Start one with: aperas service start".
+    - The same refusal is given while the service is up and busy and does not answer a ping ([the entry on a refusal while the service is up](#id/BlockNode:00CVMPABY8001)). An agent cannot tell a stopped service, which it must start, from a busy one, which it must wait for, so it reports a crash or waits for a service that is not there.
+    - The CLI does not start the service by itself: <a name='id/BlockNode:00D2PCFDBR005' class='aperas-anchor aperas-id'></a> `aperas service start` is the only place that does.
+    - The Coder's turn of 2026-10-12 began at about 14:15Z and its first `aperas` calls worked; its `Edit` of `Apeiron/README.md` then waited on a permission prompt for over 30 minutes with no `aperas` command (the turn lasted about 13.7 hours of wall time), and after the answer every call was refused.
+  - **Root cause** (read from the code)
+    
+    - `service.ts` sets an idle timer of 30 minutes (`IDLE_TIMEOUT_MS`, line 99), and `resetIdleTimer` (around line 433) ends the service by a plain `shutdown(0)`, which writes no log line.
+    - `ensureServiceRunning` (`serviceClient.ts`, line 151) throws the one message whenever `ping()` fails, whatever the reason, and its comment says it never starts a service.
+    - Evidence of the stop: <a name='id/BlockNode:00D2PCFDC0003' class='aperas-anchor aperas-id'></a> the run directory, where the service removes its socket and lock when it stops, last changed at 14:51Z on 2026-10-12, and the log's last line is 14:13Z, so the stop came about 30 minutes after the last command.
+  - **Not proven**
+    
+    - The exact moment of the stop: <a name='id/BlockNode:00D2PCFDC0005' class='aperas-anchor aperas-id'></a> the shutdown leaves no log line, so it is read from the time of the run directory.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [A command can fail with "No ApeironNgn service running" while the service is up](#id/BlockNode:00CVMPABY8001), the busy case that gives the same message.
+    - [The service can die silently](#id/BlockNode:00CRBJ0VYG001), a stop with no signal to the client.
+    - [The service lifecycle](../design/core.md#id/BlockNode:00D24N87T000W) in the design, which has no design of its own yet.
+- **A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe, and the skills and the mechanics reference do not say so**: <a name='id/BlockNode:00D2PVVMWG001' class='aperas-anchor aperas-id'></a> found 2026-10-13 by the Grapher when it ran a move from a harness in the update of `design/core.md`, and agreed by the orchestrator to be filed. Filed 2026-10-13.
+  
+  - **Symptom**
+    
+    - A move run from a harness whose standard input is an open pipe does not finish:  the command ran for 120 seconds and the harness moved it to the background. The same move run again with standard input from `/dev/null` finished at once, and the first process stayed blocked on standard input and was left running.
+    - No wrong result and no fault of the service: <a name='id/BlockNode:00D2PVVMWR000' class='aperas-anchor aperas-id'></a>  the wait is in the client, before the request is sent.
+    - The `aperas` skill's quick reference ("no stdin moves node"), the `aperas-grapher` skill ("with no stdin") and the mechanics reference say the move takes no standard input, and none says that standard input must be closed when the command is run from a harness that leaves it open.
+  - **Root cause** (read from the code)
+    
+    - `readStdinIfPiped` in `monorepo/packages/cli/src/kgInsert.ts` (line 241) returns at once only when `process.stdin.isTTY` is true; otherwise it reads the stream to its end and takes an empty read as "nothing was piped", which selects the move.
+    - Its comment says why a test of `isTTY` alone is not enough:  a harness with no terminal reads `isTTY` as false, and a bare `insert` was then taken for a create with empty content. The read to the end was chosen as the signal, and it needs the stream to end; a stream that stays open never ends.
+  - **Not proven**
+    
+    - Whether a harness other than the one that ran the move behaves the same:  a harness that closes standard input for each command would not wait.
+    - Whether any other command that reads standard input waits the same way; only the move was run.
+  - **Fix directions**
+    
+    - None decided.
+  - **Workaround**
+    
+    - Run the move with standard input closed, `aperas insert <id> --after <anchor> --flush < /dev/null`.
+- **`dehydrate` sorts with `localeCompare`, a comparison that depends on the locale, where the mirror's orders are decided as plain code-point order**: <a name='id/BlockNode:00D39EY5B0001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder's fact-check of `design/core.md`; the order decided by the user on 2026-10-14. Filed 2026-10-14.
+  
+  - **Symptom**
+    
+    - None observed. On a copy of the real mirror the Coder checked 6,084 sorted lists and found every one in code-unit order, with 0 differences, and the four tracked class files are sorted by `@id` in plain code-point order.
+  - **Root cause** (as reported by the census, the lines read again in the code)
+    
+    - `dehydrate.ts` sorts the values of a set field (line 58) and the documents of each file (lines 106, 130 and 138) with `stableId(a).localeCompare(stableId(b))`. The order `localeCompare` gives depends on the locale and the collation data of the runtime, so the byte-for-byte round trip could depend on the machine that flushes.
+    - The design decides plain code-point comparison for the mirror's orders: <a name='id/BlockNode:00D39EY5B8002' class='aperas-anchor aperas-id'></a> [Ids give a stable order](../design/core.md#id/BlockNode:00D24N87SR01F) and [A flush is a dump](../design/core.md#id/BlockNode:00D39EAKW0001).
+  - **Not proven**
+    
+    - An actual difference between machines: <a name='id/BlockNode:00D39EY5B8004' class='aperas-anchor aperas-id'></a> no flush under another locale or another runtime was compared.
+  - **Fix directions**
+    
+    - None decided.
+- **One live artifact, `concepts.md`, has no `parent`, so its path cannot be derived from the parent chain**: <a name='id/BlockNode:00D3F6RJCG001' class='aperas-anchor aperas-id'></a> found 2026-10-12 in the fact-check of the draft `design/core.md`, counted again 2026-10-14 by the Grapher. Filed 2026-10-14 as seven artifacts; narrowed 2026-10-15 to `concepts.md`, after the user's correction that the `README.md` files are the organic part of their folder.
+  
+  - **Symptom**
+    
+    - In `Apeiron/ArtifactNode.jsonld` (read 2026-10-14), 7 of the 54 live `ArtifactNode` documents carry no `parent`: `concepts.md` and six `README.md` nodes (`README.md`, `design/README.md`, `discussion/README.md`, `issues/README.md`, `planning/README.md` and `history/README.md`). The fact-check of 2026-10-12 counted the same seven. The six `README.md` nodes are strays, filed as [Six live `ArtifactNode`s for `README.md` files](#id/BlockNode:00D3WTZG9G001): a `README.md` file is the organic part of its folder, which holds its content among its own children, and needs no parent of its own. `concepts.md`, at the root, is the one live artifact without a parent.
+    - The root folder has no parent by definition, its path being `.`; `concepts.md` is an artifact, which the derivation of the path needs to have one.
+  - **Fix directions**
+    
+    - None decided. The design lists the options under [Deriving the path](../design/core.md#id/BlockNode:00D25698B0001): (a) give `concepts.md` the folder that holds it as its parent, before the path is derived, or (b) keep the stored path for it as an exception.
+  - **Related**
+    
+    - [The path is derived from the parent chain](../design/core.md#id/BlockNode:00D24N87SR01S) in the design.
+- **Every `Link` carries a `predicate`, which the design of a `Link` no longer has**: <a name='id/BlockNode:00D3WNBPPG001' class='aperas-anchor aperas-id'></a> found 2026-10-15, when the user removed the predicate of a `Link` from `design/core.md`; counted the same day by the Grapher. Filed 2026-10-15.
+  
+  - **Symptom**
+    
+    - In the mirror files read 2026-10-15, every embedded `Link` has a `predicate`, and every one of them is `[[wikilink]]`: 1,923 in `Apeiron/` (1,921 in `BlockNode.jsonld`, 2 in `ArtifactNode.jsonld`) and 1,357 in `Apeiron/.state/BlockNode.jsonld`. None is `references`. Counted with `grep` on the files as last flushed, so it is what the mirror held at that read, not the store in memory.
+    - The code writes a predicate on every `Link` it makes: <a name='id/BlockNode:00D3WNBPPR000' class='aperas-anchor aperas-id'></a> `[[wikilink]]` for a wikilink (`WIKILINK_PREDICATE` of `@aperas/core/astParser`) and `references` for a manual link (`addLink('references', ...)` in `kgLink.ts`, whose removal of a manual link also filters on that predicate). Tests in `tests/links/`, `tests/ingest/` and `tests/gc/` write `references` links and filter on both values. Found by a search of the code, not traced.
+  - **Fix directions**
+    
+    - None decided.
+  - **Related**
+    
+    - [Links are outgoing ports](../design/core.md#id/BlockNode:00D24N87SR011) and [the fields of `Link`](../design/core.md#id/BlockNode:00D24N87SR00T) in the design.
+- **Six live `ArtifactNode`s for `README.md` files stand outside any folder and duplicate the README content their folders already hold**: <a name='id/BlockNode:00D3WTZG9G001' class='aperas-anchor aperas-id'></a> found 2026-10-15 by the orchestrator in the mirror, after the user's correction that the `README.md` files are the organic part of their `FolderNode`; counted again the same day by the Grapher. Filed 2026-10-15.
+  
+  - **Symptom**
+    
+    - In `Apeiron/ArtifactNode.jsonld` (read 2026-10-15), six live `ArtifactNode`s have the paths `README.md`, `design/README.md`, `discussion/README.md`, `issues/README.md`, `planning/README.md` and `history/README.md`. None of them has a `parent`, none is listed in the `children` of any `FolderNode`, and each has one child block.
+    - The README content of a folder is already the folder's own: each of the six folders (the root folder `.`, `design`, `discussion`, `issues`, `planning` and `history`) holds one `BlockNode` among its children with its README's content, beside its artifacts and subfolders. The child block of each of the six `ArtifactNode`s has the same text as the block its folder holds, and neither has children, so the six duplicate what the folders hold.
+    - Their `lastTrackedAt` and `lastIngestedAt` fall on 2026-09-22. How they were made is not traced. Counted on the mirror files as last flushed, not on the store in memory.
+  - **Fix directions**
+    
+    - None decided. The six nodes are kept until one is.
+  - **Related**
+    
+    - [One live artifact, `concepts.md`, has no `parent`](#id/BlockNode:00D3F6RJCG001), which first counted these six among its seven, and [Deriving the path](../design/core.md#id/BlockNode:00D25698B0001) in the design.
+- **The stored `text` of an artifact or a folder is a copy of a descendant's text, kept only as a rename fingerprint, where it should come from the frontmatter `description`**: <a name='id/BlockNode:00D3WV3CZ0001' class='aperas-anchor aperas-id'></a> found 2026-10-15 by the user, reading `design/core.md`, who called the fingerprint "a legacy left over, not intended design"; counted the same day by the Grapher. Filed 2026-10-15.
+  
+  - **Symptom**
+    
+    - The stored `text` of an `ArtifactNode` or a `FolderNode` is a copy of the text of its first descendant that has any, and its one remaining use is as a fingerprint for detecting a rename; the abstract a reader sees has been the frontmatter `description` since the redesign of 2026-09-20. The design gives the `text` from the `description`, as the value the rename check compares (see [The artifact is its own root document](../design/core.md#id/BlockNode:00D24N87SR010)).
+    - In the mirror files read 2026-10-15: <a name='id/BlockNode:00D3WV3CZ8000' class='aperas-anchor aperas-id'></a> of 54 live `ArtifactNode`s, 53 carry a `description` and none has a `text` equal to it, while 48 have a `text` equal to the text of one of their own blocks; of 16 live `FolderNode`s, 6 carry a `description`, none equal to its `text`. Counted on the mirror files as last flushed, not on the store in memory.
+    - Where the code sets the `text` and where the rename check reads it (by the orchestrator's reading, the comments in `node.ts` at the ingest and the render) is not traced.
+  - **Fix directions**
+    
+    - None decided. Whatever the fix, an artifact or a folder without a `description` has no basis for detecting a rename, by design: the user called it "a miss of the content, not of the system", and its remedy is to write a `description`.
+  - **Related**
+    
+    - [The stale, heuristic copy of `text`](#id/BlockNode:00CKE4R93R001) and [its follow-on on the preview paths](#id/BlockNode:00CN7V9BX0001), which retired the copy as the abstract a reader sees.
 
 ## Sub-Parts <a name='id/BlockNode:00CF1WZ4JG00A' class='aperas-anchor aperas-id'></a>
 
@@ -735,6 +1210,10 @@ See [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) for the ord
     - [The reload entry](#id/BlockNode:00D0W00YCR001): <a name='id/BlockNode:00D0WPK580003' class='aperas-anchor aperas-id'></a> a reload leaves the old store alive until an event-loop turn runs.
     - [The restart entry](#id/BlockNode:00D0W044DG001): <a name='id/BlockNode:00D0WPK580004' class='aperas-anchor aperas-id'></a> `aperas service restart` errors out after 10 s whenever the service has been marked dirty.
     - [The `npm run verify` entry](#id/BlockNode:00CJ0202MG001) and [its resolved "why" entry](#id/BlockNode:00CJ0HX2Y0000): <a name='id/BlockNode:00D0WPK580005' class='aperas-anchor aperas-id'></a> the process-lifetime slowdown of the verify run.
+- **`design/` has no document for the store, hydration or the service lifecycle**: <a name='id/BlockNode:00D0W07DRR000' class='aperas-anchor aperas-id'></a> noted 2026-10-10 in the store-size investigation. The graph holds the early ApeironNgn design only in the archive (`archive/Aperas-design.md`, where `rehydrateStore` is a quoted 256 ms at 1,594 BlockNodes), and nothing in `design/` states the quad shape the store holds, when and how the mirrors are hydrated and dehydrated, what the boot, the flush timers, the shutdown and the reload each do and in what order, or what the client's waits (300 ms ping, 5 s ready, 10 s stop) are allowed to assume of them. The boot and shutdown issue already says there is no document for the service lifecycle; this entry records the same gap for the store and hydration too, so the figures in the issues above have no design to be read against. Recorded only; no design is written here. Filed 2026-10-10.
+  
+  - **The early design's trigger for revisiting the store was met by wrapper overhead, not by data size** (2026-10-12): the archived ApeironNgn design chose Oxigraph's in-memory store as "not a from-scratch build" (its section 3) and decided to revisit it only "once the KG's actual size makes in-memory rehydration or working-set size a real problem (GB-level)" (its section 4, in the rollout step on the store; its section 5 repeats the wait). The trigger is a data size. In practice the service idled at 1.05 to 1.5 GB for 3.66 MB of JSON-LD on disk (about 6.3 MB now, see the counts in [the memory entry](#id/BlockNode:00CVQ4Z968001)), and the measured mechanism is the wrappers that full-store scans leave alive, not the data ([the scan entry](#id/BlockNode:00D0W02KPG001)); the recorded trigger names no wrapper overhead.
+  - **Resolved** (2026-10-15): <a name='id/BlockNode:00D3X3MHF0001' class='aperas-anchor aperas-id'></a> [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001) is the document for the store and its mirror, drafted with the user from 2026-10-12 to 2026-10-15: the engine in memory, and the mirror, its format, the load and the flush on its caller's side. The service lifecycle stays outside it, listed under its Open points as [The service lifecycle](../design/core.md#id/BlockNode:00D24N87T000W).
 
 - **`npm run verify` costs ~5 minutes, dominated by a process-lifetime slowdown neither store-freshness nor heap size explains** — instrumented per-step (a `console.log`-wrapping timer keyed on each step's own `"N. Testing..."` header, printing a sorted breakdown even on failure) and found the same operation (`checkLinkIntegrity`'s corpus sweep, and separately `parseMarkdownTree`-driven ingestion in Linking Slice steps 13-18) costs low hundreds of ms freshly isolated, but 12-55 *seconds* run as `verify.ts`'s own later steps — steps 3-6 doing the identical kind of parsing work stay fast, steps 7-12 in between do no heavy parsing at all, then 13 onward is uniformly slow. Two credible causes ruled out by direct experiment, not by inspection: (1) oxigraph's own WASM memory footprint (`external`, ~850MB-1GB by that point vs ~50MB fresh) looked causal, but compacting the store mid-run (dehydrate a scratch dir, rehydrate a brand-new `Store` with the identical live content) made the same sweep *slower*, not faster — ruling out "this one store instance is bloated." (2) V8 heap-size tuning (`--max-old-space-size=8192 --max-semi-space-size=128`) changed nothing measurably.
   
@@ -743,4 +1222,4 @@ See [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) for the ord
 
 - **Why isolation helps is still unexplained** — narrower and lower-stakes now that the split above removes the actual pain, but the mechanism itself is still just "two ruled-out hypotheses and one unconfirmed one" (see the entry above: not oxigraph's own memory footprint, not V8 heap-size — leading guess is inline-cache megamorphism or similar JIT-level degradation in a long process running many differently-shaped operations, never directly confirmed). Worth a closer look sometime with real V8 profiling (`--prof`/`--trace-deopt`) if it recurs somewhere a process split isn't a viable fix, but not worth chasing further here.
   
-  - **Resolved**: <a name='id/BlockNode:00D1EZSCH8001' class='aperas-anchor aperas-id'></a> explained, in part measured, not proved (2026-10-11). Measured: the slow steps are repeated full garbage collections (Mark-Compact), 70 to 87% of the time of every slow step, that free 5 MB or less each from a heap of about 230 to 450 MB; a 50 ms timer between steps cut them in some steps (step 5 from 24,985 ms to 0, step 5d from 47,103 ms to 3 ms) and not in others (step 3, step 5g), and a `setImmediate` yield or none did not; a fresh process rehydrates the same directory in 2.9 s against 37.8 s in a process that has already rehydrated and dehydrated, about thirteen times (one run); the old suite's steps 7, 10 and 11 cost 649, 188 and 202 s on the real-size store and milliseconds on a tiny one. This replaces the leading guess of inline-cache megamorphism or another JIT-level degradation in a long process, which the collection measurements replace as the reading and which was itself not tested; the V8 profiling (`--prof`, `--trace-deopt`) proposed here was not run. Still a reading and not shown: that the trigger is V8 starting a full collection when external (wasm) memory has grown past its limit, which the collection cannot lower because the wasm side is released by a later callback, so that a pause lets the callbacks run and stops the collections; it was not tested whether `free()` on the quads, which leaves external memory flat in the earlier scan test, would remove the growth. Two runs, each cut at 180 s, one sample per variant. The suite no longer depends on it: the monolithic suite is retired and replaced by standalone files, `npm run verify` runs the `commit` suite in 8 to 20 s and `npm run verify -- --suite demand` runs 56 cases on a copy of the real mirror in 73 s and 74 s, as recorded in [Testing — Design](../design/testing.md#id/BlockNode:00D1D5F63R001); the core's cost itself stays open in [the full-store-scans issue](../issues/core.md#id/BlockNode:00D0W02KPG001).
+  - **Resolved**: <a name='id/BlockNode:00D1EZSCH8001' class='aperas-anchor aperas-id'></a> explained, in part measured, not proved (2026-10-11). Measured: the slow steps are repeated full garbage collections (Mark-Compact), 70 to 87% of the time of every slow step, that free 5 MB or less each from a heap of about 230 to 450 MB; a 50 ms timer between steps cut them in some steps (step 5 from 24,985 ms to 0, step 5d from 47,103 ms to 3 ms) and not in others (step 3, step 5g), and a `setImmediate` yield or none did not; a fresh process rehydrates the same directory in 2.9 s against 37.8 s in a process that has already rehydrated and dehydrated, about thirteen times (one run); the old suite's steps 7, 10 and 11 cost 649, 188 and 202 s on the real-size store and milliseconds on a tiny one. This replaces the leading guess of inline-cache megamorphism or another JIT-level degradation in a long process, which the collection measurements replace as the reading and which was itself not tested; the V8 profiling (`--prof`, `--trace-deopt`) proposed here was not run. Still a reading and not shown: that the trigger is V8 starting a full collection when external (wasm) memory has grown past its limit, which the collection cannot lower because the wasm side is released by a later callback, so that a pause lets the callbacks run and stops the collections. Whether `free()` on the quads would remove the growth, which was not tested when this was written, was tested by [the `free()` landing](../history/core.md#id/BlockNode:00D21FP4ZG003) of 2026-10-12: in a scratch process on a copy of the mirror (59,275 quads, 3 samples per case, a fresh process each), eight scans of all ids stayed flat at about 265 MB where they had grown 40 MB a call, a dehydrate of both mirrors fell from 33 to 38 s to 2.5 to 3.8 s and a rehydrate from 3.3 to 3.5 s to 2.0 to 2.9 s. That agrees with the reading and does not prove it, because the recorded measurements do not count collections. Two runs, each cut at 180 s, one sample per variant, for the earlier measurements. The suite no longer depends on it: the monolithic suite is retired and replaced by standalone files, `npm run verify` runs the `commit` suite in 8 to 20 s and `npm run verify -- --suite demand` runs 56 cases on a copy of the real mirror in 73 s and 74 s, as recorded in [Testing — Design](../design/testing.md#id/BlockNode:00D1D5F63R001); the core's cost itself stays open in [the full-store-scans issue](../issues/core.md#id/BlockNode:00D0W02KPG001).
