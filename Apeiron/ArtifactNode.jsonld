@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "7de7213da065488f124c103030300e33dc81e11959a20d35d599a6b2d3a6ef3a",
+    "fileHash": "92f1e9c0242a95cec73ee7ed1de3a7a504f5451dc3d82b488aa12097989b319f",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "7de7213da065488f124c103030300e33dc81e11959a20d35d599a6b2d3a6ef3a",
-    "lastIngestedAt": "2026-10-16T09:18:40.544Z",
-    "projectedHash": "7de7213da065488f124c103030300e33dc81e11959a20d35d599a6b2d3a6ef3a"
+    "ingestedHash": "92f1e9c0242a95cec73ee7ed1de3a7a504f5451dc3d82b488aa12097989b319f",
+    "lastIngestedAt": "2026-10-16T12:33:59.554Z",
+    "projectedHash": "92f1e9c0242a95cec73ee7ed1de3a7a504f5451dc3d82b488aa12097989b319f"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,11 +896,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "5fdddbe7e2a6977e1d7a9c0eefce88cf1ce7643707d35df30f213aa5c7ed09ad",
+    "fileHash": "b7e3bfc1230b7e62c410b1f0d297a3df7544f468c331cd427239ecde58ad18d2",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "5fdddbe7e2a6977e1d7a9c0eefce88cf1ce7643707d35df30f213aa5c7ed09ad",
-    "lastIngestedAt": "2026-10-16T09:22:04.245Z",
-    "projectedHash": "5fdddbe7e2a6977e1d7a9c0eefce88cf1ce7643707d35df30f213aa5c7ed09ad"
+    "ingestedHash": "b7e3bfc1230b7e62c410b1f0d297a3df7544f468c331cd427239ecde58ad18d2",
+    "lastIngestedAt": "2026-10-16T12:34:04.313Z",
+    "projectedHash": "b7e3bfc1230b7e62c410b1f0d297a3df7544f468c331cd427239ecde58ad18d2"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -914,18 +914,18 @@
       }
     ],
     "title": "core.md",
-    "text": "The plan builds the engine of [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001) in plain JavaScript, in the checkout `Aperas.dev/` on branch `js-apeironngn`. The code repo `Aperas/` stays on branch `oxigraph` as the working engine the workflow uses while the new one is built. The Oxigraph-based code is kept as a frozen reference copy in `Aperas.dev/monorepo/.archive/oxigraph/` (the TerminusDB-era code is in `.archive/tdb/`), and the live code in `monorepo/packages/` is rewritten for the new engine. The plan follows the design's own boundary: the engine in memory (Batches 3 to 8), then the caller on disk (Batches 9 and 10), then the layers above the engine moved onto it (Batches 11 and 12), then the comparison with the Oxigraph engine (Batch 13), and last the ports (Batch 14), which no other batch needs.",
+    "text": "The plan builds the engine of [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001) in plain JavaScript, in the checkout `Aperas.dev/` on branch `js-apeironngn`. The code repo `Aperas/` stays on branch `oxigraph` as the working engine the workflow uses while the new one is built. The Oxigraph-based code is kept as a frozen reference copy in `Aperas.dev/monorepo/.archive/oxigraph/` (the TerminusDB-era code is in `.archive/tdb/`), and the live code in `monorepo/packages/` is rewritten for the new engine. The plan follows the design's own boundary: first the current code moved out of the engine's directory into the shell's ([Batch 15](#id/BlockNode:00D4NBFKAG001), done), then the engine in memory (Batches 3 to 8), then the shell on disk (Batches 9 and 10), then the layers above the engine moved onto it (Batches 11 and 12), then the comparison with the Oxigraph engine (Batch 13), and last the ports (Batch 14), which no other batch needs.",
     "parent": "FolderNode:00CDBYV4BR004",
     "type": "root",
     "children": [
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "1b0d9ddae96b3492582b2318699710256dce3db649ae6529fc85f86e69a25e8b",
+    "fileHash": "184b431e587c6e330ea8c616dafd744a08e813a851a2aebc146e10f8332be863",
     "lastTrackedAt": "2026-09-22T08:07:51.361Z",
-    "ingestedHash": "1b0d9ddae96b3492582b2318699710256dce3db649ae6529fc85f86e69a25e8b",
-    "lastIngestedAt": "2026-10-16T09:18:37.646Z",
-    "projectedHash": "1b0d9ddae96b3492582b2318699710256dce3db649ae6529fc85f86e69a25e8b"
+    "ingestedHash": "184b431e587c6e330ea8c616dafd744a08e813a851a2aebc146e10f8332be863",
+    "lastIngestedAt": "2026-10-16T12:33:56.874Z",
+    "projectedHash": "184b431e587c6e330ea8c616dafd744a08e813a851a2aebc146e10f8332be863"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
@@ -1337,21 +1337,37 @@
       "BlockNode:00D21FP4Z0001"
     ],
     "path": "history/core.md",
-    "fileHash": "3100166c4a47bacec93abb16299850d1b9404f36ff8af87b2be2be8a08791b74",
+    "fileHash": "f5704b6468b7f51524001fa75a25daf84182946096361ac87c1503175e0787b4",
     "lastTrackedAt": "2026-10-12T09:54:21.047Z",
-    "ingestedHash": "3100166c4a47bacec93abb16299850d1b9404f36ff8af87b2be2be8a08791b74",
-    "lastIngestedAt": "2026-10-15T07:25:48.281Z",
-    "projectedHash": "3100166c4a47bacec93abb16299850d1b9404f36ff8af87b2be2be8a08791b74"
+    "ingestedHash": "f5704b6468b7f51524001fa75a25daf84182946096361ac87c1503175e0787b4",
+    "lastIngestedAt": "2026-10-16T12:34:01.911Z",
+    "projectedHash": "f5704b6468b7f51524001fa75a25daf84182946096361ac87c1503175e0787b4"
   },
   {
     "@id": "ArtifactNode:00D24N84NR000",
     "@type": "ArtifactNode",
+    "links": [
+      {
+        "@id": "ArtifactNode:00D24N84NR000:links:Link:00D4NBB84G001",
+        "@type": "Link",
+        "target": "BlockNode:00CF1WZE10001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "ArtifactNode:00D24N84NR000:links:Link:00D4NBB84G001:props:StringProp:00D4NBB84G002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "16"
+          }
+        ]
+      }
+    ],
     "props": [
       {
-        "@id": "ArtifactNode:00D24N84NR000:props:StringProp:00D24N8N2G000",
+        "@id": "ArtifactNode:00D24N84NR000:props:StringProp:00D4NBB84G000",
         "@type": "StringProp",
         "key": "description",
-        "value": "The design of the ApeironNgn engine, the in-memory graph the service holds as a reflection of the mirror: its closed vocabulary of fields, its index, its ordering, its identity rules, the mirror format and the interface callers use."
+        "value": "The design of the ApeironNgn engine, the generic in-memory graph the service holds as a reflection of the mirror, and of the shell that calls it: the engine's meta-model, index, ordering, identity rules and interface, and the shell's Aperas schema, mirror format and persistence."
       }
     ],
     "title": "core.md",
@@ -1362,10 +1378,10 @@
       "BlockNode:00D24N87SR001"
     ],
     "path": "design/core.md",
-    "fileHash": "d2574860c62d51bb735f82b43a82e63013efeed141090616293307ac61a8c52b",
+    "fileHash": "ca52f3188ab63bfb663f9d0e68840420edf7fc05df5177530f6fc97ca63b78aa",
     "lastTrackedAt": "2026-10-12T13:36:13.399Z",
-    "ingestedHash": "d2574860c62d51bb735f82b43a82e63013efeed141090616293307ac61a8c52b",
-    "lastIngestedAt": "2026-10-16T09:22:01.710Z",
-    "projectedHash": "d2574860c62d51bb735f82b43a82e63013efeed141090616293307ac61a8c52b"
+    "ingestedHash": "ca52f3188ab63bfb663f9d0e68840420edf7fc05df5177530f6fc97ca63b78aa",
+    "lastIngestedAt": "2026-10-16T12:03:14.489Z",
+    "projectedHash": "ca52f3188ab63bfb663f9d0e68840420edf7fc05df5177530f6fc97ca63b78aa"
   }
 ]

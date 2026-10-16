@@ -613,6 +613,7 @@ description: The engine-level bug family this concern owns — most prominently 
     
     - The stray block `BlockNode:00CJ2TCV40000` was removed offline in the mirror sweep of 2026-10-11, by the user's decision: records went from 5,972 to 5,971, and `aperas show` says the node is not found after the service started.
     - The issue stays open for the collector's blind spot itself: <a name='id/BlockNode:00D1BBPCKG003' class='aperas-anchor aperas-id'></a> an unreachable block that was never tombstoned is collected by no sweep. No fix is decided.
+  - **The test cases, kept, decided 2026-10-16 (the user)**: <a name='id/BlockNode:00D4P4J3KR001' class='aperas-anchor aperas-id'></a> the 42 live blocks of [42 live `BlockNode`s have no `parent` and no container lists them](#id/BlockNode:00D3YS41VR001) and the artifact of [one live artifact, `concepts.md`, has no `parent`](#id/BlockNode:00D3F6RJCG001), none of them reachable by containment, are left as they stand by the migration of the mirror ([Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8002)), so that they test the resolution of this issue in the new engine. A resolution that collects unreachable nodes would collect all 43, `concepts.md` included; nothing uses `concepts.md` now, and it is kept for the test.
 - **One `insert` blocks the service for 1.6 to 3.2 s before its reply and for 1.4 s more after it, and none of it is the parse, the write or the dehydrate on `--flush`: it is a path index rebuilt over every live block, two link sweeps of the target artifact, and the timed dehydrate of all four content classes**: <a name='id/BlockNode:00D22Z1HJ8001' class='aperas-anchor aperas-id'></a> profiled 2026-10-12 by the Coder (`write-cost-profile`, Turn 1) on a scratch copy of the mirror, after the `free()` patch (commit `d794060`). Filed 2026-10-12.
   
   - **Symptom**
@@ -954,6 +955,7 @@ description: The engine-level bug family this concern owns — most prominently 
   - **Related**
     
     - [Written by kind and scope](../design/core.md#id/BlockNode:00D24N87SR01Y) in the design, which states the placement.
+    - [The code differs from the boundary](#id/BlockNode:00D4NBNCF8001), the wider case, resolved: <a name='id/BlockNode:00D4NBT02G001' class='aperas-anchor aperas-id'></a> [Batch 15](../planning/core.md#id/BlockNode:00D4NBFKAG001) moved `threadScope.ts` to `src/shell/` in `Aperas.dev` with the rest of the engine's directory (2026-10-16), which does not close this issue; the test becomes the graph a node belongs to in [Batch 9](../planning/core.md#id/BlockNode:00D3XQQ2VR01M). The working checkout `Aperas/` keeps it in `core/src/apeironNgn/`.
 - **`ownerOfLink` takes the first node whose `links` names a link, and nothing checks that there is only one**: <a name='id/BlockNode:00D2593220001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder in the fact-check of the draft `design/core.md`, named there in passing under the first-match lookup; the orchestrator asked for its own entry. Filed 2026-10-12.
   
   - **Symptom**
@@ -1064,7 +1066,7 @@ description: The engine-level bug family this concern owns — most prominently 
     - Checked 2026-10-15 on a clone of the mirror (`Apeiron/`, `Apeiron/.state/`): <a name='id/BlockNode:00D3YTHB7R001' class='aperas-anchor aperas-id'></a> `ArtifactNode:00CR5AEJ88000` (`concepts.md`) is live and has no `parent`, and no `FolderNode` lists it in its `children`. The live nodes without a `parent` are 7 `ArtifactNode`s (this one and the six `README.md` artifacts), the root folder `FolderNode:00CDBYV47G000` and 42 `BlockNode`s that no container lists; the blocks are filed in [42 live `BlockNode`s have no `parent` and no container lists them](#id/BlockNode:00D3YS41VR001). What the migration of the mirror does with `concepts.md` is part of [an open point of Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8001).
   - **Fix directions**
     
-    - None decided. The design lists the options under [Deriving the path](../design/core.md#id/BlockNode:00D25698B0001): (a) give `concepts.md` the folder that holds it as its parent, before the path is derived, or (b) keep the stored path for it as an exception.
+    - No fix in the migration. Decided 2026-10-16 (the user): <a name='id/BlockNode:00D3F6RJCG006' class='aperas-anchor aperas-id'></a> the migration of the mirror leaves `concepts.md` as it stands, with no `parent`, beside the 42 blocks of [42 live `BlockNode`s have no `parent` and no container lists them](#id/BlockNode:00D3YS41VR001) ([Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8002)), so that it tests how the new engine handles it, the case of [garbage collection never collects an unreachable block that was never tombstoned](#id/BlockNode:00D1A2AY68001). Nothing uses `concepts.md` now and it could be removed, but it is kept for that test. The design lists the options under [Deriving the path](../design/core.md#id/BlockNode:00D25698B0001), neither chosen: (a) give `concepts.md` the folder that holds it as its parent, before the path is derived, or (b) keep the stored path for it as an exception.
     - The dry run of 2026-10-16 on a clone ([Batch 9, step 6](../planning/core.md#id/BlockNode:00D3Y3DMTR001)) leaves `concepts.md` as it stands, among the 44 live documents without a `parent`. Its node has no file under `artifacts/`, which [a new issue](#id/BlockNode:00D4JZ0A7R001) files.
   - **Related**
     
@@ -1156,7 +1158,7 @@ description: The engine-level bug family this concern owns — most prominently 
     - The full list is the live `BlockNode`s of `Apeiron/BlockNode.jsonld` without a `parent` key.
   - **Fix directions**
     
-    - None decided. It is an open point of the migration of the mirror ([Batch 9](../planning/core.md#id/BlockNode:00D3Y3DMTR001)).
+    - No fix. Decided 2026-10-16 (the user): <a name='id/BlockNode:00D3YS41VR008' class='aperas-anchor aperas-id'></a> the migration of the mirror leaves the 42 as they stand ([Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8002)), so that they test how the new engine handles nodes that nothing reaches, the case of [garbage collection never collects an unreachable block that was never tombstoned](#id/BlockNode:00D1A2AY68001).
     - The dry run of 2026-10-16 on a clone ([Batch 9, step 6](../planning/core.md#id/BlockNode:00D3Y3DMTR001)) leaves them as they stand: the live documents without a `parent` are 44 in the migrated clone, the root folder, `concepts.md` and these 42 blocks. Still undecided.
   - **Related**
     
@@ -1174,7 +1176,7 @@ description: The engine-level bug family this concern owns — most prominently 
     - The dry run of 2026-10-16 on a clone ([Batch 9, step 6](../planning/core.md#id/BlockNode:00D3Y3DMTR001)): `Profile:00CJC4S69R000` (`dinhlx`) now holds `kind: human` and `default` is unchanged, with no other document of the mirror touched by this part. The design edit of the optional fields is made (2026-10-16), and the real mirror gets the `kind` at the cutover.
   - **Related**
     
-    - [Enforcement](../design/core.md#id/BlockNode:00D24N87T000M) in the design, which gates what the load does with a document outside the shape, and [The shapes follow the design](../planning/core.md#id/BlockNode:00D3XQQ2VG003) in Batch 3.
+    - [Enforcement](../design/core.md#id/BlockNode:00D24N87T000M) in the design, which gates what the load does with a document outside the shape, and [The meta-model and the schemas](../planning/core.md#id/BlockNode:00D3XQQ2VG003) in Batch 3.
 - **`concepts.md` has no file under `artifacts/`, so `track` offers to remove its node permanently, and a yes would delete it**: <a name='id/BlockNode:00D4JZ0A7R001' class='aperas-anchor aperas-id'></a> found 2026-10-16 in the dry run of the migration of the mirror, on a clone and on the real graph. Filed 2026-10-16.
   
   - **Symptom**
@@ -1185,7 +1187,7 @@ description: The engine-level bug family this concern owns — most prominently 
     - Listed, not chosen: <a name='id/BlockNode:00D4JZ0A7R005' class='aperas-anchor aperas-id'></a> project it (`aperas project concepts.md`), which gives it a file and ends the offer; or leave it, and answer no at every `track` prompt that names it.
   - **Related**
     
-    - [One live artifact, `concepts.md`, has no `parent`](#id/BlockNode:00D3F6RJCG001) and [42 live `BlockNode`s have no `parent` and no container lists them](#id/BlockNode:00D3YS41VR001), the parentless documents of the census, which the migration of the mirror leaves as they stand ([an open point of Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8002)); [the confirmation prompt of a corpus-wide `ingest`](#id/BlockNode:00CNX1T4XG001), the other prompt that proposes to remove nodes whose file is not on disk.
+    - [One live artifact, `concepts.md`, has no `parent`](#id/BlockNode:00D3F6RJCG001) and [42 live `BlockNode`s have no `parent` and no container lists them](#id/BlockNode:00D3YS41VR001), the parentless documents of the census, which the migration of the mirror leaves as they stand ([settled in Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8002)); [the confirmation prompt of a corpus-wide `ingest`](#id/BlockNode:00CNX1T4XG001), the other prompt that proposes to remove nodes whose file is not on disk.
 
 ## Sub-Parts <a name='id/BlockNode:00CF1WZ4JG00A' class='aperas-anchor aperas-id'></a>
 
@@ -1423,3 +1425,16 @@ See [Task Breakdown](../planning/core.md#id/BlockNode:00CF23FB1G003) for the pla
     - Where it stands: <a name='id/BlockNode:00D457ANX0000' class='aperas-anchor aperas-id'></a> staged on branch `oxigraph` of `Aperas/` and not committed (committing is the user's), and live in the running service since its restart of 2026-10-15; the flag is client-side, so it works as soon as the CLI runs the new source.
     - Evidence, run by the orchestrator at normal CPU speed: <a name='id/BlockNode:00D457ANX0001' class='aperas-anchor aperas-id'></a> `commit` 70 of 70 in 19.6 s (budget 60 s), `essential` 27 of 27 in 2.9 s (budget 5 s), the groups `folder,prompt,ingest` 19 of 19 in 1.4 s.
     - **Not resolved by this**: <a name='id/BlockNode:00D457ANX0002' class='aperas-anchor aperas-id'></a> [the `danglingRefs` entry](#id/BlockNode:00D258W098001) stays open, and so does the dangling `children` reference of the ghost, which is worked around and not removed (the multi-graph design that would remove it is out of scope).
+- **The code differs from the boundary: `src/apeironNgn/` holds the old engine and the code that calls it together, and there is no `src/shell/`**: <a name='id/BlockNode:00D4NBNCF8001' class='aperas-anchor aperas-id'></a> found 2026-10-16, when [the boundary](../design/core.md#id/BlockNode:00D3CJFB7G001) was mapped to the folders of `src`, and measured by the Coder's survey of the dependencies of `monorepo/packages/core/src/` in `Aperas.dev` at `4062128`. Filed 2026-10-16.
+  
+  - **Symptom**
+    
+    - The design places the engine, in memory, in `monorepo/packages/core/src/apeironNgn/` and the shell, on disk, in `monorepo/packages/core/src/shell/`, and the engine's directory imports nothing of the shell, no file system and no store library ([the shell](../design/core.md#id/BlockNode:00D4M7YEZG001)). In the code, `src/apeironNgn/` holds the Oxigraph engine and the code that calls it together (the node classes and `wrap`, ingest and projection, the dump and the load, resolve, link integrity and the sweeps), and there is no `src/shell/`.
+    - The directory's own imports cross the boundary: <a name='id/BlockNode:00D4NBNCF8004' class='aperas-anchor aperas-id'></a> `node.ts` imports `dehydrate.ts` for `allIdsOfKind`, which pulls persistence into the engine's import closure and, through `store.ts` and `graphConfig.ts`, `node:fs`; 30 of its files import Oxigraph's `Store` as a type, and 6 import its values.
+  - **Fix directions**
+    
+    - Decided 2026-10-16 (the user): <a name='id/BlockNode:00D4NBNCF8006' class='aperas-anchor aperas-id'></a> the current code moves to `src/shell/` as it is, with no `legacy/` directory, before the new engine is written, and the old engine's files are deleted as the batches replace them. The move is [Batch 15](../planning/core.md#id/BlockNode:00D4NBFKAG001), which closes this issue; once [Batch 12](../planning/core.md#id/BlockNode:00D3XQQ2W000S) is done, nothing under `src/shell/` imports `oxigraph`.
+  - **Related**
+    
+    - [The thread-scope test sits inside the engine's directory](#id/BlockNode:00D2590B2R001), a narrower case of the same difference: Batch 15 moves `threadScope.ts` out of the engine's directory with the rest, and that issue stays open until [Batch 9](../planning/core.md#id/BlockNode:00D3XQQ2VR01M) makes the scope test the graph a node belongs to.
+  - **Resolved (2026-10-16)**: <a name='id/BlockNode:00D4P4K8P0001' class='aperas-anchor aperas-id'></a> [Batch 15](../planning/core.md#id/BlockNode:00D4NBFKAG001) moved the current code from `core/src/apeironNgn/` to `core/src/shell/` in `Aperas.dev` (branch `js-apeironngn`), staged and not committed: `core/src/apeironNgn/` is gone, no import names `@aperas/core/apeironNgn/` outside `.archive/`, and the directory is free for the engine of [Batch 3](../planning/core.md#id/BlockNode:00D3XQQ2VG001). The old engine stays under `src/shell/` and imports `oxigraph` there until [Batch 12](../planning/core.md#id/BlockNode:00D3XQQ2W000S) deletes it. The working checkout `Aperas/` on branch `oxigraph` keeps the old layout.
