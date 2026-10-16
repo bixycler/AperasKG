@@ -1021,13 +1021,18 @@ description: The engine-level bug family this concern owns — most prominently 
     - [A command can fail with "No ApeironNgn service running" while the service is up](#id/BlockNode:00CVMPABY8001), the busy case that gives the same message.
     - [The service can die silently](#id/BlockNode:00CRBJ0VYG001), a stop with no signal to the client.
     - [The service lifecycle](../design/core.md#id/BlockNode:00D24N87T000W) in the design, which has no design of its own yet.
-- **A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe, and the skills and the mechanics reference do not say so**: <a name='id/BlockNode:00D2PVVMWG001' class='aperas-anchor aperas-id'></a> found 2026-10-13 by the Grapher when it ran a move from a harness in the update of `design/core.md`, and agreed by the orchestrator to be filed. Filed 2026-10-13.
+- **A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe**: <a name='id/BlockNode:00D2PVVMWG001' class='aperas-anchor aperas-id'></a> found 2026-10-13 by the Grapher when it ran a move from a harness in the update of `design/core.md`, and agreed by the orchestrator to be filed. Filed 2026-10-13. The skills and the mechanics reference carry the workaround from v4.7; the fix in the code is not decided.
   
   - **Symptom**
     
     - A move run from a harness whose standard input is an open pipe does not finish:  the command ran for 120 seconds and the harness moved it to the background. The same move run again with standard input from `/dev/null` finished at once, and the first process stayed blocked on standard input and was left running.
     - No wrong result and no fault of the service: <a name='id/BlockNode:00D2PVVMWR000' class='aperas-anchor aperas-id'></a>  the wait is in the client, before the request is sent.
     - The `aperas` skill's quick reference ("no stdin moves node"), the `aperas-grapher` skill ("with no stdin") and the mechanics reference say the move takes no standard input, and none says that standard input must be closed when the command is run from a harness that leaves it open.
+  - **Occurrences**
+    
+    - 2026-09-27: <a name='id/BlockNode:00D4PMMZY0002' class='aperas-anchor aperas-id'></a> a grapher's move hung in its shell; the grapher stopped it and reran it with `< /dev/null`, and it succeeded. The cause was then left unknown.
+    - 2026-10-13: <a name='id/BlockNode:00D4PMMZY0003' class='aperas-anchor aperas-id'></a> the occurrence this issue was filed on, in the update of `design/core.md`.
+    - 2026-10-16: <a name='id/BlockNode:00D4PMMZY8000' class='aperas-anchor aperas-id'></a> the third, in a grapher's filing turn; the move hung about two minutes until it was rerun with `< /dev/null`. It is of the same root as [the `ingest` prompt hang](#id/BlockNode:00CNX1T4XG001), a client that waits on standard input, which `eb352f5` fixed with `--no-prompt`.
   - **Root cause** (read from the code)
     
     - `readStdinIfPiped` in `monorepo/packages/cli/src/kgInsert.ts` (line 241) returns at once only when `process.stdin.isTTY` is true; otherwise it reads the stream to its end and takes an empty read as "nothing was piped", which selects the move.
@@ -1039,9 +1044,11 @@ description: The engine-level bug family this concern owns — most prominently 
   - **Fix directions**
     
     - None decided.
+    - Proposed 2026-10-16, not decided: <a name='id/BlockNode:00D4PMQPW0001' class='aperas-anchor aperas-id'></a> an explicit move signal, so that a move never reads standard input.
   - **Workaround**
     
     - Run the move with standard input closed, `aperas insert <id> --after <anchor> --flush < /dev/null`.
+    - Carried in the skills from v4.7, as a stopgap until a fix is decided: every move recipe in the `aperas` and `aperas-grapher` skills and in `skills/aperas/references/mechanics.md` ends in `< /dev/null` and says why, and the reference has a section on the move.
 - **`dehydrate` sorts with `localeCompare`, a comparison that depends on the locale, where the mirror's orders are decided as plain code-point order**: <a name='id/BlockNode:00D39EY5B0001' class='aperas-anchor aperas-id'></a> found 2026-10-12 by the Coder's fact-check of `design/core.md`; the order decided by the user on 2026-10-14. Filed 2026-10-14.
   
   - **Symptom**

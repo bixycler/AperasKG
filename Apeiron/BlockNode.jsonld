@@ -12637,6 +12637,7 @@
       "BlockNode:00D1DA0Q18001",
       "BlockNode:00D1EDH18G001",
       "BlockNode:00D1FJW728001",
+      "BlockNode:00D4PMGJJR001",
       "BlockNode:00CF4QNX0000B"
     ]
   },
@@ -14082,10 +14083,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D1EE6JT800C:props:StringProp:00D1FN6YGG004",
+            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D1EE6JT800C:props:StringProp:00D4PQBJKR003",
             "@type": "StringProp",
             "key": "position",
-            "value": "1617"
+            "value": "1707"
           }
         ]
       },
@@ -14096,22 +14097,36 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D1FN6YGG000:props:StringProp:00D1FN6YGG001",
+            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D1FN6YGG000:props:StringProp:00D4PQBJKR002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "1191"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00CEA5MHD8002:links:Link:00D4PQBJKG000",
+        "@type": "Link",
+        "target": "BlockNode:00D4PQ79A8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D4PQBJKG000:props:StringProp:00D4PQBJKR000",
             "@type": "StringProp",
             "key": "position",
             "value": "56"
           },
           {
-            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D1FN6YGG000:props:StringProp:00D1FN6YGG002",
+            "@id": "BlockNode:00CEA5MHD8002:links:Link:00D4PQBJKG000:props:StringProp:00D4PQBJKR001",
             "@type": "StringProp",
             "key": "position",
-            "value": "1194"
+            "value": "1231"
           }
         ]
       }
     ],
     "title": "## Current Status",
-    "text": "The restructure has landed and has been revised through [v4.6](#id/BlockNode:00D1FMR19G001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001), [v4.5](#id/BlockNode:00D1EDPP30001) and [v4.6](#id/BlockNode:00D1FMR19G001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, v4.5 that text brought to the built suites, and v4.6 the transcript path that every Work records. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
+    "text": "The restructure has landed and has been revised through [v4.7](#id/BlockNode:00D4PQ79A8001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001), [v4.5](#id/BlockNode:00D1EDPP30001), [v4.6](#id/BlockNode:00D1FMR19G001) and [v4.7](#id/BlockNode:00D4PQ79A8001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, v4.5 that text brought to the built suites, v4.6 the transcript path that every Work records, and v4.7 the closed standard input of every move recipe. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "BlockNode:00CEA5MHD8001",
     "type": "heading",
     "children": [
@@ -14182,7 +14197,8 @@
       "BlockNode:00CVMPRD60002",
       "BlockNode:00D1DCS9YG001",
       "BlockNode:00D1EDPP30001",
-      "BlockNode:00D1FMR19G001"
+      "BlockNode:00D1FMR19G001",
+      "BlockNode:00D4PQ79A8001"
     ]
   },
   {
@@ -14802,7 +14818,7 @@
       }
     ],
     "title": "00CEA68QVG005",
-    "text": "[History](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) — what shipped, milestone by milestone through v4.3.",
+    "text": "[History](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) — what shipped, milestone by milestone through v4.7.",
     "parent": "BlockNode:00CE8XWZK0000",
     "type": "listItem",
     "children": []
@@ -17677,6 +17693,7 @@
       "BlockNode:00CRC6N7TG001",
       "BlockNode:00D3X4DNWG001",
       "BlockNode:00D3XJ7GTR001",
+      "BlockNode:00D4PDAWZ8001",
       "BlockNode:00CRC9E2SR001"
     ]
   },
@@ -41603,7 +41620,9 @@
     "text": "**A stdin-less `aperas insert --after` (a move) hung in the grapher's shell, cause unknown**: found 2026-09-27. The grapher stopped the call, reran it with `< /dev/null`, and it succeeded. The orchestrator first blamed `readStdinIfPiped` in `packages/cli/src/kgInsert.ts` (it reads stdin to end-of-file whenever stdin isn't a TTY). But in the orchestrator's shell stdin is `/dev/null` and reaches end-of-file at once, so that read cannot block there. Unconfirmed alternatives: the subagent's shell has a different stdin, or the service was unresponsive (it dropped or was slow to start twice the same session) and the retry simply came later. Related but distinct: [the unscoped `aperas ingest` hang on a confirmation prompt](../issues/core.md#id/BlockNode:00CNX1T4XG001).",
     "parent": "BlockNode:00CR81TAV8001",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00D4PMW2X8001"
+    ]
   },
   {
     "@id": "BlockNode:00CR92W8TR001",
@@ -93479,12 +93498,13 @@
   {
     "@id": "BlockNode:00D2PVVMWG001",
     "@type": "BlockNode",
-    "title": "**A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe, and the skills and the mechanics reference do not say so**",
-    "text": "**A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe, and the skills and the mechanics reference do not say so**: found 2026-10-13 by the Grapher when it ran a move from a harness in the update of `design/core.md`, and agreed by the orchestrator to be filed. Filed 2026-10-13.",
+    "title": "**A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe**",
+    "text": "**A move, `aperas insert <id> --after <anchor>` with no body, waits on standard input when it is an open pipe**: found 2026-10-13 by the Grapher when it ran a move from a harness in the update of `design/core.md`, and agreed by the orchestrator to be filed. Filed 2026-10-13. The skills and the mechanics reference carry the workaround from v4.7; the fix in the code is not decided.",
     "parent": "BlockNode:00CF1WZ4JG002",
     "type": "listItem",
     "children": [
       "BlockNode:00D2PVVMWG002",
+      "BlockNode:00D4PMMZY0001",
       "BlockNode:00D2PVVMWR002",
       "BlockNode:00D2PVVMWR005",
       "BlockNode:00D2PVVMWR008",
@@ -93655,7 +93675,8 @@
     "parent": "BlockNode:00D2PVVMWG001",
     "type": "listItem",
     "children": [
-      "BlockNode:00D2PVVMWR009"
+      "BlockNode:00D2PVVMWR009",
+      "BlockNode:00D4PMQPW0001"
     ]
   },
   {
@@ -93689,7 +93710,8 @@
     "parent": "BlockNode:00D2PVVMWG001",
     "type": "listItem",
     "children": [
-      "BlockNode:00D2PVVMWR00B"
+      "BlockNode:00D2PVVMWR00B",
+      "BlockNode:00D4PMPC1G001"
     ]
   },
   {
@@ -115374,6 +115396,658 @@
     "title": "**Recorded in `planning/core.md` and `issues/core.md`**",
     "text": "**Recorded in `planning/core.md` and `issues/core.md`**: the open point is [settled in Batch 9](../planning/core.md#id/BlockNode:00D3YSA5T8002) and moved under step 6, whose text, [Gated by](../planning/core.md#id/BlockNode:00D3XQQ2W0002) and [Layer 3](../planning/core.md#id/BlockNode:00D3XQW6AR001) no longer name it as open, and whose [Done when](../planning/core.md#id/BlockNode:00D3XQQ2W0003) says the 43 stand as they were; the [Open points](../planning/core.md#id/BlockNode:00D3YSA5T8001) of Batch 9 now hold only whether `default` has a `name`. On the issues: [garbage collection never collects an unreachable block that was never tombstoned](../issues/core.md#id/BlockNode:00D4P4J3KR001) keeps the 43 as its test cases, and the Fix directions of [the 42 blocks](../issues/core.md#id/BlockNode:00D3YS41VR008) and of [`concepts.md`](../issues/core.md#id/BlockNode:00D3F6RJCG006) record the decision; both issues stay open.",
     "parent": "BlockNode:00D4NX8JHR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PDAWZ8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PDAWZ8001:links:Link:00D4PDBDD8000",
+        "@type": "Link",
+        "target": "BlockNode:00D2PVVMWG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PDAWZ8001:links:Link:00D4PDBDD8000:props:StringProp:00D4PDBDD8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "252"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D4PDAWZ8001:links:Link:00D4PDBDD8002",
+        "@type": "Link",
+        "target": "BlockNode:00CNX1T4XG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PDAWZ8001:links:Link:00D4PDBDD8002:props:StringProp:00D4PDBDD8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "402"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D4PDAWZ8001:links:Link:00D4PDBDD8004",
+        "@type": "Link",
+        "target": "BlockNode:00D4NYBTD0001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PDAWZ8001:links:Link:00D4PDBDD8004:props:StringProp:00D4PDBDDG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "885"
+          }
+        ]
+      }
+    ],
+    "title": "**The move's stdin hang, a third time, and its stopgap, 2026-10-16**",
+    "text": "**The move's stdin hang, a third time, and its stopgap, 2026-10-16**: in the filing of Batch 15 the grapher's move (`aperas insert <id> --after <anchor>` with no body) hung about two minutes until it was rerun with `< /dev/null`. It is a recurrence of [the move waits on standard input when it is an open pipe](../issues/core.md#id/BlockNode:00D2PVVMWG001) (first seen 2026-09-27), of the same root as [the `ingest` prompt hang](../issues/core.md#id/BlockNode:00CNX1T4XG001), fixed in `eb352f5` by `--no-prompt`. The orchestrator proposed a code fix (an explicit move signal, so that a move never reads standard input) and, as a stopgap, `< /dev/null` in the skills' move recipes. The user decided the stopgap now, on branch `oxigraph` of `Aperas/`; the user commits it and rebases `js-apeironngn` before Batch 3 goes on. The code fix is not decided. On the two other questions of the [filing of Batch 15](#id/BlockNode:00D4NYBTD0001) the user agreed: no issue for the sampler of each checkout matching its own service, and the stale comment of `core/src/artifacts.ts` fixed in Batch 11.",
+    "parent": "BlockNode:00CF1WZE18004",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D4PEYBDR001",
+      "BlockNode:00D4PHZBV8001",
+      "BlockNode:00D4PJVDSG001",
+      "BlockNode:00D4PNNZB8001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PEYBDR001",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D4PEYBDR001:props:StringProp:00D4PEYV80000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D4PEYBDR001:props:StringProp:00D4PEYV80001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The stopgap checked by the orchestrator**",
+    "text": "**The stopgap checked by the orchestrator**: in `Aperas/` (`oxigraph`, staged, not committed) the diff is 5 files: the move recipes of `skills/aperas/SKILL.md` (the quick reference row, a new move line in the patterns) and `skills/aperas-grapher/SKILL.md` (two recipes) end in `< /dev/null` with the reason; `skills/aperas/references/mechanics.md` gains a section \"Moving a Node (`insert` with No Body)\" and goes from v4.2 to v4.7; the four skills go to v4.7 (the coder and orchestrator skills have no move recipe, only the Status line). `skill_drift.py` fails as expected at this step, naming exactly the edited units (4 Status lines, 6 added, 6 dropped); `aperas check-links` is clean. The coder asked three questions; the orchestrator put them to the user.",
+    "parent": "BlockNode:00D4PDAWZ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PHZBV8001",
+    "@type": "BlockNode",
+    "title": "**The coder's three questions, decided**",
+    "text": "**The coder's three questions, decided**: the user agreed with the orchestrator: the coder and orchestrator skills get no move recipe (neither role moves graph nodes), only the v4.7 Status line; the new section of `references/mechanics.md` stays, at v4.7, the skill release it ships with; and the in-place promote (`aperas insert <path>` with no body and no anchor), which reads standard input by the same code path, gets `< /dev/null` wherever a promote recipe appears.",
+    "parent": "BlockNode:00D4PDAWZ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PJVDSG001",
+    "@type": "BlockNode",
+    "title": "**No promote recipe to change**",
+    "text": "**No promote recipe to change**: the coder found no in-place promote recipe in the skills or `references/mechanics.md`, and the orchestrator confirmed it; the decision applied \"wherever a promote recipe appears\", so nothing changed and no recipe is added. The stopgap is the v4.7 diff checked above.",
+    "parent": "BlockNode:00D4PDAWZ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR001:links:Link:00D4PMH308000",
+        "@type": "Link",
+        "target": "BlockNode:00D4PDAWZ8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR001:links:Link:00D4PMH308000:props:StringProp:00D4PMH308001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "54"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D4PMGJJR001:links:Link:00D4PMH308002",
+        "@type": "Link",
+        "target": "BlockNode:00D4PHZBV8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR001:links:Link:00D4PMH308002:props:StringProp:00D4PMH308003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "169"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D4PMGJJR001:links:Link:00D4PMH308004",
+        "@type": "Link",
+        "target": "BlockNode:00D2PVVMWG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR001:links:Link:00D4PMH308004:props:StringProp:00D4PMH308005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "267"
+          }
+        ]
+      }
+    ],
+    "title": "## v4.7 additions — delta on the v4 snapshot",
+    "text": "Records the v4.7 edits to the skills: the stopgap for [the move's stdin hang, a third time](../discussion/core.md#id/BlockNode:00D4PDAWZ8001), decided by the user, with [the coder's three questions, decided](../discussion/core.md#id/BlockNode:00D4PHZBV8001), against [the move that waits on standard input](../issues/core.md#id/BlockNode:00D2PVVMWG001). Every move recipe ends in `< /dev/null`, with the reason: a move reads standard input to its end, and a harness can leave it open. The base skill carries it in its quick-reference row and in a new move line in its command patterns, and the Grapher skill in its two move recipes (step 3 of the edit loop and *Move nodes cleanly*). The `Status:` lines of all four skills (the base, Orchestrator, Coder and Grapher skills) move to v4.7, with four `Status` entries, one per skill; the Coder and Orchestrator skills have no move recipe, so only their `Status:` lines moved. `skills/aperas/references/mechanics.md` goes from v4.2 to v4.7, the skill release it ships with, and gains a section, *Moving a Node (`insert` with No Body)*. The drift check reads only the `SKILL.md` files, and a recorded block absent from them reads as dropped, so the reference's text is recorded here, in the delta's commentary, as it has been since its extraction in v4.2: `aperas insert <node-id> --after <anchor-id>` (or `--before <anchor-id>`) with no body moves the existing node next to the anchor, keeping its ID, backlinks and history, and the anchor's parent becomes the node's new parent; the recipe is `aperas insert <node-id> --after <anchor-id> --flush < /dev/null`; and its one rule, **Close standard input**, says that a move reads standard input to its end before acting, and a harness can leave standard input open, so a move without `< /dev/null` can wait on it indefinitely. No in-place promote recipe appears in the skills or the reference, so none changed. Each entry that rewrites text recorded in an earlier delta or the v4 snapshot carries a `Supersedes:` line naming the blocks it replaces.",
+    "parent": "BlockNode:00CE8XWZJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR002",
+      "BlockNode:00D4PMGJJR004",
+      "BlockNode:00D4PMGJJR006",
+      "BlockNode:00D4PMGJJR008",
+      "BlockNode:00D4PMGJJR00A",
+      "BlockNode:00D4PMGJJR00C",
+      "BlockNode:00D4PMGJJR00E",
+      "BlockNode:00D4PMGJJR00G"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR002",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR002:links:Link:00D4PMH308006",
+        "@type": "Link",
+        "target": "BlockNode:00D1FJZBM0002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR002:links:Link:00D4PMH308006:props:StringProp:00D4PMH308007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Status v4.7",
+    "text": "Supersedes: [v4.6 Base Status](#id/BlockNode:00D1FJZBM0002)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR003"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR003",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.7** — Base skill for all Aperas roles.",
+    "parent": "BlockNode:00D4PMGJJR002",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR004",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR004:links:Link:00D4PMH308008",
+        "@type": "Link",
+        "target": "BlockNode:00D1FK2RD8002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR004:links:Link:00D4PMH308008:props:StringProp:00D4PMH308009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-coder — Status v4.7",
+    "text": "Supersedes: [v4.6 Coder Status](#id/BlockNode:00D1FK2RD8002)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR005"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR005",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.7** — Coder role skill.",
+    "parent": "BlockNode:00D4PMGJJR004",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR006:links:Link:00D4PMH30G000",
+        "@type": "Link",
+        "target": "BlockNode:00D1FKJDRR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR006:links:Link:00D4PMH30G000:props:StringProp:00D4PMH30G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Status v4.7",
+    "text": "Supersedes: [v4.6 Grapher Status](#id/BlockNode:00D1FKJDRR002)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR007"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR007",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.7** — Grapher role skill.",
+    "parent": "BlockNode:00D4PMGJJR006",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR008",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR008:links:Link:00D4PMH30G002",
+        "@type": "Link",
+        "target": "BlockNode:00D1FQQB0R002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR008:links:Link:00D4PMH30G002:props:StringProp:00D4PMH30G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-orchestrator — Status v4.7",
+    "text": "Supersedes: [v4.6 Orchestrator Status](#id/BlockNode:00D1FQQB0R002)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR009"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR009",
+    "@type": "BlockNode",
+    "title": "Status",
+    "text": "Status: **v4.7** — Orchestrator role skill.",
+    "parent": "BlockNode:00D4PMGJJR008",
+    "type": "paragraph",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00A",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR00A:links:Link:00D4PMH30G004",
+        "@type": "Link",
+        "target": "BlockNode:00CV3K19P0004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR00A:links:Link:00D4PMH30G004:props:StringProp:00D4PMH30G005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Quick Syntax & Command Reference, the move row",
+    "text": "Supersedes: [v4.2 Quick Syntax table](#id/BlockNode:00CV3K19P0004)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR00B"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00B",
+    "@type": "BlockNode",
+    "title": "00D4PMGJJR00B",
+    "text": "| Operation | Command Pattern | Key Rule / Note |\n|---|---|---|\n| **Peek / View** | `aperas unfold <ref> [--view <n>]` / `tree` | Peek node or render structured view lens |\n| **Inspect State** | `aperas show <ref> [--text]` / `backlinks` | Exact stored text, full record, or dependents |\n| **Insert Turn** | `cat turn.md \\| aperas insert <id> --after <a>`| Pipes markdown AST subtree after anchor child |\n| **Zoom View** | `aperas zoom <id> --view <name> --flush` | Re-roots view onto current Ask or Report |\n| **Update Node** | `echo \"text\" \\| aperas update <id> [--text-only]`| `--text-only` preserves kids; bare tombstones |\n| **Insert / Reposition**| `aperas insert <par> [--after <sib>]` | Bullet `- ` inserts; no body and `< /dev/null` moves node |\n| **Sweep / Service** | `aperas check-links` / `service restart` | Sweeps internal links; restarts daemon |",
+    "parent": "BlockNode:00D4PMGJJR00A",
+    "type": "table",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00C",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR00C:links:Link:00D4PMH30G006",
+        "@type": "Link",
+        "target": "BlockNode:00CV3K19P0005",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR00C:links:Link:00D4PMH30G006:props:StringProp:00D4PMH30G007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas — Common Command Patterns, the move line",
+    "text": "Supersedes: [v4.2 Common Command Patterns](#id/BlockNode:00CV3K19P0005)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR00D"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00D",
+    "@type": "BlockNode",
+    "title": "00D4PMGJJR00D",
+    "text": "```bash\naperas unfold <ref> [--view <name>]                          # Peek node or unfold into view\naperas tree --view <name>                                    # Render structured lens of view\ncat turn.md | aperas insert <turn-id> --after <ask> --flush  # Insert Work + Report tree\naperas zoom <id> --view <name> --flush                       # Re-root view onto Ask/Report\necho \"text\" | aperas update <id> --text-only --flush         # Update node (preserves kids)\necho \"- text\" | aperas insert <par> --after <sib> --flush    # Insert list item (needs bullet)\naperas insert <id> --after <sib> --flush < /dev/null         # Move node (a move reads stdin to its end; a harness can leave it open)\naperas check-links [--repair]                                # Sweep / repair link integrity\n```",
+    "parent": "BlockNode:00D4PMGJJR00C",
+    "type": "code",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00E",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR00E:links:Link:00D4PMH30G008",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593NR00H",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR00E:links:Link:00D4PMH30G008:props:StringProp:00D4PMH30G009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Writing the Graph, step 3, the move recipe",
+    "text": "Supersedes: [v4 Reposition node without reminting](#id/BlockNode:00CS1593NR00H)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR00F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00F",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D4PMGJJR00F:props:StringProp:00D4PMH2ZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D4PMGJJR00F:props:StringProp:00D4PMH2ZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Reposition node without reminting",
+    "text": "Reposition node without reminting: `aperas insert <node-id> --after <anchor-id> --flush < /dev/null` (no body, standard input closed: a harness can leave standard input open, and a move reads it to its end).",
+    "parent": "BlockNode:00D4PMGJJR00E",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00G",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMGJJR00G:links:Link:00D4PMH30R000",
+        "@type": "Link",
+        "target": "BlockNode:00CS1593NR011",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMGJJR00G:links:Link:00D4PMH30R000:props:StringProp:00D4PMH30R001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      }
+    ],
+    "title": "### aperas-grapher — Preserving Node Identity, Move nodes cleanly",
+    "text": "Supersedes: [v4 Move nodes cleanly](#id/BlockNode:00CS1593NR011)",
+    "parent": "BlockNode:00D4PMGJJR001",
+    "type": "heading",
+    "children": [
+      "BlockNode:00D4PMGJJR00H"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMGJJR00H",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D4PMGJJR00H:props:StringProp:00D4PMH2ZR002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D4PMGJJR00H:props:StringProp:00D4PMH2ZR003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Move nodes cleanly**",
+    "text": "**Move nodes cleanly**: Use `aperas insert <node-id> --after <anchor-id> --flush < /dev/null`, with **no body** and standard input closed.",
+    "parent": "BlockNode:00D4PMGJJR00G",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMMZY0001",
+    "@type": "BlockNode",
+    "title": "00D4PMMZY0001",
+    "text": "**Occurrences**",
+    "parent": "BlockNode:00D2PVVMWG001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D4PMMZY0002",
+      "BlockNode:00D4PMMZY0003",
+      "BlockNode:00D4PMMZY8000"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D4PMMZY0002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D4PMMZY0002:props:StringProp:00D4PMNG1R000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D4PMMZY0002:props:StringProp:00D4PMNG1R001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "2026-09-27",
+    "text": "2026-09-27: a grapher's move hung in its shell; the grapher stopped it and reran it with `< /dev/null`, and it succeeded. The cause was then left unknown.",
+    "parent": "BlockNode:00D4PMMZY0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMMZY0003",
+    "@type": "BlockNode",
+    "title": "2026-10-13",
+    "text": "2026-10-13: the occurrence this issue was filed on, in the update of `design/core.md`.",
+    "parent": "BlockNode:00D4PMMZY0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMMZY8000",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMMZY8000:links:Link:00D4PMNG20000",
+        "@type": "Link",
+        "target": "BlockNode:00CNX1T4XG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMMZY8000:links:Link:00D4PMNG20000:props:StringProp:00D4PMNG20001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "148"
+          }
+        ]
+      }
+    ],
+    "title": "2026-10-16",
+    "text": "2026-10-16: the third, in a grapher's filing turn; the move hung about two minutes until it was rerun with `< /dev/null`. It is of the same root as [the `ingest` prompt hang](#id/BlockNode:00CNX1T4XG001), a client that waits on standard input, which `eb352f5` fixed with `--no-prompt`.",
+    "parent": "BlockNode:00D4PMMZY0001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMPC1G001",
+    "@type": "BlockNode",
+    "title": "00D4PMPC1G001",
+    "text": "Carried in the skills from v4.7, as a stopgap until a fix is decided: every move recipe in the `aperas` and `aperas-grapher` skills and in `skills/aperas/references/mechanics.md` ends in `< /dev/null` and says why, and the reference has a section on the move.",
+    "parent": "BlockNode:00D2PVVMWR00A",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMQPW0001",
+    "@type": "BlockNode",
+    "title": "Proposed 2026-10-16, not decided",
+    "text": "Proposed 2026-10-16, not decided: an explicit move signal, so that a move never reads standard input.",
+    "parent": "BlockNode:00D2PVVMWR008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PMW2X8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PMW2X8001:links:Link:00D4PMWKZR002",
+        "@type": "Link",
+        "target": "BlockNode:00D2PVVMWG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PMW2X8001:links:Link:00D4PMWKZR002:props:StringProp:00D4PMWKZR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "110"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D4PMW2X8001:props:StringProp:00D4PMWKZR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D4PMW2X8001:props:StringProp:00D4PMWKZR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "Recurred 2026-10-13 and 2026-10-16, with the cause read from `readStdinIfPiped`",
+    "text": "Recurred 2026-10-13 and 2026-10-16, with the cause read from `readStdinIfPiped`: recorded as an occurrence of [the move that waits on standard input](../issues/core.md#id/BlockNode:00D2PVVMWG001).",
+    "parent": "BlockNode:00CR92SVXG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PNNZB8001",
+    "@type": "BlockNode",
+    "title": "**v4.7 recorded, and its loose ends**",
+    "text": "**v4.7 recorded, and its loose ends**: the grapher recorded the v4.7 delta; the orchestrator checked that `skill_drift.py` exits 0 and `aperas check-links` is clean. On the grapher's three questions the orchestrator decided, as part of the stopgap the user approved and before the user's commit: the coder adds the new section to the Table of Contents of `references/mechanics.md` inside v4.7; the grapher retitles the issue in place now (the skill half is done, the code half stays open) and writes the v4.7 history entry and the Dashboard now, as the finishing turn of this small task.",
+    "parent": "BlockNode:00D4PDAWZ8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D4PQ79A8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D4PQ79A8001:links:Link:00D4PQ7QYG000",
+        "@type": "Link",
+        "target": "BlockNode:00D4PMGJJR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PQ79A8001:links:Link:00D4PQ7QYG000:props:StringProp:00D4PQ7QYG001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "105"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D4PQ79A8001:links:Link:00D4PQ7QYG002",
+        "@type": "Link",
+        "target": "BlockNode:00D2PVVMWG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D4PQ79A8001:links:Link:00D4PQ7QYG002:props:StringProp:00D4PQ7QYG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "457"
+          }
+        ]
+      }
+    ],
+    "title": "**v4.7 — every move recipe closes standard input, a stopgap for the move that waits on it**",
+    "text": "**v4.7 — every move recipe closes standard input, a stopgap for the move that waits on it**: recorded as [the v4.7 delta](../discussion/aperas-skill.md#id/BlockNode:00D4PMGJJR001). A move (`aperas insert <id> --after <anchor>` with no body) reads standard input to its end before acting, and a harness can leave standard input open, so a move run from a harness can wait indefinitely; it did three times (2026-09-27, 2026-10-13, 2026-10-16), as recorded on [the move that waits on standard input](../issues/core.md#id/BlockNode:00D2PVVMWG001). Every move recipe now ends in `< /dev/null` and says why: the base skill's quick-reference row and a new move line in its command patterns, and the Grapher skill's two recipes (step 3 of the edit loop and *Move nodes cleanly*). `skills/aperas/references/mechanics.md` goes from v4.2 to v4.7, the skill release it ships with, and gains a section, *Moving a Node (`insert` with No Body)*, with its entry in the reference's Table of Contents. The Coder and Orchestrator skills have no move recipe, so only their `Status:` lines move to v4.7; no in-place promote recipe appears in the skills or the reference, so none changed. The stopgap was decided by the user; the fix in the code, an explicit move signal so that a move never reads standard input, is proposed and not decided.",
+    "parent": "BlockNode:00CEA5MHD8004",
     "type": "listItem",
     "children": []
   }

@@ -9,7 +9,7 @@ description: Open questions and freeflow notes behind the skill's four-level des
 - [Design](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG003) — the four-level shape, abstract to concrete, that the skill follows, and the multi-agent loop around it.
 - [Issues](../issues/aperas-skill.md#id/BlockNode:00CEA5KW4G002) — the open defects in the skill and its drift checker, among them the checker's truncated output and the unwritten rule on who moves the `Status:` lines.
 - [Planning](../planning/aperas-skill.md#id/BlockNode:00CEA5M6S8005) — the ordered work, whose three batches have shipped.
-- [History](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) — what shipped, milestone by milestone through v4.3.
+- [History](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) — what shipped, milestone by milestone through v4.7.
 
 ## Open Questions <a name='id/BlockNode:00CEB07XC0001' class='aperas-anchor aperas-id'></a>
 
@@ -1425,6 +1425,8 @@ Promoted as the sixth batch into [Core — Design](../design/core.md#id/BlockNod
 **The user corrects the wrap-up: the next Grapher turn is the last of the design drafting, and everything remaining goes into it; asks what else should be done** (2026-10-15, user). The orchestrator's list, for the user to confirm: (1) the two corrections left open (`00D24N87T000R`; the issue `00D3F6RJCG001`); (2) the "Promoted to" note for the removal of the `key` block, which the orchestrator ran itself; (3) the issue `00D0W07DRR000` (`design/` has no document for the store) marked resolved by `design/core.md`, since the user has read and corrected the document; (4) the design's Status: drafted through 2026-10-15, its Open points listed as the remaining work; (5) a milestone in `history/core.md` for the draft of `design/core.md` (2026-10-12 to 2026-10-15) and its Current Status brought up to date; (6) a pointer from `discussion/core.md`, which the design's Context names as its discussion, to this session's Freeflow heading in `discussion/aperas-skill.md`, where the design was actually discussed; (7) the finishing notes in the threads: the tasks `design-core-draft`, `js-apeironngn-survey`, `write-cost-profile` and `store-access-free` marked done, with what remains; no pruning; (8) projection, `aperas check-links`, staging. Not proposed: `concepts.md` (not designed yet), skill changes (the retry rule is still on trial).
 
 **The user: apply the wrap-up list** (2026-10-15, user: <a name='id/BlockNode:00D3X122CR001' class='aperas-anchor aperas-id'></a> "Apply them."), the eight items of [the list](../discussion/aperas-skill.md#id/BlockNode:00D3WZHJ50001), as the last Grapher turn of the design drafting.
+
+**Verification — the last turn of the design drafting (`design-core-draft` Turn 13, Report `BlockNode:00D3X5J7JG00C`)** (2026-10-15, orchestrator): the eight items are applied: the two rewordings (`00D24N87T000R`; the issue `00D3F6RJCG001` now covers only `concepts.md`, and the stray-README issue's Related entry updated to match); the "Promoted to" note for the `key` removal; the issue `00D0W07DRR000` resolved and moved under Resolved, the service lifecycle staying an Open point; the Status of the design; the history milestone `00D3X4321G001` and its Current Status; the pointer `00D3X4DNWG001` from `discussion/core.md` to this session's Freeflow heading; eight tasks closed with a dated "Done" line and what remains (four per thread); no write refused (a fourth data point for the retry rule), nothing removed, `aperas check-links` clean, tracked changes staged. Left, as the Grapher reports: two Related entries in `issues/core.md` (`00D0X1SZ40012`, `00D0X1HTFR00S`) still say `design/` has no document for the store; small, for a later turn. The Grapher's note that projecting `.threads/coder.md` overwrote a file changed on disk concerns a git-ignored projection, regenerated from the graph, so nothing of the graph was lost. The design drafting is closed.
 
 Promoted as the seventh batch into [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001): <a name='id/BlockNode:00D3WVHKAG001' class='aperas-anchor aperas-id'></a> [The artifact is its own root document](../design/core.md#id/BlockNode:00D24N87SR010) (the `text` from the frontmatter `description`, compared by the rename check), [Links are outgoing ports](../design/core.md#id/BlockNode:00D24N87SR011) (retitled), [The path is derived from the parent chain](../design/core.md#id/BlockNode:00D24N87SR01S), and the Open points [The order of links without a position](../design/core.md#id/BlockNode:00D24N87T000P) and [Deriving the path](../design/core.md#id/BlockNode:00D25698B0001); into the history as [the entry of 2026-10-15](../history/core.md#id/BlockNode:00D3WV5V48001) for the two statements that left the design; into the issues as [the six `README.md` artifacts](../issues/core.md#id/BlockNode:00D3WTZG9G001) and [the stored `text` of an artifact](../issues/core.md#id/BlockNode:00D3WV3CZ0001); and Turn 10's go note moved back beside its origin.
 
@@ -5583,3 +5585,72 @@ Supersedes: [v4.3 Grapher Pipe Work and Report block](#id/BlockNode:00CVJXQWNR00
     - **Friction — <topic>**: <a mistake of your own, a tool-use problem, or a tool gap: workaround built, call that failed or hung>
   EOF
   ```
+
+## v4.7 additions — delta on the v4 snapshot <a name='id/BlockNode:00D4PMGJJR001' class='aperas-anchor aperas-id'></a>
+
+Records the v4.7 edits to the skills: the stopgap for [the move's stdin hang, a third time](../discussion/core.md#id/BlockNode:00D4PDAWZ8001), decided by the user, with [the coder's three questions, decided](../discussion/core.md#id/BlockNode:00D4PHZBV8001), against [the move that waits on standard input](../issues/core.md#id/BlockNode:00D2PVVMWG001). Every move recipe ends in `< /dev/null`, with the reason: a move reads standard input to its end, and a harness can leave it open. The base skill carries it in its quick-reference row and in a new move line in its command patterns, and the Grapher skill in its two move recipes (step 3 of the edit loop and *Move nodes cleanly*). The `Status:` lines of all four skills (the base, Orchestrator, Coder and Grapher skills) move to v4.7, with four `Status` entries, one per skill; the Coder and Orchestrator skills have no move recipe, so only their `Status:` lines moved. `skills/aperas/references/mechanics.md` goes from v4.2 to v4.7, the skill release it ships with, and gains a section, *Moving a Node (`insert` with No Body)*. The drift check reads only the `SKILL.md` files, and a recorded block absent from them reads as dropped, so the reference's text is recorded here, in the delta's commentary, as it has been since its extraction in v4.2: `aperas insert <node-id> --after <anchor-id>` (or `--before <anchor-id>`) with no body moves the existing node next to the anchor, keeping its ID, backlinks and history, and the anchor's parent becomes the node's new parent; the recipe is `aperas insert <node-id> --after <anchor-id> --flush < /dev/null`; and its one rule, **Close standard input**, says that a move reads standard input to its end before acting, and a harness can leave standard input open, so a move without `< /dev/null` can wait on it indefinitely. No in-place promote recipe appears in the skills or the reference, so none changed. Each entry that rewrites text recorded in an earlier delta or the v4 snapshot carries a `Supersedes:` line naming the blocks it replaces.
+
+### aperas — Status v4.7 <a name='id/BlockNode:00D4PMGJJR002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.6 Base Status](#id/BlockNode:00D1FJZBM0002)
+
+Status: <a name='id/BlockNode:00D4PMGJJR003' class='aperas-anchor aperas-id'></a> **v4.7** — Base skill for all Aperas roles.
+
+### aperas-coder — Status v4.7 <a name='id/BlockNode:00D4PMGJJR004' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.6 Coder Status](#id/BlockNode:00D1FK2RD8002)
+
+Status: <a name='id/BlockNode:00D4PMGJJR005' class='aperas-anchor aperas-id'></a> **v4.7** — Coder role skill.
+
+### aperas-grapher — Status v4.7 <a name='id/BlockNode:00D4PMGJJR006' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.6 Grapher Status](#id/BlockNode:00D1FKJDRR002)
+
+Status: <a name='id/BlockNode:00D4PMGJJR007' class='aperas-anchor aperas-id'></a> **v4.7** — Grapher role skill.
+
+### aperas-orchestrator — Status v4.7 <a name='id/BlockNode:00D4PMGJJR008' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.6 Orchestrator Status](#id/BlockNode:00D1FQQB0R002)
+
+Status: <a name='id/BlockNode:00D4PMGJJR009' class='aperas-anchor aperas-id'></a> **v4.7** — Orchestrator role skill.
+
+### aperas — Quick Syntax & Command Reference, the move row <a name='id/BlockNode:00D4PMGJJR00A' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.2 Quick Syntax table](#id/BlockNode:00CV3K19P0004)
+
+| Operation | Command Pattern | Key Rule / Note |
+|---|---|---|
+| **Peek / View** | `aperas unfold <ref> [--view <n>]` / `tree` | Peek node or render structured view lens |
+| **Inspect State** | `aperas show <ref> [--text]` / `backlinks` | Exact stored text, full record, or dependents |
+| **Insert Turn** | `cat turn.md \| aperas insert <id> --after <a>`| Pipes markdown AST subtree after anchor child |
+| **Zoom View** | `aperas zoom <id> --view <name> --flush` | Re-roots view onto current Ask or Report |
+| **Update Node** | `echo "text" \| aperas update <id> [--text-only]`| `--text-only` preserves kids; bare tombstones |
+| **Insert / Reposition**| `aperas insert <par> [--after <sib>]` | Bullet `- ` inserts; no body and `< /dev/null` moves node |
+| **Sweep / Service** | `aperas check-links` / `service restart` | Sweeps internal links; restarts daemon |
+
+### aperas — Common Command Patterns, the move line <a name='id/BlockNode:00D4PMGJJR00C' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.2 Common Command Patterns](#id/BlockNode:00CV3K19P0005)
+
+```bash
+aperas unfold <ref> [--view <name>]                          # Peek node or unfold into view
+aperas tree --view <name>                                    # Render structured lens of view
+cat turn.md | aperas insert <turn-id> --after <ask> --flush  # Insert Work + Report tree
+aperas zoom <id> --view <name> --flush                       # Re-root view onto Ask/Report
+echo "text" | aperas update <id> --text-only --flush         # Update node (preserves kids)
+echo "- text" | aperas insert <par> --after <sib> --flush    # Insert list item (needs bullet)
+aperas insert <id> --after <sib> --flush < /dev/null         # Move node (a move reads stdin to its end; a harness can leave it open)
+aperas check-links [--repair]                                # Sweep / repair link integrity
+```
+
+### aperas-grapher — Writing the Graph, step 3, the move recipe <a name='id/BlockNode:00D4PMGJJR00E' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Reposition node without reminting](#id/BlockNode:00CS1593NR00H)
+
+- Reposition node without reminting: <a name='id/BlockNode:00D4PMGJJR00F' class='aperas-anchor aperas-id'></a> `aperas insert <node-id> --after <anchor-id> --flush < /dev/null` (no body, standard input closed: a harness can leave standard input open, and a move reads it to its end).
+
+### aperas-grapher — Preserving Node Identity, Move nodes cleanly <a name='id/BlockNode:00D4PMGJJR00G' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4 Move nodes cleanly](#id/BlockNode:00CS1593NR011)
+
+- **Move nodes cleanly**: <a name='id/BlockNode:00D4PMGJJR00H' class='aperas-anchor aperas-id'></a> Use `aperas insert <node-id> --after <anchor-id> --flush < /dev/null`, with **no body** and standard input closed.
