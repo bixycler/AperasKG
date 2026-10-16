@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "3c6d6b5c600ebb171bbe56dc878f7c638b609597edb082fb0355d950fe746f5e",
+    "fileHash": "7de7213da065488f124c103030300e33dc81e11959a20d35d599a6b2d3a6ef3a",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "3c6d6b5c600ebb171bbe56dc878f7c638b609597edb082fb0355d950fe746f5e",
-    "lastIngestedAt": "2026-10-15T07:25:45.993Z",
-    "projectedHash": "3c6d6b5c600ebb171bbe56dc878f7c638b609597edb082fb0355d950fe746f5e"
+    "ingestedHash": "7de7213da065488f124c103030300e33dc81e11959a20d35d599a6b2d3a6ef3a",
+    "lastIngestedAt": "2026-10-16T09:18:40.544Z",
+    "projectedHash": "7de7213da065488f124c103030300e33dc81e11959a20d35d599a6b2d3a6ef3a"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,36 +896,36 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "6450a634d55635f11a839142d5864461adc19142e5bdfa213faba9722532dd6b",
+    "fileHash": "5fdddbe7e2a6977e1d7a9c0eefce88cf1ce7643707d35df30f213aa5c7ed09ad",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "6450a634d55635f11a839142d5864461adc19142e5bdfa213faba9722532dd6b",
-    "lastIngestedAt": "2026-10-15T07:25:50.655Z",
-    "projectedHash": "6450a634d55635f11a839142d5864461adc19142e5bdfa213faba9722532dd6b"
+    "ingestedHash": "5fdddbe7e2a6977e1d7a9c0eefce88cf1ce7643707d35df30f213aa5c7ed09ad",
+    "lastIngestedAt": "2026-10-16T09:22:04.245Z",
+    "projectedHash": "5fdddbe7e2a6977e1d7a9c0eefce88cf1ce7643707d35df30f213aa5c7ed09ad"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
     "@type": "ArtifactNode",
     "props": [
       {
-        "@id": "ArtifactNode:00CF23FACG000:props:StringProp:00CN3ZB3K0000",
+        "@id": "ArtifactNode:00CF23FACG000:props:StringProp:00D3XR3A1R000",
         "@type": "StringProp",
         "key": "description",
-        "value": "The batch plan for `core`'s reconcile-identity bug family, reordered once actually reading `reconcile.ts` showed the original filing order didn't match the real mechanism."
+        "value": "The plan for building the engine of Core — Design in plain JavaScript, in batches with a verification plan, and the archive of the reconcile-identity batches done on the Oxigraph-era engine."
       }
     ],
     "title": "core.md",
-    "text": "Batched, not fixed by the original filing order below — that plan was sketched before `reconcile.ts` was actually read, and wasn't followed as written once it was. [Open Issues](../issues/core.md#id/BlockNode:00CF1WZ4JG002) are grouped by which batch actually closes them, per [Task Breakdown](#id/BlockNode:00CF23FB1G003).",
+    "text": "The plan builds the engine of [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001) in plain JavaScript, in the checkout `Aperas.dev/` on branch `js-apeironngn`. The code repo `Aperas/` stays on branch `oxigraph` as the working engine the workflow uses while the new one is built. The Oxigraph-based code is kept as a frozen reference copy in `Aperas.dev/monorepo/.archive/oxigraph/` (the TerminusDB-era code is in `.archive/tdb/`), and the live code in `monorepo/packages/` is rewritten for the new engine. The plan follows the design's own boundary: the engine in memory (Batches 3 to 8), then the caller on disk (Batches 9 and 10), then the layers above the engine moved onto it (Batches 11 and 12), then the comparison with the Oxigraph engine (Batch 13), and last the ports (Batch 14), which no other batch needs.",
     "parent": "FolderNode:00CDBYV4BR004",
     "type": "root",
     "children": [
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "aac843e24b9b99f77f4cccfc482b885aa32ef5c424dc6a67b5eec65b7f1cb13f",
+    "fileHash": "1b0d9ddae96b3492582b2318699710256dce3db649ae6529fc85f86e69a25e8b",
     "lastTrackedAt": "2026-09-22T08:07:51.361Z",
-    "ingestedHash": "aac843e24b9b99f77f4cccfc482b885aa32ef5c424dc6a67b5eec65b7f1cb13f",
-    "lastIngestedAt": "2026-09-22T08:24:11.463Z",
-    "projectedHash": "aac843e24b9b99f77f4cccfc482b885aa32ef5c424dc6a67b5eec65b7f1cb13f"
+    "ingestedHash": "1b0d9ddae96b3492582b2318699710256dce3db649ae6529fc85f86e69a25e8b",
+    "lastIngestedAt": "2026-10-16T09:18:37.646Z",
+    "projectedHash": "1b0d9ddae96b3492582b2318699710256dce3db649ae6529fc85f86e69a25e8b"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
@@ -1362,10 +1362,10 @@
       "BlockNode:00D24N87SR001"
     ],
     "path": "design/core.md",
-    "fileHash": "a13f036c5f0f0953ba417e41dc35d8e89b104cc377f625ab2d6ad7edbf93c33f",
+    "fileHash": "d2574860c62d51bb735f82b43a82e63013efeed141090616293307ac61a8c52b",
     "lastTrackedAt": "2026-10-12T13:36:13.399Z",
-    "ingestedHash": "a13f036c5f0f0953ba417e41dc35d8e89b104cc377f625ab2d6ad7edbf93c33f",
-    "lastIngestedAt": "2026-10-15T07:25:43.341Z",
-    "projectedHash": "a13f036c5f0f0953ba417e41dc35d8e89b104cc377f625ab2d6ad7edbf93c33f"
+    "ingestedHash": "d2574860c62d51bb735f82b43a82e63013efeed141090616293307ac61a8c52b",
+    "lastIngestedAt": "2026-10-16T09:22:01.710Z",
+    "projectedHash": "d2574860c62d51bb735f82b43a82e63013efeed141090616293307ac61a8c52b"
   }
 ]
