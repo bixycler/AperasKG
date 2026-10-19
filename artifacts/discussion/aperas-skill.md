@@ -9,7 +9,7 @@ description: Open questions and freeflow notes behind the skill's four-level des
 - [Design](../design/aperas-skill.md#id/BlockNode:00CEA5Y5JG003) — the four-level shape, abstract to concrete, that the skill follows, and the multi-agent loop around it.
 - [Issues](../issues/aperas-skill.md#id/BlockNode:00CEA5KW4G002) — the open defects in the skill and its drift checker, among them the checker's truncated output and the unwritten rule on who moves the `Status:` lines.
 - [Planning](../planning/aperas-skill.md#id/BlockNode:00CEA5M6S8005) — the ordered work, whose three batches have shipped.
-- [History](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) — what shipped, milestone by milestone through v4.7.
+- [History](../history/aperas-skill.md#id/BlockNode:00CEA5MHD8002) — what shipped, milestone by milestone through v4.8.
 
 ## Open Questions <a name='id/BlockNode:00CEB07XC0001' class='aperas-anchor aperas-id'></a>
 
@@ -5654,3 +5654,76 @@ Supersedes: [v4 Reposition node without reminting](#id/BlockNode:00CS1593NR00H)
 Supersedes: [v4 Move nodes cleanly](#id/BlockNode:00CS1593NR011)
 
 - **Move nodes cleanly**: <a name='id/BlockNode:00D4PMGJJR00H' class='aperas-anchor aperas-id'></a> Use `aperas insert <node-id> --after <anchor-id> --flush < /dev/null`, with **no body** and standard input closed.
+
+## v4.8 additions — delta on the v4 snapshot <a name='id/BlockNode:00D6HJWKQG001' class='aperas-anchor aperas-id'></a>
+
+Records the v4.8 edits to the skills: [the user's decision](../discussion/core.md#id/BlockNode:00D6H8QJXR001) that `< /dev/null` is for a move only, and [the Orchestrator's check of the diff](../discussion/core.md#id/BlockNode:00D6HA6M7G001), against [the issue that the skills give `< /dev/null` as the recipe of a move without saying it belongs to a move only](../issues/aperas-skill.md#id/BlockNode:00D6HAJNRR001). A Coder wrote `cat file | aperas insert <id> </dev/null`: the redirect replaced the pipe, the body was empty and the CLI took the insert for a move. The rule now stands next to every move recipe: `< /dev/null` is for a move (an insert with no body) only, never for an insert that has a body or a pipe, because the redirect replaces the pipe and the CLI takes the insert for a move. The base skill carries it in its quick-reference row and in its move line of the command patterns, the Grapher skill in its two move recipes (step 3 of the edit loop and *Move nodes cleanly*), and the Coder skill in a new note under the Work and Report insert of *Every Invocation*, since the Coder writes inserts with a body and has no move recipe. The `Status:` lines of all four skills move to v4.8, with four `Status` entries, one per skill; the Orchestrator skill has no move recipe and no insert recipe of this kind, so only its `Status:` line moved. `skills/aperas/references/mechanics.md` goes from v4.7 to v4.8, the skill release it ships with, and its section *Moving a Node (`insert` with No Body)* gains a second rule. The drift check reads only the `SKILL.md` files, and a recorded block absent from them reads as dropped, so the reference's text is recorded here, in the delta's commentary, as it has been since its extraction in v4.2: the rule **`< /dev/null` is for a move only** says never to put the redirect on an insert that has a body or a pipe, because the redirect replaces the pipe, the body is empty and the CLI takes the insert for a move, so the content is never inserted; and it shows the wrong form, `cat file | aperas insert <id> </dev/null` (the redirect replaces the pipe; this is a move of `<id>` and the file's content is lost), and the right one, `cat file | aperas insert <id> --flush` (an insert with a body takes the pipe and no redirect). The move recipes of v4.7 stay as they were; v4.8 adds the sentence to each. Each entry that rewrites text recorded in an earlier delta or the v4 snapshot carries a `Supersedes:` line naming the blocks it replaces.
+
+### aperas — Status v4.8 <a name='id/BlockNode:00D6HJWKQG002' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Base Status](#id/BlockNode:00D4PMGJJR003)
+
+Status: <a name='id/BlockNode:00D6HJWKQG003' class='aperas-anchor aperas-id'></a> **v4.8** — Base skill for all Aperas roles.
+
+### aperas-coder — Status v4.8 <a name='id/BlockNode:00D6HJWKQG004' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Coder Status](#id/BlockNode:00D4PMGJJR005)
+
+Status: <a name='id/BlockNode:00D6HJWKQG005' class='aperas-anchor aperas-id'></a> **v4.8** — Coder role skill.
+
+### aperas-grapher — Status v4.8 <a name='id/BlockNode:00D6HJWKQG006' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Grapher Status](#id/BlockNode:00D4PMGJJR007)
+
+Status: <a name='id/BlockNode:00D6HJWKQG007' class='aperas-anchor aperas-id'></a> **v4.8** — Grapher role skill.
+
+### aperas-orchestrator — Status v4.8 <a name='id/BlockNode:00D6HJWKQG008' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Orchestrator Status](#id/BlockNode:00D4PMGJJR009)
+
+Status: <a name='id/BlockNode:00D6HJWKQG009' class='aperas-anchor aperas-id'></a> **v4.8** — Orchestrator role skill.
+
+### aperas — Quick Syntax & Command Reference, the move row <a name='id/BlockNode:00D6HJWKQG00A' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Quick Syntax table](#id/BlockNode:00D4PMGJJR00B)
+
+| Operation | Command Pattern | Key Rule / Note |
+|---|---|---|
+| **Peek / View** | `aperas unfold <ref> [--view <n>]` / `tree` | Peek node or render structured view lens |
+| **Inspect State** | `aperas show <ref> [--text]` / `backlinks` | Exact stored text, full record, or dependents |
+| **Insert Turn** | `cat turn.md \| aperas insert <id> --after <a>`| Pipes markdown AST subtree after anchor child |
+| **Zoom View** | `aperas zoom <id> --view <name> --flush` | Re-roots view onto current Ask or Report |
+| **Update Node** | `echo "text" \| aperas update <id> [--text-only]`| `--text-only` preserves kids; bare tombstones |
+| **Insert / Reposition**| `aperas insert <par> [--after <sib>]` | Bullet `- ` inserts; no body and `< /dev/null` moves node; never `< /dev/null` on an insert with a body or pipe (it replaces the pipe, so the CLI takes it for a move) |
+| **Sweep / Service** | `aperas check-links` / `service restart` | Sweeps internal links; restarts daemon |
+
+### aperas — Common Command Patterns, the move line <a name='id/BlockNode:00D6HJWKQG00C' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Common Command Patterns move line](#id/BlockNode:00D4PMGJJR00D)
+
+```bash
+aperas unfold <ref> [--view <name>]                          # Peek node or unfold into view
+aperas tree --view <name>                                    # Render structured lens of view
+cat turn.md | aperas insert <turn-id> --after <ask> --flush  # Insert Work + Report tree
+aperas zoom <id> --view <name> --flush                       # Re-root view onto Ask/Report
+echo "text" | aperas update <id> --text-only --flush         # Update node (preserves kids)
+echo "- text" | aperas insert <par> --after <sib> --flush    # Insert list item (needs bullet)
+aperas insert <id> --after <sib> --flush < /dev/null         # Move node, no body (a move reads stdin to its end; a harness can leave it open). Move only: never on an insert with a body or pipe, because the redirect replaces the pipe and the CLI takes it for a move
+aperas check-links [--repair]                                # Sweep / repair link integrity
+```
+
+### aperas-coder — Every Invocation, the note that an insert with a body takes no `< /dev/null` <a name='id/BlockNode:00D6HJWKQG00E' class='aperas-anchor aperas-id'></a>
+
+- *Note*: <a name='id/BlockNode:00D6HJWKQG00F' class='aperas-anchor aperas-id'></a> This insert has a body, so it takes the pipe and no `< /dev/null`: that redirect belongs to a move only, and on an insert it replaces the pipe, leaving an empty body that the CLI takes for a move.
+
+### aperas-grapher — Writing the Graph, step 3, the move recipe <a name='id/BlockNode:00D6HJWKQG00G' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Reposition node without reminting](#id/BlockNode:00D4PMGJJR00F)
+
+- Reposition node without reminting: <a name='id/BlockNode:00D6HJWKQG00H' class='aperas-anchor aperas-id'></a> `aperas insert <node-id> --after <anchor-id> --flush < /dev/null` (no body, standard input closed: a harness can leave standard input open, and a move reads it to its end). `< /dev/null` is for a move only: never on an insert that has a body or a pipe, because the redirect replaces the pipe and the CLI takes the insert for a move.
+
+### aperas-grapher — Preserving Node Identity, Move nodes cleanly <a name='id/BlockNode:00D6HJWKQG00J' class='aperas-anchor aperas-id'></a>
+
+Supersedes: [v4.7 Move nodes cleanly](#id/BlockNode:00D4PMGJJR00H)
+
+- **Move nodes cleanly**: <a name='id/BlockNode:00D6HJWKQG00K' class='aperas-anchor aperas-id'></a> Use `aperas insert <node-id> --after <anchor-id> --flush < /dev/null`, with **no body** and standard input closed. `< /dev/null` belongs to a move only; an insert with a body is piped and takes no redirect, because the redirect replaces the pipe, the body is empty and the CLI takes it for a move.

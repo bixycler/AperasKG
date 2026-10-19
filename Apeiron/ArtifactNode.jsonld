@@ -734,11 +734,11 @@
       "BlockNode:00CE8XWZJR001"
     ],
     "path": "discussion/aperas-skill.md",
-    "fileHash": "6787b723f704e0e81d6a42e71d89b2f667c450b51adf6e8d3bb8e2e3fc1234cd",
+    "fileHash": "5b63af0d9ba02d9ac20b36de9268ef522f6c08fbda446711796c5e8e637007ac",
     "lastTrackedAt": "2026-09-22T08:06:17.752Z",
-    "ingestedHash": "6787b723f704e0e81d6a42e71d89b2f667c450b51adf6e8d3bb8e2e3fc1234cd",
-    "lastIngestedAt": "2026-10-16T13:13:42.659Z",
-    "projectedHash": "6787b723f704e0e81d6a42e71d89b2f667c450b51adf6e8d3bb8e2e3fc1234cd"
+    "ingestedHash": "5b63af0d9ba02d9ac20b36de9268ef522f6c08fbda446711796c5e8e637007ac",
+    "lastIngestedAt": "2026-10-20T08:36:55.549Z",
+    "projectedHash": "5b63af0d9ba02d9ac20b36de9268ef522f6c08fbda446711796c5e8e637007ac"
   },
   {
     "@id": "ArtifactNode:00CEA5KVFR000",
@@ -759,11 +759,11 @@
       "BlockNode:00CEA5KW4G001"
     ],
     "path": "issues/aperas-skill.md",
-    "fileHash": "084c1bb438c62fc20b03a695e714b7fcfa85a8e996880e082137e91a6bedf12e",
+    "fileHash": "f650f44aa85587bc89123285281538b0ceab64531aa6f5e2615f53a86c9c4a58",
     "lastTrackedAt": "2026-09-22T13:10:43.858Z",
-    "ingestedHash": "084c1bb438c62fc20b03a695e714b7fcfa85a8e996880e082137e91a6bedf12e",
-    "lastIngestedAt": "2026-10-02T14:41:41.273Z",
-    "projectedHash": "084c1bb438c62fc20b03a695e714b7fcfa85a8e996880e082137e91a6bedf12e"
+    "ingestedHash": "f650f44aa85587bc89123285281538b0ceab64531aa6f5e2615f53a86c9c4a58",
+    "lastIngestedAt": "2026-10-20T08:37:01.046Z",
+    "projectedHash": "f650f44aa85587bc89123285281538b0ceab64531aa6f5e2615f53a86c9c4a58"
   },
   {
     "@id": "ArtifactNode:00CEA5M69R000",
@@ -802,18 +802,18 @@
       }
     ],
     "title": "aperas-skill.md",
-    "text": "The restructure has landed and has been revised through [v4.7](#id/BlockNode:00D4PQ79A8001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001), [v4.5](#id/BlockNode:00D1EDPP30001), [v4.6](#id/BlockNode:00D1FMR19G001) and [v4.7](#id/BlockNode:00D4PQ79A8001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, v4.5 that text brought to the built suites, v4.6 the transcript path that every Work records, and v4.7 the closed standard input of every move recipe. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
+    "text": "The restructure has landed and has been revised through [v4.8](#id/BlockNode:00D6HK42K0001) — four minor releases atop v1, a full rewrite at v2, eleven more minor releases atop that, a role split at v3, a comprehensive operational clarity rewrite at v4, and v4.1's operational gating refinements. `skills/aperas/SKILL.md` (reached by symlink from `.agents/skills/` and `.claude/skills/`) is the base every role loads, with role-specific skills defining each role's write boundaries (`aperas-orchestrator`, `aperas-grapher`, `aperas-coder`). v4 eliminated verbose prose across all skills, formalizing upfront role gating and in-flight triage. v4.1 resolved chronic gating failures by replacing passive negative prohibitions with an imperative View Triage entry bridge, establishing dual memory/rules (`.agents/rules/aperas.md`), strictly scoping native harness artifacts to human communication, and assigning codebase-tracked meta-tasks exclusively to the Coder role. The [v4](#id/BlockNode:00CTTFT4HR001), [v4.1](#id/BlockNode:00CTTFT4HR002), [v4.2](#id/BlockNode:00CVMPRD60001), [v4.3](#id/BlockNode:00CVMPRD60002), [v4.4](#id/BlockNode:00D1DCS9YG001), [v4.5](#id/BlockNode:00D1EDPP30001), [v4.6](#id/BlockNode:00D1FMR19G001), [v4.7](#id/BlockNode:00D4PQ79A8001) and [v4.8](#id/BlockNode:00D6HK42K0001) milestones below record what each of those releases shipped, v4.2 and v4.3 being the progressive-disclosure split and the one command form with a gating drift check, v4.4 the verification text that follows the new test structure, v4.5 that text brought to the built suites, v4.6 the transcript path that every Work records, v4.7 the closed standard input of every move recipe, and v4.8 the statement that the redirect belongs to a move only. Open Issues remains active, alongside the still-unmeasured [trigger accuracy against a held-out split](../planning/aperas-skill.md#id/BlockNode:00CEDFKN3000A).",
     "parent": "FolderNode:00CDBYV4BR002",
     "type": "root",
     "children": [
       "BlockNode:00CEA5MHD8001"
     ],
     "path": "history/aperas-skill.md",
-    "fileHash": "c62ce4449e1ff33d3f4c151b57e1c05473d41bf100c6827314786f10672e6408",
+    "fileHash": "42cb829c0fb2338ee86e040848d45b984c1c5b31d5f4d4d43a6423af26ea7845",
     "lastTrackedAt": "2026-09-22T08:08:49.651Z",
-    "ingestedHash": "c62ce4449e1ff33d3f4c151b57e1c05473d41bf100c6827314786f10672e6408",
-    "lastIngestedAt": "2026-10-16T13:13:36.663Z",
-    "projectedHash": "c62ce4449e1ff33d3f4c151b57e1c05473d41bf100c6827314786f10672e6408"
+    "ingestedHash": "42cb829c0fb2338ee86e040848d45b984c1c5b31d5f4d4d43a6423af26ea7845",
+    "lastIngestedAt": "2026-10-20T08:36:58.335Z",
+    "projectedHash": "42cb829c0fb2338ee86e040848d45b984c1c5b31d5f4d4d43a6423af26ea7845"
   },
   {
     "@id": "ArtifactNode:00CEA5Y4Y8000",
@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "8b0f3edfd8d3aa2b78ca374159cd4b8682078df1d780952480e14665df8f7af3",
+    "fileHash": "c7cb751217b800e5b42b460c738a3e88d7ed728b035604790e22f94296a4b0db",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "8b0f3edfd8d3aa2b78ca374159cd4b8682078df1d780952480e14665df8f7af3",
-    "lastIngestedAt": "2026-10-16T13:13:39.478Z",
-    "projectedHash": "8b0f3edfd8d3aa2b78ca374159cd4b8682078df1d780952480e14665df8f7af3"
+    "ingestedHash": "c7cb751217b800e5b42b460c738a3e88d7ed728b035604790e22f94296a4b0db",
+    "lastIngestedAt": "2026-10-20T08:36:49.059Z",
+    "projectedHash": "c7cb751217b800e5b42b460c738a3e88d7ed728b035604790e22f94296a4b0db"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,11 +896,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "b7e3bfc1230b7e62c410b1f0d297a3df7544f468c331cd427239ecde58ad18d2",
+    "fileHash": "3c2095c2b1dc19798fa354e26bbcbb7595b59b8ea686fd40f8903b343237659f",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "b7e3bfc1230b7e62c410b1f0d297a3df7544f468c331cd427239ecde58ad18d2",
-    "lastIngestedAt": "2026-10-16T12:34:04.313Z",
-    "projectedHash": "b7e3bfc1230b7e62c410b1f0d297a3df7544f468c331cd427239ecde58ad18d2"
+    "ingestedHash": "3c2095c2b1dc19798fa354e26bbcbb7595b59b8ea686fd40f8903b343237659f",
+    "lastIngestedAt": "2026-10-20T08:36:51.976Z",
+    "projectedHash": "3c2095c2b1dc19798fa354e26bbcbb7595b59b8ea686fd40f8903b343237659f"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -921,11 +921,11 @@
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "184b431e587c6e330ea8c616dafd744a08e813a851a2aebc146e10f8332be863",
+    "fileHash": "839742aa9cce26aabe26ad6064f8c0f17cdbe7de9ae822ac9883525f31f081e7",
     "lastTrackedAt": "2026-09-22T08:07:51.361Z",
-    "ingestedHash": "184b431e587c6e330ea8c616dafd744a08e813a851a2aebc146e10f8332be863",
-    "lastIngestedAt": "2026-10-16T12:33:56.874Z",
-    "projectedHash": "184b431e587c6e330ea8c616dafd744a08e813a851a2aebc146e10f8332be863"
+    "ingestedHash": "839742aa9cce26aabe26ad6064f8c0f17cdbe7de9ae822ac9883525f31f081e7",
+    "lastIngestedAt": "2026-10-20T08:36:43.063Z",
+    "projectedHash": "839742aa9cce26aabe26ad6064f8c0f17cdbe7de9ae822ac9883525f31f081e7"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
@@ -1337,11 +1337,11 @@
       "BlockNode:00D21FP4Z0001"
     ],
     "path": "history/core.md",
-    "fileHash": "f5704b6468b7f51524001fa75a25daf84182946096361ac87c1503175e0787b4",
+    "fileHash": "3e53742a833318f2e2bb6a06c84ea5351b8dbbbd9a694dbbd7d91eca5a61823e",
     "lastTrackedAt": "2026-10-12T09:54:21.047Z",
-    "ingestedHash": "f5704b6468b7f51524001fa75a25daf84182946096361ac87c1503175e0787b4",
-    "lastIngestedAt": "2026-10-16T12:34:01.911Z",
-    "projectedHash": "f5704b6468b7f51524001fa75a25daf84182946096361ac87c1503175e0787b4"
+    "ingestedHash": "3e53742a833318f2e2bb6a06c84ea5351b8dbbbd9a694dbbd7d91eca5a61823e",
+    "lastIngestedAt": "2026-10-20T08:36:45.888Z",
+    "projectedHash": "3e53742a833318f2e2bb6a06c84ea5351b8dbbbd9a694dbbd7d91eca5a61823e"
   },
   {
     "@id": "ArtifactNode:00D24N84NR000",
@@ -1378,10 +1378,10 @@
       "BlockNode:00D24N87SR001"
     ],
     "path": "design/core.md",
-    "fileHash": "ca52f3188ab63bfb663f9d0e68840420edf7fc05df5177530f6fc97ca63b78aa",
+    "fileHash": "c3be5a85548a4898bef809627d9272a663672c1b7d99f8440d1cc8e91a4ac36d",
     "lastTrackedAt": "2026-10-12T13:36:13.399Z",
-    "ingestedHash": "ca52f3188ab63bfb663f9d0e68840420edf7fc05df5177530f6fc97ca63b78aa",
-    "lastIngestedAt": "2026-10-16T12:03:14.489Z",
-    "projectedHash": "ca52f3188ab63bfb663f9d0e68840420edf7fc05df5177530f6fc97ca63b78aa"
+    "ingestedHash": "c3be5a85548a4898bef809627d9272a663672c1b7d99f8440d1cc8e91a4ac36d",
+    "lastIngestedAt": "2026-10-20T08:36:40.162Z",
+    "projectedHash": "c3be5a85548a4898bef809627d9272a663672c1b7d99f8440d1cc8e91a4ac36d"
   }
 ]
