@@ -218,11 +218,11 @@
       "BlockNode:00CDDVBXH8001"
     ],
     "path": "design/packaging.md",
-    "fileHash": "a253434e4f80ae7bc30e2569b47fe52a31415be1a2593f9ccb59454fe310cebc",
+    "fileHash": "57f9cce0234cbd031749b553980601b0e54e05707fc50a2a5a58ec4337a0958a",
     "lastTrackedAt": "2026-09-22T08:06:13.848Z",
-    "ingestedHash": "a253434e4f80ae7bc30e2569b47fe52a31415be1a2593f9ccb59454fe310cebc",
-    "lastIngestedAt": "2026-10-20T10:04:55.396Z",
-    "projectedHash": "a253434e4f80ae7bc30e2569b47fe52a31415be1a2593f9ccb59454fe310cebc"
+    "ingestedHash": "57f9cce0234cbd031749b553980601b0e54e05707fc50a2a5a58ec4337a0958a",
+    "lastIngestedAt": "2026-10-21T16:38:56.106Z",
+    "projectedHash": "57f9cce0234cbd031749b553980601b0e54e05707fc50a2a5a58ec4337a0958a"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
@@ -244,11 +244,11 @@
       "BlockNode:00CDG9DD4R001"
     ],
     "path": "discussion/packaging.md",
-    "fileHash": "91cd5013d1689693362f570b6ed3d900417ad7bc3c708acd6f323d11855b2099",
+    "fileHash": "d259fad226baa9eb1c1f3ca686f5b7211fe26a2701ad479e8d67717ba2ede267",
     "lastTrackedAt": "2026-09-22T08:06:52.658Z",
-    "ingestedHash": "91cd5013d1689693362f570b6ed3d900417ad7bc3c708acd6f323d11855b2099",
-    "lastIngestedAt": "2026-09-22T09:34:58.122Z",
-    "projectedHash": "91cd5013d1689693362f570b6ed3d900417ad7bc3c708acd6f323d11855b2099"
+    "ingestedHash": "d259fad226baa9eb1c1f3ca686f5b7211fe26a2701ad479e8d67717ba2ede267",
+    "lastIngestedAt": "2026-10-21T12:11:24.077Z",
+    "projectedHash": "d259fad226baa9eb1c1f3ca686f5b7211fe26a2701ad479e8d67717ba2ede267"
   },
   {
     "@id": "ArtifactNode:00CDDTBYG0000",
@@ -318,11 +318,11 @@
       "BlockNode:00CDDVCKCG001"
     ],
     "path": "history/packaging.md",
-    "fileHash": "8f79681500817cf68bf55417ef88920bba84c3d79221439257dcdefc975f35e9",
+    "fileHash": "5c96a3157a48b4c4ca6a0ad7f8ec98dd71aa0a056861ff92109ec73bfceb1957",
     "lastTrackedAt": "2026-09-22T08:08:41.526Z",
-    "ingestedHash": "8f79681500817cf68bf55417ef88920bba84c3d79221439257dcdefc975f35e9",
-    "lastIngestedAt": "2026-09-24T04:11:55.733Z",
-    "projectedHash": "8f79681500817cf68bf55417ef88920bba84c3d79221439257dcdefc975f35e9"
+    "ingestedHash": "5c96a3157a48b4c4ca6a0ad7f8ec98dd71aa0a056861ff92109ec73bfceb1957",
+    "lastIngestedAt": "2026-10-21T12:11:20.728Z",
+    "projectedHash": "5c96a3157a48b4c4ca6a0ad7f8ec98dd71aa0a056861ff92109ec73bfceb1957"
   },
   {
     "@id": "ArtifactNode:00CE01XZ88000",
@@ -534,11 +534,11 @@
       "BlockNode:00CE1GW638001"
     ],
     "path": "issues/treeview.md",
-    "fileHash": "2b2f7df6f4f2fb6f5a39669d51ef355a19149d27a70b29855daef420897dd7f6",
+    "fileHash": "39a7d57146d406f3e7e43979830ea9c21e37d29d17d9d033e596a330e2288c57",
     "lastTrackedAt": "2026-09-22T08:07:36.316Z",
-    "ingestedHash": "2b2f7df6f4f2fb6f5a39669d51ef355a19149d27a70b29855daef420897dd7f6",
-    "lastIngestedAt": "2026-10-12T10:03:36.360Z",
-    "projectedHash": "2b2f7df6f4f2fb6f5a39669d51ef355a19149d27a70b29855daef420897dd7f6"
+    "ingestedHash": "39a7d57146d406f3e7e43979830ea9c21e37d29d17d9d033e596a330e2288c57",
+    "lastIngestedAt": "2026-10-21T10:18:03.693Z",
+    "projectedHash": "39a7d57146d406f3e7e43979830ea9c21e37d29d17d9d033e596a330e2288c57"
   },
   {
     "@id": "ArtifactNode:00CE1GW4B8001",
@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "325091019d747b98213da48be929e3bb4b9d8b15a7fc086154bf95f3f2cd28f7",
+    "fileHash": "5063356573967a69107f2b8d14479c0574812d2cd1e53be1dc2d1a03cfb6b9b6",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "325091019d747b98213da48be929e3bb4b9d8b15a7fc086154bf95f3f2cd28f7",
-    "lastIngestedAt": "2026-10-21T09:09:09.791Z",
-    "projectedHash": "325091019d747b98213da48be929e3bb4b9d8b15a7fc086154bf95f3f2cd28f7"
+    "ingestedHash": "5063356573967a69107f2b8d14479c0574812d2cd1e53be1dc2d1a03cfb6b9b6",
+    "lastIngestedAt": "2026-10-21T16:38:47.607Z",
+    "projectedHash": "5063356573967a69107f2b8d14479c0574812d2cd1e53be1dc2d1a03cfb6b9b6"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,11 +896,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "31eab8844dafe448d39a8683177947a8f05a1bf70eb10ef06958f5dca7cc0b4e",
+    "fileHash": "401c893e5ca32dca2b8e109e7a6e756d125b2b255bd1251b099a6fa800524d9c",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "31eab8844dafe448d39a8683177947a8f05a1bf70eb10ef06958f5dca7cc0b4e",
-    "lastIngestedAt": "2026-10-21T09:09:12.890Z",
-    "projectedHash": "31eab8844dafe448d39a8683177947a8f05a1bf70eb10ef06958f5dca7cc0b4e"
+    "ingestedHash": "401c893e5ca32dca2b8e109e7a6e756d125b2b255bd1251b099a6fa800524d9c",
+    "lastIngestedAt": "2026-10-21T16:38:53.366Z",
+    "projectedHash": "401c893e5ca32dca2b8e109e7a6e756d125b2b255bd1251b099a6fa800524d9c"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -914,18 +914,18 @@
       }
     ],
     "title": "core.md",
-    "text": "The plan builds the engine of [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001) in plain JavaScript, in the checkout `Aperas.dev/` on branch `js-apeironngn`. The code repo `Aperas/` stays on branch `oxigraph` as the working engine the workflow uses while the new one is built. The Oxigraph-based code is kept as a frozen reference copy in `Aperas.dev/monorepo/.archive/oxigraph/` (the TerminusDB-era code is in `.archive/tdb/`), and the live code in `monorepo/packages/` is rewritten for the new engine. The plan follows the design's own boundary: first the current code moved out of the engine's directory into the shell's ([Batch 15](#id/BlockNode:00D4NBFKAG001), done), then the engine in memory (Batches 3 to 8), then the shell on disk (Batches 9 and 10), then the layers above the engine moved onto it (Batches 11 and 12), then the comparison with the Oxigraph engine (Batch 13), and last the ports (Batch 14), which no other batch needs.",
+    "text": "The plan builds the engine of [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001) in plain JavaScript, in the checkout `Aperas.dev/` on branch `js-apeironngn`. The code repo `Aperas/` stays on branch `oxigraph` as the working engine the workflow uses while the new one is built. The Oxigraph-based code is kept as a frozen reference copy in `Aperas.dev/monorepo/.archive/oxigraph/` (the TerminusDB-era code is in `.archive/tdb/`), and the live code in `monorepo/packages/` is rewritten for the new engine. The plan follows the design's own boundary: first the current code moved out of the engine's directory into the shell's ([Batch 15](#id/BlockNode:00D4NBFKAG001), done), then the engine in memory (Batches 3 to 8), then the shell on disk (Batches 9 and 10), then the layers above the engine moved onto it (Batch 11, done, and Batch 12), then the comparison with the Oxigraph engine (Batch 13), and last the ports (Batch 14), which no other batch needs.",
     "parent": "FolderNode:00CDBYV4BR004",
     "type": "root",
     "children": [
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "5acae714fc85b8a3deb1ade95677c1a640efb7861858a6d6d9201d702490a35b",
+    "fileHash": "c75398d770da7ba1f137cdf41836f8cb810123193f35f3673bc6112573466af0",
     "lastTrackedAt": "2026-09-22T08:07:51.361Z",
-    "ingestedHash": "5acae714fc85b8a3deb1ade95677c1a640efb7861858a6d6d9201d702490a35b",
-    "lastIngestedAt": "2026-10-21T09:09:06.448Z",
-    "projectedHash": "5acae714fc85b8a3deb1ade95677c1a640efb7861858a6d6d9201d702490a35b"
+    "ingestedHash": "c75398d770da7ba1f137cdf41836f8cb810123193f35f3673bc6112573466af0",
+    "lastIngestedAt": "2026-10-21T16:38:44.447Z",
+    "projectedHash": "c75398d770da7ba1f137cdf41836f8cb810123193f35f3673bc6112573466af0"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
@@ -1312,11 +1312,11 @@
       "BlockNode:00D1D5F63R001"
     ],
     "path": "design/testing.md",
-    "fileHash": "2c9c5984396a8937ed88a7e505dbac416bebec7478a4e22922e81daa666e6ccd",
+    "fileHash": "27e107ee11a78991c889737dadd51b3f38858f7c22f37d18666fc391cca55a79",
     "lastTrackedAt": "2026-10-11T10:13:55.688Z",
-    "ingestedHash": "2c9c5984396a8937ed88a7e505dbac416bebec7478a4e22922e81daa666e6ccd",
-    "lastIngestedAt": "2026-10-21T09:09:15.762Z",
-    "projectedHash": "2c9c5984396a8937ed88a7e505dbac416bebec7478a4e22922e81daa666e6ccd"
+    "ingestedHash": "27e107ee11a78991c889737dadd51b3f38858f7c22f37d18666fc391cca55a79",
+    "lastIngestedAt": "2026-10-21T16:38:58.855Z",
+    "projectedHash": "27e107ee11a78991c889737dadd51b3f38858f7c22f37d18666fc391cca55a79"
   },
   {
     "@id": "ArtifactNode:00D21FP1XR000",
@@ -1337,11 +1337,11 @@
       "BlockNode:00D21FP4Z0001"
     ],
     "path": "history/core.md",
-    "fileHash": "3e53742a833318f2e2bb6a06c84ea5351b8dbbbd9a694dbbd7d91eca5a61823e",
+    "fileHash": "4a8f02d84eeeab940ca0ee74757cf1d4647daecc977361403a9fdf1e6485fc77",
     "lastTrackedAt": "2026-10-12T09:54:21.047Z",
-    "ingestedHash": "3e53742a833318f2e2bb6a06c84ea5351b8dbbbd9a694dbbd7d91eca5a61823e",
-    "lastIngestedAt": "2026-10-20T08:36:45.888Z",
-    "projectedHash": "3e53742a833318f2e2bb6a06c84ea5351b8dbbbd9a694dbbd7d91eca5a61823e"
+    "ingestedHash": "4a8f02d84eeeab940ca0ee74757cf1d4647daecc977361403a9fdf1e6485fc77",
+    "lastIngestedAt": "2026-10-21T16:38:50.453Z",
+    "projectedHash": "4a8f02d84eeeab940ca0ee74757cf1d4647daecc977361403a9fdf1e6485fc77"
   },
   {
     "@id": "ArtifactNode:00D24N84NR000",
@@ -1378,10 +1378,10 @@
       "BlockNode:00D24N87SR001"
     ],
     "path": "design/core.md",
-    "fileHash": "383f46726be7aa4d374888210d0b4b3a0315542eec075d9ed2c7821f669ecb9c",
+    "fileHash": "287ca5aaf162980b824067f20c169f958698c20fa13d4ac3f4ab820a277ded7d",
     "lastTrackedAt": "2026-10-12T13:36:13.399Z",
-    "ingestedHash": "383f46726be7aa4d374888210d0b4b3a0315542eec075d9ed2c7821f669ecb9c",
-    "lastIngestedAt": "2026-10-20T10:04:51.589Z",
-    "projectedHash": "383f46726be7aa4d374888210d0b4b3a0315542eec075d9ed2c7821f669ecb9c"
+    "ingestedHash": "287ca5aaf162980b824067f20c169f958698c20fa13d4ac3f4ab820a277ded7d",
+    "lastIngestedAt": "2026-10-21T10:18:14.852Z",
+    "projectedHash": "287ca5aaf162980b824067f20c169f958698c20fa13d4ac3f4ab820a277ded7d"
   }
 ]
