@@ -17087,7 +17087,6 @@
       "BlockNode:00D3YV43Q0001",
       "BlockNode:00D4JZ0A7R001",
       "BlockNode:00D4T7JDAR001",
-      "BlockNode:00D6HAEDCR001",
       "BlockNode:00D76KJ728001",
       "BlockNode:00D7710E58001",
       "BlockNode:00D79JHQ40001"
@@ -17405,7 +17404,8 @@
       "BlockNode:00D2538VKR001",
       "BlockNode:00D2595QAG001",
       "BlockNode:00D2590B2R001",
-      "BlockNode:00D3WNBPPG001"
+      "BlockNode:00D3WNBPPG001",
+      "BlockNode:00D6HAEDCR001"
     ]
   },
   {
@@ -64355,7 +64355,8 @@
       "BlockNode:00D3YH0QGR001",
       "BlockNode:00D3Z1FX4R001",
       "BlockNode:00D4198VGG001",
-      "BlockNode:00D457N7XR001"
+      "BlockNode:00D457N7XR001",
+      "BlockNode:00D7T5W9Z8001"
     ]
   },
   {
@@ -77299,7 +77300,7 @@
     "@id": "BlockNode:00D1D5F648000",
     "@type": "BlockNode",
     "title": "00D1D5F648000",
-    "text": "**Per commit:** the `commit` suite, with a budget of 60 s, which lists `essential` and every other test file outside the corpus, the seeded model files and the runner's own test, which are in `models` and `tools`: 56 files, 975 cases, 18.1 s wall. It holds the fast engine files (`engine/schema` to `engine/embeddedOrdered`, and `engine/boundary` through `essential`), the files of `mirror/`, `lookups/maps`, `store/`, `links/`, `linking/`, `folder/ghost`, `prompt/removalPrompt`, `commands/`, `service/`, `shell/db`, and `runner/suites.test.ts`, which fails when a test file is in none or in two of `commit`, `models` and `tools`. *(built, measured; one run, by the orchestrator)*",
+    "text": "**Per commit:** the `commit` suite, with a budget of 60 s, which lists `essential` and every other test file outside the corpus, the seeded model files and the runner's own test, which are in `models` and `tools`: 59 files, 999 cases, 19.8 s to 25.6 s wall. It holds the fast engine files (`engine/schema` to `engine/embeddedOrdered`, and `engine/boundary` through `essential`), the files of `mirror/`, `lookups/maps`, `store/`, `links/`, `linking/`, `folder/ghost`, `prompt/removalPrompt`, `commands/`, `service/`, `shell/db`, `shell/oldEngine`, and `runner/suites.test.ts`, which fails when a test file is in none or in two of `commit`, `models` and `tools`. *(built, measured; two runs, one by the coder and one by the orchestrator, on different loads)*",
     "parent": "BlockNode:00D1D5F64000K",
     "type": "listItem",
     "children": []
@@ -77308,7 +77309,7 @@
     "@id": "BlockNode:00D1D5F648001",
     "@type": "BlockNode",
     "title": "00D1D5F648001",
-    "text": "**On demand:** the `demand` suite, with no budget, which lists `commit`, `models` and `tools` and then the six corpus files, `corpus/copy.test.ts` (the test of the copy helper itself), `corpus/dangling-unfolds.test.ts`, `corpus/link-integrity.test.ts`, `corpus/roundtrip.test.ts`, `corpus/mirror.test.ts` and `corpus/lookups.test.ts`, which run on a copy of the real mirror made by `makeCorpusCopy()`: 71 files in all. When it listed 19 files, 56 cases, it ran in 73 s and 74 s on two occasions, one by the orchestrator and one by the user; it has not been run since the split and the files added since. The corpus files alone took 3.4 s, 19 s, 22 s and about 43 s, the last running the round trip as two fresh child processes, 2.8 s to rehydrate and 24.3 s to dehydrate in the first and 2.9 s to rehydrate in the second. *(built, measured for the 19 files; the 71 files are listed, not timed)*",
+    "text": "**On demand:** the `demand` suite, with no budget, which lists `commit`, `models` and `tools` and then the five corpus files, `corpus/copy.test.ts` (the test of the copy helper itself), `corpus/link-integrity.test.ts`, `corpus/roundtrip.test.ts`, `corpus/mirror.test.ts` and `corpus/lookups.test.ts`, which run on a copy of the real mirror made by `makeCorpusCopy()`: 73 files in all. When it listed 19 files, 56 cases, it ran in 73 s and 74 s on two occasions, one by the orchestrator and one by the user; it has not been run since the split and the files added since. The corpus files alone took 3.4 s, 19 s, 22 s and about 43 s, the last running the round trip as two fresh child processes, 2.8 s to rehydrate and 24.3 s to dehydrate in the first and 2.9 s to rehydrate in the second. *(built, measured for the 19 files; the 73 files are listed, not timed)*",
     "parent": "BlockNode:00D1D5F64000K",
     "type": "listItem",
     "children": []
@@ -77403,7 +77404,7 @@
     "@id": "BlockNode:00D1D5F648009",
     "@type": "BlockNode",
     "title": "00D1D5F648009",
-    "text": "The runner takes `--suite <name|path>`, `--group <dir[,dir]>`, `--case <name>`, `--list`, `--concurrency N`, `--timeout MS` and `--help` (`-h`). `--list` prints the files the selection resolves to and runs nothing; it loads the suite scripts, which import no member, because `node --test` has no list mode. Exit codes: 0 all passed, and `--help`; 1 a failed case, a crashed or timed-out file, or a `--case` that matched nothing; 2 a bad invocation or a broken suite. *(built, measured: `--list --suite demand` prints the 71 files of `demand`)*",
+    "text": "The runner takes `--suite <name|path>`, `--group <dir[,dir]>`, `--case <name>`, `--list`, `--concurrency N`, `--timeout MS` and `--help` (`-h`). `--list` prints the files the selection resolves to and runs nothing; it loads the suite scripts, which import no member, because `node --test` has no list mode. Exit codes: 0 all passed, and `--help`; 1 a failed case, a crashed or timed-out file, or a `--case` that matched nothing; 2 a bad invocation or a broken suite. *(built, measured: `--list --suite demand` prints the 73 files of `demand`)*",
     "parent": "BlockNode:00D1D5F648003",
     "type": "listItem",
     "children": []
@@ -77512,7 +77513,7 @@
     "@id": "BlockNode:00D1D5F64800H",
     "@type": "BlockNode",
     "title": "00D1D5F64800H",
-    "text": "**Before a commit:** `npm run verify`, which runs `commit`; the run takes about 18 s (975 cases in 18.1 s), and the reporter warns once it passes the 60 s budget. *(built, measured)*",
+    "text": "**Before a commit:** `npm run verify`, which runs `commit`; the run takes about 20 to 26 s (999 cases in 19.8 s to 25.6 s), and the reporter warns once it passes the 60 s budget. *(built, measured)*",
     "parent": "BlockNode:00D1D5F64800F",
     "type": "listItem",
     "children": []
@@ -77521,7 +77522,7 @@
     "@id": "BlockNode:00D1D5F64800J",
     "@type": "BlockNode",
     "title": "00D1D5F64800J",
-    "text": "**On demand:** `npm run verify -- --suite demand`, for the corpus checks on a copy of the real mirror; the suite has no budget and prints no warning, and it lists 71 files, and when it listed 19 files its 56 cases ran in 73 s and 74 s on two occasions, one by the orchestrator and one by the user; the 71 files have not been timed. *(built, measured)*",
+    "text": "**On demand:** `npm run verify -- --suite demand`, for the corpus checks on a copy of the real mirror; the suite has no budget and prints no warning, and it lists 73 files, and when it listed 19 files its 56 cases ran in 73 s and 74 s on two occasions, one by the orchestrator and one by the user; the 73 files have not been timed. *(built, measured)*",
     "parent": "BlockNode:00D1D5F64800F",
     "type": "listItem",
     "children": []
@@ -77539,7 +77540,7 @@
     "@id": "BlockNode:00D1D5F64800M",
     "@type": "BlockNode",
     "title": "00D1D5F64800M",
-    "text": "**Migration:** complete. Steps 1 to 22 of the earlier suite are standalone files in the groups `parse`, `ingest`, `folder`, `store`, `gc`, `links`, `linking`, `corpus` and `runner`. The earlier suite of 26 steps that took 1,434 s is replaced by the `commit` suite, which takes under a minute (975 cases in about 18 s), plus the on-demand tier on a copy of the real mirror. The split of tests across tiers moves with measured time. *(built, measured)*",
+    "text": "**Migration:** complete. Steps 1 to 22 of the earlier suite are standalone files in the groups `parse`, `ingest`, `folder`, `store`, `gc`, `links`, `linking`, `corpus` and `runner`. The earlier suite of 26 steps that took 1,434 s is replaced by the `commit` suite, which takes under a minute (999 cases in about 20 to 26 s), plus the on-demand tier on a copy of the real mirror. The split of tests across tiers moves with measured time. *(built, measured)*",
     "parent": "BlockNode:00D1D5F64800F",
     "type": "listItem",
     "children": []
@@ -80136,7 +80137,7 @@
     "@id": "BlockNode:00D1EXMKPG001",
     "@type": "BlockNode",
     "title": "00D1EXMKPG001",
-    "text": "`--help` (`-h`) prints the usage, the options with their defaults, the suites with budget, file count and a description built from the first sentence of the suite's leading comment, the groups with their file counts, and examples, and exits 0. *(built, measured: `npm run verify -- --help` exits 0 and lists `commit` at 60 s and 56 files, `demand` with no budget and 71 files, `essential` at 5 s and 10 files, `models` at 30 s and 8 files, `tools` at 30 s and 1 file, and sixteen groups)*",
+    "text": "`--help` (`-h`) prints the usage, the options with their defaults, the suites with budget, file count and a description built from the first sentence of the suite's leading comment, the groups with their file counts, and examples, and exits 0. *(built, measured: `npm run verify -- --help` exits 0 and lists `commit` at 60 s and 59 files, `demand` with no budget and 73 files, `essential` at 5 s and 10 files, `models` at 30 s and 8 files, `tools` at 30 s and 1 file, and sixteen groups)*",
     "parent": "BlockNode:00D1D5F648003",
     "type": "listItem",
     "children": []
@@ -80145,7 +80146,7 @@
     "@id": "BlockNode:00D1EXNME8001",
     "@type": "BlockNode",
     "title": "00D1EXNME8001",
-    "text": "Every run except `--list` and `--help` prints a header line first, naming the suite or the group with its budget, the file count, the concurrency and the per-file timeout, and the case pattern when `--case` is given: `suite commit (budget 60 s) - 56 files, concurrency 2, timeout 120 s a file`. *(built, measured)*",
+    "text": "Every run except `--list` and `--help` prints a header line first, naming the suite or the group with its budget, the file count, the concurrency and the per-file timeout, and the case pattern when `--case` is given: `suite commit (budget 60 s) - 59 files, concurrency 2, timeout 120 s a file`. *(built, measured)*",
     "parent": "BlockNode:00D1D5F648003",
     "type": "listItem",
     "children": []
@@ -84273,7 +84274,8 @@
       "BlockNode:00D22ZMTKR004",
       "BlockNode:00D22ZMTKR006",
       "BlockNode:00D22ZMTKR008",
-      "BlockNode:00D751KPR0001"
+      "BlockNode:00D751KPR0001",
+      "BlockNode:00D7T5QTMG001"
     ]
   },
   {
@@ -84533,7 +84535,8 @@
       "BlockNode:00D22ZV0FG002",
       "BlockNode:00D22ZV0FR001",
       "BlockNode:00D22ZV0FR003",
-      "BlockNode:00D22ZV0FR005"
+      "BlockNode:00D22ZV0FR005",
+      "BlockNode:00D7T5TTP0001"
     ]
   },
   {
@@ -90773,7 +90776,8 @@
       "BlockNode:00D2536E20007",
       "BlockNode:00D2536E20009",
       "BlockNode:00D3YFA80R001",
-      "BlockNode:00D4QJF658001"
+      "BlockNode:00D4QJF658001",
+      "BlockNode:00D7T5SAYG001"
     ]
   },
   {
@@ -101370,6 +101374,8 @@
       "BlockNode:00D799Z790001",
       "BlockNode:00D79DCNPR001",
       "BlockNode:00D79G81AR001",
+      "BlockNode:00D7S9A300001",
+      "BlockNode:00D7T09ZXG001",
       "BlockNode:00D4RJ4XDR001",
       "BlockNode:00D4RM2H38001",
       "BlockNode:00D4RN38H0001",
@@ -105608,7 +105614,7 @@
       }
     ],
     "title": "**1. The tests of the frozen files and the made-up predicates**",
-    "text": "**1. The tests of the frozen files and the made-up predicates**: the fixture (`makeFixtureStore()` in `support/fixture.ts` builds an engine; the groups `store`, `gc`, `ingest`, `linking`, `links`, `folder` and `corpus` run on it) and the raw-quad tests of the groups that moved belong to piece 6 of Batch 11, so they are done when this batch starts. What is left is a test that writes a made-up predicate on a scratch store, which is rewritten against the shapes, and the tests of the frozen files (`store/storeAccess.test.ts`, `store/roundtrip.test.ts`, `corpus/roundtrip.test.ts`, `support/roundtripChild.ts` and the reproduction blocks of `mirror/load.test.ts` and `mirror/format.test.ts`), which go with the frozen set in step 4.",
+    "text": "**1. The tests of the frozen files and the made-up predicates**: piece 6 of Batch 11 moved the fixture (`makeFixtureStore()` in `support/fixture.ts` builds a `newDb()`; the groups `store`, `gc`, `ingest`, `linking`, `links`, `folder` and `corpus` run on it) and rewrote the raw-quad tests of the groups that moved, so they are done when this batch starts. What is left is the tests of the frozen files, which run on an old `Store` made from the dump (`support/oldFixture.ts` and `support/oldCorpus.ts`): `store/storeAccess.test.ts`, `store/roundtrip.test.ts`, `corpus/roundtrip.test.ts`, `support/roundtripChild.ts` and the reproduction blocks of `mirror/load.test.ts` and `mirror/format.test.ts`; they go with the frozen set in step 4, with the two support files. After the flip no test outside them imports `oxigraph` except `shell/oldEngine.test.ts` and `engine/boundary.test.ts`, so a test that writes a made-up predicate on a scratch store, which is rewritten against the shapes, is any that the search for `oxigraph` and for raw terms in the tests finds once the frozen tests are gone.",
     "parent": "BlockNode:00D3XQQ2W000S",
     "type": "listItem",
     "children": []
@@ -105641,7 +105647,7 @@
       }
     ],
     "title": "**2. The dev tools**",
-    "text": "**2. The dev tools**: piece 6 of Batch 11 deletes `apeironNgnSmokeTest.ts` ([it is referenced by nothing and asks for a dead predicate](../issues/core.md#id/BlockNode:00D22ZV0FG001)) and ports or retires `verifyDanglingUnfolds.ts` and `verifyLinkRefusals.ts`, because they build a raw `Store` and call `wrap` and `tsc` of `cli` fails otherwise. What is left of the step is the check that no dev tool or script under `monorepo/` imports `oxigraph` or a file of the frozen set, which step 3's search covers.",
+    "text": "**2. The dev tools**: piece 6 of Batch 11 deleted `apeironNgnSmokeTest.ts` ([it is referenced by nothing and asks for a dead predicate](../issues/core.md#id/BlockNode:00D22ZV0FG001)) and `verifyDanglingUnfolds.ts`, and ported `verifyLinkRefusals.ts` to the engine (it counts records), because they built a raw `Store` and called `wrap`, and `tsc` of `cli` failed otherwise. What is left of the step is the check that no dev tool or script under `monorepo/` imports `oxigraph` or a file of the frozen set, which step 3's search covers.",
     "parent": "BlockNode:00D3XQQ2W000S",
     "type": "listItem",
     "children": []
@@ -106613,7 +106619,9 @@
     "text": "**Layer 4, the differential run**: the same script of commands on the reference engine and on the new one, and the dumps compared. The two designs have no mirror in common ([which mirror the differential run starts from](#id/BlockNode:00D3YG50B0002)): the reference runs on an unmigrated copy of the mirror and the new engine on the migrated copy of it, and the dumps are compared after the differences that the migration and the design make on purpose are normalised. The deliberate differences are listed and few: the migration's own changes ([Batch 9, step 6](#id/BlockNode:00D3Y3DMTR001): no `predicate` on a `Link`, the tombstones stripped from the tree, the six `README.md` artifacts and their paragraphs deleted, `dinhlx` given `kind: human`, the `unfolds` entries whose target is not defined stripped, the `type` of every artifact stripped), the order of ids by code point where `localeCompare` ordered them, the `children` order and `parent` rule of the load, the rejection of a repeated `@id`, the empty tombstone, the text of a link in `tree` and `unfold` without its predicate, the removal of `aperas link` and `aperas unlink` ([manual links are dropped](../issues/core.md#id/BlockNode:00D3WNBPPG001)), and whatever the settled open points change. Any other difference is a finding and not a pass. The harness copies both mirrors from one snapshot that includes `Apeiron/.state/`, runs every command with `</dev/null` under a timeout, and has a fixture for a `children` entry that names an id with no document ([the ghost folder](../issues/core.md#id/BlockNode:00D417WK80001)): the new engine returns it in the list of ids referenced and never defined, and what the shell does with the list is the service lifecycle.",
     "parent": "BlockNode:00CF23FB1G009",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00D7T3XZA8001"
+    ]
   },
   {
     "@id": "BlockNode:00D3XQW6AR003",
@@ -107141,10 +107149,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D3Y41TB8009:props:StringProp:00D79K5J1G00B",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D3Y41TB8009:props:StringProp:00D7T69DZ0003",
             "@type": "StringProp",
             "key": "position",
-            "value": "12777"
+            "value": "13822"
           }
         ]
       },
@@ -107155,10 +107163,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D3Y41TBG000:props:StringProp:00D79K5J1R000",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D3Y41TBG000:props:StringProp:00D7T69DZ0004",
             "@type": "StringProp",
             "key": "position",
-            "value": "12853"
+            "value": "13898"
           }
         ]
       },
@@ -107169,10 +107177,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZQ0001:props:StringProp:00D79K5J1R004",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZQ0001:props:StringProp:00D7T69DZ8003",
             "@type": "StringProp",
             "key": "position",
-            "value": "13271"
+            "value": "14316"
           }
         ]
       },
@@ -107183,10 +107191,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZQG001:props:StringProp:00D79K5J1R007",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZQG001:props:StringProp:00D7T69DZG001",
             "@type": "StringProp",
             "key": "position",
-            "value": "13628"
+            "value": "14673"
           }
         ]
       },
@@ -107197,10 +107205,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZQR001:props:StringProp:00D79K5J1R008",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZQR001:props:StringProp:00D7T69DZG002",
             "@type": "StringProp",
             "key": "position",
-            "value": "13697"
+            "value": "14742"
           }
         ]
       },
@@ -107211,10 +107219,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZR0001:props:StringProp:00D79K5J20003",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D41NRZR0001:props:StringProp:00D7T69DZR001",
             "@type": "StringProp",
             "key": "position",
-            "value": "14743"
+            "value": "15901"
           }
         ]
       },
@@ -107225,10 +107233,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZ0006:props:StringProp:00D79K5J20000",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZ0006:props:StringProp:00D7T69DZG004",
             "@type": "StringProp",
             "key": "position",
-            "value": "14012"
+            "value": "15057"
           }
         ]
       },
@@ -107239,10 +107247,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZG000:props:StringProp:00D79K5J1R009",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZG000:props:StringProp:00D7T69DZG003",
             "@type": "StringProp",
             "key": "position",
-            "value": "13836"
+            "value": "14881"
           }
         ]
       },
@@ -107253,16 +107261,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZG002:props:StringProp:00D79K5J18003",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZG002:props:StringProp:00D7T69DY8002",
             "@type": "StringProp",
             "key": "position",
             "value": "6596"
           },
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZG002:props:StringProp:00D79K5J18004",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4581YZG002:props:StringProp:00D7T69DYG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "14665"
+            "value": "15823"
           }
         ]
       },
@@ -107273,10 +107281,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4K03H80002:props:StringProp:00D79K5J1R001",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4K03H80002:props:StringProp:00D7T69DZ8000",
             "@type": "StringProp",
             "key": "position",
-            "value": "12955"
+            "value": "14000"
           }
         ]
       },
@@ -107287,10 +107295,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4K03H88007:props:StringProp:00D79K5J1R005",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4K03H88007:props:StringProp:00D7T69DZ8004",
             "@type": "StringProp",
             "key": "position",
-            "value": "13399"
+            "value": "14444"
           }
         ]
       },
@@ -107301,10 +107309,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4K03H88009:props:StringProp:00D79K5J1R006",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4K03H88009:props:StringProp:00D7T69DZG000",
             "@type": "StringProp",
             "key": "position",
-            "value": "13523"
+            "value": "14568"
           }
         ]
       },
@@ -107385,10 +107393,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0GR00A:props:StringProp:00D79K5J1G008",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0GR00A:props:StringProp:00D7T69DZ0000",
             "@type": "StringProp",
             "key": "position",
-            "value": "12612"
+            "value": "13657"
           }
         ]
       },
@@ -107399,10 +107407,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0GR00C:props:StringProp:00D79K5J1G009",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0GR00C:props:StringProp:00D7T69DZ0001",
             "@type": "StringProp",
             "key": "position",
-            "value": "12682"
+            "value": "13727"
           }
         ]
       },
@@ -107413,10 +107421,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0GR00E:props:StringProp:00D79K5J1G00A",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0GR00E:props:StringProp:00D7T69DZ0002",
             "@type": "StringProp",
             "key": "position",
-            "value": "12731"
+            "value": "13776"
           }
         ]
       },
@@ -107427,10 +107435,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0H0003:props:StringProp:00D79K5J1R002",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0H0003:props:StringProp:00D7T69DZ8001",
             "@type": "StringProp",
             "key": "position",
-            "value": "13107"
+            "value": "14152"
           }
         ]
       },
@@ -107441,10 +107449,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0H0005:props:StringProp:00D79K5J1R003",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4P5B0H0005:props:StringProp:00D7T69DZ8002",
             "@type": "StringProp",
             "key": "position",
-            "value": "13185"
+            "value": "14230"
           }
         ]
       },
@@ -107553,13 +107561,13 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR008:props:StringProp:00D79K5J10000",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR008:props:StringProp:00D7T69DY0000",
             "@type": "StringProp",
             "key": "position",
             "value": "4507"
           },
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR008:props:StringProp:00D79K5J18000",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR008:props:StringProp:00D7T69DY0001",
             "@type": "StringProp",
             "key": "position",
             "value": "7215"
@@ -107573,13 +107581,13 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR00A:props:StringProp:00D79K5J18001",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR00A:props:StringProp:00D7T69DY8000",
             "@type": "StringProp",
             "key": "position",
             "value": "4594"
           },
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR00A:props:StringProp:00D79K5J18002",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D4QYXWFR00A:props:StringProp:00D7T69DY8001",
             "@type": "StringProp",
             "key": "position",
             "value": "6003"
@@ -108013,10 +108021,16 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D6HD9JA0004:props:StringProp:00D79K5J20001",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D6HD9JA0004:props:StringProp:00D7T69DYR004",
             "@type": "StringProp",
             "key": "position",
-            "value": "14406"
+            "value": "12518"
+          },
+          {
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D6HD9JA0004:props:StringProp:00D7T69DYR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "15451"
           }
         ]
       },
@@ -108027,10 +108041,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D6HD9JA0006:props:StringProp:00D79K5J20002",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D6HD9JA0006:props:StringProp:00D7T69DZR000",
             "@type": "StringProp",
             "key": "position",
-            "value": "14491"
+            "value": "15642"
           }
         ]
       },
@@ -108139,10 +108153,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D77225ER004:props:StringProp:00D79K5J1G000",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D77225ER004:props:StringProp:00D7T69DYG001",
             "@type": "StringProp",
             "key": "position",
-            "value": "10675"
+            "value": "10712"
           }
         ]
       },
@@ -108153,10 +108167,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D77225ER006:props:StringProp:00D79K5J1G001",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D77225ER006:props:StringProp:00D7T69DYG002",
             "@type": "StringProp",
             "key": "position",
-            "value": "10791"
+            "value": "10828"
           }
         ]
       },
@@ -108167,10 +108181,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D77225ER008:props:StringProp:00D79K5J1G002",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D77225ER008:props:StringProp:00D7T69DYG003",
             "@type": "StringProp",
             "key": "position",
-            "value": "10934"
+            "value": "10971"
           }
         ]
       },
@@ -108195,10 +108209,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D79CHJJ8001:props:StringProp:00D79K5J1G003",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D79CHJJ8001:props:StringProp:00D7T69DYG004",
             "@type": "StringProp",
             "key": "position",
-            "value": "11245"
+            "value": "11282"
           }
         ]
       },
@@ -108209,10 +108223,10 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D79K5J1G004:props:StringProp:00D79K5J1G005",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D79K5J1G004:props:StringProp:00D7T69DYG005",
             "@type": "StringProp",
             "key": "position",
-            "value": "11574"
+            "value": "11607"
           }
         ]
       },
@@ -108223,16 +108237,72 @@
         "predicate": "[[wikilink]]",
         "props": [
           {
-            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D79K5J1G006:props:StringProp:00D79K5J1G007",
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D79K5J1G006:props:StringProp:00D7T69DYR00A",
             "@type": "StringProp",
             "key": "position",
-            "value": "12352"
+            "value": "13397"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR000",
+        "@type": "Link",
+        "target": "BlockNode:00D76BQ2N0004",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR000:props:StringProp:00D7T69DYR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12059"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR002",
+        "@type": "Link",
+        "target": "BlockNode:00D7T09ZXG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR002:props:StringProp:00D7T69DYR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12128"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR006",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQW6AR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR006:props:StringProp:00D7T69DYR007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12710"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR008",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D3Y41ARR002:links:Link:00D7T69DYR008:props:StringProp:00D7T69DYR009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "13123"
           }
         ]
       }
     ],
     "title": "**In flight**",
-    "text": "**In flight**: the plan is carried out in `Aperas.dev` on branch `js-apeironngn`. Done: [Batch 15](../planning/core.md#id/BlockNode:00D4NBFKAG001), the current code moved to `src/shell/` ([the go](#id/BlockNode:00D4NT02HR001), [checked](#id/BlockNode:00D4NYBTD0001)), which resolves [the code differs from the boundary](../issues/core.md#id/BlockNode:00D4NBNCF8001); [Batch 3](../planning/core.md#id/BlockNode:00D3XQQ2VG001), the engine's module in the emptied `src/apeironNgn/` with its meta-model, the Aperas and test schemas, the interface as types, the oracle and the `engine` test group, with no behaviour yet ([checked](#id/BlockNode:00D4QFMSDG001)); [Batch 4](../planning/core.md#id/BlockNode:00D3XQQ2VR006), the records, the literal fields of cardinality `one`, `optional` and `set`, the ids, the collections and the orders, tested against the oracle ([checked](#id/BlockNode:00D4QW4JXG001)); [Batch 5](../planning/core.md#id/BlockNode:00D3XQQ2VR00H), the reference and embed fields, the reverse side built on first use, the removal of a node and the build of Persistence, with a model-based test of the reverse against the oracle ([checked](#id/BlockNode:00D4RTZKK8001)); and [Batch 6](../planning/core.md#id/BlockNode:00D3XQQ2VR00V), the ordered fields, the partitioning mark, containment with the parent derived from the reverse of `children`, and the tree of the records, with a model-based test of 20 seeds against the oracle and two reproductions that failed on the reference copy and pass on the engine ([checked](#id/BlockNode:00D4SGY6JR001)); [Batch 7](../planning/core.md#id/BlockNode:00D3XQQ2VR014), the tombstone, the tombstone of a subtree, embedded nodes removed with their owner and `sweep(graph): Id[]`, with a model-based test of 20 seeds against the oracle, two reproductions that failed on the old engine and pass on the engine, and four mutations, three caught by the model test or a hand-written case and one by the hand-written cases only ([checked](#id/BlockNode:00D4T3JTP8001)); [Batch 8](../planning/core.md#id/BlockNode:00D3XQQ2VR01D), several graphs: the grammar of a graph's name, `createGraph`, `dropGraph`, the reads of a node's relations filtered to the graph they name, `graphOf` (built, confirmed by the user on 2026-10-20) and the refusal of an embedded id in a containment field, with a model test of 20 seeds against the oracle and the cross-graph cases written first ([checked](#id/BlockNode:00D5BATEM0000)); [Batch 9](../planning/core.md#id/BlockNode:00D3XQQ2VR01M), the mirror, the shell's first batch: the format and the dump of the engine's records, the load into the three graphs, the exact round trip, the table of settings and the mapping from a graph and a kind to a file, the rule that gives a new node its graph, `danglingRefs`, and rules 5 and 6 of the migration scripts, with the round trip of the migrated copy of the real mirror byte for byte for all 8 files and 31 mutations caught ([steps 1, 3, 4, 5 and 6 checked](#id/BlockNode:00D5C44ZSG001), [step 2 checked](#id/BlockNode:00D6H5V1BR001)); and [Batch 10](../planning/core.md#id/BlockNode:00D3XQQ2W0004), the lookups by a literal value, the shell's second batch: the three maps of a profile by its handle, a view by its name and an artifact or a folder by its stored path, one update function for each write that changes a map, `liveAtPath` for the live node at a path, `pathKeyOf` as the one place that gives the key, and the rule for a key held by two live nodes ([A key held by two live nodes](../design/core.md#id/BlockNode:00D6J3N65R001)), with a model test of 20 seeds against the oracle and 16 mutations all caught ([checked](#id/BlockNode:00D6HRZD8G001)); all nine are committed by the user on `js-apeironngn` (Batches 3 to 10 as `1b58fab`, Batch 15 as `eae00f1`), and the suites are near their budgets (after Batch 10, `commit` 904 of 904 in 50.0 s of 60 s, 49.5 s on a quiet machine, and `essential` 52 of 52 in 3.8 to 4.6 s of 5 s; after Batch 9, `commit` 862 of 862 in 44 s and `essential` 52 of 52 in 3.6 s; after the follow-up of Batch 8, `essential` 51 of 51 in 4.4 s and 3.9 s, and a run under load took 6.6 s, [checked](#id/BlockNode:00D5BFCTAR001)). Batch 3 closes in part [the store is read outside the helpers](../issues/core.md#id/BlockNode:00D2536E1R001) and the `type` shape part of [artifacts without a `type`](../issues/core.md#id/BlockNode:00D253D680001), Batch 4 closes in part [the kind of an id and an id-like string](../issues/core.md#id/BlockNode:00D2534RSG001), [the scans that list the ids of a kind](../issues/core.md#id/BlockNode:00D0W02KPG001), [`dehydrate`'s `localeCompare`](../issues/core.md#id/BlockNode:00D39EY5B0001) and [the order of a block's links](../issues/core.md#id/BlockNode:00D22ZK7C8001), and Batch 5 closes in part [`ownerOfLink` takes the first node whose `links` names a link](../issues/core.md#id/BlockNode:00D2593220001) and the scans again (its reverse reads), all seven issues still open for the rest. Batch 7 closes in part [tombstoning does not empty the node at every site](../issues/core.md#id/BlockNode:00D252W7VG001) for the nodes the engine tombstones, which stays open for the tombstones the mirror holds (Batch 9) and the callers (Batch 11), and files [a plain write sets or clears the tombstone marker and writes to a tombstone](../issues/core.md#id/BlockNode:00D4T7JDAR001), open until Enforcement is decided. Batch 8 resolves [the buckets of a reverse side are read across graphs](../issues/core.md#id/BlockNode:00D4SRWNPR001) with a dated entry (its reproduction is the test, `graphReads.test.ts`), and a follow-up of the Coder resolves [`insertItem` into an ordered embed field accepts any string](../issues/core.md#id/BlockNode:00D4SRT8KR001) (the embedded-id rule on an ordered embed field, tested over a schema that declares one) and adds a case that fails without the `moveItem` refusal; the refusal of an embedded id in a containment field, Batch 8's step 5, did not close that issue by itself. Batch 9 resolves [`dehydrate`'s `localeCompare`](../issues/core.md#id/BlockNode:00D39EY5B0001) (a simulated collation is its reproduction), [the loader writes `parent` from its own pair](../issues/core.md#id/BlockNode:00D2538VKR001) and [a repeated `@id` is logged and merged](../issues/core.md#id/BlockNode:00D2595QAG001) (each with a reproduction that fails on the reference copy's `rehydrateStore` and passes on the load), each with a dated entry, and [the thread-scope test inside the engine's directory](../issues/core.md#id/BlockNode:00D2590B2R001) for `Aperas.dev` only; it builds the computing half of [`danglingRefs` computed and not read by the service](../issues/core.md#id/BlockNode:00D258W098001), which stays open for the reading (a dated entry); the reference copy under `core/src/shell/` keeps its own code for all five until Batch 11 and Batch 12. Batch 10 resolves no issue: it builds the fix of [`findByExactPath` takes the first node found at a path](../issues/core.md#id/BlockNode:00D22ZMTKG001) and of the first-match behaviour of [three behaviours of the caller depend on the order of an unordered read](../issues/core.md#id/BlockNode:00D3YFXDC800D), and the maps for the four scans for a literal value of [full-store scans](../issues/core.md#id/BlockNode:00D0W02KPG001), each with a dated entry and open until Batch 11 moves the callers (the reference copy under `core/src/shell/` keeps the first-match readers). Batch 6 resolves [sibling indexes are not kept dense](../issues/core.md#id/BlockNode:00D252Y7WR001) and [a child can end with two `parent` pairs](../issues/core.md#id/BlockNode:00D2532JJR001), each with a dated entry, in the engine; the reference copy under `core/src/shell/` keeps both until Batch 11 and Batch 12. Batch 4 recorded as waiting step 6 (`exists` and `size`), which still waits, and the deletion half of step 4, which Batch 5 built with `removeNode`. Batches 4, 5 and 6 record as waiting the cases that throw `Undecided` for [Enforcement](../design/core.md#id/BlockNode:00D24N87T000M) and [Existence](../design/core.md#id/BlockNode:00D24N87T000K), Existence having been added to Batch 5's Gated by as it was to Batch 4's, and both having been written into Batch 6's Gated by, which said nothing; the Coder notes that Existence also decides nothing yet about a node that has only incoming pairs (it has a bucket in the map of the reverse and no record, and no read counts the bucket as existence). One design point of Batch 3 still waits for the user, in its [open points](../planning/core.md#id/BlockNode:00D4QHPDV8004): the rules the schema check read in; the other three are settled, one of them, clearing an embed field that keeps some of its nodes (by `removePair` and `addPair`), built by Batch 5, and another, that the sweep is an operation of the engine, built by Batch 7. Three points that Batch 6 found were settled on 2026-10-17 and are stated in the design: a node is owned or contained, never both ([Containment](../design/core.md#id/BlockNode:00D24N87SR00Z)); the order of the checks on a partitioning field is not a design point; the mark names no direction and the engine derives the climbed side from the cardinality ([Partitioning fields](../design/core.md#id/BlockNode:00D3CJDGH8001)). The engine holds no settings of a graph, they are the shell's, graphs are named by a `graph.domain` ([Graphs in memory](../design/core.md#id/BlockNode:00D3CHJXK8003)), and the mirror holds no `graph` field in a document ([Records by kind and by graph](../design/core.md#id/BlockNode:00D24N87SR018)). [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C), the layers above moved onto the engine, is surveyed and split into ten pieces of one coder turn each ([the survey](#id/BlockNode:00D763GYZ0001)), and its four design answers are settled and written into the design and the plan ([the answers](#id/BlockNode:00D766N4RR001)): `graphOf` is confirmed and a node exists when a document stands for it, a tombstone leaves its container, the listings are sorted in the shell and the canonical place is the first in code-point order, and a load that rejects a document is refused with a start-anyway option and a side copy. The split of `commit` into `commit`, `models` and `tools` is built, the preparation the survey asked for before piece 4 ([the split](../planning/core.md#id/BlockNode:00D792XEJ8001); staged, not committed): `essential` 74 of 74 in 3.6 s of 5 s, `commit` 888 of 888 in 15.4 s of 60 s, `models` 145 of 145 in 12.0 s of 30 s and `tools` 14 of 14 in 14.0 s of 30 s, and a test that holds each file in exactly one suite. Pieces 1 to 5 are done in `Aperas.dev` (staged, not committed; pieces 1 to 4 on the old code): [piece 1](../planning/core.md#id/BlockNode:00D76BQ2MR003) removed the manual links (`commit` 904 of 904 in 39.5 s), [piece 2](../planning/core.md#id/BlockNode:00D76BQ2N0000) wrote the group `commands/` for the reads (59 cases, 17 of 17 mutations caught), and [piece 3](../planning/core.md#id/BlockNode:00D76BQ2N0001) wrote the tests of the writes, `track` and `project` (79 cases and case `5g` of the ingest chain, 22 of 23 mutations caught) and the reproduction of the move into its own subtree (`commit` 1043 of 1043 in 49.5 s of 60 s, `essential` 74 of 74 in 4.6 s), [piece 4](../planning/core.md#id/BlockNode:00D76BQ2N0002) wrote the group `service/` for the service (50 cases in about 3 s on a service of its own in a scratch runtime directory and port, all 26 arms of `handle()` reached, none waived, 9 of 9 mutations caught; `commit` 938 of 938 in 18.2 s, `essential` 74 of 74 in 3.5 s), and [piece 5](../planning/core.md#id/BlockNode:00D76BQ2N0003) built the engine-side handle and the write layer beside the old code, `core/src/shell/db.ts` and `writeLayer.ts`, which nothing imports yet, with the group `shell/` (37 cases in `commit`, 20 seeds in `models`; 23 of 24 mutations caught, the one missed an equivalent mutant; `commit` 975 of 975 in 18.1 s, `models` 165 of 165 in 13.7 s, `essential` 74 of 74 in 3.5 s, no old file changed). The closing of piece 4's gaps (a case for every unreached branch of an arm that reads or writes the store, the others waived by name) is under way in a small follow-up before piece 6, the flip, which is next and removes `Lookups.subtreeTombstoned` with its two test uses; the folder scan that skips dot-names is filed for piece 8 ([the issue](../issues/core.md#id/BlockNode:00D79JHQ40001)). The real mirror is not touched until the cutover. The real mirror is not migrated: the migration is applied at the cutover only. The design and the plan were completed before them, on 2026-10-16: the [decisions on the dependency survey](#id/BlockNode:00D4MJBY98001) and [the five answers](#id/BlockNode:00D4NN1G50001) ([recorded](#id/BlockNode:00D4NQ73AR001)). The [one-time migration of the mirror](#id/BlockNode:00D3Y1N5Y8001) is settled ([Batch 9, step 6](../planning/core.md#id/BlockNode:00D3Y3DMTR001)) and its dry run on a clone passed ([the dry run](../planning/core.md#id/BlockNode:00D4JYSYZ0001)); the live blocks and the artifact that have no parent stay as they stand, as the test of [the garbage-collection issue](../issues/core.md#id/BlockNode:00D1A2AY68001) ([decided](#id/BlockNode:00D4NX8JHR001)), and what Batch 9 still leaves open is in its [open points](../planning/core.md#id/BlockNode:00D3YSA5T8001). The migration is applied to the real mirror at the cutover only ([the rule in step 6](../planning/core.md#id/BlockNode:00D4JYSYZ0003)), after a fresh dry run on a clone. The dry run raised [`concepts.md` has no file under `artifacts/`](../issues/core.md#id/BlockNode:00D4JZ0A7R001). The fix of [the ghost folder](../issues/core.md#id/BlockNode:00D417WK80001) and [the `ingest` prompt](../issues/core.md#id/BlockNode:00CNX1T4XG001) is committed on branch `oxigraph` of `Aperas/` as `eb352f5`. Deferred: [the fix of the busy service that looks stopped](../issues/core.md#id/BlockNode:00D457SD1R001), with its directions not chosen, and the single write measurement at full speed ([the cost of a write](../issues/core.md#id/BlockNode:00D457M2F8001)). The working service has looped twice on a move of a node into its own subtree (the loop is in the next walk of the parent chain, not in the move): for a day and 20 hours until the orchestrator stopped it on 2026-10-19, and again on 2026-10-20 until it was killed and started again, each time with the mirror on disk intact; [the issue](../issues/core.md#id/BlockNode:00D6HAEDCR001) is closed by Batch 11, and [the skills' recipe of a move](../issues/aperas-skill.md#id/BlockNode:00D6HAJNRR001) does not say that `< /dev/null` is for a move only. Still open and related to the ghost: [the `danglingRefs` entry](../issues/core.md#id/BlockNode:00D258W098001). The [tests](#id/BlockNode:00D40RVX68000) that no group has today are written at the batch that requires them, not before.",
+    "text": "**In flight**: the plan is carried out in `Aperas.dev` on branch `js-apeironngn`. Done: [Batch 15](../planning/core.md#id/BlockNode:00D4NBFKAG001), the current code moved to `src/shell/` ([the go](#id/BlockNode:00D4NT02HR001), [checked](#id/BlockNode:00D4NYBTD0001)), which resolves [the code differs from the boundary](../issues/core.md#id/BlockNode:00D4NBNCF8001); [Batch 3](../planning/core.md#id/BlockNode:00D3XQQ2VG001), the engine's module in the emptied `src/apeironNgn/` with its meta-model, the Aperas and test schemas, the interface as types, the oracle and the `engine` test group, with no behaviour yet ([checked](#id/BlockNode:00D4QFMSDG001)); [Batch 4](../planning/core.md#id/BlockNode:00D3XQQ2VR006), the records, the literal fields of cardinality `one`, `optional` and `set`, the ids, the collections and the orders, tested against the oracle ([checked](#id/BlockNode:00D4QW4JXG001)); [Batch 5](../planning/core.md#id/BlockNode:00D3XQQ2VR00H), the reference and embed fields, the reverse side built on first use, the removal of a node and the build of Persistence, with a model-based test of the reverse against the oracle ([checked](#id/BlockNode:00D4RTZKK8001)); and [Batch 6](../planning/core.md#id/BlockNode:00D3XQQ2VR00V), the ordered fields, the partitioning mark, containment with the parent derived from the reverse of `children`, and the tree of the records, with a model-based test of 20 seeds against the oracle and two reproductions that failed on the reference copy and pass on the engine ([checked](#id/BlockNode:00D4SGY6JR001)); [Batch 7](../planning/core.md#id/BlockNode:00D3XQQ2VR014), the tombstone, the tombstone of a subtree, embedded nodes removed with their owner and `sweep(graph): Id[]`, with a model-based test of 20 seeds against the oracle, two reproductions that failed on the old engine and pass on the engine, and four mutations, three caught by the model test or a hand-written case and one by the hand-written cases only ([checked](#id/BlockNode:00D4T3JTP8001)); [Batch 8](../planning/core.md#id/BlockNode:00D3XQQ2VR01D), several graphs: the grammar of a graph's name, `createGraph`, `dropGraph`, the reads of a node's relations filtered to the graph they name, `graphOf` (built, confirmed by the user on 2026-10-20) and the refusal of an embedded id in a containment field, with a model test of 20 seeds against the oracle and the cross-graph cases written first ([checked](#id/BlockNode:00D5BATEM0000)); [Batch 9](../planning/core.md#id/BlockNode:00D3XQQ2VR01M), the mirror, the shell's first batch: the format and the dump of the engine's records, the load into the three graphs, the exact round trip, the table of settings and the mapping from a graph and a kind to a file, the rule that gives a new node its graph, `danglingRefs`, and rules 5 and 6 of the migration scripts, with the round trip of the migrated copy of the real mirror byte for byte for all 8 files and 31 mutations caught ([steps 1, 3, 4, 5 and 6 checked](#id/BlockNode:00D5C44ZSG001), [step 2 checked](#id/BlockNode:00D6H5V1BR001)); and [Batch 10](../planning/core.md#id/BlockNode:00D3XQQ2W0004), the lookups by a literal value, the shell's second batch: the three maps of a profile by its handle, a view by its name and an artifact or a folder by its stored path, one update function for each write that changes a map, `liveAtPath` for the live node at a path, `pathKeyOf` as the one place that gives the key, and the rule for a key held by two live nodes ([A key held by two live nodes](../design/core.md#id/BlockNode:00D6J3N65R001)), with a model test of 20 seeds against the oracle and 16 mutations all caught ([checked](#id/BlockNode:00D6HRZD8G001)); all nine are committed by the user on `js-apeironngn` (Batches 3 to 10 as `1b58fab`, Batch 15 as `eae00f1`), and the suites are near their budgets (after Batch 10, `commit` 904 of 904 in 50.0 s of 60 s, 49.5 s on a quiet machine, and `essential` 52 of 52 in 3.8 to 4.6 s of 5 s; after Batch 9, `commit` 862 of 862 in 44 s and `essential` 52 of 52 in 3.6 s; after the follow-up of Batch 8, `essential` 51 of 51 in 4.4 s and 3.9 s, and a run under load took 6.6 s, [checked](#id/BlockNode:00D5BFCTAR001)). Batch 3 closes in part [the store is read outside the helpers](../issues/core.md#id/BlockNode:00D2536E1R001) and the `type` shape part of [artifacts without a `type`](../issues/core.md#id/BlockNode:00D253D680001), Batch 4 closes in part [the kind of an id and an id-like string](../issues/core.md#id/BlockNode:00D2534RSG001), [the scans that list the ids of a kind](../issues/core.md#id/BlockNode:00D0W02KPG001), [`dehydrate`'s `localeCompare`](../issues/core.md#id/BlockNode:00D39EY5B0001) and [the order of a block's links](../issues/core.md#id/BlockNode:00D22ZK7C8001), and Batch 5 closes in part [`ownerOfLink` takes the first node whose `links` names a link](../issues/core.md#id/BlockNode:00D2593220001) and the scans again (its reverse reads), all seven issues still open for the rest. Batch 7 closes in part [tombstoning does not empty the node at every site](../issues/core.md#id/BlockNode:00D252W7VG001) for the nodes the engine tombstones, which stays open for the tombstones the mirror holds (Batch 9) and the callers (Batch 11), and files [a plain write sets or clears the tombstone marker and writes to a tombstone](../issues/core.md#id/BlockNode:00D4T7JDAR001), open until Enforcement is decided. Batch 8 resolves [the buckets of a reverse side are read across graphs](../issues/core.md#id/BlockNode:00D4SRWNPR001) with a dated entry (its reproduction is the test, `graphReads.test.ts`), and a follow-up of the Coder resolves [`insertItem` into an ordered embed field accepts any string](../issues/core.md#id/BlockNode:00D4SRT8KR001) (the embedded-id rule on an ordered embed field, tested over a schema that declares one) and adds a case that fails without the `moveItem` refusal; the refusal of an embedded id in a containment field, Batch 8's step 5, did not close that issue by itself. Batch 9 resolves [`dehydrate`'s `localeCompare`](../issues/core.md#id/BlockNode:00D39EY5B0001) (a simulated collation is its reproduction), [the loader writes `parent` from its own pair](../issues/core.md#id/BlockNode:00D2538VKR001) and [a repeated `@id` is logged and merged](../issues/core.md#id/BlockNode:00D2595QAG001) (each with a reproduction that fails on the reference copy's `rehydrateStore` and passes on the load), each with a dated entry, and [the thread-scope test inside the engine's directory](../issues/core.md#id/BlockNode:00D2590B2R001) for `Aperas.dev` only; it builds the computing half of [`danglingRefs` computed and not read by the service](../issues/core.md#id/BlockNode:00D258W098001), which stays open for the reading (a dated entry); the reference copy under `core/src/shell/` keeps its own code for all five until Batch 11 and Batch 12. Batch 10 resolves no issue: it builds the fix of [`findByExactPath` takes the first node found at a path](../issues/core.md#id/BlockNode:00D22ZMTKG001) and of the first-match behaviour of [three behaviours of the caller depend on the order of an unordered read](../issues/core.md#id/BlockNode:00D3YFXDC800D), and the maps for the four scans for a literal value of [full-store scans](../issues/core.md#id/BlockNode:00D0W02KPG001), each with a dated entry and open until Batch 11 moves the callers (the reference copy under `core/src/shell/` keeps the first-match readers). Batch 6 resolves [sibling indexes are not kept dense](../issues/core.md#id/BlockNode:00D252Y7WR001) and [a child can end with two `parent` pairs](../issues/core.md#id/BlockNode:00D2532JJR001), each with a dated entry, in the engine; the reference copy under `core/src/shell/` keeps both until Batch 11 and Batch 12. Batch 4 recorded as waiting step 6 (`exists` and `size`), which still waits, and the deletion half of step 4, which Batch 5 built with `removeNode`. Batches 4, 5 and 6 record as waiting the cases that throw `Undecided` for [Enforcement](../design/core.md#id/BlockNode:00D24N87T000M) and [Existence](../design/core.md#id/BlockNode:00D24N87T000K), Existence having been added to Batch 5's Gated by as it was to Batch 4's, and both having been written into Batch 6's Gated by, which said nothing; the Coder notes that Existence also decides nothing yet about a node that has only incoming pairs (it has a bucket in the map of the reverse and no record, and no read counts the bucket as existence). One design point of Batch 3 still waits for the user, in its [open points](../planning/core.md#id/BlockNode:00D4QHPDV8004): the rules the schema check read in; the other three are settled, one of them, clearing an embed field that keeps some of its nodes (by `removePair` and `addPair`), built by Batch 5, and another, that the sweep is an operation of the engine, built by Batch 7. Three points that Batch 6 found were settled on 2026-10-17 and are stated in the design: a node is owned or contained, never both ([Containment](../design/core.md#id/BlockNode:00D24N87SR00Z)); the order of the checks on a partitioning field is not a design point; the mark names no direction and the engine derives the climbed side from the cardinality ([Partitioning fields](../design/core.md#id/BlockNode:00D3CJDGH8001)). The engine holds no settings of a graph, they are the shell's, graphs are named by a `graph.domain` ([Graphs in memory](../design/core.md#id/BlockNode:00D3CHJXK8003)), and the mirror holds no `graph` field in a document ([Records by kind and by graph](../design/core.md#id/BlockNode:00D24N87SR018)). [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C), the layers above moved onto the engine, is surveyed and split into ten pieces of one coder turn each ([the survey](#id/BlockNode:00D763GYZ0001)), and its four design answers are settled and written into the design and the plan ([the answers](#id/BlockNode:00D766N4RR001)): `graphOf` is confirmed and a node exists when a document stands for it, a tombstone leaves its container, the listings are sorted in the shell and the canonical place is the first in code-point order, and a load that rejects a document is refused with a start-anyway option and a side copy. The split of `commit` into `commit`, `models` and `tools` is built, the preparation the survey asked for before piece 4 ([the split](../planning/core.md#id/BlockNode:00D792XEJ8001); staged, not committed): `essential` 74 of 74 in 3.6 s of 5 s, `commit` 888 of 888 in 15.4 s of 60 s, `models` 145 of 145 in 12.0 s of 30 s and `tools` 14 of 14 in 14.0 s of 30 s, and a test that holds each file in exactly one suite. Pieces 1 to 6 are done in `Aperas.dev` (staged, not committed; pieces 1 to 4 on the old code, piece 5 beside it, piece 6 the flip): [piece 1](../planning/core.md#id/BlockNode:00D76BQ2MR003) removed the manual links (`commit` 904 of 904 in 39.5 s), [piece 2](../planning/core.md#id/BlockNode:00D76BQ2N0000) wrote the group `commands/` for the reads (59 cases, 17 of 17 mutations caught), and [piece 3](../planning/core.md#id/BlockNode:00D76BQ2N0001) wrote the tests of the writes, `track` and `project` (79 cases and case `5g` of the ingest chain, 22 of 23 mutations caught) and the reproduction of the move into its own subtree (`commit` 1043 of 1043 in 49.5 s of 60 s, `essential` 74 of 74 in 4.6 s), [piece 4](../planning/core.md#id/BlockNode:00D76BQ2N0002) wrote the group `service/` for the service (50 cases in about 3 s on a service of its own in a scratch runtime directory and port, all 26 arms of `handle()` reached, none waived, 9 of 9 mutations caught; `commit` 938 of 938 in 18.2 s, `essential` 74 of 74 in 3.5 s), [piece 5](../planning/core.md#id/BlockNode:00D76BQ2N0003) built the engine-side handle and the write layer beside the old code, `core/src/shell/db.ts` and `writeLayer.ts`, which nothing imports yet, with the group `shell/` (37 cases in `commit`, 20 seeds in `models`; 23 of 24 mutations caught, the one missed an equivalent mutant; `commit` 975 of 975 in 18.1 s, `models` 165 of 165 in 13.7 s, `essential` 74 of 74 in 3.5 s, no old file changed)., and [piece 6](../planning/core.md#id/BlockNode:00D76BQ2N0004), the flip ([checked](#id/BlockNode:00D7T09ZXG001)), ran the shell, the cli and the service on the engine through the `Db`, the maps and the write layer, starting from a clean tree with `commit` 991 of 991 in 19.4 s (the service boots, reloads and flushes on it; the six old Oxigraph files stay as the frozen set with no diff, held by `shell/oldEngine.test.ts`; `Lookups.subtreeTombstoned` is removed; [the move into its own subtree](../issues/core.md#id/BlockNode:00D6HAEDCR001) is refused by the engine's no-cycle rule and its issue is resolved; twelve deliberate differences are recorded in [Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002), the main one being that a tombstone leaves its list and a removed node is pruned at the next sweep; 12 of 12 mutations caught; `commit` 999 of 999 in 19.8 s by the coder and 25.6 s by the orchestrator, `essential` 74 of 74 in 3.9 to 4.0 s, `models` 165 of 165, `tools` 14 of 14, the corpus group 17 of 17 on a migrated scratch copy). Steps 1, 2 and 4 of [Batch 12](../planning/core.md#id/BlockNode:00D3XQQ2W000S) are reworded to the leftover, the frozen set with its tests and the `oxigraph` dependency. Piece 7, the reads, link integrity, profiles and views, is next; the folder scan that skips dot-names is filed for piece 8 ([the issue](../issues/core.md#id/BlockNode:00D79JHQ40001)). The real mirror is not touched until the cutover. The real mirror is not migrated: the migration is applied at the cutover only. The design and the plan were completed before them, on 2026-10-16: the [decisions on the dependency survey](#id/BlockNode:00D4MJBY98001) and [the five answers](#id/BlockNode:00D4NN1G50001) ([recorded](#id/BlockNode:00D4NQ73AR001)). The [one-time migration of the mirror](#id/BlockNode:00D3Y1N5Y8001) is settled ([Batch 9, step 6](../planning/core.md#id/BlockNode:00D3Y3DMTR001)) and its dry run on a clone passed ([the dry run](../planning/core.md#id/BlockNode:00D4JYSYZ0001)); the live blocks and the artifact that have no parent stay as they stand, as the test of [the garbage-collection issue](../issues/core.md#id/BlockNode:00D1A2AY68001) ([decided](#id/BlockNode:00D4NX8JHR001)), and what Batch 9 still leaves open is in its [open points](../planning/core.md#id/BlockNode:00D3YSA5T8001). The migration is applied to the real mirror at the cutover only ([the rule in step 6](../planning/core.md#id/BlockNode:00D4JYSYZ0003)), after a fresh dry run on a clone. The dry run raised [`concepts.md` has no file under `artifacts/`](../issues/core.md#id/BlockNode:00D4JZ0A7R001). The fix of [the ghost folder](../issues/core.md#id/BlockNode:00D417WK80001) and [the `ingest` prompt](../issues/core.md#id/BlockNode:00CNX1T4XG001) is committed on branch `oxigraph` of `Aperas/` as `eb352f5`. Deferred: [the fix of the busy service that looks stopped](../issues/core.md#id/BlockNode:00D457SD1R001), with its directions not chosen, and the single write measurement at full speed ([the cost of a write](../issues/core.md#id/BlockNode:00D457M2F8001)). The working service has looped twice on a move of a node into its own subtree (the loop is in the next walk of the parent chain, not in the move): for a day and 20 hours until the orchestrator stopped it on 2026-10-19, and again on 2026-10-20 until it was killed and started again, each time with the mirror on disk intact; [the issue](../issues/core.md#id/BlockNode:00D6HAEDCR001) is resolved in `Aperas.dev` by piece 6 of Batch 11 (the working service runs the old code until the cutover and keeps the loop), and [the skills' recipe of a move](../issues/aperas-skill.md#id/BlockNode:00D6HAJNRR001) has said since v4.8 that `< /dev/null` is for a move only. Still open and related to the ghost: [the `danglingRefs` entry](../issues/core.md#id/BlockNode:00D258W098001). The [tests](#id/BlockNode:00D40RVX68000) that no group has today are written at the batch that requires them, not before.",
     "parent": "BlockNode:00CF1WZE10002",
     "type": "listItem",
     "children": []
@@ -116410,7 +116480,7 @@
       }
     ],
     "title": "**4. The old engine gone from the shell**",
-    "text": "**4. The old engine gone from the shell**: what is left in `src/shell/` of the old engine once Batch 11 has flipped the shell is the frozen set, and it is deleted: `storeAccess.ts`, `shape.ts`, `store.ts`, `dehydrate.ts`, `threadScope.ts` and the IRI and literal codec of `vocab.ts` with `NODE_BASE`, with their tests (step 1). The engine access of `node.ts` is not part of it: piece 6 of Batch 11 replaces those functions in place, so nothing is left to delete there. The test `shell/oldEngine.test.ts` of piece 6, which lists the frozen set and fails if any other module imports `oxigraph` or a frozen file, is removed with it.",
+    "text": "**4. The old engine gone from the shell**: what is left in `src/shell/` of the old engine after Batch 11 has flipped the shell is the frozen set, and it is deleted: `storeAccess.ts`, `shape.ts`, `store.ts`, `dehydrate.ts`, `threadScope.ts` and `vocab.ts` (the IRI and literal codec with `NODE_BASE` and `nodeExists`; `nodeKindFromId` and `isNodeRef` already live in `shell/nodeIds.ts`, so the whole file goes), with their tests and the two support files (step 1). The engine access of `node.ts` is not part of it: piece 6 of Batch 11 replaced those functions in place, so nothing is left to delete there. The test `shell/oldEngine.test.ts` of piece 6, which lists the frozen set and fails if any other module imports `oxigraph` or a frozen file, is removed with it.",
     "parent": "BlockNode:00D3XQQ2W000S",
     "type": "listItem",
     "children": []
@@ -125864,7 +125934,7 @@
     "@type": "BlockNode",
     "title": "**A move of a node after an anchor inside its own subtree is not refused by the working engine, and the next walk of the parent chain loops the service**",
     "text": "**A move of a node after an anchor inside its own subtree is not refused by the working engine, and the next walk of the parent chain loops the service**: found 2026-10-19 by the orchestrator in the check of the Coder's Turn 13 (Batch 9, step 2) and agreed to be filed. Filed 2026-10-19. It has frozen the service twice, from 2026-10-17 to 2026-10-19 and on 2026-10-20: the first time a pipe replaced by `< /dev/null` turned an insert into a move, the second time a wrong node id given to a move.",
-    "parent": "BlockNode:00CF1WZ4JG002",
+    "parent": "BlockNode:00CF1WZ4JG00J",
     "type": "listItem",
     "children": [
       "BlockNode:00D6HAEDCR002",
@@ -125872,7 +125942,8 @@
       "BlockNode:00D6HAEDCR007",
       "BlockNode:00D6HAEDCR00A",
       "BlockNode:00D6HAEDCR00C",
-      "BlockNode:00D6HAEDCR00E"
+      "BlockNode:00D6HAEDCR00E",
+      "BlockNode:00D7T575N8001"
     ]
   },
   {
@@ -129796,7 +129867,8 @@
     "children": [
       "BlockNode:00D76KS838001",
       "BlockNode:00D771XJX0001",
-      "BlockNode:00D79JW9AR001"
+      "BlockNode:00D79JW9AR001",
+      "BlockNode:00D7T3QAV8001"
     ]
   },
   {
@@ -129911,7 +129983,8 @@
     "parent": "BlockNode:00D3XQQ2W000C",
     "type": "listItem",
     "children": [
-      "BlockNode:00D76KTFMR001"
+      "BlockNode:00D76KTFMR001",
+      "BlockNode:00D7T4PZ7R001"
     ]
   },
   {
@@ -129951,7 +130024,9 @@
     "text": "**Piece 8: ingest, track and project**: (step 5; the readers of the old lookups in `artifacts.ts` and `folders.ts`). Replaces: `findLiveByKindAndPath` and `findLiveArtifactByPath` (`artifacts.ts:188`, `:194`; callers `:67`, `:216`, `:317`, `:710`, `:763`, `kgIngest.ts:48`) by `liveAtPath` with the kind as a filter; the folder ingest's local maps by path (`folders.ts` 41 to 114, `existingByPath`, `folderIdByPath`, `artifactIdByPath`, and those in `artifacts.ts`) by the one map, with the write layer telling it after each accepted write (decided at the Batch 10 check); `positionsEqual` (`artifacts.ts:371`) by a comparison of sorted lists; the ghost filter `allLiveIdsOfKind` (`artifacts.ts:203`, `folders.ts:27`: `path !== undefined`) by a test that a node has a record and a title, since a ghost has a `parent` and no document; the graph of each node an ingest creates by `graphOfNewNode`. Deletes: the two `find` functions of `artifacts.ts` and the local maps. Tests: the files of piece 3 (`track.test.ts`, `project.test.ts`, the second-ingest case) and `ingest/chain.test.ts` unchanged; new `commands/ingest.test.ts` (a tracked artifact and a folder ingested in the same run found by the one map; a file renamed on disk; an ingest that reuses a path after a removal; a ghost folder is not an artifact; a thread artifact lands in `threads.tree`). Done when: those pass; the two `find` functions and the local maps are gone; the mutations survive none (`positionsEqual` unsorted, a map not told after a write); `tsc`, `essential`, `commit`. Gated by: the open point on order differences (for `positionsEqual`, settled), [No set of live ids](../design/core.md#id/BlockNode:00D24N87T000X). Closes: the second of the three behaviours in [the order issue](../issues/core.md#id/BlockNode:00D3YFXDC800D).",
     "parent": "BlockNode:00D3XQQ2W000C",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00D7T4RDMR001"
+    ]
   },
   {
     "@id": "BlockNode:00D76BQ2N0007",
@@ -129976,7 +130051,9 @@
     "text": "**Piece 9: writes and tombstones**: (step 4). The open point [Tombstones leave their container](../planning/core.md#id/BlockNode:00D3YG50B0001) is settled: the design wins. Replaces: `applyTombstone` and `tombstoneLiveSubtree` (`node.ts:850` to `:878`; callers `kgRemove.ts:42`, `artifacts.ts:272`, `kgUpdate.ts:332`, `folders.ts:104`, `node.ts:803`) by the engine's `tombstone` and `tombstoneSubtree` through the write layer, the copying of `type`, `title` and `text` from the reconcile record staying the shell's; the tombstone leaves its container, so `tree --tombstoned` loses its source for a removed child, `toPath()` of a tombstone is `null` (13 sites in `core` and 15 in `cli`; the fallbacks at `node.ts:1876`, `:1900` already take `null`), a removal ends by tombstoning a container it empties (a rule at the time of the removal, in the same write), and `tombstoneVacuousContainers` keeps only the boot-time rule over a list or a textless item with no live child; `kgRemove.ts`, `kgInsert.ts`, `kgUpdate.ts`, `kgRetype.ts` onto the write layer's `insertItem`, `moveItem` and `removeItem` directly. Deletes: the clearing of `children`, `links` and `props` by the shell (the engine's tombstone does it). Tests: `commands/remove.test.ts` and `insert.test.ts` of piece 3 with their expectations on `--tombstoned` and on the vacuous container changed by the decision, a model case in `shell/writeLayer.model.test.ts` (a tombstone is in no list; a removal that empties a container tombstones it), and a test that `tree --tombstoned` shows what the decision says. Done when: those pass; the mirror a flush writes holds no tombstone in a `children` list (checked on a fixture); mutations on the cascade and on the list removal are caught; `tsc`, `essential`, `commit`. Gated by: the open point named, settled, which also gated piece 10.",
     "parent": "BlockNode:00D3XQQ2W000C",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00D7T4SV0G001"
+    ]
   },
   {
     "@id": "BlockNode:00D76BQ2N0008",
@@ -130055,7 +130132,9 @@
     "text": "**Piece 10: the sweeps and the service lifecycle**: (steps 7 and 8). Replaces: `pruneUnreachableTombstones` (`node.ts:2159` to `:2189`) by the write layer's `sweep` for each graph (the step is one sweep, not three); `pruneStaleUnfolds` (`node.ts:2063` to `:2075`) dropped (the engine drops an `unfolds` entry with its target, and the migration strips the ones that already dangle); `tombstoneVacuousContainers` kept as the boot rule of piece 9; in `service.ts` the three sweep sites at `:201` to `:203`, `:364` to `:372`, `:417` to `:419` and `:473` to `:476`; the two timers (`:96`, `:97`, `:444`, `:447`) by one timer for each graph at the interval of the table of settings (`tree` 10 s, `threads.tree` and `treeviews` 3 s); `stampAll` and `diverged` over the mapping's files; the boot or reload with `rejected` or `errors` in the load's result by the rule of [Packaging — Design](../design/packaging.md#id/BlockNode:00D76B1ZTR001) (a load that rejects a document is refused, with a start-anyway option and a side copy of the raw rejected documents); `reloadStore` building a new `Db` and dropping the old one (`dropGraph`, Batch 8) instead of replacing a store without freeing it; `quadCount` (`:163`, `:387`, `corpus.ts`, `copy.test.ts`, the round-trip tests) by the count of records; `danglingRefs` read or left unread (it waits on [The service lifecycle](../design/core.md#id/BlockNode:00D24N87T000W)). Deletes: `pruneStaleUnfolds`, `pruneUnreachableTombstones`, `removeDanglingUnfolds` and the old `reloadStore` path. Tests: `service/lifecycle.test.ts` of piece 4 with the sweep counts, the intervals (a write in `threads.tree` is flushed at its interval; read through the setting, not by sleeping), the refusal on a mirror that the load cannot read in full, and a reload that frees the old graphs; `tombstone` and `sweep` cases in `shell/writeLayer.model.test.ts`. Done when: those pass; nothing in `service.ts` names `dehydrate`, `rehydrateStore` or a quad; the differential run of [Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002) is Batch 13's and is not run here; `tsc`, `essential`, `commit`. Gated by: the open point on tombstones (settled), the rule for a load that rejects a document (settled, in [Packaging — Design](../design/packaging.md#id/BlockNode:00D76B1ZTR001); [The service lifecycle](../design/core.md#id/BlockNode:00D24N87T000W) in the design points to it) and [Enforcement](../design/core.md#id/BlockNode:00D24N87T000M) (the load's `errors`).",
     "parent": "BlockNode:00D3XQQ2W000C",
     "type": "listItem",
-    "children": []
+    "children": [
+      "BlockNode:00D7T4V82G001"
+    ]
   },
   {
     "@id": "BlockNode:00D76BQ2N0009",
@@ -132491,6 +132570,968 @@
     "title": "00D79K9158001",
     "text": "Promoted (2026-10-20) to [the done record of piece 5](../planning/core.md#id/BlockNode:00D79JRVH8001), [the entry of piece 6](../planning/core.md#id/BlockNode:00D79JW9AR001) (it removes `Lookups.subtreeTombstoned`), [the Dashboard's In flight](#id/BlockNode:00D3Y41ARR002), [the issue of the folder scan that skips dot-names](../issues/core.md#id/BlockNode:00D79JHQ40001) and the figures of [the tiers](../design/testing.md#id/BlockNode:00D1D5F648000) (`commit` 56 files, 975 cases, 18.1 s; `demand` 71 files; `models` 8 files; sixteen groups).",
     "parent": "BlockNode:00D79G81AR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7S9A300001",
+    "@type": "BlockNode",
+    "title": "**Go for the flip, 2026-10-21**",
+    "text": "**Go for the flip, 2026-10-21**: the user committed the checkpoint (`Aperas.dev` `1b15432`: Batch 11 pieces 1 to 5 and the split of the suites; `AperasKG` `bb7792b`) and said to go: the coder implements piece 6, the flip, the one change that moves what the shell runs on (steps 1 and 2 of Batch 11, the boot, reload and flush of step 8, the wiring of Batch 10's maps, the fixtures). Piece 4's gaps were closed (`service/` 66 cases, 52 of 52 mutations of `service.ts` caught; four branches waived by name) and checked by the orchestrator (`commit` 991 of 991 in 18.1 s, `essential` 74 of 74 in 3.4 s, `models` 165 of 165 in 13.3 s). The flip is judged against these suites and the tests already written on the old code (the three of `commands/`, the four of piece 3, `service/`, the corpus), which must stay green or be an entry of the list of deliberate differences. The old Oxigraph files stay as a frozen set, guarded by a test, until Batch 12; the working service and the reference copy run from `Aperas/` and are not touched.",
+    "parent": "BlockNode:00D3XJ7GTR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T09ZXG001",
+    "@type": "BlockNode",
+    "title": "**The flip (piece 6) checked, 2026-10-21**",
+    "text": "**The flip (piece 6) checked, 2026-10-21**: the coder was cut off by the session limit, resumed after the reset and finished. In `Aperas.dev/monorepo` (`js-apeironngn`, 65 files staged, not committed) the core and cli sources run on the engine through the `Db` and the write layer, the service boots, reloads and flushes on it, `Lookups.subtreeTombstoned` is removed, the first-match reproduction is the regular test (the live node under both orders), `commands/moveIntoOwnSubtree.test.ts` is named in `commit` and passes by the engine's no-cycle rule, `shell/oldEngine.test.ts` guards the frozen set (the six old files have no diff), and two tests are added (`commands/containers.test.ts`, `service/refusal.test.ts`). The orchestrator ran: `tsc` clean for core, cli and web; `essential` 74 of 74 in 4.0 s, `commit` 999 of 999 in 25.6 s, `models` 165 of 165, `tools` 14 of 14, `--group shell` 61 of 61, `--group corpus` 17 of 17 (migrated scratch copy), load 1 to 2.5; the coder's 12 of 12 mutations on the main seams caught; 12 deliberate differences, each with its reason, in the coder's Report (the main one: a tombstone leaves its list, a removal also tombstones the container it empties, and a removed node is pruned at the next sweep). Decided by the orchestrator on the coder's two questions: (1) a removed artifact's tombstone does not survive the sweep: it is the consequence of the user's tombstone answer, `track --reverse` forgets it once pruned and a later track makes a new artifact: a deliberate difference; (2) a textless list item written with no child is tombstoned at boot: intended, it is the boot rule over a container with no live child the user confirmed. The coder started the working service (down with no process, the standing arrangement) though its Ask said not to; it is up. Next: the grapher files piece 6, rewords Batch 12 steps 1, 2 and 4 to the leftovers as decided, and records the deliberate differences; then piece 7.",
+    "parent": "BlockNode:00D3XJ7GTR001",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D7T6DGC0001"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8001",
+    "@type": "BlockNode",
+    "title": "**Done, 2026-10-21**",
+    "text": "**Done, 2026-10-21**: in `Aperas.dev/monorepo` on branch `js-apeironngn`, staged and not committed (65 files, 1,142 insertions, 1,102 deletions, nothing unstaged). The shell, the cli and the service run on the engine through the `Db` and the write layer: the service boots, reloads and flushes on it, the six frozen files have no diff, and the real mirror and the checkout `Aperas/` were only read. The Coder was cut off by the session limit and finished after the reset.",
+    "parent": "BlockNode:00D76BQ2N0004",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D7T3QAV8002",
+      "BlockNode:00D7T3QAV8003",
+      "BlockNode:00D7T3QAV8004",
+      "BlockNode:00D7T3QAV8005",
+      "BlockNode:00D7T3QAV8006",
+      "BlockNode:00D7T3QAV8007",
+      "BlockNode:00D7T3QAV8008",
+      "BlockNode:00D7T3QAV8009",
+      "BlockNode:00D7T3QAV800A",
+      "BlockNode:00D7T3QAV800B",
+      "BlockNode:00D7T3QAV800C",
+      "BlockNode:00D7T3QAV800D",
+      "BlockNode:00D7T3QAV800E"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D7T3QAV8002:props:StringProp:00D7T3QYBR000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T3QAV8002:props:StringProp:00D7T3QYBR001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**What moved in `core`**",
+    "text": "**What moved in `core`**: in `node.ts` the engine access was replaced in place: `childrenOf`, `appendOrderedChild`, `insertOrderedChild`, `decodeObj`, `readField`, `idOf`, `clearField`, `mintEmbedded`, `hardDeleteNode`, `writeField`, `ApeironInstance`, `defineAccessors`, `wrap`, `backlinks`. The accessors are generated from the closed Aperas schema (`FIELDS_OF_KIND`), the reads go by `engine.items`, `values`, `graphOfId` and `backlinksOf`, the writes by `db.write`. The list of a container is written as the engine's splices (`setOrderedChildren`, `placeUnder`, which leaves the old container first and puts the child back when the engine refuses). A node is made by the new `createNode` and `wrapOrCreate`, and a write to an id with no record throws. `tombstoneNode`, `applyTombstone` and `tombstoneLiveSubtree` run on the engine's `tombstone` and `tombstoneSubtree`; `tombstoneEmptiedContainers` and the new `tombstoneVacuousContainers` rule are the two container rules. `findProfileByHandle`, `findTreeViewByName` and `tree.ts` `findByExactPath` read the maps (`findByExactPath` is `liveAtPath` under its old name). A new file `shell/nodeIds.ts` holds `nodeKindFromId` and `isNodeRef` by the grammar of `apeironNgn/ids`, so `vocab.ts` is not edited (the plan split `vocab.ts` in place). `Store` is replaced by `Db` in `artifacts.ts`, `folders.ts`, `linkIntegrity.ts`, `resolve.ts`, `resolveCreate.ts` and `tree.ts`; the creation sites (`trackArtifact`, the holders of `resolveCreate.ts`, the folder tree) call `createNode` with a path or an `under`. `Lookups.subtreeTombstoned` is removed with its two test uses; `mirrorDump.ts` gains `documentOf` and a `select` filter; `db.ts` gains `loadRefusal`.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8003",
+    "@type": "BlockNode",
+    "title": "**What moved in `cli` and the service**",
+    "text": "**What moved in `cli` and the service**: the 16 `kg*.ts` are on `Db`; `kgShow` prints `documentOf`; `kgRemove` ends by `tombstoneEmptiedContainers`; `kgInsert`, `kgUpdate` and `kgProfile` make their nodes with `createNode`; `kgInit` writes the empty files from `KINDS_OF_GRAPH` and `EMPTY_FILE_TEXT`. `service.ts` boots by `openDb` (it exits with status 1 and a cleared lock, logging the ids and files, when the load returns `rejected` or `errors`), stamps and flushes the files of the mapping (the content is the main graph, `.state/` is the threads and the views), reloads by `openDb` and refuses to replace the graph when the load is not whole (also for `--discard`, which reads the disk first), and logs and returns record counts. Deleted: `apeironNgnSmokeTest.ts` and `verifyDanglingUnfolds.ts`; ported: `verifyLinkRefusals.ts`.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8004",
+    "@type": "BlockNode",
+    "title": "**The frozen set and its guard**",
+    "text": "**The frozen set and its guard**: `storeAccess.ts`, `shape.ts`, `store.ts`, `dehydrate.ts`, `threadScope.ts` and `vocab.ts` stay in the tree, compiled, with no diff (`git diff --cached --stat` on the six is empty). `shell/oldEngine.test.ts` (4 cases, named in `commit`) holds them: the set is in the tree; no module outside the set and outside the tests imports `oxigraph` or a frozen file; a frozen file imports only the frozen set, `oxigraph`, `graphConfig` and the node builtins; and the scanner finds what it should (a probe of import specifiers). It goes with the frozen set at Batch 12.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8005",
+    "@type": "BlockNode",
+    "title": "**The fixtures**",
+    "text": "**The fixtures**: `support/fixture.ts` builds a `newDb()` with the three graphs, keeps the property name `store` so the test files that use it keep their text, and writes the empty mirror; `support/corpus.ts` copies the real mirror to a scratch directory and runs `scripts/migrate-mirror.py` on the copy; `support/oldFixture.ts` and `support/oldCorpus.ts` (new) keep the frozen files' own tests (`store/storeAccess.test.ts`, `store/roundtrip.test.ts`, `corpus/roundtrip.test.ts`) running on an old `Store` made from the dump of the handle and on an unmigrated copy; `serviceHarness.dumpMirror` dumps the handle.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8006",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3QAV8006:links:Link:00D7T3QYD0000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQW6AR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3QAV8006:links:Link:00D7T3QYD0000:props:StringProp:00D7T3QYD0001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "783"
+          }
+        ]
+      }
+    ],
+    "title": "**The tests turned**",
+    "text": "**The tests turned**: `commands/moveIntoOwnSubtree.repro.ts` is renamed `.test.ts` and named in `commit`, and it ends by itself with a refusal that names the cause, the engine's no-cycle rule, with the service answering; its child also checks that a refused move changes nothing. The first-match case of `commands/resolve.test.ts` is the regular test (the live node under both orders, through `liveAtPath`), and the reproduction of the reference reader in `lookups/maps.test.ts` is retired with its subject. `store/dangling-unfolds.test.ts` and `corpus/dangling-unfolds.test.ts` are retired (the engine's `dropWithTarget` case in `engine/removal.test.ts` and `store/views.test.ts` 9 cover them). The tests that changed with a deliberate difference are named under each difference in [Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002); every other test of the moved groups passes with its text unchanged. After the edits of part 3, by group: commands 139 of 139, service 66 of 66, store 16 of 16, linking 10 of 10, links 3 of 3, gc 2 of 2, folder 6 of 6, ingest 9 of 9.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8007",
+    "@type": "BlockNode",
+    "title": "00D7T3QAV8007",
+    "text": "**The checks and timings, with the load** (load average of 1, 5 and 15 minutes in brackets): the baseline before the piece, on a clean tree at `1b15432`, was `tsc` of `core` 0 errors, `web` 0, `cli` 1 (the type of a `find` in `service/ops.test.ts:334`, already there), and `commit` 991 of 991 in 19.4 s [0.70 before]. After, by the Coder: `tsc` of `core`, `cli` and `web` (`tsconfig.app.json`) 0 [2.2 at the three]; `essential` 74 of 74 in 3.9 s of 5 s [2.33 1.41 1.12 before]; `commit` 999 of 999 in 19.8 s of 60 s [2.62 1.49 1.15 before, 3.19 after]; `models` 165 of 165 in 14.6 s of 30 s [3.19 before]; `tools` 14 of 14 in 14.6 s [3.29 before]; `--group corpus` 17 of 17 in 41.0 s on a migrated scratch copy [2.64 before, 2.80 after]. By the orchestrator: `tsc` clean for `core`, `cli` and `web`; `essential` 74 of 74 in 4.0 s; `commit` 999 of 999 in 25.6 s; `models` 165 of 165; `tools` 14 of 14; `--group shell` 61 of 61; `--group corpus` 17 of 17 on a migrated scratch copy; load 1 to 2.5. The two figures for `commit` (19.8 s and 25.6 s) were taken on different loads and are not compared.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8008",
+    "@type": "BlockNode",
+    "title": "00D7T3QAV8008",
+    "text": "**The 12 mutations**, each applied by a scratch script that runs `npm run verify -- --group <g>` under `timeout 100` and restores the file; 12 of 12 caught: (1) a literal write that bypasses the write layer so the maps are not told (commands, 137 failed); (2) a tombstone that only sets the marker and stays in its list (commands, 3); (3) `isThreadsPath` false for the graph of a new node (service, 2); (4) `trackArtifact` creating the artifact without its path (ingest, 9); (5) the boot not refusing on `rejected` or `errors` (service, 2); (6) the reload not refusing (service, 1); (7) a refused move that does not put the child back (commands, 1: the check added to the child); (8) a child that does not leave its old container before the insert (commands, 5); (9) the removal that does not tombstone the container it empties (commands, 3); (10) a divergence guard that never diverges (service, 7); (11) an `oxigraph` import in the shell (`oldEngine`, 1); (12) `findByExactPath` answering the first node found (commands, 1). No survivor.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV8009",
+    "@type": "BlockNode",
+    "title": "**The extra tests**",
+    "text": "**The extra tests**: `shell/oldEngine.test.ts` (above); `commands/containers.test.ts` (3 cases: the removal rule on a list, on a textless wrapper and on a chain; the boot rule) and `service/refusal.test.ts` (2 cases: the boot refuses and leaves no lock; a reload, plain and with `--discard`, refuses and the memory is kept), both named in `commit`. The test services ran with a runtime directory, a port and roots of their own, asserted before the start; `pgrep` for `aperas-test-` found nothing left after each run.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV800A",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3QAV800A:links:Link:00D7T3QYD8000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQW6AR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3QAV800A:links:Link:00D7T3QYD8000:props:StringProp:00D7T3QYD8001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "86"
+          }
+        ]
+      }
+    ],
+    "title": "**The list of deliberate differences**",
+    "text": "**The list of deliberate differences**: twelve, each with its reason, are recorded in [Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002) of the Verification Plan, where the plan keeps that list. The main one: a tombstone leaves its list, a removal also tombstones the container it empties, and a removed node is pruned at the next sweep.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV800B",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3QAV800B:links:Link:00D7T3QYD8002",
+        "@type": "Link",
+        "target": "BlockNode:00D24N87SR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3QAV800B:links:Link:00D7T3QYD8002:props:StringProp:00D7T3QYD8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "193"
+          }
+        ]
+      }
+    ],
+    "title": "**Decided on the Coder's two questions** (by the orchestrator, 2026-10-21)",
+    "text": "**Decided on the Coder's two questions** (by the orchestrator, 2026-10-21): (1) the tombstone of a removed artifact does not survive the sweep: it is the consequence of the tombstone answer in [Core — Design](../design/core.md#id/BlockNode:00D24N87SR001), `track --reverse` forgets the artifact once it is pruned and a later `track` of the path makes a new artifact with new ids, and this is a deliberate difference; (2) a textless list item written with no child is tombstoned at boot: intended, it is the boot rule over a container with no live child, which the user confirmed.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV800C",
+    "@type": "BlockNode",
+    "title": "**Left to their pieces** (the Report)",
+    "text": "**Left to their pieces** (the Report): the sort rules and the callers' names of `findByExactPath` (piece 7); `findLiveByKindAndPath` (piece 8); the engine `sweep` instead of `pruneUnreachableTombstones`, the sweeps and timers of the service, `dropGraph` on reload and the start-anyway option with the side copy of the rejected documents (piece 10). The part of piece 9 that the Ask pulled in is done here: `applyTombstone`, `tombstoneLiveSubtree`, `kgRemove` and the boot rule, with the tombstone leaving its container.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV800D",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3QAV800D:links:Link:00D7T3QYD8004",
+        "@type": "Link",
+        "target": "BlockNode:00D6HAEDCR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3QAV800D:links:Link:00D7T3QYD8004:props:StringProp:00D7T3QYD8005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "12"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T3QAV800D:links:Link:00D7T3QYD8006",
+        "@type": "Link",
+        "target": "BlockNode:00D2536E1R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3QAV800D:links:Link:00D7T3QYD8006:props:StringProp:00D7T3QYD8007",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "200"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T3QAV800D:links:Link:00D7T3QYD8008",
+        "@type": "Link",
+        "target": "BlockNode:00D22ZMTKG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3QAV800D:links:Link:00D7T3QYD8008:props:StringProp:00D7T3QYD8009",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "313"
+          }
+        ]
+      }
+    ],
+    "title": "**Closes**",
+    "text": "**Closes**: [a move of a node after an anchor inside its own subtree](../issues/core.md#id/BlockNode:00D6HAEDCR001) (refused by the no-cycle rule, with the service answering), and the shell's side of [the store is read outside the helpers](../issues/core.md#id/BlockNode:00D2536E1R001); the first-match reader of [`findByExactPath`](../issues/core.md#id/BlockNode:00D22ZMTKG001) is on the maps, and the issue stays open until the callers move (piece 7). Each has its dated entry.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3QAV800E",
+    "@type": "BlockNode",
+    "title": "**Findings of the Coder along the way**",
+    "text": "**Findings of the Coder along the way**: a first set of service tests failed in a cascade because a failed assertion before `brokenBytes = blocks` left the variable empty and the next cases wrote an empty file (found by reading the first failure, not the last); `pgrep -af \"aperas-test-\"` matches its own shell, so the check for leftovers drops the `pgrep` line.",
+    "parent": "BlockNode:00D7T3QAV8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3XZA8001:links:Link:00D7T3YJRR000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3XZA8001:links:Link:00D7T3YJRR000:props:StringProp:00D7T3YJRR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "53"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D7T3XZA8001:props:StringProp:00D7T3YJR8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T3XZA8001:props:StringProp:00D7T3YJR8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**The deliberate differences of the flip (piece 6 of [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C)), 2026-10-21**",
+    "text": "**The deliberate differences of the flip (piece 6 of [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C)), 2026-10-21**: twelve, each with its reason; a test that changed shows under its difference, and every other test of the moved groups passes with its text unchanged. They come from the design answers, from the engine's rules and from the retirement of the reference code.",
+    "parent": "BlockNode:00D3XQW6AR002",
+    "type": "listItem",
+    "children": [
+      "BlockNode:00D7T3XZA8002",
+      "BlockNode:00D7T3XZA8003",
+      "BlockNode:00D7T3XZA8004",
+      "BlockNode:00D7T3XZA8005",
+      "BlockNode:00D7T3XZA8006",
+      "BlockNode:00D7T3XZA8007",
+      "BlockNode:00D7T3XZA8008",
+      "BlockNode:00D7T3XZA8009",
+      "BlockNode:00D7T3XZA800A",
+      "BlockNode:00D7T3XZA800B",
+      "BlockNode:00D7T3XZA800C",
+      "BlockNode:00D7T3XZA800D",
+      "BlockNode:00D7T3XZA800E",
+      "BlockNode:00D7T3XZA800F"
+    ]
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8002",
+    "@type": "BlockNode",
+    "props": [
+      {
+        "@id": "BlockNode:00D7T3XZA8002:props:StringProp:00D7T3YJR8002",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T3XZA8002:props:StringProp:00D7T3YJR8003",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00D7T3XZA8002",
+    "text": "**Difference 1, a tombstone leaves the list of its container** (design answer 2): `tree` and `unfold` show nothing in place for a removed child, with `--tombstoned` too; the tombstone is shown by its id (`tree <id> --tombstoned`, `unfold <id> --tombstoned`), and a link to a tombstoned target keeps its `(tombstoned)` tag. Tests adapted: `commands/render.test.ts` (2), `commands/remove.test.ts` (3), `service/ops.test.ts` (2).",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8003",
+    "@type": "BlockNode",
+    "title": "00D7T3XZA8003",
+    "text": "**Difference 2, a removed node is unreachable, so a sweep prunes it** (it follows from 1): a removed artifact, folder or block leaves its list and is pruned at the next boot, reload, clobber or stop (it was kept before because its container reached it). The boot line of `service/lifecycle.test.ts` reads `3 unreachable tombstone(s), 1 vacuous container(s), 1 stale unfold(s)` (it was 1, 1, 1: the removed item and the vacuous list itself are now in no list); `FODDER_PRUNED` is 4 (it was 1: artifact, heading, item, list); the case that waited for the vacuous list and the artifact to stay in the file now expects them pruned; a case that asked for a removed artifact's tree after the sweep now expects the refusal; `service/ops.test.ts` can no longer unfold a removed child by its id after an earlier sweep in the file.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8004",
+    "@type": "BlockNode",
+    "title": "00D7T3XZA8004",
+    "text": "**Difference 3, a removal tombstones the container it empties, in the same write** (design answer 2; `tombstoneEmptiedContainers` in `kgRemove`): a `list`, or a textless `listItem`, left with no live child goes with the removal, and so on upward, so the sweep's vacuous count is 0 after a removal (`lifecycle.test.ts` expects `[FODDER_PRUNED, 0, 0]`). The boot rule `tombstoneVacuousContainers` is now \"a `list`, or a textless `listItem`, with no child\" (before: with children, all tombstoned). The log words `1 vacuous container(s) tombstoned` for a reload or a clobber after a removal no longer appear.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8005",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3XZA8005:links:Link:00D7T3YJRR002",
+        "@type": "Link",
+        "target": "BlockNode:00D25686RR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3XZA8005:links:Link:00D7T3YJRR002:props:StringProp:00D7T3YJRR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "86"
+          }
+        ]
+      }
+    ],
+    "title": "00D7T3XZA8005",
+    "text": "**Difference 4, the first node found at a path is the live one** (the Ask's decision, [How a path names one node](../design/core.md#id/BlockNode:00D25686RR001)): `findByExactPath` is `liveAtPath`; `commands/resolve.test.ts` asserts the live node under both orders; the reproduction of the reference reader in `lookups/maps.test.ts` is retired, its subject, the old reader, no longer existing in the shell (the primitive's own cases stay).",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8006",
+    "@type": "BlockNode",
+    "title": "**Difference 5, a move into its own subtree is refused by the engine's no-cycle rule**",
+    "text": "**Difference 5, a move into its own subtree is refused by the engine's no-cycle rule**: the shell words the refusal (`cannot be moved into its own subtree`) and puts the child back, so a refused move changes nothing; `commands/moveIntoOwnSubtree.test.ts` is a regular test in `commit`.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8007",
+    "@type": "BlockNode",
+    "title": "00D7T3XZA8007",
+    "text": "**Difference 6, a node must be made before it is written, and its id must be of the engine's grammar** (13 Crockford characters; a reference field still takes any string, so a ghost in a `children` list is allowed): tests that built nodes with `wrap` on a fresh id use `createNode` (`gc/collection`, `store/views`, `links/backlinks`, `folder/ghost` with a generated id, `service/lifecycle` `addList`); a block is made `under` a node, so a test with no node first makes an artifact.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8008",
+    "@type": "BlockNode",
+    "title": "**Difference 7, removing an embed pair removes the embedded node**",
+    "text": "**Difference 7, removing an embed pair removes the embedded node**: `linking/integrity.test.ts` drops the link with `removePair` (the `Link` goes with the pair; the raw delete left it orphaned).",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA8009",
+    "@type": "BlockNode",
+    "title": "00D7T3XZA8009",
+    "text": "**Difference 8, `ArtifactNode` has no `type`** (the schema and rule 6 of the migration): it reads `undefined` and a write is ignored.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA800A",
+    "@type": "BlockNode",
+    "title": "**Difference 9, no quads**",
+    "text": "**Difference 9, no quads**: the service logs `Rehydrated N record(s)` and `Reloaded N record(s), M document(s)` and returns `recordCount` and `documentCount` (it was `quadCount` and `nodeCount`); `lifecycle.test.ts` and `ops.test.ts` follow (`> 20` and `> 10`, since the fixture is smaller than the quad counts were); `verifyLinkRefusals` counts records. The raw-quad cases are rewritten: `integrity.test.ts` (`removePair`); `lifecycle.test.ts` `buildSeed` (the stale unfold is an `unfolds` entry written for an id never made, since the engine drops an entry with its target; the dropped link by `removePair`; the dumps by `dumpMirror`); `store/storeAccess` and `store/roundtrip` (frozen files) run on an old `Store` made from the dump; `corpus/roundtrip` runs on an unmigrated copy.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA800B",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T3XZA800B:links:Link:00D7T3YJRR004",
+        "@type": "Link",
+        "target": "BlockNode:00D76B1ZTR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T3XZA800B:links:Link:00D7T3YJRR004:props:StringProp:00D7T3YJRR005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "534"
+          }
+        ]
+      }
+    ],
+    "title": "**Difference 10, the load is whole or the service does not run**",
+    "text": "**Difference 10, the load is whole or the service does not run**: a boot with `rejected` or `errors` logs `REFUSING TO START` with the ids and files, clears the lock and exits 1 (the client then reports \"did not become ready in time\" after its 5 s, and the log says why); a reload refuses with `Refusing to reload: the mirror was not read in full` and keeps the memory, and so does `--discard`, which reads the disk first, so a discard now loads twice. The start-anyway option and the copy of the rejected raw documents are piece 10 ([the rule](../design/packaging.md#id/BlockNode:00D76B1ZTR001)).",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA800C",
+    "@type": "BlockNode",
+    "title": "**Difference 11, retired and deleted**",
+    "text": "**Difference 11, retired and deleted**: `apeironNgnSmokeTest.ts`, `verifyDanglingUnfolds.ts`, `store/dangling-unfolds.test.ts` and `corpus/dangling-unfolds.test.ts` (the engine's `dropWithTarget` case in `engine/removal.test.ts` and `store/views.test.ts` 9 cover them); `Lookups.subtreeTombstoned` and its two test uses (the model test and `maps.test.ts` tell the maps of each member by id, as the write layer does).",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA800D",
+    "@type": "BlockNode",
+    "title": "**Difference 12, one sequencing change in a test**",
+    "text": "**Difference 12, one sequencing change in a test**: in `lifecycle.test.ts` \"a stop sweeps and flushes\", a `flush --clobber` comes first, because the blocks removed in the thread test above are now pruned at the next sweep, which marks the state pending and would meet the file the test writes from outside.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA800E",
+    "@type": "BlockNode",
+    "title": "**The two decisions on the Coder's questions** (the orchestrator, 2026-10-21)",
+    "text": "**The two decisions on the Coder's questions** (the orchestrator, 2026-10-21): (1) the tombstone of a removed artifact does not survive the sweep (Difference 2): `track --reverse` forgets it once it is pruned and a later `track` or `ingest` of that path makes a new artifact with new ids; it is the consequence of the tombstone answer, and it is a deliberate difference, not a defect. (2) A textless `listItem` written with no child is tombstoned at boot (Difference 3): intended, it is the boot rule over a container with no live child, which the user confirmed; the rule cannot tell an emptied wrapper from an item written empty (`-` alone).",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T3XZA800F",
+    "@type": "BlockNode",
+    "title": "**Noted, not a difference of this piece**",
+    "text": "**Noted, not a difference of this piece**: the set fields (`links`, `props`, `unfolds`) read in the engine's insertion order and `backlinks` in id order; no test pinned the old store order, and the order rules are piece 7's.",
+    "parent": "BlockNode:00D7T3XZA8001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T4PZ7R001",
+    "@type": "BlockNode",
+    "title": "**Set by piece 6, 2026-10-21**",
+    "text": "**Set by piece 6, 2026-10-21**: (1) `findByExactPath` of `tree.ts` is already `liveAtPath` under its old name, so its callers (`resolve.ts:69`, `resolveCreate.ts:98`, `kgProject.ts:46`, `linkIntegrity.ts:323`) get the live node today; this piece changes their name and deletes the function, and the regular first-match test of `commands/resolve.test.ts` then calls `liveAtPath`. (2) The sort rules are all still this piece's: the set fields (`links`, `props`, `unfolds`) read in the engine's insertion order and `backlinks` in id order, and no test pinned the old store order, so the exact-order assertions of `commands/order.test.ts` are new. (3) `Lookups.subtreeTombstoned` is gone, and `findProfileByHandle` and `findTreeViewByName` read the maps.",
+    "parent": "BlockNode:00D76BQ2N0005",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T4RDMR001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T4RDMR001:links:Link:00D7T4S0T8002",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQW6AR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T4RDMR001:links:Link:00D7T4S0T8002:props:StringProp:00D7T4S0T8003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "380"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D7T4RDMR001:props:StringProp:00D7T4S0T8000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T4RDMR001:props:StringProp:00D7T4S0T8001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Set by piece 6, 2026-10-21**",
+    "text": "**Set by piece 6, 2026-10-21**: the flip leaves `findLiveByKindAndPath` and its callers to this piece. It made `trackArtifact`, the holders of `resolveCreate.ts` and the folder tree create their nodes with `createNode` and a path or an `under`, so the graph of each node an ingest creates is already the one `graphOfNewNode` gives. A removed artifact is pruned at the next sweep ([Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002), Difference 2), so the case of an ingest that reuses a path after a removal makes a new artifact with new ids, which is decided to be so, and `track --reverse` forgets a removed artifact once it is pruned.",
+    "parent": "BlockNode:00D76BQ2N0006",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T4SV0G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T4SV0G001:links:Link:00D7T4TDTG002",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQW6AR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T4SV0G001:links:Link:00D7T4TDTG002:props:StringProp:00D7T4TDTG003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "659"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D7T4SV0G001:props:StringProp:00D7T4TDTG000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T4SV0G001:props:StringProp:00D7T4TDTG001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Set by piece 6, 2026-10-21**",
+    "text": "**Set by piece 6, 2026-10-21**: the part of this entry that the Ask of piece 6 pulled in is done: `applyTombstone` and `tombstoneLiveSubtree` on the engine's `tombstone` and `tombstoneSubtree`, the tombstone leaving its container, `tombstoneEmptiedContainers` at the end of `kgRemove` (a removal tombstones the container it empties, in the same write), and the boot rule `tombstoneVacuousContainers` as \"a `list`, or a textless `listItem`, with no child\". The tests whose expectations changed with the decision are `commands/render.test.ts` (2), `commands/remove.test.ts` (3) and `service/ops.test.ts` (2), and `commands/containers.test.ts` (3 cases) is new ([Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002), Differences 1 to 3). What else this entry lists stands as written, for the Coder's survey of the piece to read against the code.",
+    "parent": "BlockNode:00D76BQ2N0007",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T4V82G001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T4V82G001:links:Link:00D7T4VW80002",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQW6AR002",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T4V82G001:links:Link:00D7T4VW80002:props:StringProp:00D7T4VW80003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "904"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D7T4V82G001:props:StringProp:00D7T4VW80000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T4V82G001:props:StringProp:00D7T4VW80001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "**Set by piece 6, 2026-10-21**",
+    "text": "**Set by piece 6, 2026-10-21**: the flip did the boot and the reload by `openDb`, with the refusal when the load returns `rejected` or `errors` (the boot logs `REFUSING TO START` with the ids and files, clears the lock and exits 1; a reload, `--discard` too, keeps the memory), the stamping and flushing of the files of the mapping, and record counts in place of quad counts; `service.ts` names no `dehydrate`, `rehydrateStore` or quad. Left to this piece, as the entry says: the engine `sweep` in place of `pruneUnreachableTombstones` and `pruneStaleUnfolds` (still called at the boot, the reload and the stop, `service.ts:209`, `:382`, `:437`, `:493`), the two timers in place of one for each graph, `dropGraph` of the old graphs on reload, and the start-anyway option with the side copy of the rejected raw documents. With the sweep a removed node is pruned at the next boot, reload, clobber or stop ([Layer 4](../planning/core.md#id/BlockNode:00D3XQW6AR002), Difference 2); a refused boot shows to the client as \"did not become ready in time\", with the reason in the log only.",
+    "parent": "BlockNode:00D76BQ2N0008",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T575N8001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T575N8001:links:Link:00D7T57S48000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T575N8001:links:Link:00D7T57S48000:props:StringProp:00D7T57S48001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "27"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T575N8001:links:Link:00D7T57S48002",
+        "@type": "Link",
+        "target": "BlockNode:00D3CJDGH8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T575N8001:links:Link:00D7T57S48002:props:StringProp:00D7T57S48003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "398"
+          }
+        ]
+      }
+    ],
+    "title": "**Resolved (2026-10-21)**",
+    "text": "**Resolved (2026-10-21)**: [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C) piece 6, the flip, ran the shell on the engine in `Aperas.dev` (branch `js-apeironngn`), staged and not committed, so an ordered insertion reaches the engine's `insertItem` and `moveItem`, where the no-cycle rule of the partitioning field `children` refuses a move after an anchor inside the node's own subtree ([Partitioning fields](../design/core.md#id/BlockNode:00D3CJDGH8001)). The reproduction is the test: `commands/moveIntoOwnSubtree.test.ts` ran on the old code in a child process killed after 6 s (`outcome: moved`) and is now a regular test in `commit`; it ends by itself with the refusal `cannot be moved into its own subtree`, which names the engine's no-cycle rule, with the service answering. The shell puts the child back when the engine refuses, so a refused move changes nothing (a case of the test checks it, and a mutation that does not put the child back is caught). `commit` 999 of 999. The working service and the reference copy in `Aperas/` run the old code until the cutover and keep the loop, so the workaround above stays in force for them: read the id of the node to move and the id of the anchor twice, and check that the anchor is not inside the node.",
+    "parent": "BlockNode:00D6HAEDCR001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T5QTMG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T5QTMG001:links:Link:00D7T5REHR000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T5QTMG001:links:Link:00D7T5REHR000:props:StringProp:00D7T5REHR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "73"
+          }
+        ]
+      }
+    ],
+    "title": "**Since (2026-10-21), the reader on the maps, the callers not renamed**",
+    "text": "**Since (2026-10-21), the reader on the maps, the callers not renamed**: [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C) piece 6, the flip, put the shell's `findByExactPath` (`tree.ts:20`) on `liveAtPath` in `Aperas.dev`, staged and not committed: a path held by a tombstoned and a live node returns the live node under both orders, and `commands/resolve.test.ts` holds it as a regular test; the reproduction of the reference reader in `lookups/maps.test.ts` is retired with its subject, the old reader. The defect is not resolved: the callers (`resolve.ts:69`, `resolveCreate.ts:98`, `kgProject.ts:46`, `linkIntegrity.ts:323`) keep the name until piece 7, which deletes `findByExactPath`, and the reference copy in `Aperas/` keeps the first-match reader until the cutover. This entry stays open until piece 7.",
+    "parent": "BlockNode:00D22ZMTKG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T5SAYG001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T5SAYG001:links:Link:00D7T5SY5G000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T5SAYG001:links:Link:00D7T5SY5G000:props:StringProp:00D7T5SY5G001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "79"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T5SAYG001:links:Link:00D7T5SY5G002",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T5SAYG001:links:Link:00D7T5SY5G002:props:StringProp:00D7T5SY5G003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "967"
+          }
+        ]
+      }
+    ],
+    "title": "**Since (2026-10-21), the shell's direct reads gone, the frozen set not yet**",
+    "text": "**Since (2026-10-21), the shell's direct reads gone, the frozen set not yet**: [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C) piece 6, the flip, moved the shell, the cli and the service onto the `Db` and the write layer in `Aperas.dev` (staged, not committed): the existence and listing reads go through `nodeExists`, `allIdsOfKind` and `liveIdsOfKind`, and the dev tools that built a raw `Store` are deleted (`apeironNgnSmokeTest.ts`, `verifyDanglingUnfolds.ts`) or ported (`verifyLinkRefusals.ts`). A search of `monorepo/packages` for `oxigraph` on 2026-10-21 finds it outside `.archive/` only in the six frozen files, the frozen files' own tests and support files, the two guards (`shell/oldEngine.test.ts`, which fails if any other module imports `oxigraph` or a frozen file, and `engine/boundary.test.ts`), `core/package.json`, `cli/build.mjs`, and a comment in `web/src/render.ts`. What is left, the frozen set with its tests and the dependency, is [Batch 12](../planning/core.md#id/BlockNode:00D3XQQ2W000S). The reference copy in `Aperas/` is unchanged. This entry stays open until then.",
+    "parent": "BlockNode:00D2536E1R001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T5TTP0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T5TTP0001:links:Link:00D7T5VDVR000",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000C",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T5TTP0001:links:Link:00D7T5VDVR000:props:StringProp:00D7T5VDVR001",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "58"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T5TTP0001:links:Link:00D7T5VDVR002",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T5TTP0001:links:Link:00D7T5VDVR002:props:StringProp:00D7T5VDVR003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "417"
+          }
+        ]
+      }
+    ],
+    "title": "**Since (2026-10-21), the file deleted in `Aperas.dev`**",
+    "text": "**Since (2026-10-21), the file deleted in `Aperas.dev`**: [Batch 11](../planning/core.md#id/BlockNode:00D3XQQ2W000C) piece 6, the flip, deleted `apeironNgnSmokeTest.ts` in `Aperas.dev` (staged, not committed), which is the fix this issue asks for, and with it `verifyDanglingUnfolds.ts`; it ported `verifyLinkRefusals.ts` to the engine. The reference copy in `Aperas/` keeps the file. The plan closes this issue with [Batch 12](../planning/core.md#id/BlockNode:00D3XQQ2W000S), so it stays open until then.",
+    "parent": "BlockNode:00D22ZV0FG001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T5W9Z8001",
+    "@type": "BlockNode",
+    "title": "**Since observed (2026-10-21), the working service stopped with no process, and a refused load**",
+    "text": "**Since observed (2026-10-21), the working service stopped with no process, and a refused load**: the Coder of piece 6 found the working service down with no process of it (the log's last start at 07:58; the idle timer, or the session reset), waited 48 s and ran `aperas service start` by the standing arrangement: it answered \"did not become ready in time\" after 5 s, the load of the real mirror taking longer (`Rehydrated 114061 quad(s)`, log 08:46:44), and the service was up 15 s later. That service runs the old code of `Aperas/`, so this is the reference engine's start on the real mirror. On the new boot of piece 6 a refused load (`rejected` or `errors`) logs `REFUSING TO START` with the ids and files, clears the lock and exits 1, and the client prints the same \"did not become ready in time\" after its 5 s, with the reason in the log only: a slow start and a refused one read the same.",
+    "parent": "BlockNode:00D0W05P08001",
+    "type": "listItem",
+    "children": []
+  },
+  {
+    "@id": "BlockNode:00D7T6DGC0001",
+    "@type": "BlockNode",
+    "links": [
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H0002",
+        "@type": "Link",
+        "target": "BlockNode:00D7T3QAV8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H0002:props:StringProp:00D7T6E4H0003",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "25"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H0004",
+        "@type": "Link",
+        "target": "BlockNode:00D7T3XZA8001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H0004:props:StringProp:00D7T6E4H0005",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "103"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H0006",
+        "@type": "Link",
+        "target": "BlockNode:00D3XQQ2W000S",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H0006:props:StringProp:00D7T6E4H8000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "246"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H8001",
+        "@type": "Link",
+        "target": "BlockNode:00D7T4PZ7R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H8001:props:StringProp:00D7T6E4H8002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "373"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H8003",
+        "@type": "Link",
+        "target": "BlockNode:00D7T4RDMR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4H8003:props:StringProp:00D7T6E4HG000",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "426"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG001",
+        "@type": "Link",
+        "target": "BlockNode:00D7T4SV0G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG001:props:StringProp:00D7T6E4HG002",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "479"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG003",
+        "@type": "Link",
+        "target": "BlockNode:00D7T4V82G001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG003:props:StringProp:00D7T6E4HG004",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "535"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG005",
+        "@type": "Link",
+        "target": "BlockNode:00D6HAEDCR001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG005:props:StringProp:00D7T6E4HG006",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "626"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG007",
+        "@type": "Link",
+        "target": "BlockNode:00D22ZMTKG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG007:props:StringProp:00D7T6E4HG008",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "734"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG009",
+        "@type": "Link",
+        "target": "BlockNode:00D2536E1R001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG009:props:StringProp:00D7T6E4HG00A",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "814"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG00B",
+        "@type": "Link",
+        "target": "BlockNode:00D22ZV0FG001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG00B:props:StringProp:00D7T6E4HG00C",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "901"
+          }
+        ]
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG00D",
+        "@type": "Link",
+        "target": "BlockNode:00D0W05P08001",
+        "predicate": "[[wikilink]]",
+        "props": [
+          {
+            "@id": "BlockNode:00D7T6DGC0001:links:Link:00D7T6E4HG00D:props:StringProp:00D7T6E4HG00E",
+            "@type": "StringProp",
+            "key": "position",
+            "value": "968"
+          }
+        ]
+      }
+    ],
+    "props": [
+      {
+        "@id": "BlockNode:00D7T6DGC0001:props:StringProp:00D7T6E4H0000",
+        "@type": "StringProp",
+        "key": "orderedList",
+        "value": "false"
+      },
+      {
+        "@id": "BlockNode:00D7T6DGC0001:props:StringProp:00D7T6E4H0001",
+        "@type": "StringProp",
+        "key": "startIndex",
+        "value": "1"
+      }
+    ],
+    "title": "00D7T6DGC0001",
+    "text": "Promoted (2026-10-21) to [the done record of piece 6](../planning/core.md#id/BlockNode:00D7T3QAV8001), [the twelve deliberate differences and the two decisions](../planning/core.md#id/BlockNode:00D7T3XZA8001) in Layer 4 of the Verification Plan, [Batch 12](../planning/core.md#id/BlockNode:00D3XQQ2W000S) steps 1, 2 and 4 reworded to the leftover, the notes set for pieces [7](../planning/core.md#id/BlockNode:00D7T4PZ7R001), [8](../planning/core.md#id/BlockNode:00D7T4RDMR001), [9](../planning/core.md#id/BlockNode:00D7T4SV0G001) and [10](../planning/core.md#id/BlockNode:00D7T4V82G001), and the dated entries of the issues: [the move into its own subtree](../issues/core.md#id/BlockNode:00D6HAEDCR001) resolved (moved to Resolved), [the first node found at a path](../issues/core.md#id/BlockNode:00D22ZMTKG001), [the store is read outside the helpers](../issues/core.md#id/BlockNode:00D2536E1R001), [the smoke test](../issues/core.md#id/BlockNode:00D22ZV0FG001) and [the start that prints \"did not become ready in time\"](../issues/core.md#id/BlockNode:00D0W05P08001), all open except the first.",
+    "parent": "BlockNode:00D7T09ZXG001",
     "type": "listItem",
     "children": []
   }
