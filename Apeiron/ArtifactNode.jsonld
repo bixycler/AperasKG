@@ -218,11 +218,11 @@
       "BlockNode:00CDDVBXH8001"
     ],
     "path": "design/packaging.md",
-    "fileHash": "2a90a547567c6a768b13255bb0578679a80dddc439cb1eaf5a608f7e5cdb0974",
+    "fileHash": "a253434e4f80ae7bc30e2569b47fe52a31415be1a2593f9ccb59454fe310cebc",
     "lastTrackedAt": "2026-09-22T08:06:13.848Z",
-    "ingestedHash": "2a90a547567c6a768b13255bb0578679a80dddc439cb1eaf5a608f7e5cdb0974",
-    "lastIngestedAt": "2026-10-02T08:47:24.784Z",
-    "projectedHash": "2a90a547567c6a768b13255bb0578679a80dddc439cb1eaf5a608f7e5cdb0974"
+    "ingestedHash": "a253434e4f80ae7bc30e2569b47fe52a31415be1a2593f9ccb59454fe310cebc",
+    "lastIngestedAt": "2026-10-20T10:04:55.396Z",
+    "projectedHash": "a253434e4f80ae7bc30e2569b47fe52a31415be1a2593f9ccb59454fe310cebc"
   },
   {
     "@id": "ArtifactNode:00CDDTBQWG000",
@@ -871,11 +871,11 @@
       "BlockNode:00CQ2M3QM0001"
     ],
     "path": "issues/core.md",
-    "fileHash": "c7cb751217b800e5b42b460c738a3e88d7ed728b035604790e22f94296a4b0db",
+    "fileHash": "d85278d0c4f4d7e104585f2a4a6d43205710ddad250fdb8d4d27bfc623255b44",
     "lastTrackedAt": "2026-09-22T08:07:14.204Z",
-    "ingestedHash": "c7cb751217b800e5b42b460c738a3e88d7ed728b035604790e22f94296a4b0db",
-    "lastIngestedAt": "2026-10-20T08:36:49.059Z",
-    "projectedHash": "c7cb751217b800e5b42b460c738a3e88d7ed728b035604790e22f94296a4b0db"
+    "ingestedHash": "d85278d0c4f4d7e104585f2a4a6d43205710ddad250fdb8d4d27bfc623255b44",
+    "lastIngestedAt": "2026-10-20T13:47:13.201Z",
+    "projectedHash": "d85278d0c4f4d7e104585f2a4a6d43205710ddad250fdb8d4d27bfc623255b44"
   },
   {
     "@id": "ArtifactNode:00CF1WZDHG000",
@@ -896,11 +896,11 @@
       "BlockNode:00CF1WZE10001"
     ],
     "path": "discussion/core.md",
-    "fileHash": "3c2095c2b1dc19798fa354e26bbcbb7595b59b8ea686fd40f8903b343237659f",
+    "fileHash": "e242639268597285c476e281f8c1b02bdd2c2b4993bb22baaa191e0f13208be4",
     "lastTrackedAt": "2026-09-22T08:06:36.591Z",
-    "ingestedHash": "3c2095c2b1dc19798fa354e26bbcbb7595b59b8ea686fd40f8903b343237659f",
-    "lastIngestedAt": "2026-10-20T08:36:51.976Z",
-    "projectedHash": "3c2095c2b1dc19798fa354e26bbcbb7595b59b8ea686fd40f8903b343237659f"
+    "ingestedHash": "e242639268597285c476e281f8c1b02bdd2c2b4993bb22baaa191e0f13208be4",
+    "lastIngestedAt": "2026-10-20T13:47:07.061Z",
+    "projectedHash": "e242639268597285c476e281f8c1b02bdd2c2b4993bb22baaa191e0f13208be4"
   },
   {
     "@id": "ArtifactNode:00CF23FACG000",
@@ -921,11 +921,11 @@
       "BlockNode:00CF23FB1G001"
     ],
     "path": "planning/core.md",
-    "fileHash": "839742aa9cce26aabe26ad6064f8c0f17cdbe7de9ae822ac9883525f31f081e7",
+    "fileHash": "75e89b4f3c13b28ab416e07f184c4921903d10cf72c1eabcfe62cca729f0034f",
     "lastTrackedAt": "2026-09-22T08:07:51.361Z",
-    "ingestedHash": "839742aa9cce26aabe26ad6064f8c0f17cdbe7de9ae822ac9883525f31f081e7",
-    "lastIngestedAt": "2026-10-20T08:36:43.063Z",
-    "projectedHash": "839742aa9cce26aabe26ad6064f8c0f17cdbe7de9ae822ac9883525f31f081e7"
+    "ingestedHash": "75e89b4f3c13b28ab416e07f184c4921903d10cf72c1eabcfe62cca729f0034f",
+    "lastIngestedAt": "2026-10-20T13:47:10.084Z",
+    "projectedHash": "75e89b4f3c13b28ab416e07f184c4921903d10cf72c1eabcfe62cca729f0034f"
   },
   {
     "@id": "ArtifactNode:00CF2AEA78000",
@@ -1312,11 +1312,11 @@
       "BlockNode:00D1D5F63R001"
     ],
     "path": "design/testing.md",
-    "fileHash": "84615505739772b03d8be7de4f425cbf6a045a7eaca5f129175ec023366e5e46",
+    "fileHash": "ab8de4c2348807c3e0398c19edd37990a8a196fb2b35c46a947ec9f76268e7e4",
     "lastTrackedAt": "2026-10-11T10:13:55.688Z",
-    "ingestedHash": "84615505739772b03d8be7de4f425cbf6a045a7eaca5f129175ec023366e5e46",
-    "lastIngestedAt": "2026-10-12T09:39:15.978Z",
-    "projectedHash": "84615505739772b03d8be7de4f425cbf6a045a7eaca5f129175ec023366e5e46"
+    "ingestedHash": "ab8de4c2348807c3e0398c19edd37990a8a196fb2b35c46a947ec9f76268e7e4",
+    "lastIngestedAt": "2026-10-20T13:47:15.898Z",
+    "projectedHash": "ab8de4c2348807c3e0398c19edd37990a8a196fb2b35c46a947ec9f76268e7e4"
   },
   {
     "@id": "ArtifactNode:00D21FP1XR000",
@@ -1378,10 +1378,10 @@
       "BlockNode:00D24N87SR001"
     ],
     "path": "design/core.md",
-    "fileHash": "c3be5a85548a4898bef809627d9272a663672c1b7d99f8440d1cc8e91a4ac36d",
+    "fileHash": "383f46726be7aa4d374888210d0b4b3a0315542eec075d9ed2c7821f669ecb9c",
     "lastTrackedAt": "2026-10-12T13:36:13.399Z",
-    "ingestedHash": "c3be5a85548a4898bef809627d9272a663672c1b7d99f8440d1cc8e91a4ac36d",
-    "lastIngestedAt": "2026-10-20T08:36:40.162Z",
-    "projectedHash": "c3be5a85548a4898bef809627d9272a663672c1b7d99f8440d1cc8e91a4ac36d"
+    "ingestedHash": "383f46726be7aa4d374888210d0b4b3a0315542eec075d9ed2c7821f669ecb9c",
+    "lastIngestedAt": "2026-10-20T10:04:51.589Z",
+    "projectedHash": "383f46726be7aa4d374888210d0b4b3a0315542eec075d9ed2c7821f669ecb9c"
   }
 ]
